@@ -1,0 +1,106 @@
+<table class="tabular hx-table is-striped">
+        <thead>
+        <tr>
+            <th *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
+
+                <!-- sortable column -->
+                <a class="tabular__sorter" *ngIf="col.sortable && col.dataType != 6" (click)="onSortClickHandler(col.id)">{{col.label}}<i class="icon {{iconDirection}}" *ngIf="orderBy == col.id"></i></a>
+
+                <!-- non sortable column -->
+                <span *ngIf="!col.sortable && col.dataType != 6">{{col.label}}</span>
+
+               <!-- checkbox column -->
+               <div *ngIf="col.dataType == 6" class="hx-checkbox-control">
+                 <input id="selectAll" name="selectAll" type="checkbox" class="hx-checkbox" (change)="toggleSelectAll($event)" title="Select All" [(ngModel)]="selectAll" />
+                 <label for="selectAll" class="hx-label"></label>
+               </div>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <!--<tr *ngFor="let row of rows | paginate: config.pagination | simpleSearch: searchTerm">-->
+        <tr *ngFor="let row of pagedItems | simpleSearch: searchTerm">
+            <td *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
+
+                <!-- string type -->
+                <span *ngIf="col.dataType == 0">{{row[col.id]}}</span>
+
+                <!-- icon type -->
+                <i *ngIf="col.dataType == 1" class="icon {{row[col.id]}}"></i>
+
+                <!-- date type -->
+                <span *ngIf="col.dataType == 2">{{row[col.id] | date}}</span>
+
+                <!-- status type -->
+                <span *ngIf="col.dataType == 4" class="hx-badge text-uppercase" [ngClass]="{'is-primary':row[col.id],'is-danger':!row[col.id]}">{{(row[col.id])?'ACTIVE':'INACTIVE'}}</span>
+
+                <!-- date time type -->
+                <span *ngIf="col.dataType == 5">{{row[col.id] | date:'medium'}}</span>
+
+                <!-- actions type -->
+                <div *ngIf="col.dataType==3" class="hx-dropdown tabularActions">
+
+
+                    <div class="tabularActions__action">
+                        <div class="hx-dropdown" hxDropdown [isRight]="true">
+
+                        <button class="hx-button is-small hx-button-dropdown" hxDropdownToggle type="button">
+                           <i class="icon icon-more"></i>
+                        </button>
+                        <div class="hx-dropdown-menu" *hxDropdownMenu>
+
+                         <ng-container *ngFor="let action of row[col.id]">
+                           <a *ngIf="!getActionDisabledState(action) && action.routeType==0"
+                              [routerLink]="action.route"
+                              class="hx-dropdown-item {{action.css}}"
+                              [innerHTML]="action.label">
+                           </a>
+                           <a *ngIf="!getActionDisabledState(action) && action.routeType==1"
+                              (click)='executeCallback($event,action.callback)'
+                              class="hx-dropdown-item {{action.css}}"
+                              [innerHTML]="action.label">
+                           </a>
+                          </ng-container>
+
+                        </div>
+
+                       <!-- <span [hx-tooltip]="getActionTooltip(action)"
+                              [disabled]="!getActionDisabledState(action)"
+                              [animation]="true"
+                              placement="top">
+                        <button *ngIf="action.routeType==0"
+                                [routerLink]="action.route"
+                                class="hx-dropdown-item {{action.css}}"
+                                [innerHTML]="action.label"
+                                [disabled]="getActionDisabledState(action)"></button>
+                        </span>
+                        <span [hx-tooltip]="getActionTooltip(action)"
+                              [disabled]="!getActionDisabledState(action)"
+                              [animation]="true"
+                              placement="top">
+                        <button *ngIf="action.routeType==1"
+                                (click)='executeCallback($event,action.callback)'
+                                class="hx-dropdown-item {{action.css}}"
+                                [innerHTML]="action.label"
+                                [disabled]="getActionDisabledState(action)"></button>
+                        </span>-->
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- checkbox type -->
+                <div *ngIf="col.dataType == 6" class="hx-checkbox-control">
+                  <input id="checkbox-{{row.id}}" name="{{col.label}}-checkbox" type="checkbox" class="hx-checkbox" title="{{col.label}}" (change)="toggleIndividualSelect($event)" [(ngModel)]="row.selected" />
+                  <label for="checkbox-{{row.id}}" class="hx-label"></label>
+                </div>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <hx-pagination [directionLinks]="true" [boundaryLinks]="true" [rotate]="false" [maxSize]="10"
+               [totalItems]="totalItemCount" [itemsPerPage]="config.pagination.itemsPerPage"
+               [(ngModel)]="config.pagination.currentPage" (pageChanged)="setPage($event)"></hx-pagination>

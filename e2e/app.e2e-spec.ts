@@ -1,10 +1,10 @@
-import { AngularHxuiPage } from './app.po';
+import { DocsPage } from './app.po';
 
-describe('angular-hxui App', () => {
-  let page: AngularHxuiPage;
+describe('docs App', () => {
+  let page: DocsPage;
 
   beforeEach(() => {
-    page = new AngularHxuiPage();
+    page = new DocsPage();
   });
 
   it('should display message saying app works', () => {

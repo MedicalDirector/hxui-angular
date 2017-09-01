@@ -1,0 +1,262 @@
+<section class="hx-section scrollable-y" #container>
+  <h1 class="hx-title">Tooltips</h1>
+  <h2 class="hx-subtitle">The tooltip component is a message component which appears when a cursor is positioned over an icon, image, hyperlink, or other element.</h2>
+  <hr>
+
+  <h4 id="usage">Usage</h4>
+  <p>Add the TooltipsModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code class="typescript">
+      import {{ '{' }}TooltipsModule} from &#x22;@hxui-angular/packages/tooltips/tooltips.module&#x22;;
+
+      @NgModule({{ '{' }}
+        imports: [TooltipsModule.forRoot(),...]
+      })
+      export class AppModule(){{ '{' }}
+    </code>
+  </pre>
+
+  <hr>
+
+  <h4 id="example">Example</h4>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+
+      <p>Here is an example of a link with a tooltip that has a top placement
+        <a href="#" hxTooltip="my tooltip message is here"
+           [disabled]="false"
+           [animation]="true"
+           placement="top">
+          tooltip
+        </a>.
+      You can also have tooltips appear on the
+        <a href="#" hxTooltip="my tooltip showing on the right"
+           [disabled]="false"
+           [animation]="true"
+           placement="right">
+          right
+        </a> or on the
+        <a href="#" hxTooltip="my tooltip showing on the left"
+           [disabled]="false"
+           [animation]="true"
+           placement="left">
+          left
+        </a>.
+      </p>
+
+      <p>You can also add styles, dynamic html content to a tooltip and have it show while hovering over a
+        <hx-tooltip-content #myTooltip [animation]="true" placement="left">
+          <b>Very</b> <span class="is-danger">Dynamic</span> <span class="is-text-capitalise is-primary">Reusable</span>
+          <b><i><span class="is-warning">Tooltip With</span></i></b> <small>Html support</small>.
+        </hx-tooltip-content>
+        <button class="hx-button is-primary is-small" [hxTooltip]="myTooltip">Button</button>.
+      </p>
+
+      <hr>
+
+      <p>You can also have dynamic content in your <a href="#" [hxTooltip]="dynamicContentTooltip">tooltips</a>.</p>
+      <div class="hx-input-control">
+        <input class="hx-input" type="text" [(ngModel)]="dynamicTooltipText" name="dynamicTooltipText" [hxTooltip]="dynamicContentTooltip" required>
+        <label class="hx-label">Tooltip text <sup>*</sup></label>
+        <div class="hx-help">Please enter some text</div>
+      </div>
+
+        <hx-tooltip-content #dynamicContentTooltip [animation]="true" placement="top">
+          {{dynamicTooltipText}}
+        </hx-tooltip-content>.
+
+
+    </div>
+  </div>
+
+  <br>
+
+  <h5 id="code">Code</h5>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+
+      <hx-tabset>
+        <hx-tab heading="Template">
+      <pre>
+        <code class="html">
+        &#x3C;p&#x3E;Here is an example of a link with a tooltip that has a top placement
+        &#x3C;a href=&#x22;#&#x22; hx-tooltip=&#x22;my tooltip message is here&#x22;
+           [disabled]=&#x22;false&#x22;
+           [animation]=&#x22;true&#x22;
+           placement=&#x22;top&#x22;&#x3E;
+          tooltip
+        &#x3C;/a&#x3E;.
+      You can also have tooltips appear on the
+        &#x3C;a href=&#x22;#&#x22; hx-tooltip=&#x22;my tooltip showing on the right&#x22;
+           [disabled]=&#x22;false&#x22;
+           [animation]=&#x22;true&#x22;
+           placement=&#x22;right&#x22;&#x3E;
+          right
+        &#x3C;/a&#x3E; or on the
+        &#x3C;a href=&#x22;#&#x22; hx-tooltip=&#x22;my tooltip showing on the left&#x22;
+           [disabled]=&#x22;false&#x22;
+           [animation]=&#x22;true&#x22;
+           placement=&#x22;left&#x22;&#x3E;
+          left
+        &#x3C;/a&#x3E;.
+      &#x3C;/p&#x3E;
+
+      &#x3C;p&#x3E;You can also add styles, dynamic html content to a tooltip and have it show while hovering over a
+        &#x3C;hx-tooltip-content #myTooltip [animation]=&#x22;true&#x22; placement=&#x22;left&#x22;&#x3E;
+          &#x3C;b&#x3E;Very&#x3C;/b&#x3E; &#x3C;span class=&#x22;is-danger&#x22;&#x3E;Dynamic&#x3C;/span&#x3E; &#x3C;span class=&#x22;is-text-capitalise is-primary&#x22;&#x3E;Reusable&#x3C;/span&#x3E;
+          &#x3C;b&#x3E;&#x3C;i&#x3E;&#x3C;span class=&#x22;is-warning&#x22;&#x3E;Tooltip With&#x3C;/span&#x3E;&#x3C;/i&#x3E;&#x3C;/b&#x3E; &#x3C;small&#x3E;Html support&#x3C;/small&#x3E;.
+        &#x3C;/hx-tooltip-content&#x3E;
+        &#x3C;button  class=&#x22;hx-button is-primary is-small&#x22; [hx-tooltip]=&#x22;myTooltip&#x22;&#x3E;Button&#x3C;/button&#x3E;.
+      &#x3C;/p&#x3E;
+
+      &#x3C;hr&#x3E;
+
+      &#x3C;p&#x3E;You can also have dynamic content in your &#x3C;a href=&#x22;#&#x22; [hx-tooltip]=&#x22;dynamicContentTooltip&#x22;&#x3E;tooltips&#x3C;/a&#x3E;.&#x3C;/p&#x3E;
+      &#x3C;div class=&#x22;hx-input-control&#x22;&#x3E;
+        &#x3C;input class=&#x22;hx-input&#x22; type=&#x22;text&#x22; [(ngModel)]=&#x22;dynamicTooltipText&#x22; name=&#x22;dynamicTooltipText&#x22; [hx-tooltip]=&#x22;dynamicContentTooltip&#x22; required&#x3E;
+        &#x3C;label class=&#x22;hx-label&#x22;&#x3E;Tooltip text &#x3C;sup&#x3E;*&#x3C;/sup&#x3E;&#x3C;/label&#x3E;
+        &#x3C;div class=&#x22;hx-help&#x22;&#x3E;Please enter some text&#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+
+        &#x3C;hx-tooltip-content #dynamicContentTooltip [animation]=&#x22;true&#x22; placement=&#x22;top&#x22;&#x3E;
+          {{ '{' }}{{ '{' }}dynamicTooltipText}}
+        &#x3C;/hx-tooltip-content&#x3E;.
+        </code>
+      </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+          <pre>
+            <code class="typescript">
+      import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
+
+      @Component({{ '{' }}
+        selector: &#x27;app-tooltips&#x27;,
+        templateUrl: &#x27;./tooltips.component.html&#x27;
+      })
+      export class TooltipsComponent implements OnInit {{ '{' }}
+
+        private _dynamicTooltipText = &#x27;sample text&#x27;;
+
+        public get dynamicTooltipText(): string {{ '{' }}
+          return this._dynamicTooltipText;
+        }
+
+        public set dynamicTooltipText(txt: string) {{ '{' }}
+          this._dynamicTooltipText = txt;
+        }
+
+        constructor() {{ '{' }} }
+
+        ngOnInit() {{ '{' }}
+        }
+
+      }
+
+            </code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr>
+
+  <h4 id="api">API Reference</h4>
+
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <h5 class="is-primary">TooltipContentComponent</h5>
+
+      <table class="hx-table  is-striped">
+        <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>hostElement</td>
+          <td><kbd>HTMLElement</kbd></td>
+          <td>the element that will call this component to show</td>
+        </tr>
+        <tr>
+          <td>content</td>
+          <td><kbd>String</kbd></td>
+          <td>the content that shows inside the tooltip</td>
+        </tr>
+        <tr>
+          <td>placement</td>
+          <td><kbd>String</kbd></td>
+          <td>place the tooltip either top|bottom|left|right</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <h5 class="is-primary">TooltipDirective</h5>
+
+      <table class="hx-table is-striped">
+        <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>content</td>
+          <td><kbd>String</kbd></td>
+          <td>the content that shows inside the tooltip</td>
+        </tr>
+        <tr>
+          <td>disabled</td>
+          <td><kbd>Boolean</kbd></td>
+          <td>disable the tooltip or not</td>
+        </tr>
+        <tr>
+          <td>placement</td>
+          <td><kbd>String</kbd></td>
+          <td>place the tooltip either top|bottom|left|right</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+
+
+
+
+</section>
+<aside class="hx-sidebar is-medium-width is-scrollable">
+  <ul class="hx-nav hx-nav-vertical">
+    <li class="hx-nav-heading"><h6>Contents</h6></li>
+
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
+    </li>
+
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Examples</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#code')"><span>Code</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
+    </li>
+
+  </ul>
+</aside>

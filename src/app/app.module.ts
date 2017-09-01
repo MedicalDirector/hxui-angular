@@ -1,20 +1,22 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
+import { NgModule } from '@angular/core';
+import {HxUiModule} from '../modules/index';
 import { AppComponent } from './app.component';
+import {SharedModule} from './shared/shared.module';
+import {CoreModule} from './core/core.module';
+
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
+    CoreModule.forRoot(),
+    SharedModule.forRoot(),
+    HxUiModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

@@ -1,0 +1,67 @@
+<section class="hx-section scrollable-y">
+  <h1 class="hx-title">Install Guide</h1>
+  <h2 class="hx-subtitle">Adding HxUI-angular into a project</h2>
+  <hr>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+
+      <section>
+        <p><span class="h5">1.</span> Use <strong>NPM</strong>:</p>
+        <p>You can run this command if you are using <strong>personal access tokens(https)</strong> method to access Visual Studio Team Services.</p>
+        <pre><code class="bash">
+
+    npm install git+https://medicaldirector.visualstudio.com/MD%20Design/_git/HxUi-angular --save
+
+        </code></pre>
+      </section>
+      <p>For Mac users, you need to install <a href="https://github.com/Microsoft/Git-Credential-Manager-for-Mac-and-Linux/blob/master/Install.md" target="_blank">Git Credential Manager for Mac</a> in order to access Visual Studio Team Services properly.</p>
+
+      <br>
+      <section>
+        <p>You can run this command if you are using <strong>SSH</strong> method to access Visual Studio Team Services.</p>
+
+        <pre><code class="bash">
+
+    npm install git+ssh://medicaldirector@medicaldirector.visualstudio.com:22/MD%20Design/_git/HxUi-angular --save
+
+        </code></pre>
+        <p>You may need to add SSH public keys to Visual Studio Team Services in order to install HxUI using npm.</p>
+      </section>
+      <br>
+      <section>
+        <p><span class="h5">2. </span><strong>Import all web component modules</strong> into app module or shared module.</p>
+        <pre><code class="typescript">
+    import {{ '{' }}HxUiModule} from &#x22;@hxui/angular/src/modules/index&#x22;;
+
+    @NgModule({{ '{' }}
+      declarations: [
+        AppComponent
+      ],
+      imports: [
+        HxUiModule.forRoot()
+      ],
+      providers: [],
+      bootstrap: [AppComponent]
+    })
+    export class AppModule {{ '{' }}
+
+        </code></pre>
+      </section>
+      <br>
+      <section>
+        <p><span class="h5">3. </span>Alternatively <strong>import each web component module</strong> that you need individually.</p>
+        <pre><code class="typescript">
+      import {{ '{' }}DropdownModule} from &#x22;@hxui/angular/src/modules/dropdown/dropdown.module&#x22;;
+
+      @NgModule({{ '{' }}
+        imports: [DropdownModule.forRoot(),...]
+      })
+      export class AppModule(){{ '{' }}
+    </code></pre>
+      </section>
+    </div>
+  </div>
+
+</section>
+

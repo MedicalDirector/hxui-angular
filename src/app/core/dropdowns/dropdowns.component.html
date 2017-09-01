@@ -1,0 +1,210 @@
+<section class="hx-section scrollable-y" #container>
+  <h1 class="hx-title">Dropdowns</h1>
+  <h2 class="hx-subtitle">Dropdowns are toggleable, contextual overlays for displaying lists of links and more. They are activated by click and not hover.</h2>
+  <hr>
+
+  <h4 id="usage">Usage</h4>
+  <p>Add the DropdownModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code class="typescript">
+      import {{ '{' }}DropdownModule} from &#x22;@hxui-angular/packages/dropdown/dropdown.module&#x22;;
+
+      @NgModule({{ '{' }}
+        imports: [DropdownModule.forRoot(),...]
+      })
+      export class AppModule(){{ '{' }}
+    </code>
+  </pre>
+
+  <hr>
+
+  <h4 id="example">Example</h4>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+
+      <div class="hx-dropdown" hxDropdown>
+        <button class="hx-button is-primary is-outlined hx-button-dropdown" hxDropdownToggle type="button">
+          Dropdown button
+        </button>
+        <div class="hx-dropdown-menu" *hxDropdownMenu>
+          <div class="hx-dropdown-header">Dropdown header</div>
+          <a class="hx-dropdown-item" href="#">Action</a>
+          <a class="hx-dropdown-item" href="#">Another action</a>
+          <div class="hx-dropdown-divider"></div>
+          <a class="hx-dropdown-item" href="#">Action</a>
+          <a class="hx-dropdown-item" href="#">Another action</a>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <br>
+
+  <h5 id="code">Code</h5>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <pre>
+        <code class="html">
+      &#x3C;div class=&#x22;hx-dropdown&#x22; hxDropdown&#x3E;
+        &#x3C;button class=&#x22;hx-button is-primary is-outlined hx-button-dropdown&#x22; hxDropdownToggle type=&#x22;button&#x22;&#x3E;
+          Dropdown button
+        &#x3C;/button&#x3E;
+        &#x3C;div class=&#x22;hx-dropdown-menu&#x22; *hxDropdownMenu&#x3E;
+          &#x3C;div class=&#x22;hx-dropdown-header&#x22;&#x3E;Dropdown header&#x3C;/div&#x3E;
+          &#x3C;a class=&#x22;hx-dropdown-item&#x22; href=&#x22;#&#x22;&#x3E;Action&#x3C;/a&#x3E;
+          &#x3C;a class=&#x22;hx-dropdown-item&#x22; href=&#x22;#&#x22;&#x3E;Another action&#x3C;/a&#x3E;
+          &#x3C;div class=&#x22;hx-dropdown-divider&#x22;&#x3E;&#x3C;/div&#x3E;
+          &#x3C;a class=&#x22;hx-dropdown-item&#x22; href=&#x22;#&#x22;&#x3E;Action&#x3C;/a&#x3E;
+          &#x3C;a class=&#x22;hx-dropdown-item&#x22; href=&#x22;#&#x22;&#x3E;Another action&#x3C;/a&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+        </code>
+      </pre>
+    </div>
+  </div>
+
+  <hr>
+
+  <h4 id="api">API Reference</h4>
+
+  <h5 class="is-primary">DropdownDirective</h5>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Inputs</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>autoClose</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Indicates that dropdown will be closed on item or document click, and after pressing ESC</td>
+          </tr>
+          <tr>
+            <td>container</td>
+            <td><kbd>string</kbd></td>
+            <td>A selector specifying the element the popover should be appended to. Currently only supports "body".</td>
+          </tr>
+          <tr>
+            <td>dropup</td>
+            <td><kbd>boolean</kbd></td>
+            <td>This attribute indicates that the dropdown should be opened upwards</td>
+          </tr>
+          <tr>
+            <td>isDisabled</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Disables dropdown toggle and hides dropdown menu if opened</td>
+          </tr>
+          <tr>
+            <td>isOpen</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Returns whether or not the popover is currently being shown</td>
+          </tr>
+          <tr>
+            <td>placement</td>
+            <td><kbd>string</kbd></td>
+            <td>Placement of a popover. Accepts: "top", "bottom", "left", "right"</td>
+          </tr>
+          <tr>
+            <td>triggers</td>
+            <td><kbd>string</kbd></td>
+            <td>Specifies events that should trigger. Supports a space separated list of event names.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+        <tr>
+          <th>Outputs</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>isOpenChange</td>
+          <td>Emits an event when isOpen change</td>
+        </tr>
+        <tr>
+          <td>onHidden</td>
+          <td>Emits an event when the popover is hidden</td>
+        </tr>
+        <tr>
+          <td>onShown</td>
+          <td>Emits an event when the popover is shown</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+        <tr>
+          <th>Methods</th>
+          <th>Return Type</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>show()</td>
+          <td><kbd>void</kbd></td>
+          <td>Opens an element’s dropdown. This is considered a “manual” triggering of the dropdown.</td>
+        </tr>
+        <tr>
+          <td>hide()</td>
+          <td><kbd>void</kbd></td>
+          <td>Closes an element’s dropdown. This is considered a “manual” triggering of the dropdown.</td>
+        </tr>
+        <tr>
+          <td>toggle(value:boolean)</td>
+          <td><kbd>void</kbd></td>
+          <td>Toggles an element’s dropdown. This is considered a “manual” triggering of the dropdown.</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+</section>
+<aside class="hx-sidebar is-medium-width is-scrollable">
+  <ul class="hx-nav hx-nav-vertical">
+    <li class="hx-nav-heading"><h6>Contents</h6></li>
+
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
+    </li>
+
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Examples</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#code')"><span>Code</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
+    </li>
+
+  </ul>
+</aside>

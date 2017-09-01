@@ -1,28 +1,36 @@
-# AngularHxui
+# README #
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.4.
+This README includes the steps that are necessary to import the HxUi-angular into a project or to contribute with development.
 
-## Development server
+### What is this repository for? ###
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+HxUi-angular is an Angular library based on the HxUi User Interface Library.
+The idea behind this UI library is for other developers to quickly and efficiently build application UI while maintaining all the UX and UI principles.
 
-## Code scaffolding
+### How do I get set up to contribute with development? ###
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+1. Clone this repository
+2. CD into the cloned repo
+3. run `npm install`
 
-## Build
+### Available Npm Scripts ###
+* `npm start` - runs the compiler and a server at the same time, both in "watch mode".
+* `npm run tsc` - runs the TypeScript compiler once.
+* `npm run tsc:w` - runs the TypeScript compiler in watch mode; the process keeps running, awaiting changes to TypeScript files and re-compiling when it sees them.
+* `npm run lite` - runs the [lite-server](https://www.npmjs.com/package/lite-server), a light-weight, static file server, written and maintained by
+[John Papa](https://github.com/johnpapa) and
+[Christopher Martin](https://github.com/cgmartin)
+with excellent support for Angular apps that use routing.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Here are the test related scripts:
+* `npm test` - compiles, runs and watches the karma unit tests
+* `npm run e2e` - run protractor e2e tests, written in JavaScript (*e2e-spec.js)
 
-## Running unit tests
+### Install as NPM (import into project) ##
+(via HTTP) npm install git+https://medicaldirector.visualstudio.com/MD%20Design/_git/HxUi-angular --save
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+(via SSH) npm install git+ssh://medicaldirector@medicaldirector.visualstudio.com:22/MD%20Design/_git/HxUi-angular --save
 
-## Running end-to-end tests
+### How do I view the HxUi-angular documentation ###
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Run ```ng serve``` .
