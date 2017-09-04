@@ -31,7 +31,7 @@
       <div class="hx-columns">
         <div class="hx-column">
           <span hxTooltip="Select 1 or more users" [disabled]="!isPrintDisabled()" placement="right">
-              <button class="hx-button is-small" (click)="printSelected()" [disabled]="isPrintDisabled()" >Print</button>
+              <button class="hx-button is-small" (click)="printSelected($event)" [disabled]="isPrintDisabled()" >Print</button>
           </span>
         </div>
       </div>

@@ -95,4 +95,8 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
     this.getTabularData();
   }
 
+  onActionClickHandler = () => {
+
+  }
+
 }
