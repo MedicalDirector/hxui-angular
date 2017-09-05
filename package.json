@@ -21,7 +21,7 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
-    "@hxui/css": "git+https://bitbucket.org/md-design/hxui-html-css.git",
+    "@hxui/css": "git+https://bitbucket.org/md-design/gethxui.git",
     "angular-in-memory-web-api": "^0.3.2",
     "angular2-highlight-js": "^5.0.0",
     "core-js": "^2.4.1",
