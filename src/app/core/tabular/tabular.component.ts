@@ -7,7 +7,7 @@ import {ActionConfigRouteType} from '../../../modules/tabular/actions-config.int
 import {TabularService} from './tabular.service';
 import {UserModel} from './user.model';
 import {CoreBaseComponent} from '../core-base.component';
-import {PageScrollService} from 'ng2-page-scroll';
+import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
 
 @Component({

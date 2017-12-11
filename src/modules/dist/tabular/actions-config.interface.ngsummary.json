@@ -1,0 +1,1 @@
+{"moduleName":null,"summaries":[{"symbol":{"__symbol":0,"members":[]},"metadata":{"Default":0,"Callback":1}},{"symbol":{"__symbol":1,"members":[]},"metadata":{"__symbolic":"class"}}],"symbols":[{"__symbol":0,"name":"ActionConfigRouteType","filePath":"./actions-config.interface"},{"__symbol":1,"name":"IActionsConfig","filePath":"./actions-config.interface"}]}

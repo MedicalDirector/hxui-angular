@@ -7,8 +7,9 @@ import {
   Provider, ReflectiveInjector
 } from '@angular/core';
 import { ContentRef } from './content-ref.class';
-import { PositioningService, PositioningOptions } from '../positioning';
+import { PositioningService } from '../positioning/positioning.service';
 import { listenToTriggers } from '../utils/triggers';
+import {PositioningOptions} from '../positioning/positioning.options';
 
 export interface ListenOptions {
   target?: ElementRef;
@@ -111,7 +112,7 @@ export class ComponentLoader<T> {
     return this;
   }
 
-  public show(opts: {content?: string | TemplateRef<any>, [key:string]: any} = {}): ComponentRef<T> {
+  public show(opts: {content?: string | TemplateRef<any>, [key: string]: any} = {}): ComponentRef<T> {
     this._subscribePositioning();
 
     if (!this._componentRef) {

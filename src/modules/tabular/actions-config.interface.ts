@@ -1,4 +1,4 @@
-import {IDisabledInput} from "./disabled-input.interface";
+import {IDisabledInput} from './disabled-input.interface';
 
 export enum ActionConfigRouteType {
   Default,
@@ -6,7 +6,7 @@ export enum ActionConfigRouteType {
 }
 
 
-export interface IActionsConfig{
+export abstract class IActionsConfig {
   /**
    * Unique identifier/reference
    */
@@ -36,11 +36,11 @@ export interface IActionsConfig{
   /**
    * The route type. Could be standard route or callback.
    */
-  routeType:ActionConfigRouteType;
+  routeType: ActionConfigRouteType;
 
   /**
    * The function to call when route type is callback
    */
-  callback?:any;
+  callback?: any;
 
 }

@@ -8,7 +8,7 @@ export enum TabularColumnTypes {
   Checkbox
 }
 
-export interface ITabularColumn {
+export abstract class ITabularColumn {
   /**
    * Unique identifier/reference
    */

@@ -1,0 +1,1 @@
+{"version":3,"file":"tabular-size.enum.js","sourceRoot":"","sources":["../../tabular/tabular-size.enum.ts"],"names":[],"mappings":"AACA,MAAM,CAAN,IAAY,WAIX;AAJD,WAAY,WAAW;IACnB,mDAAO,CAAA;IACP,+CAAK,CAAA;IACL,+CAAK,CAAA;GAHG,WAAW,KAAX,WAAW,QAItB","sourcesContent":["\nexport enum TabularSize {\n    Default,\n    Small,\n    Large\n}"]}

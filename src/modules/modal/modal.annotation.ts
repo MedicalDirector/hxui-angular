@@ -7,7 +7,7 @@ export class ModalContainer {
     }
 }
 export function Modal() {
-    return function (target:any) {
+    return function (target: any) {
         Object.assign(target.prototype,  ModalContainer.prototype);
     };
 }

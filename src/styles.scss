@@ -1,8 +1,15 @@
-@import '../node_modules/@hxui/css/css/hxui.css';
+$icons-path: '../node_modules/@hxui/css/dist/static/fonts/';
+@import '../node_modules/@hxui/css/dist/static/scss/hxui.scss';
 
 
 .helixLogo{
   width:2rem;
+}
+
+.hxui-logo{
+  &.is-white use{
+     fill:#fff;
+  }
 }
 
 code.hljs {

@@ -3,7 +3,7 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const users = [
       {
-        id:1,
+        id: 1,
         usercode: 'BR001',
         firstname: 'Brenda',
         surname: 'Reed',
@@ -21,7 +21,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: false
       },
       {
-        id:3,
+        id: 3,
         usercode: 'II006',
         firstname: 'John',
         surname: 'Smith',
@@ -30,7 +30,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true
       },
       {
-        id:4,
+        id: 4,
         usercode: 'JS001',
         firstname: 'Julia',
         surname: 'Sampson',
@@ -39,7 +39,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true
       },
       {
-        id:5,
+        id: 5,
         usercode: 'GP001',
         firstname: 'John',
         surname: 'Pipps',
@@ -48,7 +48,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true
       },
       {
-        id:6,
+        id: 6,
         usercode: 'NR001',
         firstname: 'Natalie',
         surname: 'Roberts',
@@ -57,7 +57,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: false
       },
       {
-        id:7,
+        id: 7,
         usercode: 'HS001',
         firstname: 'Harry',
         surname: 'Sechi',
@@ -66,7 +66,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true
       },
       {
-        id:8,
+        id: 8,
         usercode: 'XL001',
         firstname: 'Xavier',
         surname: 'Lorenzo',
@@ -75,7 +75,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true
       },
       {
-        id:9,
+        id: 9,
         usercode: 'CY001',
         firstname: 'Chris',
         surname: 'Yap',
@@ -120,34 +120,34 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true
       },
       {
-        id:14,
+        id: 14,
         usercode: 'SH001',
         firstname: 'Susan',
         surname: 'Homes',
-        rolename:'Receptionist',
+        rolename: 'Receptionist',
         email: 'susan.homes@medicaldirector.com',
         active: false
       },
       {
-        id:15,
+        id: 15,
         usercode: 'KL001',
         firstname: 'Kevin',
         surname: 'Liang',
-        rolename:'GP',
+        rolename: 'GP',
         email: 'kevin.liang@medicaldirector.com',
         active: false
       },
       {
-        id:16,
+        id: 16,
         usercode: 'JK001',
         firstname: 'Jack',
         surname: 'Kelvin',
-        rolename:'Nurse',
+        rolename: 'Nurse',
         email: 'jack.kelvin@medicaldirector.com',
         active: true
       },
       {
-        id:17,
+        id: 17,
         usercode: 'DP001',
         firstname: 'Dave',
         surname: 'Poon',
@@ -156,7 +156,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true
       },
       {
-        id:18,
+        id: 18,
         usercode: 'FB001',
         firstname: 'Fred',
         surname: 'Borris',
@@ -165,20 +165,20 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true
       },
       {
-        id:19,
+        id: 19,
         usercode: 'TS001',
         firstname: 'Tupac',
         surname: 'Shakur',
-        rolename:'Administrator',
+        rolename: 'Administrator',
         email: 'tupac.shakur@medicaldirector.com',
         active: true
       },
       {
-        id:20,
+        id: 20,
         usercode: 'BS001',
         firstname: 'Biggie',
         surname: 'Smalls',
-        rolename:'GP',
+        rolename: 'GP',
         email: 'biggie.smalls@medicaldirector.com',
         active: true
       }

@@ -1,9 +1,9 @@
 
-import {Component} from "@angular/core";
-import {Modal} from "./modal.annotation";
+import {Component} from '@angular/core';
+import {Modal} from './modal.annotation';
 
 @Component({
-    selector: "hx-modal-backdrop",
+    selector: 'hx-modal-backdrop',
     template: `<div class="hx-modal-backdrop fade in" (click)="dismiss()"></div>`
 })
 @Modal()

@@ -27,85 +27,85 @@ import { TabsetConfig } from './tabset.config';
 export class TabsetComponent implements OnDestroy {
   /** if true tabs will be placed vertically */
   @Input()
-  public get vertical():boolean {
+  public get vertical(): boolean {
     return this._vertical;
   }
-  public set vertical(value:boolean) {
+  public set vertical(value: boolean) {
     this._vertical = value;
     this.setClassMap();
   }
 
   /** if true tabs fill the container and have a consistent width */
   @Input()
-  public get justified():boolean {
+  public get justified(): boolean {
     return this._justified;
   }
-  public set justified(value:boolean) {
+  public set justified(value: boolean) {
     this._justified = value;
     this.setClassMap();
   }
 
   /** navigation context class: 'tabs' or 'pills' */
   @Input()
-  public get type():string {
+  public get type(): string {
     return this._type;
   }
-  public set type(value:string) {
+  public set type(value: string) {
     this._type = value;
     this.setClassMap();
   }
 
-  @HostBinding('class.hx-tab-container') public clazz:boolean = true;
+  @HostBinding('class.hx-tab-container') public clazn = true;
 
-  public tabs:TabDirective[] = [];
-  public classMap:any = {};
+  public tabs: TabDirective[] = [];
+  public classMap: any = {};
 
-  protected isDestroyed:boolean;
-  protected _vertical:boolean;
-  protected _justified:boolean;
-  protected _type:string;
+  protected isDestroyed: boolean;
+  protected _vertical: boolean;
+  protected _justified: boolean;
+  protected _type: string;
 
   public constructor(config: TabsetConfig) {
     Object.assign(this, config);
   }
 
-  public ngOnDestroy():void {
+  public ngOnDestroy(): void {
     this.isDestroyed = true;
   }
 
-  public addTab(tab:TabDirective):void {
+  public addTab(tab: TabDirective): void {
     this.tabs.push(tab);
     tab.active = this.tabs.length === 1 && tab.active !== false;
   }
 
-  public removeTab(tab: TabDirective, options = {reselect: true, emit: true}):void {
-    let index = this.tabs.indexOf(tab);
+  public removeTab(tab: TabDirective, options = {reselect: true, emit: true}): void {
+    const index = this.tabs.indexOf(tab);
     if (index === -1 || this.isDestroyed) {
       return;
     }
     // Select a new tab if the tab to be removed is selected and not destroyed
     if (options.reselect && tab.active && this.hasAvailableTabs(index)) {
-      let newActiveIndex = this.getClosestTabIndex(index);
+      const newActiveIndex = this.getClosestTabIndex(index);
       this.tabs[newActiveIndex].active = true;
     }
-    if(options.emit) {
+    if (options.emit) {
       tab.removed.emit(tab);
     }
     this.tabs.splice(index, 1);
-    if(tab.elementRef.nativeElement && tab.elementRef.nativeElement.remove) {
+    if (tab.elementRef.nativeElement && tab.elementRef.nativeElement.remove) {
       tab.elementRef.nativeElement.remove();
     }
   }
 
-  protected getClosestTabIndex(index:number):number {
-    let tabsLength = this.tabs.length;
+  protected getClosestTabIndex(index: number): number {
+    const tabsLength = this.tabs.length;
     if (!tabsLength) {
       return -1;
     }
 
     for (let step = 1; step <= tabsLength; step += 1) {
-      let prevIndex = index - step;
-      let nextIndex = index + step;
+      const prevIndex = index - step;
+      const nextIndex = index + step;
       if (this.tabs[prevIndex] && !this.tabs[prevIndex].disabled) {
         return prevIndex;
       }
@@ -116,8 +116,8 @@ export class TabsetComponent implements OnDestroy {
     return -1;
   }
 
-  protected hasAvailableTabs(index:number):boolean {
-    let tabsLength = this.tabs.length;
+  protected hasAvailableTabs(index: number): boolean {
+    const tabsLength = this.tabs.length;
     if (!tabsLength) {
       return false;
     }
@@ -130,7 +130,7 @@ export class TabsetComponent implements OnDestroy {
     return false;
   }
 
-  protected setClassMap():void {
+  protected setClassMap(): void {
     this.classMap = {
       'is-vertical': this.vertical,
       'is-justified': this.justified,

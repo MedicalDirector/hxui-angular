@@ -1,6 +1,6 @@
 import {TabularSize} from './tabular-size.enum';
 
-export interface ITabularConfig {
+export abstract class ITabularConfig {
   size: TabularSize;
   pagination: {
     itemsPerPage: number,

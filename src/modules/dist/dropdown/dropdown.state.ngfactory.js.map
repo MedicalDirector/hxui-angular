@@ -1,0 +1,1 @@
+{"version":3,"file":"dropdown.state.ngfactory.js","sourceRoot":"","sources":["../../dropdown/dropdown.state.ngfactory.ts"],"names":[],"mappings":"","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n"]}

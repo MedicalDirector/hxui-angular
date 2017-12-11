@@ -78,7 +78,7 @@ export class TabularComponent implements OnInit, DoCheck {
   private defaultOrderBy: Array<string> = ['id'];
   private defaultOrderByDirection: OrderByDirection;
   pagedItems: any[];
-  private selectAll: boolean = false;
+  private selectAll = false;
   protected _callback: Function;
   protected _config: ITabularConfig;
   protected _searchTerm: string;

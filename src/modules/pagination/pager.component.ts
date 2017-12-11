@@ -26,52 +26,52 @@ const PAGER_TEMPLATE = `
   providers: [PAGER_CONTROL_VALUE_ACCESSOR]
 })
 export class PagerComponent implements ControlValueAccessor, OnInit {
-  public config:any;
+  public config: any;
   /** if `true` aligns each link to the sides of pager */
-  @Input() public align:boolean;
+  @Input() public align: boolean;
   /** limit number for page links in pager */
-  @Input() public maxSize:number;
+  @Input() public maxSize: number;
   /** if false first and last buttons will be hidden */
-  @Input() public boundaryLinks:boolean;
+  @Input() public boundaryLinks: boolean;
   /** if false previous and next buttons will be hidden */
-  @Input() public directionLinks:boolean;
+  @Input() public directionLinks: boolean;
   // labels
   /** first button text */
-  @Input() public firstText:string;
+  @Input() public firstText: string;
   /** previous button text */
-  @Input() public previousText:string;
+  @Input() public previousText: string;
   /** next button text */
-  @Input() public nextText:string;
+  @Input() public nextText: string;
   /** last button text */
-  @Input() public lastText:string;
+  @Input() public lastText: string;
   /** if true current page will in the middle of pages list */
-  @Input() public rotate:boolean;
+  @Input() public rotate: boolean;
   // css
   /** add class to <li> */
-  @Input() public pageBtnClass:string;
+  @Input() public pageBtnClass: string;
 
   /** if true pagination component will be disabled */
-  @Input() public disabled:boolean;
+  @Input() public disabled: boolean;
 
   /** fired when total pages count changes, $event:number equals to total pages count */
-  @Output() public numPages:EventEmitter<number> = new EventEmitter<number>();
+  @Output() public numPages: EventEmitter<number> = new EventEmitter<number>();
   /** fired when page was changed, $event:{page, itemsPerPage} equals to object with current page index and number of items per page */
-  @Output() public pageChanged:EventEmitter<PageChangedEvent> = new EventEmitter<PageChangedEvent>();
+  @Output() public pageChanged: EventEmitter<PageChangedEvent> = new EventEmitter<PageChangedEvent>();
 
   /** maximum number of items per page. If value less than 1 will display all items on one page */
   @Input()
-  public get itemsPerPage():number {
+  public get itemsPerPage(): number {
     return this._itemsPerPage;
   }
 
-  public set itemsPerPage(v:number) {
+  public set itemsPerPage(v: number) {
     this._itemsPerPage = v;
     this.totalPages = this.calculateTotalPages();
   }
 
   /** total number of items in all pages */
   @Input()
-  public get totalItems():number {
+  public get totalItems(): number {
     return this._totalItems;
   }
 
@@ -122,8 +122,8 @@ export class PagerComponent implements ControlValueAccessor, OnInit {
   protected _itemsPerPage: number;
   protected _totalItems: number;
   protected _totalPages: number;
-  protected inited: boolean = false;
-  protected _page: number = 1;
+  protected inited = false;
+  protected _page = 1;
 
   public constructor(renderer: Renderer, elementRef: ElementRef, paginationConfig: PaginationConfig) {
     this.renderer = renderer;
@@ -198,7 +198,7 @@ export class PagerComponent implements ControlValueAccessor, OnInit {
 
     if (!this.disabled) {
       if (event && event.target) {
-        let target: any = event.target;
+        const target: any = event.target;
         target.blur();
       }
       this.writeValue(page);
@@ -212,12 +212,12 @@ export class PagerComponent implements ControlValueAccessor, OnInit {
   }
 
   protected getPages(currentPage: number, totalPages: number): any[] {
-    let pages: any[] = [];
+    const pages: any[] = [];
 
     // Default page limits
     let startPage = 1;
     let endPage = totalPages;
-    let isMaxSized = typeof this.maxSize !== 'undefined' && this.maxSize < totalPages;
+    const isMaxSized = typeof this.maxSize !== 'undefined' && this.maxSize < totalPages;
 
     // recompute if maxSize
     if (isMaxSized) {
@@ -242,19 +242,19 @@ export class PagerComponent implements ControlValueAccessor, OnInit {
 
     // Add page number links
     for (let num = startPage; num <= endPage; num++) {
-      let page = this.makePage(num, num.toString(), num === currentPage);
+      const page = this.makePage(num, num.toString(), num === currentPage);
       pages.push(page);
     }
 
     // Add links to move between page sets
     if (isMaxSized && !this.rotate) {
       if (startPage > 1) {
-        let previousPageSet = this.makePage(startPage - 1, '...', false);
+        const previousPageSet = this.makePage(startPage - 1, '...', false);
         pages.unshift(previousPageSet);
       }
 
       if (endPage < totalPages) {
-        let nextPageSet = this.makePage(endPage + 1, '...', false);
+        const nextPageSet = this.makePage(endPage + 1, '...', false);
         pages.push(nextPageSet);
       }
     }
@@ -264,7 +264,7 @@ export class PagerComponent implements ControlValueAccessor, OnInit {
 
   // base class
   protected calculateTotalPages(): number {
-    let totalPages = this.itemsPerPage < 1
+    const totalPages = this.itemsPerPage < 1
       ? 1
       : Math.ceil(this.totalItems / this.itemsPerPage);
     return Math.max(totalPages || 0, 1);

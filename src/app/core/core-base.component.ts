@@ -1,6 +1,8 @@
-import {ElementRef, Inject, ViewChild} from '@angular/core';
-import {PageScrollInstance, PageScrollService} from 'ng2-page-scroll';
+import {ElementRef, Inject, Injectable, ViewChild} from '@angular/core';
+import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
+
+@Injectable()
 export class CoreBaseComponent {
 
   @ViewChild('container')
