@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {CoreBaseComponent} from '../core-base.component';
-import {PageScrollService} from 'ng2-page-scroll';
+import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
 
 @Component({

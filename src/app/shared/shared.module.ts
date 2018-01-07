@@ -2,12 +2,12 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
 import {AppRoutingModule} from '../app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {HxUiModule} from '../../modules/index';
+import {HxUiModule} from 'modules/index';
 import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';
-import {Ng2PageScrollModule, PageScrollService} from 'ng2-page-scroll';
+import {NgxPageScrollModule, PageScrollService} from 'ngx-page-scroll';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -15,26 +15,26 @@ import {Ng2PageScrollModule, PageScrollService} from 'ng2-page-scroll';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HxUiModule,
     HighlightJsModule,
-    Ng2PageScrollModule
+    NgxPageScrollModule
   ],
   declarations: [],
   exports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HxUiModule,
     HighlightJsModule,
-    Ng2PageScrollModule
+    NgxPageScrollModule
   ]
 })
 export class SharedModule {

@@ -2,9 +2,9 @@ import {
     ViewContainerRef,
     ReflectiveInjector, Injectable, Injector, ComponentRef,
     ComponentFactoryResolver
-} from "@angular/core";
-import {Observable, ReplaySubject} from "rxjs/Rx";
-import {ModalBackdropComponent} from "./modal-backdrop.component";
+} from '@angular/core';
+import {Observable, ReplaySubject} from 'rxjs/Rx';
+import {ModalBackdropComponent} from './modal-backdrop.component';
 
 @Injectable()
 export class ModalService {
@@ -13,7 +13,7 @@ export class ModalService {
     // here we hold our injector
     private injector: Injector;
     // here we hold the backdrop component
-    private backdropRef:ComponentRef<ModalBackdropComponent>;
+    private backdropRef: ComponentRef<ModalBackdropComponent>;
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver) {
     }
@@ -37,7 +37,7 @@ export class ModalService {
         this.backdropRef = this.dynamicComponentLoader<ModalBackdropComponent>(ModalBackdropComponent);
 
         //create dynamic component
-        return this.dynamicComponentLoader<T>(component,parameters);
+        return this.dynamicComponentLoader<T>(component, parameters);
     }
 
 
@@ -48,7 +48,7 @@ export class ModalService {
      * @param parameters
      * @returns {ComponentRef}
      */
-    private dynamicComponentLoader<T>(component:any,parameters?:Object):ComponentRef<any>{
+    private dynamicComponentLoader<T>(component: any, parameters?: Object): ComponentRef<any>{
         // compile the component based on its type and
         // create a component factory
         const factory = this.componentFactoryResolver.resolveComponentFactory(component);
@@ -56,11 +56,11 @@ export class ModalService {
         // the custom component
         const childInjector = ReflectiveInjector.resolveAndCreate([], this.injector);
         // create the actual component
-        let componentRef = this.vcRef.createComponent(factory, 0, childInjector);
+        const componentRef = this.vcRef.createComponent(factory, 0, childInjector);
         // pass the @Input parameters to the instance
         Object.assign(componentRef.instance, parameters);
         // add a destroy method to the modal instance
-        componentRef.instance["destroy"] = () => {
+        componentRef.instance['destroy'] = () => {
             // this will close the backdrop
             this.backdropRef.destroy();
             // this will destroy the component

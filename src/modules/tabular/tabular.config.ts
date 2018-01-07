@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {ITabularConfig} from "./tabular-config.interface";
-import {OrderByDirection} from "./tabular-order-by.service";
-import {TabularSize} from "./tabular-size.enum";
+import {ITabularConfig} from './tabular-config.interface';
+import {OrderByDirection} from './tabular-order-by.service';
+import {TabularSize} from './tabular-size.enum';
 
 
 /**
@@ -14,8 +14,8 @@ export class TabularConfig {
      * Tabular configuration
      * IPaginationInstance, ISearchConfig
      */
-    public config:ITabularConfig = {
-        size:TabularSize.Default,
+    public config: ITabularConfig = {
+        size: TabularSize.Default,
         pagination: {
             itemsPerPage: 5,
             currentPage: 1
@@ -26,13 +26,13 @@ export class TabularConfig {
      * Default order by value
      * @type {string[]}
      */
-    public defaultOrderBy:Array<string> = ['id'];
+    public defaultOrderBy: Array<string> = ['id'];
 
     /**
      * Default order by direction
      * @type OrderByDirection
      */
-    public defaultOrderByDirection:OrderByDirection = OrderByDirection.Ascending;
+    public defaultOrderByDirection: OrderByDirection = OrderByDirection.Ascending;
 
 
 }

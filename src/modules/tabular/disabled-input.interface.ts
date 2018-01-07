@@ -1,4 +1,4 @@
 export interface IDisabledInput{
-    disabled:boolean;
-    tooltip:string;
+    disabled: boolean;
+    tooltip: string;
 }

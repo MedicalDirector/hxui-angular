@@ -1,0 +1,1 @@
+{"moduleName":null,"summaries":[{"symbol":{"__symbol":0,"members":[]},"metadata":{"__symbolic":"class","members":{"__ctor__":[{"__symbolic":"constructor","parameters":[null,null,null]}],"isHeader":[{"__symbolic":"method"}],"toString":[{"__symbolic":"method"}]}}}],"symbols":[{"__symbol":0,"name":"TypeaheadMatch","filePath":"./typeahead-match.class"}]}

@@ -1,6 +1,6 @@
-import {Directive, HostListener, ComponentRef, ViewContainerRef, Input, ComponentFactoryResolver} from "@angular/core";
-import {TooltipContentComponent} from "./tooltip-content.component";
-import {TooltipConfig} from "./tooltip.config";
+import {Directive, HostListener, ComponentRef, ViewContainerRef, Input, ComponentFactoryResolver} from '@angular/core';
+import {TooltipContentComponent} from './tooltip-content.component';
+import {TooltipConfig} from './tooltip.config';
 
 @Directive({
   selector: '[hxTooltip]'
@@ -21,18 +21,18 @@ export class TooltipDirective {
 
   @Input() public disabled: boolean;
 
-  @Input() public animation: boolean = true;
+  @Input() public animation = true;
 
-  @Input() public placement: "top"|"bottom"|"left"|"right" = "bottom";
+  @Input() public placement: 'top'|'bottom'|'left'|'right' = 'bottom';
 
-  @HostListener("focusin")
-  @HostListener("mouseenter")
+  @HostListener('focusin')
+  @HostListener('mouseenter')
   show(): void {
     if (this.disabled || this.visible)
       return;
 
     this.visible = true;
-    if (typeof this.content === "string") {
+    if (typeof this.content === 'string') {
       const factory = this.resolver.resolveComponentFactory(TooltipContentComponent);
       if (!this.visible)
         return;
@@ -51,8 +51,8 @@ export class TooltipDirective {
     }
   }
 
-  @HostListener("focusout")
-  @HostListener("mouseleave")
+  @HostListener('focusout')
+  @HostListener('mouseleave')
   hide(): void {
     if (!this.visible)
       return;

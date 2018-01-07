@@ -1,0 +1,1 @@
+[{"__symbolic":"module","version":4,"metadata":{},"exports":[{"from":"./tabular.component"},{"from":"./tabular.module"},{"from":"./actions-config.interface"},{"from":"./tabular-column.interface"},{"from":"./tabular-column.model"},{"from":"./tabular-config.interface"},{"from":"./tabular.config"},{"from":"./tabular-order-by.service"},{"from":"./tabular-size.enum"}]}]

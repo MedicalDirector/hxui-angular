@@ -5,9 +5,9 @@ import { TabDirective } from './tab.directive';
 /** Should be used to mark <template> element as a template for tab heading */
 @Directive({selector: '[hxTabHeading]'})
 export class TabHeadingDirective {
-  public templateRef:TemplateRef<any>;
+  public templateRef: TemplateRef<any>;
 
-  public constructor(templateRef:TemplateRef<any>, tab:TabDirective) {
+  public constructor(templateRef: TemplateRef<any>, tab: TabDirective) {
     tab.headingRef = templateRef;
   }
 }

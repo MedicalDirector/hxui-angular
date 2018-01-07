@@ -4,8 +4,8 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
-import { ComponentLoader, ComponentLoaderFactory } from '../component-loader';
-
+import { ComponentLoaderFactory } from '../component-loader/component-loader.factory';
+import { ComponentLoader } from '../component-loader/component-loader.class';
 import { DropdownConfig } from './dropdown.config';
 import { DropdownContainerComponent } from './dropdown-container.component';
 import { DropdownState } from './dropdown.state';

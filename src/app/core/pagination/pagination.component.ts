@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {PageScrollService} from 'ng2-page-scroll';
+import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
 import {CoreBaseComponent} from '../core-base.component';
 
@@ -9,9 +9,9 @@ import {CoreBaseComponent} from '../core-base.component';
   styles: [':host { display:flex; flex: 1; min-width: 0; }']
 })
 export class PaginationComponent extends CoreBaseComponent implements OnInit {
-  public totalItems: number = 128;
-  public currentPage: number = 4;
-  public smallnumPages: number = 0;
+  public totalItems = 128;
+  public currentPage = 4;
+  public smallnumPages = 0;
 
   constructor(protected pageScrollService: PageScrollService,
               @Inject(DOCUMENT) protected document: any) {

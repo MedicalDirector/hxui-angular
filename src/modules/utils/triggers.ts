@@ -1,7 +1,4 @@
-/**
- * @copyright Valor Software
- * @copyright Angular ng-bootstrap team
- */
+
 import { Renderer } from '@angular/core';
 import { Trigger } from './trigger.class';
 
@@ -20,7 +17,7 @@ export function parseTriggers(triggers: string, aliases: any = DEFAULT_ALIASES):
   const parsedTriggers = trimmedTriggers.split(/\s+/)
     .map((trigger: string) => trigger.split(':'))
     .map((triggerPair: string[]) => {
-      let alias = aliases[triggerPair[0]] || triggerPair;
+      const alias = aliases[triggerPair[0]] || triggerPair;
       return new Trigger(alias[0], alias[1]);
     });
 
@@ -28,17 +25,17 @@ export function parseTriggers(triggers: string, aliases: any = DEFAULT_ALIASES):
     .filter((triggerPair: Trigger) => triggerPair.isManual());
 
   if (manualTriggers.length > 1) {
-    throw 'Triggers parse error: only one manual trigger is allowed';
+    throw new Error('Triggers parse error: only one manual trigger is allowed');
   }
 
   if (manualTriggers.length === 1 && parsedTriggers.length > 1) {
-    throw 'Triggers parse error: manual trigger can\'t be mixed with other triggers';
+    throw new Error('Triggers parse error: manual trigger can\'t be mixed with other triggers');
   }
 
   return parsedTriggers;
 }
 
-export function listenToTriggers(renderer: Renderer, target: any, triggers: string,
+export function listenToTriggers(renderer: Renderer, target: any, triggers: any,
                                  showFn: Function, hideFn: Function, toggleFn: Function): Function {
   const parsedTriggers = parseTriggers(triggers);
   const listeners: any[] = [];
@@ -54,9 +51,9 @@ export function listenToTriggers(renderer: Renderer, target: any, triggers: stri
     }
 
     listeners.push(
-      renderer.listen(target, trigger.open, showFn),
-      renderer.listen(target, trigger.close, hideFn));
+      renderer.listen(target, <any>trigger.open, showFn),
+      renderer.listen(target, <any>trigger.close, hideFn));
   });
 
-  return () => { listeners.forEach((unsubscribeFn: Function) => unsubscribeFn()); };
+  return () => { listeners.forEach((unsubscribeFn: Function) => <any>unsubscribeFn()); };
 }

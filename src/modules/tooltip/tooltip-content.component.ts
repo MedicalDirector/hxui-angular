@@ -1,7 +1,7 @@
 import {Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
 
 @Component({
-    selector: "hx-tooltip-content",
+    selector: 'hx-tooltip-content',
    // changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="hx-tooltip is-{{ placement }}"
@@ -25,14 +25,14 @@ export class TooltipContentComponent implements AfterViewInit {
     content: string;
 
     @Input()
-    placement: "top"|"bottom"|"left"|"right" = "bottom";
+    placement: 'top'|'bottom'|'left'|'right' = 'bottom';
 
     @Input()
-    animation: boolean = true;
+    animation = true;
 
     top: number = -100000;
     left: number = -100000;
-    active: boolean = false;
+    active = false;
 
 
     constructor(private element: ElementRef,
@@ -63,13 +63,13 @@ export class TooltipContentComponent implements AfterViewInit {
 
 
     private positionElements(hostEl: HTMLElement, targetEl: HTMLElement, positionStr: string, appendToBody: boolean = true): { top: number, left: number } {
-        let positionStrParts = positionStr.split("-");
-        let pos0 = positionStrParts[0];
-        let pos1 = positionStrParts[1] || "center";
-        let hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
-        let targetElWidth = targetEl.offsetWidth;
-        let targetElHeight = targetEl.offsetHeight;
-        let shiftWidth: any = {
+        const positionStrParts = positionStr.split('-');
+        const pos0 = positionStrParts[0];
+        const pos1 = positionStrParts[1] || 'center';
+        const hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
+        const targetElWidth = targetEl.offsetWidth;
+        const targetElHeight = targetEl.offsetHeight;
+        const shiftWidth: any = {
             center: function (): number {
                 return hostElPos.left + hostElPos.width / 2 - targetElWidth / 2;
             },
@@ -81,7 +81,7 @@ export class TooltipContentComponent implements AfterViewInit {
             }
         };
 
-        let shiftHeight: any = {
+        const shiftHeight: any = {
             center: function (): number {
                 return hostElPos.top + hostElPos.height / 2 - targetElHeight / 2;
             },
@@ -95,21 +95,21 @@ export class TooltipContentComponent implements AfterViewInit {
 
         let targetElPos: { top: number, left: number };
         switch (pos0) {
-            case "right":
+            case 'right':
                 targetElPos = {
                     top: shiftHeight[pos1](),
                     left: shiftWidth[pos0]()
                 };
                 break;
 
-            case "left":
+            case 'left':
                 targetElPos = {
                     top: shiftHeight[pos1](),
                     left: hostElPos.left - targetElWidth
                 };
                 break;
 
-            case "bottom":
+            case 'bottom':
                 targetElPos = {
                     top: shiftHeight[pos0](),
                     left: shiftWidth[pos1]()
@@ -146,7 +146,7 @@ export class TooltipContentComponent implements AfterViewInit {
         };
     }
 
-    private offset(nativeEl:any): { width: number, height: number, top: number, left: number } {
+    private offset(nativeEl: any): { width: number, height: number, top: number, left: number } {
         const boundingClientRect = nativeEl.getBoundingClientRect();
         return {
             width: boundingClientRect.width || nativeEl.offsetWidth,
@@ -168,7 +168,7 @@ export class TooltipContentComponent implements AfterViewInit {
     }
 
     private isStaticPositioned(nativeEl: HTMLElement): boolean {
-        return (this.getStyle(nativeEl, "position") || "static" ) === "static";
+        return (this.getStyle(nativeEl, 'position') || 'static' ) === 'static';
     }
 
     private parentOffsetEl(nativeEl: HTMLElement): any {

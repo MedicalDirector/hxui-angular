@@ -1,7 +1,3 @@
-/**
- * @copyright Valor Software
- * @copyright Angular ng-bootstrap team
- */
 
 import { ComponentRef, ViewRef } from '@angular/core';
 

@@ -1,4 +1,4 @@
-import {ITabularColumn} from "./tabular-column.interface";
+import {ITabularColumn} from './tabular-column.interface';
 
 export class TabularColumn implements ITabularColumn {
 

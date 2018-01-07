@@ -10,29 +10,29 @@ import { latinize } from './typeahead-utils';
   // tslint:disable-next-line
   template: `
 <!-- inject options list template -->
-<template [ngTemplateOutlet]="optionsListTemplate || optionListTemplate"
-  [ngOutletContext]="{matches:matches, itemTemplate:itemTemplate, query:query}"></template>
+<ng-template [ngTemplateOutlet]="optionsListTemplate || optionListTemplate"
+  [ngTemplateOutletContext]="{matches:matches, itemTemplate:itemTemplate, query:query}"></ng-template>
 
 <!-- default options item template -->
-<template #hxItemTemplate let-match="match" let-query="query"><span [innerHtml]="hightlight(match, query)"></span></template>
+<ng-template #hxItemTemplate let-match="match" let-query="query"><span [innerHtml]="hightlight(match, query)"></span></ng-template>
 
 <!-- options list template -->
-<template #optionListTemplate >
-<template ngFor let-match let-i="index" [ngForOf]="matches">
+<ng-template #optionListTemplate >
+<ng-template ngFor let-match let-i="index" [ngForOf]="matches">
    <h6 *ngIf="match.isHeader()" class="hx-dropdown-header">{{match}}</h6>
    
-   <template [ngIf]="!match.isHeader()">
+   <ng-template [ngIf]="!match.isHeader()">
       <a href="#"
         class="hx-dropdown-item"
         (click)="selectMatch(match, $event)"
         (mouseenter)="selectActive(match)"
         [class.active]="isActive(match)">
-          <template [ngTemplateOutlet]="itemTemplate || hxItemTemplate" 
-            [ngOutletContext]="{item:match.item, index:i, match:match, query:query}"></template>
+          <ng-template [ngTemplateOutlet]="itemTemplate || hxItemTemplate" 
+            [ngTemplateOutletContext]="{item:match.item, index:i, match:match, query:query}"></ng-template>
       </a>
-  </template>
-</template>
-</template>
+  </ng-template>
+</ng-template>
+</ng-template>
 `,
   // tslint:disable
   host: {

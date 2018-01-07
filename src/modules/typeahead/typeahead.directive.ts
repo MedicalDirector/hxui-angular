@@ -14,7 +14,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/toArray';
 import { TypeaheadMatch } from './typeahead-match.class';
-import { ComponentLoader, ComponentLoaderFactory } from '../component-loader';
+import { ComponentLoaderFactory } from '../component-loader/component-loader.factory';
+import { ComponentLoader } from '../component-loader/component-loader.class';
 
 @Directive({selector: '[typeahead]', exportAs: 'hx-typeahead'})
 export class TypeaheadDirective implements OnInit, OnDestroy {
@@ -33,13 +34,13 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
   /** should be used only in case of typeahead attribute is array. If true - loading of options will be async, otherwise - sync. true make sense if options array is large. */
   @Input() public typeaheadAsync: boolean = void 0;
   /** match latin symbols. If true the word súper would match super and vice versa. */
-  @Input() public typeaheadLatinize: boolean = true;
+  @Input() public typeaheadLatinize = true;
   /** break words with spaces. If true the text "exact phrase" here match would match with match exact phrase here but not with phrase here exact match (kind of "google style"). */
-  @Input() public typeaheadSingleWords: boolean = true;
+  @Input() public typeaheadSingleWords = true;
   /** should be used only in case typeaheadSingleWords attribute is true. Sets the word delimiter to break words. Defaults to space. */
-  @Input() public typeaheadWordDelimiters: string = ' ';
+  @Input() public typeaheadWordDelimiters = ' ';
   /** should be used only in case typeaheadSingleWords attribute is true. Sets the word delimiter to match exact phrase. Defaults to simple and double quotes. */
-  @Input() public typeaheadPhraseDelimiters: string = '\'"';
+  @Input() public typeaheadPhraseDelimiters = '\'"';
   /** used to specify a custom item template. Template variables exposed are called item and index; */
   @Input() public typeaheadItemTemplate: TemplateRef<any>;
   /** used to specify a custom options list template. Template variables: matches, itemTemplate, query */
@@ -75,11 +76,11 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
     // @Input() protected typeaheadFocusOnSelect:boolean;
 
   public _container: TypeaheadContainerComponent;
-  public isTypeaheadOptionsListActive: boolean = false;
+  public isTypeaheadOptionsListActive = false;
 
   protected keyUpEventEmitter: EventEmitter<any> = new EventEmitter();
   protected _matches: TypeaheadMatch[];
-  protected placement: string = 'bottom-left';
+  protected placement = 'bottom-left';
   // protected popup:ComponentRef<TypeaheadContainerComponent>;
 
   protected ngControl: NgControl;
@@ -195,7 +196,7 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
   }
 
   public changeModel(match: TypeaheadMatch): void {
-    let valueStr: string = match.value;
+    const valueStr: string = match.value;
     this.ngControl.viewToModelUpdate(valueStr);
     (this.ngControl.control as FormControl).setValue(valueStr);
     this.hide();
@@ -220,7 +221,7 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
     this._container = this._typeahead.instance;
     this._container.parent = this;
     // This improves the speed as it won't have to be done for each list item
-    let normalizedQuery = (this.typeaheadLatinize
+    const normalizedQuery = (this.typeaheadLatinize
       ? latinize(this.ngControl.control.value)
       : this.ngControl.control.value).toString()
       .toLowerCase();
@@ -260,7 +261,7 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
     this.keyUpEventEmitter
       .debounceTime(this.typeaheadWaitMs)
       .mergeMap((value: string) => {
-        let normalizedQuery = this.normalizeQuery(value);
+        const normalizedQuery = this.normalizeQuery(value);
 
         return Observable.from(this.typeahead)
           .filter((option: any) => {
@@ -279,8 +280,8 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
   }
 
   protected normalizeOption(option: any): any {
-    let optionValue: string = getValueFromObject(option, this.typeaheadOptionField);
-    let normalizedOption = this.typeaheadLatinize
+    const optionValue: string = getValueFromObject(option, this.typeaheadOptionField);
+    const normalizedOption = this.typeaheadLatinize
       ? latinize(optionValue)
       : optionValue;
 
@@ -330,7 +331,7 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
 
     if (this._container) {
       // This improves the speed as it won't have to be done for each list item
-      let normalizedQuery = (this.typeaheadLatinize
+      const normalizedQuery = (this.typeaheadLatinize
         ? latinize(this.ngControl.control.value)
         : this.ngControl.control.value).toString()
         .toLowerCase();
@@ -344,13 +345,13 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
   }
 
   protected prepareMatches(options: any[]): void {
-    let limited: any[] = options.slice(0, this.typeaheadOptionsLimit);
+    const limited: any[] = options.slice(0, this.typeaheadOptionsLimit);
 
     if (this.typeaheadGroupField) {
       let matches: TypeaheadMatch[] = [];
 
       // extract all group names
-      let groups = limited
+      const groups = limited
         .map((option: any) => getValueFromObject(option, this.typeaheadGroupField))
         .filter((v: string, i: number, a: any[]) => a.indexOf(v) === i);
 

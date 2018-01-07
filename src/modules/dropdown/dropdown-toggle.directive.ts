@@ -11,7 +11,7 @@ import { DropdownState } from './dropdown.state';
 })
 export class DropdownToggleDirective implements OnDestroy {
   @HostBinding('attr.disabled')
-  isDisabled: boolean = null;
+  isDisabled: boolean;
 
   @HostBinding('class.is-active')
   @HostBinding('attr.aria-expanded') isOpen: boolean;
@@ -67,7 +67,7 @@ export class DropdownToggleDirective implements OnDestroy {
     // populate disabled state
     this._subscriptions.push(this._state
       .isDisabledChange
-      .subscribe((value: boolean) => this.isDisabled = value || null));
+      .subscribe((value: boolean) => this.isDisabled = value || false));
   }
 
   ngOnDestroy(): void {
