@@ -1,0 +1,30 @@
+<div class="hxui-reset">
+  <div class="hx-card datepicker__container">
+    <div class="hx-card-header datepicker__header">
+      <div class="datepicker__month">
+        <div class="datepicker__icon" title="Previous Month" (click)="previousMonth()">
+            <a class="hx-button is-transparent"><i class="hx-icon icon-angle-left"></i></a>
+        </div>
+        <div class="datepicker__month--text">
+          <span>{{viewDate.toLocaleString("en-au", { month: "long", year: "numeric" })}}</span></div>
+        <div class="datepicker__icon" title="Next Month" (click)="nextMonth()">
+            <a class="hx-button is-transparent"><i class="hx-icon icon-angle-right"></i></a>
+        </div>
+      </div>
+      <div class="datepicker__week">
+        <div class="datepicker__weekday" *ngFor="let weekday of week">
+          {{weekday | slice:0:3}}
+        </div>
+      </div>
+    </div>
+    <div class="datepicker__contents">
+      <div class="datepicker__day" *ngFor="let day of days" 
+      [ngClass]="{'datepicker__day--sibling-month': !isCurrentMonth(day), 
+      'datepicker__day--current-day': isCurrentDay(day),
+      'datepicker__day--selected-day': isSelectedDay(day)}"
+      (click)="setSelectedDate(day)">
+      <a class="hx-button is-transparent" [attr.disabled]="!validate(day) ? true : null">{{day.getDate()}}</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
       "assets": [
         "assets",
         "favicon.ico",
-        {"glob": "**/*", "input": "../node_modules/@hxui/css/fonts/", "output": "./fonts/"}
+        {"glob": "**/*", "input": "../node_modules/@hxui/css/static/static/fonts/", "output": "./fonts/"}
       ],
       "index": "index.html",
       "main": "main.ts",

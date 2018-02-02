@@ -29,8 +29,8 @@ html {
 
 @font-face {
   font-family: 'hxui';
-  src: url("../node_modules/@hxui/css/dist/static/fonts/hxui.eot");
-  src: url("../node_modules/@hxui/css/dist/static/fonts/hxui.eot#iefix") format("embedded-opentype"), url("../node_modules/@hxui/css/dist/static/fonts/hxui.ttf") format("truetype"), url("../node_modules/@hxui/css/dist/static/fonts/hxui.woff") format("woff"), url("../node_modules/@hxui/css/dist/static/fonts/hxui.svg?#hxui") format("svg");
+  src: url("../node_modules/@hxui/css/static/static/fonts/hxui.eot");
+  src: url("../node_modules/@hxui/css/static/static/fonts/hxui.eot#iefix") format("embedded-opentype"), url("../node_modules/@hxui/css/static/static/fonts/hxui.ttf") format("truetype"), url("../node_modules/@hxui/css/static/static/fonts/hxui.woff") format("woff"), url("../node_modules/@hxui/css/static/static/fonts/hxui.svg?#hxui") format("svg");
   font-weight: normal;
   font-style: normal; }
 .hxui-reset {

@@ -1,0 +1,15 @@
+<div class="hx-input-group datepicker__form">
+  <div class="hx-input-control" [ngClass]="{'is-danger': !isValid}">
+    <input class="hx-input" type="text" required #datePickerForm
+    [value]="date | date:dateFormat"
+    (click)="onClick()" 
+    (focus)="onFocus()"
+    (change)="onChange(datePickerForm.value)"
+    [disabled]="isDisabled">
+    <label class="hx-label">{{placeholder}} <sup>*</sup></label>
+    <div class="hx-help">Please select a date</div>
+  </div>
+  <i class="hx-icon icon-calendar"></i>
+  <hx-datepicker class="datepicker__calendar" *ngIf="visible" [selectedDate]="date"
+   (onDateSelected)="onDateSelectEvent($event)" [validate]="validateIsNotBeforeDate(presentDate)"></hx-datepicker>
+</div>

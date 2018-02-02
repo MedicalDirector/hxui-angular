@@ -1,0 +1,18 @@
+.datepicker {
+    &__form {
+        position: relative;
+    }
+
+    &__calendar {
+        position: absolute;
+        z-index: 99;
+        bottom: 100%;
+        left: 0;
+    }
+}
+
+.datepicker__form input[readonly] ~ .hx-label {
+    top: -.5rem;
+    font-size: .75rem;
+    color: #41b987;
+}
