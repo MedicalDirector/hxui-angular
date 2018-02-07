@@ -11,24 +11,22 @@ export class DatepickerComponent implements OnInit {
 
   // The month/year that the view binds to
   @Input() public selectedDate: Date;
-  @Input() public validate: (date: Date) => boolean = (date: Date) => true;
 
   public viewDate: Date;
   public days: Array<Date> = new Array<Date>();
-  private week: Array<string> = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  public week: Array<string> = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   private presentDate: Date;
   private cellCount: number = 41;
 
-  constructor() { 
+  constructor() {
   }
 
-  // Populates the days array with the current month, days not in the current month that are in the same week,
-  // for example, look at the windows calendar, rather than display blank spaces, days from sibling months are populated as well
+  // Populates the days array with the current month, and completes the view with partial dates from sibling months
   public renderCalendar() {
     for (let i = 0; i <= this.cellCount; i++) {
-      // date will be set to the first day of the month held in this.viewDate
+      // date will be set to the first day of the month set in this.viewDate
       let date: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth());
-      // Shifts the week to start from Monday at index 1, rather than Sunday at index 0
+      // Shifts the week to start from Monday, rather than Sunday, this causes the index to start at 1
       let dayOffset = date.getDay() == 0 ? 7 : date.getDay();
       this.days[i] = new Date(date.setDate(2 - dayOffset + i));
     }
@@ -60,15 +58,14 @@ export class DatepickerComponent implements OnInit {
   }
 
   public setSelectedDate(date: Date): void {
-    if (this.validate(date)) {
-      this.selectedDate = date;
-      this.onDateSelected.emit(date);
-    }
+    this.selectedDate = date;
+    this.onDateSelected.emit(date);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!!changes.selectedDate)
+    if (!!changes.selectedDate.currentValue) {
       this.viewDate = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth());
+    }
   }
 
   ngOnInit() {
@@ -77,5 +74,4 @@ export class DatepickerComponent implements OnInit {
     this.viewDate = this.viewDate || new Date(date.getFullYear(), date.getMonth());
     this.renderCalendar();
   }
-
 }

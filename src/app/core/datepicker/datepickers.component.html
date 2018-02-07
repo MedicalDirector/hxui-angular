@@ -21,11 +21,12 @@
 
   <h4 id="example">Example</h4>
 
-
-    <div class="hxui-reset">
-      <hx-datepicker-form></hx-datepicker-form>    
-
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-datepicker-form [align]="top" [(ngModel)]="dayte"></hx-datepicker-form>
+      {{dayte}}
     </div>
+  </div>
 
   <br>
 
@@ -35,19 +36,7 @@
     <div class="hx-column">
       <pre>
         <code class="html">
-      &#x3C;div class=&#x22;hx-dropdown&#x22; hxDropdown&#x3E;
-        &#x3C;button class=&#x22;hx-button is-primary is-outlined hx-button-dropdown&#x22; hxDropdownToggle type=&#x22;button&#x22;&#x3E;
-          Dropdown button
-        &#x3C;/button&#x3E;
-        &#x3C;div class=&#x22;hx-dropdown-menu&#x22; *hxDropdownMenu&#x3E;
-          &#x3C;div class=&#x22;hx-dropdown-header&#x22;&#x3E;Dropdown header&#x3C;/div&#x3E;
-          &#x3C;a class=&#x22;hx-dropdown-item&#x22; href=&#x22;#&#x22;&#x3E;Action&#x3C;/a&#x3E;
-          &#x3C;a class=&#x22;hx-dropdown-item&#x22; href=&#x22;#&#x22;&#x3E;Another action&#x3C;/a&#x3E;
-          &#x3C;div class=&#x22;hx-dropdown-divider&#x22;&#x3E;&#x3C;/div&#x3E;
-          &#x3C;a class=&#x22;hx-dropdown-item&#x22; href=&#x22;#&#x22;&#x3E;Action&#x3C;/a&#x3E;
-          &#x3C;a class=&#x22;hx-dropdown-item&#x22; href=&#x22;#&#x22;&#x3E;Another action&#x3C;/a&#x3E;
-        &#x3C;/div&#x3E;
-      &#x3C;/div&#x3E;
+      &#x3C;hx-datepicker-form &#x3E;&#x3C;/hx-datepicker-form&#x3E;
         </code>
       </pre>
     </div>
@@ -57,7 +46,7 @@
 
   <h4 id="api">API Reference</h4>
 
-  <h5 class="is-primary">DropdownDirective</h5>
+  <h5 class="is-primary">Datepicker-Form Component</h5>
   <div class="hx-columns">
     <div class="hx-column">
       <table class="hx-table is-striped">
@@ -70,39 +59,39 @@
         </thead>
         <tbody>
           <tr>
-            <td>autoClose</td>
-            <td><kbd>boolean</kbd></td>
-            <td>Indicates that dropdown will be closed on item or document click, and after pressing ESC</td>
-          </tr>
-          <tr>
-            <td>container</td>
+            <td>dateFormat</td>
             <td><kbd>string</kbd></td>
-            <td>A selector specifying the element the popover should be appended to. Currently only supports "body".</td>
+            <td>A JavaScript Date object formatting string, formats the display of components current value. Defaults to "dd/MM/y".</td>
           </tr>
           <tr>
-            <td>dropup</td>
+            <td>defaultToPresentDate</td>
             <td><kbd>boolean</kbd></td>
-            <td>This attribute indicates that the dropdown should be opened upwards</td>
+            <td>Initializes the component with a value of the present date. Defaults to true.</td>
           </tr>
           <tr>
-            <td>isDisabled</td>
-            <td><kbd>boolean</kbd></td>
-            <td>Disables dropdown toggle and hides dropdown menu if opened</td>
-          </tr>
-          <tr>
-            <td>isOpen</td>
-            <td><kbd>boolean</kbd></td>
-            <td>Returns whether or not the popover is currently being shown</td>
-          </tr>
-          <tr>
-            <td>placement</td>
+            <td>placeholder</td>
             <td><kbd>string</kbd></td>
-            <td>Placement of a popover. Accepts: "top", "bottom", "left", "right"</td>
+            <td>This attribute specifies the placeholder value of the components input element. Defaults to "Date".</td>
           </tr>
           <tr>
-            <td>triggers</td>
-            <td><kbd>string</kbd></td>
-            <td>Specifies events that should trigger. Supports a space separated list of event names.</td>
+            <td>disabled</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Adds the disabled html attribute to the components input element. Defaults to false.</td>
+          </tr>
+          <tr>
+              <td>readonly</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Adds the readonly html attribute to the components input element. Defaults to false.</td>
+            </tr>
+          <tr>
+            <td>allowPreviousDates</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Setting to false will disallow the user from selecting dates before the present date. Defaults to true.d</td>
+          </tr>
+          <tr>
+            <td>align</td>
+            <td><kbd>"top" | "bottom"</kbd></td>
+            <td>Specifies to open the datepicker at the top of the input element or at the bottom</td>
           </tr>
         </tbody>
       </table>
@@ -121,55 +110,13 @@
         </thead>
         <tbody>
         <tr>
-          <td>isOpenChange</td>
-          <td>Emits an event when isOpen change</td>
-        </tr>
-        <tr>
-          <td>onHidden</td>
-          <td>Emits an event when the popover is hidden</td>
-        </tr>
-        <tr>
-          <td>onShown</td>
-          <td>Emits an event when the popover is shown</td>
+          <td>onDateChange</td>
+          <td>Emits a Date is selected from the Datepicker or a valid date string is entered into input field</td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
-
-
-  <div class="hx-columns">
-    <div class="hx-column">
-      <table class="hx-table is-striped">
-        <thead>
-        <tr>
-          <th>Methods</th>
-          <th>Return Type</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>show()</td>
-          <td><kbd>void</kbd></td>
-          <td>Opens an element’s dropdown. This is considered a “manual” triggering of the dropdown.</td>
-        </tr>
-        <tr>
-          <td>hide()</td>
-          <td><kbd>void</kbd></td>
-          <td>Closes an element’s dropdown. This is considered a “manual” triggering of the dropdown.</td>
-        </tr>
-        <tr>
-          <td>toggle(value:boolean)</td>
-          <td><kbd>void</kbd></td>
-          <td>Toggles an element’s dropdown. This is considered a “manual” triggering of the dropdown.</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-
 
 </section>
 <aside class="hx-sidebar is-medium-width is-scrollable">

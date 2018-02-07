@@ -4,7 +4,7 @@ import { DatepickerFormComponent } from './datepicker-form.component';
 import { DatepickerComponent } from './datepicker.component'
 
 
-fdescribe('DatepickerFormComponent', () => {
+describe('DatepickerFormComponent', () => {
   let component: DatepickerFormComponent;
   let fixture: ComponentFixture<DatepickerFormComponent>;
   let testDate: Date;
@@ -80,6 +80,14 @@ fdescribe('DatepickerFormComponent', () => {
 
       expect(component.setDate).not.toHaveBeenCalled();
     });
+
+    it('should not set component.date to the Date object passed to it if it does not pass validation', () => {
+      component.registerValidator(() => false);
+
+      component.onChange("11/01/1993");
+
+      expect(component.setDate).not.toHaveBeenCalled();
+    });
   });
 
   describe("validateIsNotBeforeDate", () => {
@@ -123,16 +131,6 @@ fdescribe('DatepickerFormComponent', () => {
       expect(component.date).toBe(date);
       expect(component.onDateChange.emit).toHaveBeenCalledWith(date);
       expect(component.propogateChange).toHaveBeenCalledWith(date);
-    });
-
-    it('should not set component.date to the Date object passed to it if it does not pass validation', () => {
-      component.registerValidator(() => false);
-
-      component.setDate(date);
-
-      expect(component.date).not.toBe(date);
-      expect(component.onDateChange.emit).not.toHaveBeenCalled();
-      expect(component.propogateChange).not.toHaveBeenCalled();
     });
   });
 

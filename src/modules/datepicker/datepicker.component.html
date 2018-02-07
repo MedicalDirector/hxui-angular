@@ -23,7 +23,7 @@
       'datepicker__day--current-day': isCurrentDay(day),
       'datepicker__day--selected-day': isSelectedDay(day)}"
       (click)="setSelectedDate(day)">
-      <a class="hx-button is-transparent" [attr.disabled]="!validate(day) ? true : null">{{day.getDate()}}</a>
+      <a class="hx-button is-transparent">{{day.getDate()}}</a>
       </div>
     </div>
   </div>

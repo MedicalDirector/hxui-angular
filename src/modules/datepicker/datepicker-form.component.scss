@@ -1,13 +1,28 @@
 .datepicker {
     &__form {
         position: relative;
+        max-width: 21rem;
     }
 
     &__calendar {
         position: absolute;
         z-index: 99;
-        bottom: 100%;
+
+        &--top {
+            bottom: 100%;
+        }
+
+        &--bottom {
+            top: 70%;
+        }
+
         left: 0;
+    }
+
+    &__help {
+        font-size: .75rem;
+        margin-top: .25rem;
+        color: #63605f;
     }
 }
 
