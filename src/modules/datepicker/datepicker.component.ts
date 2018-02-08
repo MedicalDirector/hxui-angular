@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'hx-datepicker',
+  selector: 'hxa-datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss']
 })

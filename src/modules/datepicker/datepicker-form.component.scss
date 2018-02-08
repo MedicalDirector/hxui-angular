@@ -1,32 +1,31 @@
-.datepicker {
-    &__form {
+.hxa-datepicker {
+    &-form {
         position: relative;
         max-width: 21rem;
     }
 
-    &__calendar {
+    &-calendar {
         position: absolute;
         z-index: 99;
+        left: 0;
 
-        &--top {
+        &-top {
             bottom: 100%;
         }
 
-        &--bottom {
+        &-bottom {
             top: 70%;
         }
-
-        left: 0;
     }
 
-    &__help {
+    &-help {
         font-size: .75rem;
         margin-top: .25rem;
         color: #63605f;
     }
 }
 
-.datepicker__form input[readonly] ~ .hx-label {
+.hxa-datepicker-form input[readonly] ~ .hx-label {
     top: -.5rem;
     font-size: .75rem;
     color: #41b987;

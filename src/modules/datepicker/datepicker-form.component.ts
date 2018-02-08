@@ -3,7 +3,7 @@ import { DateValueAccessor } from './datevalue.accessor'
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'hx-datepicker-form',
+  selector: 'hxa-datepicker-form',
   templateUrl: './datepicker-form.component.html',
   styleUrls: ['./datepicker-form.component.scss'],
   providers: [{
