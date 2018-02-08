@@ -6,8 +6,10 @@ export abstract class DateValueAccessor implements ControlValueAccessor {
 
   abstract setDate(date: Date): void;
 
-  public writeValue(value: Date) {    
-    this.setDate(value);
+  public writeValue(value: Date) {
+    if (value === null || value instanceof Date) {
+      this.setDate(value);
+    }
   }
 
   public registerOnChange(fn: (value: Date) => void) {

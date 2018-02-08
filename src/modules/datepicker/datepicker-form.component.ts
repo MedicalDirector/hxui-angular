@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, HostListener, Input, Output, EventEmitter, forwardRef, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener, Input, Output, EventEmitter, forwardRef, SimpleChanges, DoCheck } from '@angular/core';
 import { DateValueAccessor } from './datevalue.accessor'
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -12,12 +12,13 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     multi: true
   }]
 })
-export class DatepickerFormComponent extends DateValueAccessor implements OnInit {
+export class DatepickerFormComponent extends DateValueAccessor implements OnInit, DoCheck {
 
   @Output() onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
   @Input() disabled: boolean = false;
   @Input() readonly: boolean = false;
+  @Input() required: boolean = true;
   @Input() allowTextEntry: boolean = true;
   @Input() defaultToPresentDate: boolean = true;
   @Input() allowPreviousDates: boolean = true;
@@ -29,6 +30,7 @@ export class DatepickerFormComponent extends DateValueAccessor implements OnInit
   public visible: boolean = false;
   public presentDate: Date;
   public isValid: boolean = true;
+  private hasInitialised: boolean = false;
   private validators: Array<(date: Date) => boolean> = new Array<(date: Date) => boolean>();
 
   constructor(private element: ElementRef) {
@@ -124,9 +126,11 @@ export class DatepickerFormComponent extends DateValueAccessor implements OnInit
     return !!date;
   }
 
-  ngAfterContentInit() {
-    if (this.defaultToPresentDate) {
+  ngDoCheck() {
+    // this.date is set to null after NgModel is bound, we want this to run only once after NgModel has run
+    if (this.defaultToPresentDate && !this.hasInitialised && this.date === null) {
       this.setDate(this.presentDate);
+      this.hasInitialised = true;
     }
   }
 

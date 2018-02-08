@@ -1,13 +1,14 @@
 <div class="hx-input-group datepicker__form">
   <div class="hx-input-control" [ngClass]="{'is-danger': !isValid}">
-    <input class="hx-input" type="text" required #datePickerForm
+    <input class="hx-input" type="text" #datePickerForm
+    [required]="required ? true : null"
     [value]="date | date:dateFormat"
     (change)="onChange(datePickerForm.value)"
     (focus)="onFocus()"
     (keydown.Tab)="onTab(datePickerForm.value)"
     [disabled]="disabled"
     [readonly]="readonly ? true : null">
-    <label class="hx-label">{{placeholder}} <sup>*</sup></label>
+    <label class="hx-label">{{placeholder}} <sup *ngIf="required">*</sup></label>
     <div class="hx-help"></div>
     <div class="datepicker__help">Please select a date</div>
   </div>

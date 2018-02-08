@@ -8,12 +8,12 @@
 
   <pre>
     <code class="typescript">
-      import {{ '{' }}DatepickerModule} from &#x22;@hxui-angular/packages/datepicker/datepicker.module&#x22;;
+      import {{ '{' }} DatepickerModule } from &#x22;@hxui-angular/packages/datepicker/datepicker.module&#x22;;
 
       @NgModule({{ '{' }}
-        imports: [DatepickerModule.forRoot(),...]
+        imports: [DatepickerModule.forRoot(), ...]
       })
-      export class AppModule(){{ '{' }}
+      export class AppModule() {{ '{' }}
     </code>
   </pre>
 
@@ -23,8 +23,11 @@
 
   <div class="hx-columns">
     <div class="hx-column">
-      <hx-datepicker-form [align]="top" [(ngModel)]="dayte"></hx-datepicker-form>
-      {{dayte}}
+      <hx-datepicker-form align="bottom" [(ngModel)]="dayte"></hx-datepicker-form>
+      <div>
+        <span>Emitted Date object: {{dayte}}</span>
+      </div>
+      
     </div>
   </div>
 
@@ -36,7 +39,7 @@
     <div class="hx-column">
       <pre>
         <code class="html">
-      &#x3C;hx-datepicker-form &#x3E;&#x3C;/hx-datepicker-form&#x3E;
+      &#x3C;hx-datepicker-form align="bottom" [(ngModel)]=&#x22;form.date&#x22;&#x3E;&#x3C;/hx-datepicker-form&#x3E;
         </code>
       </pre>
     </div>
@@ -79,10 +82,15 @@
             <td>Adds the disabled html attribute to the components input element. Defaults to false.</td>
           </tr>
           <tr>
-              <td>readonly</td>
-              <td><kbd>boolean</kbd></td>
-              <td>Adds the readonly html attribute to the components input element. Defaults to false.</td>
-            </tr>
+            <td>readonly</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Adds the readonly html attribute to the components input element. Defaults to false.</td>
+          </tr>
+          <tr>
+            <td>required</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Adds the required html attribute to the components input element and a required asterisk on the input label. Defaults to true.</td>
+          </tr>
           <tr>
             <td>allowPreviousDates</td>
             <td><kbd>boolean</kbd></td>
