@@ -1,0 +1,19 @@
+<div class="hx-input-group hxa-datepicker-form">
+  <div class="hx-input-control" [ngClass]="{'is-danger': !isValid}">
+    <input class="hx-input" type="text" #datePickerForm
+    [required]="required ? true : null"
+    [value]="date | date:dateFormat"
+    (change)="onChange(datePickerForm.value)"
+    (focus)="onFocus()"
+    (keydown.Tab)="onTab(datePickerForm.value)"
+    [disabled]="disabled"
+    [readonly]="readonly ? true : null">
+    <label class="hx-label">{{placeholder}} <sup *ngIf="required">*</sup></label>
+    <div class="hx-help"></div>
+    <div class="hxa-datepicker-help">Please select a date</div>
+  </div>
+  <i class="hx-icon icon-calendar"></i>
+  <hxa-datepicker class="hxa-datepicker-calendar" *ngIf="visible" [selectedDate]="date"
+   (onDateSelected)="onDateSelectEvent($event)"
+   [ngClass]="{'hxa-datepicker-calendar-top': align == 'top', 'hxa-datepicker-calendar-bottom': align == 'bottom'}"></hxa-datepicker>
+</div>
