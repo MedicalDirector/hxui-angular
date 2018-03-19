@@ -1,1 +1,0 @@
-{"version":3,"file":"tabular-order-by.service.ngfactory.js","sourceRoot":"","sources":["../../tabular/tabular-order-by.service.ngfactory.ts"],"names":[],"mappings":"","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n"]}

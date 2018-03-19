@@ -10,7 +10,7 @@ import {TabularSize} from './tabular-size.enum';
 
 
 @Component({
-  selector: 'hx-tabular',
+  selector: 'hxa-tabular',
   template: `<table class="tabular hx-table is-striped">
     <thead>
     <tr>
@@ -156,7 +156,6 @@ export class TabularComponent implements OnInit, DoCheck {
   /**
    * Event fired when refresh is called.
    * Host should refresh data of input.
-   * @type {EventEmitter<any>}
    */
   @Output() refresh: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -195,9 +194,6 @@ export class TabularComponent implements OnInit, DoCheck {
 
   /**
    * Calls the parsed callback with optional arguments
-   * @param event
-   * @param cb
-   * @returns {boolean}
    */
   private executeCallback(event: Event, cb: any[]) {
     if (cb.length) {
@@ -249,9 +245,7 @@ export class TabularComponent implements OnInit, DoCheck {
 
   /**
    * Get the action tooltip if it exists
-   * @param action
-   * @returns {string}
-     */
+   */
   private getActionTooltip(action: IActionsConfig): string{
     return (action && action.disabledConfig) ? action.disabledConfig.tooltip : '';
   }
@@ -264,7 +258,6 @@ export class TabularComponent implements OnInit, DoCheck {
 
   /**
    * Handles the column header click event.
-   * @param key
    */
   private onSortClickHandler(key: string) {
     this.orderBy = ([key] === this.orderBy) ? this.defaultOrderBy : [key];
@@ -301,7 +294,6 @@ export class TabularComponent implements OnInit, DoCheck {
 
   /**
    * Helper to determine if tabular instance is in small mode
-   * @returns {boolean}
    */
   private isSmall(): boolean {
     return (this.config.size === TabularSize.Small);

@@ -8,6 +8,7 @@
 # dependencies
 /node_modules
 /src/modules/node_modules
+.ng_pkg_build
 
 # IDEs and editors
 /.idea
