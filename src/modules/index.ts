@@ -6,8 +6,9 @@ import { PaginationModule } from './pagination/pagination.module';
 import { TabsModule } from './tabs/tabs.module';
 import { TooltipModule } from './tooltip/tooltip.module';
 import { TypeaheadModule } from './typeahead/typeahead.module';
-import {ModalService} from './modal/modal.service';
-import {TabularModule} from './tabular/tabular.module';
+import { ModalService } from './modal/modal.service';
+import { TabularModule } from './tabular/tabular.module';
+import { SelectizeModule } from 'modules/selectize/selectize.module';
 
 export * from './modal/index';
 export * from './dropdown/index';
@@ -31,27 +32,22 @@ export {
   ComponentLoader
 } from './component-loader/component-loader.class';
 
-
-
 export {
   Positioning, PositioningOptions, PositioningService, positionElements
 } from './positioning/index';
-
-
 
 @NgModule({
   imports: [
     DropdownModule.forRoot(), ModalModule.forRoot(), PaginationModule.forRoot(),
     TabsModule.forRoot(), TooltipModule.forRoot(),
-    TypeaheadModule.forRoot(), TabularModule.forRoot()
+    TypeaheadModule.forRoot(), TabularModule.forRoot(), SelectizeModule.forRoot()
   ],
   exports: [
     DropdownModule, ModalModule, PaginationModule,
     TabsModule, TooltipModule,
-    TypeaheadModule, TabularModule
+    TypeaheadModule, TabularModule, SelectizeModule
   ]
 })
-
 
 export class HxUiModule {
   public static forRoot(): ModuleWithProviders {

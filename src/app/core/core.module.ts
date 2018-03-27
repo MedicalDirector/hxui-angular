@@ -15,6 +15,7 @@ import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './tabular/in-memory-data.service';
 import {TabularService} from './tabular/tabular.service';
 import { InstallGuideComponent } from './install-guide/install-guide.component';
+import { SelectizeComponent } from 'app/core/selectize/selectize.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { InstallGuideComponent } from './install-guide/install-guide.component';
       TooltipsComponent,
       PaginationComponent,
       TabularComponent,
-      InstallGuideComponent
+      InstallGuideComponent,
+      SelectizeComponent
   ],
   providers: [
      TabularService,
