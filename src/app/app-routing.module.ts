@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { WelcomeComponent } from './core/welcome/welcome.component';
+import { DatepickersComponent } from './core/datepicker/datepickers.component';
 import { DropdownsComponent } from './core/dropdowns/dropdowns.component';
 import { ModalsComponent } from './core/modals/modals.component';
 import { TabsComponent } from './core/tabs/tabs.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: 'welcome',  component: WelcomeComponent },
   { path: 'install-guide',  component: InstallGuideComponent },
+  { path: 'datepickers',  component: DatepickersComponent },
   { path: 'dropdowns',  component: DropdownsComponent },
   { path: 'modals',  component: ModalsComponent },
   { path: 'tabs',  component: TabsComponent },

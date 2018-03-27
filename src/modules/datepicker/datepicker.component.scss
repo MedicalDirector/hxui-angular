@@ -1,0 +1,106 @@
+.hxa-datepicker {
+    &-container {
+        max-width: 21em;
+        width: 21em;
+        height: 24em;
+        display: flex;
+        flex-direction: column;
+        font-size: 1rem;
+    }
+
+    &-header {
+        padding: 1rem 1rem 0;
+        flex-direction: column;
+        align-items: initial;
+        justify-content: space-around;
+        font-weight: 100;
+    }
+
+    &-icon {
+        cursor: pointer;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        & .hx-button {
+            position: initial !important;
+            top: initial !important;
+            
+            &.is-transparent:hover {
+                color: black;
+            }
+        }      
+        
+        & .hx-icon {
+            font-size: 2.3em;
+            position: initial !important;
+            top: initial !important;
+        }
+    }
+
+    &-month {
+        display: flex;
+        text-align: center;
+        margin-bottom: 1rem;
+
+        &-title {
+            font-size: 1.5em;
+            flex: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;      
+        }        
+    }
+
+    &-week {
+        display: flex;
+        width: 100%;
+        text-align: center;
+
+        &day {
+            flex: 1;
+        }
+    }
+
+    &-contents {
+        padding: 1rem;
+        background-color: rgba(246, 246, 249, 0.5);
+        display: flex;
+        flex-flow: row wrap;
+        flex: 1;
+        justify-content: space-around;
+        align-content: space-around;
+    }
+
+    &-day {
+        flex: 1 1 14%;
+        height: 16.666%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & .hx-button {
+            position: initial;
+            top: initial;
+            flex: 1;
+            font-weight: 100;
+            height: 100%;
+            padding: 0;
+        }
+
+        &-siblingmonth .hx-button {
+            color: rgba(0, 0, 0, .3);
+        }
+
+        &-selectedday .hx-button {
+            color: white;
+            background: #41b987;
+        }
+
+        &-currentday .hx-button {
+            border: 2px solid #41b987;
+        }
+    }
+}
