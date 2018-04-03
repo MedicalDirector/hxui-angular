@@ -43,12 +43,11 @@ export {
   imports: [
     DropdownModule.forRoot(), ModalModule.forRoot(), PaginationModule.forRoot(),
     TabsModule.forRoot(), TooltipModule.forRoot(),
-    TypeaheadModule.forRoot(), TabularModule.forRoot(), SelectizeModule.forRoot()
-
-    DatepickerModule.forRoot()
+    TypeaheadModule.forRoot(), TabularModule.forRoot(),
+    SelectizeModule.forRoot(), DatepickerModule.forRoot()
   ],
   exports: [
-    DatepickerModule, DropdownModule, ModalModule, 
+    DatepickerModule, DropdownModule, ModalModule,
     PaginationModule, TabsModule, TooltipModule,
     TypeaheadModule, TabularModule, SelectizeModule
   ]
