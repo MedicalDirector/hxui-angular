@@ -14,6 +14,8 @@ import { DatepickerFormComponent } from '../../../modules/datepicker/datepicker-
 })
 export class DatepickersComponent extends CoreBaseComponent {
 
+  dayte: string;
+
   constructor(protected pageScrollService: PageScrollService,
               @Inject(DOCUMENT) protected document: any) {
     super(pageScrollService, document);

@@ -1,13 +1,13 @@
+import {} from 'jasmine';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DatepickerFormComponent } from './datepicker-form.component';
-import { DatepickerComponent } from './datepicker.component'
+import { DatepickerComponent } from './datepicker.component';
 
 
 describe('DatepickerFormComponent', () => {
   let component: DatepickerFormComponent;
   let fixture: ComponentFixture<DatepickerFormComponent>;
-  let testDate: Date;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -31,7 +31,7 @@ describe('DatepickerFormComponent', () => {
 
     beforeEach(() => {
      date = new Date('11 Jan 1993');
-    })
+    });
 
     it('should parse a valid dd/mm/yyyy date then return a new Date object with a value of that date', () => {
       const parsedDate: Date = component.parseDate('11/01/1993');
@@ -93,7 +93,7 @@ describe('DatepickerFormComponent', () => {
   describe("validateIsNotBeforeDate", () => {
     let presentDate: Date;
 
-    beforeEach(() => { 
+    beforeEach(() => {
       presentDate = new Date('11 Jan 1993');
     })
 
@@ -171,5 +171,5 @@ describe('DatepickerFormComponent', () => {
       expect(result).toBe(false);
     });
   });
-  
+
 });
