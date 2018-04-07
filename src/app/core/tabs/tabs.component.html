@@ -101,9 +101,9 @@
             {{ '{' }} {{ '{' }} tabz?.content}}
           &#x3C;/hx-tab&#x3E;
           &#x3C;hx-tab (select)=&#x22;alertMe()&#x22;&#x3E;
-            &#x3C;template hxTabHeading&#x3E;
+            &#x3C;ng-template hxTabHeading&#x3E;
               &#x3C;i class=&#x22;icon icon-bell is-small&#x22;&#x3E;&#x3C;/i&#x3E; Alert!
-            &#x3C;/template&#x3E;
+            &#x3C;/ng-template&#x3E;
             Html tab heading and callback!
           &#x3C;/hx-tab&#x3E;
         &#x3C;/hx-tabset&#x3E;
@@ -156,6 +156,221 @@
 
   <hr>
 
+  <h4 id="infotabexample">Info Tab Example</h4>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+
+      <hx-tabset [justified]="true" [hasInfo]="true">
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Overdue</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">10 <small>in April</small></h6>
+                <h6 class="mt-0 mb-0">13 <small>in total</small></h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 1 content
+        </hx-tab>
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Upcoming</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">23 <small>in April/May</small></h6>
+                <h6 class="mt-0 mb-0">300 <small>claims</small></h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 2 content
+        </hx-tab>
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Assigned/New</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">40 <small>total</small></h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 3 content
+        </hx-tab>
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Plan Started</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">23 <small>awaiting recall</small></h6>
+                <h6 class="mt-0 mb-0">40 <small>recalled</small></h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 4 content
+        </hx-tab>
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Team Participation</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">23 <small>participating</small></h6>
+                <h6 class="mt-0 mb-0">11 <small>no response</small></h6>
+                <h6 class="mt-0 mb-0">5 <small>declined</small></h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 5 content
+        </hx-tab>
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Awaiting Billing</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">23 <small>in April</small></h6>
+                <h6 class="mt-0 mb-0">40 <small>in total</small></h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 6 content
+        </hx-tab>
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Completed</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">23 <small>in April</small></h6>
+                <h6 class="mt-0 mb-0">40 <small>in total</small></h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 7 content
+        </hx-tab>
+      </hx-tabset>
+
+    </div>
+  </div>
+
+  <br>
+
+  <h5 id="infotabcode">Code</h5>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+
+      <hx-tabset>
+        <hx-tab heading="Template">
+      <pre>
+        <code class="html">
+      &#x3C;hx-tabset [justified]=&#x22;true&#x22; [hasInfo]=&#x22;true&#x22;&#x3E;
+        &#x3C;hx-tab&#x3E;
+          &#x3C;ng-template hxTabHeading&#x3E;
+            &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Overdue&#x3C;/h6&#x3E;
+            &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
+              &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;10 &#x3C;small&#x3E;in April&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;13 &#x3C;small&#x3E;in total&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/ng-template&#x3E;
+          Tab 1 content
+        &#x3C;/hx-tab&#x3E;
+        &#x3C;hx-tab&#x3E;
+          &#x3C;ng-template hxTabHeading&#x3E;
+            &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Upcoming&#x3C;/h6&#x3E;
+            &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
+              &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;23 &#x3C;small&#x3E;in April/May&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;300 &#x3C;small&#x3E;claims&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/ng-template&#x3E;
+          Tab 2 content
+        &#x3C;/hx-tab&#x3E;
+        &#x3C;hx-tab&#x3E;
+          &#x3C;ng-template hxTabHeading&#x3E;
+            &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Assigned/New&#x3C;/h6&#x3E;
+            &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
+              &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;40 &#x3C;small&#x3E;total&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/ng-template&#x3E;
+          Tab 3 content
+        &#x3C;/hx-tab&#x3E;
+        &#x3C;hx-tab&#x3E;
+          &#x3C;ng-template hxTabHeading&#x3E;
+            &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Plan Started&#x3C;/h6&#x3E;
+            &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
+              &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;23 &#x3C;small&#x3E;awaiting recall&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;40 &#x3C;small&#x3E;recalled&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/ng-template&#x3E;
+          Tab 4 content
+        &#x3C;/hx-tab&#x3E;
+        &#x3C;hx-tab&#x3E;
+          &#x3C;ng-template hxTabHeading&#x3E;
+            &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Team Participation&#x3C;/h6&#x3E;
+            &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
+              &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;23 &#x3C;small&#x3E;participating&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;11 &#x3C;small&#x3E;no response&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;5 &#x3C;small&#x3E;declined&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/ng-template&#x3E;
+          Tab 5 content
+        &#x3C;/hx-tab&#x3E;
+        &#x3C;hx-tab&#x3E;
+          &#x3C;ng-template hxTabHeading&#x3E;
+            &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Awaiting Billing&#x3C;/h6&#x3E;
+            &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
+              &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;23 &#x3C;small&#x3E;in April&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;40 &#x3C;small&#x3E;in total&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/ng-template&#x3E;
+          Tab 6 content
+        &#x3C;/hx-tab&#x3E;
+        &#x3C;hx-tab&#x3E;
+          &#x3C;ng-template hxTabHeading&#x3E;
+            &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Completed&#x3C;/h6&#x3E;
+            &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
+              &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;23 &#x3C;small&#x3E;in April&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;40 &#x3C;small&#x3E;in total&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
+                &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
+              &#x3C;/div&#x3E;
+            &#x3C;/div&#x3E;
+          &#x3C;/ng-template&#x3E;
+          Tab 7 content
+        &#x3C;/hx-tab&#x3E;
+      &#x3C;/hx-tabset&#x3E;
+        </code>
+      </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr>
+
   <h4 id="api">API Reference</h4>
 
 
@@ -185,6 +400,11 @@
           <td>vertical</td>
           <td><kbd>boolean</kbd></td>
           <td>if true tabs will be placed vertically</td>
+        </tr>
+        <tr>
+          <td>hasInfo</td>
+          <td><kbd>boolean</kbd></td>
+          <td>if true info tab classes will be added</td>
         </tr>
         </tbody>
       </table>

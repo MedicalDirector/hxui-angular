@@ -45,6 +45,15 @@ export class TabsetComponent implements OnDestroy {
     this.setClassMap();
   }
 
+  @Input()
+  public get hasInfo(): boolean {
+    return this._hasInfo;
+  }
+  public set hasInfo(value: boolean) {
+    this._hasInfo = value;
+    this.setClassMap();
+  }
+
   /** navigation context class: 'tabs' or 'pills' */
   @Input()
   public get type(): string {
@@ -63,6 +72,7 @@ export class TabsetComponent implements OnDestroy {
   protected isDestroyed: boolean;
   protected _vertical: boolean;
   protected _justified: boolean;
+  protected _hasInfo: boolean;
   protected _type: string;
 
   public constructor(config: TabsetConfig) {
@@ -134,6 +144,7 @@ export class TabsetComponent implements OnDestroy {
     this.classMap = {
       'is-vertical': this.vertical,
       'is-justified': this.justified,
+      'has-info': this.hasInfo,
       [`hx-nav-${this.type}`]: true
     };
   }
