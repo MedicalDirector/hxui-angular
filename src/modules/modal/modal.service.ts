@@ -28,9 +28,6 @@ export class ModalService {
 
     /**
      * Create component dynamically
-     * @param component
-     * @param parameters
-     * @returns {ReplaySubject}
      */
     create<T>(component: any, parameters?: Object): ComponentRef<T> {
         //create backdrop
@@ -44,9 +41,6 @@ export class ModalService {
 
     /**
      * Load dynamic component and return componentRef
-     * @param component
-     * @param parameters
-     * @returns {ComponentRef}
      */
     private dynamicComponentLoader<T>(component: any, parameters?: Object): ComponentRef<any>{
         // compile the component based on its type and

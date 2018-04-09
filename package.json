@@ -8,9 +8,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "packagr": "ng-packagr -p ng-package.json"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^5.1.0",
     "@angular/common": "^5.1.0",
@@ -22,7 +23,7 @@
     "@angular/platform-browser-dynamic": "^5.1.0",
     "@angular/platform-server": "^5.1.0",
     "@angular/router": "^5.1.0",
-    "@hxui/css": "git+https://bitbucket.org/md-design/gethxui.git#v1.1.9",
+    "@hxui/css": "git+https://bitbucket.org/md-design/gethxui.git#v1.1.13",
     "angular-in-memory-web-api": "^0.3.2",
     "angular2-highlight-js": "^5.0.0",
     "core-js": "^2.4.1",
@@ -49,6 +50,7 @@
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^2.2.0",
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",

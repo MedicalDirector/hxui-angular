@@ -24,13 +24,11 @@ export class TabularConfig {
 
     /**
      * Default order by value
-     * @type {string[]}
      */
     public defaultOrderBy: Array<string> = ['id'];
 
     /**
      * Default order by direction
-     * @type OrderByDirection
      */
     public defaultOrderByDirection: OrderByDirection = OrderByDirection.Ascending;
 

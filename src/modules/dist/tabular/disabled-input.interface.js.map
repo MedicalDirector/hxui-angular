@@ -1,1 +1,0 @@
-{"version":3,"file":"disabled-input.interface.js","sourceRoot":"","sources":["../../tabular/disabled-input.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IDisabledInput{\r\n    disabled: boolean;\r\n    tooltip: string;\r\n}"]}
