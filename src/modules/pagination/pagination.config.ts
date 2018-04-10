@@ -14,7 +14,8 @@ export class PaginationConfig {
     nextText: 'Next',
     lastText: 'Last',
     pageBtnClass: '',
-    rotate: true
+    rotate: true,
+    sticky: false
   };
   public pager: any = {
     itemsPerPage: 15,

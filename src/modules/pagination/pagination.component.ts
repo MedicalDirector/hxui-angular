@@ -17,7 +17,7 @@ export const PAGINATION_CONTROL_VALUE_ACCESSOR: any = {
 };
 
 const PAGINATION_TEMPLATE = `
-  <ul class="hx-pagination" [ngClass]="classMap">
+  <ul class="hx-pagination" [ngClass]="classMap" [class.is-sticky]="sticky">
     <li class="is-first"
         *ngIf="boundaryLinks"
         [class.is-disabled]="noPrevious()||disabled">
@@ -74,6 +74,8 @@ export class PaginationComponent implements ControlValueAccessor, OnInit {
   @Input() public lastText: string;
   /** if true current page will in the middle of pages list */
   @Input() public rotate: boolean;
+  /** if true the .is-sticky modifier will be added to the pagination component*/
+  @Input() public sticky: boolean;
   // css
   /** add class to <li> */
   @Input() public pageBtnClass: string;
