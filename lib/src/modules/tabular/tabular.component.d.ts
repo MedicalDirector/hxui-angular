@@ -33,6 +33,7 @@ export declare class TabularComponent implements OnInit, DoCheck {
     refresh: EventEmitter<boolean>;
     private defaultOrderBy;
     private defaultOrderByDirection;
+    private TabularSize;
     pagedItems: any[];
     private selectAll;
     protected _callback: Function;
