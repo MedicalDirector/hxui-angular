@@ -11,13 +11,13 @@ import {TabularSize} from './tabular-size.enum';
 
 @Component({
   selector: 'hxa-tabular',
-  template: `<table class="tabular hx-table is-striped">
+  template: `<table class="tabular hx-table is-striped" [class.is-narrow]="config.size === TabularSize.Small">
     <thead>
     <tr>
       <th *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
 
         <!-- sortable column -->
-        <a class="tabular__sorter" *ngIf="col.sortable && col.dataType != 6" (click)="onSortClickHandler(col.id)">{{col.label}}<i class="icon {{iconDirection}}" *ngIf="orderBy == col.id"></i></a>
+        <a class="tabular__sorter" *ngIf="col.sortable && col.dataType != 6" (click)="onSortClickHandler(col.id)"><i class="icon {{iconDirection}} is-small" *ngIf="orderBy == col.id"></i> {{col.label}}</a>
 
         <!-- non sortable column -->
         <span *ngIf="!col.sortable && col.dataType != 6">{{col.label}}</span>
@@ -58,7 +58,7 @@ import {TabularSize} from './tabular-size.enum';
           <div class="tabularActions__action">
             <div class="hx-dropdown" hxDropdown [isRight]="true">
 
-              <button class="hx-button is-small hx-button-dropdown" hxDropdownToggle type="button">
+              <button class="hx-button is-small is-flat hx-button-dropdown" hxDropdownToggle type="button">
                 <i class="icon icon-more"></i>
               </button>
               <div class="hx-dropdown-menu" *hxDropdownMenu>
@@ -99,7 +99,7 @@ import {TabularSize} from './tabular-size.enum';
                  [(ngModel)]="config.pagination.currentPage" (pageChanged)="setPage($event)"></hx-pagination>
   `,
   styles: [
-    '.tabular__sorter{position:relative;cursor:pointer} th .icon{position: absolute;}',
+    '.tabular__sorter{position:relative;cursor:pointer} th .icon{position: absolute;left:-1rem;}',
     '.tabular__checkboxes{width:2%;}',
     '.tabular__checkboxes .hx-checkbox-control{margin:0;display:flex;}'
   ]
@@ -162,6 +162,7 @@ export class TabularComponent implements OnInit, DoCheck {
 
   private defaultOrderBy: Array<string> = ['id'];
   private defaultOrderByDirection: OrderByDirection;
+  private TabularSize = TabularSize;
   pagedItems: any[];
   private selectAll = false;
   protected _callback: Function;
@@ -189,7 +190,7 @@ export class TabularComponent implements OnInit, DoCheck {
   }
 
   private get iconDirection(): string{
-    return (this.defaultOrderByDirection === OrderByDirection.Ascending) ? 'icon-sort-asc' : 'icon-sort-desc';
+    return (this.defaultOrderByDirection === OrderByDirection.Ascending) ? ' icon-arrow-up' : ' icon-arrow-down';
   }
 
   /**
@@ -246,7 +247,7 @@ export class TabularComponent implements OnInit, DoCheck {
   /**
    * Get the action tooltip if it exists
    */
-  private getActionTooltip(action: IActionsConfig): string{
+  private getActionTooltip(action: IActionsConfig): string {
     return (action && action.disabledConfig) ? action.disabledConfig.tooltip : '';
   }
 
