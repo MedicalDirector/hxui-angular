@@ -10,7 +10,7 @@
         <p><span class="h5">1.</span> Use <strong>NPM</strong>:</p>
         <pre><code class="bash">
 
-    npm install git+https://bitbucket.org/md-design/angular-hxui.git --save
+    npm install @hxui/angular --save
 
         </code></pre>
       </section>
@@ -21,7 +21,7 @@
 
         <pre><code class="bash">
 
-      npm install git+ssh://bitbucket.org/md-design/angular-hxui.git --save
+      npm install @hxui/angular --save
 
         </code></pre>
 
@@ -30,7 +30,7 @@
       <section>
         <p><span class="h5">2. </span><strong>Import all web component modules</strong> into app module or shared module.</p>
         <pre><code class="typescript">
-    import {{ '{' }}HxUiModule} from &#x22;@hxui/angular/src/modules/index&#x22;;
+    import {{ '{' }}HxUiModule} from &#x22;@hxui/angular&#x22;;
 
     @NgModule({{ '{' }}
       declarations: [
@@ -50,7 +50,7 @@
       <section>
         <p><span class="h5">3. </span>Alternatively <strong>import each web component module</strong> that you need individually.</p>
         <pre><code class="typescript">
-      import {{ '{' }}DropdownModule} from &#x22;@hxui/angular/src/modules/dropdown/dropdown.module&#x22;;
+      import {{ '{' }}DropdownModule} from &#x22;@hxui/angular&#x22;;
 
       @NgModule({{ '{' }}
         imports: [DropdownModule.forRoot(),...]
