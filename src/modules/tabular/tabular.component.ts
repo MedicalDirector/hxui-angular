@@ -37,7 +37,7 @@ import {TabularSize} from './tabular-size.enum';
       <td *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
 
         <!-- string type -->
-        <span *ngIf="col.dataType == 0">{{row[col.id]}}</span>
+        <span *ngIf="col.dataType == 0" title="{{row[col.id]}}">{{row[col.id]}}</span>
 
         <!-- icon type -->
         <i *ngIf="col.dataType == 1" class="icon {{row[col.id]}}"></i>
