@@ -41,6 +41,7 @@ export class AppModule(){{ '{' }}
         <hx-pager [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" pageBtnClass="hx-button" itemsPerPage="10"></hx-pager>
         <br>
 
+
         <div class="hx-flex hx-flex-justify-center">
           <div>
             <pre>The selected page no: {{currentPage}}/{{smallnumPages}}</pre>
