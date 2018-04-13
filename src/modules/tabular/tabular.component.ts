@@ -46,7 +46,7 @@ import {TabularSize} from './tabular-size.enum';
         <span *ngIf="col.dataType == 2">{{row[col.id] | date}}</span>
 
         <!-- status type -->
-        <span *ngIf="col.dataType == 4" class="hx-badge text-uppercase" [ngClass]="{'is-primary':row[col.id],'is-danger':!row[col.id]}">{{(row[col.id])?'ACTIVE':'INACTIVE'}}</span>
+        <span *ngIf="col.dataType == 4" class="hx-badge text-uppercase" [ngClass]="{'is-primary':row[col.id],'is-danger':!row[col.id]}"><span class="hx-badge-content">{{(row[col.id])?'ACTIVE':'INACTIVE'}}</span></span>
 
         <!-- date time type -->
         <span *ngIf="col.dataType == 5">{{row[col.id] | date:'medium'}}</span>

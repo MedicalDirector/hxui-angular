@@ -21,4 +21,65 @@ import { trigger, transition, animate, style } from '@angular/animations';
 
 export class AppComponent {
   nav = true;
+  navs = [
+    {
+      cat: 'Getting started',
+      items: [
+        {
+          name: 'Welcome',
+          link: '/welcome'
+        },
+        {
+          name: 'Install guide',
+          link: '/install-guide'
+        }
+      ]
+    },
+    {
+      cat: 'Components',
+      items: [
+        {
+          name: 'Datepickers',
+          link: '/datepickers'
+        },
+        {
+          name: 'Dropdowns',
+          link: '/dropdowns'
+        },
+        {
+          name: 'Modals',
+          link: '/modals'
+        },
+        {
+          name: 'Pagination',
+          link: '/pagination'
+        },
+        {
+          name: 'Tabs',
+          link: '/tabs'
+        },
+        {
+          name: 'Tabular',
+          link: '/tabular'
+        },
+        {
+          name: 'Tooltips',
+          link: '/tooltips'
+        },
+        {
+          name: 'Typeaheads',
+          link: '/typeaheads'
+        }
+      ]
+    },
+    {
+      cat: 'Feedback',
+      items: [
+        {
+          name: 'Feedback',
+          url: 'https://medicaldirector.visualstudio.com/MD%20Design/_workitems'
+        }
+      ]
+    }
+  ]
 }

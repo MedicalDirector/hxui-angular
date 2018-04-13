@@ -36,62 +36,13 @@
           </ul>
         </aside>
 
-        <div class="hx-sidebar is-medium-width is-scrollable is-active">
-          <ul class="hx-nav hx-nav-vertical">
-            <li class="hx-nav-heading"><h6><span class="oi" data-glyph="home"></span> Getting started</h6></li>
-            <li class="hx-nav-item">
-              <a class="hx-nav-link" [routerLink]="['/welcome']" routerLinkActive="is-active"><span>Welcome</span></a>
-            </li>
-            <li class="hx-nav-item">
-              <a class="hx-nav-link " [routerLink]="['/install-guide']" routerLinkActive="is-active"><span>Install Guide</span></a>
-            </li>
-          </ul>
+        <div class="hx-sidebar is-medium-width is-scrollable is-active hx-bg-white">
 
-          <hr>
-
-          <ul class="hx-nav hx-nav-vertical">
-            <li class="hx-nav-heading"><h6><span class="oi" data-glyph="puzzle-piece"></span> Components</h6></li>
-
-            <li class="hx-nav-item">
-              <a class="hx-nav-link " [routerLink]="['/datepickers']" routerLinkActive="is-active"><span>Datepickers</span></a>
-            </li>
-
-            <li class="hx-nav-item">
-              <a class="hx-nav-link " [routerLink]="['/dropdowns']" routerLinkActive="is-active"><span>Dropdowns</span></a>
-            </li>
-
-            <li class="hx-nav-item">
-              <a class="hx-nav-link " [routerLink]="['/modals']" routerLinkActive="is-active"><span>Modals</span></a>
-            </li>
-
-            <li class="hx-nav-item">
-              <a class="hx-nav-link " [routerLink]="['/tabs']" routerLinkActive="is-active"><span>Tabs</span></a>
-            </li>
-
-            <li class="hx-nav-item">
-              <a class="hx-nav-link " [routerLink]="['/typeaheads']" routerLinkActive="is-active"><span>Typeaheads</span></a>
-            </li>
-
-            <li class="hx-nav-item">
-              <a class="hx-nav-link " [routerLink]="['/tooltips']" routerLinkActive="is-active"><span>Tooltips</span></a>
-            </li>
-
-            <li class="hx-nav-item">
-              <a class="hx-nav-link " [routerLink]="['/pagination']" routerLinkActive="is-active"><span>Pagination</span></a>
-            </li>
-
-            <li class="hx-nav-item">
-              <a class="hx-nav-link " [routerLink]="['/tabular']" routerLinkActive="is-active"><span>Tabular</span></a>
-            </li>
-
-          </ul>
-
-          <hr>
-
-          <ul class="hx-nav hx-nav-vertical">
-            <li class="hx-nav-heading"><h6><span class="oi" data-glyph="chat"></span> Feedback</h6></li>
-            <li class="hx-nav-item">
-              <a class="hx-nav-link " href="https://medicaldirector.visualstudio.com/MD%20Design/_workitems"><span>Give your feedback</span></a>
+          <ul class="hx-nav hx-nav-vertical" *ngFor="let navItem of navs">
+            <li class="hx-nav-heading"><h6><span class="oi" data-glyph="home"></span> {{ navItem.cat }}</h6></li>
+            <li class="hx-nav-item" *ngFor="let item of navItem.items">
+              <a class="hx-nav-link" *ngIf="item.url" [href]="item.url" routerLinkActive="is-active"><span>{{ item.name }}</span></a>
+              <a class="hx-nav-link" *ngIf="item.link" [routerLink]="item.link" routerLinkActive="is-active"><span>{{ item.name }}</span></a>
             </li>
           </ul>
 
@@ -109,4 +60,5 @@
 
   </main>
 </div>
+
 <hx-modal-placeholder></hx-modal-placeholder>

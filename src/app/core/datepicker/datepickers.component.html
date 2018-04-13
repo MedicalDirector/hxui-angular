@@ -1,133 +1,137 @@
-<section class="hx-section scrollable-y" #container>
-  <h1 class="hx-title">Datepickers</h1>
-  <h2 class="hx-subtitle">The date picker is a form element that is used to select a date</h2>
-  <hr>
+<section class="hx-section scrollable-y">
+  <div class="hx-section is-comfortable">
 
-  <h4 id="usage">Usage</h4>
-  <p>Add the DatepickerModule to AppModule or SharedModule.</p>
+    <h1 class="hx-title">Datepickers</h1>
+    <h2 class="hx-subtitle">The date picker is a form element that is used to select a date</h2>
+    <hr>
 
-  <pre>
-    <code class="typescript">
-      import {{ '{' }} DatepickerModule } from &#x22;@hxui-angular/packages/datepicker/datepicker.module&#x22;;
+    <h4 id="usage">Usage</h4>
+    <p>Add the DatepickerModule to AppModule or SharedModule.</p>
 
-      @NgModule({{ '{' }}
-        imports: [DatepickerModule.forRoot(), ...]
-      })
-      export class AppModule() {{ '{' }}
-    </code>
-  </pre>
+    <pre>
+      <code class="typescript">
+import {{ '{' }} DatepickerModule } from &#x22;@hxui-angular/packages/datepicker/datepicker.module&#x22;;
 
-  <hr>
+@NgModule({{ '{' }}
+  imports: [DatepickerModule.forRoot(), ...]
+})
+export class AppModule() {{ '{' }}
+      </code>
+    </pre>
 
-  <h4 id="example">Example</h4>
+    <hr>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <hxa-datepicker-form align="bottom" [(ngModel)]="dayte"></hxa-datepicker-form>
-      <div>
-        <span>Emitted Date object: {{dayte}}</span>
+    <h4 id="example">Example</h4>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <hxa-datepicker-form align="bottom" [(ngModel)]="dayte"></hxa-datepicker-form>
+        <div>
+          <span>Emitted Date object: {{dayte}}</span>
+        </div>
+
       </div>
-      
     </div>
-  </div>
 
-  <br>
+    <br>
 
-  <h5 id="code">Code</h5>
+    <h5 id="code">Code</h5>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <pre>
-        <code class="html">
-      &#x3C;hxa-datepicker-form align="bottom" [(ngModel)]=&#x22;form.date&#x22;&#x3E;&#x3C;/hxa-datepicker-form&#x3E;
-        </code>
-      </pre>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <pre>
+          <code class="html">
+&#x3C;hxa-datepicker-form align="bottom" [(ngModel)]=&#x22;form.date&#x22;&#x3E;&#x3C;/hxa-datepicker-form&#x3E;
+          </code>
+        </pre>
+      </div>
     </div>
-  </div>
 
-  <hr>
+    <hr>
 
-  <h4 id="api">API Reference</h4>
+    <h4 id="api">API Reference</h4>
 
-  <h5 class="is-primary">Datepicker-Form Component</h5>
-  <div class="hx-columns">
-    <div class="hx-column">
-      <table class="hx-table is-striped">
-        <thead>
+    <h5 class="is-primary">Datepicker-Form Component</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Inputs</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>dateFormat</td>
+              <td><kbd>string</kbd></td>
+              <td>A JavaScript Date object formatting string, formats the display of components current value. Defaults to "dd/MM/y".</td>
+            </tr>
+            <tr>
+              <td>defaultToPresentDate</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Initializes the component with a value of the present date. Defaults to true.</td>
+            </tr>
+            <tr>
+              <td>placeholder</td>
+              <td><kbd>string</kbd></td>
+              <td>This attribute specifies the placeholder value of the components input element. Defaults to "Date".</td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Adds the disabled html attribute to the components input element. Defaults to false.</td>
+            </tr>
+            <tr>
+              <td>readonly</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Adds the readonly html attribute to the components input element. Defaults to false.</td>
+            </tr>
+            <tr>
+              <td>required</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Adds the required html attribute to the components input element and a required asterisk on the input label. Defaults to true.</td>
+            </tr>
+            <tr>
+              <td>allowPreviousDates</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Setting to false will disallow the user from selecting dates before the present date. Defaults to true.d</td>
+            </tr>
+            <tr>
+              <td>align</td>
+              <td><kbd>"top" | "bottom"</kbd></td>
+              <td>Specifies to open the datepicker at the top of the input element or at the bottom</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <table class="hx-table is-striped">
+          <thead>
           <tr>
-            <th>Inputs</th>
-            <th>Type</th>
+            <th>Outputs</th>
             <th>Description</th>
           </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
           <tr>
-            <td>dateFormat</td>
-            <td><kbd>string</kbd></td>
-            <td>A JavaScript Date object formatting string, formats the display of components current value. Defaults to "dd/MM/y".</td>
+            <td>onDateChange</td>
+            <td>Emits a Date is selected from the Datepicker or a valid date string is entered into input field</td>
           </tr>
-          <tr>
-            <td>defaultToPresentDate</td>
-            <td><kbd>boolean</kbd></td>
-            <td>Initializes the component with a value of the present date. Defaults to true.</td>
-          </tr>
-          <tr>
-            <td>placeholder</td>
-            <td><kbd>string</kbd></td>
-            <td>This attribute specifies the placeholder value of the components input element. Defaults to "Date".</td>
-          </tr>
-          <tr>
-            <td>disabled</td>
-            <td><kbd>boolean</kbd></td>
-            <td>Adds the disabled html attribute to the components input element. Defaults to false.</td>
-          </tr>
-          <tr>
-            <td>readonly</td>
-            <td><kbd>boolean</kbd></td>
-            <td>Adds the readonly html attribute to the components input element. Defaults to false.</td>
-          </tr>
-          <tr>
-            <td>required</td>
-            <td><kbd>boolean</kbd></td>
-            <td>Adds the required html attribute to the components input element and a required asterisk on the input label. Defaults to true.</td>
-          </tr>
-          <tr>
-            <td>allowPreviousDates</td>
-            <td><kbd>boolean</kbd></td>
-            <td>Setting to false will disallow the user from selecting dates before the present date. Defaults to true.d</td>
-          </tr>
-          <tr>
-            <td>align</td>
-            <td><kbd>"top" | "bottom"</kbd></td>
-            <td>Specifies to open the datepicker at the top of the input element or at the bottom</td>
-          </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
+
   </div>
-
-
-  <div class="hx-columns">
-    <div class="hx-column">
-      <table class="hx-table is-striped">
-        <thead>
-        <tr>
-          <th>Outputs</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>onDateChange</td>
-          <td>Emits a Date is selected from the Datepicker or a valid date string is entered into input field</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
 </section>
-<aside class="hx-sidebar is-medium-width is-scrollable">
+
+<aside class="hx-sidebar is-right is-active is-medium-width is-scrollable">
   <ul class="hx-nav hx-nav-vertical">
     <li class="hx-nav-heading"><h6>Contents</h6></li>
 
