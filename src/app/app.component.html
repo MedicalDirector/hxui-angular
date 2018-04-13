@@ -1,104 +1,112 @@
 <div class="hx-page hx-flex">
   <main class="hx-page-body" highlight-js-content>
-    <aside class="hx-sidebar is-minified has-blue-gradient hx-flex hx-flex-column">
 
-      <ul class="hx-nav hx-nav-vertical hx-flex-auto">
-        <li class="hx-nav-item hx-nav-brand">
-          <svg class="hxui-logo is-white">
-            <use xlink:href="assets/hxui.svg#hxui"></use>
-          </svg>
-        </li>
-        <li class="hx-nav-item">
-          <a class="hx-nav-link" href="http://www.gethxui.com"><i class="icon icon-html-css"></i><span>HxUi-css</span></a>
-        </li>
-        <li class="hx-nav-item">
-          <a class="hx-nav-link is-active" href="http://angular.gethxui.com"><i class="icon icon-angular"></i> <span>HxUi-angular</span></a>
-        </li>
-        <li class="hx-nav-item">
-          <a class="hx-nav-link" href="#"><i class="icon icon-react"></i>  <span>React</span></a>
-        </li>
-        <li class="hx-nav-item">
-          <a class="hx-nav-link" href="#"><i class="icon icon-vue"></i>  <span>Vue</span></a>
-        </li>
+    <div class="hx-nav-drawer">
 
-      </ul>
-      <ul class="hx-nav hx-nav-vertical is-bottom">
-        <li class="hx-nav-item">
-          <a class="hx-nav-link is-disabled" href=""><i class="hx-icon icon-chat-bubble"></i>  <span class="ml-1">Feedback</span></a>
-        </li>
-        <li class="hx-nav-item">
-          <a class="hx-nav-link" href=""><i class="hx-icon icon-more"></i>  <span class="ml-1">Collapse</span></a>
-        </li>
-      </ul>
-    </aside>
-    <div class="hx-sidebar is-medium-width is-scrollable">
+      <span *ngIf="nav" [@slideInOut]>
 
-      <ul class="hx-nav hx-nav-vertical">
-        <li class="hx-nav-heading"><h6><span class="oi" data-glyph="home"></span> Getting started</h6></li>
+        <aside class="hx-sidebar is-minified has-blue-gradient hx-flex hx-flex-column is-active">
 
-        <li class="hx-nav-item">
-          <a class="hx-nav-link" [routerLink]="['/welcome']" routerLinkActive="is-active"><span>Welcome</span></a>
-        </li>
+          <ul class="hx-nav hx-nav-vertical hx-flex-auto">
+            <li class="hx-nav-item hx-nav-brand">
+              <svg class="hxui-logo is-white">
+                <use xlink:href="assets/hxui.svg#hxui"></use>
+              </svg>
+            </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link" href="http://www.gethxui.com"><i class="icon icon-html-css"></i><span>HxUi-css</span></a>
+            </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link is-active" href="http://angular.gethxui.com"><i class="icon icon-angular"></i> <span>HxUi-angular</span></a>
+            </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link" href="#"><i class="icon icon-react"></i>  <span>React</span></a>
+            </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link" href="#"><i class="icon icon-vue"></i>  <span>Vue</span></a>
+            </li>
+          </ul>
+          <ul class="hx-nav hx-nav-vertical is-bottom">
+            <li class="hx-nav-item">
+              <a class="hx-nav-link is-disabled" href=""><i class="hx-icon icon-chat-bubble"></i>  <span class="ml-1">Feedback</span></a>
+            </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link" href=""><i class="hx-icon icon-more"></i>  <span class="ml-1">Collapse</span></a>
+            </li>
+          </ul>
+        </aside>
 
-        <li class="hx-nav-item">
-          <a class="hx-nav-link " [routerLink]="['/install-guide']" routerLinkActive="is-active"><span>Install Guide</span></a>
-        </li>
+        <div class="hx-sidebar is-medium-width is-scrollable is-active">
+          <ul class="hx-nav hx-nav-vertical">
+            <li class="hx-nav-heading"><h6><span class="oi" data-glyph="home"></span> Getting started</h6></li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link" [routerLink]="['/welcome']" routerLinkActive="is-active"><span>Welcome</span></a>
+            </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link " [routerLink]="['/install-guide']" routerLinkActive="is-active"><span>Install Guide</span></a>
+            </li>
+          </ul>
 
-      </ul>
-      <hr>
+          <hr>
 
+          <ul class="hx-nav hx-nav-vertical">
+            <li class="hx-nav-heading"><h6><span class="oi" data-glyph="puzzle-piece"></span> Components</h6></li>
 
-      <ul class="hx-nav hx-nav-vertical">
-        <li class="hx-nav-heading"><h6><span class="oi" data-glyph="puzzle-piece"></span> Components</h6></li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link " [routerLink]="['/datepickers']" routerLinkActive="is-active"><span>Datepickers</span></a>
+            </li>
 
-        <li class="hx-nav-item">
-          <a class="hx-nav-link " [routerLink]="['/datepickers']" routerLinkActive="is-active"><span>Datepickers</span></a>
-        </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link " [routerLink]="['/dropdowns']" routerLinkActive="is-active"><span>Dropdowns</span></a>
+            </li>
 
-        <li class="hx-nav-item">
-          <a class="hx-nav-link " [routerLink]="['/dropdowns']" routerLinkActive="is-active"><span>Dropdowns</span></a>
-        </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link " [routerLink]="['/modals']" routerLinkActive="is-active"><span>Modals</span></a>
+            </li>
 
-        <li class="hx-nav-item">
-          <a class="hx-nav-link " [routerLink]="['/modals']" routerLinkActive="is-active"><span>Modals</span></a>
-        </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link " [routerLink]="['/tabs']" routerLinkActive="is-active"><span>Tabs</span></a>
+            </li>
 
-        <li class="hx-nav-item">
-          <a class="hx-nav-link " [routerLink]="['/tabs']" routerLinkActive="is-active"><span>Tabs</span></a>
-        </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link " [routerLink]="['/typeaheads']" routerLinkActive="is-active"><span>Typeaheads</span></a>
+            </li>
 
-        <li class="hx-nav-item">
-          <a class="hx-nav-link " [routerLink]="['/typeaheads']" routerLinkActive="is-active"><span>Typeaheads</span></a>
-        </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link " [routerLink]="['/tooltips']" routerLinkActive="is-active"><span>Tooltips</span></a>
+            </li>
 
-        <li class="hx-nav-item">
-          <a class="hx-nav-link " [routerLink]="['/tooltips']" routerLinkActive="is-active"><span>Tooltips</span></a>
-        </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link " [routerLink]="['/pagination']" routerLinkActive="is-active"><span>Pagination</span></a>
+            </li>
 
-        <li class="hx-nav-item">
-          <a class="hx-nav-link " [routerLink]="['/pagination']" routerLinkActive="is-active"><span>Pagination</span></a>
-        </li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link " [routerLink]="['/tabular']" routerLinkActive="is-active"><span>Tabular</span></a>
+            </li>
 
-        <li class="hx-nav-item">
-          <a class="hx-nav-link " [routerLink]="['/tabular']" routerLinkActive="is-active"><span>Tabular</span></a>
-        </li>
+          </ul>
 
-      </ul>
-      <hr>
+          <hr>
 
-      <ul class="hx-nav hx-nav-vertical">
-        <li class="hx-nav-heading"><h6><span class="oi" data-glyph="chat"></span> Feedback</h6></li>
+          <ul class="hx-nav hx-nav-vertical">
+            <li class="hx-nav-heading"><h6><span class="oi" data-glyph="chat"></span> Feedback</h6></li>
+            <li class="hx-nav-item">
+              <a class="hx-nav-link " href="https://medicaldirector.visualstudio.com/MD%20Design/_workitems"><span>Give your feedback</span></a>
+            </li>
+          </ul>
 
-        <li class="hx-nav-item">
-          <a class="hx-nav-link " href="https://medicaldirector.visualstudio.com/MD%20Design/_workitems"><span>Give your feedback</span></a>
-        </li>
+        </div>
 
-      </ul>
+      </span>
 
+      <div class="hx-overlay"></div>
+
+      <div class="hx-nav-navicon" [ngClass]="{ 'is-closed': !nav }" (click)="nav = !nav"><i class="hx-icon icon-navicon"></i></div>
 
     </div>
+
     <router-outlet></router-outlet>
+
   </main>
 </div>
 <hx-modal-placeholder></hx-modal-placeholder>
-
