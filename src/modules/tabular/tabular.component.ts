@@ -17,7 +17,7 @@ import {TabularSize} from './tabular-size.enum';
       <th *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
 
         <!-- sortable column -->
-        <a class="tabular__sorter" *ngIf="col.sortable && col.dataType != 6" (click)="onSortClickHandler(col.id)"><i class="icon {{iconDirection}} is-small" *ngIf="orderBy == col.id"></i> {{col.label}}</a>
+        <a class="tabular__sorter" *ngIf="col.sortable && col.dataType != 6" (click)="onSortClickHandler(col.id)"><i class="hx-icon {{iconDirection}} is-small" *ngIf="orderBy == col.id"></i> {{col.label}}</a>
 
         <!-- non sortable column -->
         <span *ngIf="!col.sortable && col.dataType != 6">{{col.label}}</span>
@@ -96,7 +96,7 @@ import {TabularSize} from './tabular-size.enum';
 
   <hx-pagination [directionLinks]="true" [boundaryLinks]="true" [rotate]="false" [maxSize]="10"
                  [totalItems]="totalItemCount" [itemsPerPage]="config.pagination.itemsPerPage"
-                 [(ngModel)]="config.pagination.currentPage" (pageChanged)="setPage($event)"></hx-pagination>
+                 [(ngModel)]="config.pagination.currentPage" (pageChanged)="setPage($event)" *ngIf="totalItemCount > config.pagination.itemsPerPage"></hx-pagination>
   `,
   styles: [
     '.tabular__sorter{position:relative;cursor:pointer} th .icon{position: absolute;left:-1rem;}',
