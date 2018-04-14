@@ -6,6 +6,7 @@ export declare enum TabularColumnTypes {
     Status = 4,
     DateTime = 5,
     Checkbox = 6,
+    Badge = 7,
 }
 export declare abstract class ITabularColumn {
     /**

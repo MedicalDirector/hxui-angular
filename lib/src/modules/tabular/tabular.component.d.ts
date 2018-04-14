@@ -33,6 +33,7 @@ export declare class TabularComponent implements OnInit, DoCheck {
     refresh: EventEmitter<boolean>;
     private defaultOrderBy;
     private defaultOrderByDirection;
+    private TabularColumnTypes;
     private TabularSize;
     pagedItems: any[];
     private selectAll;
@@ -80,4 +81,5 @@ export declare class TabularComponent implements OnInit, DoCheck {
      * Helper to determine if tabular instance is in small mode
      */
     private isSmall();
+    private hasValidBadgeTypeParams(colData);
 }
