@@ -7,7 +7,11 @@ export class UserModel {
   public surname: string;
   public rolename: string;
   public email: string;
+  public flag: {label: string, cssClass: string};
   public active: boolean;
+  public created: Date;
+  public modified: Date;
+
 
   constructor(data?: any) {
     if (data) {

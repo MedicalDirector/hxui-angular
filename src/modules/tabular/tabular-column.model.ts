@@ -6,6 +6,7 @@ export class TabularColumn implements ITabularColumn {
               public label: string,
               public dataType: number,
               public sortable: boolean,
-              public cssClass: string = '') {
+              public cssClass: string = '',
+              public options?: any) {
   }
 }

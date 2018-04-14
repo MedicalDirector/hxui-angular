@@ -1,6 +1,6 @@
 {
   "name": "@hxui/angular",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "^5.1.0",
     "@angular/platform-server": "^5.1.0",
     "@angular/router": "^5.1.0",
-    "@hxui/css": "^1.1.21",
+    "@hxui/css": "^1.1.25",
     "angular-in-memory-web-api": "^0.3.2",
     "angular2-highlight-js": "^5.0.0",
     "core-js": "^2.4.1",

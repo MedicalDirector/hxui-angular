@@ -7,6 +7,7 @@ import {IActionsConfig} from './actions-config.interface';
 import {TabularOrderByService, OrderByDirection} from './tabular-order-by.service';
 import {TabularConfig} from './tabular.config';
 import {TabularSize} from './tabular-size.enum';
+import {TabularColumnTypes} from './tabular-column.interface';
 
 
 @Component({
@@ -17,7 +18,7 @@ import {TabularSize} from './tabular-size.enum';
       <th *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
 
         <!-- sortable column -->
-        <a class="tabular__sorter" *ngIf="col.sortable && col.dataType != 6" (click)="onSortClickHandler(col.id)"><i class="hx-icon {{iconDirection}} is-small" *ngIf="orderBy == col.id"></i> {{col.label}}</a>
+        <a class="tabular__sorter" href="#" *ngIf="col.sortable && col.dataType != 6" (click)="onSortClickHandler(col.id)"><i class="hx-icon {{iconDirection}} is-small" *ngIf="orderBy == col.id"></i> {{col.label}}</a>
 
         <!-- non sortable column -->
         <span *ngIf="!col.sortable && col.dataType != 6">{{col.label}}</span>
@@ -37,22 +38,25 @@ import {TabularSize} from './tabular-size.enum';
       <td *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
 
         <!-- string type -->
-        <span *ngIf="col.dataType == 0" title="{{row[col.id]}}">{{row[col.id]}}</span>
+        <span *ngIf="col.dataType == TabularColumnTypes.String" title="{{row[col.id]}}">{{row[col.id]}}</span>
 
         <!-- icon type -->
-        <i *ngIf="col.dataType == 1" class="icon {{row[col.id]}}"></i>
+        <i *ngIf="col.dataType == TabularColumnTypes.Icon" class="icon {{row[col.id]}}"></i>
 
         <!-- date type -->
-        <span *ngIf="col.dataType == 2">{{row[col.id] | date}}</span>
+        <span *ngIf="col.dataType == TabularColumnTypes.Date">{{row[col.id] | date:'d/M/yyyy'}}</span>
 
         <!-- status type -->
-        <span *ngIf="col.dataType == 4" class="hx-badge text-uppercase" [ngClass]="{'is-primary':row[col.id],'is-danger':!row[col.id]}"><span class="hx-badge-content">{{(row[col.id])?'ACTIVE':'INACTIVE'}}</span></span>
+        <span *ngIf="col.dataType == TabularColumnTypes.Status" class="hx-icon" [ngClass]="{'is-primary':row[col.id],'is-danger':!row[col.id], 'icon-check-empty': row[col.id], 'icon-close-empty':!row[col.id]}" ></span>
 
+        <!-- badge type -->
+        <span *ngIf="col.dataType == TabularColumnTypes.Badge && hasValidBadgeTypeParams(row[col.id])" class="hx-badge is-small {{row[col.id].cssClass}}"><span class="hx-badge-content">{{row[col.id].label}}</span></span>
+        
         <!-- date time type -->
-        <span *ngIf="col.dataType == 5">{{row[col.id] | date:'medium'}}</span>
+        <span *ngIf="col.dataType == TabularColumnTypes.DateTime">{{row[col.id] | date:'d/M/yyy h:mm a'}}</span>
 
         <!-- actions type -->
-        <div *ngIf="col.dataType==3" class="hx-dropdown tabularActions">
+        <div *ngIf="col.dataType == TabularColumnTypes.Actions" class="hx-dropdown tabularActions">
 
 
           <div class="tabularActions__action">
@@ -162,6 +166,7 @@ export class TabularComponent implements OnInit, DoCheck {
 
   private defaultOrderBy: Array<string> = ['id'];
   private defaultOrderByDirection: OrderByDirection;
+  private TabularColumnTypes = TabularColumnTypes;
   private TabularSize = TabularSize;
   pagedItems: any[];
   private selectAll = false;
@@ -263,6 +268,7 @@ export class TabularComponent implements OnInit, DoCheck {
   private onSortClickHandler(key: string) {
     this.orderBy = ([key] === this.orderBy) ? this.defaultOrderBy : [key];
     this.orderByData();
+    return false;
   }
 
 
@@ -298,6 +304,18 @@ export class TabularComponent implements OnInit, DoCheck {
    */
   private isSmall(): boolean {
     return (this.config.size === TabularSize.Small);
+  }
+
+
+  private hasValidBadgeTypeParams(colData) {
+    if (colData) {
+      if (typeof colData.label !== 'undefined' && typeof colData.cssClass !== 'undefined') {
+        return true;
+      } else {
+        console.error('Record for column type badge is invalid, make sure you have the right type. {label:string,cssClass:string}', colData);
+      }
+    }
+    return false;
   }
 
 }
