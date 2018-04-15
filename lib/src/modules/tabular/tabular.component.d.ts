@@ -82,4 +82,8 @@ export declare class TabularComponent implements OnInit, DoCheck {
      */
     private isSmall();
     private hasValidBadgeTypeParams(colData);
+    private getDefaultAction(actions);
+    private hasDefaultAction(actions);
+    private getDefaultActionName(actions);
+    private getDefaultActionCallback(actions);
 }

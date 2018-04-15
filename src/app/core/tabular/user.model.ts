@@ -49,6 +49,13 @@ export class UserModel {
         label: 'Delete',
         routeType: ActionConfigRouteType.Callback,
         callback: [this.onActionClickHandler, 'perm-delete', 1]
+      },
+      {
+        id: 'row_default',
+        label: '<span class="hx-icon icon-medications"></span>',
+        isDefault: true,
+        routeType: ActionConfigRouteType.Callback,
+        callback: [this.onActionClickHandler, 'default', 1]
       }
     ];
   }

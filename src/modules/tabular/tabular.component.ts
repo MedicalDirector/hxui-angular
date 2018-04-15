@@ -62,18 +62,29 @@ import {TabularColumnTypes} from './tabular-column.interface';
           <div class="tabularActions__action">
             <div class="hx-dropdown" hxDropdown [isRight]="true">
 
-              <button class="hx-button is-small is-flat hx-button-dropdown" hxDropdownToggle type="button">
+              <ng-template *ngIf="!hasDefaultAction(row[col.id]); else splitBtn">
+              <!-- collection of actions DOES NOT have a default -->
+              <button class="hx-button is-flat hx-button-dropdown" [class.is-small]="config.size === TabularSize.Small" hxDropdownToggle type="button">
                 <i class="icon icon-more"></i>
               </button>
+              </ng-template>
+              <ng-template #splitBtn>
+              <!-- collection of actions DOES have a default -->
+              <div class="hx-button-split">
+                <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small"  (click)='executeCallback($event,getDefaultActionCallback(row[col.id]))' [innerHtml]="getDefaultActionName(row[col.id])"></button>
+                <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small" hxDropdownToggle><i class="icon icon-more"></i></button>
+              </div>
+              </ng-template>
+              
               <div class="hx-dropdown-menu" *hxDropdownMenu>
 
                 <ng-container *ngFor="let action of row[col.id]">
-                  <a *ngIf="!getActionDisabledState(action) && action.routeType==0"
+                  <a *ngIf="!getActionDisabledState(action) && action.routeType==0 && !action.isDefault"
                      [routerLink]="action.route"
                      class="hx-dropdown-item {{action.css}}"
                      [innerHTML]="action.label">
                   </a>
-                  <a *ngIf="!getActionDisabledState(action) && action.routeType==1"
+                  <a *ngIf="!getActionDisabledState(action) && action.routeType==1 && !action.isDefault"
                      (click)='executeCallback($event,action.callback)'
                      class="hx-dropdown-item {{action.css}}"
                      [innerHTML]="action.label">
@@ -105,7 +116,8 @@ import {TabularColumnTypes} from './tabular-column.interface';
   styles: [
     '.tabular__sorter{position:relative;cursor:pointer} th .icon{position: absolute;left:-1rem;}',
     '.tabular__checkboxes{width:2%;}',
-    '.tabular__checkboxes .hx-checkbox-control{margin:0;display:flex;}'
+    '.tabular__checkboxes .hx-checkbox-control{margin:0;display:flex;}',
+    '.tabularActions__action button.hx-button{ width: 1rem;}'
   ]
 })
 
@@ -316,6 +328,25 @@ export class TabularComponent implements OnInit, DoCheck {
       }
     }
     return false;
+  }
+
+  private getDefaultAction(actions: IActionsConfig[]): IActionsConfig {
+    const action = actions.find(function (a) { return a.isDefault; });
+    return action;
+  }
+
+  private hasDefaultAction(actions: IActionsConfig[]): boolean {
+    return (typeof this.getDefaultAction(actions) !== 'undefined');
+  }
+
+  private getDefaultActionName(actions: IActionsConfig[]) {
+    const action = this.getDefaultAction(actions);
+    return (action) ? action.label : '';
+  }
+
+  private getDefaultActionCallback(actions: IActionsConfig[]) {
+    const action = this.getDefaultAction(actions);
+    return (action) ? action.callback : {};
   }
 
 }

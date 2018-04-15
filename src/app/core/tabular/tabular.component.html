@@ -40,7 +40,12 @@ export class AppModule(){{ '{' }}
           </div>
         </div>
 
-        <hxa-tabular [rows]="rowData" [columns]="columnData" [config]="tabularConfig" [callback]="onActionClickHandler" (refresh)="refreshDataHandler($event)">
+        <hxa-tabular
+          [rows]="rowData"
+          [columns]="columnData"
+          [config]="tabularConfig"
+          [callback]="onActionClickHandler"
+          (refresh)="refreshDataHandler($event)">
         </hxa-tabular>
 
       </div>
