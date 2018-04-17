@@ -9,6 +9,8 @@ import {UserModel} from './user.model';
 import {CoreBaseComponent} from '../core-base.component';
 import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
+import {OrderByDirection} from '../../../modules/tabular/tabular-order-by.service';
+import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
 
 @Component({
   selector: 'app-tabular',
@@ -18,7 +20,7 @@ import {DOCUMENT} from '@angular/platform-browser';
 export class TabularComponent extends CoreBaseComponent implements OnInit {
 
   searchTerm: string;
-  rowData: any[] = [];
+  rowData: ITabularRow[] = [];
   columnData: TabularColumn[] = [
     new TabularColumn('checkboxes', 'Checkboxes', TabularColumnTypes.Checkbox, false),
     new TabularColumn('id', 'Id', TabularColumnTypes.String, true),
@@ -34,6 +36,9 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
 
   tabularConfig: ITabularConfig = {
     size: TabularSize.Default,
+    clickableRows: true,
+    defaultOrderBy: 'firstname',
+    defaultOrderByDirection: OrderByDirection.Descending,
     pagination: {
       itemsPerPage: 5,
       currentPage: 1
@@ -50,10 +55,15 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
   }
 
 
+  rowClickHandler($event) {
+    console.log($event);
+  }
+
+
   printSelected = ($event) => {
     let count = 0;
     for (let i = 0; i < this.rowData.length; i++) {
-      if (this.rowData[i].selected) {
+      if (this.rowData[i].checked) {
         count++;
         console.log(this.rowData[i]);
       }
@@ -64,7 +74,7 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
 
   isPrintDisabled = () => {
     for (let i = 0; i < this.rowData.length; i++) {
-      if (this.rowData[i].selected) {
+      if (this.rowData[i].checked) {
         return false;
       }
     }
@@ -75,14 +85,15 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
    * Static data for example
    */
   private getTabularData() {
-    this.rowData = [];
+    const data: ITabularRow[] = [];
     this.service.getUsers()
       .then((users) => {
         for (let i = 0; i < users.length; i++) {
           const user = new UserModel(users[i]);
-          this.rowData.push(user);
+          data.push(user);
         }
       });
+    this.rowData = data;
   }
 
   constructor(protected pageScrollService: PageScrollService,

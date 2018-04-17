@@ -20,17 +20,7 @@ export class TabularConfig {
             itemsPerPage: 5,
             currentPage: 1
         },
+        clickableRows: false
     };
-
-    /**
-     * Default order by value
-     */
-    public defaultOrderBy: Array<string> = ['id'];
-
-    /**
-     * Default order by direction
-     */
-    public defaultOrderByDirection: OrderByDirection = OrderByDirection.Ascending;
-
 
 }

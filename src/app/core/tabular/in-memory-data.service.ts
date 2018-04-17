@@ -1,5 +1,4 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import {UserModel} from './user.model';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const users = [
@@ -36,7 +35,8 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', cssClass: 'is-outlined'}
+        flag: {label: 'S', cssClass: 'is-outlined'},
+        selected: true
       },
       {
         id: 4,
@@ -48,7 +48,8 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', cssClass: 'is-danger'}
+        flag: {label: 'S', cssClass: 'is-danger'},
+        checked: true
       },
       {
         id: 5,
@@ -84,7 +85,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', css: 'is-error'}
+        flag: {label: 'S', cssClass: 'is-error'}
       },
       {
         id: 8,
@@ -96,7 +97,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', css: 'is-outlined'}
+        flag: {label: 'S', cssClass: 'is-outlined'}
       },
       {
         id: 9,
@@ -108,7 +109,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', css: ''}
+        flag: {label: 'S', cssClass: ''}
       },
       {
         id: 10,
@@ -132,7 +133,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', css: 'is-outlined'}
+        flag: {label: 'S', cssClass: 'is-outlined'}
       },
       {
         id: 12,

@@ -1,5 +1,6 @@
 import {
-  Component, Input, Output, EventEmitter, OnInit, DoCheck
+  Component, Input, Output, EventEmitter, OnInit, DoCheck, AfterViewInit, AfterContentInit, OnChanges, SimpleChange,
+  SimpleChanges
 } from '@angular/core';
 import {TabularColumn} from './tabular';
 import {ITabularConfig} from './tabular-config.interface';
@@ -8,11 +9,12 @@ import {TabularOrderByService, OrderByDirection} from './tabular-order-by.servic
 import {TabularConfig} from './tabular.config';
 import {TabularSize} from './tabular-size.enum';
 import {TabularColumnTypes} from './tabular-column.interface';
+import {ITabularRow} from './tabular-row.interface';
 
 
 @Component({
   selector: 'hxa-tabular',
-  template: `<table class="tabular hx-table is-striped" [class.is-narrow]="config.size === TabularSize.Small">
+  template: `<table class="tabular hx-table is-striped" [class.is-hover]="config.clickableRows" [class.is-narrow]="config.size === TabularSize.Small">
     <thead>
     <tr>
       <th *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
@@ -34,29 +36,35 @@ import {TabularColumnTypes} from './tabular-column.interface';
 
     <tbody>
     <!--<tr *ngFor="let row of rows | paginate: config.pagination | simpleSearch: searchTerm">-->
-    <tr *ngFor="let row of pagedItems | simpleSearch: searchTerm">
+    <tr *ngFor="let row of pagedItems | simpleSearch: searchTerm" (click)="onRowClickHandler(row)" [class.is-selected]="row.selected">
       <td *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
 
+        <!-- checkbox type -->
+        <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
+          <input id="checkbox-{{row.id}}" name="{{col.label}}-checkbox" type="checkbox" class="hx-checkbox" title="{{col.label}}" (change)="toggleIndividualSelect($event)" [(ngModel)]="row.checked" />
+          <label for="checkbox-{{row.id}}" class="hx-label"></label>
+        </div>
+        
         <!-- string type -->
-        <span *ngIf="col.dataType == TabularColumnTypes.String" title="{{row[col.id]}}">{{row[col.id]}}</span>
+        <span *ngIf="col.dataType === TabularColumnTypes.String" title="{{row[col.id]}}">{{row[col.id]}}</span>
 
         <!-- icon type -->
-        <i *ngIf="col.dataType == TabularColumnTypes.Icon" class="icon {{row[col.id]}}"></i>
+        <i *ngIf="col.dataType === TabularColumnTypes.Icon" class="hx-icon {{row[col.id]}}"></i>
 
         <!-- date type -->
-        <span *ngIf="col.dataType == TabularColumnTypes.Date">{{row[col.id] | date:'d/M/yyyy'}}</span>
+        <span *ngIf="col.dataType === TabularColumnTypes.Date">{{row[col.id] | date:'d/M/yy'}}</span>
 
         <!-- status type -->
-        <span *ngIf="col.dataType == TabularColumnTypes.Status" class="hx-icon" [ngClass]="{'is-primary':row[col.id],'is-danger':!row[col.id], 'icon-check-empty': row[col.id], 'icon-close-empty':!row[col.id]}" ></span>
+        <span *ngIf="col.dataType === TabularColumnTypes.Status" class="hx-icon" [ngClass]="{'is-primary':row[col.id],'is-danger':!row[col.id], 'icon-check-empty': row[col.id], 'icon-close-empty':!row[col.id]}" ></span>
 
         <!-- badge type -->
-        <span *ngIf="col.dataType == TabularColumnTypes.Badge && hasValidBadgeTypeParams(row[col.id])" class="hx-badge is-small {{row[col.id].cssClass}}"><span class="hx-badge-content">{{row[col.id].label}}</span></span>
+        <span *ngIf="col.dataType === TabularColumnTypes.Badge && hasValidBadgeTypeParams(row[col.id])" class="hx-badge is-small {{row[col.id].cssClass}}"><span class="hx-badge-content">{{row[col.id].label}}</span></span>
         
         <!-- date time type -->
-        <span *ngIf="col.dataType == TabularColumnTypes.DateTime">{{row[col.id] | date:'d/M/yyy h:mm a'}}</span>
+        <span *ngIf="col.dataType === TabularColumnTypes.DateTime">{{row[col.id] | date:'d/M/yy h:mm a'}}</span>
 
         <!-- actions type -->
-        <div *ngIf="col.dataType == TabularColumnTypes.Actions" class="hx-dropdown tabularActions">
+        <div *ngIf="col.dataType === TabularColumnTypes.Actions" class="hx-dropdown tabularActions">
 
 
           <div class="tabularActions__action">
@@ -98,12 +106,6 @@ import {TabularColumnTypes} from './tabular-column.interface';
           </div>
         </div>
 
-        <!-- checkbox type -->
-        <div *ngIf="col.dataType == 6" class="hx-checkbox-control">
-          <input id="checkbox-{{row.id}}" name="{{col.label}}-checkbox" type="checkbox" class="hx-checkbox" title="{{col.label}}" (change)="toggleIndividualSelect($event)" [(ngModel)]="row.selected" />
-          <label for="checkbox-{{row.id}}" class="hx-label"></label>
-        </div>
-
       </td>
     </tr>
     </tbody>
@@ -122,19 +124,18 @@ import {TabularColumnTypes} from './tabular-column.interface';
 })
 
 
-export class TabularComponent implements OnInit, DoCheck {
+export class TabularComponent implements OnInit, DoCheck, OnChanges {
 
   /**
    * Collection of column models
    */
-  @Input() columns: Array<TabularColumn>;
+  @Input() columns: TabularColumn[];
 
   /**
    * Collection of data rows
    */
   // todo - this is not strict. should it be when it's dynamic?.
-   @Input() rows: Array<any>;
-
+   @Input() rows: ITabularRow[];
 
   /**
    * Tabular configuration
@@ -157,6 +158,7 @@ export class TabularComponent implements OnInit, DoCheck {
     this._callback = Fn;
   }
 
+
   /**
    * Search term is used in the simple search pipe
    * Array of objects: *ngFor="#row of rows | simpleSearch : 'the search term'"
@@ -175,12 +177,17 @@ export class TabularComponent implements OnInit, DoCheck {
    */
   @Output() refresh: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  /**
+   * Event fired when a row is clicked.
+   */
+  @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
 
-  private defaultOrderBy: Array<string> = ['id'];
-  private defaultOrderByDirection: OrderByDirection;
+
+  private oldRows: ITabularRow[] = [];
+  private changeDetected: boolean;
+  private pagedItems: any[] = [];
   private TabularColumnTypes = TabularColumnTypes;
   private TabularSize = TabularSize;
-  pagedItems: any[];
   private selectAll = false;
   protected _callback: Function;
   protected _config: ITabularConfig;
@@ -188,10 +195,8 @@ export class TabularComponent implements OnInit, DoCheck {
 
   /**
    * Order by used by orderBy service
-   * @example *ngFor="#person of people | orderBy : ['-age', 'firstName']"
-   * @example *ngFor="#person of people | orderBy : ['+age', 'firstName']"
    */
-  public orderBy: Array<string> = this.defaultOrderBy;
+  public orderBy: string;
 
 
   public constructor(private conf: TabularConfig,
@@ -200,20 +205,35 @@ export class TabularComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
+
   }
 
   ngDoCheck() {
-    this.setPage();
+    if (this.rows.length !== this.oldRows.length) {
+      this.changeDetected = true;
+      console.log('DoCheck: Rows changed to "${this.rows}" from "${this.oldRows}"');
+      this.oldRows = this.rows;
+      if (this.config.defaultOrderBy) {
+        this.orderBy = this.config.defaultOrderBy;
+      }
+      this.orderByData();
+    }
+    this.changeDetected = false;
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+  }
+
+
   private get iconDirection(): string{
-    return (this.defaultOrderByDirection === OrderByDirection.Ascending) ? ' icon-arrow-up' : ' icon-arrow-down';
+    return (this.config.defaultOrderByDirection === OrderByDirection.Ascending) ? ' icon-arrow-up' : ' icon-arrow-down';
   }
 
   /**
    * Calls the parsed callback with optional arguments
    */
   private executeCallback(event: Event, cb: any[]) {
+    event.stopPropagation();
     if (cb.length) {
       if (cb.length === 1) { // if callback has no arguments
         cb[0]();
@@ -225,13 +245,12 @@ export class TabularComponent implements OnInit, DoCheck {
         cb[0].apply(this, args);
       }
     }
-    return false;
   }
 
 
   private toggleSelectAll = () => {
     for (let i = 0; i < this.rows.length; i++) {
-      this.rows[i].selected = this.selectAll;
+      this.rows[i].checked = this.selectAll;
     }
   }
 
@@ -239,7 +258,7 @@ export class TabularComponent implements OnInit, DoCheck {
   private toggleIndividualSelect = () => {
     let count = 0;
     for (let i = 0; i < this.rows.length; i++) {
-      if (this.rows[i].selected) {
+      if (this.rows[i].checked) {
         count++;
       }
     }
@@ -278,9 +297,18 @@ export class TabularComponent implements OnInit, DoCheck {
    * Handles the column header click event.
    */
   private onSortClickHandler(key: string) {
-    this.orderBy = ([key] === this.orderBy) ? this.defaultOrderBy : [key];
+    this.orderBy = key;
     this.orderByData();
     return false;
+  }
+
+  /**
+   * Handles the row click event.
+   */
+  private onRowClickHandler(data: any) {
+    if (this.config.clickableRows) {
+      this.rowClick.emit(data);
+    }
   }
 
 
@@ -293,15 +321,15 @@ export class TabularComponent implements OnInit, DoCheck {
    */
   private orderByData() {
     let direction: string;
-    if (this.defaultOrderByDirection === OrderByDirection.Ascending) {
+    if (this.config.defaultOrderByDirection === OrderByDirection.Ascending) {
       direction = '-';
-      this.defaultOrderByDirection = OrderByDirection.Descending;
+      this.config.defaultOrderByDirection = OrderByDirection.Descending;
     } else {
       direction = '+';
-      this.defaultOrderByDirection = OrderByDirection.Ascending;
+      this.config.defaultOrderByDirection = OrderByDirection.Ascending;
     }
 
-    this.orderByService.doTransform(this.rows, [direction + this.orderBy[0]]);
+    this.orderByService.doTransform(this.rows, [direction + this.orderBy]);
     this.setPage();
   }
 

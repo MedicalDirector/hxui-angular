@@ -1,6 +1,7 @@
 import {ActionConfigRouteType, IActionsConfig} from '../../../modules/tabular/actions-config.interface';
+import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
 
-export class UserModel {
+export class UserModel implements ITabularRow {
   public id: number;
   public usercode: string;
   public firstname: string;
@@ -11,6 +12,8 @@ export class UserModel {
   public active: boolean;
   public created: Date;
   public modified: Date;
+  public selected: boolean;
+  public checked: boolean;
 
 
   constructor(data?: any) {

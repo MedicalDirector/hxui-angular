@@ -4,10 +4,6 @@
     <h1 class="hx-title">Tabular</h1>
     <h2 class="hx-subtitle">The tabular component is a table with sort, filter and pagination features baked in.</h2>
 
-    <span class="hx-badge is-warning">
-      <span class="hx-badge-content">EXPERIMENTAL</span>
-    </span>
-
     <hr>
 
     <h4 id="usage">Usage</h4>
@@ -45,7 +41,8 @@ export class AppModule(){{ '{' }}
           [columns]="columnData"
           [config]="tabularConfig"
           [callback]="onActionClickHandler"
-          (refresh)="refreshDataHandler($event)">
+          (refresh)="refreshDataHandler($event)"
+          (rowClick)="rowClickHandler($event)">
         </hxa-tabular>
 
       </div>
@@ -75,7 +72,8 @@ export class AppModule(){{ '{' }}
   [columns]=&#x22;columnData&#x22;
   [config]=&#x22;tabularConfig&#x22;
   [callback]=&#x22;onActionClickHandler&#x22;
-  (refresh)=&#x22;refreshDataHandler($event)&#x22;&#x3E;
+  (refresh)=&#x22;refreshDataHandler($event)&#x22;
+  (rowClick)=&#x22;rowClickHandler($event)&#x22;&#x3E;
 &#x3C;/hx-tabular&#x3E;
               </code>
             </pre>
@@ -116,6 +114,7 @@ export class TabularComponent implements OnInit {{ '{' }}
 
   tabularConfig: ITabularConfig = {{ '{' }}
     size: TabularSize.Default,
+    clickableRows: true,
     pagination: {{ '{' }}
       itemsPerPage: 5,
       currentPage: 1
@@ -125,14 +124,18 @@ export class TabularComponent implements OnInit {{ '{' }}
   /**
    * Refresh data handler for data grid.
    */
-  refreshDataHandler = ($event) =&#x3E; {{ '{' }}
+  refreshDataHandler($event) {{ '{' }}
     this.getTabularData();
+  }
+
+   rowClickHandler($event) {{ '{' }}
+    console.log($event);
   }
 
   printSelected = ($event) =&#x3E; {{ '{' }}
     let count = 0;
     for (let i = 0; i &#x3C; this.rowData.length; i++) {{ '{' }}
-      if (this.rowData[i].selected) {{ '{' }}
+      if (this.rowData[i].checked) {{ '{' }}
         count++;
         console.log(this.rowData[i]);
       }
@@ -142,7 +145,7 @@ export class TabularComponent implements OnInit {{ '{' }}
 
   isPrintDisabled = () =&#x3E; {{ '{' }}
     for (let i = 0; i &#x3C; this.rowData.length; i++) {{ '{' }}
-      if (this.rowData[i].selected) {{ '{' }}
+      if (this.rowData[i].checked) {{ '{' }}
         return false;
       }
     }
@@ -215,195 +218,332 @@ export class TabularService {{ '{' }}
           <hx-tab heading="Mock Data">
             <pre>
               <code class="typescript">
-import {{ '{' }} InMemoryDbService } from 'angular2-in-memory-web-api';
-
+import {{ '{' }} InMemoryDbService } from &#x27;angular-in-memory-web-api&#x27;;
 export class InMemoryDataService implements InMemoryDbService {{ '{' }}
   createDb() {{ '{' }}
     const users = [
       {{ '{' }}
-        id:1,
-        usercode: 'BR001',
-        firstname: 'Brenda',
-        surname: 'Reed',
-        rolename: 'GP',
-        email: 'brenda.reed@medicaldirector.com',
-        active: false
+        id: 1,
+        usercode: &#x27;BR001&#x27;,
+        firstname: &#x27;Brenda&#x27;,
+        surname: &#x27;Reed&#x27;,
+        rolename: &#x27;GP&#x27;,
+        email: &#x27;brenda.reed@medicaldirector.com&#x27;,
+        active: false,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-primary&#x27;}
       },
       {{ '{' }}
         id: 2,
-        usercode: 'MR001',
-        firstname: 'Mercedes',
-        surname: 'Mendez',
-        rolename: 'GP',
-        email: 'mercedes.mendez@medicaldirector.com',
-        active: false
+        usercode: &#x27;MR001&#x27;,
+        firstname: &#x27;Mercedes&#x27;,
+        surname: &#x27;Mendez&#x27;,
+        rolename: &#x27;GP&#x27;,
+        email: &#x27;mercedes.mendez@medicaldirector.com&#x27;,
+        active: false,
+        created: new Date(),
+        modified: new Date()
       },
       {{ '{' }}
-        id:3,
-        usercode: 'II006',
-        firstname: 'John',
-        surname: 'Smith',
-        rolename: 'Specialist',
-        email: 'john.smith@medicaldirector.com',
-        active: true
+        id: 3,
+        usercode: &#x27;II006&#x27;,
+        firstname: &#x27;John&#x27;,
+        surname: &#x27;Smith&#x27;,
+        rolename: &#x27;Specialist&#x27;,
+        email: &#x27;john.smith@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-outlined&#x27;},
+        selected: true
       },
       {{ '{' }}
-        id:4,
-        usercode: 'JS001',
-        firstname: 'Julia',
-        surname: 'Sampson',
-        rolename: 'Specialist',
-        email: 'julia.sampson@medicaldirector.com',
-        active: true
+        id: 4,
+        usercode: &#x27;JS001&#x27;,
+        firstname: &#x27;Julia&#x27;,
+        surname: &#x27;Sampson&#x27;,
+        rolename: &#x27;Specialist&#x27;,
+        email: &#x27;julia.sampson@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-danger&#x27;},
+        checked: true
       },
       {{ '{' }}
-        id:5,
-        usercode: 'GP001',
-        firstname: 'John',
-        surname: 'Pipps',
-        rolename: 'Specialist',
-        email: 'john.gipps@medicaldirector.com',
-        active: true
+        id: 5,
+        usercode: &#x27;GP001&#x27;,
+        firstname: &#x27;John&#x27;,
+        surname: &#x27;Pipps&#x27;,
+        rolename: &#x27;Specialist&#x27;,
+        email: &#x27;john.gipps@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-warning&#x27;}
       },
       {{ '{' }}
-        id:6,
-        usercode: 'NR001',
-        firstname: 'Natalie',
-        surname: 'Roberts',
-        rolename: 'Receptionist',
-        email: 'natalie.roberts@medicaldirector.com',
-        active: false
+        id: 6,
+        usercode: &#x27;NR001&#x27;,
+        firstname: &#x27;Natalie&#x27;,
+        surname: &#x27;Roberts&#x27;,
+        rolename: &#x27;Receptionist&#x27;,
+        email: &#x27;natalie.roberts@medicaldirector.com&#x27;,
+        active: false,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;&#x27;}
       },
       {{ '{' }}
-        id:7,
-        usercode: 'HS001',
-        firstname: 'Harry',
-        surname: 'Sechi',
-        rolename: 'GP',
-        email: 'harry.sechi@medicaldirector.com',
-        active: true
+        id: 7,
+        usercode: &#x27;HS001&#x27;,
+        firstname: &#x27;Harry&#x27;,
+        surname: &#x27;Sechi&#x27;,
+        rolename: &#x27;GP&#x27;,
+        email: &#x27;harry.sechi@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, css: &#x27;is-error&#x27;}
       },
       {{ '{' }}
-        id:8,
-        usercode: 'XL001',
-        firstname: 'Xavier',
-        surname: 'Lorenzo',
-        rolename: 'Practice Manager',
-        email: 'xavier.lorenzo@medicaldirector.com',
-        active: true
+        id: 8,
+        usercode: &#x27;XL001&#x27;,
+        firstname: &#x27;Xavier&#x27;,
+        surname: &#x27;Lorenzo&#x27;,
+        rolename: &#x27;Practice Manager&#x27;,
+        email: &#x27;xavier.lorenzo@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, css: &#x27;is-outlined&#x27;}
       },
       {{ '{' }}
-        id:9,
-        usercode: 'CY001',
-        firstname: 'Chris',
-        surname: 'Yap',
-        rolename: 'GP',
-        email: 'chris.yap@medicaldirector.com',
-        active: true
+        id: 9,
+        usercode: &#x27;CY001&#x27;,
+        firstname: &#x27;Chris&#x27;,
+        surname: &#x27;Yap&#x27;,
+        rolename: &#x27;GP&#x27;,
+        email: &#x27;chris.yap@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, css: &#x27;&#x27;}
       },
       {{ '{' }}
         id: 10,
-        usercode: 'MA001',
-        firstname: 'Mohammad',
-        surname: 'Ahmed',
-        rolename: 'Specialist',
-        email: 'mohammad.ahmed@medicaldirector.com',
-        active: true
+        usercode: &#x27;MA001&#x27;,
+        firstname: &#x27;Mohammad&#x27;,
+        surname: &#x27;Ahmed&#x27;,
+        rolename: &#x27;Specialist&#x27;,
+        email: &#x27;mohammad.ahmed@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;Short&#x27;, cssClass: &#x27;&#x27;}
       },
       {{ '{' }}
         id: 11,
-        usercode: 'EG001',
-        firstname: 'Elizabth',
-        surname: 'Gino',
-        rolename: 'Nurse',
-        email: 'eli.gino@medicaldirector.com',
-        active: true
+        usercode: &#x27;EG001&#x27;,
+        firstname: &#x27;Elizabth&#x27;,
+        surname: &#x27;Gino&#x27;,
+        rolename: &#x27;Nurse&#x27;,
+        email: &#x27;eli.gino@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, css: &#x27;is-outlined&#x27;}
       },
       {{ '{' }}
         id: 12,
-        usercode: 'BP001',
-        firstname: 'Brian',
-        surname: 'Pulliese',
-        rolename: 'Specialist',
-        email: 'brian.pulliese@medicaldirector.com',
-        active: true
+        usercode: &#x27;BP001&#x27;,
+        firstname: &#x27;Brian&#x27;,
+        surname: &#x27;Pulliese&#x27;,
+        rolename: &#x27;Specialist&#x27;,
+        email: &#x27;brian.pulliese@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-primary&#x27;}
       },
       {{ '{' }}
         id: 13,
-        usercode: 'AW001',
-        firstname: 'Annabell',
-        surname: 'Wilson',
-        rolename: 'Receptionist',
-        email: 'annabell.wilson@medicaldirector.com',
-        active: true
+        usercode: &#x27;AW001&#x27;,
+        firstname: &#x27;Annabell&#x27;,
+        surname: &#x27;Wilson&#x27;,
+        rolename: &#x27;Receptionist&#x27;,
+        email: &#x27;annabell.wilson@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-primary&#x27;}
       },
       {{ '{' }}
-        id:14,
-        usercode: 'SH001',
-        firstname: 'Susan',
-        surname: 'Homes',
-        rolename:'Receptionist',
-        email: 'susan.homes@medicaldirector.com',
-        active: false
+        id: 14,
+        usercode: &#x27;SH001&#x27;,
+        firstname: &#x27;Susan&#x27;,
+        surname: &#x27;Homes&#x27;,
+        rolename: &#x27;Receptionist&#x27;,
+        email: &#x27;susan.homes@medicaldirector.com&#x27;,
+        active: false,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27; is-outlined&#x27;}
       },
       {{ '{' }}
-        id:15,
-        usercode: 'KL001',
-        firstname: 'Kevin',
-        surname: 'Liang',
-        rolename:'GP',
-        email: 'kevin.liang@medicaldirector.com',
-        active: false
+        id: 15,
+        usercode: &#x27;KL001&#x27;,
+        firstname: &#x27;Kevin&#x27;,
+        surname: &#x27;Liang&#x27;,
+        rolename: &#x27;GP&#x27;,
+        email: &#x27;kevin.liang@medicaldirector.com&#x27;,
+        active: false,
+        created: new Date(),
+        modified: new Date()
       },
       {{ '{' }}
-        id:16,
-        usercode: 'JK001',
-        firstname: 'Jack',
-        surname: 'Kelvin',
-        rolename:'Nurse',
-        email: 'jack.kelvin@medicaldirector.com',
-        active: true
+        id: 16,
+        usercode: &#x27;JK001&#x27;,
+        firstname: &#x27;Jack&#x27;,
+        surname: &#x27;Kelvin&#x27;,
+        rolename: &#x27;Nurse&#x27;,
+        email: &#x27;jack.kelvin@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date()
       },
       {{ '{' }}
-        id:17,
-        usercode: 'DP001',
-        firstname: 'Dave',
-        surname: 'Poon',
-        rolename: 'Practice Manager',
-        email: 'dave.poon@medicaldirector.com',
-        active: true
+        id: 17,
+        usercode: &#x27;DP001&#x27;,
+        firstname: &#x27;Dave&#x27;,
+        surname: &#x27;Poon&#x27;,
+        rolename: &#x27;Practice Manager&#x27;,
+        email: &#x27;dave.poon@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date()
       },
       {{ '{' }}
-        id:18,
-        usercode: 'FB001',
-        firstname: 'Fred',
-        surname: 'Borris',
-        rolename: 'Admin',
-        email: 'fred.borris@medicaldirector.com',
-        active: true
+        id: 18,
+        usercode: &#x27;FB001&#x27;,
+        firstname: &#x27;Fred&#x27;,
+        surname: &#x27;Borris&#x27;,
+        rolename: &#x27;Admin&#x27;,
+        email: &#x27;fred.borris@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-outlined&#x27;}
       },
       {{ '{' }}
-        id:19,
-        usercode: 'TS001',
-        firstname: 'Tupac',
-        surname: 'Shakur',
-        rolename:'Administrator',
-        email: 'tupac.shakur@medicaldirector.com',
-        active: true
+        id: 19,
+        usercode: &#x27;TS001&#x27;,
+        firstname: &#x27;Tupac&#x27;,
+        surname: &#x27;Shakur&#x27;,
+        rolename: &#x27;Administrator&#x27;,
+        email: &#x27;tupac.shakur@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date()
       },
       {{ '{' }}
-        id:20,
-        usercode: 'BS001',
-        firstname: 'Biggie',
-        surname: 'Smalls',
-        rolename:'GP',
-        email: 'biggie.smalls@medicaldirector.com',
-        active: true
+        id: 20,
+        usercode: &#x27;BS001&#x27;,
+        firstname: &#x27;Biggie&#x27;,
+        surname: &#x27;Smalls&#x27;,
+        rolename: &#x27;GP&#x27;,
+        email: &#x27;biggie.smalls@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date()
       }
     ];
     return {{ '{' }}users};
   }
 }
+
+              </code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="User Model">
+            <pre>
+              <code class="typescript">
+  import {{ '{' }}ActionConfigRouteType, IActionsConfig} from &#x27;../../../modules/tabular/actions-config.interface&#x27;;
+  import {{ '{' }}ITabularRow} from &#x27;../../../modules/tabular/tabular-row.interface&#x27;;
+
+  export class UserModel implements ITabularRow {{ '{' }}
+    public id: number;
+    public usercode: string;
+    public firstname: string;
+    public surname: string;
+    public rolename: string;
+    public email: string;
+    public flag: {{ '{' }}label: string, cssClass: string};
+    public active: boolean;
+    public created: Date;
+    public modified: Date;
+    public selected: boolean;
+    public checked: boolean;
+
+
+    constructor(data?: any) {{ '{' }}
+      if (data) {{ '{' }}
+        Object.assign(this, data);
+      }
+    }
+
+    get icon(): string {{ '{' }}
+      return (this.active) ? &#x27;icon-check-empty is-primary&#x27; : &#x27;icon-close-empty is-danger&#x27;;
+    }
+
+    get actions(): IActionsConfig[] {{ '{' }}
+      return  [
+        {{ '{' }}
+          id: &#x27;row_person_view&#x27;,
+          label: &#x27;View&#x27;,
+          route: [&#x27;/tabular&#x27;],
+          routeType: ActionConfigRouteType.Default,
+          disabledConfig: {{ '{' }}disabled: (Math.floor(Math.random() * 2) === 1), tooltip: &#x27;Not enough permission&#x27;}
+        },
+        {{ '{' }}
+          id: &#x27;row_person_edit&#x27;,
+          label: &#x27;Edit&#x27;,
+          routeType: ActionConfigRouteType.Callback,
+          callback: [this.onActionClickHandler, &#x27;edit&#x27;, 1]
+        },
+        {{ '{' }}
+          id: &#x27;row_person_delete&#x27;,
+          label: &#x27;Archive&#x27;,
+          routeType: ActionConfigRouteType.Callback,
+          callback: [this.onActionClickHandler, &#x27;delete&#x27;, 1]
+        },
+        {{ '{' }}
+          id: &#x27;row_person_delete_forever&#x27;,
+          label: &#x27;Delete&#x27;,
+          routeType: ActionConfigRouteType.Callback,
+          callback: [this.onActionClickHandler, &#x27;perm-delete&#x27;, 1]
+        },
+        {{ '{' }}
+          id: &#x27;row_default&#x27;,
+          label: &#x27;&#x3C;span class=&#x22;hx-icon icon-medications&#x22;&#x3E;&#x3C;/span&#x3E;&#x27;,
+          isDefault: true,
+          routeType: ActionConfigRouteType.Callback,
+          callback: [this.onActionClickHandler, &#x27;default&#x27;, 1]
+        }
+      ];
+    }
+
+    /**
+     * Function used in the callback actions
+     * @param type
+     * @param data
+     */
+    onActionClickHandler = (type, data) =&#x3E; {{ '{' }}
+      alert(&#x27;You clicked the &#x27; + type + &#x27; button. Arguments:&#x27; + type + &#x27; and &#x27; + data);
+    }
+  }
+
               </code>
             </pre>
           </hx-tab>
@@ -492,6 +632,7 @@ export class InMemoryDataService implements InMemoryDbService {{ '{' }}
               <td><pre><code>
 {{ '{' }}
   size: TabularSize.Default,
+  clickableRows: true,
   pagination: {{ '{' }}
       itemsPerPage: 5,
       currentPage: 1
@@ -546,14 +687,18 @@ export class InMemoryDataService implements InMemoryDbService {{ '{' }}
               <td>
                 <p>The supported column data types:</p>
                 <code>
+                  <br/>
               TabularColumnTypes.String<br/>
               TabularColumnTypes.Icon<br/>
               TabularColumnTypes.Date<br/>
               TabularColumnTypes.Actions<br/>
               TabularColumnTypes.Status<br/>
               TabularColumnTypes.DateTime<br/>
-              TabularColumnTypes.Badge</code>
-                <p><b>Note: Value for the Badge column type must be in the following format <code>{{ '{' }}label:string, cssClass:string}</code></b></p>
+              TabularColumnTypes.Badge<br/>
+                  <br/>
+                </code>
+                <p>Note: Value for the <kbd>badge column type</kbd> must be in the following format</p>
+                <code><br/>{{ '{' }}label:string, cssClass:string}<br/><br/></code>
               </td>
             </tr>
             <tr>
