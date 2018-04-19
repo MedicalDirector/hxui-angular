@@ -43,4 +43,9 @@ export abstract class IActionsConfig {
    */
   callback?: any;
 
+  /**
+   *  If true, this will be the default action in a split button
+   */
+  isDefault?: boolean;
+
 }

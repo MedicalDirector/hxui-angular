@@ -1,236 +1,231 @@
 <section class="hx-section scrollable-y" #container>
-  <h1 class="hx-title">Typeaheads</h1>
-  <h2 class="hx-subtitle">A typeahead is a suggestive search component.</h2>
-  <hr>
+  <div class="hx-section is-comfortable">
 
-  <h4 id="usage">Usage</h4>
-  <p>Add the TypeaheadsModule to AppModule or SharedModule.</p>
+    <h1 class="hx-title">Typeaheads</h1>
+    <h2 class="hx-subtitle">A typeahead is a suggestive search component.</h2>
+    <hr>
 
-  <pre>
-    <code class="typescript">
-      import {{ '{' }}TypeaheadsModule} from &#x22;@hxui-angular/packages/typeaheads/typeaheads.module&#x22;;
+    <h4 id="usage">Usage</h4>
+    <p>Add the TypeaheadsModule to AppModule or SharedModule.</p>
 
-      @NgModule({{ '{' }}
-        imports: [TypeaheadsModule.forRoot(),...]
-      })
-      export class AppModule(){{ '{' }}
-    </code>
-  </pre>
+    <pre>
+      <code class="typescript">
+import {{ '{' }}TypeaheadsModule} from &#x22;@hxui-angular/packages/typeaheads/typeaheads.module&#x22;;
 
-  <hr>
+@NgModule({{ '{' }}
+  imports: [TypeaheadsModule.forRoot(),...]
+})
+export class AppModule(){{ '{' }}
+      </code>
+    </pre>
 
-  <h4 id="example">Example</h4>
+    <hr>
 
-  <div class="hx-columns">
-    <div class="hx-column">
+    <h4 id="example">Example</h4>
 
-      <div class="hx-input-control">
-        <input class="hx-input" type="text" [(ngModel)]="selected"
-               [typeahead]="states" required>
-        <label class="hx-label"><i class="icon icon-search is-small"></i> Medications</label>
-        <div class="hx-help">Search for medication names</div>
+    <div class="hx-columns">
+      <div class="hx-column">
+
+        <div class="hx-input-control">
+          <input class="hx-input" type="text" [(ngModel)]="selected" [typeahead]="states" required>
+          <label class="hx-label"><i class="icon icon-search is-small"></i> Medications</label>
+          <div class="hx-help">Search for medication names</div>
+        </div>
+
       </div>
-
-
     </div>
-  </div>
 
-  <br>
+    <br>
 
-  <h5 id="code">Code</h5>
+    <h5 id="code">Code</h5>
 
-  <div class="hx-columns">
-    <div class="hx-column">
+    <div class="hx-columns">
+      <div class="hx-column">
 
-      <hx-tabset>
-        <hx-tab heading="Template">
-      <pre>
-        <code class="html">
-       &#x3C;div class=&#x22;hx-input-control&#x22;&#x3E;
-        &#x3C;input class=&#x22;hx-input&#x22; type=&#x22;text&#x22; [(ngModel)]=&#x22;selected&#x22;
-               [typeahead]=&#x22;states&#x22; required&#x3E;
-        &#x3C;label class=&#x22;hx-label&#x22;&#x3E;&#x3C;i class=&#x22;icon icon-search is-small&#x22;&#x3E;&#x3C;/i&#x3E; Medications&#x3C;/label&#x3E;
-        &#x3C;div class=&#x22;hx-help&#x22;&#x3E;Search for medication names&#x3C;/div&#x3E;
-      &#x3C;/div&#x3E;
-        </code>
-      </pre>
-        </hx-tab>
-        <hx-tab heading="Typescript">
-          <pre>
-            <code class="typescript">
-      import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
+        <hx-tabset>
+          <hx-tab heading="Template">
+            <pre>
+              <code class="html">
+&#x3C;div class=&#x22;hx-input-control&#x22;&#x3E;
+  &#x3C;input class=&#x22;hx-input&#x22; type=&#x22;text&#x22; [(ngModel)]=&#x22;selected&#x22;
+    [typeahead]=&#x22;states&#x22; required&#x3E;
+  &#x3C;label class=&#x22;hx-label&#x22;&#x3E;&#x3C;i class=&#x22;icon icon-search is-small&#x22;&#x3E;&#x3C;/i&#x3E; Medications&#x3C;/label&#x3E;
+  &#x3C;div class=&#x22;hx-help&#x22;&#x3E;Search for medication names&#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
+              </code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Typescript">
+            <pre>
+              <code class="typescript">
+import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
 
-      @Component({{ '{' }}
-        selector: &#x27;app-typeaheads&#x27;,
-        templateUrl: &#x27;./typeaheads.component.html&#x27;
-      })
-      export class TypeaheadsComponent implements OnInit {{ '{' }}
-        public selected: string;
-        public states: string[] = [
-          &#x27;SABRIL powder for oral solution 500mg&#x27;,
-          &#x27;SABRIL tablet 500mg&#x27;,
-          &#x27;SACROSIDASE oral liquid, solution 8,500 Units/mL&#x27;,
-          &#x27;SACUBITRIL/VALSARTAN tablet 24.3mg/25.7mg&#x27;,
-          &#x27;SACUBITRIL/VALSARTAN tablet 48.6mg/51.4mg&#x27;,
-          &#x27;SACUBITRIL/VALSARTAN tablet 97.3mg/102.8mg&#x27;,
-          &#x27;SAFLUTAN eye drops 0.0015% (4.5mcg/0.3mL)&#x27;,
-          &#x27;SAIZEN 8 CLICK.EASY powder for injection 8mg (24 units)&#x27;,
-          &#x27;SAIZEN powder for injection 3mg (10 units)&#x27;,
-          &#x27;SAIZEN injection 6mg (18 units)&#x27;,
-          &#x27;SAIZEN injection 12mg (36 units)&#x27;,
-          &#x27;SAIZEN injection 20mg (60 units)&#x27;,
-          &#x27;SALAZOPYRIN-EN enteric-coated tablet 500mg&#x27;,
-          &#x27;SALBUTAMOL ACTAVIS inhalation 2.5mg/2.5mL&#x27;,
-          &#x27;SALBUTAMOL ACTAVIS inhalation 5mg/2.5mL&#x27;,
-          &#x27;SALBUTAMOL SANDOZ inhalation 2.5mg/2.5mL&#x27;,
-          &#x27;SALBUTAMOL SANDOZ inhalation 5mg/2.5mL&#x27;,
-          &#x27;SALBUTAMOL metered-dose aerosol 100mcg/dose&#x27;,
-          &#x27;SALBUTAMOL injection 1mg/mL&#x27;];
-        constructor() {{ '{' }} }
+@Component({{ '{' }}
+  selector: &#x27;app-typeaheads&#x27;,
+  templateUrl: &#x27;./typeaheads.component.html&#x27;
+})
+export class TypeaheadsComponent implements OnInit {{ '{' }}
+  public selected: string;
+  public states: string[] = [
+    &#x27;SABRIL powder for oral solution 500mg&#x27;,
+    &#x27;SABRIL tablet 500mg&#x27;,
+    &#x27;SACROSIDASE oral liquid, solution 8,500 Units/mL&#x27;,
+    &#x27;SACUBITRIL/VALSARTAN tablet 24.3mg/25.7mg&#x27;,
+    &#x27;SACUBITRIL/VALSARTAN tablet 48.6mg/51.4mg&#x27;,
+    &#x27;SACUBITRIL/VALSARTAN tablet 97.3mg/102.8mg&#x27;,
+    &#x27;SAFLUTAN eye drops 0.0015% (4.5mcg/0.3mL)&#x27;,
+    &#x27;SAIZEN 8 CLICK.EASY powder for injection 8mg (24 units)&#x27;,
+    &#x27;SAIZEN powder for injection 3mg (10 units)&#x27;,
+    &#x27;SAIZEN injection 6mg (18 units)&#x27;,
+    &#x27;SAIZEN injection 12mg (36 units)&#x27;,
+    &#x27;SAIZEN injection 20mg (60 units)&#x27;,
+    &#x27;SALAZOPYRIN-EN enteric-coated tablet 500mg&#x27;,
+    &#x27;SALBUTAMOL ACTAVIS inhalation 2.5mg/2.5mL&#x27;,
+    &#x27;SALBUTAMOL ACTAVIS inhalation 5mg/2.5mL&#x27;,
+    &#x27;SALBUTAMOL SANDOZ inhalation 2.5mg/2.5mL&#x27;,
+    &#x27;SALBUTAMOL SANDOZ inhalation 5mg/2.5mL&#x27;,
+    &#x27;SALBUTAMOL metered-dose aerosol 100mcg/dose&#x27;,
+    &#x27;SALBUTAMOL injection 1mg/mL&#x27;];
+  constructor() {{ '{' }} }
 
-        ngOnInit() {{ '{' }}
-        }
+  ngOnInit() {{ '{' }}
+  }
 
-      }
-
-            </code>
-          </pre>
-        </hx-tab>
-      </hx-tabset>
+}
+              </code>
+            </pre>
+          </hx-tab>
+        </hx-tabset>
+      </div>
     </div>
-  </div>
 
-  <hr>
+    <hr>
 
-  <h4 id="api">API Reference</h4>
+    <h4 id="api">API Reference</h4>
 
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <h5 class="is-primary">TypeaheadDirective</h5>
-      <table class="hx-table is-striped">
-        <thead>
-        <tr>
-          <th>Inputs</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>container</td>
-          <td><kbd>string</kbd></td>
-          <td>A selector specifying the element the typeahead should be appended to.<br>
-            Currently only supports "body".</td>
-        </tr>
-        <tr>
-          <td>optionsListTemplate</td>
-          <td><kbd>TemplateRef&lt;any&gt;</kbd></td>
-          <td>used to specify a custom options list template. Template variables: matches, itemTemplate, query</td>
-        </tr>
-        <tr>
-          <td>typeahead</td>
-          <td><kbd>any</kbd></td>
-          <td>options source, can be Array of strings, objects or an Observable for external matching process</td>
-        </tr>
-        <tr>
-          <td>typeaheadAsync</td>
-          <td><kbd>boolean</kbd></td>
-          <td>should be used only in case of typeahead attribute is array. If true - loading of options will be async, otherwise - sync. true make sense if options array is large.</td>
-        </tr>
-        <tr>
-          <td>typeaheadGroupField</td>
-          <td><kbd>string</kbd></td>
-          <td>when options source is an array of objects, the name of field that contains the group value, matches are grouped by this field when set.</td>
-        </tr>
-        <tr>
-          <td>typeaheadItemTemplate</td>
-          <td><kbd>TemplateRef&lt;any&gt;</kbd></td>
-          <td>used to specify a custom item template. Template variables exposed are called item and index;</td>
-        </tr>
-        <tr>
-          <td>typeaheadLatinize</td>
-          <td><kbd>boolean</kbd></td>
-          <td>match latin symbols. If true the word súper would match super and vice versa.</td>
-        </tr>
-        <tr>
-          <td>typeaheadMinLength</td>
-          <td><kbd>number</kbd></td>
-          <td>minimal no of characters that needs to be entered before typeahead kicks-in. When set to 0, typeahead shows on focus with full list of options (limited as normal by typeaheadOptionsLimit)</td>
-        </tr>
-        <tr>
-          <td>typeaheadOptionField</td>
-          <td><kbd>string</kbd></td>
-          <td>when options source is an array of objects, the name of field that contains the options value, we use array item as option in case of this field is missing. Supports nested properties and methods.</td>
-        </tr>
-        <tr>
-          <td>typeaheadOptionsLimit</td>
-          <td><kbd>number</kbd></td>
-          <td>maximum length of options items list</td>
-        </tr>
-        <tr>
-          <td>typeaheadPhraseDelimiters</td>
-          <td><kbd>string</kbd></td>
-          <td>should be used only in case typeaheadSingleWords attribute is true. Sets the word delimiter to match exact phrase. Defaults to simple and double quotes.</td>
-        </tr>
-        <tr>
-          <td>typeaheadSingleWords</td>
-          <td><kbd>boolean</kbd></td>
-          <td>break words with spaces. If true the text "exact phrase" here match would match with match exact phrase here but not with phrase here exact match (kind of "google style"). </td>
-        </tr>
-        <tr>
-          <td>typeaheadWaitMs</td>
-          <td><kbd>number</kbd></td>
-          <td>minimal wait time after last character typed before typeahead kicks-in</td>
-        </tr>
-        <tr>
-          <td>typeaheadWordDelimiters</td>
-          <td><kbd>string</kbd></td>
-          <td>should be used only in case typeaheadSingleWords attribute is true. Sets the word delimiter to break words. Defaults to space. </td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <h5 class="is-primary">TypeaheadDirective</h5>
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Inputs</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>container</td>
+              <td><kbd>string</kbd></td>
+              <td>A selector specifying the element the typeahead should be appended to.<br> Currently only supports "body".</td>
+            </tr>
+            <tr>
+              <td>optionsListTemplate</td>
+              <td><kbd>TemplateRef&lt;any&gt;</kbd></td>
+              <td>used to specify a custom options list template. Template variables: matches, itemTemplate, query</td>
+            </tr>
+            <tr>
+              <td>typeahead</td>
+              <td><kbd>any</kbd></td>
+              <td>options source, can be Array of strings, objects or an Observable for external matching process</td>
+            </tr>
+            <tr>
+              <td>typeaheadAsync</td>
+              <td><kbd>boolean</kbd></td>
+              <td>should be used only in case of typeahead attribute is array. If true - loading of options will be async, otherwise - sync. true make sense if options array is large.</td>
+            </tr>
+            <tr>
+              <td>typeaheadGroupField</td>
+              <td><kbd>string</kbd></td>
+              <td>when options source is an array of objects, the name of field that contains the group value, matches are grouped by this field when set.</td>
+            </tr>
+            <tr>
+              <td>typeaheadItemTemplate</td>
+              <td><kbd>TemplateRef&lt;any&gt;</kbd></td>
+              <td>used to specify a custom item template. Template variables exposed are called item and index;</td>
+            </tr>
+            <tr>
+              <td>typeaheadLatinize</td>
+              <td><kbd>boolean</kbd></td>
+              <td>match latin symbols. If true the word súper would match super and vice versa.</td>
+            </tr>
+            <tr>
+              <td>typeaheadMinLength</td>
+              <td><kbd>number</kbd></td>
+              <td>minimal no of characters that needs to be entered before typeahead kicks-in. When set to 0, typeahead shows on focus with full list of options (limited as normal by typeaheadOptionsLimit)</td>
+            </tr>
+            <tr>
+              <td>typeaheadOptionField</td>
+              <td><kbd>string</kbd></td>
+              <td>when options source is an array of objects, the name of field that contains the options value, we use array item as option in case of this field is missing. Supports nested properties and methods.</td>
+            </tr>
+            <tr>
+              <td>typeaheadOptionsLimit</td>
+              <td><kbd>number</kbd></td>
+              <td>maximum length of options items list</td>
+            </tr>
+            <tr>
+              <td>typeaheadPhraseDelimiters</td>
+              <td><kbd>string</kbd></td>
+              <td>should be used only in case typeaheadSingleWords attribute is true. Sets the word delimiter to match exact phrase. Defaults to simple and double quotes.</td>
+            </tr>
+            <tr>
+              <td>typeaheadSingleWords</td>
+              <td><kbd>boolean</kbd></td>
+              <td>break words with spaces. If true the text "exact phrase" here match would match with match exact phrase here but not with phrase here exact match (kind of "google style"). </td>
+            </tr>
+            <tr>
+              <td>typeaheadWaitMs</td>
+              <td><kbd>number</kbd></td>
+              <td>minimal wait time after last character typed before typeahead kicks-in</td>
+            </tr>
+            <tr>
+              <td>typeaheadWordDelimiters</td>
+              <td><kbd>string</kbd></td>
+              <td>should be used only in case typeaheadSingleWords attribute is true. Sets the word delimiter to break words. Defaults to space. </td>
+            </tr>
+          </tbody>
+        </table>
 
-      <table class="hx-table is-striped">
-        <thead>
-        <tr>
-          <th>Outputs</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>typeaheadLoading</td>
-          <td>fired when 'busy' state of this component was changed, fired on async mode only, returns boolean</td>
-        </tr>
-        <tr>
-          <td>typeaheadNoResults</td>
-          <td>fired on every key event and returns true in case of matches are not detected</td>
-        </tr>
-        <tr>
-          <td>typeaheadOnBlur</td>
-          <td>fired when blur event occurres. returns the active item</td>
-        </tr>
-        <tr>
-          <td>typeaheadOnSelect</td>
-          <td>fired when option was selected, return object with data of this option</td>
-        </tr>
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Outputs</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>typeaheadLoading</td>
+              <td>fired when 'busy' state of this component was changed, fired on async mode only, returns boolean</td>
+            </tr>
+            <tr>
+              <td>typeaheadNoResults</td>
+              <td>fired on every key event and returns true in case of matches are not detected</td>
+            </tr>
+            <tr>
+              <td>typeaheadOnBlur</td>
+              <td>fired when blur event occurres. returns the active item</td>
+            </tr>
+            <tr>
+              <td>typeaheadOnSelect</td>
+              <td>fired when option was selected, return object with data of this option</td>
+            </tr>
 
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
+
   </div>
-
-
-
-
-
-
-
 </section>
-<aside class="hx-sidebar is-medium-width is-scrollable">
+
+<aside class="hx-sidebar is-right is-active is-medium-width is-scrollable">
   <ul class="hx-nav hx-nav-vertical">
-    <li class="hx-nav-heading"><h6>Contents</h6></li>
+    <li class="hx-nav-heading">
+      <h6>Contents</h6></li>
 
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>

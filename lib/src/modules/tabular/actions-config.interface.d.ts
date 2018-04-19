@@ -33,4 +33,8 @@ export declare abstract class IActionsConfig {
      * The function to call when route type is callback
      */
     callback?: any;
+    /**
+     *  If true, this will be the default action in a split button
+     */
+    isDefault?: boolean;
 }

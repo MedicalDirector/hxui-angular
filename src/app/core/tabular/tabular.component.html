@@ -1,665 +1,808 @@
 <section class="hx-section scrollable-y" #container>
+  <div class="hx-section is-comfortable">
 
-  <h1 class="hx-title">Tabular</h1>
-  <h2 class="hx-subtitle">The tabular component is a table with sort, filter and pagination features baked in.</h2>
-  <span class="hx-badge is-warning">EXPERIMENTAL</span>
-  <hr>
+    <h1 class="hx-title">Tabular</h1>
+    <h2 class="hx-subtitle">The tabular component is a table with sort, filter and pagination features baked in.</h2>
 
-  <h4 id="usage">Usage</h4>
-  <p>Add the TabularModule to AppModule or SharedModule.</p>
+    <hr>
+
+    <h4 id="usage">Usage</h4>
+    <p>Add the TabularModule to AppModule or SharedModule.</p>
+
+    <pre>
+      <code class="typescript">
+import {{ '{' }}TabularModule} from &#x22;@hxui-angular/packages/tabular/tabular.module&#x22;;
+
+@NgModule({{ '{' }}
+  imports: [TabularModule.forRoot(),...]
+})
+export class AppModule(){{ '{' }}
+      </code>
+    </pre>
 
 
-  <pre>
-    <code class="typescript">
-      import {{ '{' }}TabularModule} from &#x22;@hxui-angular/packages/tabular/tabular.module&#x22;;
+    <hr>
 
-      @NgModule({{ '{' }}
-        imports: [TabularModule.forRoot(),...]
-      })
-      export class AppModule(){{ '{' }}
-    </code>
-  </pre>
+    <h4 id="example">Example</h4>
+    <p>Inline actions, multi-select with global actions, pagination and sorting.</p>
+    <div class="hx-columns">
+      <div class="hx-column">
 
-
-  <hr>
-
-  <h4 id="example">Example</h4>
-  <p>Inline actions, multi-select with global actions, pagination and sorting.</p>
-  <div class="hx-columns">
-    <div class="hx-column">
-
-      <div class="hx-columns">
-        <div class="hx-column">
-          <span hxTooltip="Select 1 or more users" [disabled]="!isPrintDisabled()" placement="right">
+        <div class="hx-columns">
+          <div class="hx-column">
+            <span hxTooltip="Select 1 or more users" [disabled]="!isPrintDisabled()" placement="right">
               <button class="hx-button is-small" (click)="printSelected($event)" [disabled]="isPrintDisabled()" >Print</button>
           </span>
+          </div>
         </div>
+
+        <hxa-tabular
+          [rows]="rowData"
+          [columns]="columnData"
+          [config]="tabularConfig"
+          [callback]="onActionClickHandler"
+          (refresh)="refreshDataHandler($event)"
+          (rowClick)="rowClickHandler($event)">
+        </hxa-tabular>
+
       </div>
-
-      <hxa-tabular
-        [rows]="rowData"
-        [columns]="columnData"
-        [config]="tabularConfig"
-        [callback]="onActionClickHandler"
-        (refresh)="refreshDataHandler($event)">
-      </hxa-tabular>
-
     </div>
-  </div>
 
-  <br>
+    <br>
 
-  <h5 id="code">Code</h5>
+    <h5 id="code">Code</h5>
 
-  <div class="hx-columns">
-    <div class="hx-column">
+    <div class="hx-columns">
+      <div class="hx-column">
 
-      <hx-tabset>
-        <hx-tab heading="Template">
-      <pre>
-        <code class="html">
-      &#x3C;div class=&#x22;hx-columns&#x22;&#x3E;
-        &#x3C;div class=&#x22;hx-column&#x22;&#x3E;
-          &#x3C;span hxTooltip=&#x22;Select 1 or more users&#x22; [disabled]=&#x22;!isPrintDisabled()&#x22; placement=&#x22;right&#x22;&#x3E;
-              &#x3C;button class=&#x22;hx-button is-small&#x22; (click)=&#x22;printSelected()&#x22; [disabled]=&#x22;isPrintDisabled()&#x22; &#x3E;Print&#x3C;/button&#x3E;
-          &#x3C;/span&#x3E;
-        &#x3C;/div&#x3E;
-      &#x3C;/div&#x3E;
+        <hx-tabset>
+          <hx-tab heading="Template">
+            <pre>
+              <code class="html">
+&#x3C;div class=&#x22;hx-columns&#x22;&#x3E;
+  &#x3C;div class=&#x22;hx-column&#x22;&#x3E;
+    &#x3C;span hxTooltip=&#x22;Select 1 or more users&#x22; [disabled]=&#x22;!isPrintDisabled()&#x22; placement=&#x22;right&#x22;&#x3E;
+        &#x3C;button class=&#x22;hx-button is-small&#x22; (click)=&#x22;printSelected()&#x22; [disabled]=&#x22;isPrintDisabled()&#x22; &#x3E;Print&#x3C;/button&#x3E;
+    &#x3C;/span&#x3E;
+  &#x3C;/div&#x3E;
+&#x3C;/div&#x3E;
 
-      &#x3C;hx-tabular
-        [rows]=&#x22;rowData&#x22;
-        [columns]=&#x22;columnData&#x22;
-        [config]=&#x22;tabularConfig&#x22;
-        [callback]=&#x22;onActionClickHandler&#x22;
-        (refresh)=&#x22;refreshDataHandler($event)&#x22;&#x3E;
-      &#x3C;/hx-tabular&#x3E;
-        </code>
-      </pre>
-        </hx-tab>
-        <hx-tab heading="Component">
-          <pre>
-            <code class="typescript">
-      import {{ '{' }}ChangeDetectionStrategy, Component, OnInit} from &#x27;@angular/core&#x27;;
-      import {{ '{' }}TabularColumn} from &#x27;../../../modules/tabular/tabular-column.model&#x27;;
-      import {{ '{' }}TabularColumnTypes} from &#x27;../../../modules/tabular/tabular-column.interface&#x27;;
-      import {{ '{' }}ITabularConfig} from &#x27;../../../modules/tabular/tabular-config.interface&#x27;;
-      import {{ '{' }}TabularSize} from &#x27;../../../modules/tabular/tabular-size.enum&#x27;;
-      import {{ '{' }}ActionConfigRouteType} from &#x27;../../../modules/tabular/actions-config.interface&#x27;;
-      import {{ '{' }}TabularService} from &#x27;./tabular.service&#x27;;
-      import {{ '{' }}UserModel} from &#x27;./user.model&#x27;;
+&#x3C;hx-tabular
+  [rows]=&#x22;rowData&#x22;
+  [columns]=&#x22;columnData&#x22;
+  [config]=&#x22;tabularConfig&#x22;
+  [callback]=&#x22;onActionClickHandler&#x22;
+  (refresh)=&#x22;refreshDataHandler($event)&#x22;
+  (rowClick)=&#x22;rowClickHandler($event)&#x22;&#x3E;
+&#x3C;/hx-tabular&#x3E;
+              </code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Component">
+            <pre>
+              <code class="typescript">
+import {{ '{' }}ChangeDetectionStrategy, Component, OnInit} from &#x27;@angular/core&#x27;;
+import {{ '{' }}TabularColumn} from &#x27;../../../modules/tabular/tabular-column.model&#x27;;
+import {{ '{' }}TabularColumnTypes} from &#x27;../../../modules/tabular/tabular-column.interface&#x27;;
+import {{ '{' }}ITabularConfig} from &#x27;../../../modules/tabular/tabular-config.interface&#x27;;
+import {{ '{' }}TabularSize} from &#x27;../../../modules/tabular/tabular-size.enum&#x27;;
+import {{ '{' }}ActionConfigRouteType} from &#x27;../../../modules/tabular/actions-config.interface&#x27;;
+import {{ '{' }}TabularService} from &#x27;./tabular.service&#x27;;
+import {{ '{' }}UserModel} from &#x27;./user.model&#x27;;
 
-      @Component({{ '{' }}
-        selector: &#x27;app-tabular&#x27;,
-        templateUrl: &#x27;./tabular.component.html&#x27;
-      })
-      export class TabularComponent implements OnInit {{ '{' }}
+@Component({{ '{' }}
+  selector: &#x27;app-tabular&#x27;,
+  templateUrl: &#x27;./tabular.component.html&#x27;
+})
+export class TabularComponent implements OnInit {{ '{' }}
 
-        searchTerm: string;
-        rowData: any[] = [];
-        currentPage:number = 0;
-        smallnumPages:number = 0;
-        columnData: TabularColumn[] = [
-          new TabularColumn(&#x27;checkboxes&#x27;, &#x27;Checkboxes&#x27;, TabularColumnTypes.Checkbox, false),
-          new TabularColumn(&#x27;id&#x27;, &#x27;Id&#x27;, TabularColumnTypes.String, true),
-          new TabularColumn(&#x27;usercode&#x27;, &#x27;User Code&#x27;, TabularColumnTypes.String, true),
-          new TabularColumn(&#x27;firstname&#x27;, &#x27;First Name&#x27;, TabularColumnTypes.String, true),
-          new TabularColumn(&#x27;surname&#x27;, &#x27;Surname&#x27;, TabularColumnTypes.String, true),
-          new TabularColumn(&#x27;rolename&#x27;, &#x27;Role&#x27;, TabularColumnTypes.String, true),
-          new TabularColumn(&#x27;email&#x27;, &#x27;Email&#x27;, TabularColumnTypes.String, true),
-          new TabularColumn(&#x27;active&#x27;, &#x27;Active&#x27;, TabularColumnTypes.Status, false, &#x27;is-text-center&#x27;),
-          new TabularColumn(&#x27;actions&#x27;, &#x27;Actions&#x27;, TabularColumnTypes.Actions, false)
-        ];
+  searchTerm: string;
+  rowData: any[] = [];
+  currentPage:number = 0;
+  smallnumPages:number = 0;
+  columnData: TabularColumn[] = [
+    new TabularColumn(&#x27;checkboxes&#x27;, &#x27;Checkboxes&#x27;, TabularColumnTypes.Checkbox, false),
+    new TabularColumn(&#x27;id&#x27;, &#x27;Id&#x27;, TabularColumnTypes.String, true),
+    new TabularColumn(&#x27;usercode&#x27;, &#x27;User Code&#x27;, TabularColumnTypes.String, true),
+    new TabularColumn(&#x27;firstname&#x27;, &#x27;First Name&#x27;, TabularColumnTypes.String, true),
+    new TabularColumn(&#x27;surname&#x27;, &#x27;Surname&#x27;, TabularColumnTypes.String, true),
+    new TabularColumn(&#x27;rolename&#x27;, &#x27;Role&#x27;, TabularColumnTypes.String, true),
+    new TabularColumn(&#x27;email&#x27;, &#x27;Email&#x27;, TabularColumnTypes.String, true),
+    new TabularColumn(&#x27;active&#x27;, &#x27;Active&#x27;, TabularColumnTypes.Status, false, &#x27;is-text-center&#x27;),
+    new TabularColumn(&#x27;actions&#x27;, &#x27;Actions&#x27;, TabularColumnTypes.Actions, false)
+  ];
 
-        tabularConfig: ITabularConfig = {{ '{' }}
-          size: TabularSize.Default,
-          pagination: {{ '{' }}
-            itemsPerPage: 5,
-            currentPage: 1
-          },
-        };
+  tabularConfig: ITabularConfig = {{ '{' }}
+    size: TabularSize.Default,
+    clickableRows: true,
+    pagination: {{ '{' }}
+      itemsPerPage: 5,
+      currentPage: 1
+    },
+  };
 
-
-
-        /**
-         * Refresh data handler for data grid.
-         */
-        refreshDataHandler = ($event) =&#x3E; {{ '{' }}
-          this.getTabularData();
-        }
-
-
-        printSelected = ($event) =&#x3E; {{ '{' }}
-          let count = 0;
-          for (let i = 0; i &#x3C; this.rowData.length; i++) {{ '{' }}
-            if (this.rowData[i].selected) {{ '{' }}
-              count++;
-              console.log(this.rowData[i]);
-            }
-          }
-          alert(&#x27;Printing &#x27; + count + &#x27; users... Check console to see who was selected.&#x27;);
-        }
-
-
-        isPrintDisabled = () =&#x3E; {{ '{' }}
-          for (let i = 0; i &#x3C; this.rowData.length; i++) {{ '{' }}
-            if (this.rowData[i].selected) {{ '{' }}
-              return false;
-            }
-          }
-          return true;
-        }
-
-
-        /**
-         * Static data for example
-         */
-        private getTabularData() {{ '{' }}
-          this.rowData = [];
-          this.service.getUsers()
-            .then((users) =&#x3E; {{ '{' }}
-              for (let i = 0; i &#x3C; users.length; i++) {{ '{' }}
-                const user = new UserModel(users[i]);
-                this.rowData.push(user);
-              }
-            });
-        }
-
-
-        constructor(private service: TabularService) {{ '{' }}
-          this.getTabularData();
-        }
-
-        ngOnInit() {{ '{' }}
-        }
-            </code>
-          </pre>
-        </hx-tab>
-
-        <hx-tab heading="Service">
-      <pre>
-        <code class="typescript">
-  import {{ '{' }} Injectable } from &#x27;@angular/core&#x27;;
-  import {{ '{' }} Http} from &#x27;@angular/http&#x27;;
-  import {{ '{' }} UserModel} from &#x27;./user.model&#x27;;
-  import &#x27;rxjs/add/operator/toPromise&#x27;;
-
-  @Injectable()
-  export class TabularService {{ '{' }}
-
-    private usersUrl = &#x27;api/users&#x27;;
-
-    constructor(private http: Http) {{ '{' }}
-
-    getUsers(): Promise&#x3C;UserModel[]&#x3E; {{ '{' }}
-      return this.http.get(this.usersUrl)
-        .toPromise()
-        .then(response =&#x3E; response.json().data as UserModel[])
-        .catch(this.handleError);
-    }
-
-    getUser(id: number): Promise&#x3C;UserModel&#x3E; {{ '{' }}
-      const url = &#x60;${{ '{' }}this.usersUrl}/${{ '{' }}id}&#x60;;
-      return this.http.get(url)
-        .toPromise()
-        .then(response =&#x3E; response.json().data as UserModel)
-        .catch(this.handleError);
-    }
-
-    private handleError(error: any): Promise&#x3C;any&#x3E; {{ '{' }}
-      console.error(&#x27;An error occurred&#x27;, error); // for demo purposes only
-      return Promise.reject(error.message || error);
-    }
+  /**
+   * Refresh data handler for data grid.
+   */
+  refreshDataHandler($event) {{ '{' }}
+    this.getTabularData();
   }
 
-        </code>
-      </pre>
-        </hx-tab>
+   rowClickHandler($event) {{ '{' }}
+    console.log($event);
+  }
 
-        <hx-tab heading="Mock Data">
-      <pre>
-        <code class="typescript">
-  import {{ '{' }} InMemoryDbService } from 'angular2-in-memory-web-api';
+  printSelected = ($event) =&#x3E; {{ '{' }}
+    let count = 0;
+    for (let i = 0; i &#x3C; this.rowData.length; i++) {{ '{' }}
+      if (this.rowData[i].checked) {{ '{' }}
+        count++;
+        console.log(this.rowData[i]);
+      }
+    }
+    alert(&#x27;Printing &#x27; + count + &#x27; users... Check console to see who was selected.&#x27;);
+  }
 
-  export class InMemoryDataService implements InMemoryDbService {{ '{' }}
-    createDb() {{ '{' }}
-      const users = [
+  isPrintDisabled = () =&#x3E; {{ '{' }}
+    for (let i = 0; i &#x3C; this.rowData.length; i++) {{ '{' }}
+      if (this.rowData[i].checked) {{ '{' }}
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+  * Static data for example
+  **/
+  private getTabularData() {{ '{' }}
+    this.rowData = [];
+    this.service.getUsers()
+      .then((users) =&#x3E; {{ '{' }}
+        for (let i = 0; i &#x3C; users.length; i++) {{ '{' }}
+          const user = new UserModel(users[i]);
+          this.rowData.push(user);
+        }
+      });
+  }
+
+  constructor(private service: TabularService) {{ '{' }}
+    this.getTabularData();
+  }
+
+  ngOnInit() {{ '{' }}
+  }
+              </code>
+            </pre>
+          </hx-tab>
+
+          <hx-tab heading="Service">
+            <pre>
+              <code class="typescript">
+import {{ '{' }} Injectable } from &#x27;@angular/core&#x27;;
+import {{ '{' }} Http} from &#x27;@angular/http&#x27;;
+import {{ '{' }} UserModel} from &#x27;./user.model&#x27;;
+import &#x27;rxjs/add/operator/toPromise&#x27;;
+
+@Injectable()
+export class TabularService {{ '{' }}
+
+  private usersUrl = &#x27;api/users&#x27;;
+
+  constructor(private http: Http) {{ '{' }}
+
+  getUsers(): Promise&#x3C;UserModel[]&#x3E; {{ '{' }}
+    return this.http.get(this.usersUrl)
+      .toPromise()
+      .then(response =&#x3E; response.json().data as UserModel[])
+      .catch(this.handleError);
+  }
+
+  getUser(id: number): Promise&#x3C;UserModel&#x3E; {{ '{' }}
+    const url = &#x60;${{ '{' }}this.usersUrl}/${{ '{' }}id}&#x60;;
+    return this.http.get(url)
+      .toPromise()
+      .then(response =&#x3E; response.json().data as UserModel)
+      .catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise&#x3C;any&#x3E; {{ '{' }}
+    console.error(&#x27;An error occurred&#x27;, error); // for demo purposes only
+    return Promise.reject(error.message || error);
+  }
+}
+              </code>
+            </pre>
+          </hx-tab>
+
+          <hx-tab heading="Mock Data">
+            <pre>
+              <code class="typescript">
+import {{ '{' }} InMemoryDbService } from &#x27;angular-in-memory-web-api&#x27;;
+export class InMemoryDataService implements InMemoryDbService {{ '{' }}
+  createDb() {{ '{' }}
+    const users = [
+      {{ '{' }}
+        id: 1,
+        usercode: &#x27;BR001&#x27;,
+        firstname: &#x27;Brenda&#x27;,
+        surname: &#x27;Reed&#x27;,
+        rolename: &#x27;GP&#x27;,
+        email: &#x27;brenda.reed@medicaldirector.com&#x27;,
+        active: false,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-primary&#x27;}
+      },
+      {{ '{' }}
+        id: 2,
+        usercode: &#x27;MR001&#x27;,
+        firstname: &#x27;Mercedes&#x27;,
+        surname: &#x27;Mendez&#x27;,
+        rolename: &#x27;GP&#x27;,
+        email: &#x27;mercedes.mendez@medicaldirector.com&#x27;,
+        active: false,
+        created: new Date(),
+        modified: new Date()
+      },
+      {{ '{' }}
+        id: 3,
+        usercode: &#x27;II006&#x27;,
+        firstname: &#x27;John&#x27;,
+        surname: &#x27;Smith&#x27;,
+        rolename: &#x27;Specialist&#x27;,
+        email: &#x27;john.smith@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-outlined&#x27;},
+        selected: true
+      },
+      {{ '{' }}
+        id: 4,
+        usercode: &#x27;JS001&#x27;,
+        firstname: &#x27;Julia&#x27;,
+        surname: &#x27;Sampson&#x27;,
+        rolename: &#x27;Specialist&#x27;,
+        email: &#x27;julia.sampson@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-danger&#x27;},
+        checked: true
+      },
+      {{ '{' }}
+        id: 5,
+        usercode: &#x27;GP001&#x27;,
+        firstname: &#x27;John&#x27;,
+        surname: &#x27;Pipps&#x27;,
+        rolename: &#x27;Specialist&#x27;,
+        email: &#x27;john.gipps@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-warning&#x27;}
+      },
+      {{ '{' }}
+        id: 6,
+        usercode: &#x27;NR001&#x27;,
+        firstname: &#x27;Natalie&#x27;,
+        surname: &#x27;Roberts&#x27;,
+        rolename: &#x27;Receptionist&#x27;,
+        email: &#x27;natalie.roberts@medicaldirector.com&#x27;,
+        active: false,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;&#x27;}
+      },
+      {{ '{' }}
+        id: 7,
+        usercode: &#x27;HS001&#x27;,
+        firstname: &#x27;Harry&#x27;,
+        surname: &#x27;Sechi&#x27;,
+        rolename: &#x27;GP&#x27;,
+        email: &#x27;harry.sechi@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, css: &#x27;is-error&#x27;}
+      },
+      {{ '{' }}
+        id: 8,
+        usercode: &#x27;XL001&#x27;,
+        firstname: &#x27;Xavier&#x27;,
+        surname: &#x27;Lorenzo&#x27;,
+        rolename: &#x27;Practice Manager&#x27;,
+        email: &#x27;xavier.lorenzo@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, css: &#x27;is-outlined&#x27;}
+      },
+      {{ '{' }}
+        id: 9,
+        usercode: &#x27;CY001&#x27;,
+        firstname: &#x27;Chris&#x27;,
+        surname: &#x27;Yap&#x27;,
+        rolename: &#x27;GP&#x27;,
+        email: &#x27;chris.yap@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, css: &#x27;&#x27;}
+      },
+      {{ '{' }}
+        id: 10,
+        usercode: &#x27;MA001&#x27;,
+        firstname: &#x27;Mohammad&#x27;,
+        surname: &#x27;Ahmed&#x27;,
+        rolename: &#x27;Specialist&#x27;,
+        email: &#x27;mohammad.ahmed@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;Short&#x27;, cssClass: &#x27;&#x27;}
+      },
+      {{ '{' }}
+        id: 11,
+        usercode: &#x27;EG001&#x27;,
+        firstname: &#x27;Elizabth&#x27;,
+        surname: &#x27;Gino&#x27;,
+        rolename: &#x27;Nurse&#x27;,
+        email: &#x27;eli.gino@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, css: &#x27;is-outlined&#x27;}
+      },
+      {{ '{' }}
+        id: 12,
+        usercode: &#x27;BP001&#x27;,
+        firstname: &#x27;Brian&#x27;,
+        surname: &#x27;Pulliese&#x27;,
+        rolename: &#x27;Specialist&#x27;,
+        email: &#x27;brian.pulliese@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-primary&#x27;}
+      },
+      {{ '{' }}
+        id: 13,
+        usercode: &#x27;AW001&#x27;,
+        firstname: &#x27;Annabell&#x27;,
+        surname: &#x27;Wilson&#x27;,
+        rolename: &#x27;Receptionist&#x27;,
+        email: &#x27;annabell.wilson@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-primary&#x27;}
+      },
+      {{ '{' }}
+        id: 14,
+        usercode: &#x27;SH001&#x27;,
+        firstname: &#x27;Susan&#x27;,
+        surname: &#x27;Homes&#x27;,
+        rolename: &#x27;Receptionist&#x27;,
+        email: &#x27;susan.homes@medicaldirector.com&#x27;,
+        active: false,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27; is-outlined&#x27;}
+      },
+      {{ '{' }}
+        id: 15,
+        usercode: &#x27;KL001&#x27;,
+        firstname: &#x27;Kevin&#x27;,
+        surname: &#x27;Liang&#x27;,
+        rolename: &#x27;GP&#x27;,
+        email: &#x27;kevin.liang@medicaldirector.com&#x27;,
+        active: false,
+        created: new Date(),
+        modified: new Date()
+      },
+      {{ '{' }}
+        id: 16,
+        usercode: &#x27;JK001&#x27;,
+        firstname: &#x27;Jack&#x27;,
+        surname: &#x27;Kelvin&#x27;,
+        rolename: &#x27;Nurse&#x27;,
+        email: &#x27;jack.kelvin@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date()
+      },
+      {{ '{' }}
+        id: 17,
+        usercode: &#x27;DP001&#x27;,
+        firstname: &#x27;Dave&#x27;,
+        surname: &#x27;Poon&#x27;,
+        rolename: &#x27;Practice Manager&#x27;,
+        email: &#x27;dave.poon@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date()
+      },
+      {{ '{' }}
+        id: 18,
+        usercode: &#x27;FB001&#x27;,
+        firstname: &#x27;Fred&#x27;,
+        surname: &#x27;Borris&#x27;,
+        rolename: &#x27;Admin&#x27;,
+        email: &#x27;fred.borris@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {{ '{' }}label: &#x27;S&#x27;, cssClass: &#x27;is-outlined&#x27;}
+      },
+      {{ '{' }}
+        id: 19,
+        usercode: &#x27;TS001&#x27;,
+        firstname: &#x27;Tupac&#x27;,
+        surname: &#x27;Shakur&#x27;,
+        rolename: &#x27;Administrator&#x27;,
+        email: &#x27;tupac.shakur@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date()
+      },
+      {{ '{' }}
+        id: 20,
+        usercode: &#x27;BS001&#x27;,
+        firstname: &#x27;Biggie&#x27;,
+        surname: &#x27;Smalls&#x27;,
+        rolename: &#x27;GP&#x27;,
+        email: &#x27;biggie.smalls@medicaldirector.com&#x27;,
+        active: true,
+        created: new Date(),
+        modified: new Date()
+      }
+    ];
+    return {{ '{' }}users};
+  }
+}
+
+              </code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="User Model">
+            <pre>
+              <code class="typescript">
+  import {{ '{' }}ActionConfigRouteType, IActionsConfig} from &#x27;../../../modules/tabular/actions-config.interface&#x27;;
+  import {{ '{' }}ITabularRow} from &#x27;../../../modules/tabular/tabular-row.interface&#x27;;
+
+  export class UserModel implements ITabularRow {{ '{' }}
+    public id: number;
+    public usercode: string;
+    public firstname: string;
+    public surname: string;
+    public rolename: string;
+    public email: string;
+    public flag: {{ '{' }}label: string, cssClass: string};
+    public active: boolean;
+    public created: Date;
+    public modified: Date;
+    public selected: boolean;
+    public checked: boolean;
+
+
+    constructor(data?: any) {{ '{' }}
+      if (data) {{ '{' }}
+        Object.assign(this, data);
+      }
+    }
+
+    get icon(): string {{ '{' }}
+      return (this.active) ? &#x27;icon-check-empty is-primary&#x27; : &#x27;icon-close-empty is-danger&#x27;;
+    }
+
+    get actions(): IActionsConfig[] {{ '{' }}
+      return  [
         {{ '{' }}
-          id:1,
-          usercode: 'BR001',
-          firstname: 'Brenda',
-          surname: 'Reed',
-          rolename: 'GP',
-          email: 'brenda.reed@medicaldirector.com',
-          active: false
+          id: &#x27;row_person_view&#x27;,
+          label: &#x27;View&#x27;,
+          route: [&#x27;/tabular&#x27;],
+          routeType: ActionConfigRouteType.Default,
+          disabledConfig: {{ '{' }}disabled: (Math.floor(Math.random() * 2) === 1), tooltip: &#x27;Not enough permission&#x27;}
         },
         {{ '{' }}
-          id: 2,
-          usercode: 'MR001',
-          firstname: 'Mercedes',
-          surname: 'Mendez',
-          rolename: 'GP',
-          email: 'mercedes.mendez@medicaldirector.com',
-          active: false
+          id: &#x27;row_person_edit&#x27;,
+          label: &#x27;Edit&#x27;,
+          routeType: ActionConfigRouteType.Callback,
+          callback: [this.onActionClickHandler, &#x27;edit&#x27;, 1]
         },
         {{ '{' }}
-          id:3,
-          usercode: 'II006',
-          firstname: 'John',
-          surname: 'Smith',
-          rolename: 'Specialist',
-          email: 'john.smith@medicaldirector.com',
-          active: true
+          id: &#x27;row_person_delete&#x27;,
+          label: &#x27;Archive&#x27;,
+          routeType: ActionConfigRouteType.Callback,
+          callback: [this.onActionClickHandler, &#x27;delete&#x27;, 1]
         },
         {{ '{' }}
-          id:4,
-          usercode: 'JS001',
-          firstname: 'Julia',
-          surname: 'Sampson',
-          rolename: 'Specialist',
-          email: 'julia.sampson@medicaldirector.com',
-          active: true
+          id: &#x27;row_person_delete_forever&#x27;,
+          label: &#x27;Delete&#x27;,
+          routeType: ActionConfigRouteType.Callback,
+          callback: [this.onActionClickHandler, &#x27;perm-delete&#x27;, 1]
         },
         {{ '{' }}
-          id:5,
-          usercode: 'GP001',
-          firstname: 'John',
-          surname: 'Pipps',
-          rolename: 'Specialist',
-          email: 'john.gipps@medicaldirector.com',
-          active: true
-        },
-        {{ '{' }}
-          id:6,
-          usercode: 'NR001',
-          firstname: 'Natalie',
-          surname: 'Roberts',
-          rolename: 'Receptionist',
-          email: 'natalie.roberts@medicaldirector.com',
-          active: false
-        },
-        {{ '{' }}
-          id:7,
-          usercode: 'HS001',
-          firstname: 'Harry',
-          surname: 'Sechi',
-          rolename: 'GP',
-          email: 'harry.sechi@medicaldirector.com',
-          active: true
-        },
-        {{ '{' }}
-          id:8,
-          usercode: 'XL001',
-          firstname: 'Xavier',
-          surname: 'Lorenzo',
-          rolename: 'Practice Manager',
-          email: 'xavier.lorenzo@medicaldirector.com',
-          active: true
-        },
-        {{ '{' }}
-          id:9,
-          usercode: 'CY001',
-          firstname: 'Chris',
-          surname: 'Yap',
-          rolename: 'GP',
-          email: 'chris.yap@medicaldirector.com',
-          active: true
-        },
-        {{ '{' }}
-          id: 10,
-          usercode: 'MA001',
-          firstname: 'Mohammad',
-          surname: 'Ahmed',
-          rolename: 'Specialist',
-          email: 'mohammad.ahmed@medicaldirector.com',
-          active: true
-        },
-        {{ '{' }}
-          id: 11,
-          usercode: 'EG001',
-          firstname: 'Elizabth',
-          surname: 'Gino',
-          rolename: 'Nurse',
-          email: 'eli.gino@medicaldirector.com',
-          active: true
-        },
-        {{ '{' }}
-          id: 12,
-          usercode: 'BP001',
-          firstname: 'Brian',
-          surname: 'Pulliese',
-          rolename: 'Specialist',
-          email: 'brian.pulliese@medicaldirector.com',
-          active: true
-        },
-        {{ '{' }}
-          id: 13,
-          usercode: 'AW001',
-          firstname: 'Annabell',
-          surname: 'Wilson',
-          rolename: 'Receptionist',
-          email: 'annabell.wilson@medicaldirector.com',
-          active: true
-        },
-        {{ '{' }}
-          id:14,
-          usercode: 'SH001',
-          firstname: 'Susan',
-          surname: 'Homes',
-          rolename:'Receptionist',
-          email: 'susan.homes@medicaldirector.com',
-          active: false
-        },
-        {{ '{' }}
-          id:15,
-          usercode: 'KL001',
-          firstname: 'Kevin',
-          surname: 'Liang',
-          rolename:'GP',
-          email: 'kevin.liang@medicaldirector.com',
-          active: false
-        },
-        {{ '{' }}
-          id:16,
-          usercode: 'JK001',
-          firstname: 'Jack',
-          surname: 'Kelvin',
-          rolename:'Nurse',
-          email: 'jack.kelvin@medicaldirector.com',
-          active: true
-        },
-        {{ '{' }}
-          id:17,
-          usercode: 'DP001',
-          firstname: 'Dave',
-          surname: 'Poon',
-          rolename: 'Practice Manager',
-          email: 'dave.poon@medicaldirector.com',
-          active: true
-        },
-        {{ '{' }}
-          id:18,
-          usercode: 'FB001',
-          firstname: 'Fred',
-          surname: 'Borris',
-          rolename: 'Admin',
-          email: 'fred.borris@medicaldirector.com',
-          active: true
-        },
-        {{ '{' }}
-          id:19,
-          usercode: 'TS001',
-          firstname: 'Tupac',
-          surname: 'Shakur',
-          rolename:'Administrator',
-          email: 'tupac.shakur@medicaldirector.com',
-          active: true
-        },
-        {{ '{' }}
-          id:20,
-          usercode: 'BS001',
-          firstname: 'Biggie',
-          surname: 'Smalls',
-          rolename:'GP',
-          email: 'biggie.smalls@medicaldirector.com',
-          active: true
+          id: &#x27;row_default&#x27;,
+          label: &#x27;&#x3C;span class=&#x22;hx-icon icon-medications&#x22;&#x3E;&#x3C;/span&#x3E;&#x27;,
+          isDefault: true,
+          routeType: ActionConfigRouteType.Callback,
+          callback: [this.onActionClickHandler, &#x27;default&#x27;, 1]
         }
       ];
-      return {{ '{' }}users};
+    }
+
+    /**
+     * Function used in the callback actions
+     * @param type
+     * @param data
+     */
+    onActionClickHandler = (type, data) =&#x3E; {{ '{' }}
+      alert(&#x27;You clicked the &#x27; + type + &#x27; button. Arguments:&#x27; + type + &#x27; and &#x27; + data);
     }
   }
 
-        </code>
-      </pre>
-        </hx-tab>
-      </hx-tabset>
+              </code>
+            </pre>
+          </hx-tab>
+        </hx-tabset>
+      </div>
     </div>
-  </div>
 
-  <hr>
+    <hr>
 
-  <h4 id="api">API Reference</h4>
+    <h4 id="api">API Reference</h4>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <h5 class="is-primary">TabularComponent</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <h5 class="is-primary">TabularComponent</h5>
 
-      <table class="hx-table is-striped">
-        <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>columns</td>
-          <td><kbd>TabularColumn[]</kbd></td>
-          <td>Collection of column configurations</td>
-        </tr>
-        <tr>
-          <td>rows</td>
-          <td><kbd>any[]</kbd></td>
-          <td>Collection of row data</td>
-        </tr>
-        <tr>
-          <td>config</td>
-          <td><kbd>ITabularConfig</kbd></td>
-          <td>Configuration options for a tabular instance</td>
-        </tr>
-        <tr>
-          <td>callback</td>
-          <td><kbd>Function</kbd></td>
-          <td>The function to call when an action route type is callback.</td>
-        </tr>
-        </tbody>
-      </table>
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Input</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>columns</td>
+              <td><kbd>TabularColumn[]</kbd></td>
+              <td>Collection of column configurations</td>
+            </tr>
+            <tr>
+              <td>rows</td>
+              <td><kbd>any[]</kbd></td>
+              <td>Collection of row data</td>
+            </tr>
+            <tr>
+              <td>config</td>
+              <td><kbd>ITabularConfig</kbd></td>
+              <td>Configuration options for a tabular instance</td>
+            </tr>
+            <tr>
+              <td>callback</td>
+              <td><kbd>Function</kbd></td>
+              <td>The function to call when an action route type is callback.</td>
+            </tr>
+          </tbody>
+        </table>
 
         <br>
 
-      <table class="hx-table is-striped">
-        <thead>
-        <tr>
-          <th>Output</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>refresh</td>
-          <td><kbd>EventEmitter</kbd></td>
-          <td>Event fired when refresh is called. Host should refresh data of input.</td>
-        </tr>
-        </tbody>
-      </table>
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Output</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>refresh</td>
+              <td><kbd>EventEmitter</kbd></td>
+              <td>Event fired when refresh is called. Host should refresh data of input.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <h5 class="is-primary">TabularConfig</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <h5 class="is-primary">TabularConfig</h5>
 
-      <table class="hx-table is-striped">
-        <thead>
-        <tr>
-          <th>Property</th>
-          <th>Type</th>
-          <th>Default</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>config</td>
-          <td><kbd>ITabularConfig</kbd></td>
-          <td><pre><code>
-  {{ '{' }}
-    size: TabularSize.Default,
-    pagination: {{ '{' }}
-        itemsPerPage: 5,
-        currentPage: 1
-    },
-  };
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>config</td>
+              <td><kbd>ITabularConfig</kbd></td>
+              <td><pre><code>
+{{ '{' }}
+  size: TabularSize.Default,
+  clickableRows: true,
+  pagination: {{ '{' }}
+      itemsPerPage: 5,
+      currentPage: 1
+  },
+};
           </code></pre></td>
-          <td>Configuration options for a tabular instance, ex: Pagination, size etc..</td>
-        </tr>
-        <tr>
-          <td>defaultOrderBy</td>
-          <td><kbd>string[]</kbd></td>
-          <td>['id']</td>
-          <td>The row data key used for default order. Example id.</td>
-        </tr>
-        <tr>
-          <td>defaultOrderByDirection</td>
-          <td><kbd>OrderByDirection</kbd></td>
-          <td>OrderByDirection.Ascending</td>
-          <td>The order by direction</td>
-        </tr>
-        </tbody>
-      </table>
+              <td>Configuration options for a tabular instance, ex: Pagination, size etc..</td>
+            </tr>
+            <tr>
+              <td>defaultOrderBy</td>
+              <td><kbd>string[]</kbd></td>
+              <td>['id']</td>
+              <td>The row data key used for default order. Example id.</td>
+            </tr>
+            <tr>
+              <td>defaultOrderByDirection</td>
+              <td><kbd>OrderByDirection</kbd></td>
+              <td>OrderByDirection.Ascending</td>
+              <td>The order by direction</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <h5 class="is-primary">TabularColumn</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <h5 class="is-primary">TabularColumn</h5>
 
-      <table class="hx-table is-striped">
-        <thead>
-        <tr>
-          <th>Property</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>id</td>
-          <td><kbd>string</kbd></td>
-          <td>The property name in an array of objects passed in @input row.  </td>
-        </tr>
-        <tr>
-          <td>label</td>
-          <td><kbd>string</kbd></td>
-          <td>The column label, which will appear in the column header.</td>
-        </tr>
-        <tr>
-          <td>dataType</td>
-          <td><kbd>TabularColumnTypes</kbd></td>
-          <td><p>The supported column  data types:</p>
-            <code>
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td><kbd>string</kbd></td>
+              <td>The property name in an array of objects passed in @input row. </td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td><kbd>string</kbd></td>
+              <td>The column label, which will appear in the column header.</td>
+            </tr>
+            <tr>
+              <td>dataType</td>
+              <td><kbd>TabularColumnTypes</kbd></td>
+              <td>
+                <p>The supported column data types:</p>
+                <code>
+                  <br/>
               TabularColumnTypes.String<br/>
               TabularColumnTypes.Icon<br/>
               TabularColumnTypes.Date<br/>
               TabularColumnTypes.Actions<br/>
               TabularColumnTypes.Status<br/>
-              TabularColumnTypes.DateTime</code></td>
-        </tr>
-        <tr>
-          <td>cssClass</td>
-          <td><kbd>string</kbd></td>
-          <td><span class="hx-badge is-info">OPTIONAL</span> CSS class </td>
-        </tr>
-        </tbody>
-      </table>
+              TabularColumnTypes.DateTime<br/>
+              TabularColumnTypes.Badge<br/>
+                  <br/>
+                </code>
+                <p>Note: Value for the <kbd>badge column type</kbd> must be in the following format</p>
+                <code><br/>{{ '{' }}label:string, cssClass:string}<br/><br/></code>
+              </td>
+            </tr>
+            <tr>
+              <td>cssClass</td>
+              <td><kbd>string</kbd></td>
+              <td><span class="hx-badge is-info"><span class="hx-badge-content">OPTIONAL</span></span> CSS class </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <h5 class="is-primary">IActionsConfig</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <h5 class="is-primary">IActionsConfig</h5>
 
-      <table class="hx-table is-striped">
-        <thead>
-        <tr>
-          <th>Property</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>id</td>
-          <td><kbd>number</kbd></td>
-          <td>Unique identifier</td>
-        </tr>
-        <tr>
-          <td>label</td>
-          <td><kbd>string</kbd></td>
-          <td>Label used for display purposes. Can be html for icons.</td>
-        </tr>
-        <tr>
-          <td>css</td>
-          <td><kbd>string</kbd></td>
-          <td><span class="hx-badge is-info">OPTIONAL</span> Css class name to append to button.</td>
-        </tr>
-        <tr>
-          <td>disabledConfig</td>
-          <td><kbd>IDisabledInput</kbd></td>
-          <td><span class="hx-badge is-info">OPTIONAL</span>  Disable action option.</td>
-        </tr>
-        <tr>
-          <td>routeType</td>
-          <td><kbd>ActionConfigRouteType</kbd></td>
-          <td>Route type, could be route by link or route by callback.</td>
-        </tr>
-        <tr>
-          <td>route</td>
-          <td><kbd>any[]</kbd></td>
-          <td>Route to go to when clicked. RouteType must be ActionConfigRouteType.Route.</td>
-        </tr>
-        <tr>
-          <td>callback</td>
-          <td><kbd>Function</kbd></td>
-          <td>Function to call when clicked. RouteType must be ActionConfigRouteType.Callback.</td>
-        </tr>
-        </tbody>
-      </table>
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>id</td>
+              <td><kbd>number</kbd></td>
+              <td>Unique identifier</td>
+            </tr>
+            <tr>
+              <td>label</td>
+              <td><kbd>string</kbd></td>
+              <td>Label used for display purposes. Can be html for icons.</td>
+            </tr>
+            <tr>
+              <td>css</td>
+              <td><kbd>string</kbd></td>
+              <td><span class="hx-badge is-info"><span class="hx-badge-content">OPTIONAL</span></span> Css class name to append to button.</td>
+            </tr>
+            <tr>
+              <td>disabledConfig</td>
+              <td><kbd>IDisabledInput</kbd></td>
+              <td><span class="hx-badge is-info"><span class="hx-badge-content">OPTIONAL</span></span> Disable action option.</td>
+            </tr>
+            <tr>
+              <td>routeType</td>
+              <td><kbd>ActionConfigRouteType</kbd></td>
+              <td>Route type, could be route by link or route by callback.</td>
+            </tr>
+            <tr>
+              <td>route</td>
+              <td><kbd>any[]</kbd></td>
+              <td>Route to go to when clicked. RouteType must be ActionConfigRouteType.Route.</td>
+            </tr>
+            <tr>
+              <td>callback</td>
+              <td><kbd>Function</kbd></td>
+              <td>Function to call when clicked. RouteType must be ActionConfigRouteType.Callback.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <h5 class="is-primary">IDisabledInput</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <h5 class="is-primary">IDisabledInput</h5>
 
-      <table class="hx-table is-striped">
-        <thead>
-        <tr>
-          <th>Property</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>disabled</td>
-          <td><kbd>boolean</kbd></td>
-          <td>Toggle for disabled state</td>
-        </tr>
-        <tr>
-          <td>tooltip</td>
-          <td><kbd>string</kbd></td>
-          <td>Messaged displayed in a tooltip when an action is disabled</td>
-        </tr>
-        </tbody>
-      </table>
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>disabled</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Toggle for disabled state</td>
+            </tr>
+            <tr>
+              <td>tooltip</td>
+              <td><kbd>string</kbd></td>
+              <td>Messaged displayed in a tooltip when an action is disabled</td>
+            </tr>
+          </tbody>
+        </table>
 
+      </div>
     </div>
+
   </div>
-
-
-
-
 </section>
-<aside class="hx-sidebar is-medium-width is-scrollable">
-  <ul class="hx-nav hx-nav-vertical">
-    <li class="hx-nav-heading"><h6>Contents</h6></li>
 
+<aside class="hx-sidebar is-right is-active is-medium-width is-scrollable">
+  <ul class="hx-nav hx-nav-vertical">
+    <li class="hx-nav-heading">
+      <h6>Contents</h6></li>
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
     </li>
-
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Examples</span></a>
     </li>

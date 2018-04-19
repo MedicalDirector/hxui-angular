@@ -1,5 +1,6 @@
 import {
-  Component, Input, Output, EventEmitter, OnInit, DoCheck
+  Component, Input, Output, EventEmitter, OnInit, DoCheck, AfterViewInit, AfterContentInit, OnChanges, SimpleChange,
+  SimpleChanges
 } from '@angular/core';
 import {TabularColumn} from './tabular';
 import {ITabularConfig} from './tabular-config.interface';
@@ -7,17 +8,19 @@ import {IActionsConfig} from './actions-config.interface';
 import {TabularOrderByService, OrderByDirection} from './tabular-order-by.service';
 import {TabularConfig} from './tabular.config';
 import {TabularSize} from './tabular-size.enum';
+import {TabularColumnTypes} from './tabular-column.interface';
+import {ITabularRow} from './tabular-row.interface';
 
 
 @Component({
   selector: 'hxa-tabular',
-  template: `<table class="tabular hx-table is-striped">
+  template: `<table class="tabular hx-table is-striped" [class.is-hover]="config.clickableRows" [class.is-narrow]="config.size === TabularSize.Small">
     <thead>
     <tr>
       <th *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
 
         <!-- sortable column -->
-        <a class="tabular__sorter" *ngIf="col.sortable && col.dataType != 6" (click)="onSortClickHandler(col.id)">{{col.label}}<i class="icon {{iconDirection}}" *ngIf="orderBy == col.id"></i></a>
+        <a class="tabular__sorter" href="#" *ngIf="col.sortable && col.dataType != 6" (click)="onSortClickHandler(col.id)"><i class="hx-icon {{iconDirection}} is-small" *ngIf="orderBy == col.id"></i> {{col.label}}</a>
 
         <!-- non sortable column -->
         <span *ngIf="!col.sortable && col.dataType != 6">{{col.label}}</span>
@@ -33,43 +36,63 @@ import {TabularSize} from './tabular-size.enum';
 
     <tbody>
     <!--<tr *ngFor="let row of rows | paginate: config.pagination | simpleSearch: searchTerm">-->
-    <tr *ngFor="let row of pagedItems | simpleSearch: searchTerm">
+    <tr *ngFor="let row of pagedItems | simpleSearch: searchTerm" (click)="onRowClickHandler(row)" [class.is-selected]="row.selected">
       <td *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
 
+        <!-- checkbox type -->
+        <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
+          <input id="checkbox-{{row.id}}" name="{{col.label}}-checkbox" type="checkbox" class="hx-checkbox" title="{{col.label}}" (change)="toggleIndividualSelect($event)" [(ngModel)]="row.checked" />
+          <label for="checkbox-{{row.id}}" class="hx-label"></label>
+        </div>
+        
         <!-- string type -->
-        <span *ngIf="col.dataType == 0">{{row[col.id]}}</span>
+        <span *ngIf="col.dataType === TabularColumnTypes.String" title="{{row[col.id]}}">{{row[col.id]}}</span>
 
         <!-- icon type -->
-        <i *ngIf="col.dataType == 1" class="icon {{row[col.id]}}"></i>
+        <i *ngIf="col.dataType === TabularColumnTypes.Icon" class="hx-icon {{row[col.id]}}"></i>
 
         <!-- date type -->
-        <span *ngIf="col.dataType == 2">{{row[col.id] | date}}</span>
+        <span *ngIf="col.dataType === TabularColumnTypes.Date">{{row[col.id] | date:'d/M/yy'}}</span>
 
         <!-- status type -->
-        <span *ngIf="col.dataType == 4" class="hx-badge text-uppercase" [ngClass]="{'is-primary':row[col.id],'is-danger':!row[col.id]}">{{(row[col.id])?'ACTIVE':'INACTIVE'}}</span>
+        <span *ngIf="col.dataType === TabularColumnTypes.Status" class="hx-icon" [ngClass]="{'is-primary':row[col.id],'is-danger':!row[col.id], 'icon-check-empty': row[col.id], 'icon-close-empty':!row[col.id]}" ></span>
 
+        <!-- badge type -->
+        <span *ngIf="col.dataType === TabularColumnTypes.Badge && hasValidBadgeTypeParams(row[col.id])" class="hx-badge is-small {{row[col.id].cssClass}}"><span class="hx-badge-content">{{row[col.id].label}}</span></span>
+        
         <!-- date time type -->
-        <span *ngIf="col.dataType == 5">{{row[col.id] | date:'medium'}}</span>
+        <span *ngIf="col.dataType === TabularColumnTypes.DateTime">{{row[col.id] | date:'d/M/yy h:mm a'}}</span>
 
         <!-- actions type -->
-        <div *ngIf="col.dataType==3" class="hx-dropdown tabularActions">
+        <div *ngIf="col.dataType === TabularColumnTypes.Actions" class="hx-dropdown tabularActions">
 
 
           <div class="tabularActions__action">
             <div class="hx-dropdown" hxDropdown [isRight]="true">
 
-              <button class="hx-button is-small hx-button-dropdown" hxDropdownToggle type="button">
+              <ng-template *ngIf="!hasDefaultAction(row[col.id]); else splitBtn">
+              <!-- collection of actions DOES NOT have a default -->
+              <button class="hx-button is-flat hx-button-dropdown" [class.is-small]="config.size === TabularSize.Small" hxDropdownToggle type="button">
                 <i class="icon icon-more"></i>
               </button>
+              </ng-template>
+              <ng-template #splitBtn>
+              <!-- collection of actions DOES have a default -->
+              <div class="hx-button-split">
+                <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small"  (click)='executeCallback($event,getDefaultActionCallback(row[col.id]))' [innerHtml]="getDefaultActionName(row[col.id])"></button>
+                <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small" hxDropdownToggle><i class="icon icon-more"></i></button>
+              </div>
+              </ng-template>
+              
               <div class="hx-dropdown-menu" *hxDropdownMenu>
 
                 <ng-container *ngFor="let action of row[col.id]">
-                  <a *ngIf="!getActionDisabledState(action) && action.routeType==0"
+                  <a *ngIf="!getActionDisabledState(action) && action.routeType==0 && !action.isDefault"
                      [routerLink]="action.route"
                      class="hx-dropdown-item {{action.css}}"
                      [innerHTML]="action.label">
                   </a>
-                  <a *ngIf="!getActionDisabledState(action) && action.routeType==1"
+                  <a *ngIf="!getActionDisabledState(action) && action.routeType==1 && !action.isDefault"
                      (click)='executeCallback($event,action.callback)'
                      class="hx-dropdown-item {{action.css}}"
                      [innerHTML]="action.label">
@@ -83,12 +106,6 @@ import {TabularSize} from './tabular-size.enum';
           </div>
         </div>
 
-        <!-- checkbox type -->
-        <div *ngIf="col.dataType == 6" class="hx-checkbox-control">
-          <input id="checkbox-{{row.id}}" name="{{col.label}}-checkbox" type="checkbox" class="hx-checkbox" title="{{col.label}}" (change)="toggleIndividualSelect($event)" [(ngModel)]="row.selected" />
-          <label for="checkbox-{{row.id}}" class="hx-label"></label>
-        </div>
-
       </td>
     </tr>
     </tbody>
@@ -96,29 +113,29 @@ import {TabularSize} from './tabular-size.enum';
 
   <hx-pagination [directionLinks]="true" [boundaryLinks]="true" [rotate]="false" [maxSize]="10"
                  [totalItems]="totalItemCount" [itemsPerPage]="config.pagination.itemsPerPage"
-                 [(ngModel)]="config.pagination.currentPage" (pageChanged)="setPage($event)"></hx-pagination>
+                 [(ngModel)]="config.pagination.currentPage" (pageChanged)="setPage($event)" *ngIf="totalItemCount > config.pagination.itemsPerPage"></hx-pagination>
   `,
   styles: [
-    '.tabular__sorter{position:relative;cursor:pointer} th .icon{position: absolute;}',
+    '.tabular__sorter{position:relative;cursor:pointer} th .icon{position: absolute;left:-1rem;}',
     '.tabular__checkboxes{width:2%;}',
-    '.tabular__checkboxes .hx-checkbox-control{margin:0;display:flex;}'
+    '.tabular__checkboxes .hx-checkbox-control{margin:0;display:flex;}',
+    '.tabularActions__action button.hx-button{ width: 1rem;}'
   ]
 })
 
 
-export class TabularComponent implements OnInit, DoCheck {
+export class TabularComponent implements OnInit, DoCheck, OnChanges {
 
   /**
    * Collection of column models
    */
-  @Input() columns: Array<TabularColumn>;
+  @Input() columns: TabularColumn[];
 
   /**
    * Collection of data rows
    */
   // todo - this is not strict. should it be when it's dynamic?.
-   @Input() rows: Array<any>;
-
+   @Input() rows: ITabularRow[];
 
   /**
    * Tabular configuration
@@ -141,6 +158,7 @@ export class TabularComponent implements OnInit, DoCheck {
     this._callback = Fn;
   }
 
+
   /**
    * Search term is used in the simple search pipe
    * Array of objects: *ngFor="#row of rows | simpleSearch : 'the search term'"
@@ -159,10 +177,17 @@ export class TabularComponent implements OnInit, DoCheck {
    */
   @Output() refresh: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  /**
+   * Event fired when a row is clicked.
+   */
+  @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
 
-  private defaultOrderBy: Array<string> = ['id'];
-  private defaultOrderByDirection: OrderByDirection;
-  pagedItems: any[];
+
+  private oldRows: ITabularRow[] = [];
+  private changeDetected: boolean;
+  private pagedItems: any[] = [];
+  private TabularColumnTypes = TabularColumnTypes;
+  private TabularSize = TabularSize;
   private selectAll = false;
   protected _callback: Function;
   protected _config: ITabularConfig;
@@ -170,10 +195,8 @@ export class TabularComponent implements OnInit, DoCheck {
 
   /**
    * Order by used by orderBy service
-   * @example *ngFor="#person of people | orderBy : ['-age', 'firstName']"
-   * @example *ngFor="#person of people | orderBy : ['+age', 'firstName']"
    */
-  public orderBy: Array<string> = this.defaultOrderBy;
+  public orderBy: string;
 
 
   public constructor(private conf: TabularConfig,
@@ -182,20 +205,35 @@ export class TabularComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
+
   }
 
   ngDoCheck() {
-    this.setPage();
+    if (this.rows.length !== this.oldRows.length) {
+      this.changeDetected = true;
+      console.log('DoCheck: Rows changed to "${this.rows}" from "${this.oldRows}"');
+      this.oldRows = this.rows;
+      if (this.config.defaultOrderBy) {
+        this.orderBy = this.config.defaultOrderBy;
+      }
+      this.orderByData();
+    }
+    this.changeDetected = false;
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+  }
+
+
   private get iconDirection(): string{
-    return (this.defaultOrderByDirection === OrderByDirection.Ascending) ? 'icon-sort-asc' : 'icon-sort-desc';
+    return (this.config.defaultOrderByDirection === OrderByDirection.Ascending) ? ' icon-arrow-up' : ' icon-arrow-down';
   }
 
   /**
    * Calls the parsed callback with optional arguments
    */
   private executeCallback(event: Event, cb: any[]) {
+    event.stopPropagation();
     if (cb.length) {
       if (cb.length === 1) { // if callback has no arguments
         cb[0]();
@@ -207,13 +245,12 @@ export class TabularComponent implements OnInit, DoCheck {
         cb[0].apply(this, args);
       }
     }
-    return false;
   }
 
 
   private toggleSelectAll = () => {
     for (let i = 0; i < this.rows.length; i++) {
-      this.rows[i].selected = this.selectAll;
+      this.rows[i].checked = this.selectAll;
     }
   }
 
@@ -221,7 +258,7 @@ export class TabularComponent implements OnInit, DoCheck {
   private toggleIndividualSelect = () => {
     let count = 0;
     for (let i = 0; i < this.rows.length; i++) {
-      if (this.rows[i].selected) {
+      if (this.rows[i].checked) {
         count++;
       }
     }
@@ -246,7 +283,7 @@ export class TabularComponent implements OnInit, DoCheck {
   /**
    * Get the action tooltip if it exists
    */
-  private getActionTooltip(action: IActionsConfig): string{
+  private getActionTooltip(action: IActionsConfig): string {
     return (action && action.disabledConfig) ? action.disabledConfig.tooltip : '';
   }
 
@@ -260,8 +297,18 @@ export class TabularComponent implements OnInit, DoCheck {
    * Handles the column header click event.
    */
   private onSortClickHandler(key: string) {
-    this.orderBy = ([key] === this.orderBy) ? this.defaultOrderBy : [key];
+    this.orderBy = key;
     this.orderByData();
+    return false;
+  }
+
+  /**
+   * Handles the row click event.
+   */
+  private onRowClickHandler(data: any) {
+    if (this.config.clickableRows) {
+      this.rowClick.emit(data);
+    }
   }
 
 
@@ -274,15 +321,15 @@ export class TabularComponent implements OnInit, DoCheck {
    */
   private orderByData() {
     let direction: string;
-    if (this.defaultOrderByDirection === OrderByDirection.Ascending) {
+    if (this.config.defaultOrderByDirection === OrderByDirection.Ascending) {
       direction = '-';
-      this.defaultOrderByDirection = OrderByDirection.Descending;
+      this.config.defaultOrderByDirection = OrderByDirection.Descending;
     } else {
       direction = '+';
-      this.defaultOrderByDirection = OrderByDirection.Ascending;
+      this.config.defaultOrderByDirection = OrderByDirection.Ascending;
     }
 
-    this.orderByService.doTransform(this.rows, [direction + this.orderBy[0]]);
+    this.orderByService.doTransform(this.rows, [direction + this.orderBy]);
     this.setPage();
   }
 
@@ -297,6 +344,37 @@ export class TabularComponent implements OnInit, DoCheck {
    */
   private isSmall(): boolean {
     return (this.config.size === TabularSize.Small);
+  }
+
+
+  private hasValidBadgeTypeParams(colData) {
+    if (colData) {
+      if (typeof colData.label !== 'undefined' && typeof colData.cssClass !== 'undefined') {
+        return true;
+      } else {
+        console.error('Record for column type badge is invalid, make sure you have the right type. {label:string,cssClass:string}', colData);
+      }
+    }
+    return false;
+  }
+
+  private getDefaultAction(actions: IActionsConfig[]): IActionsConfig {
+    const action = actions.find(function (a) { return a.isDefault; });
+    return action;
+  }
+
+  private hasDefaultAction(actions: IActionsConfig[]): boolean {
+    return (typeof this.getDefaultAction(actions) !== 'undefined');
+  }
+
+  private getDefaultActionName(actions: IActionsConfig[]) {
+    const action = this.getDefaultAction(actions);
+    return (action) ? action.label : '';
+  }
+
+  private getDefaultActionCallback(actions: IActionsConfig[]) {
+    const action = this.getDefaultAction(actions);
+    return (action) ? action.callback : {};
   }
 
 }

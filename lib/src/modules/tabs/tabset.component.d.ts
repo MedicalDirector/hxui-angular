@@ -6,6 +6,7 @@ export declare class TabsetComponent implements OnDestroy {
     vertical: boolean;
     /** if true tabs fill the container and have a consistent width */
     justified: boolean;
+    hasInfo: boolean;
     /** navigation context class: 'tabs' or 'pills' */
     type: string;
     clazn: boolean;
@@ -14,6 +15,7 @@ export declare class TabsetComponent implements OnDestroy {
     protected isDestroyed: boolean;
     protected _vertical: boolean;
     protected _justified: boolean;
+    protected _hasInfo: boolean;
     protected _type: string;
     constructor(config: TabsetConfig);
     ngOnDestroy(): void;

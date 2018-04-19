@@ -1,240 +1,246 @@
 <section class="hx-section scrollable-y" #container>
-  <h1 class="hx-title">Modals</h1>
-  <h2 class="hx-subtitle">A modal creates a mode that disables the main window, but keeps it visible with the modal window as a child window in front of it.
+  <div class="hx-section is-comfortable">
+
+    <h1 class="hx-title">Modals</h1>
+    <h2 class="hx-subtitle">A modal creates a mode that disables the main window, but keeps it visible with the modal window as a child window in front of it.
     Mainly used for adding form content or showing a notification of some sort.</h2>
-  <hr>
 
-  <h4 id="usage">Usage</h4>
-  <p>Add the ModalModule to AppModule or SharedModule.</p>
+    <hr>
 
-  <pre>
+    <h4 id="usage">Usage</h4>
+    <p>Add the ModalModule to AppModule or SharedModule.</p>
+
+    <pre>
     <code class="typescript">
-      import {{ '{' }}ModalModule} from &#x22;@hxui-angular/packages/modal/modal.module&#x22;;
+import {{ '{' }}ModalModule} from &#x22;@hxui-angular/packages/modal/modal.module&#x22;;
 
-      @NgModule({{ '{' }}
-        imports: [ModalModule.forRoot(),...]
-      })
-      export class AppModule(){{ '{' }}
+@NgModule({{ '{' }}
+  imports: [ModalModule.forRoot(),...]
+})
+export class AppModule(){{ '{' }}
     </code>
 
     <code class="html">
-      &#x3C;!--Add this placeholder component anywhere on the body.--&#x3E;
-      &#x3C;hx-modal-placeholder&#x3E;&#x3C;/hx-modal-placeholder&#x3E;
+&#x3C;!--Add this placeholder component anywhere on the body.--&#x3E;
+&#x3C;hx-modal-placeholder&#x3E;&#x3C;/hx-modal-placeholder&#x3E;
     </code>
   </pre>
 
 
-  <hr>
+    <hr>
 
-  <h4 id="example">Example</h4>
+    <h4 id="example">Example</h4>
 
-  <div class="hx-columns">
-    <div class="hx-column">
+    <div class="hx-columns">
+      <div class="hx-column">
 
 
-      <button class="hx-button is-primary is-outlined"  type="button" (click)="openModal()">
+        <button class="hx-button is-primary is-outlined" type="button" (click)="openModal()">
         Open Modal
       </button>
 
 
+      </div>
     </div>
-  </div>
 
-  <br>
+    <br>
 
-  <h5 id="code">Code</h5>
+    <h5 id="code">Code</h5>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <hx-tabset>
-        <hx-tab heading="Template">
-          <pre>
-            <code class="html">
-       &#x3C;button class=&#x22;hx-button is-primary is-outlined&#x22;  type=&#x22;button&#x22; (click)=&#x22;openModal()&#x22;&#x3E;
-        Open Modal
-      &#x3C;/button&#x3E;
-            </code>
-          </pre>
-        </hx-tab>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <hx-tabset>
+          <hx-tab heading="Template">
+            <pre>
+              <code class="html">
+&#x3C;button class=&#x22;hx-button is-primary is-outlined&#x22;  type=&#x22;button&#x22; (click)=&#x22;openModal()&#x22;&#x3E;
+  Open Modal
+&#x3C;/button&#x3E;
+              </code>
+            </pre>
+          </hx-tab>
 
-        <hx-tab heading="Typescript">
-          <pre>
+          <hx-tab heading="Typescript">
+            <pre>
             <code class="typescript">
-      import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
-      import {{ '{' }}ModalService} from &#x22;@hxui-angular/packages/modal/modal.service&#x22;;
-      import {{ '{' }}CustomModalComponent} from &#x22;./custom-modal/custom-modal.component&#x22;;
+import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
+import {{ '{' }}ModalService} from &#x22;@hxui-angular/packages/modal/modal.service&#x22;;
+import {{ '{' }}CustomModalComponent} from &#x22;./custom-modal/custom-modal.component&#x22;;
 
-      @Component({{ '{' }}
-        selector: &#x27;app-modals&#x27;,
-        templateUrl: &#x27;./modals.component.html&#x27;
-      })
-      export class ModalsComponent implements OnInit {{ '{' }}
+@Component({{ '{' }}
+  selector: &#x27;app-modals&#x27;,
+  templateUrl: &#x27;./modals.component.html&#x27;
+})
+export class ModalsComponent implements OnInit {{ '{' }}
 
-        constructor(private modalService: ModalService) {{ '{' }}
+  constructor(private modalService: ModalService) {{ '{' }}
 
-        ngOnInit() {{ '{' }}
-        }
+  ngOnInit() {{ '{' }}
+  }
 
-        openModal = () =&#x3E; {{ '{' }}
-          this.modalService.create&#x3C;CustomModalComponent&#x3E;(CustomModalComponent, {{ '{' }}
-            onSuccess: (data) =&#x3E; {{ '{' }}
-             alert(data);
-            }
-          });
-        }
-
+  openModal = () =&#x3E; {{ '{' }}
+    this.modalService.create&#x3C;CustomModalComponent&#x3E;(CustomModalComponent, {{ '{' }}
+      onSuccess: (data) =&#x3E; {{ '{' }}
+       alert(data);
       }
+    });
+  }
+
+}
             </code>
           </pre>
 
-        </hx-tab>
-        <hx-tab heading="Custom Modal Component">
-          <pre>
+          </hx-tab>
+          <hx-tab heading="Custom Modal Component">
+            <pre>
             <code class="typescript">
-      import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
-      import {{ '{' }} Modal} from &#x27;@hxui-angular/packages/modal/modal.annotation&#x27;;
+import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
+import {{ '{' }} Modal} from &#x27;@hxui-angular/packages/modal/modal.annotation&#x27;;
 
-      @Component({{ '{' }}
-        selector: &#x27;app-custom-modal&#x27;,
-        template: &#x60;
-          &#x3C;div class=&#x22;hx-modal is-active&#x22;&#x3E;
-            &#x3C;div class=&#x22;hx-modal-background&#x22;&#x3E;&#x3C;/div&#x3E;
-            &#x3C;div class=&#x22;hx-modal-card&#x22;&#x3E;
-              &#x3C;header class=&#x22;hx-modal-card-head&#x22;&#x3E;
-                &#x3C;h1 class=&#x22;hx-modal-card-title&#x22;&#x3E;HxUI Modal Title&#x3C;/h1&#x3E;
-                &#x3C;button class=&#x22;delete&#x22; (click)=&#x22;onCancel()&#x22;&#x3E;&#x3C;/button&#x3E;
-              &#x3C;/header&#x3E;
-              &#x3C;section class=&#x22;hx-modal-card-content&#x22;&#x3E;
-                &#x3C;p&#x3E;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque.&#x3C;/p&#x3E;
-              &#x3C;/section&#x3E;
-              &#x3C;footer class=&#x22;hx-modal-card-foot&#x22;&#x3E;
-                &#x3C;a class=&#x22;hx-button is-primary&#x22; (click)=&#x22;onOk()&#x22;&#x3E;Save changes&#x3C;/a&#x3E;
-                &#x3C;a class=&#x22;hx-button&#x22; (click)=&#x22;onCancel()&#x22;&#x3E;Cancel&#x3C;/a&#x3E;
-              &#x3C;/footer&#x3E;
-            &#x3C;/div&#x3E;
-          &#x3C;/div&#x3E;
-        &#x60;
-      })
+@Component({{ '{' }}
+  selector: &#x27;app-custom-modal&#x27;,
+  template: &#x60;
+    &#x3C;div class=&#x22;hx-modal is-active&#x22;&#x3E;
+      &#x3C;div class=&#x22;hx-modal-background&#x22;&#x3E;&#x3C;/div&#x3E;
+      &#x3C;div class=&#x22;hx-modal-card&#x22;&#x3E;
+        &#x3C;header class=&#x22;hx-modal-card-head&#x22;&#x3E;
+          &#x3C;h1 class=&#x22;hx-modal-card-title&#x22;&#x3E;HxUI Modal Title&#x3C;/h1&#x3E;
+          &#x3C;button class=&#x22;delete&#x22; (click)=&#x22;onCancel()&#x22;&#x3E;&#x3C;/button&#x3E;
+        &#x3C;/header&#x3E;
+        &#x3C;section class=&#x22;hx-modal-card-content&#x22;&#x3E;
+          &#x3C;p&#x3E;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque.&#x3C;/p&#x3E;
+        &#x3C;/section&#x3E;
+        &#x3C;footer class=&#x22;hx-modal-card-foot&#x22;&#x3E;
+          &#x3C;a class=&#x22;hx-button is-primary&#x22; (click)=&#x22;onOk()&#x22;&#x3E;Save changes&#x3C;/a&#x3E;
+          &#x3C;a class=&#x22;hx-button&#x22; (click)=&#x22;onCancel()&#x22;&#x3E;Cancel&#x3C;/a&#x3E;
+        &#x3C;/footer&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x60;
+})
 
-      @Modal()
-      export class CustomModalComponent implements OnInit {{ '{' }}
+@Modal()
+export class CustomModalComponent implements OnInit {{ '{' }}
 
-        protected onSuccess: Function;
-        protected close: Function;
+  protected onSuccess: Function;
+  protected close: Function;
 
-        constructor() {{ '{' }}
+  constructor() {{ '{' }}
 
-        ngOnInit() {{ '{' }}
-        }
+  ngOnInit() {{ '{' }}
+  }
 
-        onCancel = () =&#x3E; {{ '{' }}
-          this.close();
-        }
+  onCancel = () =&#x3E; {{ '{' }}
+    this.close();
+  }
 
-        onOk = () =&#x3E; {{ '{' }}
-          this.onSuccess(&#x27;Callback&#x27;);
-          this.close();
-        }
+  onOk = () =&#x3E; {{ '{' }}
+    this.onSuccess(&#x27;Callback&#x27;);
+    this.close();
+  }
 
-      }
+}
             </code>
           </pre>
-        </hx-tab>
-        <hx-tab heading="Module">
-          <pre>
+          </hx-tab>
+          <hx-tab heading="Module">
+            <pre>
             <code class="typescript">
-    // You need to declare the modal component as an entry component for dynamic loading
-    @NgModule({{ '{' }}
-      ...
-      declarations: [CustomModalComponent],
-      entryComponents: [CustomModalComponent]
-    })
+// You need to declare the modal component as an entry component for dynamic loading
+@NgModule({{ '{' }}
+  ...
+  declarations: [CustomModalComponent],
+  entryComponents: [CustomModalComponent]
+})
             </code>
           </pre>
-        </hx-tab>
-      </hx-tabset>
+          </hx-tab>
+        </hx-tabset>
+      </div>
     </div>
-  </div>
 
-  <hr>
+    <hr>
 
-  <h4 id="api">API Reference</h4>
+    <h4 id="api">API Reference</h4>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <h5 class="is-primary">ModalPlaceholderComponent</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <h5 class="is-primary">ModalPlaceholderComponent</h5>
 
-      <table class="hx-table  is-striped">
-        <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>n/a</td>
-          <td><kbd>n/a</kbd></td>
-          <td>n/a</td>
-        </tr>
-        </tbody>
-      </table>
+        <table class="hx-table  is-striped">
+          <thead>
+            <tr>
+              <th>Input</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>n/a</td>
+              <td><kbd>n/a</kbd></td>
+              <td>n/a</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  <div class="hx-columns">
-    <div class="hx-column">
-      <h5 class="is-primary">ModalAnnotation</h5>
-      <table class="hx-table  is-striped">
-        <thead>
-        <tr>
-          <th>Method</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>destroy</td>
-          <td><kbd>Function</kbd></td>
-          <td>Destroys the component when the ng2 magic calls destroy</td>
-        </tr>
-        <tr>
-          <td>close</td>
-          <td><kbd>Function</kbd></td>
-          <td>Closes the modal and then calls destroy</td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <h5 class="is-primary">ModalAnnotation</h5>
+        <table class="hx-table  is-striped">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>destroy</td>
+              <td><kbd>Function</kbd></td>
+              <td>Destroys the component when the ng2 magic calls destroy</td>
+            </tr>
+            <tr>
+              <td>close</td>
+              <td><kbd>Function</kbd></td>
+              <td>Closes the modal and then calls destroy</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <h5 class="is-primary">ModalService</h5>
-      <table class="hx-table  is-striped">
-        <thead>
-        <tr>
-          <th>Method</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>create&#x3C;T&#x3E;(module: any, component: any, parameters?: Object)</td>
-          <td><kbd>Observable&#x3C;ComponentRef&#x3C;T&#x3E;&#x3E;</kbd></td>
-          <td>create and loads a dynamic component that is of type @modal</td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <h5 class="is-primary">ModalService</h5>
+        <table class="hx-table  is-striped">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>create&#x3C;T&#x3E;(module: any, component: any, parameters?: Object)</td>
+              <td><kbd>Observable&#x3C;ComponentRef&#x3C;T&#x3E;&#x3E;</kbd></td>
+              <td>create and loads a dynamic component that is of type @modal</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
+  </div>
 </section>
-<aside class="hx-sidebar is-medium-width is-scrollable">
+
+<aside class="hx-sidebar is-active is-right is-medium-width is-scrollable">
   <ul class="hx-nav hx-nav-vertical">
-    <li class="hx-nav-heading"><h6>Contents</h6></li>
+    <li class="hx-nav-heading">
+      <h6>Contents</h6></li>
 
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>

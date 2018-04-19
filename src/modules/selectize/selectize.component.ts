@@ -33,7 +33,7 @@ export const SELECTIZE_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-  selector: 'hx-selectize',
+  selector: 'hxa-selectize',
   template: `<select #selectizeInput></select>`,
   providers: [SELECTIZE_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None,

@@ -1,13 +1,20 @@
 import {ActionConfigRouteType, IActionsConfig} from '../../../modules/tabular/actions-config.interface';
+import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
 
-export class UserModel {
+export class UserModel implements ITabularRow {
   public id: number;
   public usercode: string;
   public firstname: string;
   public surname: string;
   public rolename: string;
   public email: string;
+  public flag: {label: string, cssClass: string};
   public active: boolean;
+  public created: Date;
+  public modified: Date;
+  public selected: boolean;
+  public checked: boolean;
+
 
   constructor(data?: any) {
     if (data) {
@@ -45,6 +52,13 @@ export class UserModel {
         label: 'Delete',
         routeType: ActionConfigRouteType.Callback,
         callback: [this.onActionClickHandler, 'perm-delete', 1]
+      },
+      {
+        id: 'row_default',
+        label: '<span class="hx-icon icon-medications"></span>',
+        isDefault: true,
+        routeType: ActionConfigRouteType.Callback,
+        callback: [this.onActionClickHandler, 'default', 1]
       }
     ];
   }

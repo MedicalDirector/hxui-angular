@@ -9,7 +9,10 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Reed',
         rolename: 'GP',
         email: 'brenda.reed@medicaldirector.com',
-        active: false
+        active: false,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: 'is-primary'}
       },
       {
         id: 2,
@@ -18,7 +21,9 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Mendez',
         rolename: 'GP',
         email: 'mercedes.mendez@medicaldirector.com',
-        active: false
+        active: false,
+        created: new Date(),
+        modified: new Date()
       },
       {
         id: 3,
@@ -27,7 +32,11 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Smith',
         rolename: 'Specialist',
         email: 'john.smith@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: 'is-outlined'},
+        selected: true
       },
       {
         id: 4,
@@ -36,7 +45,11 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Sampson',
         rolename: 'Specialist',
         email: 'julia.sampson@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: 'is-danger'},
+        checked: true
       },
       {
         id: 5,
@@ -45,7 +58,10 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Pipps',
         rolename: 'Specialist',
         email: 'john.gipps@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: 'is-warning'}
       },
       {
         id: 6,
@@ -54,7 +70,10 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Roberts',
         rolename: 'Receptionist',
         email: 'natalie.roberts@medicaldirector.com',
-        active: false
+        active: false,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: ''}
       },
       {
         id: 7,
@@ -63,7 +82,10 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Sechi',
         rolename: 'GP',
         email: 'harry.sechi@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: 'is-error'}
       },
       {
         id: 8,
@@ -72,7 +94,10 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Lorenzo',
         rolename: 'Practice Manager',
         email: 'xavier.lorenzo@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: 'is-outlined'}
       },
       {
         id: 9,
@@ -81,7 +106,10 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Yap',
         rolename: 'GP',
         email: 'chris.yap@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: ''}
       },
       {
         id: 10,
@@ -90,7 +118,10 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Ahmed',
         rolename: 'Specialist',
         email: 'mohammad.ahmed@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'Short', cssClass: ''}
       },
       {
         id: 11,
@@ -99,7 +130,10 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Gino',
         rolename: 'Nurse',
         email: 'eli.gino@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: 'is-outlined'}
       },
       {
         id: 12,
@@ -108,7 +142,10 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Pulliese',
         rolename: 'Specialist',
         email: 'brian.pulliese@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: 'is-primary'}
       },
       {
         id: 13,
@@ -117,7 +154,10 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Wilson',
         rolename: 'Receptionist',
         email: 'annabell.wilson@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: 'is-primary'}
       },
       {
         id: 14,
@@ -126,7 +166,10 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Homes',
         rolename: 'Receptionist',
         email: 'susan.homes@medicaldirector.com',
-        active: false
+        active: false,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: ' is-outlined'}
       },
       {
         id: 15,
@@ -135,7 +178,9 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Liang',
         rolename: 'GP',
         email: 'kevin.liang@medicaldirector.com',
-        active: false
+        active: false,
+        created: new Date(),
+        modified: new Date()
       },
       {
         id: 16,
@@ -144,7 +189,9 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Kelvin',
         rolename: 'Nurse',
         email: 'jack.kelvin@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date()
       },
       {
         id: 17,
@@ -153,7 +200,9 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Poon',
         rolename: 'Practice Manager',
         email: 'dave.poon@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date()
       },
       {
         id: 18,
@@ -162,7 +211,10 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Borris',
         rolename: 'Admin',
         email: 'fred.borris@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: 'is-outlined'}
       },
       {
         id: 19,
@@ -171,7 +223,9 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Shakur',
         rolename: 'Administrator',
         email: 'tupac.shakur@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date()
       },
       {
         id: 20,
@@ -180,7 +234,9 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Smalls',
         rolename: 'GP',
         email: 'biggie.smalls@medicaldirector.com',
-        active: true
+        active: true,
+        created: new Date(),
+        modified: new Date()
       }
     ];
     return {users};

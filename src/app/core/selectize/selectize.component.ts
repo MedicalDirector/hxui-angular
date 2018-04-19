@@ -9,6 +9,7 @@ import { PageScrollService } from 'ngx-page-scroll';
 import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/platform-browser';
 import { SelectizeConfig } from 'modules/selectize/selectize.config';
+import {ISelectizeItem} from '../../../modules/selectize/selectize-item.interface';
 
 @Component({
   selector: 'app-selectize',
@@ -17,28 +18,41 @@ import { SelectizeConfig } from 'modules/selectize/selectize.config';
 })
 export class SelectizeComponent extends CoreBaseComponent implements OnInit {
   public selectizeConfig = new SelectizeConfig();
-  public selectizeOptions = [
+  public selectizeOptions: ISelectizeItem[] = <ISelectizeItem[]>[
     {
-      label: 'Angular',
-      value: 'angular',
-      code: 'NG'
+      label: 'Iron studies',
+      value: 'ironstudies'
     },
     {
-      label: 'ReactJS',
-      value: 'reactjs',
-      code: 'RJS'
+      label: 'Glucose fasting',
+      value: 'glucosefasting'
     },
     {
-      label: 'Ember JS',
-      value: 'emberjs',
-      code: 'emjs'
+      label: 'HbA1c',
+      value: 'hba1c'
     },
     {
-      label: 'Ruby on Rails',
-      value: 'ruby_on_rails',
-      code: 'ROR'
+      label: 'Glucose tolerance test',
+      value: 'gklucosetolerencetest'
+    },
+    {
+      label: 'HDL cholesterol',
+      value: 'hdlcholesterol'
+    },
+    {
+      label: 'INR',
+      value: 'inr'
+    },
+    {
+      label: 'Fructosamine',
+      value: 'fructosamine'
+    },
+    {
+      label: 'Thyroid function tests',
+      value: 'thyroid functions tests'
     }
   ];
+
 
   ngOnInit(): void {
     this.selectizeConfig.create = true;

@@ -5,7 +5,8 @@ export enum TabularColumnTypes {
   Actions,
   Status,
   DateTime,
-  Checkbox
+  Checkbox,
+  Badge
 }
 
 export abstract class ITabularColumn {

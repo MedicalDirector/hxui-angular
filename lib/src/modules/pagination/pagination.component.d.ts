@@ -26,6 +26,8 @@ export declare class PaginationComponent implements ControlValueAccessor, OnInit
     lastText: string;
     /** if true current page will in the middle of pages list */
     rotate: boolean;
+    /** if true the .is-sticky modifier will be added to the pagination component*/
+    sticky: boolean;
     /** add class to <li> */
     pageBtnClass: string;
     /** if true pagination component will be disabled */

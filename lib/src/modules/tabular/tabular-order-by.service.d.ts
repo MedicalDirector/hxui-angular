@@ -4,7 +4,6 @@ export declare enum OrderByDirection {
     None = 2,
 }
 export declare class TabularOrderByService {
-    constructor();
     static _orderByComparator(a: any, b: any): number;
     doTransform(data: any, [config]: [string]): any;
 }

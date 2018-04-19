@@ -1,65 +1,67 @@
 <section class="hx-section scrollable-y">
-  <h1 class="hx-title">Install Guide</h1>
-  <h2 class="hx-subtitle">Adding HxUI-angular into a project</h2>
-  <hr>
+  <div class="hx-section is-comfortable">
 
-  <div class="hx-columns">
-    <div class="hx-column">
+    <h1 class="hx-title">Install Guide</h1>
+    <h2 class="hx-subtitle">Adding HxUI-angular into a project</h2>
+    <hr>
 
-      <section>
-        <p><span class="h5">1.</span> Use <strong>NPM</strong>:</p>
-        <pre><code class="bash">
+    <div class="hx-columns">
+      <div class="hx-column">
 
-    npm install git+https://bitbucket.org/md-design/angular-hxui.git --save
+        <section>
+          <p><span class="h5">1.</span> Use <strong>NPM</strong>:</p>
+          <pre><code class="bash">
 
-        </code></pre>
-      </section>
+npm install @hxui/angular --save
 
-      <br>
-      <section>
-        <p>You can run this command if you are using <strong>SSH</strong> method to access repo.</p>
+          </code></pre>
+        </section>
 
-        <pre><code class="bash">
+        <br>
+        <section>
+          <p>You can run this command if you are using <strong>SSH</strong> method to access repo.</p>
 
-      npm install git+ssh://bitbucket.org/md-design/angular-hxui.git --save
+          <pre><code class="bash">
 
-        </code></pre>
+npm install @hxui/angular --save
 
-      </section>
-      <br>
-      <section>
-        <p><span class="h5">2. </span><strong>Import all web component modules</strong> into app module or shared module.</p>
-        <pre><code class="typescript">
-    import {{ '{' }}HxUiModule} from &#x22;@hxui/angular/src/modules/index&#x22;;
+          </code></pre>
 
-    @NgModule({{ '{' }}
-      declarations: [
-        AppComponent
-      ],
-      imports: [
-        HxUiModule.forRoot()
-      ],
-      providers: [],
-      bootstrap: [AppComponent]
-    })
-    export class AppModule {{ '{' }}
+        </section>
+        <br>
+        <section>
+          <p><span class="h5">2. </span><strong>Import all web component modules</strong> into app module or shared module.</p>
+          <pre><code class="typescript">
+import {{ '{' }}HxUiModule} from &#x22;@hxui/angular&#x22;;
 
-        </code></pre>
-      </section>
-      <br>
-      <section>
-        <p><span class="h5">3. </span>Alternatively <strong>import each web component module</strong> that you need individually.</p>
-        <pre><code class="typescript">
-      import {{ '{' }}DropdownModule} from &#x22;@hxui/angular/src/modules/dropdown/dropdown.module&#x22;;
+@NgModule({{ '{' }}
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    HxUiModule.forRoot()
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {{ '{' }}
 
-      @NgModule({{ '{' }}
-        imports: [DropdownModule.forRoot(),...]
-      })
-      export class AppModule(){{ '{' }}
-    </code></pre>
-      </section>
+          </code></pre>
+        </section>
+        <br>
+        <section>
+          <p><span class="h5">3. </span>Alternatively <strong>import each web component module</strong> that you need individually.</p>
+          <pre><code class="typescript">
+import {{ '{' }}DropdownModule} from &#x22;@hxui/angular&#x22;;
+
+@NgModule({{ '{' }}
+  imports: [DropdownModule.forRoot(),...]
+})
+export class AppModule(){{ '{' }}
+          </code></pre>
+        </section>
+      </div>
     </div>
+
   </div>
-
 </section>
-

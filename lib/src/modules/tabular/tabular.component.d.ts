@@ -1,19 +1,20 @@
-import { EventEmitter, OnInit, DoCheck } from '@angular/core';
+import { EventEmitter, OnInit, DoCheck, OnChanges, SimpleChanges } from '@angular/core';
 import { TabularColumn } from './tabular';
 import { ITabularConfig } from './tabular-config.interface';
 import { TabularOrderByService } from './tabular-order-by.service';
 import { TabularConfig } from './tabular.config';
-export declare class TabularComponent implements OnInit, DoCheck {
+import { ITabularRow } from './tabular-row.interface';
+export declare class TabularComponent implements OnInit, DoCheck, OnChanges {
     private conf;
     private orderByService;
     /**
      * Collection of column models
      */
-    columns: Array<TabularColumn>;
+    columns: TabularColumn[];
     /**
      * Collection of data rows
      */
-    rows: Array<any>;
+    rows: ITabularRow[];
     /**
      * Tabular configuration
      * IPaginationInstance, ISearchConfig
@@ -31,22 +32,27 @@ export declare class TabularComponent implements OnInit, DoCheck {
      * Host should refresh data of input.
      */
     refresh: EventEmitter<boolean>;
-    private defaultOrderBy;
-    private defaultOrderByDirection;
-    pagedItems: any[];
+    /**
+     * Event fired when a row is clicked.
+     */
+    rowClick: EventEmitter<any>;
+    private oldRows;
+    private changeDetected;
+    private pagedItems;
+    private TabularColumnTypes;
+    private TabularSize;
     private selectAll;
     protected _callback: Function;
     protected _config: ITabularConfig;
     protected _searchTerm: string;
     /**
      * Order by used by orderBy service
-     * @example *ngFor="#person of people | orderBy : ['-age', 'firstName']"
-     * @example *ngFor="#person of people | orderBy : ['+age', 'firstName']"
      */
-    orderBy: Array<string>;
+    orderBy: string;
     constructor(conf: TabularConfig, orderByService: TabularOrderByService);
     ngOnInit(): void;
     ngDoCheck(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     private readonly iconDirection;
     /**
      * Calls the parsed callback with optional arguments
@@ -68,6 +74,10 @@ export declare class TabularComponent implements OnInit, DoCheck {
      */
     private onSortClickHandler(key);
     /**
+     * Handles the row click event.
+     */
+    private onRowClickHandler(data);
+    /**
      * Order collection via full collection and not via pipe.
      * The pagination pipe will only return the paginated amount.
      * Which means the order by filter will only be applied to whats paginated
@@ -79,4 +89,9 @@ export declare class TabularComponent implements OnInit, DoCheck {
      * Helper to determine if tabular instance is in small mode
      */
     private isSmall();
+    private hasValidBadgeTypeParams(colData);
+    private getDefaultAction(actions);
+    private hasDefaultAction(actions);
+    private getDefaultActionName(actions);
+    private getDefaultActionCallback(actions);
 }

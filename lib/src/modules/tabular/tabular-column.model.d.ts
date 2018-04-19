@@ -5,5 +5,6 @@ export declare class TabularColumn implements ITabularColumn {
     dataType: number;
     sortable: boolean;
     cssClass: string;
-    constructor(id: string, label: string, dataType: number, sortable: boolean, cssClass?: string);
+    options: any;
+    constructor(id: string, label: string, dataType: number, sortable: boolean, cssClass?: string, options?: any);
 }

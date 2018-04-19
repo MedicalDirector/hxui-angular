@@ -34,3 +34,11 @@ Here are the test related scripts:
 ### How do I view the HxUi-angular documentation ###
 
 Run ```ng serve``` .
+
+
+### How do I package and publish to NPM
+Run ```npm run packagr```
+then
+Run ```npm publish lib --access=public```
+
+Note: Don't forget to bump up the version number in the package json

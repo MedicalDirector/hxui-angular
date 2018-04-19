@@ -1,27 +1,28 @@
+@import '~@hxui/css/static/static/scss/variables';
 // base styles
 
 $selectize-font-family: inherit;
 $selectize-font-smoothing: inherit;
-$selectize-font-size: 13px;
-$selectize-line-height: 18px;
+$selectize-font-size: $font-size-base;
+$selectize-line-height: $line-height-base;
 
-$selectize-color-text: #303030;
-$selectize-color-border: #d0d0d0;
-$selectize-color-highlight: rgba(125,168,208,0.2);
-$selectize-color-input: #fff;
+$selectize-color-text: $color-dark;
+$selectize-color-border: transparent;
+$selectize-color-highlight: $color-primary;
+$selectize-color-input: transparent;
 $selectize-color-input-full: $selectize-color-input;
 $selectize-color-disabled: #fafafa;
-$selectize-color-item: #f2f2f2;
-$selectize-color-item-text: $selectize-color-text;
-$selectize-color-item-border: #d0d0d0;
+$selectize-color-item: rgba(0,0,0,.05);
+$selectize-color-item-text: $color-gray-dark;
+$selectize-color-item-border: transparent;
 $selectize-color-item-active: #e8e8e8;
 $selectize-color-item-active-text: $selectize-color-text;
 $selectize-color-item-active-border: #cacaca;
 $selectize-color-dropdown: #fff;
 $selectize-color-dropdown-border: $selectize-color-border;
 $selectize-color-dropdown-border-top: #f0f0f0;
-$selectize-color-dropdown-item-active: #f5fafd;
-$selectize-color-dropdown-item-active-text: #495c68;
+$selectize-color-dropdown-item-active: $color-primary;
+$selectize-color-dropdown-item-active-text: #fff;
 $selectize-color-dropdown-item-create-text: rgba(red($selectize-color-text), green($selectize-color-text), blue($selectize-color-text), 0.5);
 $selectize-color-dropdown-item-create-active-text: $selectize-color-dropdown-item-active-text;
 $selectize-color-optgroup: $selectize-color-dropdown;
@@ -31,11 +32,11 @@ $selectize-lighten-disabled-item-text: 30%;
 $selectize-lighten-disabled-item-border: 30%;
 $selectize-opacity-disabled: 0.5;
 
-$selectize-shadow-input: inset 0 1px 1px rgba(0,0,0,0.1);
-$selectize-shadow-input-focus: inset 0 1px 2px rgba(0,0,0,0.15);
-$selectize-border: 1px solid $selectize-color-border;
-$selectize-dropdown-border: 1px solid $selectize-color-dropdown-border;
-$selectize-border-radius: 3px;
+$selectize-shadow-input: none;
+$selectize-shadow-input-focus: none;
+$selectize-border: transparent;
+$selectize-dropdown-border: transparent;
+$selectize-border-radius: 0;
 
 $selectize-width-item-border: 0;
 $selectize-max-height-dropdown: 200px;
@@ -87,6 +88,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
     filter: e(%("progid:DXImageTransform.Microsoft@include gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb($color-top),argb($color-bottom))); // IE9 and down
 }
 
+
 .selectize-control {
 	position: relative;
 }
@@ -116,6 +118,8 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	@include selectize-box-sizing(border-box);
 	@include selectize-box-shadow($selectize-shadow-input);
 	@include selectize-border-radius($selectize-border-radius);
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-width: 0 0 1px 0;
 
 	.selectize-control.multi &.has-items {
 		$padding-x: $selectize-padding-x;
@@ -146,11 +150,16 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	}
 	.selectize-control.multi & > div {
 		cursor: pointer;
-		margin: 0 $selectize-margin-item-x $selectize-margin-item-y 0;
+		margin: 4px;
 		padding: $selectize-padding-item-y $selectize-padding-item-x;
 		background: $selectize-color-item;
 		color: $selectize-color-item-text;
 		border: $selectize-width-item-border solid $selectize-color-item-border;
+    border-radius: 290486px;
+    font-size: $font-size-xs;
+    justify-content: center;
+    line-height: 1.5;
+    white-space: nowrap;
 
 		&.active {
 			background: $selectize-color-item-active;
@@ -202,6 +211,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	right: 0;
 }
 
+.hx-select-control:after{  display:none;}
 .selectize-dropdown {
 	position: absolute;
 	z-index: 10;
@@ -210,7 +220,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	margin: -1px 0 0 0;
 	border-top: 0 none;
 	@include selectize-box-sizing(border-box);
-	@include selectize-box-shadow(0 1px 3px rgba(0,0,0,0.1));
+	@include selectize-box-shadow(0 6px 12px rgba(0,0,0,.145));
 	@include selectize-border-radius(0 0 $selectize-border-radius $selectize-border-radius);
 
 	[data-selectable] {
@@ -293,4 +303,4 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 // @import "plugins/drag_drop";
 // @import "plugins/dropdown_header";
 // @import "plugins/optgroup_columns";
-@import "plugins/remove-button";
+ @import "plugins/remove-button";

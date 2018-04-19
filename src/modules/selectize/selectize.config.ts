@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import {ISelectizeItem} from './selectize-item.interface';
 
 @Injectable()
-export class SelectizeConfig {
+export class SelectizeConfig  {
 
   /**
    *  The string to separate items by. When typing an item in a multi-selection control
@@ -51,7 +52,7 @@ export class SelectizeConfig {
    *
    *  Default: true
    */
-  highlight = true;
+  highlight = false;
 
   /**
    *  If false, items created by the user will not show up as available options once
@@ -59,7 +60,7 @@ export class SelectizeConfig {
    *
    *  Default: false
    */
-  persist = false;
+  persist = true;
 
   /**
    *  Show the dropdown immediately when the control receives focus.
@@ -194,5 +195,25 @@ export class SelectizeConfig {
   /**
    *  Selectize plugins to use
    */
-  private plugins = ['remove_button'];
+  private plugins = {
+    'remove_button': {
+      label     : '',
+      title     : 'Remove',
+      className : 'hx-delete',
+      append    : true
+    }
+  };
+
+  /**
+   * Default override item render function
+   */
+  public render = {
+    item: (item: ISelectizeItem, escape: Function): string => {
+      return `<span class="hx-badge">
+                <span class="hx-badge-content">`
+                    + escape(item.label) +
+                `</span>
+              </span>`;
+    }
+  };
 }

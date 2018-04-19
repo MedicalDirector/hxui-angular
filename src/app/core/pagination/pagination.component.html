@@ -1,326 +1,332 @@
 <section class="hx-section scrollable-y" #container>
-  <h1 class="hx-title">Pagination</h1>
-  <h2 class="hx-subtitle">Provides pagination links for multi-page pagination.</h2>
-  <hr>
+  <div class="hx-section is-comfortable">
 
-  <h4 id="usage">Usage</h4>
-  <p>Add the PaginationModule to AppModule or SharedModule.</p>
+    <h1 class="hx-title">Pagination</h1>
+    <h2 class="hx-subtitle">Provides pagination links for multi-page pagination.</h2>
 
-  <pre>
-    <code class="typescript">
-      import {{ '{' }}PaginationModule} from &#x22;@hxui-angular/packages/pagination/pagination.module&#x22;;
+    <hr>
 
-      @NgModule({{ '{' }}
-        imports: [PaginationModule.forRoot(),...]
-      })
-      export class AppModule(){{ '{' }}
-    </code>
-  </pre>
+    <h4 id="usage">Usage</h4>
+    <p>Add the PaginationModule to AppModule or SharedModule.</p>
+
+    <pre>
+      <code class="typescript">
+import {{ '{' }}PaginationModule} from &#x22;@hxui-angular/packages/pagination/pagination.module&#x22;;
+
+@NgModule({{ '{' }}
+  imports: [PaginationModule.forRoot(),...]
+})
+export class AppModule(){{ '{' }}
+      </code>
+    </pre>
 
 
-  <hr>
+    <hr>
 
-  <h4>Examples</h4>
+    <h4>Examples</h4>
 
-  <div class="hx-columns">
-    <div class="hx-column">
+    <div class="hx-columns">
+      <div class="hx-column">
 
-      <hx-pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></hx-pagination>
-      <br>
-      <hx-pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></hx-pagination>
-      <br>
-      <hx-pagination [directionLinks]="false" [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage"></hx-pagination>
-      <br>
-      <hx-pagination [directionLinks]="true" [boundaryLinks]="true" [rotate]="false" [totalItems]="totalItems" [maxSize]="7" [(ngModel)]="currentPage"></hx-pagination>
-      <br>
-      <hx-pagination [directionLinks]="false" [totalItems]="totalItems" [(ngModel)]="currentPage" (numPages)="smallnumPages = $event"></hx-pagination>
-      <br>
-      <hx-pager [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" pageBtnClass="hx-button" itemsPerPage="10"></hx-pager>
-      <br>
+        <hx-pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></hx-pagination>
+        <br>
+        <hx-pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></hx-pagination>
+        <br>
+        <hx-pagination [directionLinks]="false" [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage"></hx-pagination>
+        <br>
+        <hx-pagination [directionLinks]="true" [boundaryLinks]="true" [rotate]="false" [totalItems]="totalItems" [maxSize]="7" [(ngModel)]="currentPage"></hx-pagination>
+        <br>
+        <hx-pagination [directionLinks]="false" [totalItems]="totalItems" [(ngModel)]="currentPage" (numPages)="smallnumPages = $event"></hx-pagination>
+        <br>
+        <hx-pager [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" pageBtnClass="hx-button" itemsPerPage="10"></hx-pager>
+        <br>
 
-      <div class="hx-flex hx-flex-justify-center">
-        <div>
+
+        <div class="hx-flex hx-flex-justify-center">
+          <div>
             <pre>The selected page no: {{currentPage}}/{{smallnumPages}}</pre>
             <button type="button" class="hx-button is-info" (click)="setPage(3)">Set current page to: 3</button>
+          </div>
         </div>
+
       </div>
-
-
     </div>
-  </div>
 
-  <br>
+    <br>
 
-  <h5 id="code">Code</h5>
+    <h5 id="code">Code</h5>
 
-  <div class="hx-columns">
-    <div class="hx-column">
+    <div class="hx-columns">
+      <div class="hx-column">
 
-      <hx-tabset>
-        <hx-tab heading="Template">
-      <pre>
-        <code class="html">
-        &#x3C;hx-pagination [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22; (pageChanged)=&#x22;pageChanged($event)&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
-        &#x3C;br&#x3E;
-        &#x3C;hx-pagination [boundaryLinks]=&#x22;true&#x22; [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22; previousText=&#x22;&#x26;lsaquo;&#x22; nextText=&#x22;&#x26;rsaquo;&#x22; firstText=&#x22;&#x26;laquo;&#x22; lastText=&#x22;&#x26;raquo;&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
-        &#x3C;br&#x3E;
-        &#x3C;hx-pagination [directionLinks]=&#x22;false&#x22; [boundaryLinks]=&#x22;true&#x22; [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
-        &#x3C;br&#x3E;
-        &#x3C;hx-pagination [directionLinks]=&#x22;true&#x22; [boundaryLinks]=&#x22;true&#x22; [rotate]=&#x22;false&#x22; [totalItems]=&#x22;totalItems&#x22; [maxSize]=&#x22;7&#x22; [(ngModel)]=&#x22;currentPage&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
-        &#x3C;br&#x3E;
-        &#x3C;hx-pagination [directionLinks]=&#x22;false&#x22; [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22; (numPages)=&#x22;smallnumPages = $event&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
-        &#x3C;br&#x3E;
-        &#x3C;hx-pager [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22; (pageChanged)=&#x22;pageChanged($event)&#x22; pageBtnClass=&#x22;hx-button&#x22; itemsPerPage=&#x22;10&#x22;&#x3E;&#x3C;/hx-pager&#x3E;
-        &#x3C;br&#x3E;
+        <hx-tabset>
+          <hx-tab heading="Template">
+            <pre>
+              <code class="html">
+&#x3C;hx-pagination [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22; (pageChanged)=&#x22;pageChanged($event)&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
+&#x3C;br&#x3E;
+&#x3C;hx-pagination [boundaryLinks]=&#x22;true&#x22; [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22; previousText=&#x22;&#x26;lsaquo;&#x22;
+  nextText=&#x22;&#x26;rsaquo;&#x22; firstText=&#x22;&#x26;laquo;&#x22; lastText=&#x22;&#x26;raquo;&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
+&#x3C;br&#x3E;
+&#x3C;hx-pagination [directionLinks]=&#x22;false&#x22; [boundaryLinks]=&#x22;true&#x22; [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
+&#x3C;br&#x3E;
+&#x3C;hx-pagination [directionLinks]=&#x22;true&#x22; [boundaryLinks]=&#x22;true&#x22; [rotate]=&#x22;false&#x22; [totalItems]=&#x22;totalItems&#x22;
+  [maxSize]=&#x22;7&#x22; [(ngModel)]=&#x22;currentPage&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
+&#x3C;br&#x3E;
+&#x3C;hx-pagination [directionLinks]=&#x22;false&#x22; [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22;
+  (numPages)=&#x22;smallnumPages = $event&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
+&#x3C;br&#x3E;
+&#x3C;hx-pager [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22; (pageChanged)=&#x22;pageChanged($event)&#x22;
+  pageBtnClass=&#x22;hx-button&#x22; itemsPerPage=&#x22;10&#x22;&#x3E;&#x3C;/hx-pager&#x3E;
+&#x3C;br&#x3E;
 
-        &#x3C;pre&#x3E;The selected page no: {{currentPage}}/{{smallnumPages}}&#x3C;/pre&#x3E;
-        &#x3C;button type=&#x22;button&#x22; class=&#x22;hx-button is-info&#x22; (click)=&#x22;setPage(3)&#x22;&#x3E;Set current page to: 3&#x3C;/button&#x3E;
-        </code>
-      </pre>
-        </hx-tab>
-        <hx-tab heading="Typescript">
-          <pre>
-            <code class="typescript">
-      import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
+&#x3C;pre&#x3E;The selected page no: {{currentPage}}/{{smallnumPages}}&#x3C;/pre&#x3E;
+&#x3C;button type=&#x22;button&#x22; class=&#x22;hx-button is-info&#x22; (click)=&#x22;setPage(3)&#x22;&#x3E;Set current page to: 3&#x3C;/button&#x3E;
+              </code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Typescript">
+            <pre>
+              <code class="typescript">
+import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
 
-      @Component({{ '{' }}
-        selector: &#x27;app-pagination&#x27;,
-        templateUrl: &#x27;./pagination.component.html&#x27;
-      })
-      export class PaginationComponent implements OnInit {{ '{' }}
-        public totalItems: number = 128;
-        public currentPage: number = 4;
-        public smallnumPages: number = 0;
+@Component({{ '{' }}
+  selector: &#x27;app-pagination&#x27;,
+  templateUrl: &#x27;./pagination.component.html&#x27;
+})
+export class PaginationComponent implements OnInit {{ '{' }}
+  public totalItems: number = 128;
+  public currentPage: number = 4;
+  public smallnumPages: number = 0;
 
-        constructor() {{ '{' }} }
+  constructor() {{ '{' }} }
 
-        public setPage(pageNo: number): void {{ '{' }}
-          this.currentPage = pageNo;
-        }
+  public setPage(pageNo: number): void {{ '{' }}
+    this.currentPage = pageNo;
+  }
 
-        public pageChanged(event: any): void {{ '{' }}
-          console.log(&#x27;Page changed to: &#x27; + event.page);
-          console.log(&#x27;Number items per page: &#x27; + event.itemsPerPage);
-        }
+  public pageChanged(event: any): void {{ '{' }}
+    console.log(&#x27;Page changed to: &#x27; + event.page);
+    console.log(&#x27;Number items per page: &#x27; + event.itemsPerPage);
+  }
 
-        ngOnInit() {{ '{' }}
-        }
+  ngOnInit() {{ '{' }}
+  }
 
-      }
-
-            </code>
-          </pre>
-        </hx-tab>
-      </hx-tabset>
+}
+              </code>
+            </pre>
+          </hx-tab>
+        </hx-tabset>
+      </div>
     </div>
-  </div>
 
-  <hr>
+    <hr>
 
-  <h4 id="api">API Reference</h4>
+    <h4 id="api">API Reference</h4>
 
+    <div class="hx-columns">
+      <div class="hx-column">
+        <h5 class="is-primary">PaginationComponent</h5>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <h5 class="is-primary">PaginationComponent</h5>
+        <table class="hx-table  is-striped">
+          <thead>
+            <tr>
+              <th>Input</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tbody>
+              <tr>
+                <td>align</td>
+                <td><kbd>boolean</kbd></td>
+                <td>if <code class="noHighlight">true</code> aligns each link to the sides of pager</td>
+              </tr>
+              <tr>
+                <td>boundaryLinks</td>
+                <td><kbd>boolean</kbd></td>
+                <td>if <code class="noHighlight">false</code> first and last buttons will be hidden</td>
+              </tr>
+              <tr>
+                <td>directionLinks</td>
+                <td><kbd>boolean</kbd></td>
+                <td>if <code class="noHighlight">false</code> previous and next buttons will be hidden</td>
+              </tr>
+              <tr>
+                <td>disabled</td>
+                <td><kbd>boolean</kbd></td>
+                <td>if <code class="noHighlight">true</code> pagination component will be disabled</td>
+              </tr>
+              <tr>
+                <td>firstText</td>
+                <td><kbd>string</kbd></td>
+                <td>first button text </td>
+              </tr>
+              <tr>
+                <td>itemsPerPage</td>
+                <td><kbd>number</kbd></td>
+                <td>maximum number of items per page. If value less than 1 will display all items on one page </td>
+              </tr>
+              <tr>
+                <td>lastText</td>
+                <td><kbd>string</kbd></td>
+                <td>last button text</td>
+              </tr>
+              <tr>
+                <td>maxSize</td>
+                <td><kbd>number</kbd></td>
+                <td>limit number for page links in pager</td>
+              </tr>
+              <tr>
+                <td>nextText</td>
+                <td><kbd>string</kbd></td>
+                <td>next button text</td>
+              </tr>
+              <tr>
+                <td>pageBtnClass</td>
+                <td><kbd>string</kbd></td>
+                <td>add class to</td>
+              </tr>
+              <tr>
+                <td>previousText</td>
+                <td><kbd>string</kbd></td>
+                <td>previous button text</td>
+              </tr>
+              <tr>
+                <td>rotate</td>
+                <td><kbd>boolean</kbd></td>
+                <td>if <code class="noHighlight">true</code> current page will in the middle of pages list</td>
+              </tr>
+              <tr>
+                <td>sticky</td>
+                <td><kbd>boolean</kbd></td>
+                <td>if <code class="noHighlight">true</code> the <code class="noHighlight">.is-sticky</code> modifier will be added to the component</td>
+              </tr>
+              <tr>
+                <td>totalItems</td>
+                <td><kbd>number</kbd></td>
+                <td>total number of items in all pages</td>
+              </tr>
+            </tbody>
+        </table>
 
-      <table class="hx-table  is-striped">
-        <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tbody>
-        <tr>
-          <td>align</td>
-          <td><kbd>boolean</kbd></td>
-          <td>if <code class="noHighlight">true</code> aligns each link to the sides of pager</td>
-        </tr>
-        <tr>
-          <td>boundaryLinks</td>
-          <td><kbd>boolean</kbd></td>
-          <td>if <code class="noHighlight">false</code> first and last buttons will be hidden</td>
-        </tr>
-        <tr>
-          <td>directionLinks</td>
-          <td><kbd>boolean</kbd></td>
-          <td>if <code class="noHighlight">false</code> previous and next buttons will be hidden</td>
-        </tr>
-        <tr>
-          <td>disabled</td>
-          <td><kbd>boolean</kbd></td>
-          <td>if <code class="noHighlight">true</code> pagination component will be disabled</td>
-        </tr>
-        <tr>
-          <td>firstText</td>
-          <td><kbd>string</kbd></td>
-          <td>first button text </td>
-        </tr>
-        <tr>
-          <td>itemsPerPage</td>
-          <td><kbd>number</kbd></td>
-          <td>maximum number of items per page. If value less than 1 will display all items on one page </td>
-        </tr>
-        <tr>
-          <td>lastText</td>
-          <td><kbd>string</kbd></td>
-          <td>last button text</td>
-        </tr>
-        <tr>
-          <td>maxSize</td>
-          <td><kbd>number</kbd></td>
-          <td>limit number for page links in pager</td>
-        </tr>
-        <tr>
-          <td>nextText</td>
-          <td><kbd>string</kbd></td>
-          <td>next button text</td>
-        </tr>
-        <tr>
-          <td>pageBtnClass</td>
-          <td><kbd>string</kbd></td>
-          <td>add class to</td>
-        </tr>
-        <tr>
-          <td>previousText</td>
-          <td><kbd>string</kbd></td>
-          <td>previous button text</td>
-        </tr>
-        <tr>
-          <td>rotate</td>
-          <td><kbd>boolean</kbd></td>
-          <td>if <code class="noHighlight">true</code> current page will in the middle of pages list</td>
-        </tr>
-        <tr>
-          <td>totalItems</td>
-          <td><kbd>number</kbd></td>
-          <td>total number of items in all pages</td>
-        </tr>
-        </tbody>
-      </table>
-
-      <table class="hx-table is-striped">
-        <thead>
-        <tr>
-          <th>Outputs</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>numPages</td>
-          <td>fired when total pages count changes, $event:number equals to total pages count</td>
-        </tr>
-        <tr>
-          <td>pageChanged</td>
-          <td>fired when page was changed, <code class="noHighlight">$event:{{ '{' }}page, itemsPerPage}</code> equals to object with current page index and number of items per page</td>
-        </tr>
-        </tbody>
-      </table>
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Outputs</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>numPages</td>
+              <td>fired when total pages count changes, $event:number equals to total pages count</td>
+            </tr>
+            <tr>
+              <td>pageChanged</td>
+              <td>fired when page was changed, <code class="noHighlight">$event:{{ '{' }}page, itemsPerPage}</code> equals to object with current page index and number of items per page</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <h5 class="is-primary">PagerComponent</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <h5 class="is-primary">PagerComponent</h5>
 
-      <table class="hx-table is-striped">
-        <thead>
-        <tr>
-          <th>Input</th>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>align</td>
-          <td><kbd>boolean</kbd></td>
-          <td>if <code class="noHighlight">true</code> aligns each link to the sides of pager</td>
-        </tr>
-        <tr>
-          <td>boundaryLinks</td>
-          <td><kbd>boolean</kbd></td>
-          <td>if <code class="noHighlight">false</code> first and last buttons will be hidden</td>
-        </tr>
-        <tr>
-          <td>directionLinks</td>
-          <td><kbd>boolean</kbd></td>
-          <td>if <code class="noHighlight">false</code> previous and next buttons will be hidden</td>
-        </tr>
-        <tr>
-          <td>disabled</td>
-          <td><kbd>boolean</kbd></td>
-          <td>if <code class="noHighlight">true</code> pagination component will be disabled</td>
-        </tr>
-        <tr>
-          <td>firstText</td>
-          <td><kbd>string</kbd></td>
-          <td>first button text</td>
-        </tr>
-        <tr>
-          <td>itemsPerPage</td>
-          <td><kbd>number</kbd></td>
-          <td>maximum number of items per page. If value less than 1 will display all items on one page</td>
-        </tr>
-        <tr>
-          <td>lastText</td>
-          <td><kbd>string</kbd></td>
-          <td>last button text</td>
-        </tr>
-        <tr>
-          <td>maxSize</td>
-          <td><kbd>number</kbd></td>
-          <td>limit number for page links in pager</td>
-        </tr>
-        <tr>
-          <td>nextText</td>
-          <td><kbd>string</kbd></td>
-          <td>next button text</td>
-        </tr>
-        <tr>
-          <td>pageBtnClass</td>
-          <td><kbd>string</kbd></td>
-          <td>add class to</td>
-        </tr>
-        <tr>
-          <td>previousText</td>
-          <td><kbd>string</kbd></td>
-          <td>previous button text</td>
-        </tr>
-        <tr>
-          <td>rotate</td>
-          <td><kbd>boolean</kbd></td>
-          <td>if <code class="noHighlight">true</code> current page will in the middle of pages list</td>
-        </tr>
-        <tr>
-          <td>totalItems</td>
-          <td><kbd>number</kbd></td>
-          <td>total number of items in all pages</td>
-        </tr>
-        </tbody>
-      </table>
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Input</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>align</td>
+              <td><kbd>boolean</kbd></td>
+              <td>if <code class="noHighlight">true</code> aligns each link to the sides of pager</td>
+            </tr>
+            <tr>
+              <td>boundaryLinks</td>
+              <td><kbd>boolean</kbd></td>
+              <td>if <code class="noHighlight">false</code> first and last buttons will be hidden</td>
+            </tr>
+            <tr>
+              <td>directionLinks</td>
+              <td><kbd>boolean</kbd></td>
+              <td>if <code class="noHighlight">false</code> previous and next buttons will be hidden</td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td><kbd>boolean</kbd></td>
+              <td>if <code class="noHighlight">true</code> pagination component will be disabled</td>
+            </tr>
+            <tr>
+              <td>firstText</td>
+              <td><kbd>string</kbd></td>
+              <td>first button text</td>
+            </tr>
+            <tr>
+              <td>itemsPerPage</td>
+              <td><kbd>number</kbd></td>
+              <td>maximum number of items per page. If value less than 1 will display all items on one page</td>
+            </tr>
+            <tr>
+              <td>lastText</td>
+              <td><kbd>string</kbd></td>
+              <td>last button text</td>
+            </tr>
+            <tr>
+              <td>maxSize</td>
+              <td><kbd>number</kbd></td>
+              <td>limit number for page links in pager</td>
+            </tr>
+            <tr>
+              <td>nextText</td>
+              <td><kbd>string</kbd></td>
+              <td>next button text</td>
+            </tr>
+            <tr>
+              <td>pageBtnClass</td>
+              <td><kbd>string</kbd></td>
+              <td>add class to</td>
+            </tr>
+            <tr>
+              <td>previousText</td>
+              <td><kbd>string</kbd></td>
+              <td>previous button text</td>
+            </tr>
+            <tr>
+              <td>rotate</td>
+              <td><kbd>boolean</kbd></td>
+              <td>if <code class="noHighlight">true</code> current page will in the middle of pages list</td>
+            </tr>
+            <tr>
+              <td>totalItems</td>
+              <td><kbd>number</kbd></td>
+              <td>total number of items in all pages</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+
   </div>
-
-
-
-
-
-
-
 </section>
-<aside class="hx-sidebar is-medium-width is-scrollable">
-  <ul class="hx-nav hx-nav-vertical">
-    <li class="hx-nav-heading"><h6>Contents</h6></li>
 
+<aside class="hx-sidebar is-right is-active is-medium-width is-scrollable">
+  <ul class="hx-nav hx-nav-vertical">
+    <li class="hx-nav-heading">
+      <h6>Contents</h6>
+    </li>
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
     </li>
-
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Examples</span></a>
     </li>
@@ -330,6 +336,5 @@
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
     </li>
-
   </ul>
 </aside>

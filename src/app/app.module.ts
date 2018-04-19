@@ -4,7 +4,10 @@ import { HxUiModule } from '../modules/index';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { registerLocaleData } from '@angular/common';
+import localeEn from '@angular/common/locales/en-AU';
 
+registerLocaleData(localeEn, 'en-AU');
 
 @NgModule({
   declarations: [
