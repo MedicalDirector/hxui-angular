@@ -17,10 +17,9 @@ import { SelectizeConfig } from '../selectize/selectize.config';
 export class SelectizeModule {
   public static forRoot(config?: any): ModuleWithProviders {
     return {
-      ngModule: SelectizeModule, providers: [
-        ComponentLoaderFactory,
-        // PositioningService,
-        {provide: SelectizeConfig, useValue: config ? config : new SelectizeConfig()}
+      ngModule: SelectizeModule,
+      providers: [
+        ComponentLoaderFactory
       ]
     };
   };

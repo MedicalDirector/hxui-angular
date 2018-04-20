@@ -9,7 +9,7 @@ import { TooltipModule } from './tooltip/tooltip.module';
 import { TypeaheadModule } from './typeahead/typeahead.module';
 import { ModalService } from './modal/modal.service';
 import { TabularModule } from './tabular/tabular.module';
-import { SelectizeModule } from 'modules/selectize/selectize.module';
+import { SelectizeModule } from './selectize/selectize.module';
 
 export * from './modal/index';
 export * from './datepicker/index';

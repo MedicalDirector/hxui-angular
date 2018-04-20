@@ -8,7 +8,7 @@ $selectize-line-height: $line-height-base;
 
 $selectize-color-text: $color-dark;
 $selectize-color-border: transparent;
-$selectize-color-highlight: $color-primary;
+$selectize-color-highlight: rgba(35, 49, 43, .23);
 $selectize-color-input: transparent;
 $selectize-color-input-full: $selectize-color-input;
 $selectize-color-disabled: #fafafa;
@@ -229,6 +229,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 		.highlight {
 			background: $selectize-color-highlight;
 			@include selectize-border-radius(1px);
+      font-weight: bold;
 		}
 	}
 	[data-selectable], .optgroup-header {

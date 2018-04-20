@@ -1,19 +1,279 @@
-<section class="hx-section scrollable-y is-comfortable" #container>
+<section class="hx-section scrollable-y" #container>
 
 
     <h1 class="hx-title">Selectize</h1>
-    <h2 class="hx-subtitle">An Angular wrapper for the popular selectize jQuery library</h2>
+  <h2 class="hx-subtitle">An Angular wrapper for the popular <a href="https://selectize.github.io/selectize.js/" target="_blank">selectize.js</a> library</h2>
 
+  <hr>
 
-  <div class="hx-card not-scrollable">
-    <div class="hx-card-content">
-      <div class="hx-input-control">
-        <div class="hx-select-control">
-        <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
-            <hxa-selectize [config]="selectizeConfig" [options]="selectizeOptions"></hxa-selectize>
+  <h4 id="usage">Usage</h4>
+  <p>Add the SelectizeModule to AppModule or SharedModule.</p>
+
+  <pre>
+      <code class="typescript">
+import {{ '{' }}SelectizeModule} from &#x22;@hxui/angular&#x22;;
+
+@NgModule({{ '{' }}
+  imports: [SelectizeModule.forRoot(),...]
+})
+export class AppModule(){{ '{' }}
+      </code>
+    </pre>
+
+  <hr>
+
+  <h4 id="multiselectexample">Multi Select Example</h4>
+
+  <p>Add and remove items in any order with or without your mouse. Use your left/right arrow keys to move the cursor between items. </p>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+
+      <div class="hx-card not-scrollable">
+        <div class="hx-card-content">
+          <div class="hx-input-control">
+            <div class="hx-select-control">
+              <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
+              <hxa-selectize [config]="multiSelectizeConfig" [options]="selectizeOptions"></hxa-selectize>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
+
+  <br>
+
+  <h5 id="code">Code</h5>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+
+      <hx-tabset>
+        <hx-tab heading="Template">
+            <pre>
+              <code class="html">
+  &#x3C;div class=&#x22;hx-card not-scrollable&#x22;&#x3E;
+    &#x3C;div class=&#x22;hx-card-content&#x22;&#x3E;
+      &#x3C;div class=&#x22;hx-input-control&#x22;&#x3E;
+        &#x3C;div class=&#x22;hx-select-control&#x22;&#x3E;
+          &#x3C;label for=&#x22;&#x22; class=&#x22;hx-label&#x22;&#x3E;Test(s) required &#x3C;sup&#x3E;*&#x3C;/sup&#x3E;&#x3C;/label&#x3E;
+          &#x3C;hxa-selectize [config]=&#x22;selectizeConfig&#x22; [options]=&#x22;selectizeOptions&#x22;&#x3E;&#x3C;/hxa-selectize&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+              </code>
+            </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+            <pre>
+              <code class="typescript">
+  import  {{ '{' }}
+    Component,
+    ElementRef,
+    Inject,
+    OnInit,
+    ViewChild
+  } from &#x27;@angular/core&#x27;;
+  import  {{ '{' }} PageScrollService } from &#x27;ngx-page-scroll&#x27;;
+  import  {{ '{' }} CoreBaseComponent } from &#x27;../core-base.component&#x27;;
+  import  {{ '{' }} DOCUMENT } from &#x27;@angular/platform-browser&#x27;;
+  import  {{ '{' }} SelectizeConfig } from &#x27;modules/selectize/selectize.config&#x27;;
+  import  {{ '{' }} ISelectizeItem } from &#x27;../../../modules/selectize/selectize-item.interface&#x27;;
+
+  @Component( {{ '{' }}
+    selector: &#x27;app-selectize&#x27;,
+    templateUrl: &#x27;./selectize.component.html&#x27;,
+    styles: [&#x27;:host  {{ '{' }} display:flex; flex: 1; min-width: 0; }&#x27;]
+  })
+  export class SelectizeComponent extends CoreBaseComponent implements OnInit  {{ '{' }}
+    public selectizeConfig = new SelectizeConfig();
+    public selectizeOptions: ISelectizeItem[] = &#x3C;ISelectizeItem[]&#x3E;[
+       {{ '{' }}
+        label: &#x27;Iron studies&#x27;,
+        value: &#x27;ironstudies&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;Glucose fasting&#x27;,
+        value: &#x27;glucosefasting&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;HbA1c&#x27;,
+        value: &#x27;hba1c&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;Glucose tolerance test&#x27;,
+        value: &#x27;gklucosetolerencetest&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;HDL cholesterol&#x27;,
+        value: &#x27;hdlcholesterol&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;INR&#x27;,
+        value: &#x27;inr&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;Fructosamine&#x27;,
+        value: &#x27;fructosamine&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;Thyroid function tests&#x27;,
+        value: &#x27;thyroid functions tests&#x27;
+      }
+    ];
+
+
+    ngOnInit(): void  {{ '{' }}
+      this.selectizeConfig.create = true;
+      this.selectizeConfig.maxItems = null;
+      this.selectizeConfig.hideSelected = true;
+    }
+
+    constructor(
+      protected pageScrollService: PageScrollService,
+      @Inject(DOCUMENT) protected document: any
+    )  {{ '{' }}
+      super(pageScrollService, document);
+    }
+  }
+
+              </code>
+            </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr>
+
+  <h4 id="singleselectexample">Single Select Example</h4>
+
+  <p>Most basic example that behaves like a native select drop down box. </p>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+
+      <div class="hx-card not-scrollable">
+        <div class="hx-card-content">
+          <div class="hx-input-control">
+            <div class="hx-select-control">
+              <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
+              <hxa-selectize [config]="singleSelectizeConfig" [options]="selectizeOptions"></hxa-selectize>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+
+  <h5 id="code">Code</h5>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+
+      <hx-tabset>
+        <hx-tab heading="Template">
+            <pre>
+              <code class="html">
+  &#x3C;div class=&#x22;hx-card not-scrollable&#x22;&#x3E;
+    &#x3C;div class=&#x22;hx-card-content&#x22;&#x3E;
+      &#x3C;div class=&#x22;hx-input-control&#x22;&#x3E;
+        &#x3C;div class=&#x22;hx-select-control&#x22;&#x3E;
+          &#x3C;label for=&#x22;&#x22; class=&#x22;hx-label&#x22;&#x3E;Test(s) required &#x3C;sup&#x3E;*&#x3C;/sup&#x3E;&#x3C;/label&#x3E;
+          &#x3C;hxa-selectize [config]=&#x22;selectizeConfig&#x22; [options]=&#x22;selectizeOptions&#x22;&#x3E;&#x3C;/hxa-selectize&#x3E;
+        &#x3C;/div&#x3E;
+      &#x3C;/div&#x3E;
+    &#x3C;/div&#x3E;
+  &#x3C;/div&#x3E;
+              </code>
+            </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+            <pre>
+              <code class="typescript">
+  import  {{ '{' }}
+    Component,
+    ElementRef,
+    Inject,
+    OnInit,
+    ViewChild
+  } from &#x27;@angular/core&#x27;;
+  import  {{ '{' }} PageScrollService } from &#x27;ngx-page-scroll&#x27;;
+  import  {{ '{' }} CoreBaseComponent } from &#x27;../core-base.component&#x27;;
+  import  {{ '{' }} DOCUMENT } from &#x27;@angular/platform-browser&#x27;;
+  import  {{ '{' }} SelectizeConfig } from &#x27;modules/selectize/selectize.config&#x27;;
+  import  {{ '{' }} ISelectizeItem } from &#x27;../../../modules/selectize/selectize-item.interface&#x27;;
+
+  @Component( {{ '{' }}
+    selector: &#x27;app-selectize&#x27;,
+    templateUrl: &#x27;./selectize.component.html&#x27;,
+    styles: [&#x27;:host  {{ '{' }} display:flex; flex: 1; min-width: 0; }&#x27;]
+  })
+  export class SelectizeComponent extends CoreBaseComponent implements OnInit  {{ '{' }}
+    public selectizeConfig = new SelectizeConfig();
+    public selectizeOptions: ISelectizeItem[] = &#x3C;ISelectizeItem[]&#x3E;[
+       {{ '{' }}
+        label: &#x27;Iron studies&#x27;,
+        value: &#x27;ironstudies&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;Glucose fasting&#x27;,
+        value: &#x27;glucosefasting&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;HbA1c&#x27;,
+        value: &#x27;hba1c&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;Glucose tolerance test&#x27;,
+        value: &#x27;gklucosetolerencetest&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;HDL cholesterol&#x27;,
+        value: &#x27;hdlcholesterol&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;INR&#x27;,
+        value: &#x27;inr&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;Fructosamine&#x27;,
+        value: &#x27;fructosamine&#x27;
+      },
+       {{ '{' }}
+        label: &#x27;Thyroid function tests&#x27;,
+        value: &#x27;thyroid functions tests&#x27;
+      }
+    ];
+
+
+    ngOnInit(): void  {{ '{' }}
+    }
+
+    constructor(
+      protected pageScrollService: PageScrollService,
+      @Inject(DOCUMENT) protected document: any
+    )  {{ '{' }}
+      super(pageScrollService, document);
+    }
+  }
+
+              </code>
+            </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr>
+
+
+
 
 </section>

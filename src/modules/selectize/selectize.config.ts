@@ -52,7 +52,7 @@ export class SelectizeConfig  {
    *
    *  Default: true
    */
-  highlight = false;
+  highlight = true;
 
   /**
    *  If false, items created by the user will not show up as available options once
@@ -193,6 +193,27 @@ export class SelectizeConfig  {
   public valueField = 'value';
 
   /**
+   * An array of property names to analyze when filtering options.
+   */
+  public searchField = ['label'];
+
+  /**
+   * Default override item render function
+   */
+  public render = {
+    item: (item: ISelectizeItem, escape: Function): string => {
+      const multi = `<span class="hx-badge is-medium">
+                <span class="hx-badge-content">`
+                    + escape(item.label) +
+                `</span>
+              </span>`;
+      const single = `<div class="item">` + escape(item.label) + `</div>`;
+      return (!this.maxItems) ? multi : single;
+    }
+  };
+
+
+  /**
    *  Selectize plugins to use
    */
   private plugins = {
@@ -204,16 +225,4 @@ export class SelectizeConfig  {
     }
   };
 
-  /**
-   * Default override item render function
-   */
-  public render = {
-    item: (item: ISelectizeItem, escape: Function): string => {
-      return `<span class="hx-badge">
-                <span class="hx-badge-content">`
-                    + escape(item.label) +
-                `</span>
-              </span>`;
-    }
-  };
 }

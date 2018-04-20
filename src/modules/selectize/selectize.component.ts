@@ -13,7 +13,7 @@ import {
   IterableDiffer,
   IterableChangeRecord,
   IterableChanges,
-  ViewEncapsulation
+  ViewEncapsulation, Renderer2, ChangeDetectionStrategy
 } from '@angular/core';
 import {
   NG_VALUE_ACCESSOR,
@@ -37,6 +37,7 @@ export const SELECTIZE_VALUE_ACCESSOR: any = {
   template: `<select #selectizeInput></select>`,
   providers: [SELECTIZE_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['selectize.component.scss']
 })
 export class SelectizeComponent
@@ -47,6 +48,7 @@ export class SelectizeComponent
   private _optgroups: any[];
   private _optgroups_differ: IterableDiffer<any>;
 
+  @Input() id: string;
   @Input() placeholder: string;
   @Input() hasOptionsPlaceholder: string;
   @Input() noOptionsPlaceholder: string;
@@ -65,9 +67,12 @@ export class SelectizeComponent
   private onTouchedCallback: () => {};
   private onChangeCallback: (_: any) => {};
 
-  constructor(private _differs: IterableDiffers) {}
+  constructor(private _differs: IterableDiffers, private renderer: Renderer2) {}
 
   ngOnInit(): void {
+    if (this.id && this.id.length > 0) {
+      this.renderer.setAttribute(this.selectizeInput.nativeElement, 'id', this.id);
+    }
     this.reset();
   }
 

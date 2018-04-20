@@ -17,7 +17,9 @@ import {ISelectizeItem} from '../../../modules/selectize/selectize-item.interfac
   styles: [':host { display:flex; flex: 1; min-width: 0; }']
 })
 export class SelectizeComponent extends CoreBaseComponent implements OnInit {
-  public selectizeConfig = new SelectizeConfig();
+
+  public multiSelectizeConfig = new SelectizeConfig();
+  public singleSelectizeConfig = new SelectizeConfig();
   public selectizeOptions: ISelectizeItem[] = <ISelectizeItem[]>[
     {
       label: 'Iron studies',
@@ -55,10 +57,15 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.selectizeConfig.create = true;
-    this.selectizeConfig.maxItems = null;
-    this.selectizeConfig.hideSelected = true;
+    this.setMultiSelectizeConfig();
   }
+
+  private setMultiSelectizeConfig() {
+     this.multiSelectizeConfig.create = true;
+     this.multiSelectizeConfig.maxItems = null;
+     this.multiSelectizeConfig.hideSelected = true;
+  }
+
 
   constructor(
     protected pageScrollService: PageScrollService,
