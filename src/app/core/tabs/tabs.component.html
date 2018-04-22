@@ -9,23 +9,7 @@
     <p>Add the TabsModule to AppModule or SharedModule.</p>
 
     <pre>
-      <code class="typescript">
-import {{ '{' }}TabsModule} from &#x22;@hxui-angular/packages/tabs/tabs.module&#x22;;
-
-@NgModule({{ '{' }}
-  imports: [TabsModule.forRoot(),...]
-})
-export class AppModule(){{ '{' }}
-      </code>
-      <code class="html">
-&#x3C;hx-tabset&#x3E;
-  &#x3C;hx-tab heading=&#x27;Tab 1 heading&#x27;&#x3E;Tab 1 content&#x3C;/hx-tab&#x3E;
-  &#x3C;hx-tab&#x3E;
-    &#x3C;template tabHeading&#x3E;Tab 2 heading&#x3C;/template&#x3E;
-    Tab 2 content
-  &#x3C;/hx-tab&#x3E;
-&#x3C;/hx-tabset&#x3E;
-      </code>
+      <code highlight [code]="code.usage"></code>
     </pre>
 
     <hr>
@@ -72,76 +56,12 @@ export class AppModule(){{ '{' }}
         <hx-tabset>
           <hx-tab heading="Template">
             <pre>
-        <code class="html">
-&#x3C;p&#x3E;
-  &#x3C;button type=&#x22;button&#x22; class=&#x22;hx-button&#x22; (click)=&#x22;tabs[0].active = true&#x22;&#x3E;Select second tab&#x3C;/button&#x3E;
-  &#x3C;button type=&#x22;button&#x22; class=&#x22;hx-button is-info&#x22; (click)=&#x22;tabs[1].active = true&#x22;&#x3E;Select third tab&#x3C;/button&#x3E;
-  &#x3C;button type=&#x22;button&#x22; class=&#x22;hx-button is-primary&#x22; (click)=&#x22;tabs[1].disabled = ! tabs[1].disabled&#x22;&#x3E;Enable / Disable third tab&#x3C;/button&#x3E;
-&#x3C;/p&#x3E;
-
-&#x3C;br&#x3E;
-
-&#x3C;hx-tabset&#x3E;
-  &#x3C;hx-tab heading=&#x22;Static title&#x22;&#x3E;Static content&#x3C;/hx-tab&#x3E;
-  &#x3C;hx-tab *ngFor=&#x22;let tabz of tabs&#x22;
-       [heading]=&#x22;tabz.title&#x22;
-       [active]=&#x22;tabz.active&#x22;
-       (select)=&#x22;tabz.active = true&#x22;
-       (deselect)=&#x22;tabz.active = false&#x22;
-       [disabled]=&#x22;tabz.disabled&#x22;
-       [removable]=&#x22;tabz.removable&#x22;
-       (removed)=&#x22;removeTabHandler(tabz)&#x22;
-       [customClass]=&#x22;tabz.customClass&#x22;&#x3E;
-    {{ '{' }} {{ '{' }} tabz?.content}}
-  &#x3C;/hx-tab&#x3E;
-  &#x3C;hx-tab (select)=&#x22;alertMe()&#x22;&#x3E;
-    &#x3C;ng-template hxTabHeading&#x3E;
-      &#x3C;i class=&#x22;icon icon-bell is-small&#x22;&#x3E;&#x3C;/i&#x3E; Alert!
-    &#x3C;/ng-template&#x3E;
-    Html tab heading and callback!
-  &#x3C;/hx-tab&#x3E;
-&#x3C;/hx-tabset&#x3E;
-        </code>
+        <code highlight [code]="code.exampleTemplate"></code>
       </pre>
           </hx-tab>
           <hx-tab heading="Typescript">
             <pre>
-            <code class="typescript">
-import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
-
-@Component({{ '{' }}
-  selector: &#x27;app-tabs&#x27;,
-  templateUrl: &#x27;./tabs.component.html&#x27;
-})
-export class TabsComponent implements OnInit {{ '{' }}
-
-  public tabs: any[] = [
-    {{ '{' }}title: &#x27;Dynamic Title 1&#x27;, content: &#x27;Dynamic content 1&#x27;},
-    {{ '{' }}title: &#x27;Dynamic Title 2&#x27;, content: &#x27;Dynamic content 2&#x27;, disabled: true},
-    {{ '{' }}title: &#x27;Dynamic Title 3&#x27;, content: &#x27;Dynamic content 3&#x27;, removable: true},
-    {{ '{' }}title: &#x27;Dynamic Title 4&#x27;, content: &#x27;Dynamic content 4&#x27;, customClass: &#x27;customClass&#x27;}
-  ];
-
-  public alertMe(): void {{ '{' }}
-    setTimeout(function (): void {{ '{' }}
-      alert(&#x27;You\&#x27;ve selected the alert tab!&#x27;);
-    });
-  }
-
-  public setActiveTab(index: number): void {{ '{' }}
-    this.tabs[index].active = true;
-  }
-
-  public removeTabHandler(): void {{ '{' }}
-    console.log(&#x27;Remove Tab handler&#x27;);
-  }
-
-  constructor() {{ '{' }}
-
-  ngOnInit() {{ '{' }}
-  }
-}
-            </code>
+            <code highlight [code]="code.exampleTypescript"></code>
           </pre>
           </hx-tab>
         </hx-tabset>
@@ -262,101 +182,7 @@ export class TabsComponent implements OnInit {{ '{' }}
         <hx-tabset>
           <hx-tab heading="Template">
             <pre>
-        <code class="html">
-&#x3C;hx-tabset [justified]=&#x22;true&#x22; [hasInfo]=&#x22;true&#x22;&#x3E;
-  &#x3C;hx-tab&#x3E;
-    &#x3C;ng-template hxTabHeading&#x3E;
-      &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Overdue&#x3C;/h6&#x3E;
-      &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
-        &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;10 &#x3C;small&#x3E;in April&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;13 &#x3C;small&#x3E;in total&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
-        &#x3C;/div&#x3E;
-      &#x3C;/div&#x3E;
-    &#x3C;/ng-template&#x3E;
-    Tab 1 content
-  &#x3C;/hx-tab&#x3E;
-  &#x3C;hx-tab&#x3E;
-    &#x3C;ng-template hxTabHeading&#x3E;
-      &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Upcoming&#x3C;/h6&#x3E;
-      &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
-        &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;23 &#x3C;small&#x3E;in April/May&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;300 &#x3C;small&#x3E;claims&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
-        &#x3C;/div&#x3E;
-      &#x3C;/div&#x3E;
-    &#x3C;/ng-template&#x3E;
-    Tab 2 content
-  &#x3C;/hx-tab&#x3E;
-  &#x3C;hx-tab&#x3E;
-    &#x3C;ng-template hxTabHeading&#x3E;
-      &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Assigned/New&#x3C;/h6&#x3E;
-      &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
-        &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;40 &#x3C;small&#x3E;total&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
-        &#x3C;/div&#x3E;
-      &#x3C;/div&#x3E;
-    &#x3C;/ng-template&#x3E;
-    Tab 3 content
-  &#x3C;/hx-tab&#x3E;
-  &#x3C;hx-tab&#x3E;
-    &#x3C;ng-template hxTabHeading&#x3E;
-      &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Plan Started&#x3C;/h6&#x3E;
-      &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
-        &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;23 &#x3C;small&#x3E;awaiting recall&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;40 &#x3C;small&#x3E;recalled&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
-        &#x3C;/div&#x3E;
-      &#x3C;/div&#x3E;
-    &#x3C;/ng-template&#x3E;
-    Tab 4 content
-  &#x3C;/hx-tab&#x3E;
-  &#x3C;hx-tab&#x3E;
-    &#x3C;ng-template hxTabHeading&#x3E;
-      &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Team Participation&#x3C;/h6&#x3E;
-      &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
-        &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;23 &#x3C;small&#x3E;participating&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;11 &#x3C;small&#x3E;no response&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;5 &#x3C;small&#x3E;declined&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-        &#x3C;/div&#x3E;
-      &#x3C;/div&#x3E;
-    &#x3C;/ng-template&#x3E;
-    Tab 5 content
-  &#x3C;/hx-tab&#x3E;
-  &#x3C;hx-tab&#x3E;
-    &#x3C;ng-template hxTabHeading&#x3E;
-      &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Awaiting Billing&#x3C;/h6&#x3E;
-      &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
-        &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;23 &#x3C;small&#x3E;in April&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;40 &#x3C;small&#x3E;in total&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
-        &#x3C;/div&#x3E;
-      &#x3C;/div&#x3E;
-    &#x3C;/ng-template&#x3E;
-    Tab 6 content
-  &#x3C;/hx-tab&#x3E;
-  &#x3C;hx-tab&#x3E;
-    &#x3C;ng-template hxTabHeading&#x3E;
-      &#x3C;h6 class=&#x22;mt-0 mb-1&#x22;&#x3E;Completed&#x3C;/h6&#x3E;
-      &#x3C;div class=&#x22;hx-columns mt-0 pt-0&#x22;&#x3E;
-        &#x3C;div class=&#x22;hx-column hx-flex-grow&#x22;&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;23 &#x3C;small&#x3E;in April&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;40 &#x3C;small&#x3E;in total&#x3C;/small&#x3E;&#x3C;/h6&#x3E;
-          &#x3C;h6 class=&#x22;mt-0 mb-0&#x22;&#x3E;&#x26;nbsp;&#x3C;/h6&#x3E;
-        &#x3C;/div&#x3E;
-      &#x3C;/div&#x3E;
-    &#x3C;/ng-template&#x3E;
-    Tab 7 content
-  &#x3C;/hx-tab&#x3E;
-&#x3C;/hx-tabset&#x3E;
-        </code>
+        <code highlight [code]="code.exampleInfoTabTemplate"></code>
       </pre>
           </hx-tab>
         </hx-tabset>

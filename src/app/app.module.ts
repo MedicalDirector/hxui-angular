@@ -6,6 +6,7 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { registerLocaleData } from '@angular/common';
 import localeEn from '@angular/common/locales/en-AU';
+import {HighlightModule} from 'ngx-highlightjs';
 
 registerLocaleData(localeEn, 'en-AU');
 
@@ -16,7 +17,8 @@ registerLocaleData(localeEn, 'en-AU');
   imports: [
     CoreModule.forRoot(),
     SharedModule.forRoot(),
-    HxUiModule.forRoot()
+    HxUiModule.forRoot(),
+    HighlightModule.forRoot({ theme: 'agate'})
   ],
   providers: [],
   bootstrap: [AppComponent]

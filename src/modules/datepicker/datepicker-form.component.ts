@@ -3,7 +3,7 @@ import { DateValueAccessor } from './datevalue.accessor'
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'hxa-datepicker-form',
+  selector: 'hxa-datepicker-input, hxa-datepicker-form',
   templateUrl: './datepicker-form.component.html',
   styleUrls: ['./datepicker-form.component.scss'],
   providers: [{
@@ -16,14 +16,14 @@ export class DatepickerFormComponent extends DateValueAccessor implements OnInit
 
   @Output() onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
-  @Input() disabled: boolean = false;
-  @Input() readonly: boolean = false;
-  @Input() required: boolean = true;
-  @Input() allowTextEntry: boolean = true;
-  @Input() defaultToPresentDate: boolean = true;
-  @Input() allowPreviousDates: boolean = true;
-  @Input() dateFormat: string = "dd/MM/y";
-  @Input() placeholder: string = "Date";
+  @Input() disabled = false;
+  @Input() readonly = false;
+  @Input() required = true;
+  @Input() allowTextEntry = true;
+  @Input() defaultToPresentDate = true;
+  @Input() allowPreviousDates = true;
+  @Input() dateFormat = "dd/MM/y";
+  @Input() placeholder = "Date";
   @Input() align: "top" | "bottom" = "bottom";
 
   public date: Date;

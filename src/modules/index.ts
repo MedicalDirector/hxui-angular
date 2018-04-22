@@ -9,6 +9,7 @@ import { TooltipModule } from './tooltip/tooltip.module';
 import { TypeaheadModule } from './typeahead/typeahead.module';
 import { ModalService } from './modal/modal.service';
 import { TabularModule } from './tabular/tabular.module';
+import { SelectizeModule } from './selectize/selectize.module';
 
 export * from './modal/index';
 export * from './datepicker/index';
@@ -34,28 +35,23 @@ export {
   ComponentLoader
 } from './component-loader/component-loader.class';
 
-
-
 export {
   Positioning, PositioningOptions, PositioningService, positionElements
 } from './positioning/index';
-
-
 
 @NgModule({
   imports: [
     DropdownModule.forRoot(), ModalModule.forRoot(), PaginationModule.forRoot(),
     TabsModule.forRoot(), TooltipModule.forRoot(),
     TypeaheadModule.forRoot(), TabularModule.forRoot(),
-    DatepickerModule.forRoot()
+    SelectizeModule.forRoot(), DatepickerModule.forRoot()
   ],
   exports: [
-    DatepickerModule, DropdownModule, ModalModule, 
+    DatepickerModule, DropdownModule, ModalModule,
     PaginationModule, TabsModule, TooltipModule,
-    TypeaheadModule, TabularModule
+    TypeaheadModule, TabularModule, SelectizeModule
   ]
 })
-
 
 export class HxUiModule {
   public static forRoot(): ModuleWithProviders {

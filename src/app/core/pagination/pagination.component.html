@@ -10,14 +10,7 @@
     <p>Add the PaginationModule to AppModule or SharedModule.</p>
 
     <pre>
-      <code class="typescript">
-import {{ '{' }}PaginationModule} from &#x22;@hxui-angular/packages/pagination/pagination.module&#x22;;
-
-@NgModule({{ '{' }}
-  imports: [PaginationModule.forRoot(),...]
-})
-export class AppModule(){{ '{' }}
-      </code>
+      <code highlight [code]="code.usage"></code>
     </pre>
 
 
@@ -62,59 +55,12 @@ export class AppModule(){{ '{' }}
         <hx-tabset>
           <hx-tab heading="Template">
             <pre>
-              <code class="html">
-&#x3C;hx-pagination [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22; (pageChanged)=&#x22;pageChanged($event)&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
-&#x3C;br&#x3E;
-&#x3C;hx-pagination [boundaryLinks]=&#x22;true&#x22; [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22; previousText=&#x22;&#x26;lsaquo;&#x22;
-  nextText=&#x22;&#x26;rsaquo;&#x22; firstText=&#x22;&#x26;laquo;&#x22; lastText=&#x22;&#x26;raquo;&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
-&#x3C;br&#x3E;
-&#x3C;hx-pagination [directionLinks]=&#x22;false&#x22; [boundaryLinks]=&#x22;true&#x22; [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
-&#x3C;br&#x3E;
-&#x3C;hx-pagination [directionLinks]=&#x22;true&#x22; [boundaryLinks]=&#x22;true&#x22; [rotate]=&#x22;false&#x22; [totalItems]=&#x22;totalItems&#x22;
-  [maxSize]=&#x22;7&#x22; [(ngModel)]=&#x22;currentPage&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
-&#x3C;br&#x3E;
-&#x3C;hx-pagination [directionLinks]=&#x22;false&#x22; [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22;
-  (numPages)=&#x22;smallnumPages = $event&#x22;&#x3E;&#x3C;/hx-pagination&#x3E;
-&#x3C;br&#x3E;
-&#x3C;hx-pager [totalItems]=&#x22;totalItems&#x22; [(ngModel)]=&#x22;currentPage&#x22; (pageChanged)=&#x22;pageChanged($event)&#x22;
-  pageBtnClass=&#x22;hx-button&#x22; itemsPerPage=&#x22;10&#x22;&#x3E;&#x3C;/hx-pager&#x3E;
-&#x3C;br&#x3E;
-
-&#x3C;pre&#x3E;The selected page no: {{currentPage}}/{{smallnumPages}}&#x3C;/pre&#x3E;
-&#x3C;button type=&#x22;button&#x22; class=&#x22;hx-button is-info&#x22; (click)=&#x22;setPage(3)&#x22;&#x3E;Set current page to: 3&#x3C;/button&#x3E;
-              </code>
+              <code highlight [code]="code.exampleTemplate"></code>
             </pre>
           </hx-tab>
           <hx-tab heading="Typescript">
             <pre>
-              <code class="typescript">
-import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
-
-@Component({{ '{' }}
-  selector: &#x27;app-pagination&#x27;,
-  templateUrl: &#x27;./pagination.component.html&#x27;
-})
-export class PaginationComponent implements OnInit {{ '{' }}
-  public totalItems: number = 128;
-  public currentPage: number = 4;
-  public smallnumPages: number = 0;
-
-  constructor() {{ '{' }} }
-
-  public setPage(pageNo: number): void {{ '{' }}
-    this.currentPage = pageNo;
-  }
-
-  public pageChanged(event: any): void {{ '{' }}
-    console.log(&#x27;Page changed to: &#x27; + event.page);
-    console.log(&#x27;Number items per page: &#x27; + event.itemsPerPage);
-  }
-
-  ngOnInit() {{ '{' }}
-  }
-
-}
-              </code>
+              <code highlight [code]="code.exampleTypescript"></code>
             </pre>
           </hx-tab>
         </hx-tabset>

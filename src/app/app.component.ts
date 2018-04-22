@@ -69,6 +69,10 @@ export class AppComponent {
         {
           name: 'Typeaheads',
           link: '/typeaheads'
+        },
+        {
+          name: 'Selectize',
+          link: '/selectize'
         }
       ]
     },

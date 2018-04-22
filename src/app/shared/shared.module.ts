@@ -5,9 +5,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from '../app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HxUiModule} from 'modules/index';
-import { HighlightJsModule, HighlightJsService } from 'angular2-highlight-js';
 import {NgxPageScrollModule, PageScrollService} from 'ngx-page-scroll';
 import {HttpClientModule} from '@angular/common/http';
+import {HighlightModule} from 'ngx-highlightjs';
 
 
 @NgModule({
@@ -20,8 +20,8 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     HxUiModule,
-    HighlightJsModule,
-    NgxPageScrollModule
+    NgxPageScrollModule,
+    HighlightModule
   ],
   declarations: [],
   exports: [
@@ -33,8 +33,8 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     HxUiModule,
-    HighlightJsModule,
-    NgxPageScrollModule
+    NgxPageScrollModule,
+    HighlightModule
   ]
 })
 export class SharedModule {
@@ -42,7 +42,6 @@ export class SharedModule {
     return {
       ngModule: SharedModule,
       providers: [
-        HighlightJsService,
         PageScrollService
       ]
     };

@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
 import {CoreBaseComponent} from '../core-base.component';
+import {PaginationCode} from './pagination.code';
 
 @Component({
   selector: 'app-pagination',
@@ -9,6 +10,8 @@ import {CoreBaseComponent} from '../core-base.component';
   styles: [':host { display:flex; flex: 1; min-width: 0; }']
 })
 export class PaginationComponent extends CoreBaseComponent implements OnInit {
+
+  code = new PaginationCode();
   public totalItems = 128;
   public currentPage = 4;
   public smallnumPages = 0;

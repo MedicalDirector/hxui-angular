@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
 import {CoreBaseComponent} from '../core-base.component';
+import {TypeaheadsCode} from './typeaheads.code';
 
 @Component({
   selector: 'app-typeaheads',
@@ -9,6 +10,7 @@ import {CoreBaseComponent} from '../core-base.component';
   styles: [':host { display:flex; flex: 1; min-width: 0; }']
 })
 export class TypeaheadsComponent extends CoreBaseComponent implements OnInit {
+  code = new TypeaheadsCode();
   public selected: string;
   public states: string[] = [
     'SABRIL powder for oral solution 500mg',

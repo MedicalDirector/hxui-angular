@@ -11,7 +11,7 @@ import { TooltipsComponent } from './core/tooltips/tooltips.component';
 import { PaginationComponent } from './core/pagination/pagination.component';
 import { TabularComponent } from './core/tabular/tabular.component';
 import { InstallGuideComponent } from './core/install-guide/install-guide.component';
-
+import { SelectizeComponent } from 'app/core/selectize/selectize.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'tooltips',  component: TooltipsComponent },
   { path: 'pagination',  component: PaginationComponent },
   { path: 'tabular',  component: TabularComponent },
+  { path: 'selectize',  component: SelectizeComponent },
   { path: '**',  component: PageNotFoundComponent },
 ];
 @NgModule({

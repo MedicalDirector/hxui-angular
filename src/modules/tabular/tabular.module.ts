@@ -38,7 +38,15 @@ import {FormsModule} from '@angular/forms';
 })
 
 export class TabularModule {
-  public static forRoot(): ModuleWithProviders {return {ngModule: TabularModule, providers: [TabularOrderByService, TabularConfig]}; }
+  public static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: TabularModule,
+      providers: [
+        TabularOrderByService,
+        TabularConfig
+      ]
+    };
+  }
 }
 
 

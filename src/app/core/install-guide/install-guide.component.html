@@ -10,55 +10,19 @@
 
         <section>
           <p><span class="h5">1.</span> Use <strong>NPM</strong>:</p>
-          <pre><code class="bash">
-
-npm install @hxui/angular --save
-
-          </code></pre>
+          <pre><code highlight [code]="code.step1"></code></pre>
         </section>
 
         <br>
-        <section>
-          <p>You can run this command if you are using <strong>SSH</strong> method to access repo.</p>
 
-          <pre><code class="bash">
-
-npm install @hxui/angular --save
-
-          </code></pre>
-
-        </section>
-        <br>
         <section>
           <p><span class="h5">2. </span><strong>Import all web component modules</strong> into app module or shared module.</p>
-          <pre><code class="typescript">
-import {{ '{' }}HxUiModule} from &#x22;@hxui/angular&#x22;;
-
-@NgModule({{ '{' }}
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    HxUiModule.forRoot()
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule {{ '{' }}
-
-          </code></pre>
+          <pre><code highlight [code]="code.step2"></code></pre>
         </section>
         <br>
         <section>
           <p><span class="h5">3. </span>Alternatively <strong>import each web component module</strong> that you need individually.</p>
-          <pre><code class="typescript">
-import {{ '{' }}DropdownModule} from &#x22;@hxui/angular&#x22;;
-
-@NgModule({{ '{' }}
-  imports: [DropdownModule.forRoot(),...]
-})
-export class AppModule(){{ '{' }}
-          </code></pre>
+          <pre><code highlight [code]="code.step3"></code></pre>
         </section>
       </div>
     </div>

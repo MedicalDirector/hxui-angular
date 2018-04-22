@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {CoreBaseComponent} from '../core-base.component';
 import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
+import {TabsCode} from './tabs.code';
 
 @Component({
   selector: 'app-tabs',
@@ -10,6 +11,7 @@ import {DOCUMENT} from '@angular/platform-browser';
 })
 export class TabsComponent extends CoreBaseComponent implements OnInit {
 
+  code = new TabsCode();
   public tabs: any[] = [
     {title: 'Dynamic Title 1', content: 'Dynamic content 1'},
     {title: 'Dynamic Title 2', content: 'Dynamic content 2', disabled: true},

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {InstallGuideCode} from './install-guide.code';
 
 @Component({
   selector: 'app-install-guide',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styles: [':host { display:flex; flex: 1; min-width: 0; }']
 })
 export class InstallGuideComponent implements OnInit {
+
+  code = new InstallGuideCode();
 
   constructor() { }
 
