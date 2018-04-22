@@ -1,3 +1,7 @@
+import {TabularColumn} from '../../../modules/tabular/tabular-column.model';
+import {TabularColumnTypes} from '../../../modules/tabular/tabular-column.interface';
+import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
+
 export class TabularCode {
 usage =
 `
@@ -49,17 +53,16 @@ import {UserModel} from '@hxui/angular';
 export class TabularComponent implements OnInit {
 
   searchTerm: string;
-  rowData: any[] = [];
-  currentPage:number = 0;
-  smallnumPages:number = 0;
+  rowData: ITabularRow[] = [];
   columnData: TabularColumn[] = [
     new TabularColumn('checkboxes', 'Checkboxes', TabularColumnTypes.Checkbox, false),
     new TabularColumn('id', 'Id', TabularColumnTypes.String, true),
     new TabularColumn('usercode', 'User Code', TabularColumnTypes.String, true),
     new TabularColumn('firstname', 'First Name', TabularColumnTypes.String, true),
     new TabularColumn('surname', 'Surname', TabularColumnTypes.String, true),
-    new TabularColumn('rolename', 'Role', TabularColumnTypes.String, true),
-    new TabularColumn('email', 'Email', TabularColumnTypes.String, true),
+    new TabularColumn('flag', 'Flag', TabularColumnTypes.Badge, false),
+    new TabularColumn('created', 'Created', TabularColumnTypes.Date, true),
+    new TabularColumn('modified', 'Modified', TabularColumnTypes.DateTime, true),
     new TabularColumn('active', 'Active', TabularColumnTypes.Status, false, 'is-text-center'),
     new TabularColumn('actions', 'Actions', TabularColumnTypes.Actions, false)
   ];
