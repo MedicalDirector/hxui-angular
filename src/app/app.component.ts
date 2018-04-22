@@ -84,15 +84,15 @@ export class AppComponent {
           link: '/autogrow'
         },
       ]
-    },
-    {
-      cat: 'Feedback',
-      items: [
-        {
-          name: 'Feedback',
-          url: 'https://medicaldirector.visualstudio.com/MD%20Design/_workitems'
-        }
-      ]
     }
-  ]
+    // {
+    //   cat: 'Feedback',
+    //   items: [
+    //     {
+    //       name: 'Feedback',
+    //       url: 'https://bitbucket.org/md-design/angular-hxui'
+    //     }
+    //   ]
+    // }
+  ];
 }

@@ -5,7 +5,6 @@ This README includes the steps that are necessary to import the HxUi-angular int
 ### What is this repository for? ###
 
 HxUi-angular is an Angular library based on the HxUi User Interface Library.
-The idea behind this UI library is for other developers to quickly and efficiently build application UI while maintaining all the UX and UI principles.
 
 ### How do I get set up to contribute with development? ###
 
