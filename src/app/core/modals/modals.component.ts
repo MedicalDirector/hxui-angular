@@ -4,6 +4,7 @@ import {CustomModalComponent} from './custom-modal/custom-modal.component';
 import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
 import {CoreBaseComponent} from '../core-base.component';
+import {ModalsCode} from './modals.code';
 
 @Component({
   selector: 'app-modals',
@@ -12,6 +13,7 @@ import {CoreBaseComponent} from '../core-base.component';
 })
 export class ModalsComponent extends CoreBaseComponent implements OnInit {
 
+  code = new ModalsCode();
   constructor(protected pageScrollService: PageScrollService,
               @Inject(DOCUMENT) protected document: any,
               private modalService: ModalService) {

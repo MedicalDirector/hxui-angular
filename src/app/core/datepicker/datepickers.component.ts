@@ -3,8 +3,7 @@ import { PageScrollService } from 'ngx-page-scroll';
 import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/platform-browser';
 
-import { DatepickerComponent } from '../../../modules/datepicker/datepicker.component';
-import { DatepickerFormComponent } from '../../../modules/datepicker/datepicker-form.component';
+import {DatepickersCode} from './datepickers.code';
 
 
 @Component({
@@ -14,6 +13,7 @@ import { DatepickerFormComponent } from '../../../modules/datepicker/datepicker-
 })
 export class DatepickersComponent extends CoreBaseComponent {
 
+  code = new DatepickersCode();
   dayte: string;
 
   constructor(protected pageScrollService: PageScrollService,

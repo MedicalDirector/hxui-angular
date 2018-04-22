@@ -1,4 +1,4 @@
-<section class="hx-section scrollable-y">
+<section class="hx-section scrollable-y" #container>
   <div class="hx-section is-comfortable">
 
     <h1 class="hx-title">Datepickers</h1>
@@ -9,14 +9,7 @@
     <p>Add the DatepickerModule to AppModule or SharedModule.</p>
 
     <pre>
-      <code class="typescript">
-import {{ '{' }} DatepickerModule } from &#x22;@hxui-angular/packages/datepicker/datepicker.module&#x22;;
-
-@NgModule({{ '{' }}
-  imports: [DatepickerModule.forRoot(), ...]
-})
-export class AppModule() {{ '{' }}
-      </code>
+      <code highlight [code]="code.usage"></code>
     </pre>
 
     <hr>
@@ -25,7 +18,7 @@ export class AppModule() {{ '{' }}
 
     <div class="hx-columns">
       <div class="hx-column">
-        <hxa-datepicker-form align="bottom" [(ngModel)]="dayte"></hxa-datepicker-form>
+        <hxa-datepicker-input align="bottom" [(ngModel)]="dayte"></hxa-datepicker-input>
         <div>
           <span>Emitted Date object: {{dayte}}</span>
         </div>
@@ -37,15 +30,18 @@ export class AppModule() {{ '{' }}
 
     <h5 id="code">Code</h5>
 
-    <div class="hx-columns">
-      <div class="hx-column">
-        <pre>
-          <code class="html">
-&#x3C;hxa-datepicker-form align="bottom" [(ngModel)]=&#x22;form.date&#x22;&#x3E;&#x3C;/hxa-datepicker-form&#x3E;
-          </code>
-        </pre>
-      </div>
-    </div>
+    <hx-tabset>
+      <hx-tab heading="Template">
+            <pre>
+              <code highlight [code]="code.exampleTemplate"></code>
+            </pre>
+      </hx-tab>
+      <hx-tab heading="Typescript">
+            <pre>
+              <code highlight [code]="code.exampleTypescript"></code>
+            </pre>
+      </hx-tab>
+    </hx-tabset>
 
     <hr>
 

@@ -1,16 +1,37 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {PageScrollService} from 'ngx-page-scroll';
-import {DOCUMENT} from '@angular/platform-browser';
-import {CoreBaseComponent} from '../core-base.component';
-import {TypeaheadsCode} from './typeaheads.code';
+export class TypeaheadsCode {
+
+usage =
+`
+import {TypeaheadsModule} from "@hxui/angular";
+
+@NgModule({
+  imports: [TypeaheadsModule.forRoot(),...]
+})
+export class AppModule(){}
+
+`;
+
+exampleTemplate =
+`
+
+<div class="hx-input-control">
+  <input class="hx-input" type="text" [(ngModel)]="selected"
+    [typeahead]="states" required>
+  <label class="hx-label"><i class="icon icon-search is-small"></i> Medications</label>
+  <div class="hx-help">Search for medication names</div>
+</div>
+
+`;
+
+exampleTypescript =
+`
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-typeaheads',
-  templateUrl: './typeaheads.component.html',
-  styles: [':host { display:flex; flex: 1; min-width: 0; }']
+  templateUrl: './typeaheads.component.html'
 })
-export class TypeaheadsComponent extends CoreBaseComponent implements OnInit {
-  code = new TypeaheadsCode();
+export class TypeaheadsComponent implements OnInit {
   public selected: string;
   public states: string[] = [
     'SABRIL powder for oral solution 500mg',
@@ -32,12 +53,12 @@ export class TypeaheadsComponent extends CoreBaseComponent implements OnInit {
     'SALBUTAMOL SANDOZ inhalation 5mg/2.5mL',
     'SALBUTAMOL metered-dose aerosol 100mcg/dose',
     'SALBUTAMOL injection 1mg/mL'];
+  constructor() { }
 
-  constructor(protected pageScrollService: PageScrollService,
-              @Inject(DOCUMENT) protected document: any) {
-    super(pageScrollService, document);
-  }
   ngOnInit() {
   }
 
+}
+
+`;
 }

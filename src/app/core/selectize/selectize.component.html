@@ -10,14 +10,7 @@
   <p>Add the SelectizeModule to AppModule or SharedModule.</p>
 
   <pre>
-      <code class="typescript">
-import {{ '{' }}SelectizeModule} from &#x22;@hxui/angular&#x22;;
-
-@NgModule({{ '{' }}
-  imports: [SelectizeModule.forRoot(),...]
-})
-export class AppModule(){{ '{' }}
-      </code>
+     <code highlight [code]="code.usage"></code>
     </pre>
 
   <hr>
@@ -45,7 +38,7 @@ export class AppModule(){{ '{' }}
 
   <br>
 
-  <h5 id="code">Code</h5>
+  <h5 id="multiselectexample">Code</h5>
 
   <div class="hx-columns">
     <div class="hx-column">
@@ -53,94 +46,12 @@ export class AppModule(){{ '{' }}
       <hx-tabset>
         <hx-tab heading="Template">
             <pre>
-              <code class="html">
-  &#x3C;div class=&#x22;hx-card not-scrollable&#x22;&#x3E;
-    &#x3C;div class=&#x22;hx-card-content&#x22;&#x3E;
-      &#x3C;div class=&#x22;hx-input-control&#x22;&#x3E;
-        &#x3C;div class=&#x22;hx-select-control&#x22;&#x3E;
-          &#x3C;label for=&#x22;&#x22; class=&#x22;hx-label&#x22;&#x3E;Test(s) required &#x3C;sup&#x3E;*&#x3C;/sup&#x3E;&#x3C;/label&#x3E;
-          &#x3C;hxa-selectize [config]=&#x22;selectizeConfig&#x22; [options]=&#x22;selectizeOptions&#x22;&#x3E;&#x3C;/hxa-selectize&#x3E;
-        &#x3C;/div&#x3E;
-      &#x3C;/div&#x3E;
-    &#x3C;/div&#x3E;
-  &#x3C;/div&#x3E;
-              </code>
+              <code highlight [code]="code.multiExampleTemplate"></code>
             </pre>
         </hx-tab>
         <hx-tab heading="Typescript">
             <pre>
-              <code class="typescript">
-  import  {{ '{' }}
-    Component,
-    ElementRef,
-    Inject,
-    OnInit,
-    ViewChild
-  } from &#x27;@angular/core&#x27;;
-  import  {{ '{' }} PageScrollService } from &#x27;ngx-page-scroll&#x27;;
-  import  {{ '{' }} CoreBaseComponent } from &#x27;../core-base.component&#x27;;
-  import  {{ '{' }} DOCUMENT } from &#x27;@angular/platform-browser&#x27;;
-  import  {{ '{' }} SelectizeConfig } from &#x27;modules/selectize/selectize.config&#x27;;
-  import  {{ '{' }} ISelectizeItem } from &#x27;../../../modules/selectize/selectize-item.interface&#x27;;
-
-  @Component( {{ '{' }}
-    selector: &#x27;app-selectize&#x27;,
-    templateUrl: &#x27;./selectize.component.html&#x27;,
-    styles: [&#x27;:host  {{ '{' }} display:flex; flex: 1; min-width: 0; }&#x27;]
-  })
-  export class SelectizeComponent extends CoreBaseComponent implements OnInit  {{ '{' }}
-    public selectizeConfig = new SelectizeConfig();
-    public selectizeOptions: ISelectizeItem[] = &#x3C;ISelectizeItem[]&#x3E;[
-       {{ '{' }}
-        label: &#x27;Iron studies&#x27;,
-        value: &#x27;ironstudies&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;Glucose fasting&#x27;,
-        value: &#x27;glucosefasting&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;HbA1c&#x27;,
-        value: &#x27;hba1c&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;Glucose tolerance test&#x27;,
-        value: &#x27;gklucosetolerencetest&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;HDL cholesterol&#x27;,
-        value: &#x27;hdlcholesterol&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;INR&#x27;,
-        value: &#x27;inr&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;Fructosamine&#x27;,
-        value: &#x27;fructosamine&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;Thyroid function tests&#x27;,
-        value: &#x27;thyroid functions tests&#x27;
-      }
-    ];
-
-
-    ngOnInit(): void  {{ '{' }}
-      this.selectizeConfig.create = true;
-      this.selectizeConfig.maxItems = null;
-      this.selectizeConfig.hideSelected = true;
-    }
-
-    constructor(
-      protected pageScrollService: PageScrollService,
-      @Inject(DOCUMENT) protected document: any
-    )  {{ '{' }}
-      super(pageScrollService, document);
-    }
-  }
-
-              </code>
+              <code highlight [code]="code.multiExampleTypescript"></code>
             </pre>
         </hx-tab>
       </hx-tabset>
@@ -160,7 +71,7 @@ export class AppModule(){{ '{' }}
         <div class="hx-card-content">
           <div class="hx-input-control">
             <div class="hx-select-control">
-              <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
+              <label for="" class="hx-label">Test required <sup>*</sup></label>
               <hxa-selectize [config]="singleSelectizeConfig" [options]="selectizeOptions"></hxa-selectize>
             </div>
           </div>
@@ -172,7 +83,7 @@ export class AppModule(){{ '{' }}
 
   <br>
 
-  <h5 id="code">Code</h5>
+  <h5 id="singleselectexamplecode">Code</h5>
 
   <div class="hx-columns">
     <div class="hx-column">
@@ -180,91 +91,12 @@ export class AppModule(){{ '{' }}
       <hx-tabset>
         <hx-tab heading="Template">
             <pre>
-              <code class="html">
-  &#x3C;div class=&#x22;hx-card not-scrollable&#x22;&#x3E;
-    &#x3C;div class=&#x22;hx-card-content&#x22;&#x3E;
-      &#x3C;div class=&#x22;hx-input-control&#x22;&#x3E;
-        &#x3C;div class=&#x22;hx-select-control&#x22;&#x3E;
-          &#x3C;label for=&#x22;&#x22; class=&#x22;hx-label&#x22;&#x3E;Test(s) required &#x3C;sup&#x3E;*&#x3C;/sup&#x3E;&#x3C;/label&#x3E;
-          &#x3C;hxa-selectize [config]=&#x22;selectizeConfig&#x22; [options]=&#x22;selectizeOptions&#x22;&#x3E;&#x3C;/hxa-selectize&#x3E;
-        &#x3C;/div&#x3E;
-      &#x3C;/div&#x3E;
-    &#x3C;/div&#x3E;
-  &#x3C;/div&#x3E;
-              </code>
+              <code highlight [code]="code.simpleExampleTemplate"></code>
             </pre>
         </hx-tab>
         <hx-tab heading="Typescript">
             <pre>
-              <code class="typescript">
-  import  {{ '{' }}
-    Component,
-    ElementRef,
-    Inject,
-    OnInit,
-    ViewChild
-  } from &#x27;@angular/core&#x27;;
-  import  {{ '{' }} PageScrollService } from &#x27;ngx-page-scroll&#x27;;
-  import  {{ '{' }} CoreBaseComponent } from &#x27;../core-base.component&#x27;;
-  import  {{ '{' }} DOCUMENT } from &#x27;@angular/platform-browser&#x27;;
-  import  {{ '{' }} SelectizeConfig } from &#x27;modules/selectize/selectize.config&#x27;;
-  import  {{ '{' }} ISelectizeItem } from &#x27;../../../modules/selectize/selectize-item.interface&#x27;;
-
-  @Component( {{ '{' }}
-    selector: &#x27;app-selectize&#x27;,
-    templateUrl: &#x27;./selectize.component.html&#x27;,
-    styles: [&#x27;:host  {{ '{' }} display:flex; flex: 1; min-width: 0; }&#x27;]
-  })
-  export class SelectizeComponent extends CoreBaseComponent implements OnInit  {{ '{' }}
-    public selectizeConfig = new SelectizeConfig();
-    public selectizeOptions: ISelectizeItem[] = &#x3C;ISelectizeItem[]&#x3E;[
-       {{ '{' }}
-        label: &#x27;Iron studies&#x27;,
-        value: &#x27;ironstudies&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;Glucose fasting&#x27;,
-        value: &#x27;glucosefasting&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;HbA1c&#x27;,
-        value: &#x27;hba1c&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;Glucose tolerance test&#x27;,
-        value: &#x27;gklucosetolerencetest&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;HDL cholesterol&#x27;,
-        value: &#x27;hdlcholesterol&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;INR&#x27;,
-        value: &#x27;inr&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;Fructosamine&#x27;,
-        value: &#x27;fructosamine&#x27;
-      },
-       {{ '{' }}
-        label: &#x27;Thyroid function tests&#x27;,
-        value: &#x27;thyroid functions tests&#x27;
-      }
-    ];
-
-
-    ngOnInit(): void  {{ '{' }}
-    }
-
-    constructor(
-      protected pageScrollService: PageScrollService,
-      @Inject(DOCUMENT) protected document: any
-    )  {{ '{' }}
-      super(pageScrollService, document);
-    }
-  }
-
-              </code>
+              <code highlight [code]="code.simpleExampleTypescript"></code>
             </pre>
         </hx-tab>
       </hx-tabset>
@@ -273,7 +105,279 @@ export class AppModule(){{ '{' }}
 
   <hr>
 
+  <h4 id="customitemexample">Custom Item Example</h4>
 
+  <p>Customise how badges render by overriding the item render function </p>
 
+  <div class="hx-columns">
+    <div class="hx-column">
+
+      <div class="hx-card not-scrollable">
+        <div class="hx-card-content">
+          <div class="hx-input-control">
+            <div class="hx-select-control">
+              <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
+              <hxa-selectize [config]="customSelectizeConfig" [options]="selectizeOptions" [value]="selectedValues"></hxa-selectize>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+
+  <h5 id="customitemtexample">Code</h5>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+
+      <hx-tabset>
+        <hx-tab heading="Template">
+            <pre>
+              <code highlight [code]="code.customItemExampleTemplate"></code>
+            </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+            <pre>
+              <code highlight [code]="code.customItemExampleTypescript"></code>
+            </pre>
+        </hx-tab>
+        <hx-tab heading="Custom Config">
+            <pre>
+              <code highlight [code]="code.customItemConfig"></code>
+            </pre>
+        </hx-tab>
+        <hx-tab heading="Custom Item Model">
+            <pre>
+              <code highlight [code]="code.customItemModel"></code>
+            </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr>
+
+  <h4 id="api">API Reference</h4>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <h5 class="is-primary">SelectizeComponent</h5>
+
+      <table class="hx-table is-striped">
+        <thead>
+        <tr>
+          <th>Input</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>config</td>
+          <td><kbd>SelectizeConfig</kbd></td>
+          <td>Configuration for Selectize instance. Read the <a href="https://github.com/selectize/selectize.js/blob/master/docs/usage.md">Selectize documentation</a>
+            for a full list of config options.</td>
+        </tr>
+        <tr>
+          <td>options</td>
+          <td><kbd>any[]</kbd></td>
+          <td>An array of the initial options available to select; array of objects.  Read the <a href="https://github.com/selectize/selectize.js/blob/master/docs/usage.md">Selectize documentation</a>
+            for a full list of config options.</td>
+        </tr>
+        <tr>
+          <td>optgroups</td>
+          <td><kbd>any[]</kbd></td>
+          <td>Option groups that options will be bucketed into. Make sure each object in the array has a property named whatever optgroupValueField is set to.</td>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td><kbd>string</kbd></td>
+          <td>Input element id</td>
+        </tr>
+        <tr>
+          <td>placeholder</td>
+          <td><kbd>string</kbd></td>
+          <td>The placeholder of the control (displayed when nothing is selected / typed).</td>
+        </tr>
+        <tr>
+          <td>enabled</td>
+          <td><kbd>boolean</kbd></td>
+          <td>Disable or enable input element</td>
+        </tr>
+        <tr>
+          <td>value</td>
+          <td><kbd>string[]</kbd></td>
+          <td>Selected value(s)</td>
+        </tr>
+        <tr>
+          <td>formControl</td>
+          <td><kbd>FormControl</kbd></td>
+          <td>Reference to a FormControl</td>
+        </tr>
+        <tr>
+          <td>errorClass</td>
+          <td><kbd>string</kbd></td>
+          <td>CSS class to be appended on error</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <br>
+
+      <table class="hx-table is-striped">
+        <thead>
+        <tr>
+          <th>Output</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>onBlur</td>
+          <td><kbd>EventEmitter</kbd></td>
+          <td>Event fired when input losses focus.</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <h5 class="is-primary">SelectizeConfig</h5>
+
+      <table class="hx-table is-striped">
+        <thead>
+        <tr>
+          <th>Property</th>
+          <th>Type</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>delimiter</td>
+          <td><kbd>string</kbd></td>
+          <td><pre><code>','</code></pre></td>
+          <td>The string to separate items by. When typing an item in a multi-selection control allowing creation, then the delimiter, the item is added.
+            If you paste delimiter-separated items in such control, the items are added at once. The delimiter is also used in the getValue API call on a
+            text input tag to separate the multiple values.</td>
+        </tr>
+        <tr>
+          <td>create</td>
+          <td><kbd>boolean|function</kbd></td>
+          <td>false</td>
+          <td>Allows the user to create new items that aren't in the initial list of options. This setting can be any of the following: true, false (disabled),
+            or a function to process input. The function can take one of two forms: synchronous (with signature function(input){{'{'}}} or asynchronous
+            (with signature function(input, callback). In the synchronous case, the function should return an object for the options (eg, with defaults:
+            return <code>{{'{'}} 'value': value, 'text': text };</code>). The asynchronous version should invoke the callback with the result in the same format as the object
+            above (eg, callback( <code>{{'{'}} 'value': value, 'text': text});</code>)</td>
+        </tr>
+        <tr>
+          <td>createOnBlur</td>
+          <td><kbd>boolean</kbd></td>
+          <td>false</td>
+          <td>If true, when user exits the field (clicks outside of input), a new option is created and selected (if create setting is enabled).</td>
+        </tr>
+        <tr>
+          <td>createFilter</td>
+          <td><kbd>RegExp|string|function</kbd></td>
+          <td>null</td>
+          <td>Specifies a RegExp or a string containing a regular expression that the current search filter must match to be allowed to be created. May
+            also be a predicate function that takes the filter text and returns whether it is allowed.</td>
+        </tr>
+        <tr>
+          <td>highlight</td>
+          <td><kbd>boolean</kbd></td>
+          <td>true</td>
+          <td>Toggles match highlighting within the dropdown menu.</td>
+        </tr>
+        <tr>
+          <td>persist</td>
+          <td><kbd>boolean</kbd></td>
+          <td>true</td>
+          <td>If false, items created by the user will not show up as available options once they are unselected.</td>
+        </tr>
+        <tr>
+          <td>maxOptions</td>
+          <td><kbd>int</kbd></td>
+          <td>1000</td>
+          <td>The max number of items to render at once in the dropdown list of options.</td>
+        </tr>
+        <tr>
+          <td>maxItems</td>
+          <td><kbd>int</kbd></td>
+          <td>1</td>
+          <td>The max number of items the user can select. 1 makes the control mono-selection, null allows an unlimited number of items.</td>
+        </tr>
+        <tr>
+          <td>hideSelected</td>
+          <td><kbd>boolean</kbd></td>
+          <td>false</td>
+          <td>If true, the items that are currently selected will not be shown in the dropdown list of available options.</td>
+        </tr>
+        <tr>
+          <td>closeAfterSelect</td>
+          <td><kbd>boolean</kbd></td>
+          <td>false</td>
+          <td>If true, the dropdown will be closed after a selection is made.</td>
+        </tr>
+        <tr>
+          <td>allowEmptyOption</td>
+          <td><kbd>boolean</kbd></td>
+          <td>false</td>
+          <td>If true, Selectize will treat any options with a "" value like normal. This defaults to false to accomodate the common
+            select practice of having the first empty option to act as a placeholder.</td>
+        </tr>
+        <tr>
+          <td>placeholder</td>
+          <td><kbd>string</kbd></td>
+          <td>undefined</td>
+          <td>The placeholder of the control (displayed when nothing is selected / typed). Defaults to input element's placeholder, unless this one is specified.</td>
+        </tr>
+        <tr>
+          <td>dropdownParent</td>
+          <td><kbd>string</kbd></td>
+          <td>null</td>
+          <td>The element the dropdown menu is appended to. This should be 'body' or null. If null, the dropdown will be appended as a child of the Selectize control.</td>
+        </tr>
+        <tr>
+          <td>addPrecedence</td>
+          <td><kbd>boolean</kbd></td>
+          <td>false</td>
+          <td>If true, the "Add..." option is the default selection in the dropdown.</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 </section>
+
+<aside class="hx-sidebar is-right is-active is-medium-width is-scrollable">
+  <ul class="hx-nav hx-nav-vertical">
+    <li class="hx-nav-heading">
+      <h6>Contents</h6></li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#multiselectexample')"><span>Multi Select Example</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#singleselectexample')"><span>Single Select Example</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#customitemexample')"><span>Custom Item Example</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
+    </li>
+  </ul>
+</aside>

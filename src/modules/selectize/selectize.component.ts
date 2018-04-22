@@ -13,7 +13,9 @@ import {
   IterableDiffer,
   IterableChangeRecord,
   IterableChanges,
-  ViewEncapsulation, Renderer2, ChangeDetectionStrategy
+  ViewEncapsulation,
+  Renderer2,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {
   NG_VALUE_ACCESSOR,
@@ -22,7 +24,7 @@ import {
 } from '@angular/forms';
 
 import cloneDeep from 'lodash.clonedeep';
-import { SelectizeConfig } from 'modules/selectize/selectize.config';
+import { SelectizeConfig } from './selectize.config';
 
 declare var $: any;
 
@@ -40,14 +42,14 @@ export const SELECTIZE_VALUE_ACCESSOR: any = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['selectize.component.scss']
 })
-export class SelectizeComponent
-  implements OnInit, OnChanges, DoCheck, ControlValueAccessor {
-  @Input() config: SelectizeConfig;
+export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlValueAccessor {
+
   private _options: any[];
   private _options_differ: IterableDiffer<any>;
   private _optgroups: any[];
   private _optgroups_differ: IterableDiffer<any>;
 
+  @Input() config: SelectizeConfig;
   @Input() id: string;
   @Input() placeholder: string;
   @Input() hasOptionsPlaceholder: string;

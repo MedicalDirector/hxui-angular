@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
 import {CoreBaseComponent} from '../core-base.component';
+import {TooltipsCode} from './tooltips.code';
 
 @Component({
   selector: 'app-tooltips',
@@ -10,6 +11,7 @@ import {CoreBaseComponent} from '../core-base.component';
 })
 export class TooltipsComponent extends CoreBaseComponent implements OnInit {
 
+  code = new TooltipsCode();
   private _dynamicTooltipText = 'sample text';
 
   public get dynamicTooltipText(): string{

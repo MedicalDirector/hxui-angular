@@ -9,14 +9,7 @@
     <p>Add the TypeaheadsModule to AppModule or SharedModule.</p>
 
     <pre>
-      <code class="typescript">
-import {{ '{' }}TypeaheadsModule} from &#x22;@hxui-angular/packages/typeaheads/typeaheads.module&#x22;;
-
-@NgModule({{ '{' }}
-  imports: [TypeaheadsModule.forRoot(),...]
-})
-export class AppModule(){{ '{' }}
-      </code>
+      <code highlight [code]="code.usage"></code>
     </pre>
 
     <hr>
@@ -45,54 +38,12 @@ export class AppModule(){{ '{' }}
         <hx-tabset>
           <hx-tab heading="Template">
             <pre>
-              <code class="html">
-&#x3C;div class=&#x22;hx-input-control&#x22;&#x3E;
-  &#x3C;input class=&#x22;hx-input&#x22; type=&#x22;text&#x22; [(ngModel)]=&#x22;selected&#x22;
-    [typeahead]=&#x22;states&#x22; required&#x3E;
-  &#x3C;label class=&#x22;hx-label&#x22;&#x3E;&#x3C;i class=&#x22;icon icon-search is-small&#x22;&#x3E;&#x3C;/i&#x3E; Medications&#x3C;/label&#x3E;
-  &#x3C;div class=&#x22;hx-help&#x22;&#x3E;Search for medication names&#x3C;/div&#x3E;
-&#x3C;/div&#x3E;
-              </code>
+              <code highlight [code]="code.exampleTemplate"></code>
             </pre>
           </hx-tab>
           <hx-tab heading="Typescript">
             <pre>
-              <code class="typescript">
-import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
-
-@Component({{ '{' }}
-  selector: &#x27;app-typeaheads&#x27;,
-  templateUrl: &#x27;./typeaheads.component.html&#x27;
-})
-export class TypeaheadsComponent implements OnInit {{ '{' }}
-  public selected: string;
-  public states: string[] = [
-    &#x27;SABRIL powder for oral solution 500mg&#x27;,
-    &#x27;SABRIL tablet 500mg&#x27;,
-    &#x27;SACROSIDASE oral liquid, solution 8,500 Units/mL&#x27;,
-    &#x27;SACUBITRIL/VALSARTAN tablet 24.3mg/25.7mg&#x27;,
-    &#x27;SACUBITRIL/VALSARTAN tablet 48.6mg/51.4mg&#x27;,
-    &#x27;SACUBITRIL/VALSARTAN tablet 97.3mg/102.8mg&#x27;,
-    &#x27;SAFLUTAN eye drops 0.0015% (4.5mcg/0.3mL)&#x27;,
-    &#x27;SAIZEN 8 CLICK.EASY powder for injection 8mg (24 units)&#x27;,
-    &#x27;SAIZEN powder for injection 3mg (10 units)&#x27;,
-    &#x27;SAIZEN injection 6mg (18 units)&#x27;,
-    &#x27;SAIZEN injection 12mg (36 units)&#x27;,
-    &#x27;SAIZEN injection 20mg (60 units)&#x27;,
-    &#x27;SALAZOPYRIN-EN enteric-coated tablet 500mg&#x27;,
-    &#x27;SALBUTAMOL ACTAVIS inhalation 2.5mg/2.5mL&#x27;,
-    &#x27;SALBUTAMOL ACTAVIS inhalation 5mg/2.5mL&#x27;,
-    &#x27;SALBUTAMOL SANDOZ inhalation 2.5mg/2.5mL&#x27;,
-    &#x27;SALBUTAMOL SANDOZ inhalation 5mg/2.5mL&#x27;,
-    &#x27;SALBUTAMOL metered-dose aerosol 100mcg/dose&#x27;,
-    &#x27;SALBUTAMOL injection 1mg/mL&#x27;];
-  constructor() {{ '{' }} }
-
-  ngOnInit() {{ '{' }}
-  }
-
-}
-              </code>
+              <code highlight [code]="code.exampleTypescript"></code>
             </pre>
           </hx-tab>
         </hx-tabset>

@@ -11,6 +11,7 @@ import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
 import {OrderByDirection} from '../../../modules/tabular/tabular-order-by.service';
 import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
+import {TabularCode} from './tabular.code';
 
 @Component({
   selector: 'app-tabular',
@@ -19,6 +20,7 @@ import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
 })
 export class TabularComponent extends CoreBaseComponent implements OnInit {
 
+  code = new TabularCode();
   searchTerm: string;
   rowData: ITabularRow[] = [];
   columnData: TabularColumn[] = [

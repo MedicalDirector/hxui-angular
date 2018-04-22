@@ -20,7 +20,7 @@ export class CoreBaseComponent {
             this.container.nativeElement
           ]
     });
-    //this.pageScrollService.start(pageScrollInstance);
+    this.pageScrollService.start(pageScrollInstance);
   }
 
 

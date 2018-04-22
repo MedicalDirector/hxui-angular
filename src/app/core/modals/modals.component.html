@@ -11,19 +11,9 @@
     <p>Add the ModalModule to AppModule or SharedModule.</p>
 
     <pre>
-    <code class="typescript">
-import {{ '{' }}ModalModule} from &#x22;@hxui-angular/packages/modal/modal.module&#x22;;
+    <code highlight [code]="code.usage"></code>
 
-@NgModule({{ '{' }}
-  imports: [ModalModule.forRoot(),...]
-})
-export class AppModule(){{ '{' }}
-    </code>
-
-    <code class="html">
-&#x3C;!--Add this placeholder component anywhere on the body.--&#x3E;
-&#x3C;hx-modal-placeholder&#x3E;&#x3C;/hx-modal-placeholder&#x3E;
-    </code>
+    <code highlight [code]="code.placeholder"></code>
   </pre>
 
 
@@ -52,107 +42,25 @@ export class AppModule(){{ '{' }}
         <hx-tabset>
           <hx-tab heading="Template">
             <pre>
-              <code class="html">
-&#x3C;button class=&#x22;hx-button is-primary is-outlined&#x22;  type=&#x22;button&#x22; (click)=&#x22;openModal()&#x22;&#x3E;
-  Open Modal
-&#x3C;/button&#x3E;
-              </code>
+              <code highlight [code]="code.exampleTemplate"></code>
             </pre>
           </hx-tab>
 
           <hx-tab heading="Typescript">
             <pre>
-            <code class="typescript">
-import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
-import {{ '{' }}ModalService} from &#x22;@hxui-angular/packages/modal/modal.service&#x22;;
-import {{ '{' }}CustomModalComponent} from &#x22;./custom-modal/custom-modal.component&#x22;;
-
-@Component({{ '{' }}
-  selector: &#x27;app-modals&#x27;,
-  templateUrl: &#x27;./modals.component.html&#x27;
-})
-export class ModalsComponent implements OnInit {{ '{' }}
-
-  constructor(private modalService: ModalService) {{ '{' }}
-
-  ngOnInit() {{ '{' }}
-  }
-
-  openModal = () =&#x3E; {{ '{' }}
-    this.modalService.create&#x3C;CustomModalComponent&#x3E;(CustomModalComponent, {{ '{' }}
-      onSuccess: (data) =&#x3E; {{ '{' }}
-       alert(data);
-      }
-    });
-  }
-
-}
-            </code>
+            <code highlight [code]="code.exampleTypescript"></code>
           </pre>
 
           </hx-tab>
           <hx-tab heading="Custom Modal Component">
             <pre>
-            <code class="typescript">
-import {{ '{' }} Component, OnInit } from &#x27;@angular/core&#x27;;
-import {{ '{' }} Modal} from &#x27;@hxui-angular/packages/modal/modal.annotation&#x27;;
-
-@Component({{ '{' }}
-  selector: &#x27;app-custom-modal&#x27;,
-  template: &#x60;
-    &#x3C;div class=&#x22;hx-modal is-active&#x22;&#x3E;
-      &#x3C;div class=&#x22;hx-modal-background&#x22;&#x3E;&#x3C;/div&#x3E;
-      &#x3C;div class=&#x22;hx-modal-card&#x22;&#x3E;
-        &#x3C;header class=&#x22;hx-modal-card-head&#x22;&#x3E;
-          &#x3C;h1 class=&#x22;hx-modal-card-title&#x22;&#x3E;HxUI Modal Title&#x3C;/h1&#x3E;
-          &#x3C;button class=&#x22;delete&#x22; (click)=&#x22;onCancel()&#x22;&#x3E;&#x3C;/button&#x3E;
-        &#x3C;/header&#x3E;
-        &#x3C;section class=&#x22;hx-modal-card-content&#x22;&#x3E;
-          &#x3C;p&#x3E;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque.&#x3C;/p&#x3E;
-        &#x3C;/section&#x3E;
-        &#x3C;footer class=&#x22;hx-modal-card-foot&#x22;&#x3E;
-          &#x3C;a class=&#x22;hx-button is-primary&#x22; (click)=&#x22;onOk()&#x22;&#x3E;Save changes&#x3C;/a&#x3E;
-          &#x3C;a class=&#x22;hx-button&#x22; (click)=&#x22;onCancel()&#x22;&#x3E;Cancel&#x3C;/a&#x3E;
-        &#x3C;/footer&#x3E;
-      &#x3C;/div&#x3E;
-    &#x3C;/div&#x3E;
-  &#x60;
-})
-
-@Modal()
-export class CustomModalComponent implements OnInit {{ '{' }}
-
-  protected onSuccess: Function;
-  protected close: Function;
-
-  constructor() {{ '{' }}
-
-  ngOnInit() {{ '{' }}
-  }
-
-  onCancel = () =&#x3E; {{ '{' }}
-    this.close();
-  }
-
-  onOk = () =&#x3E; {{ '{' }}
-    this.onSuccess(&#x27;Callback&#x27;);
-    this.close();
-  }
-
-}
-            </code>
+            <code highlight [code]="code.exampleModal"></code>
           </pre>
           </hx-tab>
           <hx-tab heading="Module">
+            <p>You need to declare the custom modal component as an entry component for dynamic loading</p>
             <pre>
-            <code class="typescript">
-// You need to declare the modal component as an entry component for dynamic loading
-@NgModule({{ '{' }}
-  ...
-  declarations: [CustomModalComponent],
-  entryComponents: [CustomModalComponent]
-})
-            </code>
+            <code highlight [code]="code.exampleModule"></code>
           </pre>
           </hx-tab>
         </hx-tabset>
