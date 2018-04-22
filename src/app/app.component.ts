@@ -77,6 +77,15 @@ export class AppComponent {
       ]
     },
     {
+      cat: 'Directives',
+      items: [
+        {
+          name: 'Auto Grow',
+          link: '/autogrow'
+        },
+      ]
+    },
+    {
       cat: 'Feedback',
       items: [
         {

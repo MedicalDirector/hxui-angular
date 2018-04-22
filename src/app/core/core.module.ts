@@ -17,6 +17,7 @@ import { InMemoryDataService } from './tabular/in-memory-data.service';
 import { TabularService } from './tabular/tabular.service';
 import { InstallGuideComponent } from './install-guide/install-guide.component';
 import { SelectizeComponent } from 'app/core/selectize/selectize.component';
+import { AutoGrowComponent } from './auto-grow/auto-grow.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { SelectizeComponent } from 'app/core/selectize/selectize.component';
       PaginationComponent,
       TabularComponent,
       InstallGuideComponent,
-      SelectizeComponent
+      SelectizeComponent,
+      AutoGrowComponent
   ],
   providers: [
      TabularService,

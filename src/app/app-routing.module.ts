@@ -12,6 +12,7 @@ import { PaginationComponent } from './core/pagination/pagination.component';
 import { TabularComponent } from './core/tabular/tabular.component';
 import { InstallGuideComponent } from './core/install-guide/install-guide.component';
 import { SelectizeComponent } from 'app/core/selectize/selectize.component';
+import {AutoGrowComponent} from './core/auto-grow/auto-grow.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'pagination',  component: PaginationComponent },
   { path: 'tabular',  component: TabularComponent },
   { path: 'selectize',  component: SelectizeComponent },
+  { path: 'autogrow',  component: AutoGrowComponent },
   { path: '**',  component: PageNotFoundComponent },
 ];
 @NgModule({
