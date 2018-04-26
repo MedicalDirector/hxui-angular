@@ -40,6 +40,10 @@ export {
   Positioning, PositioningOptions, PositioningService, positionElements
 } from './positioning/index';
 
+export {
+  Context
+} from './enums';
+
 @NgModule({
   imports: [
     DropdownModule.forRoot(), ModalModule.forRoot(), PaginationModule.forRoot(),
