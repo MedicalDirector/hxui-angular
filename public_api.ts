@@ -9,6 +9,8 @@ import { TooltipModule } from './src/modules/tooltip/tooltip.module';
 import { TypeaheadModule } from './src/modules/typeahead/typeahead.module';
 import { ModalService } from './src/modules/modal/modal.service';
 import { TabularModule } from './src/modules/tabular/tabular.module';
+import { SelectizeModule } from './src/modules/selectize/selectize.module';
+import { AutoGrowModule } from './src/modules/auto-grow';
 
 export * from './src/modules/modal/index';
 export * from './src/modules/datepicker/index';
@@ -47,12 +49,14 @@ export {
     DropdownModule.forRoot(), ModalModule.forRoot(), PaginationModule.forRoot(),
     TabsModule.forRoot(), TooltipModule.forRoot(),
     TypeaheadModule.forRoot(), TabularModule.forRoot(),
-    DatepickerModule.forRoot()
+    SelectizeModule.forRoot(), DatepickerModule.forRoot(),
+    AutoGrowModule.forRoot()
   ],
   exports: [
     DatepickerModule, DropdownModule, ModalModule,
     PaginationModule, TabsModule, TooltipModule,
-    TypeaheadModule, TabularModule
+    TypeaheadModule, TabularModule, SelectizeModule,
+    AutoGrowModule
   ]
 })
 
