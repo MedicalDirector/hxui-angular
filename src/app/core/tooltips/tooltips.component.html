@@ -33,6 +33,12 @@
           <button class="hx-button is-primary is-small" [hxTooltip]="myTooltip">Button</button>.
         </p>
 
+        <p>You can set the context (colour) of the tooltip to
+          <a href hxTooltip="Success!" [animation]="true" placement="bottom" [context]="contextEnum.Success">success</a>,
+          <a href hxTooltip="Warning!" [animation]="true" placement="bottom" [context]="contextEnum.Warning">warning</a>, or
+          <a href hxTooltip="Danger!" [animation]="true" placement="bottom" [context]="contextEnum.Danger">danger</a>.
+        </p>
+
         <hr>
 
         <p>You can also have dynamic content in your <a href="#" [hxTooltip]="dynamicContentTooltip">tooltips</a>.</p>
@@ -103,6 +109,11 @@
               <td>placement</td>
               <td><kbd>String</kbd></td>
               <td>place the tooltip either top|bottom|left|right</td>
+            </tr>
+            <tr>
+            <td>context</td>
+              <td><kbd>Enum</kbd></td>
+              <td>set the context (colour) to either Success|Warning|Danger|None</td>
             </tr>
           </tbody>
         </table>
