@@ -36,13 +36,13 @@ export {
   ComponentLoader
 } from './src/modules/component-loader/component-loader.class';
 
-
-
 export {
   Positioning, PositioningOptions, PositioningService, positionElements
 } from './src/modules/positioning/index';
 
-
+export {
+  Context
+} from './src/modules/enums';
 
 @NgModule({
   imports: [
