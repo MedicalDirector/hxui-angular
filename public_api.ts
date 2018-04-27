@@ -21,6 +21,8 @@ export * from './src/modules/tooltip/index';
 export * from './src/modules/typeahead/index';
 export * from './src/modules/tabular/index';
 export * from './src/modules/datepicker/index';
+export * from './src/modules/selectize/index';
+export * from './src/modules/auto-grow/index';
 
 export { OnChange, LinkedList, Trigger, Utils } from './src/modules/utils/index';
 
