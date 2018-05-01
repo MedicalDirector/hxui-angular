@@ -55,7 +55,7 @@ export class UserModel implements ITabularRow {
       },
       {
         id: 'row_default',
-        label: '<span class="hx-icon icon-medications"></span>',
+        label: '<span class="hx-icon icon-edit"></span>',
         isDefault: true,
         routeType: ActionConfigRouteType.Callback,
         callback: [this.onActionClickHandler, 'default', 1]
