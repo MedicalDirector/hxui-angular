@@ -1,9 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ComponentLoaderFactory } from '../component-loader/component-loader.factory';
-
-import { PositioningService } from '../positioning/positioning.service';
 import { SelectizeComponent } from '../selectize/selectize.component';
-import { SelectizeConfig } from '../selectize/selectize.config';
+
 
 @NgModule({
   declarations: [

@@ -23,7 +23,7 @@ import {
   FormControl
 } from '@angular/forms';
 
-import * as cloneDeep from 'lodash/cloneDeep';
+import cloneDeep from 'lodash/cloneDeep';
 import { SelectizeConfig } from './selectize.config';
 
 declare var $: any;

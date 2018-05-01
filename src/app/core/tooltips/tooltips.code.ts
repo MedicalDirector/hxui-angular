@@ -26,6 +26,12 @@ export class TooltipsCode {
       <button class="hx-button is-primary is-small" [hxTooltip]="myTooltip">Button</button>.
     </p>
 
+    <p>You can set the context (colour) of the tooltip to
+      <a href hxTooltip="Success!" [animation]="true" placement="bottom" [context]="contextEnum.Success">success</a>,
+      <a href hxTooltip="Warning!" [animation]="true" placement="bottom" [context]="contextEnum.Warning">warning</a>, or
+      <a href hxTooltip="Danger!" [animation]="true" placement="bottom" [context]="contextEnum.Danger">danger</a>.
+    </p>
+
     <hr>
 
     <p>You can also have dynamic content in your <a href="#" [hxTooltip]="dynamicContentTooltip">tooltips</a>.</p>
@@ -38,7 +44,7 @@ export class TooltipsCode {
     <hx-tooltip-content #dynamicContentTooltip [animation]="true" placement="top">
       {{dynamicTooltipText}}
     </hx-tooltip-content>.
-    
+
     `;
 
   exampleTypescript =
@@ -50,23 +56,25 @@ export class TooltipsCode {
       templateUrl: './tooltips.component.html'
     })
     export class TooltipsComponent implements OnInit {
-    
+
       private _dynamicTooltipText = 'sample text';
-    
+
+      public contextEnum = Context;
+
       public get dynamicTooltipText(): string {
         return this._dynamicTooltipText;
       }
-    
+
       public set dynamicTooltipText(txt: string) {
         this._dynamicTooltipText = txt;
       }
-    
+
       constructor() { }
-    
+
       ngOnInit() {
       }
-    
+
     }
-    
+
     `;
 }

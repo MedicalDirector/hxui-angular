@@ -21,6 +21,8 @@ export * from './tooltip/index';
 export * from './typeahead/index';
 export * from './tabular/index';
 export * from './datepicker/index';
+export * from './selectize/index';
+export * from './auto-grow/index';
 
 export { OnChange, LinkedList, Trigger, Utils } from './utils/index';
 
@@ -39,6 +41,10 @@ export {
 export {
   Positioning, PositioningOptions, PositioningService, positionElements
 } from './positioning/index';
+
+export {
+  Context
+} from './enums';
 
 @NgModule({
   imports: [

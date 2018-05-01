@@ -9,6 +9,8 @@ import { TooltipModule } from './src/modules/tooltip/tooltip.module';
 import { TypeaheadModule } from './src/modules/typeahead/typeahead.module';
 import { ModalService } from './src/modules/modal/modal.service';
 import { TabularModule } from './src/modules/tabular/tabular.module';
+import { SelectizeModule } from './src/modules/selectize/selectize.module';
+import { AutoGrowModule } from './src/modules/auto-grow';
 
 export * from './src/modules/modal/index';
 export * from './src/modules/datepicker/index';
@@ -19,6 +21,8 @@ export * from './src/modules/tooltip/index';
 export * from './src/modules/typeahead/index';
 export * from './src/modules/tabular/index';
 export * from './src/modules/datepicker/index';
+export * from './src/modules/selectize/index';
+export * from './src/modules/auto-grow/index';
 
 export { OnChange, LinkedList, Trigger, Utils } from './src/modules/utils/index';
 
@@ -34,25 +38,27 @@ export {
   ComponentLoader
 } from './src/modules/component-loader/component-loader.class';
 
-
-
 export {
   Positioning, PositioningOptions, PositioningService, positionElements
 } from './src/modules/positioning/index';
 
-
+export {
+  Context
+} from './src/modules/enums';
 
 @NgModule({
   imports: [
     DropdownModule.forRoot(), ModalModule.forRoot(), PaginationModule.forRoot(),
     TabsModule.forRoot(), TooltipModule.forRoot(),
     TypeaheadModule.forRoot(), TabularModule.forRoot(),
-    DatepickerModule.forRoot()
+    SelectizeModule.forRoot(), DatepickerModule.forRoot(),
+    AutoGrowModule.forRoot()
   ],
   exports: [
     DatepickerModule, DropdownModule, ModalModule,
     PaginationModule, TabsModule, TooltipModule,
-    TypeaheadModule, TabularModule
+    TypeaheadModule, TabularModule, SelectizeModule,
+    AutoGrowModule
   ]
 })
 
