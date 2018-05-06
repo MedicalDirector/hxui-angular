@@ -15,6 +15,11 @@ export class PositioningService {
       appendToBody);
   }
 
+  public isElementBelowTheFold(element: HTMLElement): boolean {
+    const rect = element.getBoundingClientRect();
+    return ((rect.top + rect.height) > document.body.clientHeight) ;
+  }
+
   private _getHtmlElement(element: any): HTMLElement {
     // it means that we got a selector
     if (typeof element === 'string') {
