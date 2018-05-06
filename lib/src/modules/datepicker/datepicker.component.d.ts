@@ -1,5 +1,8 @@
-import { OnInit, EventEmitter, SimpleChanges } from '@angular/core';
-export declare class DatepickerComponent implements OnInit {
+import { OnInit, EventEmitter, SimpleChanges, OnChanges, ElementRef } from '@angular/core';
+import { PositioningService } from '../positioning';
+export declare class DatepickerComponent implements OnInit, OnChanges {
+    private hostElement;
+    private positioningService;
     onDateSelected: EventEmitter<Date>;
     selectedDate: Date;
     viewDate: Date;
@@ -7,8 +10,9 @@ export declare class DatepickerComponent implements OnInit {
     week: Array<string>;
     private presentDate;
     private cellCount;
-    constructor();
+    constructor(hostElement: ElementRef, positioningService: PositioningService);
     renderCalendar(): void;
+    private positionCalendar();
     previousMonth(): void;
     nextMonth(): void;
     isCurrentMonth(inputDate: Date): boolean;

@@ -1,5 +1,4 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { ComponentLoaderFactory } from '../component-loader/component-loader.factory';
 
 import { PositioningService } from '../positioning/positioning.service';
 import { DropdownContainerComponent } from './dropdown-container.component';
@@ -28,7 +27,6 @@ export class DropdownModule {
   public static forRoot(config?: any): ModuleWithProviders {
     return {
       ngModule: DropdownModule, providers: [
-        ComponentLoaderFactory,
         PositioningService,
         DropdownState,
         {provide: DropdownConfig, useValue: config ? config : {autoClose: true}}

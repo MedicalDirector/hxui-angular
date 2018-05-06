@@ -1,11 +1,12 @@
-import { Component, OnInit, EventEmitter, Output, Input, SimpleChanges } from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, Input, SimpleChanges, OnChanges, ElementRef} from '@angular/core';
+import {PositioningService} from '../positioning';
 
 @Component({
   selector: 'hxa-datepicker',
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss']
 })
-export class DatepickerComponent implements OnInit {
+export class DatepickerComponent implements OnInit, OnChanges {
 
   @Output() public onDateSelected: EventEmitter<Date> = new EventEmitter<Date>();
 
@@ -14,21 +15,31 @@ export class DatepickerComponent implements OnInit {
 
   public viewDate: Date;
   public days: Array<Date> = new Array<Date>();
-  public week: Array<string> = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  public week: Array<string> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   private presentDate: Date;
-  private cellCount: number = 41;
+  private cellCount = 41;
 
-  constructor() {
-  }
+  constructor(
+    private hostElement: ElementRef,
+    private positioningService: PositioningService) {}
 
   // Populates the days array with the current month, and completes the view with partial dates from sibling months
   public renderCalendar() {
     for (let i = 0; i <= this.cellCount; i++) {
       // date will be set to the first day of the month set in this.viewDate
-      let date: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth());
+      const date: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth());
       // Shifts the week to start from Monday, rather than Sunday, this causes the index to start at 1
-      let dayOffset = date.getDay() == 0 ? 7 : date.getDay();
+      const dayOffset = date.getDay() === 0 ? 7 : date.getDay();
       this.days[i] = new Date(date.setDate(2 - dayOffset + i));
+    }
+  }
+
+  // TODO: Maybe we should move all of this logic into the positioning service?
+  private positionCalendar() {
+    const rect = this.hostElement.nativeElement.getBoundingClientRect();
+    const buffer = 10;
+    if (this.positioningService.isElementBelowTheFold(this.hostElement.nativeElement)) {
+      this.hostElement.nativeElement.style.top = (rect.top - (rect.top + rect.height + buffer)) + 'px';
     }
   }
 
@@ -43,16 +54,17 @@ export class DatepickerComponent implements OnInit {
   }
 
   public isCurrentMonth(inputDate: Date): boolean {
-    return inputDate.getMonth() == this.viewDate.getMonth();
+    return inputDate.getMonth() === this.viewDate.getMonth();
   }
 
   public isCurrentDay(inputDate: Date): boolean {
-    return inputDate.getTime() == this.presentDate.getTime();
+    return inputDate.getTime() === this.presentDate.getTime();
   }
 
   public isSelectedDay(inputDate: Date): boolean {
-    if (this.selectedDate)
-      return inputDate.getTime() == this.selectedDate.getTime();
+    if (this.selectedDate) {
+      return inputDate.getTime() === this.selectedDate.getTime();
+    }
 
     return false;
   }
@@ -69,9 +81,10 @@ export class DatepickerComponent implements OnInit {
   }
 
   ngOnInit() {
-    let date: Date = new Date();
+    const date: Date = new Date();
     this.presentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     this.viewDate = this.viewDate || new Date(date.getFullYear(), date.getMonth());
     this.renderCalendar();
+    this.positionCalendar();
   }
 }
