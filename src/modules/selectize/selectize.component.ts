@@ -15,7 +15,7 @@ import {
   IterableChanges,
   ViewEncapsulation,
   Renderer2,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy, OnDestroy
 } from '@angular/core';
 import {
   NG_VALUE_ACCESSOR,
@@ -23,7 +23,7 @@ import {
   FormControl
 } from '@angular/forms';
 
-import cloneDeep from 'lodash/cloneDeep';
+import * as cloneDeep from 'lodash/cloneDeep';
 import { SelectizeConfig } from './selectize.config';
 
 declare var $: any;
@@ -42,7 +42,7 @@ export const SELECTIZE_VALUE_ACCESSOR: any = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['selectize.component.scss']
 })
-export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlValueAccessor {
+export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlValueAccessor, OnDestroy {
 
   private _options: any[];
   private _options_differ: IterableDiffer<any>;
@@ -84,9 +84,17 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
     )[0].selectize;
     this.selectize.on('change', this.onSelectizeValueChange.bind(this));
     this.selectize.on('blur', this.onBlurEvent.bind(this));
-
+    this.selectize.on('type', this.onSelectizeType.bind(this));
+    this.selectize.on('item_add', this.onSelectizeItemSelected.bind(this));
     this.updatePlaceholder();
     this.onEnabledStatusChange();
+  }
+
+  ngOnDestroy() {
+    this.selectize
+      .off('change')
+      .off('blur')
+      .off('type');
   }
 
   /**
@@ -147,6 +155,13 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
     });
     this.updatePlaceholder();
     this.evalHasError();
+  }
+
+
+  private clearhighlight(): void{
+    // remove highlight to help selectize bug
+    // https://github.com/selectize/selectize.js/issues/1141
+    this.selectize.$dropdown_content.removeHighlight();
   }
 
   onBlurEvent() {
@@ -231,6 +246,34 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
     // In some cases this gets called before registerOnChange.
     if (this.onChangeCallback) {
       this.onChangeCallback(this.selectize.getValue());
+    }
+  }
+
+  /**
+   * Invoked when the user types while filtering options.
+   * @param str
+   */
+  onSelectizeType(str: string): void {
+    if (str.length === 0) {
+      this.clearhighlight();
+    }
+  }
+
+  onSelectizeItemSelected($event: any): void {
+    this.clearhighlight();
+  }
+
+  /**
+   * Invoked anytime a key is pressed down on the selectize search field
+   * @param e
+   */
+  onKeydown = (e) => {
+    console.log(e);
+    const TABKEY = 9;
+    if (e.keyCode === TABKEY) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      e.stopPropagation();
     }
   }
 
