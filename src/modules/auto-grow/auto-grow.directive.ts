@@ -1,9 +1,9 @@
-import { AfterContentChecked, Directive, ElementRef, HostListener } from '@angular/core';
+import { AfterContentChecked, Directive, ElementRef, HostListener, AfterContentInit } from '@angular/core';
 
 @Directive({
   selector: 'textarea[autogrow]'
 })
-export class AutoGrowDirective implements AfterContentChecked {
+export class AutoGrowDirective implements AfterContentInit, AfterContentChecked {
 
   constructor(public element: ElementRef) {}
 
@@ -12,17 +12,20 @@ export class AutoGrowDirective implements AfterContentChecked {
     this.resize();
   }
 
+  public ngAfterContentInit() {
+    const style = this.element.nativeElement.style;
+    style.overflow = 'hidden';
+    style.height = 'auto';
+  }
+
   public ngAfterContentChecked() {
     this.resize();
   }
 
   public resize() {
     const style = this.element.nativeElement.style;
-    style.overflow = 'hidden';
-    style.height = 'auto';
-
     const height = this.element.nativeElement.scrollHeight;
+
     style.height = `${height}px`;
   }
-
 }
