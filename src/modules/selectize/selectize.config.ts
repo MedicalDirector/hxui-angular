@@ -28,7 +28,7 @@ export class SelectizeConfig  {
    *
    *  Default: false
    */
-  create = false;
+  create: boolean | Function = false;
 
   /**
    *  If true, when user exits the field (clicks outside of input), a new option
