@@ -2,8 +2,8 @@ import {
   Directive, ElementRef, EmbeddedViewRef, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output,
   Renderer, ViewContainerRef
 } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/filter';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { ComponentLoaderFactory } from '../component-loader/component-loader.factory';
 import { ComponentLoader } from '../component-loader/component-loader.class';
 import { DropdownConfig } from './dropdown.config';
@@ -165,9 +165,9 @@ export class DropdownDirective implements OnInit, OnDestroy {
 
     // hide dropdown if set disabled while opened
     this._subscriptions.push(this._state
-      .isDisabledChange
-      .filter((value: boolean) => value === true)
-      .subscribe((value: boolean) => this.hide()));
+      .isDisabledChange.pipe(
+        filter((value: boolean) => value === true)
+      ).subscribe((value: boolean) => this.hide()));
 
     // attach dropdown menu inside of dropdown
     if (this._showInline) {
