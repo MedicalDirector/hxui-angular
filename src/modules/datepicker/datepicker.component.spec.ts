@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DatepickerComponent } from './datepicker.component';
 import { DatepickerFormComponent } from './datepicker-form.component';
+import {PositioningService} from '../positioning';
 
 describe('DatepickerComponent', () => {
   let component: DatepickerComponent;
@@ -9,7 +10,8 @@ describe('DatepickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DatepickerFormComponent, DatepickerComponent ]
+      declarations: [ DatepickerFormComponent, DatepickerComponent ],
+      providers: [PositioningService]
     })
     .compileComponents();
   }));
@@ -51,7 +53,7 @@ describe('DatepickerComponent', () => {
       confirmRenderCalendarStartDate(Thursday, new Date("Monday 29 January 2018"))
       confirmRenderCalendarStartDate(Friday, new Date("Monday 28 May 2018"))
       confirmRenderCalendarStartDate(Saturday, new Date("Monday 27 August 2018"))
-      confirmRenderCalendarStartDate(Sunday, new Date("Monday 26 March 2018"))      
+      confirmRenderCalendarStartDate(Sunday, new Date("Monday 26 March 2018"))
     });
 
     function confirmRenderCalendarStartDate(month: Date, startDate: Date) {

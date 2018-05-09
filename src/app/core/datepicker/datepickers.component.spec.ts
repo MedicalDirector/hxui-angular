@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {} from 'jasmine';
 import { DatepickersComponent } from './datepickers.component';
+import {AppModule} from '../../app.module';
 
 describe('DatepickersComponent', () => {
   let component: DatepickersComponent;
@@ -8,7 +9,7 @@ describe('DatepickersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DatepickersComponent ]
+      imports: [ AppModule ]
     })
     .compileComponents();
   }));

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TypeaheadsComponent } from './typeaheads.component';
+import {AppModule} from '../../app.module';
 
 describe('TypeaheadsComponent', () => {
   let component: TypeaheadsComponent;
@@ -8,7 +9,7 @@ describe('TypeaheadsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TypeaheadsComponent ]
+     imports: [ AppModule ]
     })
     .compileComponents();
   }));
