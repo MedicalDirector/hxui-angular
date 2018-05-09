@@ -1,12 +1,6 @@
 import { ElementRef, EventEmitter, OnDestroy, OnInit, Renderer, TemplateRef, ViewContainerRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { TypeaheadContainerComponent } from './typeahead-container.component';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/toArray';
 import { TypeaheadMatch } from './typeahead-match.class';
 import { ComponentLoaderFactory } from '../component-loader/component-loader.factory';
 export declare class TypeaheadDirective implements OnInit, OnDestroy {

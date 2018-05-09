@@ -1,5 +1,4 @@
 import { ElementRef, EventEmitter, OnDestroy, OnInit, Renderer, ViewContainerRef } from '@angular/core';
-import 'rxjs/add/operator/filter';
 import { ComponentLoaderFactory } from '../component-loader/component-loader.factory';
 import { DropdownConfig } from './dropdown.config';
 import { DropdownState } from './dropdown.state';
