@@ -6,13 +6,8 @@ import { FormControl, NgControl } from '@angular/forms';
 import { TypeaheadContainerComponent } from './typeahead-container.component';
 import { getValueFromObject, latinize, tokenize } from './typeahead-utils';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/toArray';
+import { Observable, from } from 'rxjs';
+import { debounceTime, mergeMap, filter, toArray } from 'rxjs/operators';
 import { TypeaheadMatch } from './typeahead-match.class';
 import { ComponentLoaderFactory } from '../component-loader/component-loader.factory';
 import { ComponentLoader } from '../component-loader/component-loader.class';
@@ -244,10 +239,10 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
   }
 
   protected asyncActions(): void {
-    this.keyUpEventEmitter
-      .debounceTime(this.typeaheadWaitMs)
-      .mergeMap(() => this.typeahead)
-      .subscribe(
+    this.keyUpEventEmitter.pipe(
+      debounceTime(this.typeaheadWaitMs),
+      mergeMap(() => this.typeahead)
+    ).subscribe(
         (matches: any[]) => {
           this.finalizeAsyncCall(matches);
         },
@@ -258,17 +253,18 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
   }
 
   protected syncActions(): void {
-    this.keyUpEventEmitter
-      .debounceTime(this.typeaheadWaitMs)
-      .mergeMap((value: string) => {
+    this.keyUpEventEmitter.pipe(
+      debounceTime(this.typeaheadWaitMs),
+      mergeMap((value: string) => {
         const normalizedQuery = this.normalizeQuery(value);
 
-        return Observable.from(this.typeahead)
-          .filter((option: any) => {
+        return from(this.typeahead).pipe(
+          filter((option: any) => {
             return option && this.testMatch(this.normalizeOption(option), normalizedQuery);
-          })
-          .toArray();
-      })
+          }),
+          toArray()
+        );
+      }))
       .subscribe(
         (matches: any[]) => {
           this.finalizeAsyncCall(matches);

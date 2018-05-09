@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Http} from '@angular/http';
 import {UserModel} from './user.model';
-import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class TabularService {

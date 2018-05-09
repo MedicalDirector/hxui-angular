@@ -1,7 +1,7 @@
 import {
   Directive, ElementRef, HostBinding, HostListener, OnDestroy, Renderer2
 } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { DropdownState } from './dropdown.state';
 

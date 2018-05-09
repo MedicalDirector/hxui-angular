@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AutoGrowComponent } from './auto-grow.component';
+import {AppModule} from '../../app.module';
 
 describe('AutoGrowComponent', () => {
   let component: AutoGrowComponent;
@@ -8,7 +9,7 @@ describe('AutoGrowComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AutoGrowComponent ]
+      imports: [ AppModule ]
     })
     .compileComponents();
   }));

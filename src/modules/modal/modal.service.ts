@@ -3,7 +3,7 @@ import {
     ReflectiveInjector, Injectable, Injector, ComponentRef,
     ComponentFactoryResolver
 } from '@angular/core';
-import {Observable, ReplaySubject} from 'rxjs/Rx';
+import {Observable, ReplaySubject} from 'rxjs';
 import {ModalBackdropComponent} from './modal-backdrop.component';
 
 @Injectable()

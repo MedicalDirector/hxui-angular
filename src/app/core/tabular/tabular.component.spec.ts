@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TabularComponent } from './tabular.component';
+import {AppModule} from '../../app.module';
 
 describe('TabularComponent', () => {
   let component: TabularComponent;
@@ -8,7 +9,7 @@ describe('TabularComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TabularComponent ]
+      imports: [ AppModule ]
     })
     .compileComponents();
   }));

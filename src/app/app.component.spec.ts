@@ -1,13 +1,13 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
+import {HxUiModule} from '../modules';
+import {AppModule} from './app.module';
 
-describe('AppComponent', () => {
+xdescribe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
+      imports: [ AppModule ]
     }).compileComponents();
   }));
 
