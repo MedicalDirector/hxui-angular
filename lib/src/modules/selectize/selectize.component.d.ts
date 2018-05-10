@@ -1,6 +1,7 @@
 import { OnInit, OnChanges, SimpleChanges, DoCheck, EventEmitter, IterableDiffers, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, FormControl } from '@angular/forms';
 import { SelectizeConfig } from './selectize.config';
+import { ISelectizeItem } from '.';
 export declare const SELECTIZE_VALUE_ACCESSOR: any;
 export declare class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlValueAccessor {
     private _differs;
@@ -68,14 +69,9 @@ export declare class SelectizeComponent implements OnInit, OnChanges, DoCheck, C
     /**
      * Implementation from ControlValueAccessor
      *
-     * Empty check on 'obj' removed due to restriction on resetting the field.
-     * From testing, async should still function appropriately.
-     *
-     * FIXME This might not be necessary anymore..
-     *
      * @param obj
      */
-    writeValue(obj: any): void;
+    writeValue(obj: ISelectizeItem[]): void;
     /**
      * Implementation from ControlValueAccessor, callback for (ngModelChange)
      * @param fn
