@@ -1,9 +1,9 @@
-import { OnInit, OnChanges, SimpleChanges, DoCheck, EventEmitter, IterableDiffers, Renderer2 } from '@angular/core';
+import { OnInit, OnChanges, SimpleChanges, DoCheck, EventEmitter, IterableDiffers, Renderer2, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, FormControl } from '@angular/forms';
 import { SelectizeConfig } from './selectize.config';
 import { ISelectizeItem } from '.';
 export declare const SELECTIZE_VALUE_ACCESSOR: any;
-export declare class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlValueAccessor {
+export declare class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlValueAccessor, OnDestroy {
     private _differs;
     private renderer;
     private _options;
@@ -27,6 +27,7 @@ export declare class SelectizeComponent implements OnInit, OnChanges, DoCheck, C
     constructor(_differs: IterableDiffers, renderer: Renderer2);
     ngOnInit(): void;
     reset(): void;
+    ngOnDestroy(): void;
     /**
      * Change detection for primitive types.
      */
@@ -39,6 +40,7 @@ export declare class SelectizeComponent implements OnInit, OnChanges, DoCheck, C
     ngDoCheck(): void;
     private _applyOptionsChanges(changes);
     private _applyOptionGroupChanges(changes);
+    private clearhighlight();
     onBlurEvent(): void;
     onSelectizeOptGroupAdd(optgroup: any): void;
     onSelectizeOptGroupRemove(optgroup: any): void;
@@ -62,6 +64,17 @@ export declare class SelectizeComponent implements OnInit, OnChanges, DoCheck, C
      * @param $event
      */
     onSelectizeValueChange($event: any): void;
+    /**
+     * Invoked when the user types while filtering options.
+     * @param str
+     */
+    onSelectizeType(str: string): void;
+    onSelectizeItemSelected($event: any): void;
+    /**
+     * Invoked anytime a key is pressed down on the selectize search field
+     * @param e
+     */
+    onKeydown: (e: any) => void;
     /**
      * Returns the applicable placeholder.
      */
