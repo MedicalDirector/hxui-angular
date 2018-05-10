@@ -25,6 +25,7 @@ import {
 
 import * as cloneDeep from 'lodash/cloneDeep';
 import { SelectizeConfig } from './selectize.config';
+import { ISelectizeItem } from '.';
 
 declare var $: any;
 
@@ -73,7 +74,11 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
 
   ngOnInit(): void {
     if (this.id && this.id.length > 0) {
-      this.renderer.setAttribute(this.selectizeInput.nativeElement, 'id', this.id);
+      this.renderer.setAttribute(
+        this.selectizeInput.nativeElement,
+        'id',
+        this.id
+      );
     }
     this.reset();
   }
@@ -245,7 +250,13 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
   onSelectizeValueChange($event: any): void {
     // In some cases this gets called before registerOnChange.
     if (this.onChangeCallback) {
-      this.onChangeCallback(this.selectize.getValue());
+
+      // Map selectize's value collection back to original ISelectizeItem object
+      const data = this.selectize.items.map(v => {
+        return this.selectize.options[v];
+      });
+
+      this.onChangeCallback(data);
     }
   }
 
@@ -297,17 +308,14 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
   /**
    * Implementation from ControlValueAccessor
    *
-   * Empty check on 'obj' removed due to restriction on resetting the field.
-   * From testing, async should still function appropriately.
-   *
-   * FIXME This might not be necessary anymore..
-   *
    * @param obj
    */
-  writeValue(obj: any): void {
-    if (obj !== this.value) {
-      this.value = obj;
-    }
+  writeValue(obj: ISelectizeItem[]): void {
+
+    // Extract just 'value' property for selectize.js to use
+    this.value = obj.map(v => {
+      return v.value;
+    });
     this.selectize.setValue(this.value);
   }
 
