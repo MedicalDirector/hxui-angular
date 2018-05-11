@@ -1,6 +1,6 @@
 {
   "name": "@hxui/angular",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "license": "MIT",
   "author": "Design @ MD <design@medicaldirector.com>",
   "scripts": {
@@ -13,7 +13,7 @@
     "packagr": "ng-packagr -p ng-package.json"
   },
   "private": false,
-  "dependencies": {
+  "peerDependencies": {
     "@angular/animations": "6.0.0",
     "@angular/cli": "6.0.0",
     "@angular/common": "6.0.0",
@@ -35,8 +35,7 @@
     "rxjs": "^6.1.0",
     "selectize": "^0.12.4",
     "webpack": "^4.8.1",
-    "zone.js": "^0.8.26",
-    "tslib": "^1.9.0"
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.0",
@@ -65,5 +64,8 @@
   "module": "esm5/hxui-angular.js",
   "es2015": "esm2015/hxui-angular.js",
   "typings": "hxui-angular.d.ts",
-  "metadata": "hxui-angular.metadata.json"
+  "metadata": "hxui-angular.metadata.json",
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
 }
