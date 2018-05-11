@@ -23,7 +23,7 @@ import {
   FormControl
 } from '@angular/forms';
 
-import * as cloneDeep from 'lodash/cloneDeep';
+import * as _ from 'lodash';
 import { SelectizeConfig } from './selectize.config';
 import { ISelectizeItem } from '.';
 
@@ -44,7 +44,6 @@ export const SELECTIZE_VALUE_ACCESSOR: any = {
   styleUrls: ['selectize.component.scss']
 })
 export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlValueAccessor, OnDestroy {
-
   private _options: any[];
   private _options_differ: IterableDiffer<any>;
   private _optgroups: any[];
@@ -189,7 +188,7 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
    * Refresh selected values when options change.
    */
   onSelectizeOptionAdd(option: any): void {
-    this.selectize.addOption(cloneDeep(option));
+    this.selectize.addOption(_.cloneDeep(option));
     const valueField = this.config.valueField;
     if (this.value) {
       const items =
