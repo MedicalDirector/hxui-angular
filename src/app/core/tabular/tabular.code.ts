@@ -134,35 +134,46 @@ export class TabularComponent implements OnInit {
 exampleService =
 `
 import { Injectable } from '@angular/core';
-import { Http} from '@angular/http';
-import { UserModel} from './user.model';
-import 'rxjs/add/operator/toPromise';
+import {Http} from '@angular/http';
+import {UserModel} from './user.model';
+import {Observable, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class TabularService {
 
   private usersUrl = 'api/users';
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) { }
 
-  getUsers(): Promise<UserModel[]> {
-    return this.http.get(this.usersUrl)
-      .toPromise()
-      .then(response => response.json().data as UserModel[])
-      .catch(this.handleError);
+  getUsers(): Observable<UserModel[]> {
+    return this.http.get<UserModel[]>(this.usersUrl)
+      .pipe(
+        catchError(this.handleError('getUsers', []))
+      );
   }
 
-  getUser(id: number): Promise<UserModel> {
-    
-    return this.http.get(url)
-      .toPromise()
-      .then(response => response.json().data as UserModel)
-      .catch(this.handleError);
+  getUser(id: number): Observable<UserModel> {
+   
+    return this.http.get<UserModel>(url)
+      .pipe(
+        catchError(this.handleError<UserModel>('getUsers id=id'))
+      );
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      console.log(\`operation failed: error.message\`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }
 `;
@@ -170,6 +181,7 @@ export class TabularService {
 exampleMockData =
 `
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import {Context} from '../../../modules/enums';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const users = [
@@ -256,7 +268,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', css: 'is-error'}
+        flag: {label: 'S', cssClass: 'is-error'}
       },
       {
         id: 8,
@@ -268,7 +280,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', css: 'is-outlined'}
+        flag: {label: 'S', cssClass: 'is-outlined'}
       },
       {
         id: 9,
@@ -280,7 +292,8 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', css: ''}
+        flag: {label: 'S', cssClass: ''},
+        context: Context.Danger
       },
       {
         id: 10,
@@ -304,7 +317,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', css: 'is-outlined'}
+        flag: {label: 'S', cssClass: 'is-outlined'}
       },
       {
         id: 12,
@@ -351,7 +364,8 @@ export class InMemoryDataService implements InMemoryDbService {
         email: 'kevin.liang@medicaldirector.com',
         active: false,
         created: new Date(),
-        modified: new Date()
+        modified: new Date(),
+        context: Context.Warning
       },
       {
         id: 16,
@@ -413,6 +427,7 @@ export class InMemoryDataService implements InMemoryDbService {
     return {users};
   }
 }
+
 
 `;
 

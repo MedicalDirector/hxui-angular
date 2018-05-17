@@ -1,16 +1,17 @@
 import {NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {TabularComponent} from './tabular.component';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {TabularOrderByService} from './tabular-order-by.service';
+import {TabularSortByService} from './tabular-sort-by.service';
 import {TabularConfig} from './tabular.config';
 import {TooltipModule} from '../tooltip/tooltip.module';
 import {SimpleSearchPipe} from '../utils/pipes/simple-search.pipe';
 import {PaginationModule} from '../pagination/pagination.module';
 import {DropdownModule} from '../dropdown/dropdown.module';
 import {FormsModule} from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import {FormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     RouterModule,
     PaginationModule,
     TooltipModule,
@@ -28,7 +29,7 @@ import {FormsModule} from '@angular/forms';
     FormsModule
   ],
   providers: [
-    TabularOrderByService,
+    TabularSortByService,
     TabularConfig
   ],
   exports: [
@@ -42,7 +43,7 @@ export class TabularModule {
     return {
       ngModule: TabularModule,
       providers: [
-        TabularOrderByService,
+        TabularSortByService,
         TabularConfig
       ]
     };

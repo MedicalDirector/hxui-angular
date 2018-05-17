@@ -1,4 +1,5 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import {Context} from '../../../modules/enums';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const users = [
@@ -109,7 +110,8 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', cssClass: ''}
+        flag: {label: 'S', cssClass: ''},
+        context: Context.Danger
       },
       {
         id: 10,
@@ -180,7 +182,8 @@ export class InMemoryDataService implements InMemoryDbService {
         email: 'kevin.liang@medicaldirector.com',
         active: false,
         created: new Date(),
-        modified: new Date()
+        modified: new Date(),
+        context: Context.Warning
       },
       {
         id: 16,

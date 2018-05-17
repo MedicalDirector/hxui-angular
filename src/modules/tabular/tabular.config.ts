@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ITabularConfig} from './tabular-config.interface';
-import {OrderByDirection} from './tabular-order-by.service';
+import {SortByDirection} from './tabular-sort-by.service';
 import {TabularSize} from './tabular-size.enum';
 
 

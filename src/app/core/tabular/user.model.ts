@@ -1,5 +1,6 @@
 import {ActionConfigRouteType, IActionsConfig} from '../../../modules/tabular/actions-config.interface';
 import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
+import {Context} from '../../../modules/enums';
 
 export class UserModel implements ITabularRow {
   public id: number;
@@ -14,7 +15,7 @@ export class UserModel implements ITabularRow {
   public modified: Date;
   public selected: boolean;
   public checked: boolean;
-
+  public context: Context = Context.None;
 
   constructor(data?: any) {
     if (data) {
@@ -25,6 +26,8 @@ export class UserModel implements ITabularRow {
   get icon(): string{
     return (this.active) ? 'icon-check-empty is-primary' : 'icon-close-empty is-danger';
   }
+
+
 
   get actions(): IActionsConfig[]{
     return  [
