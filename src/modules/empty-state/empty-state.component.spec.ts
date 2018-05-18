@@ -1,6 +1,8 @@
+import {} from 'jasmine';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EmptyStateComponent } from './empty-state.component';
+import {EmptyStateConfig} from './empty-state.config';
 
 describe('EmptyStateComponent', () => {
   let component: EmptyStateComponent;
@@ -8,7 +10,8 @@ describe('EmptyStateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmptyStateComponent ]
+      declarations: [ EmptyStateComponent ],
+      providers: [EmptyStateConfig]
     })
     .compileComponents();
   }));

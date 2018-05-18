@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EmptyStateComponent } from './empty-state.component';
+import {AppModule} from '../../app.module';
 
 describe('EmptyStateComponent', () => {
   let component: EmptyStateComponent;
@@ -8,9 +9,9 @@ describe('EmptyStateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmptyStateComponent ]
+      imports: [ AppModule ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +23,6 @@ describe('EmptyStateComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
 });
