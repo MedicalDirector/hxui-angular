@@ -1,0 +1,109 @@
+<section class="hx-section scrollable-y" #container>
+  <div class="hx-section is-comfortable">
+
+    <h1 class="hx-title">Empty States</h1>
+    <h2 class="hx-subtitle">The default state of a specific area, module, component is usually filled with a so called empty state. <br>It's a component that requires users to go through one or more steps to populate it with data.</h2>
+    <hr>
+
+    <h4 id="usage">Usage</h4>
+    <p>Add the EmptyStateModule to AppModule or SharedModule.</p>
+
+    <pre>
+      <code highlight [code]="code.usage"></code>
+    </pre>
+
+    <hr>
+
+    <h4 id="example">Example</h4>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+
+       <hxa-empty-state  icon="icon-medications" [msg]="emptyStateMsg" [actions]="emptyStateActions"></hxa-empty-state>
+
+
+
+      </div>
+    </div>
+
+    <br>
+
+    <h5 id="code">Code</h5>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <hx-tabset>
+          <hx-tab heading="Template">
+            <pre>
+              <code highlight [code]="code.exampleTemplate"></code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Typescript">
+            <pre>
+              <code highlight [code]="code.exampleTypescript"></code>
+            </pre>
+          </hx-tab>
+        </hx-tabset>
+      </div>
+    </div>
+
+    <hr>
+
+    <h4 id="api">API Reference</h4>
+
+    <h5 class="is-primary">EmptyStateComponent</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <table class="hx-table is-striped">
+          <thead>
+          <tr>
+            <th>Inputs</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>icon</td>
+            <td><kbd>string</kbd></td>
+            <td>A string value of the icon name. </td>
+          </tr>
+          <tr>
+            <td>msg</td>
+            <td><kbd>string</kbd></td>
+            <td>The message to describe why the state is empty.</td>
+          </tr>
+          <tr>
+            <td>actions</td>
+            <td><kbd>IEmptyStateAction[]</kbd></td>
+            <td>1 or more actions that the user can perform.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<aside class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
+  <ul class="hx-nav hx-nav-vertical">
+    <li class="hx-nav-heading"><h6>Contents</h6></li>
+
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
+    </li>
+
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Examples</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#code')"><span>Code</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
+    </li>
+
+  </ul>
+</aside>

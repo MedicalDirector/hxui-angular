@@ -73,7 +73,11 @@ export class AppComponent {
         {
           name: 'Selectize',
           link: '/selectize'
-        }
+        },
+        {
+          name: 'Empty State',
+          link: '/empty-state'
+        },
       ]
     },
     {
