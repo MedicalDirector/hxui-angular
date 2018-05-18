@@ -13,6 +13,9 @@
     "packagr": "ng-packagr -p ng-package.json"
   },
   "private": false,
+  "dependencies": {
+    "array-sort-by": "^1.2.1"
+  },
   "peerDependencies": {
     "@angular/animations": "6.0.0",
     "@angular/cli": "^6.0.1",
@@ -35,8 +38,7 @@
     "rxjs": "^6.1.0",
     "selectize": "^0.12.4",
     "webpack": "^4.8.1",
-    "zone.js": "^0.8.26",
-    "array-sort-by": "^1.2.1"
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.0",
