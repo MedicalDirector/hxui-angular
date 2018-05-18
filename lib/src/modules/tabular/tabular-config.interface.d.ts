@@ -1,5 +1,5 @@
 import { TabularSize } from './tabular-size.enum';
-import { OrderByDirection } from './tabular-order-by.service';
+import { ISortByProperty } from './tabular-sort-by.service';
 export declare abstract class ITabularConfig {
     size: TabularSize;
     pagination: {
@@ -7,6 +7,5 @@ export declare abstract class ITabularConfig {
         currentPage: number;
     };
     clickableRows?: boolean;
-    defaultOrderBy?: string;
-    defaultOrderByDirection?: OrderByDirection;
+    sortBy?: ISortByProperty[];
 }

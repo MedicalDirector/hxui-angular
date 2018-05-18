@@ -23,7 +23,7 @@ import { AutoGrowComponent } from './auto-grow/auto-grow.component';
 @NgModule({
   imports: [
     SharedModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    InMemoryWebApiModule.forRoot(InMemoryDataService,  {dataEncapsulation: false }),
   ],
   declarations: [
       PageNotFoundComponent,

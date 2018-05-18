@@ -3,15 +3,15 @@ import {TabularColumn} from '../../../modules/tabular/tabular-column.model';
 import {TabularColumnTypes} from '../../../modules/tabular/tabular-column.interface';
 import {ITabularConfig} from '../../../modules/tabular/tabular-config.interface';
 import {TabularSize} from '../../../modules/tabular/tabular-size.enum';
-import {ActionConfigRouteType} from '../../../modules/tabular/actions-config.interface';
 import {TabularService} from './tabular.service';
 import {UserModel} from './user.model';
 import {CoreBaseComponent} from '../core-base.component';
 import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/platform-browser';
-import {OrderByDirection} from '../../../modules/tabular/tabular-order-by.service';
+import {SortByDirection} from '../../../modules/tabular/tabular-sort-by.service';
 import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
 import {TabularCode} from './tabular.code';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-tabular',
@@ -20,12 +20,13 @@ import {TabularCode} from './tabular.code';
 })
 export class TabularComponent extends CoreBaseComponent implements OnInit {
 
+  users$: Observable<UserModel[]>;
   code = new TabularCode();
   searchTerm: string;
   rowData: ITabularRow[] = [];
   columnData: TabularColumn[] = [
     new TabularColumn('checkboxes', 'Checkboxes', TabularColumnTypes.Checkbox, false),
-    new TabularColumn('id', 'Id', TabularColumnTypes.String, true),
+    new TabularColumn('id', 'Id', TabularColumnTypes.Number, true),
     new TabularColumn('usercode', 'User Code', TabularColumnTypes.String, true),
     new TabularColumn('firstname', 'First Name', TabularColumnTypes.String, true),
     new TabularColumn('surname', 'Surname', TabularColumnTypes.String, true),
@@ -39,8 +40,11 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
   tabularConfig: ITabularConfig = {
     size: TabularSize.Default,
     clickableRows: true,
-    defaultOrderBy: 'firstname',
-    defaultOrderByDirection: OrderByDirection.Descending,
+    sortBy: [{
+      property: 'firstname',
+      direction: SortByDirection.Descending,
+      type: TabularColumnTypes.String
+    }],
     pagination: {
       itemsPerPage: 5,
       currentPage: 1
@@ -89,10 +93,12 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
   private getTabularData() {
     const data: ITabularRow[] = [];
     this.service.getUsers()
-      .then((users) => {
-        for (let i = 0; i < users.length; i++) {
-          const user = new UserModel(users[i]);
-          data.push(user);
+      .subscribe((users) => {
+        if (users) {
+          for (let i = 0; i < users.length; i++) {
+            const user = new UserModel(users[i]);
+            data.push(user);
+          }
         }
       });
     this.rowData = data;
