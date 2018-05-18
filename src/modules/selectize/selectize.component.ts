@@ -95,10 +95,9 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
   }
 
   ngOnDestroy() {
-    this.selectize
-      .off('change')
-      .off('blur')
-      .off('type');
+    this.selectize.off('change');
+    this.selectize.off('blur');
+    this.selectize.off('type');
   }
 
   /**
