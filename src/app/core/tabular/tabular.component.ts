@@ -26,7 +26,7 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
   rowData: ITabularRow[] = [];
   columnData: TabularColumn[] = [
     new TabularColumn('checkboxes', 'Checkboxes', TabularColumnTypes.Checkbox, false),
-    new TabularColumn('id', 'Id', TabularColumnTypes.String, true),
+    new TabularColumn('id', 'Id', TabularColumnTypes.Number, true),
     new TabularColumn('usercode', 'User Code', TabularColumnTypes.String, true),
     new TabularColumn('firstname', 'First Name', TabularColumnTypes.String, true),
     new TabularColumn('surname', 'Surname', TabularColumnTypes.String, true),
@@ -42,7 +42,8 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
     clickableRows: true,
     sortBy: [{
       property: 'firstname',
-      direction: SortByDirection.Descending
+      direction: SortByDirection.Descending,
+      type: TabularColumnTypes.String
     }],
     pagination: {
       itemsPerPage: 5,

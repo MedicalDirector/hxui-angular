@@ -1,12 +1,14 @@
 import { EventEmitter, OnInit, DoCheck, OnChanges, SimpleChanges } from '@angular/core';
 import { TabularColumn } from './tabular';
 import { ITabularConfig } from './tabular-config.interface';
-import { TabularOrderByService } from './tabular-order-by.service';
+import { IActionsConfig } from './actions-config.interface';
+import { TabularSortByService, SortByDirection } from './tabular-sort-by.service';
 import { TabularConfig } from './tabular.config';
+import { TabularColumnTypes } from './tabular-column.interface';
 import { ITabularRow } from './tabular-row.interface';
 export declare class TabularComponent implements OnInit, DoCheck, OnChanges {
     private conf;
-    private orderByService;
+    private sortByService;
     /**
      * Collection of column models
      */
@@ -42,18 +44,15 @@ export declare class TabularComponent implements OnInit, DoCheck, OnChanges {
     private TabularColumnTypes;
     private TabularSize;
     private selectAll;
+    private Context;
+    private SortByDirection;
     protected _callback: Function;
     protected _config: ITabularConfig;
     protected _searchTerm: string;
-    /**
-     * Order by used by orderBy service
-     */
-    orderBy: string;
-    constructor(conf: TabularConfig, orderByService: TabularOrderByService);
+    constructor(conf: TabularConfig, sortByService: TabularSortByService);
     ngOnInit(): void;
     ngDoCheck(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    private readonly iconDirection;
     /**
      * Calls the parsed callback with optional arguments
      */
@@ -67,22 +66,18 @@ export declare class TabularComponent implements OnInit, DoCheck, OnChanges {
     /**
      * Get the action tooltip if it exists
      */
-    private getActionTooltip(action);
-    private getActionDisabledState(action);
+    getActionTooltip(action: IActionsConfig): string;
+    getActionDisabledState(action: IActionsConfig): boolean;
     /**
-     * Handles the column header click event.
+     * Handles the column header click event for sorting.
+     * Sort order is Descending, Ascending followed by None.
      */
-    private onSortClickHandler(key);
+    onSortClickHandler(key: string, type: TabularColumnTypes): boolean;
+    isColumnSorted(key: string, direction: SortByDirection): boolean;
     /**
      * Handles the row click event.
      */
     private onRowClickHandler(data);
-    /**
-     * Order collection via full collection and not via pipe.
-     * The pagination pipe will only return the paginated amount.
-     * Which means the order by filter will only be applied to whats paginated
-     * and not the full collection.
-     */
     private orderByData();
     readonly totalItemCount: number;
     /**

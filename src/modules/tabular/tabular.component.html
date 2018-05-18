@@ -1,16 +1,16 @@
 <table class="tabular hx-table is-striped" [class.is-hover]="config.clickableRows" [class.is-narrow]="config.size === TabularSize.Small">
   <thead>
   <tr>
-    <th *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
+    <th *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox}">
 
       <!-- sortable column -->
-      <a class="tabular__sorter" href="#" *ngIf="col.sortable && col.dataType != 6" (click)="onSortClickHandler(col.id)"><i class="hx-icon icon-arrow-up is-small" *ngIf="isColumnSorted(col.id, SortByDirection.Ascending)"></i><i class="hx-icon icon-arrow-down is-small" *ngIf="isColumnSorted(col.id, SortByDirection.Descending)"></i> {{col.label}}</a>
+      <a class="tabular__sorter" href="#" *ngIf="col.sortable && col.dataType != TabularColumnTypes.Checkbox" (click)="onSortClickHandler(col.id, col.dataType)"><i class="hx-icon icon-arrow-up is-small" *ngIf="isColumnSorted(col.id, SortByDirection.Ascending)"></i><i class="hx-icon icon-arrow-down is-small" *ngIf="isColumnSorted(col.id, SortByDirection.Descending)"></i> {{col.label}}</a>
 
       <!-- non sortable column -->
-      <span *ngIf="!col.sortable && col.dataType != 6">{{col.label}}</span>
+      <span *ngIf="!col.sortable && col.dataType !== TabularColumnTypes.Checkbox">{{col.label}}</span>
 
       <!-- checkbox column -->
-      <div *ngIf="col.dataType == 6" class="hx-checkbox-control">
+      <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
         <input id="selectAll" name="selectAll" type="checkbox" class="hx-checkbox" (change)="toggleSelectAll($event)" title="Select All" [(ngModel)]="selectAll" />
         <label for="selectAll" class="hx-label"></label>
       </div>
@@ -35,8 +35,8 @@
         <label for="checkbox-{{row.id}}" class="hx-label"></label>
       </div>
 
-      <!-- string type -->
-      <span *ngIf="col.dataType === TabularColumnTypes.String" title="{{row[col.id]}}">{{row[col.id]}}</span>
+      <!-- string type | number type -->
+      <span *ngIf="col.dataType === TabularColumnTypes.String || col.dataType === TabularColumnTypes.Number" title="{{row[col.id]}}">{{row[col.id]}}</span>
 
       <!-- icon type -->
       <i *ngIf="col.dataType === TabularColumnTypes.Icon" class="hx-icon {{row[col.id]}}"></i>

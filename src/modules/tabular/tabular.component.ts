@@ -185,23 +185,27 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
 
 
   /**
-   * Handles the column header click event.
+   * Handles the column header click event for sorting.
+   * Sort order is Descending, Ascending followed by None.
    */
-  onSortClickHandler(key: string) {
+  onSortClickHandler(key: string, type: TabularColumnTypes) {
 
     const findPropInSortList = this.config.sortBy.filter((prop: ISortByProperty) => { return (prop.property === key); });
 
     if (findPropInSortList.length) {
       const prop = findPropInSortList[0];
+      const index = this.config.sortBy.findIndex(x => x === prop);
       if (prop.direction === SortByDirection.None) {
-         prop.direction = SortByDirection.Descending;
+        prop.direction = SortByDirection.Descending;
       } else if (prop.direction === SortByDirection.Descending) {
-         prop.direction = SortByDirection.Ascending;
-      } else if (prop.direction === SortByDirection.Ascending) {
-        prop.direction = SortByDirection.None;
+        prop.direction = SortByDirection.Ascending;
+      }  else if (prop.direction === SortByDirection.Ascending) {
+        if (index > -1) {
+          this.config.sortBy.splice(index, 1);
+        }
       }
     } else {
-      this.config.sortBy.push({ property: key, direction: SortByDirection.Descending});
+      this.config.sortBy.push({property: key, direction: SortByDirection.Descending, type: type});
     }
 
     this.orderByData();
@@ -226,7 +230,6 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
 
   private orderByData() {
     this.sortByService.sortBy(this.rows, this.config.sortBy);
-    console.log(this.config.sortBy);
     this.setPage();
   }
 

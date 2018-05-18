@@ -1,6 +1,7 @@
 import {TabularColumn} from '../../../modules/tabular/tabular-column.model';
 import {TabularColumnTypes} from '../../../modules/tabular/tabular-column.interface';
 import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
+import {ISortByProperty, SortByDirection} from '../../../modules/tabular/tabular-sort-by.service';
 
 export class TabularCode {
 usage =
@@ -519,13 +520,21 @@ tabularConfig =
       itemsPerPage: 5,
       currentPage: 1
   },
+  clickableRows: true;
+  sortBy: [{
+    property: 'firstname',
+    direction: SortByDirection.Descending,
+    type: TabularColumnTypes.String
+  }];
 };
 
 `;
 
+
 columnTypes =
 `
 TabularColumnTypes.String
+TabularColumnTypes.Number
 TabularColumnTypes.Icon
 TabularColumnTypes.Date
 TabularColumnTypes.Actions

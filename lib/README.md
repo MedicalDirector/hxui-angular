@@ -26,9 +26,7 @@ Here are the test related scripts:
 * `npm run e2e` - run protractor e2e tests, written in JavaScript (*e2e-spec.js)
 
 ### Install as NPM (import into project) ##
-(via HTTP) npm install git+https://medicaldirector.visualstudio.com/MD%20Design/_git/HxUi-angular --save
-
-(via SSH) npm install git+ssh://medicaldirector@medicaldirector.visualstudio.com:22/MD%20Design/_git/HxUi-angular --save
+npm install @hxui/angular --save
 
 ### How do I view the HxUi-angular documentation ###
 
@@ -39,5 +37,11 @@ Run ```ng serve``` .
 Run ```npm run packagr```
 then
 Run ```npm publish lib --access=public```
+
+
+### trouble shooting during development 
+Dependencies in the peerDependency list will not be installed when your run ```npm install```. 
+You will need to install ```npm install -g npm-install-peers``` to then be able to install
+these dependencies by running ```npm-install-peers```
 
 Note: Don't forget to bump up the version number in the package json

@@ -162,6 +162,18 @@ export class InMemoryDataService implements InMemoryDbService {
         flag: {label: 'S', cssClass: 'is-primary'}
       },
       {
+        id: 13,
+        usercode: 'BW001',
+        firstname: 'Annabell',
+        surname: 'Bolsen',
+        rolename: 'Receptionist',
+        email: 'annabell.wilson@medicaldirector.com',
+        active: true,
+        created: new Date(),
+        modified: new Date(),
+        flag: {label: 'S', cssClass: 'is-primary'}
+      },
+      {
         id: 14,
         usercode: 'SH001',
         firstname: 'Susan',
