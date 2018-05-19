@@ -10,11 +10,35 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "packagr": "ng-packagr -p ng-package.json"
+    "packagr": "ng-packagr -p ng-package.json",
+    "install-peers": "npm install @angular/animations @angular/cli @angular/common @angular/compiler @angular/core @angular/forms @angular/http @angular/platform-browser @angular/platform-browser-dynamic @angular/platform-server @angular/router @hxui/css angular-in-memory-web-api core-js jquery lodash.clonedeep ngx-highlightjs ngx-page-scroll rxjs selectize webpack zone.js",
+    "deploy": "npm run install-peers && npm run build"
   },
   "private": false,
   "dependencies": {
-    "array-sort-by": "^1.2.1"
+    "@angular/animations": "^6.0.2",
+    "@angular/cli": "^6.0.3",
+    "@angular/common": "^6.0.2",
+    "@angular/compiler": "^6.0.2",
+    "@angular/core": "^6.0.2",
+    "@angular/forms": "^6.0.2",
+    "@angular/http": "^6.0.2",
+    "@angular/platform-browser": "^6.0.2",
+    "@angular/platform-browser-dynamic": "^6.0.2",
+    "@angular/platform-server": "^6.0.2",
+    "@angular/router": "^6.0.2",
+    "@hxui/css": "^1.1.41",
+    "angular-in-memory-web-api": "^0.6.0",
+    "array-sort-by": "^1.2.1",
+    "core-js": "^2.5.6",
+    "jquery": "^3.3.1",
+    "lodash.clonedeep": "^4.5.0",
+    "ngx-highlightjs": "^2.0.2",
+    "ngx-page-scroll": "^5.0.0",
+    "rxjs": "^6.1.0",
+    "selectize": "^0.12.4",
+    "webpack": "^4.8.3",
+    "zone.js": "^0.8.26"
   },
   "peerDependencies": {
     "@angular/animations": "6.0.0",
