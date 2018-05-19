@@ -4,3 +4,8 @@ export declare enum Context {
     Warning = 2,
     Danger = 3,
 }
+export declare enum Size {
+    Default = 0,
+    Small = 1,
+    Large = 2,
+}
