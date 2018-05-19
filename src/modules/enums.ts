@@ -4,3 +4,10 @@ export enum Context {
   Warning,
   Danger
 }
+
+
+export enum Size {
+  Default,
+  Small,
+  Large
+}

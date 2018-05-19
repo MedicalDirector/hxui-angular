@@ -18,6 +18,7 @@ import { TabularService } from './tabular/tabular.service';
 import { InstallGuideComponent } from './install-guide/install-guide.component';
 import { SelectizeComponent } from 'app/core/selectize/selectize.component';
 import { AutoGrowComponent } from './auto-grow/auto-grow.component';
+import { EmptyStateComponent } from './empty-state/empty-state.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { AutoGrowComponent } from './auto-grow/auto-grow.component';
       TabularComponent,
       InstallGuideComponent,
       SelectizeComponent,
-      AutoGrowComponent
+      AutoGrowComponent,
+      EmptyStateComponent
   ],
   providers: [
      TabularService,

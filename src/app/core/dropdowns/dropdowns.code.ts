@@ -7,7 +7,7 @@ export class DropdownsCode {
      @NgModule({
         imports: [DropdownModule.forRoot(),...]
      })
-     exportclass AppModule(){
+     export class AppModule(){
     
     `;
 
