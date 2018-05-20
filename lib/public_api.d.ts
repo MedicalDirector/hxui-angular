@@ -10,6 +10,7 @@ export * from './src/modules/tabular/index';
 export * from './src/modules/datepicker/index';
 export * from './src/modules/selectize/index';
 export * from './src/modules/auto-grow/index';
+export * from './src/modules/empty-state/index';
 export { OnChange, LinkedList, Trigger, Utils } from './src/modules/utils/index';
 export { ComponentLoaderFactory } from './src/modules/component-loader/component-loader.factory';
 export { ContentRef } from './src/modules/component-loader/content-ref.class';

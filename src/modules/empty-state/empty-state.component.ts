@@ -28,7 +28,6 @@ export class EmptyStateComponent implements OnInit {
    * Calls the parsed callback with optional arguments
    * @param event
    * @param cb
-   * @returns {boolean}
    */
   private executeCallback(event: Event, cb: any[]) {
     if (cb.length) {

@@ -11,6 +11,7 @@ import { ModalService } from './src/modules/modal/modal.service';
 import { TabularModule } from './src/modules/tabular/tabular.module';
 import { SelectizeModule } from './src/modules/selectize/selectize.module';
 import { AutoGrowModule } from './src/modules/auto-grow';
+import {EmptyStateModule} from './src/modules/empty-state/empty-state.module';
 
 export * from './src/modules/modal/index';
 export * from './src/modules/datepicker/index';
@@ -23,6 +24,7 @@ export * from './src/modules/tabular/index';
 export * from './src/modules/datepicker/index';
 export * from './src/modules/selectize/index';
 export * from './src/modules/auto-grow/index';
+export * from './src/modules/empty-state/index';
 
 export { OnChange, LinkedList, Trigger, Utils } from './src/modules/utils/index';
 
@@ -52,13 +54,13 @@ export {
     TabsModule.forRoot(), TooltipModule.forRoot(),
     TypeaheadModule.forRoot(), TabularModule.forRoot(),
     SelectizeModule.forRoot(), DatepickerModule.forRoot(),
-    AutoGrowModule.forRoot()
+    AutoGrowModule.forRoot(), EmptyStateModule.forRoot()
   ],
   exports: [
     DatepickerModule, DropdownModule, ModalModule,
     PaginationModule, TabsModule, TooltipModule,
     TypeaheadModule, TabularModule, SelectizeModule,
-    AutoGrowModule
+    AutoGrowModule, EmptyStateModule
   ]
 })
 
