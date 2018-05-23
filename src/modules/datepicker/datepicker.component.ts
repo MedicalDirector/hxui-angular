@@ -6,12 +6,11 @@ import {PositioningService} from '../positioning';
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss']
 })
-export class DatepickerComponent implements OnInit, OnChanges {
-
-  @Output() public onDateSelected: EventEmitter<Date> = new EventEmitter<Date>();
-
-  // The month/year that the view binds to
+export class DatepickerComponent implements OnInit, OnChanges {  
   @Input() public selectedDate: Date;
+  @Input() public validators: Array<(date: Date) => boolean>;
+  
+  @Output() public onDateSelected: EventEmitter<Date> = new EventEmitter<Date>();
 
   public viewDate: Date;
   public days: Array<Date> = new Array<Date>();
@@ -24,7 +23,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
     private positioningService: PositioningService) { }
 
   // Populates the days array with the current month, and completes the view with partial dates from sibling months
-  public renderCalendar() {
+  public renderCalendar(): void {
     for (let i = 0; i <= this.cellCount; i++) {
       // date will be set to the first day of the month set in this.viewDate
       const date: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth());
@@ -35,7 +34,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
   }
 
   // TODO: Maybe we should move all of this logic into the positioning service?
-  private positionCalendar() {
+  private positionCalendar(): void {
     const rect = this.hostElement.nativeElement.getBoundingClientRect();
     const buffer = 10;
     if (this.positioningService.isElementBelowTheFold(this.hostElement.nativeElement)) {
@@ -43,12 +42,12 @@ export class DatepickerComponent implements OnInit, OnChanges {
     }
   }
 
-  public previousMonth() {
+  public previousMonth(): void {
     this.viewDate = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() - 1);
     this.renderCalendar();
   }
 
-  public nextMonth() {
+  public nextMonth(): void {
     this.viewDate = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1);
     this.renderCalendar();
   }
@@ -69,18 +68,24 @@ export class DatepickerComponent implements OnInit, OnChanges {
     return false;
   }
 
-  public setSelectedDate(date: Date): void {
-    this.selectedDate = date;
-    this.onDateSelected.emit(date);
+  public isInvalidDay(inputDate: Date): boolean {
+    return this.validators.map((fn) => fn(inputDate)).reduce((prev, next) => prev || next, false);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  public setSelectedDate(date: Date): void {
+    if (!this.isInvalidDay(date)) {
+      this.selectedDate = date;
+      this.onDateSelected.emit(date);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     if (!!changes.selectedDate.currentValue) {
       this.viewDate = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth());
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const date: Date = new Date();
     this.presentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     this.viewDate = this.viewDate || new Date(date.getFullYear(), date.getMonth());

@@ -27,10 +27,10 @@
             ></hxa-datepicker-input>
             <div>
               <span>Emitted Date object: {{dayte}}</span><br>
-              <span>Valid: {{form.valid}}</span> <br>
-              <span>Valid: {{d.valid}}</span><br>
-              <span>Touched: {{form.touched}}</span><br>
-              <span>Touched: {{d.touched}}</span>
+              <span>NgForm Valid: {{form.valid}}</span> <br>
+              <span>NgModel Valid: {{d.valid}}</span><br>
+              <span>NgForm Touched: {{form.touched}}</span><br>
+              <span>NgModel Touched: {{d.touched}}</span>
             </div>
         </form>       
       </div>
@@ -114,7 +114,17 @@
               <td><kbd>"top" | "bottom"</kbd></td>
               <td>Specifies to open the datepicker at the top of the input element or at the bottom</td>
             </tr>
-          </tbody>
+            <tr>
+              <td>from</td>
+              <td><kbd>"dd/mm/yyyy"</kbd></td>
+              <td>Specifies the inclusive beginning date for allowed date values</td>
+            </tr>
+            <tr>
+              <td>to</td>
+              <td><kbd>"dd/mm/yyyy"</kbd></td>
+              <td>Specifies the inclusive end date for allowed date values</td>
+            </tr>
+            </tbody>
         </table>
       </div>
     </div>

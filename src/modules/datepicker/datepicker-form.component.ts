@@ -20,13 +20,14 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   @Input() disabled = false;
   @Input() readonly = false;
   @Input() required = false;
-  @Input() allowTextEntry = true;
   @Input() defaultToPresentDate = true;
   @Input() allowPreviousDates = true;
   @Input() allowFutureDates = true;
   @Input() dateFormat = "dd/MM/y";
   @Input() placeholder = "Date";
   @Input() align: "top" | "bottom" = "bottom";
+  @Input() from = '';
+  @Input() to = '';
 
   @Output() onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
@@ -34,8 +35,11 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   public visible: boolean = false;
   public presentDate: Date;
   public isValid: boolean;
+  public dateValidators = new Array<(date: Date) => boolean>();
   private onChanged = new Array<(value: Date) => void>();
   private onTouched = new Array<() => void>();
+
+  private validateDateRange: (date: Date) => boolean;
 
   constructor(private element: ElementRef) { }
 
@@ -43,9 +47,26 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     const date: Date = new Date();
     this.presentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-    setTimeout(() => {
-      this.setDate(this.presentDate);
-    });
+    if (this.defaultToPresentDate) {
+      setTimeout(() => {
+        this.setDate(this.presentDate);
+      });
+    }    
+
+    // Close to the minimum and maxium possible dates, but still normalisable
+    // http://ecma-international.org/ecma-262/5.1/#sec-15.9.1.1
+    const from = this.parseDate(this.from) || new Date(-8630000000000000);
+    const to = this.parseDate(this.to) || new Date(8630000000000000);
+
+    if (from || to) {
+      this.validateDateRange = this.createDateRangeValidator(from, to);
+      this.dateValidators.push(this.validateDateRange.bind(this));
+    }
+
+    if (!this.allowPreviousDates)
+      this.dateValidators.push(this.validateIsNotBeforeDate.bind(this));
+    if (!this.allowFutureDates)
+      this.dateValidators.push(this.validateIsNotAfterDate.bind(this));
   }
 
   public setDate(date: Date): void {
@@ -124,6 +145,17 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     return normalisedDate.getTime() > this.presentDate.getTime();
   }
 
+  public createDateRangeValidator(from: Date, to: Date): (date: Date) => boolean {
+    const normalisedFromDate = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+    const normalisedToDate = new Date(to.getFullYear(), to.getMonth(), to.getDate());
+
+    return (date: Date) => {
+      const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      return !(normalisedFromDate.getTime() <= normalisedDate.getTime() &&
+        normalisedDate.getTime() <= normalisedToDate.getTime());
+    };
+  }
+
   public writeValue(value: Date): void {
     this.setDate(value);
   }
@@ -174,6 +206,15 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
       this.isValid = false;
       return {
         futureDateError: {
+          valid: false
+        }
+      }
+    }
+
+    if (this.validateDateRange && this.validateDateRange(this.date)) {
+      this.isValid = false;
+      return {
+        dateRangeError: {
           valid: false
         }
       }

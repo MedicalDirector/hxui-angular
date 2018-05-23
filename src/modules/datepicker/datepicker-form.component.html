@@ -13,7 +13,9 @@
     <div class="hxa-datepicker-help">Please select a date</div>
   </div>
   <i class="hx-icon icon-calendar"></i>
-  <hxa-datepicker class="hxa-datepicker-calendar" *ngIf="visible" [selectedDate]="date"
-   (onDateSelected)="onDateSelectEvent($event)"
-   [ngClass]="{'hxa-datepicker-calendar-top': align == 'top', 'hxa-datepicker-calendar-bottom': align == 'bottom'}"></hxa-datepicker>
+  <hxa-datepicker class="hxa-datepicker-calendar" *ngIf="visible" 
+    [selectedDate]="date"
+    [validators]="dateValidators"
+    (onDateSelected)="onDateSelectEvent($event)"
+    [ngClass]="{'hxa-datepicker-calendar-top': align == 'top', 'hxa-datepicker-calendar-bottom': align == 'bottom'}"></hxa-datepicker>
 </div>
