@@ -13,7 +13,7 @@ export class InMemoryDataService implements InMemoryDbService {
         active: false,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', cssClass: 'is-primary'}
+        cssClass: 'is-text-line-through'
       },
       {
         id: 2,
@@ -24,7 +24,9 @@ export class InMemoryDataService implements InMemoryDbService {
         email: 'mercedes.mendez@medicaldirector.com',
         active: false,
         created: new Date(),
-        modified: new Date()
+        modified: new Date(),
+        checked: true,
+        flag: {label: 'S', cssClass: ''}
       },
       {
         id: 3,
@@ -50,7 +52,7 @@ export class InMemoryDataService implements InMemoryDbService {
         created: new Date(),
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-danger'},
-        checked: true
+        stripeContext: Context.Danger
       },
       {
         id: 5,
@@ -62,7 +64,9 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', cssClass: 'is-warning'}
+        flag: {label: 'S', cssClass: 'is-warning'},
+        context: Context.Warning,
+        stripeContext: Context.Warning
       },
       {
         id: 6,

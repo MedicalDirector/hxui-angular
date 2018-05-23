@@ -41,8 +41,8 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
     size: TabularSize.Default,
     clickableRows: true,
     sortBy: [{
-      property: 'firstname',
-      direction: SortByDirection.Descending,
+      property: 'id',
+      direction: SortByDirection.Ascending,
       type: TabularColumnTypes.String
     }],
     pagination: {
