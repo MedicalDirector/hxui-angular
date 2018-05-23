@@ -25,8 +25,7 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     SharedModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService,  {dataEncapsulation: false }),
-    FormsModule
+    InMemoryWebApiModule.forRoot(InMemoryDataService,  {dataEncapsulation: false })
   ],
   declarations: [
       PageNotFoundComponent,
