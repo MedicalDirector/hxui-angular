@@ -17,9 +17,11 @@ import {Context} from '../enums';
   selector: 'hxa-tabular',
   templateUrl: './tabular.component.html',
   styles: [
-    '.tabular__sorter{position:relative;cursor:pointer} th .icon{position: absolute;left:-1rem;}',
+    '.tabular__sortable {}',
+    '.tabular__sorter {cursor:pointer; display:flex; align-items: center;}',
+    '.tabular__sorter .hx-icon {margin-left:.1rem;}',
     '.tabular__checkboxes{width:2%;}',
-    '.tabular__checkboxes .hx-checkbox-control{margin:0;display:flex;}',
+    '.tabular__checkboxes .hx-checkbox-control{display:flex;}',
     '.tabularActions__action button.hx-button{ width: 1rem;}'
   ]
 })

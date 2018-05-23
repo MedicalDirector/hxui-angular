@@ -15,7 +15,7 @@ export class UserModel implements ITabularRow {
   public modified: Date;
   public selected: boolean;
   public checked: boolean;
-  public context: Context = Context.None;
+
 
   constructor(data?: any) {
     if (data) {
