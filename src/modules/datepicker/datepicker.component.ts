@@ -21,7 +21,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
 
   constructor(
     private hostElement: ElementRef,
-    private positioningService: PositioningService) {}
+    private positioningService: PositioningService) { }
 
   // Populates the days array with the current month, and completes the view with partial dates from sibling months
   public renderCalendar() {

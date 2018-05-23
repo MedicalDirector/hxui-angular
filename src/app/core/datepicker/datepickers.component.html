@@ -18,11 +18,21 @@
 
     <div class="hx-columns">
       <div class="hx-column">
-        <hxa-datepicker-input align="bottom" [(ngModel)]="dayte"></hxa-datepicker-input>
-        <div>
-          <span>Emitted Date object: {{dayte}}</span>
-        </div>
-
+        <form #form="ngForm">
+            <hxa-datepicker-input 
+              name="datepicker" 
+              align="bottom" 
+              #d="ngModel" 
+              [(ngModel)]="dayte"
+            ></hxa-datepicker-input>
+            <div>
+              <span>Emitted Date object: {{dayte}}</span><br>
+              <span>Valid: {{form.valid}}</span> <br>
+              <span>Valid: {{d.valid}}</span><br>
+              <span>Touched: {{form.touched}}</span><br>
+              <span>Touched: {{d.touched}}</span>
+            </div>
+        </form>       
       </div>
     </div>
 
@@ -92,7 +102,12 @@
             <tr>
               <td>allowPreviousDates</td>
               <td><kbd>boolean</kbd></td>
-              <td>Setting to false will disallow the user from selecting dates before the present date. Defaults to true.d</td>
+              <td>Setting to false will disallow the user from selecting dates before the present date. Defaults to true.</td>
+            </tr>
+            <tr>
+              <td>allowFutureDates</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Setting to false will disallow the user from selecting dates after the present date. Defaults to true.</td>
             </tr>
             <tr>
               <td>align</td>

@@ -12,7 +12,7 @@ export class DatepickersCode {
 
   exampleTemplate =
     `
-    <hxa-datepicker-input align="bottom" [(ngModel)]="form.date"></hxa-datepicker-input>
+    <hxa-datepicker-input align="bottom" [(ngModel)]="date"></hxa-datepicker-input>
     `;
 
   exampleTypescript =
@@ -22,16 +22,13 @@ export class DatepickersCode {
 
     @Component({
       selector: 'app-datepickers',
-      templateUrl: './datepickers.component.html',
-      styles: [':host { display:flex; flex: 1; min-width: 0; }']
+      templateUrl: './datepickers.component.html'
     })
     export class DatepickersComponent extends CoreBaseComponent {
     
-      dayte: string;
+      date: string;
     
-      constructor() {
-        
-      }    
+      constructor() { }    
     }
 
     `;
