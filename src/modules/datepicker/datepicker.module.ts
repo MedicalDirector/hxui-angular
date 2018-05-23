@@ -1,18 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { PortalModule } from '@angular/cdk/portal';
-
 import { DatepickerComponent } from './datepicker.component';
 import { DatepickerFormComponent } from './datepicker-form.component'
 
 
 @NgModule({
-  imports: [CommonModule, FormsModule, OverlayModule, PortalModule],
+  imports: [CommonModule, FormsModule],
   declarations: [DatepickerComponent, DatepickerFormComponent],
-  exports: [DatepickerComponent, DatepickerFormComponent],
-  entryComponents: [DatepickerComponent]
+  exports: [DatepickerComponent, DatepickerFormComponent]
 })
 export class DatepickerModule {
   public static forRoot(): ModuleWithProviders {
