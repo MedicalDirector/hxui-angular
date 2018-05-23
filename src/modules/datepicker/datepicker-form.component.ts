@@ -58,7 +58,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     const from = this.parseDate(this.from) || new Date(-8630000000000000);
     const to = this.parseDate(this.to) || new Date(8630000000000000);
 
-    if (from || to) {
+    if (!!this.from || !!this.to) {
       this.validateDateRange = this.createDateRangeValidator(from, to);
       this.dateValidators.push(this.validateDateRange.bind(this));
     }
