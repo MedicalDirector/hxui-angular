@@ -18,7 +18,7 @@ export class AppModule(){}
       <div class="hx-input-control">
         <div class="hx-select-control">
           <label for="" class="hx-label">Test required <sup>*</sup></label>
-          <hxa-selectize [config]="selectizeConfig" [options]="selectizeOptions"></hxa-selectize>
+          <hxa-selectize [config]="selectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedSingleSelectValue"></hxa-selectize>
         </div>
       </div>
     </div>
@@ -44,6 +44,8 @@ export class AppModule(){}
     styles: [':host  { display:flex; flex: 1; min-width: 0; }']
   })
   export class SelectizeComponent extends CoreBaseComponent implements OnInit  {
+  
+    public selectedSingleSelectValue: string[] = [];
     public selectizeConfig = new SelectizeConfig();
     public selectizeOptions: ISelectizeItem[] = <ISelectizeItem[]>[
        {
@@ -94,7 +96,7 @@ export class AppModule(){}
       <div class="hx-input-control">
         <div class="hx-select-control">
           <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
-          <hxa-selectize [config]="selectizeConfig" [options]="selectizeOptions"></hxa-selectize>
+          <hxa-selectize [config]="selectizeConfig" [options]="selectizeOptions"  [(ngModel)]="selectedMultiSelectValue"></hxa-selectize>
         </div>
       </div>
     </div>
@@ -120,6 +122,8 @@ multiExampleTypescript =
     styles: [':host  { display:flex; flex: 1; min-width: 0; }']
   })
   export class SelectizeComponent extends CoreBaseComponent implements OnInit  {
+  
+    public selectedMultiSelectValue: string[] = [];
     public selectizeConfig = new SelectizeConfig();
     public selectizeOptions: ISelectizeItem[] = <ISelectizeItem[]>[
        {
@@ -174,7 +178,7 @@ multiExampleTypescript =
       <div class="hx-input-control">
         <div class="hx-select-control">
           <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
-          <hxa-selectize [config]="selectizeCustomConfig" [options]="selectizeOptions" [value]="selectedValues"></hxa-selectize>
+          <hxa-selectize [config]="selectizeCustomConfig" [options]="selectizeOptions"  [(ngModel)]="selectedCustomSelectValue"></hxa-selectize>
         </div>
       </div>
     </div>
@@ -201,7 +205,7 @@ multiExampleTypescript =
   })
   export class SelectizeComponent extends CoreBaseComponent implements OnInit  {
   
-    public selectedValues: string[] = [];
+    public selectedCustomSelectValue: SelectizeCustomItemModel[] = [];
     public selectizeCustomConfig = new SelectizeCustomConfig();
     public selectizeOptions: SelectizeCustomItemModel[] = <SelectizeCustomItemModel[]>[
        {
@@ -251,7 +255,7 @@ multiExampleTypescript =
       this.selectizeCustomConfig.create = true;
       this.selectizeCustomConfig.maxItems = null;
       this.selectizeCustomConfig.hideSelected = true;
-      this.selectedValues = [
+      this.selectedCustomSelectValue = [
           this.selectizeOptions[0].value, 
           this.selectizeOptions[1].value, 
           this.selectizeOptions[2].value, 

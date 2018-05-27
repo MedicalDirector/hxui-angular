@@ -55,7 +55,7 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
   @Input() hasOptionsPlaceholder: string;
   @Input() noOptionsPlaceholder: string;
   @Input() enabled = true;
-  @Input() value: string[];
+  @Input() value: ISelectizeItem[];
   @Input() formControl: FormControl;
   @Input() errorClass: string;
 
@@ -311,9 +311,9 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
   writeValue(obj: ISelectizeItem[]): void {
 
     // Extract just 'value' property for selectize.js to use
-    this.value = obj.map(v => {
-      return v.value;
-    });
+    if (obj !== this.value) {
+      this.value = obj;
+    }
     this.selectize.setValue(this.value);
   }
 

@@ -16,7 +16,7 @@ export declare class SelectizeComponent implements OnInit, OnChanges, DoCheck, C
     hasOptionsPlaceholder: string;
     noOptionsPlaceholder: string;
     enabled: boolean;
-    value: string[];
+    value: ISelectizeItem[];
     formControl: FormControl;
     errorClass: string;
     onBlur: EventEmitter<void>;

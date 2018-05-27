@@ -1,6 +1,6 @@
 {
   "name": "@hxui/angular",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "license": "MIT",
   "author": "Design @ MD <design@medicaldirector.com>",
   "scripts": {
@@ -30,7 +30,7 @@
     "@angular/platform-browser-dynamic": "6.0.0",
     "@angular/platform-server": "6.0.0",
     "@angular/router": "6.0.0",
-    "@hxui/css": "^1.1.47",
+    "@hxui/css": "^1.1.48",
     "angular-in-memory-web-api": "^0.6.0",
     "core-js": "^2.4.1",
     "jquery": "^3.3.1",
