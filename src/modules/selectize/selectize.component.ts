@@ -270,6 +270,10 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
 
   onSelectizeItemSelected($event: any): void {
     this.clearhighlight();
+
+    if (this.config.closeAfterSelect) {
+      this.selectize.close();
+  }
   }
 
   /**
@@ -310,10 +314,21 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
    */
   writeValue(obj: ISelectizeItem[]): void {
 
-    // Extract just 'value' property for selectize.js to use
+    if (!obj || obj.length === 0) {
+      this.selectize.setValue('');
+      return;
+    }
+
     if (obj !== this.value) {
       this.value = obj;
     }
+
+    obj.forEach(v => {
+      if (!Object.keys(this.selectize.options).some(x => x === v.value)) {
+        this.selectize.addOption(v);
+      }
+    });
+
     this.selectize.setValue(this.value);
   }
 
