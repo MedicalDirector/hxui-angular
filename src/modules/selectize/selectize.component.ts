@@ -15,7 +15,8 @@ import {
   IterableChanges,
   ViewEncapsulation,
   Renderer2,
-  ChangeDetectionStrategy, OnDestroy
+  ChangeDetectionStrategy,
+  OnDestroy
 } from '@angular/core';
 import {
   NG_VALUE_ACCESSOR,
@@ -43,7 +44,8 @@ export const SELECTIZE_VALUE_ACCESSOR: any = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['selectize.component.scss']
 })
-export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlValueAccessor, OnDestroy {
+export class SelectizeComponent
+  implements OnInit, OnChanges, DoCheck, ControlValueAccessor, OnDestroy {
   private _options: any[];
   private _options_differ: IterableDiffer<any>;
   private _optgroups: any[];
@@ -160,8 +162,7 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
     this.evalHasError();
   }
 
-
-  private clearhighlight(): void{
+  private clearhighlight(): void {
     // remove highlight to help selectize bug
     // https://github.com/selectize/selectize.js/issues/1141
     this.selectize.$dropdown_content.removeHighlight();
@@ -248,7 +249,6 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
   onSelectizeValueChange($event: any): void {
     // In some cases this gets called before registerOnChange.
     if (this.onChangeCallback) {
-
       // Map selectize's value collection back to original ISelectizeItem object
       const data = this.selectize.items.map(v => {
         return this.selectize.options[v];
@@ -273,14 +273,14 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
 
     if (this.config.closeAfterSelect) {
       this.selectize.close();
-  }
+    }
   }
 
   /**
    * Invoked anytime a key is pressed down on the selectize search field
    * @param e
    */
-  onKeydown = (e) => {
+  onKeydown = e => {
     console.log(e);
     const TABKEY = 9;
     if (e.keyCode === TABKEY) {
@@ -288,7 +288,7 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
       e.stopImmediatePropagation();
       e.stopPropagation();
     }
-  }
+  };
 
   /**
    * Returns the applicable placeholder.
@@ -313,23 +313,25 @@ export class SelectizeComponent implements OnInit, OnChanges, DoCheck, ControlVa
    * @param obj
    */
   writeValue(obj: ISelectizeItem[]): void {
+    if (obj === this.value) {
+      return;
+    }
+
+    this.value = obj;
 
     if (!obj || obj.length === 0) {
       this.selectize.setValue('');
       return;
     }
 
-    if (obj !== this.value) {
-      this.value = obj;
-    }
-
-    obj.forEach(v => {
+    const stringValue = obj.map(v => {
       if (!Object.keys(this.selectize.options).some(x => x === v.value)) {
         this.selectize.addOption(v);
       }
+      return v.value;
     });
 
-    this.selectize.setValue(this.value);
+    this.selectize.setValue(stringValue);
   }
 
   /**
