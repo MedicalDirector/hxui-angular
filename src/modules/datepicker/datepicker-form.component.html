@@ -8,7 +8,7 @@
     (keydown.Tab)="onTab(datePickerForm.value)"
     [disabled]="disabled"
     [readonly]="readonly ? true : null">
-    <label class="hx-label">{{placeholder}} <sup *ngIf="required">*</sup></label>
+    <label class="hx-label" *ngIf="placeholder">{{placeholder}} <sup *ngIf="required">*</sup></label>
     <div class="hx-help"></div>
     <div class="hxa-datepicker-help">Please select a date</div>
   </div>

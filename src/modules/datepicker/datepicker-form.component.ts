@@ -119,7 +119,7 @@ export class DatepickerFormComponent extends DateValueAccessor implements OnInit
   public validateIsNotBeforeDate(presentDate: Date): (date: Date) => boolean {
     return (date: Date) => {
       return date.getTime() >= presentDate.getTime();
-    }
+    };
   }
 
   public validateIsNotNullOrUndefined(date: Date): boolean {
