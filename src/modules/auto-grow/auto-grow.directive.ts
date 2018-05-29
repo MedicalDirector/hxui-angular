@@ -1,31 +1,38 @@
-import { AfterContentChecked, Directive, ElementRef, HostListener, AfterContentInit } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  AfterViewInit
+} from '@angular/core';
 
 @Directive({
   selector: 'textarea[autogrow]'
 })
-export class AutoGrowDirective implements AfterContentInit, AfterContentChecked {
-
-  constructor(public element: ElementRef) {}
+export class AutoGrowDirective
+  implements AfterViewInit {
 
   @HostListener('input', ['$event.target'])
   public onInput() {
     this.resize();
   }
 
-  public ngAfterContentInit() {
+  constructor(public element: ElementRef) {}
+
+  public ngAfterViewInit() {
     const style = this.element.nativeElement.style;
     style.overflow = 'hidden';
     style.height = 'auto';
   }
 
-  public ngAfterContentChecked() {
-    this.resize();
-  }
-
   public resize() {
-    const style = this.element.nativeElement.style;
-    const height = this.element.nativeElement.scrollHeight;
+    const el = this.element.nativeElement;
 
-    style.height = `${height}px`;
+    if (el.style.height === el.scrollHeight + 'px') {
+      return;
+    }
+
+    el.style.overflow = 'hidden';
+    el.style.height = 'auto';
+    el.style.height = `${el.scrollHeight}px`;
   }
 }

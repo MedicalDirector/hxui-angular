@@ -41,7 +41,6 @@ export const SELECTIZE_VALUE_ACCESSOR: any = {
   template: `<select #selectizeInput></select>`,
   providers: [SELECTIZE_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['selectize.component.scss']
 })
 export class SelectizeComponent
