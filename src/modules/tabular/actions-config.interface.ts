@@ -1,7 +1,8 @@
 import {IDisabledInput} from './disabled-input.interface';
 
 export enum ActionConfigRouteType {
-  Default,
+  None,
+  Route,
   Callback
 }
 
@@ -14,9 +15,13 @@ export abstract class IActionsConfig {
 
   /**
    * Label used for display purposes.
-   * Can be html for icons.
    */
   label: string;
+
+  /**
+   * HxUI Icon
+   */
+  icon?: string;
 
   /**
    * Css class name to append to button
@@ -43,9 +48,10 @@ export abstract class IActionsConfig {
    */
   callback?: any;
 
+
   /**
-   *  If true, this will be the default action in a split button
+   * Child actions
    */
-  isDefault?: boolean;
+  children?: IActionsConfig[];
 
 }

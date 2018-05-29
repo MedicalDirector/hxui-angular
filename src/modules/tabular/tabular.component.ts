@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import {TabularColumn} from './tabular';
 import {ITabularConfig} from './tabular-config.interface';
-import {IActionsConfig} from './actions-config.interface';
+import {ActionConfigRouteType, IActionsConfig} from './actions-config.interface';
 import {TabularSortByService, SortByDirection, ISortByProperty} from './tabular-sort-by.service';
 import {TabularConfig} from './tabular.config';
 import {TabularSize} from './tabular-size.enum';
@@ -91,6 +91,7 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
   private pagedItems: any[] = [];
   private TabularColumnTypes = TabularColumnTypes;
   private TabularSize = TabularSize;
+  private ActionConfigRouteType = ActionConfigRouteType;
   private selectAll = false;
   private Context = Context;
   private SortByDirection = SortByDirection;
@@ -111,7 +112,6 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
   ngDoCheck() {
     if (this.rows.length !== this.oldRows.length) {
       this.changeDetected = true;
-      console.log('DoCheck: Rows changed to "${this.rows}" from "${this.oldRows}"');
       this.oldRows = this.rows;
       this.orderByData();
     }
@@ -244,12 +244,12 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
   /**
    * Helper to determine if tabular instance is in small mode
    */
-  private isSmall(): boolean {
+  isSmall(): boolean {
     return (this.config.size === TabularSize.Small);
   }
 
 
-  private hasValidBadgeTypeParams(colData) {
+  hasValidBadgeTypeParams(colData) {
     if (colData) {
       if (typeof colData.label !== 'undefined' && typeof colData.cssClass !== 'undefined') {
         return true;
@@ -260,23 +260,13 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
     return false;
   }
 
-  private getDefaultAction(actions: IActionsConfig[]): IActionsConfig {
-    const action = actions.find(function (a) { return a.isDefault; });
-    return action;
+
+  hasChildren(action: IActionsConfig): boolean {
+    return (action.children && action.children.length > 0);
   }
 
-  private hasDefaultAction(actions: IActionsConfig[]): boolean {
-    return (typeof this.getDefaultAction(actions) !== 'undefined');
-  }
-
-  private getDefaultActionName(actions: IActionsConfig[]) {
-    const action = this.getDefaultAction(actions);
-    return (action) ? action.label : '';
-  }
-
-  private getDefaultActionCallback(actions: IActionsConfig[]) {
-    const action = this.getDefaultAction(actions);
-    return (action) ? action.callback : {};
+  trackByFn(index, action) {
+    return index; // or action.id
   }
 
 }

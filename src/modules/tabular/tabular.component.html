@@ -31,8 +31,9 @@
       [class.has-stripe-warning]="row.stripeContext && row.stripeContext === Context.Warning"
       [class.has-stripe-info]="row.stripeContext && row.stripeContext === Context.Info"
       [class.has-stripe-success]="row.stripeContext && row.stripeContext === Context.Success"
-      [ngClass]="[row.cssClass? row.cssClass : '']">
-    <td *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === 6}">
+      [ngClass]="[row.cssClass? row.cssClass : '']"
+      [attr.title]="row.title ? row.title : ''">
+    <td *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox}">
 
       <!-- checkbox type -->
       <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
@@ -63,40 +64,43 @@
 
 
         <div class="tabularActions__action">
-          <div class="hx-dropdown" hxDropdown [isRight]="true">
 
-            <ng-template *ngIf="!hasDefaultAction(row[col.id]); else splitBtn">
-              <!-- collection of actions DOES NOT have a default -->
-              <button class="hx-button is-flat hx-button-dropdown" [class.is-small]="config.size === TabularSize.Small" hxDropdownToggle type="button">
-                <i class="icon icon-more"></i>
-              </button>
-            </ng-template>
-            <ng-template #splitBtn>
-              <!-- collection of actions DOES have a default -->
-              <div class="hx-button-split">
-                <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small"  (click)='executeCallback($event,getDefaultActionCallback(row[col.id]))' [innerHtml]="getDefaultActionName(row[col.id])"></button>
-                <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small" hxDropdownToggle><i class="icon icon-more"></i></button>
-              </div>
-            </ng-template>
+          <ng-container *ngFor="let action of row[col.id];trackBy: trackByFn">
 
-            <div class="hx-dropdown-menu" *hxDropdownMenu>
-
-              <ng-container *ngFor="let action of row[col.id]">
-                <a *ngIf="!getActionDisabledState(action) && action.routeType==0 && !action.isDefault"
-                   [routerLink]="action.route"
-                   class="hx-dropdown-item {{action.css}}"
-                   [innerHTML]="action.label">
-                </a>
-                <a *ngIf="!getActionDisabledState(action) && action.routeType==1 && !action.isDefault"
+            <!-- single action -->
+            <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small"
+                    *ngIf="!getActionDisabledState(action) && action.routeType === ActionConfigRouteType.Route && !hasChildren(action)"
+                    [routerLink]="action.route"
+                    class="hx-button is-flat {{action.css}}"
+                    title="{{action.label}}"><span class="hx-icon {{action.icon}}"></span></button>
+            <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small"
+                    *ngIf="!getActionDisabledState(action) && action.routeType === ActionConfigRouteType.Callback && !hasChildren(action)"
                    (click)='executeCallback($event,action.callback)'
-                   class="hx-dropdown-item {{action.css}}"
-                   [innerHTML]="action.label">
-                </a>
-              </ng-container>
+                   class="hx-button is-flat {{action.css}}"><span class="hx-icon {{action.icon}}"></span></button>
+
+            <!-- action with children -->
+            <div class="hx-dropdown" hxDropdown [isRight]="true" *ngIf="hasChildren(action)">
+
+              <button class="hx-button is-flat hx-button-dropdown" [class.is-small]="config.size === TabularSize.Small" hxDropdownToggle type="button">
+                <i class="icon {{action.icon}}"></i>
+              </button>
+
+              <div class="hx-dropdown-menu" *hxDropdownMenu>
+
+                <ng-container *ngFor="let childAction of action.children;trackBy: trackByFn">
+                  <a *ngIf="!getActionDisabledState(childAction) && childAction.routeType === ActionConfigRouteType.Route"
+                     [routerLink]="childAction.route"
+                     class="hx-dropdown-item {{childAction.css}}">{{childAction.label}}</a>
+                  <a *ngIf="!getActionDisabledState(childAction) && childAction.routeType === ActionConfigRouteType.Callback"
+                     (click)='executeCallback($event,childAction.callback)'
+                     class="hx-dropdown-item {{childAction.css}}">{{childAction.label}}</a>
+                </ng-container>
+
+              </div>
 
             </div>
 
-          </div>
+          </ng-container>
 
         </div>
       </div>

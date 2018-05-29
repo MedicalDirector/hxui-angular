@@ -2,6 +2,7 @@ import {TabularColumn} from '../../../modules/tabular/tabular-column.model';
 import {TabularColumnTypes} from '../../../modules/tabular/tabular-column.interface';
 import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
 import {ISortByProperty, SortByDirection} from '../../../modules/tabular/tabular-sort-by.service';
+import {ActionConfigRouteType, IActionsConfig} from '../../../modules/tabular/actions-config.interface';
 
 export class TabularCode {
 usage =
@@ -465,54 +466,82 @@ export class UserModel implements ITabularRow {
   public modified: Date;
   public selected: boolean;
   public checked: boolean;
+  public title: string;
+  public icon: string;
+  public actions: IActionsConfig[] = [];
 
 
   constructor(data?: any) {
     if (data) {
       Object.assign(this, data);
     }
+    this.setIcon();
+    this.setActions();
+    this.setTitle();
   }
 
-  get icon(): string {
-    return (this.active) ? 'icon-check-empty is-primary' : 'icon-close-empty is-danger';
+  setIcon() {
+   this.icon = (this.active) ? 'icon-check-empty is-primary' : 'icon-close-empty is-danger';
   }
 
-  get actions(): IActionsConfig[] {
-    return  [
+  setActions() {
+    this.actions = [
       {
-        id: 'row_person_view',
-        label: 'View',
-        route: ['/tabular'],
-        routeType: ActionConfigRouteType.Default,
-        disabledConfig: {disabled: (Math.floor(Math.random() * 2) === 1), tooltip: 'Not enough permission'}
+        id: 'row_person_prescription',
+        label: 'Prescribe',
+        icon: 'icon-prescription',
+        route: ['/prescription'],
+        routeType: ActionConfigRouteType.Route,
+        disabledConfig: {disabled: true, tooltip: 'Not enough permission'}
       },
       {
         id: 'row_person_edit',
         label: 'Edit',
+        icon: 'icon-edit',
         routeType: ActionConfigRouteType.Callback,
         callback: [this.onActionClickHandler, 'edit', 1]
       },
       {
         id: 'row_person_delete',
-        label: 'Archive',
+        label: 'Delete',
+        icon: 'icon-bin',
         routeType: ActionConfigRouteType.Callback,
         callback: [this.onActionClickHandler, 'delete', 1]
       },
       {
-        id: 'row_person_delete_forever',
-        label: 'Delete',
-        routeType: ActionConfigRouteType.Callback,
-        callback: [this.onActionClickHandler, 'perm-delete', 1]
-      },
-      {
-        id: 'row_default',
-        label: '<span class="hx-icon icon-medications"></span>',
-        isDefault: true,
-        routeType: ActionConfigRouteType.Callback,
-        callback: [this.onActionClickHandler, 'default', 1]
+        id: 'row_person_more',
+        label: 'More',
+        icon: 'icon-more',
+        routeType: ActionConfigRouteType.None,
+        children: [
+          {
+            id: 'row_person_prescription',
+            label: 'Prescribe',
+            route: ['/prescription'],
+            routeType: ActionConfigRouteType.Route,
+            disabledConfig: {disabled: true, tooltip: 'Not enough permission'}
+          },
+          {
+            id: 'row_person_edit',
+            label: 'Edit',
+            routeType: ActionConfigRouteType.Callback,
+            callback: [this.onActionClickHandler, 'edit', 1]
+          },
+          {
+            id: 'row_person_delete',
+            label: 'Delete',
+            routeType: ActionConfigRouteType.Callback,
+            callback: [this.onActionClickHandler, 'delete', 1]
+          }]
       }
     ];
   }
+
+  setTitle() {
+    this.title = 'This is a custom title tag for: ' + this.usercode + ':' + this.firstname + ':' + this.surname;
+  }
+
+
 
   /**
    * Function used in the callback actions
