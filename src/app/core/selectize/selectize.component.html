@@ -27,9 +27,10 @@
           <div class="hx-input-control">
             <div class="hx-select-control">
               <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
-              <hxa-selectize [config]="multiSelectizeConfig" [options]="selectizeOptions"></hxa-selectize>
+              <hxa-selectize [config]="multiSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedMultiSelectValue"></hxa-selectize>
             </div>
           </div>
+          <pre>Current value: {{selectedMultiSelectValue | json}}</pre>
         </div>
       </div>
 
@@ -72,9 +73,10 @@
           <div class="hx-input-control">
             <div class="hx-select-control">
               <label for="" class="hx-label">Test required <sup>*</sup></label>
-              <hxa-selectize [config]="singleSelectizeConfig" [options]="selectizeOptions"></hxa-selectize>
+              <hxa-selectize [config]="singleSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedSingleSelectValue"></hxa-selectize>
             </div>
           </div>
+          <pre>Current value: {{selectedSingleSelectValue | json}}</pre>
         </div>
       </div>
 
@@ -117,9 +119,10 @@
           <div class="hx-input-control">
             <div class="hx-select-control">
               <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
-              <hxa-selectize [config]="customSelectizeConfig" [options]="selectizeOptions" [value]="selectedValues"></hxa-selectize>
+              <hxa-selectize [config]="customSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedCustomSelectValue"></hxa-selectize>
             </div>
           </div>
+          <pre>Current value: {{selectedCustomSelectValue | json}}</pre>
         </div>
       </div>
 

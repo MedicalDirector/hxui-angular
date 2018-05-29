@@ -22,7 +22,9 @@ import {SelectizeCustomConfig} from './selectize-custom.config';
 export class SelectizeComponent extends CoreBaseComponent implements OnInit {
 
 
-
+  public selectedMultiSelectValue: string[] = [];
+  public selectedCustomSelectValue: string[] = [];
+  public selectedSingleSelectValue: string[] = [];
   public code = new SelectizeCode();
   public multiSelectizeConfig = new SelectizeConfig();
   public singleSelectizeConfig = new SelectizeConfig();
@@ -83,7 +85,7 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.setMultiSelectizeConfig();
-    this.selectedValues = [this.selectizeOptions[0].value, this.selectizeOptions[1].value, this.selectizeOptions[2].value, this.selectizeOptions[5].value];
+    this.selectedCustomSelectValue = [this.selectizeOptions[0].value, this.selectizeOptions[1].value, this.selectizeOptions[2].value, this.selectizeOptions[5].value];
   }
 
   private setMultiSelectizeConfig() {
