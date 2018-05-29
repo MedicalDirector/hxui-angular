@@ -1,3 +1,5 @@
+@import "~@hxui/css/static/static/scss/variables";
+
 .hxa-datepicker {
     &-container {
         max-width: 21em;
@@ -37,6 +39,7 @@
             font-size: 2.3em;
             position: initial !important;
             top: initial !important;
+            color: $color-blue;
         }
     }
 
@@ -50,7 +53,8 @@
             flex: 3;
             display: flex;
             justify-content: center;
-            align-items: center;      
+            align-items: center;   
+            color: $color-blue;   
         }        
     }
 
@@ -61,6 +65,7 @@
 
         &day {
             flex: 1;
+            color: $color-blue;
         }
     }
 
@@ -85,20 +90,27 @@
             position: initial;
             top: initial;
             flex: 1;
-            font-weight: 100;
+            font-weight: 400;
             height: 100%;
             padding: 0;
-        }
+            color: $color-success;
+        }  
 
         &-siblingmonth .hx-button {
-            color: rgba(0, 0, 0, .3);
+            color: $color-gray;
+            font-weight: 100;
         }
 
         &-selectedday .hx-button {
             color: white;
             background: #41b987;
         }
-
+        
+        &-invalidday .hx-button {
+            color: $color-light !important;
+            pointer-events: none;
+        }
+        
         &-currentday .hx-button {
             border: 2px solid #41b987;
         }

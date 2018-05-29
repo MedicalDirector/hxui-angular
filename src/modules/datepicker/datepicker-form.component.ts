@@ -1,6 +1,5 @@
-import { Component, OnInit, ElementRef, HostListener, Input, Output, EventEmitter, forwardRef, SimpleChanges, DoCheck } from '@angular/core';
-import { DateValueAccessor } from './datevalue.accessor'
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Input, Output, OnInit, ElementRef, HostListener, EventEmitter, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, Validator, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'hxa-datepicker-input, hxa-datepicker-form',
@@ -10,38 +9,70 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => DatepickerFormComponent),
     multi: true
+  },
+  {
+    provide: NG_VALIDATORS,
+    useExisting: forwardRef(() => DatepickerFormComponent),
+    multi: true,
   }]
 })
-export class DatepickerFormComponent extends DateValueAccessor implements OnInit, DoCheck {
-
-  @Output() onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
-
+export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Validator {
   @Input() disabled = false;
   @Input() readonly = false;
-  @Input() required = true;
-  @Input() allowTextEntry = true;
+  @Input() required = false;
   @Input() defaultToPresentDate = true;
   @Input() allowPreviousDates = true;
+  @Input() allowFutureDates = true;
   @Input() dateFormat = "dd/MM/y";
   @Input() placeholder = "Date";
   @Input() align: "top" | "bottom" = "bottom";
+  @Input() from = '';
+  @Input() to = '';
+
+  @Output() onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
   public date: Date;
   public visible: boolean = false;
   public presentDate: Date;
-  public isValid: boolean = true;
-  private hasInitialised: boolean = false;
-  private validators: Array<(date: Date) => boolean> = new Array<(date: Date) => boolean>();
+  public isValid: boolean;
+  public dateValidators = new Array<(date: Date) => boolean>();
+  private onChanged = new Array<(value: Date) => void>();
+  private onTouched = new Array<() => void>();
 
-  constructor(private element: ElementRef) {
-    super();
+  private validateDateRange: (date: Date) => boolean;
+
+  constructor(private element: ElementRef) { }
+
+  ngOnInit(): void {
+    const date: Date = new Date();
+    this.presentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+    if (this.defaultToPresentDate) {
+      setTimeout(() => {
+        this.setDate(this.presentDate);
+      });
+    }    
+
+    // Close to the minimum and maxium possible dates, but still normalisable
+    // http://ecma-international.org/ecma-262/5.1/#sec-15.9.1.1
+    const from = this.parseDate(this.from) || new Date(-8630000000000000);
+    const to = this.parseDate(this.to) || new Date(8630000000000000);
+
+    if (!!this.from || !!this.to) {
+      this.validateDateRange = this.createDateRangeValidator(from, to);
+      this.dateValidators.push(this.validateDateRange.bind(this));
+    }
+
+    if (!this.allowPreviousDates)
+      this.dateValidators.push(this.validateIsNotBeforeDate.bind(this));
+    if (!this.allowFutureDates)
+      this.dateValidators.push(this.validateIsNotAfterDate.bind(this));
   }
 
   public setDate(date: Date): void {
     this.date = date;
     this.onDateChange.emit(date);
     this.propogateChange(date);
-    this.isValid = true;
   }
 
   public setVisible(): void {
@@ -59,7 +90,6 @@ export class DatepickerFormComponent extends DateValueAccessor implements OnInit
     }
   }
 
-  // The method bound to the event emitted by the date picker component
   public onDateSelectEvent(inputDate: Date): void {
     this.unsetVisible();
     this.setDate(inputDate);
@@ -67,14 +97,13 @@ export class DatepickerFormComponent extends DateValueAccessor implements OnInit
 
   public onChange(inputDate: string): void {
     const date: Date = this.parseDate(inputDate);
-    const isValid: boolean = this.validate(date);
 
-    if (inputDate === "") {
+    if (inputDate == "") {
       this.setDate(null);
-    } else if (isValid) {
+    } else if (!!date) {
       this.setDate(date);
     } else {
-      this.isValid = false;
+      this.propogateChange(inputDate);
     }
   }
 
@@ -104,43 +133,103 @@ export class DatepickerFormComponent extends DateValueAccessor implements OnInit
     return null;
   }
 
-  public validate(date: Date): boolean {
-    let isValid: boolean = true;
-    this.validators.forEach((validator) => {
-      isValid = isValid && validator(date);
-    });
-    return isValid;
+  public validateIsNotBeforeDate(date: Date): boolean {
+    const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+    return normalisedDate.getTime() < this.presentDate.getTime();
   }
 
-  public registerValidator(fn: (date: Date) => boolean): void {
-    this.validators.push(fn);
+  public validateIsNotAfterDate(date: Date): boolean {
+    const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+    return normalisedDate.getTime() > this.presentDate.getTime();
   }
 
-  public validateIsNotBeforeDate(presentDate: Date): (date: Date) => boolean {
+  public createDateRangeValidator(from: Date, to: Date): (date: Date) => boolean {
+    const normalisedFromDate = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+    const normalisedToDate = new Date(to.getFullYear(), to.getMonth(), to.getDate());
+
     return (date: Date) => {
-      return date.getTime() >= presentDate.getTime();
+      const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      return !(normalisedFromDate.getTime() <= normalisedDate.getTime() &&
+        normalisedDate.getTime() <= normalisedToDate.getTime());
     };
   }
 
-  public validateIsNotNullOrUndefined(date: Date): boolean {
-    return !!date;
+  public writeValue(value: Date): void {
+    this.setDate(value);
   }
 
-  ngDoCheck() {
-    // this.date is set to null after NgModel is bound, we want this to run only once after NgModel has run
-    if (this.defaultToPresentDate && !this.hasInitialised && this.date === null) {
-      this.setDate(this.presentDate);
-      this.hasInitialised = true;
-    }
+  public registerOnChange(fn: (value: Date) => void): void {
+    this.onChanged.push(fn);
   }
 
-  ngOnInit() {
-    const date: Date = new Date();
-    this.presentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  public registerOnTouched(fn: () => void): void {
+    this.onTouched.push(fn);
+  }
 
-    if (!this.allowPreviousDates) {
-      this.registerValidator(this.validateIsNotBeforeDate(this.presentDate));
+  public propogateTouched(): void {
+    this.onTouched.forEach(fn => fn());
+  }
+
+  public propogateChange(value): void {
+    this.onChanged.forEach(fn => fn(value));
+  }
+
+  validate(control: AbstractControl): { [key: string]: any; } {
+    const date = Date.parse(control.value);
+
+    if (!this.required && (control.value === null || control.value === undefined)) {
+      this.isValid = true;
+      return null;
     }
-    this.registerValidator(this.validateIsNotNullOrUndefined);
+
+    if (isNaN(date)) {
+      this.isValid = false;
+      return {
+        dateParseError: {
+          valid: false
+        }
+      }
+    }
+
+    if (!this.allowPreviousDates && this.validateIsNotBeforeDate(this.date)) {
+      this.isValid = false;
+      return {
+        previousDateError: {
+          valid: false
+        }
+      }
+    }
+
+    if (!this.allowFutureDates && this.validateIsNotAfterDate(this.date)) {
+      this.isValid = false;
+      return {
+        futureDateError: {
+          valid: false
+        }
+      }
+    }
+
+    if (this.validateDateRange && this.validateDateRange(this.date)) {
+      this.isValid = false;
+      return {
+        dateRangeError: {
+          valid: false
+        }
+      }
+    }
+
+    if (this.required && !this.date) {
+      this.isValid = false;
+      return {
+        dateRequiredError: {
+          valid: false
+        }
+      }
+    }
+
+    this.isValid = true;
+    return null;
   }
 }

@@ -20,11 +20,10 @@ import { SelectizeComponent } from 'app/core/selectize/selectize.component';
 import { AutoGrowComponent } from './auto-grow/auto-grow.component';
 import { EmptyStateComponent } from './empty-state/empty-state.component';
 
-
 @NgModule({
   imports: [
     SharedModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService,  {dataEncapsulation: false }),
+    InMemoryWebApiModule.forRoot(InMemoryDataService,  {dataEncapsulation: false })
   ],
   declarations: [
       PageNotFoundComponent,

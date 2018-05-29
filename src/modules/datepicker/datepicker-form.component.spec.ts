@@ -80,37 +80,59 @@ describe('DatepickerFormComponent', () => {
 
       expect(component.setDate).not.toHaveBeenCalled();
     });
-
-    it('should not set component.date to the Date object passed to it if it does not pass validation', () => {
-      component.registerValidator(() => false);
-
-      component.onChange("11/01/1993");
-
-      expect(component.setDate).not.toHaveBeenCalled();
-    });
   });
 
   describe("validateIsNotBeforeDate", () => {
-    let presentDate: Date;
+    let date: Date;
 
     beforeEach(() => {
-      presentDate = new Date('11 Jan 1993');
+      /*
+      * ECMAScript Spec states that the below is the minimum possible date
+      * http://ecma-international.org/ecma-262/5.1/#sec-15.9.1.1
+      */
+     date = new Date(-8640000000000000);
     })
 
     it('should return true if passed the current date', () => {
-      const result: boolean = component.validateIsNotBeforeDate(presentDate)(new Date('11 Jan 1993'));
+      const result: boolean = component.validateIsNotBeforeDate(date);
 
       expect(result).toEqual(true);
     });
 
     it('should return true if passed a future date', () => {
-      const result: boolean = component.validateIsNotBeforeDate(presentDate)(new Date('12 Jan 1993'));
+      const result: boolean = component.validateIsNotBeforeDate(date);
 
       expect(result).toEqual(true);
     });
 
     it('should return false if passed a past date', () => {
-      const result: boolean = component.validateIsNotBeforeDate(presentDate)(new Date('10 Jan 1993'));
+      const result: boolean = component.validateIsNotBeforeDate(date);
+
+      expect(result).toEqual(false);
+    });
+  });
+
+  describe("validateIsNotAfterDate", () => {
+    let date: Date;
+
+    beforeEach(() => {
+      date = new Date(8640000000000000);
+    })
+
+    it('should return true if passed the current date', () => {
+      const result: boolean = component.validateIsNotAfterDate(date);
+
+      expect(result).toEqual(true);
+    });
+
+    it('should return true if passed a future date', () => {
+      const result: boolean = component.validateIsNotAfterDate(date);
+
+      expect(result).toEqual(true);
+    });
+
+    it('should return false if passed a past date', () => {
+      const result: boolean = component.validateIsNotAfterDate(date);
 
       expect(result).toEqual(false);
     });
@@ -133,43 +155,4 @@ describe('DatepickerFormComponent', () => {
       expect(component.propogateChange).toHaveBeenCalledWith(date);
     });
   });
-
-  describe('validate', () => {
-    let date: Date
-
-    beforeEach(() => {
-      date = new Date('11 Jan 1993');
-    });
-
-    it('should return true if all validators return true', () => {
-      component.registerValidator(() => true);
-      component.registerValidator(() => true);
-      component.registerValidator(() => true);
-
-      let result = component.validate(date);
-
-      expect(result).toBe(true);
-    });
-
-    it('should return false if all validators return false', () => {
-      component.registerValidator(() => false);
-      component.registerValidator(() => false);
-      component.registerValidator(() => false);
-
-      let result = component.validate(date);
-
-      expect(result).toBe(false);
-    });
-
-    it('should return false if at least 1 validator returns false', () => {
-      component.registerValidator(() => true);
-      component.registerValidator(() => true);
-      component.registerValidator(() => false);
-
-      let result = component.validate(date);
-
-      expect(result).toBe(false);
-    });
-  });
-
 });

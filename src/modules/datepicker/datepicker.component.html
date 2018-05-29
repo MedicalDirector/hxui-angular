@@ -19,10 +19,11 @@
     </div>
     <div class="hxa-datepicker-contents">
       <div class="hxa-datepicker-day" *ngFor="let day of days" 
-      [ngClass]="{'hxa-datepicker-day-siblingmonth': !isCurrentMonth(day), 
-      'hxa-datepicker-day-currentday': isCurrentDay(day),
-      'hxa-datepicker-day-selectedday': isSelectedDay(day)}"
-      (click)="setSelectedDate(day)">
+        [ngClass]="{'hxa-datepicker-day-siblingmonth': !isCurrentMonth(day), 
+        'hxa-datepicker-day-currentday': isCurrentDay(day),
+        'hxa-datepicker-day-selectedday': isSelectedDay(day),
+        'hxa-datepicker-day-invalidday': isInvalidDay(day)}"
+        (click)="setSelectedDate(day)">
       <a class="hx-button is-transparent">{{day.getDate()}}</a>
       </div>
     </div>

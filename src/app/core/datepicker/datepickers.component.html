@@ -18,11 +18,21 @@
 
     <div class="hx-columns">
       <div class="hx-column">
-        <hxa-datepicker-input align="bottom" [(ngModel)]="dayte"></hxa-datepicker-input>
-        <div>
-          <span>Emitted Date object: {{dayte}}</span>
-        </div>
-
+        <form #form="ngForm">
+            <hxa-datepicker-input 
+              name="datepicker" 
+              align="bottom" 
+              #d="ngModel" 
+              [(ngModel)]="dayte"
+            ></hxa-datepicker-input>
+            <div>
+              <span>Emitted Date object: {{dayte}}</span><br>
+              <span>NgForm Valid: {{form.valid}}</span> <br>
+              <span>NgModel Valid: {{d.valid}}</span><br>
+              <span>NgForm Touched: {{form.touched}}</span><br>
+              <span>NgModel Touched: {{d.touched}}</span>
+            </div>
+        </form>       
       </div>
     </div>
 
@@ -92,14 +102,29 @@
             <tr>
               <td>allowPreviousDates</td>
               <td><kbd>boolean</kbd></td>
-              <td>Setting to false will disallow the user from selecting dates before the present date. Defaults to true.d</td>
+              <td>Setting to false will disallow the user from selecting dates before the present date. Defaults to true.</td>
+            </tr>
+            <tr>
+              <td>allowFutureDates</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Setting to false will disallow the user from selecting dates after the present date. Defaults to true.</td>
             </tr>
             <tr>
               <td>align</td>
               <td><kbd>"top" | "bottom"</kbd></td>
               <td>Specifies to open the datepicker at the top of the input element or at the bottom</td>
             </tr>
-          </tbody>
+            <tr>
+              <td>from</td>
+              <td><kbd>"dd/mm/yyyy"</kbd></td>
+              <td>Specifies the inclusive beginning date for allowed date values</td>
+            </tr>
+            <tr>
+              <td>to</td>
+              <td><kbd>"dd/mm/yyyy"</kbd></td>
+              <td>Specifies the inclusive end date for allowed date values</td>
+            </tr>
+            </tbody>
         </table>
       </div>
     </div>
