@@ -33,7 +33,7 @@ export class TabularSortByService {
      * sortBy(arr, item => [item.name, -item.age, item.id]);
      */
     sortBy(rows, item => {
-      const  sort = [];
+      const sort = [];
       for (const prop of sortProps) {
         if (prop.type === TabularColumnTypes.String && prop.direction === SortByDirection.Descending) {
           sort.push('desc:' + item[prop.property]);

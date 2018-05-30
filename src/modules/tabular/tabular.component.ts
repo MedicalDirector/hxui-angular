@@ -216,6 +216,8 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
 
 
   isColumnSorted(key: string, direction: SortByDirection): boolean {
+    if (!this.config.sortBy)
+      return false;
     const findPropInSortList = this.config.sortBy.filter((prop: ISortByProperty) => { return (prop.property === key && prop.direction === direction); });
     return (findPropInSortList.length > 0);
   }
@@ -231,6 +233,7 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
   }
 
   private orderByData() {
+    this.rows = [...this.rows]; // Required as array-sort-by mutates the original array
     this.sortByService.sortBy(this.rows, this.config.sortBy);
     this.setPage();
   }
