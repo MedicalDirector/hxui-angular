@@ -29,25 +29,22 @@ export class DropdownToggleDirective implements OnDestroy {
       this._state.toggleClick.emit();
     }
 
-    if (this._state.isOpen || this._element.nativeElement.contains(event.target)) {
-      const removeRegisteredListener = this._renderer.listen('document', 'click', () => {
-      //  console.log('the document was clicked', this._state.isOpen);
-        this._state.toggleClick.emit(false);
-        removeRegisteredListener();
-      });
 
-    }
   }
 
   // Performance issue with multiple document listeners
-  /*@HostListener('document:click', ['$event'])
+  @HostListener('document:click', ['$event'])
   onDocumentClick(event: any): void {
-    if (this._state.autoClose && event.button !== 2 &&
-      !this._element.nativeElement.contains(event.target)) {
+    console.log(this._element.nativeElement.parentNode.contains(event.target), event.target, this._element.nativeElement.parentNode);
+
+    if (this._state.autoClose) {
       console.log('document:click');
       this._state.toggleClick.emit(false);
+    } else if (!this._element.nativeElement.parentNode.contains(event.target)) {
+      this._state.toggleClick.emit(false);
     }
-  }*/
+
+  }
 
   @HostListener('keyup.esc')
   onEsc(): void {
