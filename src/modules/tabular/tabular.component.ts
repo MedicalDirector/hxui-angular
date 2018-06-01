@@ -22,7 +22,8 @@ import {Context} from '../enums';
     '.tabular__sorter .hx-icon {margin-left:.1rem;}',
     '.tabular__checkboxes{width:2%;}',
     '.tabular__checkboxes .hx-checkbox-control{display:flex;}',
-    '.tabularActions__action button.hx-button{ width: 1rem;}'
+    '.tabularActions__action button.hx-button{ width: 1rem;}',
+    '.tabularActions__action {display:flex;}'
   ]
 })
 
