@@ -49,6 +49,9 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
     return this._config;
   }
   public set config(c: ITabularConfig)  {
+    if (!c.sortBy) {
+      c.sortBy = [];
+    }
     this._config = c;
   }
 
@@ -100,8 +103,10 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
   protected _searchTerm: string;
 
 
-  public constructor(private conf: TabularConfig,
-                     private sortByService: TabularSortByService) {
+  public constructor(
+    private conf: TabularConfig,
+    private sortByService: TabularSortByService
+  ) {
     Object.assign(this, conf);
   }
 
@@ -216,8 +221,6 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
 
 
   isColumnSorted(key: string, direction: SortByDirection): boolean {
-    if (!this.config.sortBy)
-      return false;
     const findPropInSortList = this.config.sortBy.filter((prop: ISortByProperty) => { return (prop.property === key && prop.direction === direction); });
     return (findPropInSortList.length > 0);
   }
@@ -233,8 +236,10 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
   }
 
   private orderByData() {
-    this.rows = [...this.rows]; // Required as array-sort-by mutates the original array
-    this.sortByService.sortBy(this.rows, this.config.sortBy);
+    if (this.config.sortBy.length > 0) {
+      this.rows = [...this.rows]; // Required as array-sort-by mutates the original array
+      this.sortByService.sortBy(this.rows, this.config.sortBy);
+    }
     this.setPage();
   }
 

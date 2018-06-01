@@ -40,15 +40,10 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
   tabularConfig: ITabularConfig = {
     size: TabularSize.Default,
     clickableRows: true,
-    sortBy: [{
-      property: 'id',
-      direction: SortByDirection.Ascending,
-      type: TabularColumnTypes.String
-    }],
     pagination: {
       itemsPerPage: 5,
       currentPage: 1
-    },
+    }
   };
 
 
