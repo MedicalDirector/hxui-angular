@@ -43,7 +43,7 @@ export class TabularSortByService {
           sort.push(-new Date(item[prop.property]));
         } else if ((prop.type === TabularColumnTypes.Date || prop.type === TabularColumnTypes.DateTime) && prop.direction === SortByDirection.Ascending) {
           sort.push(new Date(item[prop.property]));
-        }else {
+        } else {
           sort.push(item[prop.property]);
         }
       }
