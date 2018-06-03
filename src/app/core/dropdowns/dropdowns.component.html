@@ -14,27 +14,24 @@
 
     <hr>
 
-    <h4 id="example">Example</h4>
+    <h4 id="basicexample">Basic Example</h4>
 
     <div class="hx-columns">
       <div class="hx-column">
-
         <div class="hx-dropdown" hxDropdown>
           <button class="hx-button is-primary is-outlined hx-button-dropdown" hxDropdownToggle type="button">
-            Dropdown button
+            <span>Dropdown</span>
+            <span class="hx-icon-control"><i class="icon icon-angle-down"></i></span>
           </button>
           <div class="hx-dropdown-menu" *hxDropdownMenu>
             <div class="hx-dropdown-header">Dropdown header</div>
-            <a class="hx-dropdown-item" href="return false;">Action</a>
+            <a class="hx-dropdown-item" href="#">Action</a>
             <a class="hx-dropdown-item" href="#">Another action</a>
             <div class="hx-dropdown-divider"></div>
             <a class="hx-dropdown-item" href="#">Action</a>
             <a class="hx-dropdown-item" href="#">Another action</a>
           </div>
         </div>
-
-
-
       </div>
     </div>
 
@@ -47,6 +44,53 @@
         <pre>
          <code highlight [code]="code.example"></code>
         </pre>
+      </div>
+    </div>
+
+    <hr>
+
+    <h4 id="manualexample">Manual Trigger Example</h4>
+
+    <div class="hx-columns">
+      <div class="hx-column is-flex">
+        <div class="hx-dropdown mr-1" hxDropdown #dropdown="hx-dropdown" [autoClose]="false">
+          <button class="hx-button is-primary is-outlined hx-button-dropdown" hxDropdownToggle type="button">
+            <span>Dropdown</span>
+            <span class="hx-icon-control"><i class="icon icon-angle-down"></i></span>
+          </button>
+          <div class="hx-dropdown-menu" *hxDropdownMenu>
+            <div class="hx-dropdown-header">Dropdown header</div>
+            <a class="hx-dropdown-item" href="#">Action</a>
+            <a class="hx-dropdown-item" href="#">Another action</a>
+            <div class="hx-dropdown-divider"></div>
+            <a class="hx-dropdown-item" href="#">Action</a>
+            <a class="hx-dropdown-item" href="#">Another action</a>
+          </div>
+        </div>
+        <button class="hx-button is-info mr-1"  (click)="toggle($event)">Toggle</button>
+        <button class="hx-button is-info mr-1"  (click)="show($event)">Show</button>
+        <button class="hx-button is-info" (click)="hide($event)">Hide</button>
+      </div>
+    </div>
+
+    <br>
+
+    <h5 id="manualcode">Code</h5>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <hx-tabset>
+          <hx-tab heading="Template">
+            <pre>
+              <code highlight [code]="code.exampleTemplate"></code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Component">
+            <pre>
+              <code highlight [code]="code.exampleComponent"></code>
+            </pre>
+          </hx-tab>
+        </hx-tabset>
       </div>
     </div>
 
@@ -178,7 +222,10 @@
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Examples</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#basicexample')"><span>Basic Example</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#manualexample')"><span>Manual Trigger Example</span></a>
     </li>
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#code')"><span>Code</span></a>

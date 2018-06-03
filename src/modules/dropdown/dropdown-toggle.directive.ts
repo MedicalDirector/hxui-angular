@@ -16,17 +16,17 @@ export class DropdownToggleDirective implements OnDestroy {
   @HostBinding('class.is-active')
   @HostBinding('attr.aria-expanded') isOpen: boolean;
 
-  @HostListener('click', ['$event'])
-  onClick(event: any): void {
-    event.stopPropagation();
+  @HostListener('click', [])
+  onClick(): void {
+
     if (this.isDisabled) {
       return;
     }
 
-    // console.log(this._state.isOpen);
     if (!this._state.isOpen) {
-     // console.log('click to open');
-      this._state.toggleClick.emit();
+      this._state.toggleClick.emit(true);
+    }else {
+      this._state.toggleClick.emit(false);
     }
 
 
@@ -35,7 +35,8 @@ export class DropdownToggleDirective implements OnDestroy {
   // Performance issue with multiple document listeners
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: any): void {
-    if (this._state.autoClose) {
+    if (this._state.autoClose && event.button !== 2 &&
+    !this._element.nativeElement.contains(event.target)) {
       this._state.toggleClick.emit(false);
     } else if (!this._element.nativeElement.parentNode.contains(event.target)) {
       this._state.toggleClick.emit(false);
