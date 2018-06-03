@@ -35,10 +35,7 @@ export class DropdownToggleDirective implements OnDestroy {
   // Performance issue with multiple document listeners
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: any): void {
-    console.log(this._element.nativeElement.parentNode.contains(event.target), event.target, this._element.nativeElement.parentNode);
-
     if (this._state.autoClose) {
-      console.log('document:click');
       this._state.toggleClick.emit(false);
     } else if (!this._element.nativeElement.parentNode.contains(event.target)) {
       this._state.toggleClick.emit(false);
