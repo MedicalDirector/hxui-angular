@@ -264,6 +264,7 @@ export class SelectizeComponent
   onSelectizeType(str: string): void {
     if (str.length === 0) {
       this.clearhighlight();
+      this.selectize.close();
     }
   }
 
@@ -287,7 +288,7 @@ export class SelectizeComponent
       e.stopImmediatePropagation();
       e.stopPropagation();
     }
-  };
+  }
 
   /**
    * Returns the applicable placeholder.
