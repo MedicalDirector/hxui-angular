@@ -10,8 +10,7 @@ import {TabularSize} from './tabular-size.enum';
 import {TabularColumnTypes} from './tabular-column.interface';
 import {ITabularRow} from './tabular-row.interface';
 import {Context} from '../enums';
-
-
+import * as _ from 'lodash';
 
 @Component({
   selector: 'hxa-tabular',
@@ -116,12 +115,10 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
   }
 
   ngDoCheck() {
-    if (this.rows.length !== this.oldRows.length) {
-      this.changeDetected = true;
-      this.oldRows = this.rows;
+    if (!_.isEqual(this.rows, this.oldRows)) {
+      this.oldRows = _.cloneDeep(this.rows);
       this.orderByData();
     }
-    this.changeDetected = false;
   }
 
   ngOnChanges(changes: SimpleChanges) {
