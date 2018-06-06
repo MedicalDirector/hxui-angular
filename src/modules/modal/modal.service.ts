@@ -24,7 +24,10 @@ export class ModalService {
   // Element that was focused before the dialog was opened. Save this to restore upon close.
   private elementFocusedBeforeDialogWasOpened: HTMLElement | null = null;
 
+  private componentRef;
+
   private componentNativeElement;
+
   private focusTrap;
 
   constructor(
@@ -53,12 +56,18 @@ export class ModalService {
     );
 
     // create dynamic component
-    const componentRef = this.dynamicComponentLoader<T>(component, parameters);
+    this.componentRef = this.dynamicComponentLoader<T>(component, parameters);
 
-    this.componentNativeElement = componentRef.location.nativeElement;
+    this.componentNativeElement = this.componentRef.location.nativeElement;
     this.trapFocus();
 
-    return componentRef;
+    return this.componentRef;
+  }
+
+  close() {
+    if (!!this.componentRef) {
+      this.componentRef.destroy()
+    }
   }
 
   /**
