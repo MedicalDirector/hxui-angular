@@ -27,7 +27,7 @@ import * as _ from 'lodash';
 })
 
 
-export class TabularComponent implements OnInit, DoCheck, OnChanges {
+export class TabularComponent implements OnInit, DoCheck {
 
   /**
    * Collection of column models
@@ -88,9 +88,7 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
    */
   @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
 
-
   private oldRows: ITabularRow[] = [];
-  private changeDetected: boolean;
   private pagedItems: any[] = [];
   private TabularColumnTypes = TabularColumnTypes;
   private TabularSize = TabularSize;
@@ -120,10 +118,6 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
       this.orderByData();
     }
   }
-
-  ngOnChanges(changes: SimpleChanges) {
-  }
-
 
   /**
    * Calls the parsed callback with optional arguments
