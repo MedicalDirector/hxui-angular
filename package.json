@@ -1,6 +1,6 @@
 {
   "name": "@hxui/angular",
-  "version": "2.0.23",
+  "version": "2.0.24",
   "license": "MIT",
   "author": "Design @ MD <design@medicaldirector.com>",
   "scripts": {
@@ -11,13 +11,14 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "packagr": "ng-packagr -p ng-package.json",
-    "install-peers": "npm install array-sort-by @angular/animations @angular/cli @angular/common @angular/compiler @angular/core @angular/forms @angular/http @angular/platform-browser @angular/platform-browser-dynamic @angular/platform-server @angular/router @hxui/css angular-in-memory-web-api core-js jquery lodash.clonedeep ngx-highlightjs ngx-page-scroll rxjs selectize zone.js",
+    "install-peers": "npm install array-sort-by @angular/animations @angular/cdk @angular/cli @angular/common @angular/compiler @angular/core @angular/forms @angular/http @angular/platform-browser @angular/platform-browser-dynamic @angular/platform-server @angular/router @hxui/css angular-in-memory-web-api core-js jquery lodash.clonedeep ngx-highlightjs ngx-page-scroll rxjs selectize zone.js",
     "deploy": "npm run install-peers && npm run build"
   },
   "private": false,
   "peerDependencies": {
     "array-sort-by": "^1.2.1",
     "@angular/animations": "^6.0.3",
+    "@angular/cdk": "^6.2.1",
     "@angular/common": "^6.0.3",
     "@angular/compiler": "^6.0.3",
     "@angular/core": "^6.0.3",
