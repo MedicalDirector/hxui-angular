@@ -10,8 +10,7 @@ import {TabularSize} from './tabular-size.enum';
 import {TabularColumnTypes} from './tabular-column.interface';
 import {ITabularRow} from './tabular-row.interface';
 import {Context} from '../enums';
-
-
+import * as _ from 'lodash';
 
 @Component({
   selector: 'hxa-tabular',
@@ -28,7 +27,7 @@ import {Context} from '../enums';
 })
 
 
-export class TabularComponent implements OnInit, DoCheck, OnChanges {
+export class TabularComponent implements OnInit, DoCheck {
 
   /**
    * Collection of column models
@@ -89,9 +88,7 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
    */
   @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
 
-
   private oldRows: ITabularRow[] = [];
-  private changeDetected: boolean;
   private pagedItems: any[] = [];
   private TabularColumnTypes = TabularColumnTypes;
   private TabularSize = TabularSize;
@@ -116,17 +113,11 @@ export class TabularComponent implements OnInit, DoCheck, OnChanges {
   }
 
   ngDoCheck() {
-    if (this.rows.length !== this.oldRows.length) {
-      this.changeDetected = true;
-      this.oldRows = this.rows;
+    if (!_.isEqual(this.rows, this.oldRows)) {
+      this.oldRows = _.cloneDeep(this.rows);
       this.orderByData();
     }
-    this.changeDetected = false;
   }
-
-  ngOnChanges(changes: SimpleChanges) {
-  }
-
 
   /**
    * Calls the parsed callback with optional arguments
