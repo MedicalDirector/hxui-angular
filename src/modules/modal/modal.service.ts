@@ -1,68 +1,123 @@
 import {
-    ViewContainerRef,
-    ReflectiveInjector, Injectable, Injector, ComponentRef,
-    ComponentFactoryResolver
+  ViewContainerRef,
+  ReflectiveInjector,
+  Injectable,
+  Injector,
+  ComponentRef,
+  ComponentFactoryResolver,
+  Optional,
+  Inject
 } from '@angular/core';
-import {Observable, ReplaySubject} from 'rxjs';
-import {ModalBackdropComponent} from './modal-backdrop.component';
+import { Observable, ReplaySubject } from 'rxjs';
+import { ModalBackdropComponent } from './modal-backdrop.component';
+import { FocusTrapFactory, FocusTrap } from '@angular/cdk/a11y';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable()
 export class ModalService {
-    // here we hold our placeholder
-    private vcRef: ViewContainerRef;
-    // here we hold our injector
-    private injector: Injector;
-    // here we hold the backdrop component
-    private backdropRef: ComponentRef<ModalBackdropComponent>;
+  // here we hold our placeholder
+  private vcRef: ViewContainerRef;
+  // here we hold our injector
+  private injector: Injector;
+  // here we hold the backdrop component
+  private backdropRef: ComponentRef<ModalBackdropComponent>;
+  // Element that was focused before the dialog was opened. Save this to restore upon close.
+  private elementFocusedBeforeDialogWasOpened: HTMLElement | null = null;
 
-    constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+  private componentNativeElement;
+  private focusTrap;
+
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private focusTrapFactory: FocusTrapFactory,
+    @Optional()
+    @Inject(DOCUMENT)
+    private document: any
+  ) {}
+
+  registerViewContainerRef(vcRef: ViewContainerRef): void {
+    this.vcRef = vcRef;
+  }
+
+  registerInjector(injector: Injector): void {
+    this.injector = injector;
+  }
+
+  /**
+   * Create component dynamically
+   */
+  create<T>(component: any, parameters?: Object): ComponentRef<T> {
+    // create backdrop
+    this.backdropRef = this.dynamicComponentLoader<ModalBackdropComponent>(
+      ModalBackdropComponent
+    );
+
+    // create dynamic component
+    const componentRef = this.dynamicComponentLoader<T>(component, parameters);
+
+    this.componentNativeElement = componentRef.location.nativeElement;
+    this.trapFocus();
+
+    return componentRef;
+  }
+
+  /**
+   * Load dynamic component and return componentRef
+   */
+  private dynamicComponentLoader<T>(
+    component: any,
+    parameters?: Object
+  ): ComponentRef<any> {
+    // compile the component based on its type and
+    // create a component factory
+    const factory = this.componentFactoryResolver.resolveComponentFactory(
+      component
+    );
+    // the injector will be needed for DI in
+    // the custom component
+    const childInjector = ReflectiveInjector.resolveAndCreate(
+      [],
+      this.injector
+    );
+    // create the actual component
+    const componentRef = this.vcRef.createComponent(factory, 0, childInjector);
+
+    // pass the @Input parameters to the instance
+    Object.assign(componentRef.instance, parameters);
+    // add a destroy method to the modal instance
+    componentRef.instance['destroy'] = () => {
+      // this will close the backdrop
+      this.backdropRef.destroy();
+      // this will destroy the component
+      componentRef.destroy();
+      this.restoreFocus();
+    };
+
+    return componentRef;
+  }
+
+  private trapFocus() {
+    this.focusTrap = this.focusTrapFactory.create(this.componentNativeElement);
+    this.savePreviouslyFocusedElement();
+    this.focusTrap.focusInitialElementWhenReady();
+  }
+
+  private restoreFocus() {
+    const toFocus = this.elementFocusedBeforeDialogWasOpened;
+
+    if (toFocus && typeof toFocus.focus === 'function') {
+      toFocus.focus();
     }
 
-    registerViewContainerRef(vcRef: ViewContainerRef): void {
-        this.vcRef = vcRef;
+    if (this.focusTrap) {
+      this.focusTrap.destroy();
     }
+  }
 
-    registerInjector(injector: Injector): void {
-        this.injector = injector;
+  private savePreviouslyFocusedElement() {
+    if (this.document) {
+      this.elementFocusedBeforeDialogWasOpened = this.document
+        .activeElement as HTMLElement;
     }
-
-    /**
-     * Create component dynamically
-     */
-    create<T>(component: any, parameters?: Object): ComponentRef<T> {
-        //create backdrop
-        this.backdropRef = this.dynamicComponentLoader<ModalBackdropComponent>(ModalBackdropComponent);
-
-        //create dynamic component
-        return this.dynamicComponentLoader<T>(component, parameters);
-    }
-
-
-
-    /**
-     * Load dynamic component and return componentRef
-     */
-    private dynamicComponentLoader<T>(component: any, parameters?: Object): ComponentRef<any>{
-        // compile the component based on its type and
-        // create a component factory
-        const factory = this.componentFactoryResolver.resolveComponentFactory(component);
-        // the injector will be needed for DI in
-        // the custom component
-        const childInjector = ReflectiveInjector.resolveAndCreate([], this.injector);
-        // create the actual component
-        const componentRef = this.vcRef.createComponent(factory, 0, childInjector);
-        // pass the @Input parameters to the instance
-        Object.assign(componentRef.instance, parameters);
-        // add a destroy method to the modal instance
-        componentRef.instance['destroy'] = () => {
-            // this will close the backdrop
-            this.backdropRef.destroy();
-            // this will destroy the component
-            componentRef.destroy();
-        };
-
-        return componentRef;
-    }
-
+  }
 }
-
