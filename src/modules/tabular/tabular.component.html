@@ -20,7 +20,7 @@
 
   <tbody>
   <!--<tr *ngFor="let row of rows | paginate: config.pagination | simpleSearch: searchTerm">-->
-  <tr *ngFor="let row of pagedItems | simpleSearch: searchTerm"
+  <tr *ngFor="let row of pagedItems"
       (click)="onRowClickHandler(row)"
       [class.is-selected]="row.selected"
       [class.is-danger]="row.context && row.context === Context.Danger"

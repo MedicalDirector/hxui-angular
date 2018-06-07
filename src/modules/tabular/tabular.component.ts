@@ -88,20 +88,20 @@ export class TabularComponent implements OnInit, DoCheck {
    */
   @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
 
-  private oldRows: ITabularRow[] = [];
-  private pagedItems: any[] = [];
-  private TabularColumnTypes = TabularColumnTypes;
-  private TabularSize = TabularSize;
-  private ActionConfigRouteType = ActionConfigRouteType;
-  private selectAll = false;
-  private Context = Context;
-  private SortByDirection = SortByDirection;
+  public oldRows: ITabularRow[] = [];
+  public pagedItems: any[] = [];
+  public TabularColumnTypes = TabularColumnTypes;
+  public TabularSize = TabularSize;
+  public ActionConfigRouteType = ActionConfigRouteType;
+  public selectAll = false;
+  public Context = Context;
+  public SortByDirection = SortByDirection;
   protected _callback: Function;
   protected _config: ITabularConfig;
   protected _searchTerm: string;
 
 
-  public constructor(
+   constructor(
     private conf: TabularConfig,
     private sortByService: TabularSortByService
   ) {
@@ -122,7 +122,7 @@ export class TabularComponent implements OnInit, DoCheck {
   /**
    * Calls the parsed callback with optional arguments
    */
-  private executeCallback(event: Event, cb: any[]) {
+   executeCallback(event: Event, cb: any[]) {
     event.stopPropagation();
     if (cb.length) {
       if (cb.length === 1) { // if callback has no arguments
@@ -138,14 +138,14 @@ export class TabularComponent implements OnInit, DoCheck {
   }
 
 
-  private toggleSelectAll = () => {
+   toggleSelectAll = ($event) => {
     for (let i = 0; i < this.rows.length; i++) {
       this.rows[i].checked = this.selectAll;
     }
   }
 
 
-  private toggleIndividualSelect = () => {
+   toggleIndividualSelect = ($event) => {
     let count = 0;
     for (let i = 0; i < this.rows.length; i++) {
       if (this.rows[i].checked) {
@@ -221,7 +221,7 @@ export class TabularComponent implements OnInit, DoCheck {
   /**
    * Handles the row click event.
    */
-  private onRowClickHandler(data: any) {
+   onRowClickHandler(data: any) {
     if (this.config.clickableRows) {
       this.rowClick.emit(data);
     }
