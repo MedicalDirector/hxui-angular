@@ -22,7 +22,7 @@ export interface ITabularRow {
   /**
    * Used to control the checkbox checked state
    */
- checked?: boolean;
+  checked?: boolean;
 
   /**
    * Used to control the model selected state
