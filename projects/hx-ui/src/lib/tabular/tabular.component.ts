@@ -7,7 +7,7 @@ import {ActionConfigRouteType, IActionsConfig} from './actions-config.interface'
 import {TabularSortByService, SortByDirection, ISortByProperty} from './tabular-sort-by.service';
 import {TabularConfig} from './tabular.config';
 import {TabularSize} from './tabular-size.enum';
-import {TabularColumnTypes} from './tabular-column.interface';
+import {ITabularColumnBadgeType, ITabularColumnIconType, TabularColumnTypes} from './tabular-column.interface';
 import {ITabularRow} from './tabular-row.interface';
 import {Context} from '../enums';
 import * as _ from 'lodash';
@@ -221,8 +221,14 @@ export class TabularComponent implements OnInit, DoCheck {
   /**
    * Handles the row click event.
    */
-   onRowClickHandler(data: any) {
+  onRowClickHandler($event: any, data: any) {
+    const el: Element = $event.target;
     if (this.config.clickableRows) {
+      if (el.parentElement.tagName === 'BUTTON' ||
+          el.tagName === 'BUTTON' ||
+          el.parentElement.classList.contains('hx-checkbox-control')) {
+        return;
+      }
       this.rowClick.emit(data);
     }
   }
@@ -249,16 +255,46 @@ export class TabularComponent implements OnInit, DoCheck {
   }
 
 
-  hasValidBadgeTypeParams(colData) {
+  hasValidBadgeTypeParams(colData: ITabularColumnBadgeType) {
     if (colData) {
-      if (typeof colData.label !== 'undefined' && typeof colData.cssClass !== 'undefined') {
+      if (typeof colData.label !== 'undefined') {
         return true;
       } else {
-        console.error('Record for column type badge is invalid, make sure you have the right type. {label:string,cssClass:string}', colData);
+        console.error('Record for column type badge is invalid, make sure you have the right type. ITabularColumnTypeBadge', {columnValue: colData});
       }
     }
     return false;
   }
+
+  hasValidIconTypeParams(colData: ITabularColumnIconType) {
+    let hasError = false;
+    if (colData) {
+      if (typeof colData.icon !== 'undefined') {
+        if (typeof colData.tooltip.config !== 'undefined' && typeof colData.tooltip.content !== 'undefined') {
+          if (typeof colData.tooltip.config.context !== 'undefined' || typeof colData.tooltip.config.placement !== 'undefined') {
+              return true;
+          } else {
+            hasError = true;
+          }
+        } else {
+          hasError = true;
+        }
+      } else {
+        hasError = true;
+      }
+    }
+
+    if (hasError) {
+      console.error('Record for column type icon is invalid, make sure you have the right type. ITabularColumnTypeIcon', {columnValue: colData});
+    }
+
+    return false;
+  }
+
+  getTooltipContext(colData: ITabularColumnIconType): Context {
+    return (!this.hasValidIconTypeParams(colData)) ? colData.tooltip.config.context : Context.None;
+  }
+
 
 
   hasChildren(action: IActionsConfig): boolean {

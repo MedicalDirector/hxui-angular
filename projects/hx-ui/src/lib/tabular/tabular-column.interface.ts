@@ -1,3 +1,5 @@
+import {TooltipConfig} from '../tooltip/tooltip.config';
+
 export enum TabularColumnTypes {
   String,
   Icon,
@@ -30,4 +32,21 @@ export abstract class ITabularColumn {
    * Css class name to append to columns
    */
   cssClass: string;
+}
+
+
+export interface ITabularColumnBadgeType {
+  label: string;
+  cssClass?: string;
+  tooltipConfig?: TooltipConfig;
+}
+
+
+export interface ITabularColumnIconType {
+  icon: string;
+  cssClass?: string;
+  tooltip: {
+    config: TooltipConfig,
+    content: string;
+  };
 }
