@@ -1,8 +1,25 @@
 {
   "name": "@hxui/angular",
-  "version": "2.0.24",
+  "version": "2.0.26",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "array-sort-by": "^1.2.1",
+    "@angular/animations": "^6.0.4",
+    "@angular/cdk": "^6.2.1",
+    "@angular/compiler": "^6.0.4",
+    "@angular/forms": "^6.0.4",
+    "@angular/http": "^6.0.4",
+    "@angular/platform-browser": "^6.0.4",
+    "@angular/platform-browser-dynamic": "^6.0.4",
+    "@angular/platform-server": "^6.0.4",
+    "@angular/router": "^6.0.4",
+    "@hxui/css": "^1.1.52",
+    "core-js": "^2.5.6",
+    "jquery": "^3.3.1",
+    "lodash.clonedeep": "^4.5.0",
+    "rxjs": "^6.2.0",
+    "selectize": "^0.12.4",
+    "zone.js": "^0.8.26"
   }
 }
