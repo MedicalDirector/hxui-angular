@@ -7,9 +7,9 @@ import {
 } from '@angular/core';
 import { PageScrollService } from 'ngx-page-scroll';
 import { CoreBaseComponent } from '../core-base.component';
-import { DOCUMENT } from '@angular/platform-browser';
-import { SelectizeConfig } from 'modules/selectize/selectize.config';
-import {ISelectizeItem} from '../../../modules/selectize/selectize-item.interface';
+import { DOCUMENT } from '@angular/common';
+import { SelectizeConfig } from '../../../../projects/hx-ui/src/lib/selectize/selectize.config';
+import {ISelectizeItem} from '../../../../projects/hx-ui/src/lib/selectize/selectize-item.interface';
 import {SelectizeCode} from './selectize.code';
 import {SelectizeCustomItemModel} from './selectize-custom-item.model';
 import {SelectizeCustomConfig} from './selectize-custom.config';

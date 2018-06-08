@@ -1,8 +1,8 @@
-import {TabularColumn} from '../../../modules/tabular/tabular-column.model';
-import {TabularColumnTypes} from '../../../modules/tabular/tabular-column.interface';
-import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
-import {ISortByProperty, SortByDirection} from '../../../modules/tabular/tabular-sort-by.service';
-import {ActionConfigRouteType, IActionsConfig} from '../../../modules/tabular/actions-config.interface';
+import {TabularColumn} from '../../../../projects/hx-ui/src/lib/tabular/tabular-column.model';
+import {TabularColumnTypes} from '../../../../projects/hx-ui/src/lib/tabular/tabular-column.interface';
+import {ITabularRow} from '../../../../projects/hx-ui/src/lib/tabular/tabular-row.interface';
+import {ISortByProperty, SortByDirection} from '../../../../projects/hx-ui/src/lib/tabular/tabular-sort-by.service';
+import {ActionConfigRouteType, IActionsConfig} from '../../../../projects/hx-ui/src/lib/tabular/actions-config.interface';
 
 export class TabularCode {
 usage =

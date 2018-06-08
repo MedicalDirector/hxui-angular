@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ModalService} from '../../../modules/modal/modal.service';
+import {ModalService} from '../../../../projects/hx-ui/src/lib/modal/modal.service';
 import {CustomModalComponent} from './custom-modal/custom-modal.component';
 import {PageScrollService} from 'ngx-page-scroll';
-import {DOCUMENT} from '@angular/platform-browser';
+import {DOCUMENT} from '@angular/common';
 import {CoreBaseComponent} from '../core-base.component';
 import {ModalsCode} from './modals.code';
 

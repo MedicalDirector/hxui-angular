@@ -1,5 +1,5 @@
-import {ActionConfigRouteType, IActionsConfig} from '../../../modules/tabular/actions-config.interface';
-import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
+import {ActionConfigRouteType, IActionsConfig} from '../../../../projects/hx-ui/src/lib/tabular/actions-config.interface';
+import {ITabularRow} from '../../../../projects/hx-ui/src/lib/tabular/tabular-row.interface';
 
 export class UserModel implements ITabularRow {
   public id: number;

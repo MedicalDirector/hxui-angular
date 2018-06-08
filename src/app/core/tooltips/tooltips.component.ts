@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { PageScrollService } from 'ngx-page-scroll';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 import { CoreBaseComponent } from '../core-base.component';
 import { TooltipsCode } from './tooltips.code';
-import { Context } from 'modules';
+import {Context} from '../../../../projects/hx-ui/src/lib/enums';
 
 @Component({
   selector: 'app-tooltips',

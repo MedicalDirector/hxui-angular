@@ -1,5 +1,5 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import {Context} from '../../../modules/enums';
+import {Context} from '../../../../projects/hx-ui/src/lib/enums';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const users = [

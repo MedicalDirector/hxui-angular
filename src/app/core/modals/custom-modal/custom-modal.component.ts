@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Modal} from '../../../../modules/modal/modal.annotation';
+import {Modal} from '../../../../../projects/hx-ui/src/lib/modal/modal.annotation';
 
 @Component({
   selector: 'app-custom-modal',
