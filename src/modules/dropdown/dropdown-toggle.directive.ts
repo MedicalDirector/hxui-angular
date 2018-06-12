@@ -16,9 +16,8 @@ export class DropdownToggleDirective implements OnDestroy {
   @HostBinding('class.is-active')
   @HostBinding('attr.aria-expanded') isOpen: boolean;
 
-  @HostListener('click', [])
-  onClick(): void {
-
+  @HostListener('click', ['$event'])
+  onClick(event): void {
     if (this.isDisabled) {
       return;
     }

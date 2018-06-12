@@ -33,6 +33,7 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
     new TabularColumn('flag', 'Flag', TabularColumnTypes.Badge, false),
     new TabularColumn('created', 'Created', TabularColumnTypes.Date, true),
     new TabularColumn('modified', 'Modified', TabularColumnTypes.DateTime, true),
+    new TabularColumn('info', 'info', TabularColumnTypes.Icon, false),
     new TabularColumn('active', 'Active', TabularColumnTypes.Status, false, 'is-text-center'),
     new TabularColumn('actions', 'Actions', TabularColumnTypes.Actions, false)
   ];
