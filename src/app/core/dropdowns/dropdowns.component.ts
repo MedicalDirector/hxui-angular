@@ -1,9 +1,9 @@
 import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {PageScrollService} from 'ngx-page-scroll';
 import {CoreBaseComponent} from '../core-base.component';
-import {DOCUMENT} from '@angular/platform-browser';
+import {DOCUMENT} from '@angular/common';
 import {DropdownsCode} from './dropdowns.code';
-import {DropdownDirective} from '../../../modules/dropdown/dropdown.directive';
+import {DropdownDirective} from '../../../../projects/hx-ui/src/lib/dropdown/dropdown.directive';
 
 @Component({
   selector: 'app-dropdowns',

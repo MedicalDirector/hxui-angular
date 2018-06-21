@@ -16,6 +16,20 @@
     "lib": [
       "es2016",
       "dom"
-    ]
+    ],
+    "paths": {
+      "hxui-angular": [
+        "dist/hxui-angular"
+      ],
+      "hxui-angular/*": [
+        "dist/hxui-angular/*"
+      ],
+      "HxUi": [
+        "dist/hx-ui"
+      ],
+      "HxUi/*": [
+        "dist/hx-ui/*"
+      ]
+    }
   }
 }

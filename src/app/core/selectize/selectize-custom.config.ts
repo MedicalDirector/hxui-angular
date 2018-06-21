@@ -1,4 +1,4 @@
-import {SelectizeConfig} from '../../../modules/selectize/selectize.config';
+import {SelectizeConfig} from '../../../../projects/hx-ui/src/lib/selectize/selectize.config';
 import {SelectizeCustomItemModel} from './selectize-custom-item.model';
 
 export class SelectizeCustomConfig extends SelectizeConfig {

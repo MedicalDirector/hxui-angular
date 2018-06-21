@@ -1,8 +1,8 @@
-import {TabularColumn} from '../../../modules/tabular/tabular-column.model';
-import {TabularColumnTypes} from '../../../modules/tabular/tabular-column.interface';
-import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
-import {ISortByProperty, SortByDirection} from '../../../modules/tabular/tabular-sort-by.service';
-import {ActionConfigRouteType, IActionsConfig} from '../../../modules/tabular/actions-config.interface';
+import {TabularColumn} from '../../../../projects/hx-ui/src/lib/tabular/tabular-column.model';
+import {TabularColumnTypes} from '../../../../projects/hx-ui/src/lib/tabular/tabular-column.interface';
+import {ITabularRow} from '../../../../projects/hx-ui/src/lib/tabular/tabular-row.interface';
+import {ISortByProperty, SortByDirection} from '../../../../projects/hx-ui/src/lib/tabular/tabular-sort-by.service';
+import {ActionConfigRouteType, IActionsConfig} from '../../../../projects/hx-ui/src/lib/tabular/actions-config.interface';
 
 export class TabularCode {
 usage =
@@ -195,8 +195,19 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'GP',
         email: 'brenda.reed@medicaldirector.com',
         active: false,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.Danger
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
-        modified: new Date()
+        modified: new Date(),
+        cssClass: 'is-text-line-through'
       },
       {
         id: 2,
@@ -206,6 +217,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'GP',
         email: 'mercedes.mendez@medicaldirector.com',
         active: false,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.Warning
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         checked: true,
@@ -219,9 +240,22 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Specialist',
         email: 'john.smith@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.Danger
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', cssClass: 'is-outlined'},
+        flag: {
+          label: 'S',
+          cssClass: 'is-outlined'
+        },
         selected: true
       },
       {
@@ -234,7 +268,10 @@ export class InMemoryDataService implements InMemoryDbService {
         active: true,
         created: new Date(),
         modified: new Date(),
-        flag: {label: 'S', cssClass: 'is-danger'},
+        flag: {
+          label: 'S',
+          cssClass: 'is-danger'
+        },
         stripeContext: Context.Danger
       },
       {
@@ -259,6 +296,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Receptionist',
         email: 'natalie.roberts@medicaldirector.com',
         active: false,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         flag: {label: 'S', cssClass: ''}
@@ -271,6 +318,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'GP',
         email: 'harry.sechi@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-error'}
@@ -283,6 +340,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Practice Manager',
         email: 'xavier.lorenzo@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-outlined'}
@@ -295,6 +362,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'GP',
         email: 'chris.yap@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         flag: {label: 'S', cssClass: ''},
@@ -308,6 +385,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Specialist',
         email: 'mohammad.ahmed@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         flag: {label: 'Short', cssClass: ''}
@@ -320,6 +407,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Nurse',
         email: 'eli.gino@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-outlined'}
@@ -332,6 +429,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Specialist',
         email: 'brian.pulliese@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-primary'}
@@ -344,6 +451,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Receptionist',
         email: 'annabell.wilson@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-primary'}
@@ -356,6 +473,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Receptionist',
         email: 'annabell.wilson@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-primary'}
@@ -368,6 +495,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Receptionist',
         email: 'susan.homes@medicaldirector.com',
         active: false,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         flag: {label: 'S', cssClass: ' is-outlined'}
@@ -380,6 +517,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'GP',
         email: 'kevin.liang@medicaldirector.com',
         active: false,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         context: Context.Warning
@@ -392,6 +539,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Nurse',
         email: 'jack.kelvin@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date()
       },
@@ -403,6 +560,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Practice Manager',
         email: 'dave.poon@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date()
       },
@@ -414,6 +581,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Admin',
         email: 'fred.borris@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-outlined'}
@@ -426,6 +603,16 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Administrator',
         email: 'tupac.shakur@medicaldirector.com',
         active: true,
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         created: new Date(),
         modified: new Date()
       },
@@ -435,6 +622,16 @@ export class InMemoryDataService implements InMemoryDbService {
         firstname: 'Biggie',
         surname: 'Smalls',
         rolename: 'GP',
+        info: {
+          icon: 'icon-information-outline',
+          tooltip: {
+            config: {
+              placement: 'right',
+              context: Context.None
+            },
+            content: 'Information'
+          }
+        },
         email: 'biggie.smalls@medicaldirector.com',
         active: true,
         created: new Date(),
@@ -450,8 +647,9 @@ export class InMemoryDataService implements InMemoryDbService {
 
 exampleUserModel =
 `
-import {ActionConfigRouteType, IActionsConfig} from '@hxui/angular';
-import {ITabularRow} from '@hxui/angular';
+import {ActionConfigRouteType, IActionsConfig} from '../../../modules/tabular/actions-config.interface';
+import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
+import {ITabularColumnIconType, ITabularColumnBadgeType} from '../../../modules/tabular';
 
 export class UserModel implements ITabularRow {
   public id: number;
@@ -460,13 +658,14 @@ export class UserModel implements ITabularRow {
   public surname: string;
   public rolename: string;
   public email: string;
-  public flag: {label: string, cssClass: string};
+  public flag: ITabularColumnBadgeType;
   public active: boolean;
   public created: Date;
   public modified: Date;
   public selected: boolean;
   public checked: boolean;
   public title: string;
+  public info: ITabularColumnIconType;
   public icon: string;
   public actions: IActionsConfig[] = [];
 
@@ -549,9 +748,10 @@ export class UserModel implements ITabularRow {
    * @param data
    */
   onActionClickHandler = (type, data) => {
-    alert('You clicked the ' + type + ' button. Arguments:' + type + ' and ' + data);
+     alert('You clicked the ' + type + ' button. Arguments:' + type + ' and ' + data);
   }
 }
+
 
 `;
 

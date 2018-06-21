@@ -1,15 +1,14 @@
 import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
-import {TabularColumn} from '../../../modules/tabular/tabular-column.model';
-import {TabularColumnTypes} from '../../../modules/tabular/tabular-column.interface';
-import {ITabularConfig} from '../../../modules/tabular/tabular-config.interface';
-import {TabularSize} from '../../../modules/tabular/tabular-size.enum';
+import {TabularColumn} from '../../../../projects/hx-ui/src/lib/tabular/tabular-column.model';
+import {TabularColumnTypes} from '../../../../projects/hx-ui/src/lib/tabular/tabular-column.interface';
+import {ITabularConfig} from '../../../../projects/hx-ui/src/lib/tabular/tabular-config.interface';
+import {TabularSize} from '../../../../projects/hx-ui/src/lib/tabular/tabular-size.enum';
 import {TabularService} from './tabular.service';
 import {UserModel} from './user.model';
 import {CoreBaseComponent} from '../core-base.component';
 import {PageScrollService} from 'ngx-page-scroll';
-import {DOCUMENT} from '@angular/platform-browser';
-import {SortByDirection} from '../../../modules/tabular/tabular-sort-by.service';
-import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
+import {DOCUMENT} from '@angular/common';
+import {ITabularRow} from '../../../../projects/hx-ui/src/lib/tabular/tabular-row.interface';
 import {TabularCode} from './tabular.code';
 import {Observable} from 'rxjs';
 
@@ -33,6 +32,7 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
     new TabularColumn('flag', 'Flag', TabularColumnTypes.Badge, false),
     new TabularColumn('created', 'Created', TabularColumnTypes.Date, true),
     new TabularColumn('modified', 'Modified', TabularColumnTypes.DateTime, true),
+    new TabularColumn('info', 'info', TabularColumnTypes.Icon, false),
     new TabularColumn('active', 'Active', TabularColumnTypes.Status, false, 'is-text-center'),
     new TabularColumn('actions', 'Actions', TabularColumnTypes.Actions, false)
   ];

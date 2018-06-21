@@ -4,10 +4,10 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from '../app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {HxUiModule} from 'modules/index';
 import {NgxPageScrollModule, PageScrollService} from 'ngx-page-scroll';
 import {HttpClientModule} from '@angular/common/http';
 import {HighlightModule} from 'ngx-highlightjs';
+import {HxUiModule} from '../../../projects/hx-ui/src/lib/hx-ui.module';
 
 
 @NgModule({

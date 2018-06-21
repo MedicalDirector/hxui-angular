@@ -1,0 +1,115 @@
+<table class="tabular hx-table is-striped" [class.is-hover]="config.clickableRows" [class.is-narrow]="config.size === TabularSize.Small">
+  <thead>
+  <tr>
+    <th *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox, 'tabular__sortable': col.sortable}">
+
+      <!-- sortable column -->
+      <a class="tabular__sorter" href="#" *ngIf="col.sortable && col.dataType != TabularColumnTypes.Checkbox" (click)="onSortClickHandler(col.id, col.dataType)">{{col.label}} <i class="hx-icon icon-arrow-up is-small" [class.icon-arrow-up]="isColumnSorted(col.id, SortByDirection.Ascending)" [class.icon-arrow-down]="isColumnSorted(col.id, SortByDirection.Descending)" *ngIf="isColumnSorted(col.id, SortByDirection.Descending) || isColumnSorted(col.id, SortByDirection.Ascending)"></i></a>
+
+      <!-- non sortable column -->
+      <span *ngIf="!col.sortable && col.dataType !== TabularColumnTypes.Checkbox">{{col.label}}</span>
+
+      <!-- checkbox column -->
+      <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
+        <input id="selectAll" name="selectAll" type="checkbox" class="hx-checkbox" (change)="toggleSelectAll($event)" title="Select All" [(ngModel)]="selectAll" />
+        <label for="selectAll" class="hx-label"></label>
+      </div>
+    </th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <!--<tr *ngFor="let row of rows | paginate: config.pagination | simpleSearch: searchTerm">-->
+  <tr *ngFor="let row of pagedItems"
+      (click)="onRowClickHandler($event, row)"
+      [class.is-selected]="row.selected"
+      [class.is-danger]="row.context && row.context === Context.Danger"
+      [class.is-warning]="row.context && row.context === Context.Warning"
+      [class.is-info]="row.context && row.context === Context.Info"
+      [class.is-success]="row.context && row.context === Context.Success"
+      [class.has-stripe-danger]="row.stripeContext && row.stripeContext === Context.Danger"
+      [class.has-stripe-warning]="row.stripeContext && row.stripeContext === Context.Warning"
+      [class.has-stripe-info]="row.stripeContext && row.stripeContext === Context.Info"
+      [class.has-stripe-success]="row.stripeContext && row.stripeContext === Context.Success"
+      [ngClass]="[row.cssClass? row.cssClass : '']"
+      [attr.title]="row.title ? row.title : ''">
+    <td *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox}">
+
+      <!-- checkbox type -->
+      <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
+        <input id="checkbox-{{row.id}}" name="{{col.label}}-checkbox" type="checkbox" class="hx-checkbox" title="{{col.label}}" (change)="toggleIndividualSelect($event)" [(ngModel)]="row.checked" />
+        <label for="checkbox-{{row.id}}" class="hx-label"></label>
+      </div>
+
+      <!-- string type | number type -->
+      <span *ngIf="col.dataType === TabularColumnTypes.String || col.dataType === TabularColumnTypes.Number" title="{{row[col.id]}}">{{row[col.id]}}</span>
+
+      <!-- icon type -->
+      <i *ngIf="col.dataType === TabularColumnTypes.Icon && hasValidIconTypeParams(row[col.id])" title="" class="hx-icon {{row[col.id].icon}}" [hxTooltip]="row[col.id].tooltip.content" placement="{{row[col.id].tooltip.placement}}" [context]="row[col.id].tooltip.config.context"></i>
+
+      <!-- date type -->
+      <span *ngIf="col.dataType === TabularColumnTypes.Date">{{row[col.id] | date:'d/M/yy'}}</span>
+
+      <!-- status type -->
+      <span *ngIf="col.dataType === TabularColumnTypes.Status" class="hx-icon" [ngClass]="{'is-primary':row[col.id],'is-danger':!row[col.id], 'icon-check-empty': row[col.id], 'icon-close-empty':!row[col.id]}" ></span>
+
+      <!-- badge type -->
+      <span *ngIf="col.dataType === TabularColumnTypes.Badge && hasValidBadgeTypeParams(row[col.id])" class="hx-badge is-small {{row[col.id].cssClass}}"><span class="hx-badge-content">{{row[col.id].label}}</span></span>
+
+      <!-- date time type -->
+      <span *ngIf="col.dataType === TabularColumnTypes.DateTime">{{row[col.id] | date:'d/M/yy h:mm a'}}</span>
+
+      <!-- actions type -->
+      <div *ngIf="col.dataType === TabularColumnTypes.Actions" class="hx-dropdown tabularActions">
+
+
+        <div class="tabularActions__action">
+
+          <ng-container *ngFor="let action of row[col.id];trackBy: trackByFn">
+
+            <!-- single action -->
+            <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small"
+                    *ngIf="!getActionDisabledState(action) && action.routeType === ActionConfigRouteType.Route && !hasChildren(action)"
+                    [routerLink]="action.route"
+                    class="hx-button is-flat {{action.css}}"
+                    title="{{action.label}}"><span class="hx-icon {{action.icon}}"></span></button>
+            <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small"
+                    *ngIf="!getActionDisabledState(action) && action.routeType === ActionConfigRouteType.Callback && !hasChildren(action)"
+                   (click)='executeCallback($event,action.callback)'
+                   class="hx-button is-flat {{action.css}}"><span class="hx-icon {{action.icon}}"></span></button>
+
+            <!-- action with children -->
+            <div class="hx-dropdown" hxDropdown [isRight]="true" *ngIf="hasChildren(action)">
+
+              <button class="hx-button is-flat hx-button-dropdown" [class.is-small]="config.size === TabularSize.Small" hxDropdownToggle type="button">
+                <i class="icon {{action.icon}}"></i>
+              </button>
+
+              <div class="hx-dropdown-menu" *hxDropdownMenu>
+
+                <ng-container *ngFor="let childAction of action.children;trackBy: trackByFn">
+                  <a *ngIf="!getActionDisabledState(childAction) && childAction.routeType === ActionConfigRouteType.Route"
+                     [routerLink]="childAction.route"
+                     class="hx-dropdown-item {{childAction.css}}">{{childAction.label}}</a>
+                  <a *ngIf="!getActionDisabledState(childAction) && childAction.routeType === ActionConfigRouteType.Callback"
+                     (click)='executeCallback($event,childAction.callback)'
+                     class="hx-dropdown-item {{childAction.css}}">{{childAction.label}}</a>
+                </ng-container>
+
+              </div>
+
+            </div>
+
+          </ng-container>
+
+        </div>
+      </div>
+
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<hx-pagination [directionLinks]="true" [boundaryLinks]="true" [rotate]="false" [maxSize]="10"
+               [totalItems]="totalItemCount" [itemsPerPage]="config.pagination.itemsPerPage"
+               [(ngModel)]="config.pagination.currentPage" (pageChanged)="setPage($event)" *ngIf="totalItemCount > config.pagination.itemsPerPage"></hx-pagination>

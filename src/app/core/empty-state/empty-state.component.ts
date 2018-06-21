@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {EmptyStateCode} from './empty-state.code';
 import {PageScrollService} from 'ngx-page-scroll';
-import {DOCUMENT} from '@angular/platform-browser';
+import {DOCUMENT} from '@angular/common';
 import {CoreBaseComponent} from '../core-base.component';
-import {IEmptyStateAction} from '../../../modules/empty-state/empty-state-action.interface';
+import {IEmptyStateAction} from '../../../../projects/hx-ui/src/lib/empty-state/empty-state-action.interface';
 
 @Component({
   selector: 'app-empty-state',

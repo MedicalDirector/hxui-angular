@@ -1,5 +1,10 @@
-import {ActionConfigRouteType, IActionsConfig} from '../../../modules/tabular/actions-config.interface';
-import {ITabularRow} from '../../../modules/tabular/tabular-row.interface';
+
+import {ActionConfigRouteType, IActionsConfig} from '../../../../projects/hx-ui/src/lib/tabular/actions-config.interface';
+import {ITabularRow} from '../../../../projects/hx-ui/src/lib/tabular/tabular-row.interface';
+import {
+  ITabularColumnBadgeType,
+  ITabularColumnIconType
+} from '../../../../projects/hx-ui/src/lib/tabular/tabular-column.interface';
 
 export class UserModel implements ITabularRow {
   public id: number;
@@ -8,13 +13,14 @@ export class UserModel implements ITabularRow {
   public surname: string;
   public rolename: string;
   public email: string;
-  public flag: {label: string, cssClass: string};
+  public flag: ITabularColumnBadgeType;
   public active: boolean;
   public created: Date;
   public modified: Date;
   public selected: boolean;
   public checked: boolean;
   public title: string;
+  public info: ITabularColumnIconType;
   public icon: string;
   public actions: IActionsConfig[] = [];
 
@@ -97,6 +103,6 @@ export class UserModel implements ITabularRow {
    * @param data
    */
   onActionClickHandler = (type, data) => {
-    alert('You clicked the ' + type + ' button. Arguments:' + type + ' and ' + data);
+     alert('You clicked the ' + type + ' button. Arguments:' + type + ' and ' + data);
   }
 }
