@@ -12,3 +12,8 @@ export enum Size {
   Small,
   Large
 }
+
+export enum Visibility {
+  Hidden,
+  Visible
+}

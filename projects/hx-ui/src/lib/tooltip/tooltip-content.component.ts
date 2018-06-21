@@ -1,214 +1,102 @@
 import {
   Component,
   Input,
-  AfterViewInit,
-  ElementRef,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy
+  ViewEncapsulation
 } from '@angular/core';
-import { Context } from '../enums';
+import {Context, Visibility} from '../enums';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
-  selector: 'hx-tooltip-content',
-  template: `
-        <div class="hx-tooltip is-{{ placement }}"
-             [style.top]="top + 'px'"
-             [style.left]="left + 'px'"
-             [class.is-active]="active"
-             [class.is-success]="context === contextEnum.Success"
-             [class.is-warning]="context === contextEnum.Warning"
-             [class.is-danger]="context === contextEnum.Danger"
-             role="tooltip">
-            <div class="hx-tooltip-content">
-                <ng-content></ng-content>
-                {{ content }}
-            </div>
-        </div>
-`
+  selector: 'hx-tooltip-content, hxa-tooltip-content',
+  template: `    
+      <div class="hx-tooltip is-{{ placement }}"
+           [class.is-active]='visibility === visibilityEnum.Visible'
+           [class.is-success]="context === contextEnum.Success"
+           [class.is-warning]="context === contextEnum.Warning"
+           [class.is-danger]="context === contextEnum.Danger"
+           role="tooltip">
+          <div class="hx-tooltip-content">
+            {{ content }}
+          </div>
+      </div>
+`,
+  styles: [
+    '.hxa-tooltip-panel { display:flex; position: absolute; pointer-events: auto; box-sizing: border-box; z-index: 1000; max-width: 100%; max-height: 100%;}',
+    '.hx-tooltip.is-left, .hx-tooltip.is-left:before{ margin-right:.5rem; }',
+    '.hx-tooltip.is-right, .hx-tooltip.is-right:before{ margin-left:.5rem; }',
+    '.hx-tooltip.is-bottom, .hx-tooltip.is-bottom:before{ margin-top:.5rem; }',
+    '.hx-tooltip.is-top, .hx-tooltip.is-top:before{ margin-bottom:.5rem; }'
+  ],
+  encapsulation: ViewEncapsulation.None
 })
-export class TooltipContentComponent implements AfterViewInit {
-  @Input() hostElement: HTMLElement;
+export class TooltipContentComponent {
 
-  @Input() content: string;
+  @Input()
+  content: string;
 
-  @Input() placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
+  @Input()
+  placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
 
-  @Input() context: Context = Context.None;
+  @Input()
+  context: Context = Context.None;
 
-  @Input() animation = true;
-
-  top: number = -100000;
-  left: number = -100000;
-  active = false;
+  /** Enums to be used in the template **/
   contextEnum = Context;
+  visibilityEnum = Visibility;
 
-  constructor(private element: ElementRef, private cdr: ChangeDetectorRef) {}
+  visibility: Visibility = Visibility.Hidden;
 
-  ngAfterViewInit(): void {
-    this.show();
-    this.cdr.detectChanges();
-  }
+  /** Subject for notifying that the tooltip has been hidden from the view */
+  private readonly _onHide: Subject<any> = new Subject();
 
-  show(): void {
-    if (!this.hostElement) {
-      return;
+  /** The timeout ID of any current timer set to show the tooltip */
+  private _showTimeoutId: number;
+
+  /** The timeout ID of any current timer set to hide the tooltip */
+  private _hideTimeoutId: number;
+
+  constructor() {}
+
+
+  /**
+   * Shows the tooltip
+   * @param delay Amount of milliseconds to the delay showing the tooltip.
+   */
+  show(delay: number): void {
+    // Cancel the delayed hide if it is scheduled
+    if (this._hideTimeoutId) {
+      clearTimeout(this._hideTimeoutId);
     }
 
-    const p = this.positionElements(
-      this.hostElement,
-      this.element.nativeElement.children[0],
-      this.placement
-    );
+    this._showTimeoutId = window.setTimeout(() => {
+      this.visibility = Visibility.Visible;
 
-    this.top = p.top;
-    this.left = p.left;
-    this.active = true;
+    }, delay);
   }
 
-  hide(): void {
-    this.top = -100000;
-    this.left = -100000;
-    this.active = true;
-  }
-
-  private positionElements(
-    hostEl: HTMLElement,
-    targetEl: HTMLElement,
-    positionStr: string,
-    appendToBody: boolean = true
-  ): { top: number; left: number } {
-    const positionStrParts = positionStr.split('-');
-    const pos0 = positionStrParts[0];
-    const pos1 = positionStrParts[1] || 'center';
-    const hostElPos = appendToBody
-      ? this.offset(hostEl)
-      : this.position(hostEl);
-    const targetElWidth = targetEl.offsetWidth;
-    const targetElHeight = targetEl.offsetHeight;
-    const shiftWidth: any = {
-      center: function(): number {
-        return hostElPos.left + hostElPos.width / 2 - targetElWidth / 2;
-      },
-      left: function(): number {
-        return hostElPos.left;
-      },
-      right: function(): number {
-        return hostElPos.left + hostElPos.width;
-      }
-    };
-
-    const shiftHeight: any = {
-      center: function(): number {
-        return hostElPos.top + hostElPos.height / 2 - targetElHeight / 2;
-      },
-      top: function(): number {
-        return hostElPos.top;
-      },
-      bottom: function(): number {
-        return hostElPos.top + hostElPos.height;
-      }
-    };
-
-    let targetElPos: { top: number; left: number };
-    switch (pos0) {
-      case 'right':
-        targetElPos = {
-          top: shiftHeight[pos1](),
-          left: shiftWidth[pos0]()
-        };
-        break;
-
-      case 'left':
-        targetElPos = {
-          top: shiftHeight[pos1](),
-          left: hostElPos.left - targetElWidth
-        };
-        break;
-
-      case 'bottom':
-        targetElPos = {
-          top: shiftHeight[pos0](),
-          left: shiftWidth[pos1]()
-        };
-        break;
-
-      default:
-        targetElPos = {
-          top: hostElPos.top - targetElHeight,
-          left: shiftWidth[pos1]()
-        };
-        break;
+  /**
+   * Hide the tooltip after the provided delay in ms.
+   * @param delay Amount of milliseconds to delay hiding the tooltip.
+   */
+  hide(delay: number): void {
+    // Cancel the delayed show if it is scheduled
+    if (this._showTimeoutId) {
+      clearTimeout(this._showTimeoutId);
     }
 
-    return targetElPos;
+    this._hideTimeoutId = window.setTimeout(() => {
+      this.visibility = Visibility.Hidden;
+      this._onHide.next();
+    }, delay);
   }
 
-  private position(
-    nativeEl: HTMLElement
-  ): { width: number; height: number; top: number; left: number } {
-    let offsetParentBCR = { top: 0, left: 0 };
-    const elBCR = this.offset(nativeEl);
-    const offsetParentEl = this.parentOffsetEl(nativeEl);
-    if (offsetParentEl !== window.document) {
-      offsetParentBCR = this.offset(offsetParentEl);
-      offsetParentBCR.top +=
-        offsetParentEl.clientTop - offsetParentEl.scrollTop;
-      offsetParentBCR.left +=
-        offsetParentEl.clientLeft - offsetParentEl.scrollLeft;
-    }
-
-    const boundingClientRect = nativeEl.getBoundingClientRect();
-    return {
-      width: boundingClientRect.width || nativeEl.offsetWidth,
-      height: boundingClientRect.height || nativeEl.offsetHeight,
-      top: elBCR.top - offsetParentBCR.top,
-      left: elBCR.left - offsetParentBCR.left
-    };
+  /** Returns an observable that notifies when the tooltip has been hidden from view. */
+  afterHidden(): Observable<void> {
+    return this._onHide.asObservable();
   }
 
-  private offset(
-    nativeEl: any
-  ): { width: number; height: number; top: number; left: number } {
-    const boundingClientRect = nativeEl.getBoundingClientRect();
-    return {
-      width: boundingClientRect.width || nativeEl.offsetWidth,
-      height: boundingClientRect.height || nativeEl.offsetHeight,
-      top:
-        boundingClientRect.top +
-        (window.pageYOffset || window.document.documentElement.scrollTop),
-      left:
-        boundingClientRect.left +
-        (window.pageXOffset || window.document.documentElement.scrollLeft)
-    };
+  isVisible(): boolean {
+    return this.visibility === Visibility.Visible;
   }
 
-  private getStyle(nativeEl: HTMLElement, cssProp: string): string {
-    if ((nativeEl as any).currentStyle) {
-      // IE
-      return (nativeEl as any).currentStyle[cssProp];
-    }
-
-    if (window.getComputedStyle) {
-      return (window.getComputedStyle(nativeEl) as any)[cssProp];
-    }
-
-    // finally try and get inline style
-    return (nativeEl.style as any)[cssProp];
-  }
-
-  private isStaticPositioned(nativeEl: HTMLElement): boolean {
-    return (this.getStyle(nativeEl, 'position') || 'static') === 'static';
-  }
-
-  private parentOffsetEl(nativeEl: HTMLElement): any {
-    let offsetParent: any = nativeEl.offsetParent || window.document;
-    while (
-      offsetParent &&
-      offsetParent !== window.document &&
-      this.isStaticPositioned(offsetParent)
-    ) {
-      offsetParent = offsetParent.offsetParent;
-    }
-    return offsetParent || window.document;
-  }
 }

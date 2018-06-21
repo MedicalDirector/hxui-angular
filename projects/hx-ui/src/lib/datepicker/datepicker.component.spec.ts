@@ -2,7 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DatepickerComponent } from './datepicker.component';
 import { DatepickerFormComponent } from './datepicker-form.component';
-import {PositioningService} from '../positioning';
+import {PositioningService} from '../positioning/positioning.service';
+
 
 describe('DatepickerComponent', () => {
   let component: DatepickerComponent;
