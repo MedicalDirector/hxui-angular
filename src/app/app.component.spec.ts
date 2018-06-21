@@ -1,7 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
-import {HxUiModule} from '../modules';
 import {AppModule} from './app.module';
 
 xdescribe('AppComponent', () => {

@@ -60,7 +60,7 @@ export class InMemoryDataService implements InMemoryDbService {
           icon: 'icon-information-outline',
           tooltip: {
             config: {
-              placement: 'right',
+              placement: 'left',
               context: Context.Danger
             },
             content: 'Information'
@@ -116,7 +116,7 @@ export class InMemoryDataService implements InMemoryDbService {
           icon: 'icon-information-outline',
           tooltip: {
             config: {
-              placement: 'right',
+              placement: 'bottom',
               context: Context.None
             },
             content: 'Information'

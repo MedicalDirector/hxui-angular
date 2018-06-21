@@ -45,7 +45,7 @@
       <span *ngIf="col.dataType === TabularColumnTypes.String || col.dataType === TabularColumnTypes.Number" title="{{row[col.id]}}">{{row[col.id]}}</span>
 
       <!-- icon type -->
-      <i *ngIf="col.dataType === TabularColumnTypes.Icon && hasValidIconTypeParams(row[col.id])" title="" class="hx-icon {{row[col.id].icon}}" [hxTooltip]="row[col.id].tooltip.content" placement="{{row[col.id].tooltip.placement}}" [context]="row[col.id].tooltip.config.context"></i>
+      <i *ngIf="col.dataType === TabularColumnTypes.Icon && hasValidIconTypeParams(row[col.id])" title="" class="hx-icon {{row[col.id].icon}}" [hxTooltip]="row[col.id].tooltip.content" placement="{{row[col.id].tooltip.config.placement}}" [context]="row[col.id].tooltip.config.context"></i>
 
       <!-- date type -->
       <span *ngIf="col.dataType === TabularColumnTypes.Date">{{row[col.id] | date:'d/M/yy'}}</span>
