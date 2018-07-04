@@ -29,17 +29,17 @@
         & .hx-button {
             position: initial !important;
             top: initial !important;
-            
+
             &.is-transparent:hover {
                 color: black;
             }
-        }      
-        
+        }
+
         & .hx-icon {
             font-size: 2.3em;
             position: initial !important;
             top: initial !important;
-            color: $color-blue;
+            color: $hx-color-blue;
         }
     }
 
@@ -53,9 +53,9 @@
             flex: 3;
             display: flex;
             justify-content: center;
-            align-items: center;   
-            color: $color-blue;   
-        }        
+            align-items: center;
+            color: $hx-color-blue;
+        }
     }
 
     &-week {
@@ -65,7 +65,7 @@
 
         &day {
             flex: 1;
-            color: $color-blue;
+            color: $hx-color-blue;
         }
     }
 
@@ -93,11 +93,11 @@
             font-weight: 400;
             height: 100%;
             padding: 0;
-            color: $color-success;
-        }  
+            color: $hx-color-success;
+        }
 
         &-siblingmonth .hx-button {
-            color: $color-gray;
+            color: $hx-color-gray;
             font-weight: 100;
         }
 
@@ -105,12 +105,12 @@
             color: white;
             background: #41b987;
         }
-        
+
         &-invalidday .hx-button {
-            color: $color-light !important;
+            color: $hx-color-light !important;
             pointer-events: none;
         }
-        
+
         &-currentday .hx-button {
             border: 2px solid #41b987;
         }
