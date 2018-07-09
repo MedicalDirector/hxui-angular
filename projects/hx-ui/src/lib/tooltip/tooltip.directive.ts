@@ -139,6 +139,18 @@ export class TooltipDirective implements OnDestroy {
       .pipe(takeUntil(this._destroyed))
       .subscribe(() => this._detach());
 
+    const position = this._overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
+    position.positionChanges
+      .pipe(takeUntil(this._destroyed))
+      .subscribe((position) => {
+        if (position.connectionPair.originX === 'start') {
+          this.placement = 'left';
+        } else if (position.connectionPair.originX === 'end') {
+          this.placement = 'right';
+        }
+        this._updateTooltipContent();
+      });
+
     return this._overlayRef;
   }
 

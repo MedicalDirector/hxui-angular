@@ -1,23 +1,26 @@
 import {
   Component,
   Input,
-  ViewEncapsulation
+  ViewEncapsulation,
+  ChangeDetectorRef
 } from '@angular/core';
 import {Context, Visibility} from '../enums';
 import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'hx-tooltip-content, hxa-tooltip-content',
-  template: `    
-      <div class="hx-tooltip is-{{ placement }}"
-           [class.is-active]='visibility === visibilityEnum.Visible'
-           [class.is-success]="context === contextEnum.Success"
-           [class.is-warning]="context === contextEnum.Warning"
-           [class.is-danger]="context === contextEnum.Danger"
-           role="tooltip">
-          <div class="hx-tooltip-content">
-            {{ content }}
-          </div>
+  template: `   
+      <div class="hxui-reset"> 
+        <div class="hx-tooltip is-{{ placement }}"
+            [class.is-active]='visibility === visibilityEnum.Visible'
+            [class.is-success]="context === contextEnum.Success"
+            [class.is-warning]="context === contextEnum.Warning"
+            [class.is-danger]="context === contextEnum.Danger"
+            role="tooltip">
+            <div class="hx-tooltip-content">
+              {{ content }}
+            </div>
+        </div>
       </div>
 `,
   styles: [
@@ -55,7 +58,7 @@ export class TooltipContentComponent {
   /** The timeout ID of any current timer set to hide the tooltip */
   private _hideTimeoutId: number;
 
-  constructor() {}
+  constructor(private _changeDetectionRef: ChangeDetectorRef) {}
 
 
   /**
@@ -67,10 +70,11 @@ export class TooltipContentComponent {
     if (this._hideTimeoutId) {
       clearTimeout(this._hideTimeoutId);
     }
-
     this._showTimeoutId = window.setTimeout(() => {
+      // Schedule for change detection incase the tooltip is used within a 
+      // component with OnPush change detection
+      this._changeDetectionRef.markForCheck();
       this.visibility = Visibility.Visible;
-
     }, delay);
   }
 
