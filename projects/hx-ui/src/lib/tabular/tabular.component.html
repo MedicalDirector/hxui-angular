@@ -79,7 +79,7 @@
                    class="hx-button is-flat {{action.css}}"><span class="hx-icon {{action.icon}}"></span></button>
 
             <!-- action with children -->
-            <div class="hx-dropdown" hxDropdown [isRight]="true" *ngIf="hasChildren(action)">
+            <div class="hx-dropdown" hxDropdown [isRight]="true" container="body" *ngIf="hasChildren(action)">
 
               <button class="hx-button is-flat hx-button-dropdown" [class.is-small]="config.size === TabularSize.Small" hxDropdownToggle type="button">
                 <i class="icon {{action.icon}}"></i>
@@ -89,15 +89,14 @@
 
                 <ng-container *ngFor="let childAction of action.children;trackBy: trackByFn">
                   <a *ngIf="!getActionDisabledState(childAction) && childAction.routeType === ActionConfigRouteType.Route"
-                     [routerLink]="childAction.route"
-                     class="hx-dropdown-item {{childAction.css}}">{{childAction.label}}</a>
+                      [routerLink]="childAction.route"
+                      class="hx-dropdown-item {{childAction.css}}">{{childAction.label}}</a>
                   <a *ngIf="!getActionDisabledState(childAction) && childAction.routeType === ActionConfigRouteType.Callback"
-                     (click)='executeCallback($event,childAction.callback)'
-                     class="hx-dropdown-item {{childAction.css}}">{{childAction.label}}</a>
+                      (click)='executeCallback($event,childAction.callback)'
+                      class="hx-dropdown-item {{childAction.css}}">{{childAction.label}}</a>
                 </ng-container>
 
               </div>
-
             </div>
 
           </ng-container>
