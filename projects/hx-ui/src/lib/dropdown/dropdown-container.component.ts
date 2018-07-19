@@ -4,7 +4,8 @@ import { DropdownState } from './dropdown.state';
 @Component({
   selector: 'hx-dropdown-container',
   host: {
-    style: 'display:block;position: absolute;'
+    style: 'display:block;position: absolute;',
+    class: 'hxui-reset'
   },
   template: `
     <div [class.is-dropup]="direction === 'up'"

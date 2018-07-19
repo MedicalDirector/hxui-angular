@@ -123,7 +123,6 @@ export class TabularComponent implements OnInit, DoCheck {
    * Calls the parsed callback with optional arguments
    */
    executeCallback(event: Event, cb: any[]) {
-    event.stopPropagation();
     if (cb.length) {
       if (cb.length === 1) { // if callback has no arguments
         cb[0]();
@@ -136,7 +135,6 @@ export class TabularComponent implements OnInit, DoCheck {
       }
     }
   }
-
 
    toggleSelectAll = ($event) => {
     for (let i = 0; i < this.rows.length; i++) {
