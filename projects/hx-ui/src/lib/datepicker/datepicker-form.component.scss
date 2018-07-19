@@ -4,6 +4,10 @@
         max-width: 21rem;
     }
 
+    &-control {
+        margin: 0;
+    }
+
     &-calendar {
         position: absolute;
         z-index: 99;

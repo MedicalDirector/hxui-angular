@@ -25,6 +25,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   @Input() allowFutureDates = true;
   @Input() dateFormat = "dd/MM/y";
   @Input() placeholder = "Date";
+  @Input() helpText = "Please select a date";
   @Input() align: "top" | "bottom" = "bottom";
   @Input() from = '';
   @Input() to = '';
