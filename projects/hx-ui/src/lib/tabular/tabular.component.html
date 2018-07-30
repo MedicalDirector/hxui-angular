@@ -72,11 +72,17 @@
                     *ngIf="!getActionDisabledState(action) && action.routeType === ActionConfigRouteType.Route && !hasChildren(action)"
                     [routerLink]="action.route"
                     class="hx-button is-flat {{action.css}}"
-                    title="{{action.label}}"><span class="hx-icon {{action.icon}}"></span></button>
+                    title="{{action.label}}"
+                    [hxTooltip]="action.tooltip?.content"
+                    placement="{{action.tooltip?.config.placement}}"
+                    [context]="action.tooltip?.config.context"><span class="hx-icon {{action.icon}}"></span></button>
             <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small"
                     *ngIf="!getActionDisabledState(action) && action.routeType === ActionConfigRouteType.Callback && !hasChildren(action)"
                    (click)='executeCallback($event,action.callback)'
-                   class="hx-button is-flat {{action.css}}"><span class="hx-icon {{action.icon}}"></span></button>
+                   class="hx-button is-flat {{action.css}}"
+                    [hxTooltip]="action.tooltip?.content"
+                    placement="{{action.tooltip?.config.placement}}"
+                    [context]="action.tooltip?.config.context"><span class="hx-icon {{action.icon}}"></span></button>
 
             <!-- action with children -->
             <div class="hx-dropdown" hxDropdown [isRight]="true" container="body" *ngIf="hasChildren(action)">
