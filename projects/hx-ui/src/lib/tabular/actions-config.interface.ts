@@ -1,4 +1,5 @@
 import {IDisabledInput} from './disabled-input.interface';
+import {TooltipConfig} from '../tooltip/tooltip.config';
 
 export enum ActionConfigRouteType {
   None,
@@ -53,5 +54,13 @@ export abstract class IActionsConfig {
    * Child actions
    */
   children?: IActionsConfig[];
+
+  /**
+   * Tooltip config
+   */
+  tooltip?: {
+    config: TooltipConfig,
+    content: string;
+  };
 
 }

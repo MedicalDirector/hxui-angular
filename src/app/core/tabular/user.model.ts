@@ -5,6 +5,7 @@ import {
   ITabularColumnBadgeType,
   ITabularColumnIconType
 } from '../../../../projects/hx-ui/src/lib/tabular/tabular-column.interface';
+import {Context} from '../../../../projects/hx-ui/src/lib/enums';
 
 export class UserModel implements ITabularRow {
   public id: number;
@@ -46,21 +47,54 @@ export class UserModel implements ITabularRow {
         icon: 'icon-prescription',
         route: ['/prescription'],
         routeType: ActionConfigRouteType.Route,
-        disabledConfig: {disabled: true, tooltip: 'Not enough permission'}
+        disabledConfig: {disabled: true, tooltip: 'Not enough permission'},
+        tooltip: {
+          config: {
+            placement: 'top',
+            context: Context.None,
+            disabled: false,
+            animation: false,
+            showDelay: 0,
+            hideDelay: 0
+          },
+          content: 'Prescriptions'
+        }
       },
       {
         id: 'row_person_edit',
         label: 'Edit',
         icon: 'icon-edit',
         routeType: ActionConfigRouteType.Callback,
-        callback: [this.onActionClickHandler, 'edit', 1]
+        callback: [this.onActionClickHandler, 'edit', 1],
+        tooltip: {
+          config: {
+            placement: 'top',
+            context: Context.None,
+            disabled: false,
+            animation: false,
+            showDelay: 0,
+            hideDelay: 0
+          },
+          content: 'Edit'
+        }
       },
       {
         id: 'row_person_delete',
         label: 'Delete',
         icon: 'icon-bin',
         routeType: ActionConfigRouteType.Callback,
-        callback: [this.onActionClickHandler, 'delete', 1]
+        callback: [this.onActionClickHandler, 'delete', 1],
+        tooltip: {
+          config: {
+            placement: 'top',
+            context: Context.None,
+            disabled: false,
+            animation: false,
+            showDelay: 0,
+            hideDelay: 0
+          },
+          content: 'Delete'
+        }
       },
       {
         id: 'row_person_more',

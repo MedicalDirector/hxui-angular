@@ -24,6 +24,7 @@ import {Observable, Subject} from 'rxjs';
       </div>
 `,
   styles: [
+    '.cdk-overlay-container { position:relative; height:100vh; width:100vw; }',
     '.hxa-tooltip-panel { display:flex; position: absolute; pointer-events: auto; box-sizing: border-box; z-index: 1000; max-width: 100%; max-height: 100%;}',
     '.hx-tooltip.is-left, .hx-tooltip.is-left:before{ margin-right:.5rem; }',
     '.hx-tooltip.is-right, .hx-tooltip.is-right:before{ margin-left:.5rem; }',
@@ -71,7 +72,7 @@ export class TooltipContentComponent {
       clearTimeout(this._hideTimeoutId);
     }
     this._showTimeoutId = window.setTimeout(() => {
-      // Schedule for change detection incase the tooltip is used within a 
+      // Schedule for change detection incase the tooltip is used within a
       // component with OnPush change detection
       this._changeDetectionRef.markForCheck();
       this.visibility = Visibility.Visible;
