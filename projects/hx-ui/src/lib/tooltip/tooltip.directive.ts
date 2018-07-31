@@ -4,7 +4,7 @@ import {
   ViewContainerRef,
   Input,
   HostBinding, ElementRef,
-  OnDestroy, NgZone, ComponentFactoryResolver
+  OnDestroy, NgZone, ComponentFactoryResolver, Optional
 } from '@angular/core';
 import { TooltipContentComponent } from './tooltip-content.component';
 import { TooltipConfig } from './tooltip.config';
@@ -73,10 +73,10 @@ export class TooltipDirective implements OnDestroy {
     private _viewContainerRef: ViewContainerRef,
     public overlay: Overlay,
     private _ngZone: NgZone,
-    private _dir: Directionality,
     private _scrollDispatcher: ScrollDispatcher,
     private _componentFactoryResolver: ComponentFactoryResolver,
-    private _config: TooltipConfig
+    private _config: TooltipConfig,
+    @Optional() private _dir: Directionality,
   ) {
     Object.assign(this, _config);
   }
@@ -142,10 +142,10 @@ export class TooltipDirective implements OnDestroy {
     const position = this._overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
     position.positionChanges
       .pipe(takeUntil(this._destroyed))
-      .subscribe((position) => {
-        if (position.connectionPair.originX === 'start') {
+      .subscribe((pos) => {
+        if (pos.connectionPair.originX === 'start') {
           this.placement = 'left';
-        } else if (position.connectionPair.originX === 'end') {
+        } else if (pos.connectionPair.originX === 'end') {
           this.placement = 'right';
         }
         this._updateTooltipContent();
