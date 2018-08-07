@@ -12,6 +12,7 @@ export * from './lib/auto-grow/auto-grow.module';
 export * from './lib/datepicker/datepicker.component';
 export * from './lib/datepicker/datepicker-form.component';
 export * from './lib/datepicker/datepicker.module';
+export * from './lib/datepicker/datepicker.config'
 
 export * from './lib/dropdown/dropdown.config';
 export * from './lib/dropdown/dropdown.directive';

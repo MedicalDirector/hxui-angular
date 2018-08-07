@@ -32,4 +32,11 @@ export class InstallGuideCode {
    export class AppModule(){
    `;
 
+ cdk =  `
+    /* Structural css needed for CDK to work correctly */
+    @import   '~@angular/cdk/overlay-prebuilt.css';
+    @import   '~@angular/cdk/a11y-prebuilt.css';
+    @import   '~@angular/cdk/text-field-prebuilt.css';
+ `;
+
 }
