@@ -33,7 +33,6 @@ import {DatepickerConfig} from './datepicker.config';
 })
 export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Validator, OnDestroy {
 
-
   _overlayRef: OverlayRef | null;
   _calendarInstance: DatepickerComponent | null;
   private _portal: ComponentPortal<DatepickerComponent>;
@@ -160,8 +159,6 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     this.propogateChange(date);
   }
 
-
-
   public onDateSelectEvent(inputDate: Date): void {
     this._hide();
     this.setDate(inputDate);
@@ -229,7 +226,9 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   }
 
   public writeValue(value: Date): void {
-    this.setDate(value);
+    if (value !== this.date) {
+      this.setDate(value);
+    }
   }
 
   public registerOnChange(fn: (value: Date) => void): void {
