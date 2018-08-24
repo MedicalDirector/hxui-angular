@@ -159,7 +159,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     this.propogateChange(date);
   }
 
-  public onDateSelectEvent(inputDate: Date): void {
+  public onDateSelectEvent = (inputDate: Date): void => {
     this._hide();
     this.setDate(inputDate);
   }
@@ -467,6 +467,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
       this._calendarInstance.selectedDate = this.date;
       this._calendarInstance.placement = this.placement;
       this._calendarInstance.validators = this.dateValidators;
+      this._calendarInstance.onDateSelected = this.onDateSelectEvent;
 
 
       this._ngZone.onMicrotaskEmpty.asObservable().pipe(
