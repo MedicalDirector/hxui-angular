@@ -21,9 +21,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
   @Input()
   placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
 
-  @Output()
-  onDateSelected: EventEmitter<Date> = new EventEmitter<Date>();
 
+  onDateSelected: (inputDate: Date) => void;
   visibilityEnum = Visibility;
   visibility: Visibility = Visibility.Hidden;
   viewDate: Date;
@@ -88,7 +87,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
   public setSelectedDate(date: Date): void {
     if (!this.isInvalidDay(date)) {
       this.selectedDate = date;
-      this.onDateSelected.emit(date);
+      this.onDateSelected(date);
     }
   }
 

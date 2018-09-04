@@ -7,7 +7,7 @@ import {EmptyStateConfig} from './empty-state.config';
   templateUrl: './empty-state.component.html',
   styles: [
     ':host { min-height: 12rem; width:100%; display:flex; flex-direction: column; flex:1;}',
-    ':host .emptyState { display:flex; justify-content: center; align-items: center; flex:1; margin: 1rem 0; }',
+    ':host .emptyState { display:flex; flex-direction: column; justify-content: center; align-items: center; flex:1; margin: 1rem 0; }',
     ':host .emptyState__icon { height:3.5rem; width:3.5rem; font-size:64px; margin: 1rem; }',
     ':host .emptyState__msg { margin: 1rem; }',
     ':host .emptyState__actions{ margin: 1.5rem 1rem ; }',
