@@ -1,0 +1,6 @@
+@import '~@hxui/css/static/static/scss/_variables.scss';
+@import '~@hxui/css/static/static/scss/components/_accordions.scss';
+
+:host:not(:last-child) .hx-accordion-container {
+    @extend .hx-accordion-container:not(:last-child);
+}

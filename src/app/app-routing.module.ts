@@ -14,11 +14,13 @@ import { InstallGuideComponent } from './core/install-guide/install-guide.compon
 import { SelectizeComponent } from 'app/core/selectize/selectize.component';
 import {AutoGrowComponent} from './core/auto-grow/auto-grow.component';
 import {EmptyStateComponent} from './core/empty-state/empty-state.component';
+import { AccordionComponent } from './core/accordion/accordion.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: 'welcome',  component: WelcomeComponent },
   { path: 'install-guide',  component: InstallGuideComponent },
+  { path: 'accordion',  component: AccordionComponent },
   { path: 'datepickers',  component: DatepickersComponent },
   { path: 'dropdowns',  component: DropdownsComponent },
   { path: 'modals',  component: ModalsComponent },

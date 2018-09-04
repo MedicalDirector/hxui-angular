@@ -39,6 +39,10 @@ export class AppComponent {
       cat: 'Components',
       items: [
         {
+          name: 'Accordions',
+          link: '/accordion'
+        },
+        {
           name: 'Datepickers',
           link: '/datepickers'
         },

@@ -19,6 +19,7 @@ import { InstallGuideComponent } from './install-guide/install-guide.component';
 import { SelectizeComponent } from 'app/core/selectize/selectize.component';
 import { AutoGrowComponent } from './auto-grow/auto-grow.component';
 import { EmptyStateComponent } from './empty-state/empty-state.component';
+import { AccordionComponent } from './accordion/accordion.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { EmptyStateComponent } from './empty-state/empty-state.component';
       InstallGuideComponent,
       SelectizeComponent,
       AutoGrowComponent,
-      EmptyStateComponent
+      EmptyStateComponent,
+      AccordionComponent
   ],
   providers: [
      TabularService,
