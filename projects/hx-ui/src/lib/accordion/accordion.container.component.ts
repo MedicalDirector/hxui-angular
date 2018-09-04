@@ -26,11 +26,11 @@ import { state, style, transition, animate, trigger } from "@angular/animations"
             state('void', style({ 'overflow-y': 'hidden' })),
             transition('* => void', [
                 style({ height: '*' }),
-                animate(250, style({ height: 0, opacity: 0 }))
+                animate('0.25s ease-out', style({ height: 0, opacity: 0 }))
             ]),
             transition('void => *', [
                 style({ height: '0' }),
-                animate(250, style({ height: '*', opacity: 1 }))
+                animate('0.25s ease-out', style({ height: '*', opacity: 1 }))
             ])
         ])
     ]
