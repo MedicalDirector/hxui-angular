@@ -1,0 +1,132 @@
+<section class="hx-section scrollable-y" #container>
+  <div class="hx-section is-comfortable">
+
+    <h1 class="hx-title">Accordian</h1>
+    <h2 class="hx-subtitle">Handles growing and contracting accordions</h2>
+    <hr>
+
+    <h4 id="usage">Usage</h4>
+    <p>Add the AccordionModule to AppModule or SharedModule.</p>
+
+    <pre>
+      <code highlight [code]="code.usage"></code>
+    </pre>
+
+    <hr>
+
+    <h4 id="example">Example</h4>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <hx-accordion>
+          <hx-accordion-container>
+            <hx-accordion-header>
+              This is the header
+            </hx-accordion-header>
+            <hx-accordion-body>
+              <p>This is the body</p>
+            </hx-accordion-body>
+          </hx-accordion-container>
+          <hx-accordion-container>
+            <hx-accordion-header>
+              This is the second header. <b>You can even style it!</b> <i class="hx-icon icon-helix is-small is-info"></i>
+            </hx-accordion-header>
+            <hx-accordion-body>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Integer eu suscipit ante. Nulla nec nulla eget quam fringilla blandit. 
+                Vivamus gravida purus erat, id ultrices lacus sagittis vel. 
+                Etiam nec nulla eleifend velit tristique faucibus sed ut nisl. 
+                Suspendisse diam enim, varius eget augue vitae, rhoncus varius nulla. 
+                Donec mattis libero sed velit rutrum, id dapibus elit imperdiet. 
+                Duis semper tincidunt urna, eget cursus augue semper non. 
+                Nulla nunc enim, semper eu tellus ut, feugiat sollicitudin nisl. 
+                Integer dictum nibh id metus ullamcorper, a pharetra dolor sagittis. 
+                Duis magna augue, laoreet in condimentum sit amet, fringilla vel neque. 
+                Etiam gravida, dolor gravida rhoncus pulvinar, odio sapien faucibus tortor, id efficitur magna ex iaculis neque. 
+                Duis convallis condimentum nisi, in commodo tortor mattis a. 
+                Vestibulum gravida est sed semper pretium. 
+                Duis interdum, mi vel consectetur aliquam, ligula velit vestibulum eros, vitae ullamcorper libero ante a nunc. 
+                Sed id purus a magna tincidunt tincidunt aliquam a nulla.
+              </p>
+              <p>
+                Pellentesque at dictum velit. Nulla nec cursus eros. Curabitur pellentesque laoreet tristique. 
+                Praesent velit felis, convallis malesuada luctus et, pharetra eget leo. 
+                Mauris blandit lorem consequat tristique mollis. Nam ut eros non lacus dignissim feugiat. 
+                Integer vulputate urna interdum malesuada congue. 
+                Sed rhoncus tempor mauris, quis luctus dolor facilisis in. Donec ac nunc massa.
+              </p>
+              <p>
+                  Praesent eget elit cursus, hendrerit nisi et, laoreet tellus. 
+                  Nullam viverra commodo orci, at euismod neque scelerisque eu. 
+                  Phasellus pellentesque ante quis porttitor hendrerit. 
+                  Aenean quam nibh, fermentum at ante vitae, vestibulum sagittis lorem. 
+                  Nam quis mi a neque egestas cursus sed nec risus. Nunc rhoncus pellentesque pellentesque. 
+                  Aliquam sagittis mi ut diam pulvinar, vitae tempor felis ultrices. Ut semper vitae mi nec dictum.
+              </p>
+            </hx-accordion-body>
+          </hx-accordion-container>
+        </hx-accordion>
+      </div>
+    </div>
+
+    <br>
+
+    <h5 id="code">Code</h5>
+
+    <hx-tabset>
+      <hx-tab heading="Template">
+            <pre>
+              <code highlight [code]="code.exampleTemplate"></code>
+            </pre>
+      </hx-tab>
+    </hx-tabset>
+
+    <hr>
+
+    <h4 id="api">API Reference</h4>
+
+    <h5 class="is-primary">Accordion Component</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Inputs</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>expanded</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Determines if the accordion container is expanded by default on load.</td>
+            </tr>            
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<aside class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
+  <ul class="hx-nav hx-nav-vertical">
+    <li class="hx-nav-heading"><h6>Contents</h6></li>
+
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
+    </li>
+
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Examples</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#code')"><span>Code</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
+    </li>
+
+  </ul>
+</aside>
