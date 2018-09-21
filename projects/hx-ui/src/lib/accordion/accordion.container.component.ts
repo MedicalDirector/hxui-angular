@@ -4,7 +4,7 @@ import { state, style, transition, animate, trigger } from "@angular/animations"
 @Component({
     selector: 'hx-accordion-container, hxa-accordion-container',
     template: `    
-    <li class="hx-accordion-container">
+    <li class="hx-accordion-container" [class.is-active]="expanded">
         <a class="hx-accordion-header" (click)="toggle()">
             <div class="header-title"><ng-content select="hx-accordion-header, hxa-accordion-header"></ng-content></div>
             <div class="header-icon">
@@ -36,7 +36,7 @@ import { state, style, transition, animate, trigger } from "@angular/animations"
     ]
 })
 export class AccordionContainerComponent {
-    @Input() expanded: boolean = true;
+    @Input() expanded = true;
 
     constructor(private _changeDetectionRef: ChangeDetectorRef) { }
 
