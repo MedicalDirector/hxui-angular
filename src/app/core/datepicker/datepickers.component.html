@@ -19,10 +19,10 @@
     <div class="hx-columns">
       <div class="hx-column">
         <form #form="ngForm">
-            <hxa-datepicker-input 
-              name="datepicker" 
-              align="bottom" 
-              #d="ngModel" 
+            <hxa-datepicker-input
+              name="datepicker"
+              align="bottom"
+              #d="ngModel"
               [(ngModel)]="dayte"
             ></hxa-datepicker-input>
             <div>
@@ -32,7 +32,7 @@
               <span>NgForm Touched: {{form.touched}}</span><br>
               <span>NgModel Touched: {{d.touched}}</span>
             </div>
-        </form>       
+        </form>
       </div>
     </div>
 
@@ -88,6 +88,16 @@
               <td>helpText</td>
               <td><kbd>string</kbd></td>
               <td>This attribute specifies the text value of input helper. Defaults to "Please select a date".</td>
+            </tr>
+            <tr>
+              <td>icon</td>
+              <td><kbd>string</kbd></td>
+              <td>This attribute specifies the font icon name. Defaults to "hx-icon icon-calendar".</td>
+            </tr>
+            <tr>
+              <td>iconPosition</td>
+              <td><kbd>string</kbd></td>
+              <td>This attribute specifies the icon position. Defaults to "right".</td>
             </tr>
             <tr>
               <td>disabled</td>
