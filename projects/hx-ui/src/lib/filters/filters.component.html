@@ -1,0 +1,45 @@
+<div class="hx-flex hx-flex-align-center">
+
+  <i  class="hx-icon icon-filter-outline mx-1"></i>
+
+  <!-- collapsed filters -->
+  <hxa-filters-collapsed (onFilter)="onCollapsedFilter($event)" (onSearchFilter)="onCollapsedSearch($event)" [data]="data" *ngIf="collapsed"></hxa-filters-collapsed>
+
+  <!-- expanded filters -->
+  <ng-container *ngIf="!collapsed">
+    <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last;">
+
+    <!-- single select filter -->
+    <div [id]="filter.id" class="hx-dropdown expandedFilter" hxDropdown [isRight]="true" *ngIf="filter.type === FilterType.SingleSelect">
+      <a class="hx-button mx-1 hx-button-dropdown" hxDropdownToggle>
+        <span class="is-text-weight-light">{{filter.label}}:&nbsp;</span>
+        <span class="is-text-weight-bolder" >{{filter.selected.label}}</span>
+        <span class="hx-icon-control"><i class="icon icon-angle-down"></i></span>
+      </a>
+      <div class="hx-dropdown-menu  expandedFilter__menu" *hxDropdownMenu>
+        <a *ngFor="let option of filter.options;trackBy: trackByFn" (click)="onFilterOptionSelected(filter,option)" class="hx-dropdown-item">{{option.label}}</a>
+      </div>
+    </div>
+
+    <!-- search filter -->
+    <div [id]="filter.id" *ngIf="filter.type === FilterType.Search"  class="hx-input-group ml-4" [class.mx-1]="!lastItem">
+      <i class="hx-icon icon-search mt-1"></i>
+      <div class="hx-input-control my-0">
+        <input class="hx-input"
+               type="search"
+               placeholder="{{filter.label}}"
+               (input)="onSearchFilterChange(filter, $event.target.value)"
+               [(ngModel)]="filter.value">
+        <label class="hx-label"></label>
+        <div class="hx-help"></div>
+      </div>
+      <div class="hx-input-actions" *ngIf="filter.value">
+        <!--<div id="searchLoadingIndicator" class="hx-loader is-small" *ngIf="patientSearchService.showPatientSearchLoader"><div></div><div></div><div></div><div></div></div>-->
+        <div class="hx-button-group">
+          <button class="hx-button is-flat" (click)="clearSearch(filter)"><span class="hx-icon-control"><i class="icon icon-close-empty"></i></span></button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  </ng-container>
+</div>

@@ -77,11 +77,20 @@ export class AppComponent {
         {
           name: 'Selectize',
           link: '/selectize'
-        },
+        }
+      ]
+    },
+    {
+      cat: 'Patterns',
+      items: [
         {
           name: 'Empty States',
           link: '/empty-state'
         },
+        {
+          name: 'Filters',
+          link: '/filters'
+        }
       ]
     },
     {

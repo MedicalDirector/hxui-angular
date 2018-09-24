@@ -15,6 +15,7 @@ import { SelectizeComponent } from 'app/core/selectize/selectize.component';
 import {AutoGrowComponent} from './core/auto-grow/auto-grow.component';
 import {EmptyStateComponent} from './core/empty-state/empty-state.component';
 import { AccordionComponent } from './core/accordion/accordion.component';
+import {FiltersComponent} from './core/filters/filters.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'selectize',  component: SelectizeComponent },
   { path: 'autogrow',  component: AutoGrowComponent },
   { path: 'empty-state',  component: EmptyStateComponent },
+  { path: 'filters',  component: FiltersComponent },
   { path: '**',  component: PageNotFoundComponent },
 ];
 @NgModule({
