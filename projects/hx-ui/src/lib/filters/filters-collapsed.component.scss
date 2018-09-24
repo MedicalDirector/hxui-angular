@@ -1,0 +1,28 @@
+:host{
+  .panes{
+    width:15rem;
+    overflow:hidden;
+
+    &__inner{
+      display:flex;
+      list-style: none;
+      padding:0;
+      margin-top:0;
+    }
+
+    &__item{
+      min-width:15rem;
+      max-width:15rem;
+
+      > ul {
+        max-height: 20rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        > li:last-child:not(:first-child) a {
+          border-bottom:none;
+        }
+      }
+    }
+  }
+}

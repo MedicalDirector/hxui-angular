@@ -20,6 +20,7 @@ import { SelectizeComponent } from 'app/core/selectize/selectize.component';
 import { AutoGrowComponent } from './auto-grow/auto-grow.component';
 import { EmptyStateComponent } from './empty-state/empty-state.component';
 import { AccordionComponent } from './accordion/accordion.component';
+import { FiltersComponent } from './filters/filters.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { AccordionComponent } from './accordion/accordion.component';
       SelectizeComponent,
       AutoGrowComponent,
       EmptyStateComponent,
-      AccordionComponent
+      AccordionComponent,
+      FiltersComponent
   ],
   providers: [
      TabularService,

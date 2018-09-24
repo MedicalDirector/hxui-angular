@@ -2,6 +2,14 @@
  * Public API Surface of hx-ui
  */
 
+export * from './lib/filters/filters-type.enum';
+export * from './lib/filters/filters-config.interface';
+export * from './lib/filters/filters-collapsed.component';
+export * from './lib/filters/filters.model';
+export * from './lib/filters/filters.component';
+export * from './lib/filters/filters.config';
+export * from './lib/filters/filters.module';
+
 export * from './lib/positioning/positioning.service';
 export * from './lib/positioning/positioning.options';
 export * from './lib/positioning/ng-positioning';

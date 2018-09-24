@@ -12,6 +12,7 @@ import {AutoGrowModule} from './auto-grow/auto-grow.module';
 import {EmptyStateModule} from './empty-state/empty-state.module';
 import {ModalService} from './modal/modal.service';
 import {AccordionModule} from './accordion/accordion.module';
+import {FiltersModule} from './filters/filters.module';
 
 @NgModule({
   imports: [
@@ -20,13 +21,14 @@ import {AccordionModule} from './accordion/accordion.module';
     TypeaheadModule.forRoot(), TabularModule.forRoot(),
     SelectizeModule.forRoot(), DatepickerModule.forRoot(),
     AutoGrowModule.forRoot(), EmptyStateModule.forRoot(),
-    AccordionModule
+    AccordionModule, FiltersModule.forRoot()
   ],
   exports: [
     DatepickerModule, DropdownModule, ModalModule,
     PaginationModule, TabsModule, TooltipModule,
     TypeaheadModule, TabularModule, SelectizeModule,
-    AutoGrowModule, EmptyStateModule, AccordionModule
+    AutoGrowModule, EmptyStateModule, AccordionModule,
+    FiltersModule
   ]
 })
 export class HxUiModule {
