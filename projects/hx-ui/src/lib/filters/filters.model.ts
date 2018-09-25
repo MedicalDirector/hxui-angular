@@ -14,7 +14,9 @@ export class FiltersModel implements IFiltersConfig {
 
   constructor(data?: IFiltersConfig) {
     Object.assign(this, data);
-    this.setSelectedOption();
+    if (this.type !== FilterType.Search) {
+      this.setSelectedOption();
+    }
   }
 
    setSelectedOption(option?: IFilterOption) {
@@ -22,7 +24,7 @@ export class FiltersModel implements IFiltersConfig {
       option.selected = true;
       this.selected = option;
     } else {
-      if (this.options) {
+      if (this.options.length && !this.selected) {
         this.selected = this.options.find((opt) => {
           return opt.selected;
         });
@@ -31,7 +33,7 @@ export class FiltersModel implements IFiltersConfig {
   }
 
   setDefaultOption() {
-    if (this.options) {
+    if (this.options.length) {
       this.selected = this.options[this.defaultIndex];
     }
   }

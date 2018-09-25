@@ -1,20 +1,22 @@
-import { Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, DoCheck, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FilterType} from './filters-type.enum';
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {FiltersModel} from './filters.model';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'hxa-filters',
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.scss']
 })
-export class FiltersComponent implements OnInit {
+export class FiltersComponent implements OnInit, DoCheck {
 
   @ViewChild('carousel') private carousel: ElementRef;
 
   FilterType = FilterType;
   data: FiltersModel[] = [];
   private _filters: IFiltersConfig[] = [];
+  private _oldFilters: IFiltersConfig[] = [];
   private _collapsed = false;
 
   @Input()
@@ -39,6 +41,13 @@ export class FiltersComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngDoCheck() {
+    if (!_.isEqual(this._filters, this._oldFilters)) {
+      this._oldFilters = _.cloneDeep(this._filters);
+      this.setData();
+    }
   }
 
   resetFilters() {
@@ -92,8 +101,9 @@ export class FiltersComponent implements OnInit {
    * Convert filter config objects to Filter Models
    */
   setData() {
-    this._filters.forEach((filter: FiltersModel, index) => {
-      this.data.push(new FiltersModel(filter));
+    this.data = [];
+    this._filters.forEach((filter: IFiltersConfig, index) => {
+      this.data.push(new FiltersModel(_.cloneDeep(filter)));
     });
   }
 

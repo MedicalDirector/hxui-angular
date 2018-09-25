@@ -10,14 +10,14 @@
     <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last;">
 
     <!-- single select filter -->
-    <div [id]="filter.id" class="hx-dropdown expandedFilter" hxDropdown [isRight]="true" *ngIf="filter.type === FilterType.SingleSelect">
+    <div [id]="filter?.id" class="hx-dropdown expandedFilter" hxDropdown [isRight]="true" *ngIf="filter?.type === FilterType.SingleSelect">
       <a class="hx-button mx-1 hx-button-dropdown" hxDropdownToggle>
-        <span class="is-text-weight-light">{{filter.label}}:&nbsp;</span>
-        <span class="is-text-weight-bolder" >{{filter.selected.label}}</span>
+        <span class="is-text-weight-light">{{filter?.label}}:&nbsp;</span>
+        <span class="is-text-weight-bolder" >{{filter?.selected?.label}}</span>
         <span class="hx-icon-control"><i class="icon icon-angle-down"></i></span>
       </a>
       <div class="hx-dropdown-menu  expandedFilter__menu" *hxDropdownMenu>
-        <a *ngFor="let option of filter.options;trackBy: trackByFn" (click)="onFilterOptionSelected(filter,option)" class="hx-dropdown-item">{{option.label}}</a>
+        <a *ngFor="let option of filter?.options;trackBy: trackByFn" (click)="onFilterOptionSelected(filter,option)" class="hx-dropdown-item">{{option?.label}}</a>
       </div>
     </div>
 
