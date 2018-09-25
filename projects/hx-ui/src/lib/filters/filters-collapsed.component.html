@@ -54,7 +54,7 @@
         <ul class="hx-list-group">
           <li *ngFor="let option of selectedFilter?.options;trackBy: trackByFn">
             <a (click)="selectFilterOption(option)">
-              <div class="hx-list-content pl-1">{{option.label}}</div>
+              <div class="hx-list-content pl-1 is-text-ellipsed">{{option.label}}</div>
             </a>
           </li>
         </ul>

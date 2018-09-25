@@ -162,7 +162,7 @@ export class FiltersComponent extends CoreBaseComponent {
           selected: false
         },
         {
-          label: 'Mr GP, Michelle',
+          label: 'Dr Sigmundsson-Higgenbotham Smythe King AB Junior III, Max Samuel Smithers Terrance Howard Allisonn Henry',
           value: 4,
           selected: false
         }

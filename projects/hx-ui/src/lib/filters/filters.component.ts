@@ -54,14 +54,16 @@ export class FiltersComponent implements OnInit, DoCheck {
     for (const filter of this.data) {
       if (filter.type === FilterType.SingleSelect) {
         filter.setDefaultOption();
+        this.executeFilterCallback(filter);
       } else if (filter.type === FilterType.Search) {
-        filter.value = '';
+        this.clearSearch(filter);
       }
     }
   }
 
   clearSearch(filter: FiltersModel) {
       filter.value = '';
+      filter.callback[0].apply(this, [filter.value]);
   }
 
 

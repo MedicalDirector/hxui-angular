@@ -1,8 +1,13 @@
 :host{
   .expandedFilter{
 
+    &__button{
+      max-width:15rem;
+    }
+
     &__menu{
       max-height: 20rem;
+      max-width: 15rem;
       overflow-x: hidden;
       overflow-y: auto;
     }
