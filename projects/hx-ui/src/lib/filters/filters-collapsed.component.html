@@ -14,7 +14,7 @@
           <ng-container *ngIf="filter.type === FilterType.SingleSelect">
             <ul class="hx-list-group">
               <li>
-                <a (click)="changeFilterSelection(filter)">
+                <a (click)="changeFilterSelection(filter)" title="{{filter.selected?.label}}">
                   <div class="hx-list-content pl-1 is-text-ellipsed is-text-weight-bolder">{{filter.selected?.label}}</div>
                   <div class="hx-list-action">
                     <i class="icon icon-angle-right"></i>
@@ -53,8 +53,8 @@
         </div>
         <ul class="hx-list-group">
           <li *ngFor="let option of selectedFilter?.options;trackBy: trackByFn">
-            <a (click)="selectFilterOption(option)">
-              <div class="hx-list-content pl-1 is-text-ellipsed">{{option.label}}</div>
+            <a (click)="selectFilterOption(option)" title="{{option?.label}}">
+              <div class="hx-list-content pl-1 is-text-ellipsed">{{option?.label}}</div>
             </a>
           </li>
         </ul>

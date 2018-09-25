@@ -63,7 +63,7 @@ export class FiltersComponent implements OnInit, DoCheck {
 
   clearSearch(filter: FiltersModel) {
       filter.value = '';
-      filter.callback[0].apply(this, [filter.value]);
+      filter.callback[0].apply(this, ['']);
   }
 
 

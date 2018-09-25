@@ -197,7 +197,7 @@ export class FiltersComponent extends CoreBaseComponent {
   }
 
   onSearchFilterHandler(term) {
-    console.log(term);
+    console.log('search:'+term);
   }
 
 }
