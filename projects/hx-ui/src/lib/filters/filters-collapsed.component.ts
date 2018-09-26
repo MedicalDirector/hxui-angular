@@ -39,6 +39,7 @@ export class FiltersCollapsedComponent implements OnInit {
 
   clearSearch(filter: FiltersModel) {
     filter.value = '';
+    this.onSearchFilter.emit({filter: filter, value: filter.value});
   }
 
   changeFilterSelection(filter: FiltersModel) {
