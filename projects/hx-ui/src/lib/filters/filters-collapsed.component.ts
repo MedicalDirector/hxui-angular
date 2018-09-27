@@ -1,7 +1,7 @@
 import {Component, Input, Output, OnInit, ViewChild, EventEmitter} from '@angular/core';
 import {FilterType} from './filters-type.enum';
 import {FiltersModel} from './filters.model';
-import {IFilterOption} from './filters-config.interface';
+import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {DropdownDirective} from '../dropdown/dropdown.directive';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
@@ -64,6 +64,16 @@ export class FiltersCollapsedComponent implements OnInit {
     if ($event.toState === 'left') {
       this.selectedFilter = null;
     }
+  }
+
+  totalActiveFilters(): number {
+    let count = 0;
+    this.data.forEach((filter: FiltersModel, index: number) => {
+        if (!filter.isDefaultOptionActive()) {
+          count++;
+        }
+    });
+    return count;
   }
 
 

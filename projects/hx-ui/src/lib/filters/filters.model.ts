@@ -37,4 +37,12 @@ export class FiltersModel implements IFiltersConfig {
       this.selected = this.options[this.defaultIndex];
     }
   }
+
+  isDefaultOptionActive() {
+    if (this.type === FilterType.SingleSelect) {
+      return (this.selected === this.options[this.defaultIndex]);
+    } else if (this.type === FilterType.Search) {
+      return (this.value === '' || this.value === undefined);
+    }
+  }
 }
