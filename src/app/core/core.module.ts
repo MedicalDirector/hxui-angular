@@ -21,6 +21,7 @@ import { AutoGrowComponent } from './auto-grow/auto-grow.component';
 import { EmptyStateComponent } from './empty-state/empty-state.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { FiltersComponent } from './filters/filters.component';
+import { LoadersComponent } from './loaders/loaders.component';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { FiltersComponent } from './filters/filters.component';
       AutoGrowComponent,
       EmptyStateComponent,
       AccordionComponent,
-      FiltersComponent
+      FiltersComponent,
+      LoadersComponent
   ],
   providers: [
      TabularService,

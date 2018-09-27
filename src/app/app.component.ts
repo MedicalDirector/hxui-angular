@@ -77,6 +77,10 @@ export class AppComponent {
         {
           name: 'Selectize',
           link: '/selectize'
+        },
+        {
+          name: 'Loaders',
+          link: '/loaders'
         }
       ]
     },

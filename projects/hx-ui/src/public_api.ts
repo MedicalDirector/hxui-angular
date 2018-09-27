@@ -2,6 +2,9 @@
  * Public API Surface of hx-ui
  */
 
+export * from './lib/loaders/loaders.component';
+export * from './lib/loaders/loaders.module';
+
 export * from './lib/filters/filters-type.enum';
 export * from './lib/filters/filters-config.interface';
 export * from './lib/filters/filters-collapsed.component';

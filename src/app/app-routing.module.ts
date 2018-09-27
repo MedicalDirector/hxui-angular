@@ -16,6 +16,7 @@ import {AutoGrowComponent} from './core/auto-grow/auto-grow.component';
 import {EmptyStateComponent} from './core/empty-state/empty-state.component';
 import { AccordionComponent } from './core/accordion/accordion.component';
 import {FiltersComponent} from './core/filters/filters.component';
+import {LoadersComponent} from './core/loaders/loaders.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'autogrow',  component: AutoGrowComponent },
   { path: 'empty-state',  component: EmptyStateComponent },
   { path: 'filters',  component: FiltersComponent },
+  { path: 'loaders',  component: LoadersComponent },
   { path: '**',  component: PageNotFoundComponent },
 ];
 @NgModule({
