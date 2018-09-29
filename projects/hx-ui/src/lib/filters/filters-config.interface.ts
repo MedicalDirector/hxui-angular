@@ -3,6 +3,7 @@ import {FilterType} from './filters-type.enum';
 export interface IFilterOption {
   label: string;
   value: any;
+  icon?: string;
   selected: boolean;
 }
 

@@ -64,26 +64,31 @@ export class FiltersComponent extends CoreBaseComponent {
       label: 'Status',
       options: [
         {
+          icon: '',
           label: 'All',
           value: 0,
           selected: true
         },
         {
+          icon: 'hx-icon icon-clock',
           label: 'Waiting',
           value: 1,
           selected: false
         },
         {
+          icon: 'hx-icon icon-doctor',
           label: 'In consult',
           value: 2,
           selected: false
         },
         {
+          icon: 'hx-icon icon-doctor-check',
           label: 'Finished consult',
           value: 3,
           selected: false
         },
         {
+          icon: 'icon icon-clock-minus',
           label: 'Did not wait',
           value: 4,
           selected: false

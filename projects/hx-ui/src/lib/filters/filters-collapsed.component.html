@@ -15,6 +15,9 @@
             <ul class="hx-list-group">
               <li>
                 <a (click)="changeFilterSelection(filter)" title="{{filter.selected?.label}}">
+                  <div class="hx-list-action" *ngIf="filter.selected?.icon">
+                    <i class="{{filter.selected?.icon}}"></i>
+                  </div>
                   <div class="hx-list-content pl-1 is-text-ellipsed is-text-weight-bolder">{{filter.selected?.label}}</div>
                   <div class="hx-list-action">
                     <i class="icon icon-angle-right"></i>
@@ -53,6 +56,9 @@
         <ul class="hx-list-group">
           <li *ngFor="let option of selectedFilter?.options;trackBy: trackByFn">
             <a (click)="selectFilterOption(option)" title="{{option?.label}}">
+              <div class="hx-list-action" *ngIf="option?.icon">
+                <i class="{{option?.icon}}"></i>
+              </div>
               <div class="hx-list-content pl-1 is-text-ellipsed">{{option?.label}}</div>
             </a>
           </li>
