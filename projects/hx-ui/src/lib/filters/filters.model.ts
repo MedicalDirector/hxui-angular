@@ -17,6 +17,7 @@ export class FiltersModel implements IFiltersConfig {
     if (this.type !== FilterType.Search) {
       this.setSelectedOption();
     }
+    this.isIconised();
   }
 
    setSelectedOption(option?: IFilterOption) {
@@ -44,5 +45,15 @@ export class FiltersModel implements IFiltersConfig {
     } else if (this.type === FilterType.Search) {
       return (this.value === '' || this.value === undefined);
     }
+  }
+
+  isIconised() {
+    if (this.options) {
+      const hasIcons = this.options.find((option) => {
+        return (typeof option.icon !== 'undefined' && option.icon !== '');
+      });
+      return (typeof hasIcons !== 'undefined');
+    }
+    return false;
   }
 }
