@@ -82,13 +82,13 @@ export class FiltersComponent extends CoreBaseComponent {
           selected: false
         },
         {
-          icon: 'hx-icon icon-doctor-check',
+          icon: 'hx-icon icon-check',
           label: 'Finished consult',
           value: 3,
           selected: false
         },
         {
-          icon: 'icon icon-clock-minus',
+          icon: 'hx-icon icon-did-not-wait',
           label: 'Did not wait',
           value: 4,
           selected: false
