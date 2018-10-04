@@ -34,6 +34,10 @@ export interface ITabularRow {
    */
   title?: string;
 
+    /**
+   * Used to disable/enable menu
+   */
+  actionDisabled?: boolean;
 
 }
 

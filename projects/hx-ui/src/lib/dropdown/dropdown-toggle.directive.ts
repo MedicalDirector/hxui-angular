@@ -61,7 +61,7 @@ export class DropdownToggleDirective implements OnDestroy {
     // populate disabled state
     this._subscriptions.push(this._state
       .isDisabledChange
-      .subscribe((value: boolean) => this.isDisabled = value || false));
+      .subscribe((value: boolean) => this.isDisabled = value? true : null));
   }
 
   ngOnDestroy(): void {
