@@ -87,8 +87,11 @@
             <!-- action with children -->
             <div class="hx-dropdown" hxDropdown [isRight]="true" container="body" *ngIf="hasChildren(action)" [isDisabled]="!!row.actionDisabled">
 
-              <button class="hx-button is-flat hx-button-dropdown" [class.is-small]="config.size === TabularSize.Small" hxDropdownToggle type="button">
-                <i class="icon {{action.icon}}"></i>
+              <button class="hx-button is-flat hx-button-dropdown" [class.is-small]="config.size === TabularSize.Small" hxDropdownToggle type="button"
+              [hxTooltip]="action.tooltip?.content"
+              placement="{{action.tooltip?.config.placement}}"
+              [context]="action.tooltip?.config.context">
+              <i class="icon {{action.icon}}"></i>
               </button>
 
               <div class="hx-dropdown-menu" *hxDropdownMenu>
