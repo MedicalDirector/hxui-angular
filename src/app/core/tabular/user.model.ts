@@ -101,6 +101,17 @@ export class UserModel implements ITabularRow {
         label: 'More',
         icon: 'icon-more',
         routeType: ActionConfigRouteType.None,
+        tooltip: {
+          config: {
+            placement: 'right',
+            context: Context.None,
+            disabled: false,
+            animation: false,
+            showDelay: 0,
+            hideDelay: 0
+          },
+          content: 'More options'
+        },
         children: [
           {
             id: 'row_person_prescription',
