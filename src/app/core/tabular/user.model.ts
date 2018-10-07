@@ -105,7 +105,7 @@ export class UserModel implements ITabularRow {
           config: {
             placement: 'right',
             context: Context.None,
-            disabled: !this.actionDisabled,
+            disabled: false,
             animation: false,
             showDelay: 0,
             hideDelay: 0
