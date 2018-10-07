@@ -24,7 +24,7 @@ export class UserModel implements ITabularRow {
   public info: ITabularColumnIconType;
   public icon: string;
   public actions: IActionsConfig[] = [];
-
+  public actionDisabled: boolean = false;
 
   constructor(data?: any) {
     if (data) {
