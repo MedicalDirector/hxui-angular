@@ -15,12 +15,7 @@ export class AppModule(){}
  `
  <div class="hx-card not-scrollable">
     <div class="hx-card-content">
-      <div class="hx-input-control">
-        <div class="hx-select-control">
-          <label for="" class="hx-label">Test required <sup>*</sup></label>
           <hxa-selectize [config]="selectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedSingleSelectValue"></hxa-selectize>
-        </div>
-      </div>
     </div>
   </div>
   `;
@@ -93,12 +88,7 @@ export class AppModule(){}
   `
  <div class="hx-card not-scrollable">
     <div class="hx-card-content">
-      <div class="hx-input-control">
-        <div class="hx-select-control">
-          <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
           <hxa-selectize [config]="selectizeConfig" [options]="selectizeOptions"  [(ngModel)]="selectedMultiSelectValue"></hxa-selectize>
-        </div>
-      </div>
     </div>
   </div>
   `;
@@ -162,6 +152,8 @@ multiExampleTypescript =
 
 
     ngOnInit(): void  {
+      this.selectizeConfig.label = 'Test(s) required';
+      this.selectizeConfig.help = 'Select 1 or more tests';
       this.selectizeConfig.create = true;
       this.selectizeConfig.maxItems = null;
       this.selectizeConfig.hideSelected = true;
@@ -175,12 +167,7 @@ multiExampleTypescript =
     `
  <div class="hx-card not-scrollable">
     <div class="hx-card-content">
-      <div class="hx-input-control">
-        <div class="hx-select-control">
-          <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
           <hxa-selectize [config]="selectizeCustomConfig" [options]="selectizeOptions"  [(ngModel)]="selectedCustomSelectValue"></hxa-selectize>
-        </div>
-      </div>
     </div>
   </div>
   `;
@@ -252,6 +239,8 @@ multiExampleTypescript =
 
 
     ngOnInit(): void  {
+      this.selectizeCustomConfig.label = 'Test(s) required';
+      this.selectizeCustomConfig.help = 'Select 1 or more tests';
       this.selectizeCustomConfig.create = true;
       this.selectizeCustomConfig.maxItems = null;
       this.selectizeCustomConfig.hideSelected = true;

@@ -37,7 +37,11 @@ export const SELECTIZE_VALUE_ACCESSOR: any = {
 
 @Component({
   selector: 'hxa-selectize',
-  template: `<select #selectizeInput></select>`,
+  template: `<div class="hx-input-control" [class.is-focused]="isFocused" [class.is-valid]="isValid">
+                  <select #selectizeInput></select>
+                  <label for="{{id}}" class="hx-label">{{config.label}} <sup *ngIf="config.mandatory">*</sup></label>
+                  <div class="hx-help">{{config.help}}</div>
+              </div>`,
   providers: [SELECTIZE_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['selectize.component.scss']
@@ -55,11 +59,14 @@ export class SelectizeComponent
   @Input() hasOptionsPlaceholder: string;
   @Input() noOptionsPlaceholder: string;
   @Input() enabled = true;
-  @Input() value: ISelectizeItem[];
+  @Input() value: ISelectizeItem[] = [];
   @Input() formControl: FormControl;
   @Input() errorClass: string;
+  isFocused = false;
+  isValid = false;
 
   @Output() onBlur: EventEmitter<void> = new EventEmitter<void>(false);
+  @Output() onFocus: EventEmitter<void> = new EventEmitter<void>(false);
 
   @ViewChild('selectizeInput') selectizeInput: any;
 
@@ -88,6 +95,7 @@ export class SelectizeComponent
     )[0].selectize;
     this.selectize.on('change', this.onSelectizeValueChange.bind(this));
     this.selectize.on('blur', this.onBlurEvent.bind(this));
+    this.selectize.on('focus', this.onFocusEvent.bind(this));
     this.selectize.on('type', this.onSelectizeType.bind(this));
     this.selectize.on('item_add', this.onSelectizeItemSelected.bind(this));
     this.updatePlaceholder();
@@ -97,6 +105,7 @@ export class SelectizeComponent
   ngOnDestroy() {
     this.selectize.off('change');
     this.selectize.off('blur');
+    this.selectize.off('focus');
     this.selectize.off('type');
   }
 
@@ -172,6 +181,17 @@ export class SelectizeComponent
     }
     this.onBlur.emit();
     this.evalHasError();
+    this.isFocused = false;
+    this.isValid = (this.selectize.getValue().length > 0);
+  }
+
+  onFocusEvent() {
+    if (this.formControl) {
+      this.formControl.markAsTouched();
+    }
+    this.onFocus.emit();
+    this.evalHasError();
+    this.isFocused = true;
   }
 
   onSelectizeOptGroupAdd(optgroup: any): void {
@@ -216,6 +236,10 @@ export class SelectizeComponent
         parent.removeClass(this.errorClass || 'has-error');
       }
     }
+  }
+
+
+  updateLabel() {
   }
 
   /**

@@ -24,17 +24,13 @@
 
       <div class="hx-card not-scrollable">
         <div class="hx-card-content">
-          <div class="hx-input-control">
-            <div class="hx-select-control">
-              <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
-              <hxa-selectize [config]="multiSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedMultiSelectValue"></hxa-selectize>
-            </div>
-          </div>
+          <hxa-selectize [config]="multiSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedMultiSelectValue"></hxa-selectize>
           <pre>Current value: {{selectedMultiSelectValue | json}}</pre>
         </div>
       </div>
 
     </div>
+    <div class="hx-column"></div>
   </div>
 
   <br>
@@ -70,17 +66,13 @@
 
       <div class="hx-card not-scrollable">
         <div class="hx-card-content">
-          <div class="hx-input-control">
-            <div class="hx-select-control">
-              <label for="" class="hx-label">Test required <sup>*</sup></label>
-              <hxa-selectize [config]="singleSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedSingleSelectValue"></hxa-selectize>
-            </div>
-          </div>
+          <hxa-selectize [config]="singleSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedSingleSelectValue"></hxa-selectize>
           <pre>Current value: {{selectedSingleSelectValue | json}}</pre>
         </div>
       </div>
 
     </div>
+    <div class="hx-column"></div>
   </div>
 
   <br>
@@ -116,17 +108,13 @@
 
       <div class="hx-card not-scrollable">
         <div class="hx-card-content">
-          <div class="hx-input-control">
-            <div class="hx-select-control">
-              <label for="" class="hx-label">Test(s) required <sup>*</sup></label>
-              <hxa-selectize [config]="customSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedCustomSelectValue"></hxa-selectize>
-            </div>
-          </div>
+          <hxa-selectize [config]="customSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedCustomSelectValue"></hxa-selectize>
           <pre>Current value: {{selectedCustomSelectValue | json}}</pre>
         </div>
       </div>
 
     </div>
+    <div class="hx-column"></div>
   </div>
 
   <br>

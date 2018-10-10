@@ -1,9 +1,13 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ComponentLoaderFactory } from '../component-loader/component-loader.factory';
 import { SelectizeComponent } from './selectize.component';
+import {CommonModule} from '@angular/common';
 
 
 @NgModule({
+  imports: [
+    CommonModule
+  ],
   declarations: [
     SelectizeComponent
   ],
