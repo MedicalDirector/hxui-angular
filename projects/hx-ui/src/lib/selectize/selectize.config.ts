@@ -5,6 +5,28 @@ import {ISelectizeItem} from './selectize-item.interface';
 export class SelectizeConfig  {
 
   /**
+   * Form label text
+   *
+   * Default: ''
+   */
+  label = 'Selectize Label';
+
+  /**
+   * Helper text shown on focus or error
+   *
+   * Default: ''
+   */
+  help = 'Selectize help text';
+
+  /**
+   * Mandatory boolean controls whether the * is shown in the label or not.
+   * Has nothing to do with formControl.
+   *
+   *  * Default: false
+   */
+  mandatory = false;
+
+  /**
    *  The string to separate items by. When typing an item in a multi-selection control
    *  allowing creation, then the delimiter, the item is added. If you paste
    *  delimiter-separated items in such control, the items are added at once.
