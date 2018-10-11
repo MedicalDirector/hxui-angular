@@ -49,6 +49,46 @@
 
     <hr>
 
+    <h4 id="appendToParentexample">Append To Parent Example</h4>
+
+    <div class="hx-columns">
+      <div class="hx-column exampleParent">
+
+        <div class="hx-card">
+          <div class="hx-card-content">
+           <div class="hx-dropdown" hxDropdown container=".exampleParent">
+          <button class="hx-button is-primary is-outlined hx-button-dropdown" hxDropdownToggle type="button">
+            <span>Dropdown</span>
+            <span class="hx-icon-control"><i class="icon icon-angle-down"></i></span>
+          </button>
+          <div class="hx-dropdown-menu" *hxDropdownMenu>
+            <div class="hx-dropdown-header">Dropdown header</div>
+            <a class="hx-dropdown-item" href="#">Action</a>
+            <a class="hx-dropdown-item" href="#">Another action</a>
+            <div class="hx-dropdown-divider"></div>
+            <a class="hx-dropdown-item" href="#">Action</a>
+            <a class="hx-dropdown-item" href="#">Another action</a>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <h5 id="appendToParentexampleCode">Code</h5>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <pre>
+         <code highlight [code]="code.example"></code>
+        </pre>
+      </div>
+    </div>
+
+    <hr>
+
     <h4 id="manualexample">Manual Trigger Example</h4>
 
     <div class="hx-columns">

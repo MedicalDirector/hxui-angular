@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy} from '@angular/core';
 import { DropdownState } from './dropdown.state';
+import {Observable, Subject} from 'rxjs/index';
+import {Visibility} from '../enums';
 
 @Component({
   selector: 'hx-dropdown-container',
@@ -13,22 +15,17 @@ import { DropdownState } from './dropdown.state';
          [class.is-open]="isOpen"><ng-content></ng-content></div>
   `
 })
-export class DropdownContainerComponent implements OnDestroy {
-  isOpen = false;
+export class DropdownContainerComponent {
 
-  get direction(): 'down' | 'up' {
-    return this._state.direction;
-  }
+  @Input()
+  content;
 
-  private _subscription: any;
+  constructor(private _changeDetectionRef: ChangeDetectorRef) {}
+  // constructor(private _state: DropdownState) {
+  //   this._subscription = _state.isOpenChange.subscribe((value: boolean) => {
+  //     this.isOpen = value;
+  //   });
+  // }
 
-  constructor(private _state: DropdownState) {
-    this._subscription = _state.isOpenChange.subscribe((value: boolean) => {
-      this.isOpen = value;
-    });
-  }
 
-  ngOnDestroy(): void {
-    this._subscription.unsubscribe();
-  }
 }

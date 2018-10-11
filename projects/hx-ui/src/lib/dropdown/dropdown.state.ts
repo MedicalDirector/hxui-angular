@@ -1,8 +1,11 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, TemplateRef } from '@angular/core';
 import { HxComponentRef } from '../component-loader/hx-component-ref.class';
 
 @Injectable()
 export class DropdownState {
+
+
+  templateRef: TemplateRef<any>;
   direction: 'down' | 'up' = 'down';
   autoClose: boolean;
   isOpen: boolean;
@@ -10,19 +13,7 @@ export class DropdownState {
   isDisabledChange = new EventEmitter<boolean>();
   toggleClick = new EventEmitter<boolean>();
 
-  /**
-   * Content to be displayed as popover.
-   */
-  dropdownMenu: Promise<HxComponentRef<any>>;
-  resolveDropdownMenu: (componentRef: HxComponentRef<any>) => void;
 
   constructor() {
-    this.dropdownMenu = new Promise((resolve) => {
-      this.resolveDropdownMenu = resolve;
-    });
-
-    this.isOpenChange.subscribe((value: boolean) => {
-      this.isOpen = value;
-    });
   }
 }
