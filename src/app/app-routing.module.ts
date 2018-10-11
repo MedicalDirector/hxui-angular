@@ -17,6 +17,7 @@ import {EmptyStateComponent} from './core/empty-state/empty-state.component';
 import { AccordionComponent } from './core/accordion/accordion.component';
 import {FiltersComponent} from './core/filters/filters.component';
 import {LoadersComponent} from './core/loaders/loaders.component';
+import {TextFieldComponent} from './core/text-field/text-field.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'empty-state',  component: EmptyStateComponent },
   { path: 'filters',  component: FiltersComponent },
   { path: 'loaders',  component: LoadersComponent },
+  { path: 'text-field',  component: TextFieldComponent },
   { path: '**',  component: PageNotFoundComponent },
 ];
 @NgModule({

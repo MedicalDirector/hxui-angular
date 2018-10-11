@@ -81,6 +81,10 @@ export class AppComponent {
         {
           name: 'Loaders',
           link: '/loaders'
+        },
+        {
+          name: 'Text Field',
+          link: '/text-field'
         }
       ]
     },
