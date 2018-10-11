@@ -1,4 +1,4 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import {PageScrollService} from 'ngx-page-scroll';
 import {CoreBaseComponent} from '../core-base.component';
 import {DOCUMENT} from '@angular/common';
@@ -22,7 +22,7 @@ export class DropdownsComponent extends CoreBaseComponent {
 
   toggle($event) {
     $event.stopPropagation();
-    this.dropdown.isOpen = !this.dropdown.isOpen;
+    //this.dropdown.isOpen = !this.dropdown.isOpen;
   }
 
   show($event) {

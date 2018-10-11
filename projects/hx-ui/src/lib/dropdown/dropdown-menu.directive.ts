@@ -1,5 +1,4 @@
 import {Directive, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
-import { DropdownState } from './dropdown.state';
 
 @Directive({
   selector: '[hxDropdownMenu],[hxaDropdownMenu]',
@@ -7,11 +6,9 @@ import { DropdownState } from './dropdown.state';
 })
 export class DropdownMenuDirective {
 
-  @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
+  public templateRef: TemplateRef<any>;
 
-  constructor(_state: DropdownState,
-              _viewContainer: ViewContainerRef,
-              _templateRef: TemplateRef<any>) {
-    _state.templateRef = this.templateRef;
+  constructor(_templateRef: TemplateRef<any>) {
+    this.templateRef = _templateRef;
   }
 }

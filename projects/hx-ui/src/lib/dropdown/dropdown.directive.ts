@@ -1,32 +1,25 @@
 import {
-  ComponentFactoryResolver,
+  ComponentFactoryResolver, ContentChild,
   Directive, ElementRef, EmbeddedViewRef, EventEmitter, HostBinding, Input, NgZone, OnDestroy, OnInit, Optional, Output,
-  Renderer2, ViewContainerRef
+  Renderer2, ViewChild, ViewChildren, ViewContainerRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {filter, take, takeUntil} from 'rxjs/operators';
-import { ComponentLoaderFactory } from '../component-loader/component-loader.factory';
-import { ComponentLoader } from '../component-loader/component-loader.class';
 import { DropdownConfig } from './dropdown.config';
-import { DropdownContainerComponent } from './dropdown-container.component';
-import { DropdownState } from './dropdown.state';
-import { HxComponentRef } from '../component-loader/hx-component-ref.class';
 import { DropdownMenuDirective } from './dropdown-menu.directive';
 import {Subject} from 'rxjs/index';
-import {ComponentPortal, TemplatePortal, TemplatePortal} from '@angular/cdk/portal';
+import {TemplatePortal} from '@angular/cdk/portal';
 import {
   FlexibleConnectedPositionStrategy,
   HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef,
   ScrollDispatcher, VerticalConnectionPos
 } from '@angular/cdk/overlay';
-import {DatepickerComponent} from '../datepicker/datepicker.component';
-import {DatepickerConfig} from '../datepicker/datepicker.config';
 import {Directionality} from '@angular/cdk/bidi';
+import {DropdownToggleDirective} from './dropdown-toggle.directive';
 
 @Directive({
   selector: '[hxaDropdown],[hxDropdown]',
   exportAs: 'hx-dropdown, hxa-dropdown',
-  providers: [DropdownState],
   host: {
     '[class.is-dropup]': 'dropup',
     '[class.is-open]': 'isOpen',
@@ -34,6 +27,9 @@ import {Directionality} from '@angular/cdk/bidi';
   }
 })
 export class DropdownDirective implements OnInit, OnDestroy {
+
+  @ContentChild(DropdownToggleDirective) trigger: DropdownToggleDirective;
+  @ContentChild(DropdownMenuDirective) menu: DropdownMenuDirective;
 
   _overlayRef: OverlayRef | null;
   private _portal: TemplatePortal;
@@ -43,22 +39,8 @@ export class DropdownDirective implements OnInit, OnDestroy {
   /**
    * Placement of a popover. Accepts: "top", "bottom", "left", "right"
    */
-  @Input() placement: string;
-  /**
-   * Specifies events that should trigger. Supports a space separated list of
-   * event names.
-   */
-  @Input() triggers: string;
-  /**
-   * A selector specifying the element the popover should be appended to.
-   * Currently only supports "body".
-   */
-  @Input() container: string;
-
-  /**
-   * This attribute indicates that the dropdown should be opened upwards
-   */
-  @Input() dropup: boolean;
+  @Input()
+  placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
 
   /**
    * Indicates that dropdown will be closed on item or document click,
@@ -66,55 +48,15 @@ export class DropdownDirective implements OnInit, OnDestroy {
    */
   @Input() set autoClose(value: boolean) {
     if (typeof value === 'boolean') {
-      this._state.autoClose = value;
+      this._config.autoClose = value;
     }
   };
 
   get autoClose(): boolean {
-    return this._state.autoClose;
+    return this._config.autoClose;
   }
 
-  /**
-   * Disables dropdown toggle and hides dropdown menu if opened
-   */
-  @Input() set isDisabled(value: boolean) {
-    this._isDisabled = value;
-    this._state.isDisabledChange.emit(value);
-    if (value) {
-      this._hide();
-    }
-  }
 
-  get isDisabled(): boolean { return this._isDisabled; }
-
-  /**
-   * Returns whether or not dropdown is position right of the toggle
-   */
-  @Input() get isRight(): boolean {
-    return this._isInlineRight;
-  }
-
-  set isRight(value: boolean) {
-    this._isInlineRight = value;
-  }
-
-  /**
-   * Returns whether or not the dropdown is currently being shown
-   */
-  @Input() get isOpen(): boolean {
-    if (this._showInline) {
-      return this._isInlineOpen;
-    }
-    return this._dropdown.isShown;
-  }
-
-  set isOpen(value: boolean) {
-    if (value) {
-      this._show();
-    } else {
-      this._hide();
-    }
-  }
 
   /**
    * Emits an event when isOpen change
@@ -131,6 +73,8 @@ export class DropdownDirective implements OnInit, OnDestroy {
    */
   @Output() onHidden: EventEmitter<any>;
 
+  @Input() isRight;
+  @Input() isDisabled;
 
   @Input()
   showDelay = this._config.showDelay;
@@ -138,16 +82,6 @@ export class DropdownDirective implements OnInit, OnDestroy {
   @Input()
   hideDelay = this._config.hideDelay;
 
-  // todo: move to component loader
-  private _isInlineOpen = false;
-  private _isInlineRight = false;
-  private _showInline: boolean;
-  private _inlinedMenu: EmbeddedViewRef<DropdownMenuDirective>;
-
-  private _isDisabled: boolean;
-  private _dropdown: ComponentLoader<DropdownContainerComponent>;
-  private _subscriptions: Subscription[] = [];
-  private _isInited = false;
 
   constructor(private _elementRef: ElementRef,
               private _viewContainerRef: ViewContainerRef,
@@ -156,66 +90,39 @@ export class DropdownDirective implements OnInit, OnDestroy {
               private _scrollDispatcher: ScrollDispatcher,
               private _componentFactoryResolver: ComponentFactoryResolver,
               private _config: DropdownConfig,
-              private _state: DropdownState,
               @Optional() private _dir: Directionality) {
 
 
   }
 
   ngOnInit(): void {
-
+      this.trigger.isOpenChange.subscribe((data) => {
+        if (data) {
+          this.show();
+        }
+      });
   }
 
 
-  /**
-   * Toggles an element’s popover. This is considered a “manual” triggering of
-   * the popover.
-   */
-  toggle(value?: boolean): void {
-    if (this.isOpen || value === false) {
-      return this._hide();
-    }
-
-    return this._show();
-  }
 
   ngOnDestroy(): void {
     if (this._overlayRef) {
       this._overlayRef.dispose();
       this._overlayRef = null;
     }
-
     this._destroyed.next();
     this._destroyed.complete();
   }
 
 
-  private _show(delay: number = this.showDelay) {
-
-    if (this._isDisabled || this._state.isOpen) { return; }
-
+  show(delay: number = this.showDelay) {
     const overlayRef = this._createOverlay();
-
     this._detach();
     overlayRef.attach(this._portal);
-
-    if (this.menu.lazyContent) {
-      this.menu.lazyContent.attach(this.menuData);
-    }
-
-    this._closeSubscription = this._menuClosingActions().subscribe(() => this.closeMenu());
-    this._initMenu();
-
-    if (this.menu instanceof MatMenu) {
-      this.menu._startAnimation();
-    }
-
   }
 
-  private _hide(delay: number = this.hideDelay) {
-    if (this._menuInstance) {
-      this._menuInstance.hide(delay);
-    }
+  hide(delay: number = this.hideDelay) {
+    this._detach();
   }
 
   private _createOverlay(): OverlayRef {
@@ -223,16 +130,16 @@ export class DropdownDirective implements OnInit, OnDestroy {
       return this._overlayRef;
     }
 
-    this._portal = new TemplatePortal(this._state.templateRef, this._viewContainerRef);
+    this._portal = new TemplatePortal(this.menu.templateRef, this._viewContainerRef);
 
     const positionStrategy = this.overlay.position()
-      .flexibleConnectedTo(this._elementRef)
+      .flexibleConnectedTo(this.trigger.elementRef)
       .withTransformOriginOn('.hxa-dropdown-control')
       .withFlexibleDimensions(false);
 
     this._overlayRef = this.overlay.create({
       positionStrategy: positionStrategy,
-      panelClass: 'hxa-dropdown-panel',
+      panelClass: ['hxa-dropdown-panel', 'is-open'],
       hasBackdrop: true,
       backdropClass: 'cdk-overlay-transparent-backdrop',
       scrollStrategy: this.overlay.scrollStrategies.reposition()
@@ -245,7 +152,7 @@ export class DropdownDirective implements OnInit, OnDestroy {
       .subscribe(() => this._detach());
 
     this._overlayRef.backdropClick().
-    subscribe(() => this._hide());
+    subscribe(() => this.hide());
 
     const position = this._overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
     position.positionChanges

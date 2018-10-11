@@ -28,8 +28,6 @@ export * from './lib/datepicker/datepicker.config'
 export * from './lib/dropdown/dropdown.config';
 export * from './lib/dropdown/dropdown.directive';
 export * from './lib/dropdown/dropdown.module';
-export * from './lib/dropdown/dropdown.state';
-export * from './lib/dropdown/dropdown-container.component';
 export * from './lib/dropdown/dropdown-menu.directive';
 export * from './lib/dropdown/dropdown-toggle.directive';
 
