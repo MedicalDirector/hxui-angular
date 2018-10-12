@@ -2,7 +2,7 @@
   <div class="hx-section is-comfortable">
 
     <h1 class="hx-title">Text Field</h1>
-    <h2 class="hx-subtitle">blah blah</h2>
+    <h2 class="hx-subtitle">Text field example</h2>
     <hr>
 
     <h4 id="usage">Usage</h4>
@@ -24,8 +24,16 @@
 
         <hxa-text-field>
           <div class="hx-input-control">
-            <input class="hx-input" type="text" formControlName="firstname">
+            <input class="hx-input" type="text" formControlName="firstname" required>
             <label class="hx-label">Firstname <sup>*</sup></label>
+            <div class="hx-help">Info!</div>
+          </div>
+        </hxa-text-field>
+
+        <hxa-text-field>
+          <div class="hx-input-control">
+            <input class="hx-input" type="text" value="John" required>
+            <label class="hx-label">Test field with default value <sup>*</sup></label>
             <div class="hx-help">Info!</div>
           </div>
         </hxa-text-field>
@@ -38,13 +46,54 @@
           </div>
         </hxa-text-field>
 
+
           <hxa-text-field>
-            <div class="hx-input-control">
-              <input class="hx-input" type="email" formControlName="email">
+            <div class="hx-input-control is-danger">
+              <input class="hx-input" type="email" value="joe.chan@medicaldirector.com" required>
               <label class="hx-label">Email <sup>*</sup></label>
-              <div class="hx-help">Info!</div>
+              <div class="hx-help">Danger!</div>
             </div>
           </hxa-text-field>
+
+          <hxa-text-field>
+            <div class="hx-input-control">
+              <input class="hx-input" type="text" disabled placeholder="I am disabled" required>
+              <label class="hx-label">This is Disabled</label>
+              <div class="hx-help">Danger!</div>
+            </div>
+          </hxa-text-field>
+
+
+          <hxa-text-field>
+            <div class="hx-input-group">
+              <i class="hx-icon icon-search"></i>
+              <div class="hx-input-control">
+                <input class="hx-input" type="text" required>
+                <label class="hx-label">Search <sup>*</sup></label>
+                <div class="hx-help">Please search by patient name</div>
+              </div>
+              <div class="hx-input-actions">
+                <div class="hx-loader is-small"><div></div><div></div><div></div><div></div></div>
+                <div class="hx-button-group">
+                  <button class="hx-button is-flat"><span class="hx-icon-control"><i class="icon icon-close-empty"></i></span></button>
+                  <button class="hx-button is-flat"><span class="hx-icon-control"><i class="icon icon-plus"></i></span></button>
+                </div>
+              </div>
+            </div>
+          </hxa-text-field>
+
+          <hxa-text-field>
+            <div class="hx-input-group">
+              <i class="hx-icon icon-person"></i>
+              <div class="hx-input-control">
+                <input class="hx-input" type="text" value="JG001" required>
+                <label class="hx-label">Username <sup>*</sup></label>
+                <div class="hx-help">Please enter your username</div>
+              </div>
+              <i class="hx-icon icon-check-empty is-medium is-success"></i>
+            </div>
+          </hxa-text-field>
+
 
           <button type="submit" class="hx-button is-primary" >Submit</button>
 
