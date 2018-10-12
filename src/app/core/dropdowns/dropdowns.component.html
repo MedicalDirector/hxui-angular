@@ -16,20 +16,20 @@
 
     <h4 id="basicexample">Basic Example</h4>
 
-    <div class="hx-columns">
+    <div class="hx-columns" id="parentEl">
       <div class="hx-column">
-        <div class="hx-dropdown" hxDropdown>
+        <div class="hx-dropdown" hxDropdown [autoClose]="true">
           <button class="hx-button is-primary is-outlined hx-button-dropdown" hxDropdownToggle type="button">
             <span>Dropdown</span>
             <span class="hx-icon-control"><i class="icon icon-angle-down"></i></span>
           </button>
-          <div class="hx-dropdown-menu" *hxDropdownMenu>
+          <div class="hx-dropdown-menu" *hxDropdownMenu resizeTo="parentEl">
             <div class="hx-dropdown-header">Dropdown header</div>
-            <a class="hx-dropdown-item" href="#">Action</a>
-            <a class="hx-dropdown-item" href="#">Another action</a>
+            <a class="hx-dropdown-item"   hxDropdownItem>Action</a>
+            <a class="hx-dropdown-item"   hxDropdownItem>Another action</a>
             <div class="hx-dropdown-divider"></div>
-            <a class="hx-dropdown-item" href="#">Action</a>
-            <a class="hx-dropdown-item" href="#">Another action</a>
+            <a class="hx-dropdown-item"  hxDropdownItem>Action</a>
+            <a class="hx-dropdown-item"  hxDropdownItem>Another action</a>
           </div>
         </div>
       </div>
@@ -63,11 +63,11 @@
           </button>
           <div class="hx-dropdown-menu" *hxDropdownMenu>
             <div class="hx-dropdown-header">Dropdown header</div>
-            <a class="hx-dropdown-item" href="#">Action</a>
-            <a class="hx-dropdown-item" href="#">Another action</a>
+            <a class="hx-dropdown-item"   hxDropdownItem>Action</a>
+            <a class="hx-dropdown-item"   hxDropdownItem>Another action</a>
             <div class="hx-dropdown-divider"></div>
-            <a class="hx-dropdown-item" href="#">Action</a>
-            <a class="hx-dropdown-item" href="#">Another action</a>
+            <a class="hx-dropdown-item"   hxDropdownItem>Action</a>
+            <a class="hx-dropdown-item"   hxDropdownItem>Another action</a>
           </div>
         </div>
           </div>
@@ -93,22 +93,22 @@
 
     <div class="hx-columns">
       <div class="hx-column is-flex">
-        <div class="hx-dropdown mr-1" hxDropdown #dropdown="hx-dropdown" [autoClose]="false">
+        <div class="hx-dropdown mr-1"  hxDropdown #dropdown="hx-dropdown" [autoClose]="false">
           <button class="hx-button is-primary is-outlined hx-button-dropdown" hxDropdownToggle type="button">
             <span>Dropdown</span>
             <span class="hx-icon-control"><i class="icon icon-angle-down"></i></span>
           </button>
           <div class="hx-dropdown-menu" *hxDropdownMenu>
             <div class="hx-dropdown-header">Dropdown header</div>
-            <a class="hx-dropdown-item" href="#">Action</a>
-            <a class="hx-dropdown-item" href="#">Another action</a>
+            <a class="hx-dropdown-item"  hxDropdownItem>Action</a>
+            <a class="hx-dropdown-item"  hxDropdownItem>Another action</a>
             <div class="hx-dropdown-divider"></div>
-            <a class="hx-dropdown-item" href="#">Action</a>
-            <a class="hx-dropdown-item" href="#">Another action</a>
+            <a class="hx-dropdown-item"  hxaDropdownItem>Action</a>
+            <a class="hx-dropdown-item"  hxaDropdownItem>Another action</a>
           </div>
         </div>
-        <button class="hx-button is-info mr-1"  (click)="toggle($event)">Toggle</button>
-        <button class="hx-button is-info mr-1"  (click)="show($event)">Show</button>
+        <button class="hx-button is-info mr-1" (click)="toggle($event)">Toggle</button>
+        <button class="hx-button is-info mr-1" (click)="show($event)">Show</button>
         <button class="hx-button is-info" (click)="hide($event)">Hide</button>
       </div>
     </div>

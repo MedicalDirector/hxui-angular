@@ -2,6 +2,7 @@ import {
   Directive, ElementRef, EventEmitter, HostBinding, HostListener, OnDestroy, Output, Renderer2
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import {DropdownDirective} from './dropdown.directive';
 
 
 @Directive({
@@ -22,16 +23,17 @@ export class DropdownToggleDirective implements OnDestroy {
 
   @HostListener('click', ['$event'])
   onClick(event): void {
-    this.isOpenChange.emit(true);
+    this.dropdown.show();
   }
 
 
   @HostListener('keyup.esc')
   onEsc(): void {
-    this.isOpenChange.emit(false);
+    this.dropdown.hide();
   }
 
-  constructor(public elementRef: ElementRef) {
+  constructor(public elementRef: ElementRef,
+              private dropdown: DropdownDirective) {
   }
 
   ngOnDestroy() {}

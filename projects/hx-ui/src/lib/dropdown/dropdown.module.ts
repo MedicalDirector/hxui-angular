@@ -3,18 +3,21 @@ import { DropdownMenuDirective } from './dropdown-menu.directive';
 import { DropdownToggleDirective } from './dropdown-toggle.directive';
 import { DropdownConfig } from './dropdown.config';
 import { DropdownDirective } from './dropdown.directive';
+import {DropdownItemDirective} from './dropdown-item.directive';
 
 
 @NgModule({
   declarations: [
     DropdownMenuDirective,
     DropdownToggleDirective,
-    DropdownDirective
+    DropdownDirective,
+    DropdownItemDirective
   ],
   exports: [
     DropdownMenuDirective,
     DropdownToggleDirective,
-    DropdownDirective
+    DropdownDirective,
+    DropdownItemDirective
   ]
 })
 export class DropdownModule {
