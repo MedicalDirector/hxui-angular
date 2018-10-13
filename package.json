@@ -26,7 +26,7 @@
     "@angular/platform-browser-dynamic": "^6.0.4",
     "@angular/platform-server": "^6.0.4",
     "@angular/router": "^6.0.4",
-    "@hxui/css": "file:../gethxui",
+    "@hxui/css": "^1.1.82",
     "angular-in-memory-web-api": "^0.6.0",
     "array-sort-by": "^1.2.1",
     "core-js": "^2.5.6",
