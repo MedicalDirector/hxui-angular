@@ -13,17 +13,18 @@ export class DropdownsCode {
 
   example =
     `
-    <div class="hx-dropdown" hxDropdown>
-    <button class="hx-button is-primary is-outlined hx-button-dropdown" hxDropdownToggle type="button">
-      Dropdown button
+    <div class="hx-dropdown" hxaDropdown>
+    <button class="hx-button" hxDropdownToggle type="button">
+      <span>Dropdown</span>
+      <span class="hx-icon-control"><i class="icon icon-caret-down"></i></span>
     </button>
-    <div class="hx-dropdown-menu" *hxDropdownMenu>
+    <div class="hx-dropdown-menu" *hxaDropdownMenu>
       <div class="hx-dropdown-header">Dropdown header</div>
-        <a class="hx-dropdown-item" href="#">Action</a>
-        <a class="hx-dropdown-item" href="#">Another action</a>
+        <a class="hx-dropdown-item" hxaDropdownItem>Action</a>
+        <a class="hx-dropdown-item" hxaDropdownItem>Another action</a>
         <div class="hx-dropdown-divider"></div>
-        <a class="hx-dropdown-item" href="#">Action</a>
-        <a class="hx-dropdown-item" href="#">Another action</a>
+        <a class="hx-dropdown-item" hxaDropdownItem>Action</a>
+        <a class="hx-dropdown-item" hxaDropdownItem>Another action</a>
       </div>
     </div>
     `;
@@ -31,18 +32,18 @@ export class DropdownsCode {
   exampleTemplate = `
   <div class="hx-columns">
       <div class="hx-column is-flex">
-        <div class="hx-dropdown mr-1" hxDropdown #dropdown="hx-dropdown" [autoClose]="false">
-          <button class="hx-button is-primary is-outlined hx-button-dropdown" hxDropdownToggle type="button">
+        <div class="hx-dropdown mr-1" hxaDropdown [autoClose]="false">
+         <button class="hx-button" hxDropdownToggle type="button">
             <span>Dropdown</span>
-            <span class="hx-icon-control"><i class="icon icon-angle-down"></i></span>
+            <span class="hx-icon-control"><i class="icon icon-caret-down"></i></span>
           </button>
-          <div class="hx-dropdown-menu" *hxDropdownMenu>
+          <div class="hx-dropdown-menu" *hxaDropdownMenu>
             <div class="hx-dropdown-header">Dropdown header</div>
-            <a class="hx-dropdown-item" href="#">Action</a>
-            <a class="hx-dropdown-item" href="#">Another action</a>
+            <a class="hx-dropdown-item" hxaDropdownItem>>Action</a>
+            <a class="hx-dropdown-item" hxaDropdownItem>>Another action</a>
             <div class="hx-dropdown-divider"></div>
-            <a class="hx-dropdown-item" href="#">Action</a>
-            <a class="hx-dropdown-item" href="#">Another action</a>
+            <a class="hx-dropdown-item" hxaDropdownItem>Action</a>
+            <a class="hx-dropdown-item" hxaDropdownItem>>Another action</a>
           </div>
         </div>
         <button class="hx-button is-info mr-1"  (click)="toggle($event)">Toggle</button>
@@ -81,5 +82,24 @@ export class DropdownsCode {
       this.dropdown.hide();
     }
   }
+  `;
+
+  maxWidthExample = `
+    <div class="hx-card" id="parentEl">
+      <div class="hx-card-content">
+       <div class="hx-dropdown" hxaDropdown maxWidthRelativeTo="parentEl">
+          <button class="hx-button" hxDropdownToggle type="button">
+            <span>Dropdown</span>
+            <span class="hx-icon-control"><i class="icon icon-caret-down"></i></span>
+          </button>
+          <div class="hx-dropdown-menu is-text-ellipsed" *hxaDropdownMenu>
+            <a class="hx-dropdown-item" hxaDropdownItem>Drop down item</a>
+            <a class="hx-dropdown-item" hxaDropdownItem>Drop down item</a>
+            <a class="hx-dropdown-item" hxaDropdownItem>Drop down item</a>
+            <a class="hx-dropdown-item" hxaDropdownItem>Drop down item that's really really really really really really really really really really really long.</a>
+          </div>
+      </div>
+     </div>
+    </div>    
   `;
 }

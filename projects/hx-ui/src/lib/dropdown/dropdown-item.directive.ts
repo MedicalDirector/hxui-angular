@@ -15,6 +15,5 @@ export class DropdownItemDirective {
 
   constructor(public elementRef: ElementRef,
               private dropdown: DropdownDirective) {
-    console.log(this.dropdown.autoClose, this.dropdown._config.autoClose);
   }
 }

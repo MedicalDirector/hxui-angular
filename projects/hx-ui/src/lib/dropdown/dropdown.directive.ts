@@ -45,11 +45,11 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     return this._autoClose;
   }
 
-  @Output() isOpenChange: EventEmitter<any>;
+  @Output() isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @Output() onShown: EventEmitter<any>;
+  @Output() onShown: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output() onHidden: EventEmitter<any>;
+  @Output() onHidden: EventEmitter<any> = new EventEmitter<any>();
 
   @Input()
   isDisabled = false;
@@ -60,7 +60,8 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   @Input()
   hideDelay = this._config.hideDelay;
 
-  @Input() widthConnectedTo: string;
+  @Input()
+  maxWidthRelativeTo: string;
 
   constructor(private _elementRef: ElementRef,
               private _viewContainerRef: ViewContainerRef,
@@ -69,11 +70,10 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   }
 
   ngOnInit(): void {
-    console.log(this.widthConnectedTo);
+
   }
 
   ngAfterContentInit() {
-
   }
 
   ngOnDestroy(): void {
@@ -105,14 +105,17 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     const overlayRef = this._createOverlay();
     this._detach();
     overlayRef.attach(this._portal);
-    this._widthConnectedTo(overlayRef);
+    this._setMaxWidthRelativeTo(overlayRef);
     this.isOpen = true;
-
+    this.isOpenChange.emit(this.isOpen);
+    this.onShown.emit();
   }
 
   hide(delay: number = this.hideDelay) {
     this._detach();
     this.isOpen = false;
+    this.isOpenChange.emit(this.isOpen);
+    this.onHidden.emit();
   }
 
   private _createOverlay(): OverlayRef {
@@ -166,9 +169,9 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
-  private _widthConnectedTo(overlayRef: OverlayRef) {
-    if (this.widthConnectedTo) {
-      const elem: Element = document.getElementById(this.widthConnectedTo);
+  private _setMaxWidthRelativeTo(overlayRef: OverlayRef) {
+    if (this.maxWidthRelativeTo) {
+      const elem: Element = document.getElementById(this.maxWidthRelativeTo);
       overlayRef.updateSize({maxWidth: elem.clientWidth});
     }
   }

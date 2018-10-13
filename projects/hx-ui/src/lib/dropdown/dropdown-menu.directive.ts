@@ -1,5 +1,5 @@
 import {
-  Directive, ElementRef, Input, OnInit, Renderer2, TemplateRef,
+  Directive, ElementRef, HostBinding, Input, OnInit, Renderer2, TemplateRef,
 } from '@angular/core';
 
 
