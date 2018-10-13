@@ -49,7 +49,8 @@ import { TextFieldComponent } from './text-field/text-field.component';
       AccordionComponent,
       FiltersComponent,
       LoadersComponent,
-      TextFieldComponent
+      TextFieldComponent,
+      
   ],
   providers: [
      TabularService,
