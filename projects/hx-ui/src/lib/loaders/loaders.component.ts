@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Context, Size} from '../enums';
 
 @Component({
-  selector: 'hxa-loaders',
+  selector: 'hxa-loader, hxa-loaders',
   templateUrl: './loaders.component.html',
   styleUrls: ['./loaders.component.scss']
 })

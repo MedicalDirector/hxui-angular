@@ -1,17 +1,22 @@
-import { Directive, TemplateRef, ViewContainerRef } from '@angular/core';
-import { DropdownState } from './dropdown.state';
+import {
+  Directive, ElementRef, HostBinding, Input, OnInit, Renderer2, TemplateRef,
+} from '@angular/core';
+
 
 @Directive({
-  selector: '[hxDropdownMenu],[dropdownMenu]',
+  selector: '[hxDropdownMenu],[hxaDropdownMenu]',
   exportAs: 'hx-dropdown-menu'
 })
-export class DropdownMenuDirective {
-  constructor(_state: DropdownState,
-              _viewContainer: ViewContainerRef,
-              _templateRef: TemplateRef<any>) {
-    _state.resolveDropdownMenu({
-      templateRef: _templateRef,
-      viewContainer: _viewContainer
-    });
+export class DropdownMenuDirective implements OnInit {
+
+  public templateRef: TemplateRef<any>;
+
+  constructor(_templateRef: TemplateRef<any>) {
+    this.templateRef = _templateRef;
   }
+
+  ngOnInit() {
+
+  }
+
 }

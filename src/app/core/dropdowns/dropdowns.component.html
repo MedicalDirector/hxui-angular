@@ -18,18 +18,18 @@
 
     <div class="hx-columns">
       <div class="hx-column">
-        <div class="hx-dropdown" hxDropdown>
-          <button class="hx-button is-primary is-outlined hx-button-dropdown" hxDropdownToggle type="button">
+        <div class="hx-dropdown" hxDropdown [autoClose]="true">
+          <button class="hx-button" hxDropdownToggle type="button">
             <span>Dropdown</span>
-            <span class="hx-icon-control"><i class="icon icon-angle-down"></i></span>
+            <span class="hx-icon-control"><i class="icon icon-caret-down"></i></span>
           </button>
           <div class="hx-dropdown-menu" *hxDropdownMenu>
             <div class="hx-dropdown-header">Dropdown header</div>
-            <a class="hx-dropdown-item" href="#">Action</a>
-            <a class="hx-dropdown-item" href="#">Another action</a>
+            <a class="hx-dropdown-item"   hxDropdownItem>Action</a>
+            <a class="hx-dropdown-item"   hxDropdownItem>Another action</a>
             <div class="hx-dropdown-divider"></div>
-            <a class="hx-dropdown-item" href="#">Action</a>
-            <a class="hx-dropdown-item" href="#">Another action</a>
+            <a class="hx-dropdown-item"  hxDropdownItem>Action</a>
+            <a class="hx-dropdown-item"  hxDropdownItem>Another action</a>
           </div>
         </div>
       </div>
@@ -49,26 +49,70 @@
 
     <hr>
 
+    <h4 id="maxWidthExample">Max width relative to element</h4>
+    <p>By default the dropdown menu width responds to its contents. In mose cases you can limit the width by appending the <code>.is-limited-width</code> css modifier, however in other
+      instances you may want the dropdown menu to have the same width as a parent container.</p>
+
+    <p>The <code>maxWidthRelativeTo</code> input allows you to do exactly this.<br> Specify the element id and the dropdown component will do the rest.</p>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+
+        <div class="hx-card" id="parentEl">
+          <div class="hx-card-content">
+           <div class="hx-dropdown" hxDropdown maxWidthRelativeTo="parentEl">
+          <button class="hx-button hx-button-dropdown" hxDropdownToggle type="button">
+            <span>Dropdown</span>
+            <span class="hx-icon-control"><i class="icon icon-caret-down"></i></span>
+          </button>
+          <div class="hx-dropdown-menu is-text-ellipsed" *hxDropdownMenu>
+            <a class="hx-dropdown-item" hxDropdownItem>Drop down item</a>
+            <a class="hx-dropdown-item" hxDropdownItem>Drop down item</a>
+            <a class="hx-dropdown-item" hxDropdownItem>Drop down item</a>
+            <a class="hx-dropdown-item" hxDropdownItem>Drop down item that's really really really really really really really really really really really long.</a>
+          </div>
+        </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="hx-column"></div>
+    </div>
+
+    <br>
+
+    <h5 id="maxWidthExampleCode">Code</h5>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <pre>
+         <code highlight [code]="code.maxWidthExample"></code>
+        </pre>
+      </div>
+    </div>
+
+    <hr>
+
     <h4 id="manualexample">Manual Trigger Example</h4>
 
     <div class="hx-columns">
       <div class="hx-column is-flex">
-        <div class="hx-dropdown mr-1" hxDropdown #dropdown="hx-dropdown" [autoClose]="false">
-          <button class="hx-button is-primary is-outlined hx-button-dropdown" hxDropdownToggle type="button">
+        <div class="hx-dropdown mr-1"  hxDropdown #dropdown="hx-dropdown" [autoClose]="false">
+          <button class="hx-button" hxDropdownToggle type="button">
             <span>Dropdown</span>
-            <span class="hx-icon-control"><i class="icon icon-angle-down"></i></span>
+            <span class="hx-icon-control"><i class="icon icon-caret-down"></i></span>
           </button>
           <div class="hx-dropdown-menu" *hxDropdownMenu>
             <div class="hx-dropdown-header">Dropdown header</div>
-            <a class="hx-dropdown-item" href="#">Action</a>
-            <a class="hx-dropdown-item" href="#">Another action</a>
+            <a class="hx-dropdown-item"  hxDropdownItem>Action</a>
+            <a class="hx-dropdown-item"  hxDropdownItem>Another action</a>
             <div class="hx-dropdown-divider"></div>
-            <a class="hx-dropdown-item" href="#">Action</a>
-            <a class="hx-dropdown-item" href="#">Another action</a>
+            <a class="hx-dropdown-item"  hxaDropdownItem>Action</a>
+            <a class="hx-dropdown-item"  hxaDropdownItem>Another action</a>
           </div>
         </div>
-        <button class="hx-button is-info mr-1"  (click)="toggle($event)">Toggle</button>
-        <button class="hx-button is-info mr-1"  (click)="show($event)">Show</button>
+        <button class="hx-button is-info mr-1" (click)="toggle($event)">Toggle</button>
+        <button class="hx-button is-info mr-1" (click)="show($event)">Show</button>
         <button class="hx-button is-info" (click)="hide($event)">Hide</button>
       </div>
     </div>
@@ -116,16 +160,6 @@
               <td>Indicates that dropdown will be closed on item or document click, and after pressing ESC</td>
             </tr>
             <tr>
-              <td>container</td>
-              <td><kbd>string</kbd></td>
-              <td>A selector specifying the element the popover should be appended to. Currently only supports "body".</td>
-            </tr>
-            <tr>
-              <td>dropup</td>
-              <td><kbd>boolean</kbd></td>
-              <td>This attribute indicates that the dropdown should be opened upwards</td>
-            </tr>
-            <tr>
               <td>isDisabled</td>
               <td><kbd>boolean</kbd></td>
               <td>Disables dropdown toggle and hides dropdown menu if opened</td>
@@ -141,9 +175,9 @@
               <td>Placement of a popover. Accepts: "top", "bottom", "left", "right"</td>
             </tr>
             <tr>
-              <td>triggers</td>
+              <td>maxWidthRelativeTo</td>
               <td><kbd>string</kbd></td>
-              <td>Specifies events that should trigger. Supports a space separated list of event names.</td>
+              <td>The element id of the element the dropdown should get it's max width from</td>
             </tr>
           </tbody>
         </table>
@@ -223,6 +257,9 @@
 
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#basicexample')"><span>Basic Example</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#maxWidthExample')"><span>Max Width Example</span></a>
     </li>
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#manualexample')"><span>Manual Trigger Example</span></a>

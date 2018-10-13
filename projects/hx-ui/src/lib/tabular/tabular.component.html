@@ -93,7 +93,7 @@
             </span>
 
             <!-- action with children -->
-            <div class="hx-dropdown" hxDropdown [isRight]="true" container="body" *ngIf="hasChildren(action)" [isDisabled]="!!row.actionDisabled">
+            <div class="hx-dropdown" hxDropdown  container="body" *ngIf="hasChildren(action)" [isDisabled]="!!row.actionDisabled">
             <span [hxTooltip]="action.tooltip?.content"
                   placement="{{action.tooltip?.config.placement}}"
                   [context]="action.tooltip?.config.context"

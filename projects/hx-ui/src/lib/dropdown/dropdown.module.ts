@@ -1,34 +1,29 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-
-import { PositioningService } from '../positioning/positioning.service';
-import { DropdownContainerComponent } from './dropdown-container.component';
 import { DropdownMenuDirective } from './dropdown-menu.directive';
 import { DropdownToggleDirective } from './dropdown-toggle.directive';
 import { DropdownConfig } from './dropdown.config';
-
 import { DropdownDirective } from './dropdown.directive';
-import { DropdownState } from './dropdown.state';
+import {DropdownItemDirective} from './dropdown-item.directive';
+
 
 @NgModule({
   declarations: [
     DropdownMenuDirective,
     DropdownToggleDirective,
-    DropdownContainerComponent,
-    DropdownDirective
+    DropdownDirective,
+    DropdownItemDirective
   ],
   exports: [
     DropdownMenuDirective,
     DropdownToggleDirective,
-    DropdownDirective
-  ],
-  entryComponents: [DropdownContainerComponent]
+    DropdownDirective,
+    DropdownItemDirective
+  ]
 })
 export class DropdownModule {
   public static forRoot(config?: any): ModuleWithProviders {
     return {
       ngModule: DropdownModule, providers: [
-        PositioningService,
-        DropdownState,
         {provide: DropdownConfig, useValue: config ? config : {autoClose: true}}
       ]
     };

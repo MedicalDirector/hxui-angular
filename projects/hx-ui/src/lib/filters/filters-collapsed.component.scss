@@ -1,16 +1,16 @@
-:host{
-  .panes{
+.collapsedFilter__menu{
+  &.panes{
     width:15rem;
     overflow:hidden;
 
-    &__inner{
+    .panes__inner{
       display:flex;
       list-style: none;
       padding:0;
       margin-top:0;
     }
 
-    &__item{
+    .panes__item{
       min-width:15rem;
       max-width:15rem;
 
