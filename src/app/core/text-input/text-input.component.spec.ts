@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TextFieldComponent } from './text-field.component';
+import { TextFieldComponent } from './text-input.component';
 
 describe('TextFieldComponent', () => {
   let component: TextFieldComponent;

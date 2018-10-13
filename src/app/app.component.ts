@@ -81,10 +81,6 @@ export class AppComponent {
         {
           name: 'Loaders',
           link: '/loaders'
-        },
-        {
-          name: 'Text Field',
-          link: '/text-field'
         }
       ]
     },
@@ -108,6 +104,10 @@ export class AppComponent {
           name: 'Auto Grow',
           link: '/autogrow'
         },
+        {
+          name: 'Text Input',
+          link: '/text-input'
+        }
       ]
     }
     // {

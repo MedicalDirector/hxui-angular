@@ -14,7 +14,7 @@ import {ModalService} from './modal/modal.service';
 import {AccordionModule} from './accordion/accordion.module';
 import {FiltersModule} from './filters/filters.module';
 import {LoadersModule} from './loaders/loaders.module';
-import {TextFieldModule} from './text-field/text-field.module';
+import {TextInputModule} from './text-input/text-input.module';
 
 @NgModule({
   imports: [
@@ -24,14 +24,14 @@ import {TextFieldModule} from './text-field/text-field.module';
     SelectizeModule.forRoot(), DatepickerModule.forRoot(),
     AutoGrowModule.forRoot(), EmptyStateModule.forRoot(),
     AccordionModule, FiltersModule.forRoot(), LoadersModule,
-    TextFieldModule
+    TextInputModule
   ],
   exports: [
     DatepickerModule, DropdownModule, ModalModule,
     PaginationModule, TabsModule, TooltipModule,
     TypeaheadModule, TabularModule, SelectizeModule,
     AutoGrowModule, EmptyStateModule, AccordionModule,
-    FiltersModule, LoadersModule, TextFieldModule
+    FiltersModule, LoadersModule, TextInputModule
   ]
 })
 export class HxUiModule {

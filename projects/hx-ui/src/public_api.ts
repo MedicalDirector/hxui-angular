@@ -2,6 +2,10 @@
  * Public API Surface of hx-ui
  */
 
+
+export * from './lib/text-input/text-input.directive';
+export * from './lib/text-input/text-input.module';
+
 export * from './lib/loaders/loaders.component';
 export * from './lib/loaders/loaders.module';
 

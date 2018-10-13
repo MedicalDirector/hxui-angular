@@ -1,10 +1,10 @@
-import { TextFieldModule } from './text-field.module';
+import {TextInputModule} from './text-input.module';
 
 describe('TextFieldModule', () => {
-  let textFieldModule: TextFieldModule;
+  let textFieldModule: TextInputModule;
 
   beforeEach(() => {
-    textFieldModule = new TextFieldModule();
+    textFieldModule = new TextInputModule();
   });
 
   it('should create an instance', () => {

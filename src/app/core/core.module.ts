@@ -22,7 +22,7 @@ import { EmptyStateComponent } from './empty-state/empty-state.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { FiltersComponent } from './filters/filters.component';
 import { LoadersComponent } from './loaders/loaders.component';
-import { TextFieldComponent } from './text-field/text-field.component';
+import { TextInputComponent } from './text-input/text-input.component';
 
 @NgModule({
   imports: [
@@ -49,8 +49,8 @@ import { TextFieldComponent } from './text-field/text-field.component';
       AccordionComponent,
       FiltersComponent,
       LoadersComponent,
-      TextFieldComponent,
-      
+      TextInputComponent,
+
   ],
   providers: [
      TabularService,
