@@ -22,6 +22,7 @@ import { EmptyStateComponent } from './empty-state/empty-state.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { FiltersComponent } from './filters/filters.component';
 import { LoadersComponent } from './loaders/loaders.component';
+import { TextInputComponent } from './text-input/text-input.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,9 @@ import { LoadersComponent } from './loaders/loaders.component';
       EmptyStateComponent,
       AccordionComponent,
       FiltersComponent,
-      LoadersComponent
+      LoadersComponent,
+      TextInputComponent,
+
   ],
   providers: [
      TabularService,

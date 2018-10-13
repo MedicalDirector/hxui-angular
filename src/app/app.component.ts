@@ -104,6 +104,10 @@ export class AppComponent {
           name: 'Auto Grow',
           link: '/autogrow'
         },
+        {
+          name: 'Text Input',
+          link: '/text-input'
+        }
       ]
     }
     // {
