@@ -17,3 +17,10 @@ export enum Visibility {
   Hidden,
   Visible
 }
+
+export enum TextFieldTypes {
+  Email = 'email',
+  Text = 'text',
+  Password = 'password',
+  Number = 'number'
+}
