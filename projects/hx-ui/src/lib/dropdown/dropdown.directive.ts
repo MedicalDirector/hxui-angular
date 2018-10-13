@@ -60,6 +60,8 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   @Input()
   hideDelay = this._config.hideDelay;
 
+  @Input() widthConnectedTo: string;
+
   constructor(private _elementRef: ElementRef,
               private _viewContainerRef: ViewContainerRef,
               public overlay: Overlay,
@@ -67,7 +69,7 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   }
 
   ngOnInit(): void {
-
+    console.log(this.widthConnectedTo);
   }
 
   ngAfterContentInit() {
@@ -99,10 +101,13 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
 
   show(delay: number = this.showDelay) {
     if (this.isDisabled || this.isOpen) { return; }
+
     const overlayRef = this._createOverlay();
     this._detach();
     overlayRef.attach(this._portal);
+    this._widthConnectedTo(overlayRef);
     this.isOpen = true;
+
   }
 
   hide(delay: number = this.hideDelay) {
@@ -158,6 +163,13 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   private _detach() {
     if (this._overlayRef && this._overlayRef.hasAttached()) {
       this._overlayRef.detach();
+    }
+  }
+
+  private _widthConnectedTo(overlayRef: OverlayRef) {
+    if (this.widthConnectedTo) {
+      const elem: Element = document.getElementById(this.widthConnectedTo);
+      overlayRef.updateSize({maxWidth: elem.clientWidth});
     }
   }
 }

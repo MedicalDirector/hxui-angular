@@ -1,5 +1,5 @@
 import {
-  Directive, Input, OnInit, TemplateRef,
+  Directive, ElementRef, Input, OnInit, Renderer2, TemplateRef,
 } from '@angular/core';
 
 
@@ -11,15 +11,12 @@ export class DropdownMenuDirective implements OnInit {
 
   public templateRef: TemplateRef<any>;
 
-  @Input()
-  resizeTo: string;
-
   constructor(_templateRef: TemplateRef<any>) {
     this.templateRef = _templateRef;
-
   }
 
   ngOnInit() {
-    console.log("dd: "+this.resizeTo);
+
   }
+
 }

@@ -68,7 +68,7 @@ export class DropdownsCode {
   
     toggle($event) {
       $event.stopPropagation();
-      this.dropdown.isOpen = !this.dropdown.isOpen;
+      this.dropdown.toggle();
     }
   
     show($event) {
