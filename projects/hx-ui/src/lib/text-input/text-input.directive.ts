@@ -1,12 +1,14 @@
-import {Directive, HostListener, ElementRef, Renderer2 } from '@angular/core';
+import {Directive, HostListener, ElementRef, HostBinding} from '@angular/core';
 
 @Directive({
     selector: '[hxaTextInput]'
   })
   export class TextInputDirective {
 
-    constructor(private el: ElementRef,
-        private renderer: Renderer2) {
+  @HostBinding('class.has-label-placeholder') isPlaceholder: boolean;
+  @HostBinding('class.has-label-floating') isLabel: boolean;
+
+    constructor(private el: ElementRef) {
             this.styleLabel();
     }
 
@@ -30,13 +32,13 @@ import {Directive, HostListener, ElementRef, Renderer2 } from '@angular/core';
     }
 
     styleLabelAsPlaceholder() {
-        this.renderer.addClass(this.el.nativeElement, 'has-label-placeholder');
-        this.renderer.removeClass(this.el.nativeElement, 'has-label-floating');
+      this.isPlaceholder = true;
+      this.isLabel = false;
     }
 
     styleLabelAsFloating() {
-        this.renderer.addClass(this.el.nativeElement, 'has-label-floating');
-        this.renderer.removeClass(this.el.nativeElement, 'has-label-placeholder');
+      this.isPlaceholder = false;
+      this.isLabel = true;
     }
 
   }
