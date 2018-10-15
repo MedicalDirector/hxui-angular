@@ -136,7 +136,7 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
 
     this._overlayRef = this.overlay.create({
       positionStrategy: positionStrategy,
-      panelClass: ['hxa-dropdown-panel', 'is-open'],
+      panelClass: ['hxui-reset', 'hxa-dropdown-panel', 'is-open'],
       hasBackdrop: true,
       backdropClass: 'cdk-overlay-transparent-backdrop'
     });
