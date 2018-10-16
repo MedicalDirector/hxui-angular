@@ -1,11 +1,11 @@
-<div class="hx-dropdown  ml-1 collapsedFilter" #dropdown="hx-dropdown"  hxDropdown  [autoClose]="false" >
-  <button type="button" class="hx-button hx-button-dropdown" hxDropdownToggle>
+<div class="hx-dropdown  ml-1 collapsedFilter" #dropdown="hx-dropdown"  hxaDropdown  [autoClose]="false" >
+  <button id="collapsedFilterTrigger" type="button" class="hx-button hx-button-dropdown" hxaDropdownToggle>
     <span>{{(totalActiveFilters() > 0)? 'Filtered ('+totalActiveFilters()+')' : 'Filters' }}</span>
     <span class="hx-icon-control"><i class="icon icon-caret-down"></i></span>
   </button>
-  <div class="hx-dropdown-menu has-limited-width collapsedFilter__menu panes" *hxDropdownMenu>
+  <div class="hx-dropdown-menu has-limited-width collapsedFilter__menu panes" *hxaDropdownMenu>
     <ul class="panes__inner" [@slide]="activePane" (@slide.done)="onSlideDone($event)">
-      <li class="panes__item">
+      <li id="filterSelections" class="panes__item">
         <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last;">
 
           <div class="hx-dropdown-header itemHeader">{{filter.label}}</div>
@@ -14,7 +14,7 @@
           <ng-container *ngIf="filter.type === FilterType.SingleSelect">
             <ul class="hx-list-group">
               <li>
-                <a (click)="changeFilterSelection(filter)" title="{{filter.selected?.label}}">
+                <a [id]="filter?.id + '-trigger'" (click)="changeFilterSelection(filter)" title="{{filter.selected?.label}}">
                   <div class="hx-list-action" *ngIf="filter.selected?.icon">
                     <i class="{{filter.selected?.icon}}"></i>
                   </div>
@@ -48,13 +48,13 @@
           </div>
         </ng-container>
       </li>
-      <li class="panes__item">
+      <li id="filterOptions" class="panes__item">
         <div class="hx-toolbar is-xsmall">
-          <button class="hx-button is-flat" (click)="back()"><i class="hx-icon icon-arrow-left"></i></button>
+          <button id="paneBack" class="hx-button is-flat" (click)="back()"><i class="hx-icon icon-arrow-left"></i></button>
           <span>{{selectedFilter?.label}}</span>
         </div>
-        <ul class="hx-list-group">
-          <li *ngFor="let option of selectedFilter?.options;trackBy: trackByFn">
+        <ul class="hx-list-group options">
+          <li class="options__item"  *ngFor="let option of selectedFilter?.options;trackBy: trackByFn">
             <a (click)="selectFilterOption(option)" title="{{option?.label}}">
               <div class="hx-list-action" *ngIf="option?.icon">
                 <i class="{{option?.icon}}"></i>

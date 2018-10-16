@@ -157,7 +157,6 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     position.positionChanges
       .pipe(takeUntil(this._destroyed))
       .subscribe((pos) => {
-        console.log(pos);
         if (pos.connectionPair.originX === 'start') {
           this.placement = 'left';
         } else if (pos.connectionPair.originX === 'end') {
@@ -183,6 +182,7 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
       overlayRef.updateSize({maxWidth: elem.clientWidth});
     }else if (this.minWidthRelativeTo) {
       const elem: Element = document.getElementById(this.minWidthRelativeTo);
+      console.log(this.menu.templateRef);
       overlayRef.updateSize({minWidth: elem.clientWidth});
     }
   }
