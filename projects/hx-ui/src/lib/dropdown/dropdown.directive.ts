@@ -13,7 +13,7 @@ import {Subject} from 'rxjs/index';
 import {TemplatePortal} from '@angular/cdk/portal';
 import {
   FlexibleConnectedPositionStrategy,
-  Overlay, OverlayRef,
+  Overlay, OverlayRef, OverlaySizeConfig,
   ScrollDispatcher
 } from '@angular/cdk/overlay';
 import {Directionality} from '@angular/cdk/bidi';
@@ -63,6 +63,9 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   @Input()
   maxWidthRelativeTo: string;
 
+  @Input()
+  minWidthRelativeTo: string;
+
   constructor(private _elementRef: ElementRef,
               private _viewContainerRef: ViewContainerRef,
               public overlay: Overlay,
@@ -105,7 +108,7 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     const overlayRef = this._createOverlay();
     this._detach();
     overlayRef.attach(this._portal);
-    this._setMaxWidthRelativeTo(overlayRef);
+    this._setWidthsRelativeTo(overlayRef);
     this.isOpen = true;
     this.isOpenChange.emit(this.isOpen);
     this.onShown.emit();
@@ -128,8 +131,9 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     const positionStrategy = this.overlay.position()
       .flexibleConnectedTo(this._elementRef)
       .withFlexibleDimensions(false)
-      .withDefaultOffsetX(-2)
-      .withDefaultOffsetY(-2)
+      .withDefaultOffsetX(0)
+      .withDefaultOffsetY(this._elementRef.nativeElement.clientHeight)
+      .withViewportMargin(this._elementRef.nativeElement.clientHeight)
       .withPositions([{ originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' }])
       .withTransformOriginOn('.hxa-dropdown-control');
 
@@ -153,6 +157,7 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     position.positionChanges
       .pipe(takeUntil(this._destroyed))
       .subscribe((pos) => {
+        console.log(pos);
         if (pos.connectionPair.originX === 'start') {
           this.placement = 'left';
         } else if (pos.connectionPair.originX === 'end') {
@@ -169,10 +174,16 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     }
   }
 
-  private _setMaxWidthRelativeTo(overlayRef: OverlayRef) {
-    if (this.maxWidthRelativeTo) {
+  private _setWidthsRelativeTo(overlayRef: OverlayRef) {
+    if (this.maxWidthRelativeTo && this.minWidthRelativeTo) {
+      const elem: Element = document.getElementById(this.maxWidthRelativeTo);
+      overlayRef.updateSize({minWidth: elem.clientWidth, maxWidth: elem.clientWidth});
+    } else if (this.maxWidthRelativeTo) {
       const elem: Element = document.getElementById(this.maxWidthRelativeTo);
       overlayRef.updateSize({maxWidth: elem.clientWidth});
+    }else if (this.minWidthRelativeTo) {
+      const elem: Element = document.getElementById(this.minWidthRelativeTo);
+      overlayRef.updateSize({minWidth: elem.clientWidth});
     }
   }
 }

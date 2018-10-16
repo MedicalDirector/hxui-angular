@@ -10,8 +10,8 @@
     <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last;">
 
     <!-- single select filter -->
-    <div [id]="filter?.id" class="hx-dropdown expandedFilter" hxDropdown  *ngIf="filter?.type === FilterType.SingleSelect">
-      <a class="hx-button mx-1 hx-button-dropdown expandedFilter__button" hxDropdownToggle>
+    <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.SingleSelect">
+      <a [id]="filter?.id + '-trigger'" class="hx-button hx-button-dropdown expandedFilter__button" hxDropdownToggle>
         <span class="is-text-weight-light">{{filter?.label}}:&nbsp;</span>
         <span class="hx-icon-control" *ngIf="filter?.selected?.icon"><i class="{{filter?.selected?.icon}} mr-1"></i></span>
         <span class="is-text-weight-bolder is-text-ellipsed" title="{{filter?.selected?.label}}">{{filter?.selected?.label}}</span>
