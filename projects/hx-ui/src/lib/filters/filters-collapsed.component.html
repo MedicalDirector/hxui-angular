@@ -55,7 +55,7 @@
         </div>
         <ul [id]="selectedFilter?.id + '-options'" class="hx-list-group options">
           <li class="options__item"  *ngFor="let option of selectedFilter?.options;trackBy: trackByFn">
-            <a (click)="selectFilterOption(option)" title="{{option?.label}}">
+            <a hxaDropdownItem (click)="selectFilterOption(option)" title="{{option?.label}}">
               <div class="hx-list-action" *ngIf="option?.icon">
                 <i class="{{option?.icon}}"></i>
               </div>
