@@ -108,10 +108,10 @@
                 <ng-container *ngFor="let childAction of action.children;trackBy: trackByFn">
                   <a *ngIf="!getActionDisabledState(childAction) && childAction.routeType === ActionConfigRouteType.Route"
                       [routerLink]="childAction.route"
-                      class="hx-dropdown-item {{childAction.css}}">{{childAction.label}}</a>
+                      class="hx-dropdown-item {{childAction.css}}" id="{{childAction.id}}">{{childAction.label}}</a>
                   <a *ngIf="!getActionDisabledState(childAction) && childAction.routeType === ActionConfigRouteType.Callback"
                       (click)='executeCallback($event,childAction.callback)'
-                      class="hx-dropdown-item {{childAction.css}}">{{childAction.label}}</a>
+                      class="hx-dropdown-item {{childAction.css}}" id="{{childAction.id}}" >{{childAction.label}}</a>
                 </ng-container>
 
               </div>
