@@ -1,6 +1,6 @@
 {
   "name": "@hxui/angular",
-  "version": "2.0.68",
+  "version": "2.0.69",
   "peerDependencies": {
     "@angular/common": "6.0.4",
     "@angular/core": "6.0.4",
