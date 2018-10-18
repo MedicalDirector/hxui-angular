@@ -93,25 +93,27 @@
             </span>
 
             <!-- action with children -->
-            <div class="hx-dropdown" hxDropdown  container="body" *ngIf="hasChildren(action)" [isDisabled]="!!row.actionDisabled">
+            <div class="hx-dropdown" hxaDropdown  *ngIf="hasChildren(action)" [isDisabled]="!!row.actionDisabled">
             <span [hxTooltip]="action.tooltip?.content"
                   placement="{{action.tooltip?.config.placement}}"
                   [context]="action.tooltip?.config.context"
                   [disabled]="action.tooltip?.config.disabled">
-                <button class="hx-button is-flat hx-button-dropdown" [class.is-small]="config.size === TabularSize.Small" hxDropdownToggle type="button">
+                <button class="hx-button is-flat hx-button-dropdown" [class.is-small]="config.size === TabularSize.Small" hxaDropdownToggle type="button">
                 <i class="icon {{action.icon}}"></i>
                 </button>
             </span>
 
-              <div class="hx-dropdown-menu" *hxDropdownMenu>
+              <div class="hx-dropdown-menu" *hxaDropdownMenu>
 
                 <ng-container *ngFor="let childAction of action.children;trackBy: trackByFn">
                   <a *ngIf="!getActionDisabledState(childAction) && childAction.routeType === ActionConfigRouteType.Route"
                       [routerLink]="childAction.route"
-                      class="hx-dropdown-item {{childAction.css}}" id="{{childAction.id}}">{{childAction.label}}</a>
+                      hxaDropdownItem
+                      class="hx-dropdown-item {{childAction.css}}" [id]="childAction.id">{{childAction.label}}</a>
                   <a *ngIf="!getActionDisabledState(childAction) && childAction.routeType === ActionConfigRouteType.Callback"
                       (click)='executeCallback($event,childAction.callback)'
-                      class="hx-dropdown-item {{childAction.css}}" id="{{childAction.id}}" >{{childAction.label}}</a>
+                       hxaDropdownItem
+                      class="hx-dropdown-item {{childAction.css}}" [id]="childAction.id" >{{childAction.label}}</a>
                 </ng-container>
 
               </div>
