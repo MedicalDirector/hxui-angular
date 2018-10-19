@@ -355,6 +355,8 @@ export class SelectizeComponent
     });
 
     this.selectize.setValue(stringValue);
+    this.evalHasError();
+    this.isValid = (this.selectize.getValue().length > 0);
   }
 
   /**
