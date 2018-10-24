@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatepickerComponent } from './datepicker.component';
 import { DatepickerFormComponent } from './datepicker-form.component';
 import {PositioningService} from '../positioning/positioning.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 describe('DatepickerComponent', () => {
@@ -11,6 +12,7 @@ describe('DatepickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule, FormsModule],
       declarations: [ DatepickerFormComponent, DatepickerComponent ],
       providers: [PositioningService]
     })

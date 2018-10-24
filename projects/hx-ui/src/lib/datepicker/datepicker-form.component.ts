@@ -210,13 +210,11 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
 
   public validateIsNotBeforeDate(date: Date): boolean {
     const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
     return normalisedDate.getTime() < this.presentDate.getTime();
   }
 
   public validateIsNotAfterDate(date: Date): boolean {
     const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
     return normalisedDate.getTime() > this.presentDate.getTime();
   }
 

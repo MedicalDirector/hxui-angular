@@ -132,46 +132,7 @@
         }
       }
     },
-    "hxui-angular": {
-      "root": "projects/hxui-angular",
-      "sourceRoot": "projects/hxui-angular/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/hxui-angular/tsconfig.lib.json",
-            "project": "projects/hxui-angular/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "project": "projects/hxui-angular/ng-package.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/hxui-angular/src/test.ts",
-            "tsConfig": "projects/hxui-angular/tsconfig.spec.json",
-            "karmaConfig": "projects/hxui-angular/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/hxui-angular/tsconfig.lib.json",
-              "projects/hxui-angular/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
+
     "HxUi": {
       "root": "projects/hx-ui",
       "sourceRoot": "projects/hx-ui/src",

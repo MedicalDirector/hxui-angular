@@ -1,13 +1,13 @@
 import {TextInputModule} from './text-input.module';
 
-describe('TextFieldModule', () => {
-  let textFieldModule: TextInputModule;
+describe('TextInputModule', () => {
+  let textInputModule: TextInputModule;
 
   beforeEach(() => {
-    textFieldModule = new TextInputModule();
+    textInputModule = new TextInputModule();
   });
 
   it('should create an instance', () => {
-    expect(textFieldModule).toBeTruthy();
+    expect(textInputModule).toBeTruthy();
   });
 });
