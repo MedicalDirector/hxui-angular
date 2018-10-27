@@ -7,16 +7,24 @@ export class SelectizeConfig  {
   /**
    * Form label text
    *
-   * Default: ''
+   * Default: 'Selectize Label'
    */
   label = 'Selectize Label';
 
   /**
    * Helper text shown on focus or error
    *
-   * Default: ''
+   * Default: 'Selectize help text'
    */
   help = 'Selectize help text';
+
+  /**
+   * Force caret to show.
+   * Only applies to multi select.
+   *
+   * Default: false
+   */
+  hasCaret = false;
 
   /**
    * Mandatory boolean controls whether the * is shown in the label or not.

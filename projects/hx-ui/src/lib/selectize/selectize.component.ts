@@ -100,6 +100,7 @@ export class SelectizeComponent
     this.selectize.on('item_add', this.onSelectizeItemSelected.bind(this));
     this.updatePlaceholder();
     this.onEnabledStatusChange();
+    this.hasCaret();
   }
 
   ngOnDestroy() {
@@ -262,6 +263,14 @@ export class SelectizeComponent
    */
   onEnabledStatusChange(): void {
     this.enabled ? this.selectize.enable() : this.selectize.disable();
+  }
+
+
+  hasCaret() {
+    if (this.config.hasCaret) {
+      const parent = $(this.selectize.$control).parent();
+      parent.addClass('hasCaret');
+    }
   }
 
   /**

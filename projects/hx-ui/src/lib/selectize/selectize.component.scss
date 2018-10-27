@@ -127,6 +127,10 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 		padding: $padding-top 0 $padding-bottom;
 	}
 
+  .selectize-control.multi.hasCaret &.has-items{
+    padding-right:1rem;
+  }
+
 	&.full {
 		background-color: $selectize-color-input-full;
 	}
@@ -261,7 +265,8 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	-webkit-overflow-scrolling: touch;
 }
 
-.selectize-control.single .selectize-input {
+.selectize-control.single .selectize-input,
+.selectize-control.hasCaret .selectize-input{
 	&, input { cursor: pointer; }
 	&.input-active, &.input-active input { cursor: text; }
 
@@ -285,8 +290,16 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	}
 }
 
+.selectize-control.multi.hasCaret .selectize-input.has-items{
+  &:after {
+    top: initial;
+    bottom:1.3rem;
+  }
+}
+
 .selectize-control.rtl {
-	&.single .selectize-input:after {
+	&.single .selectize-input:after,
+  &.hasCaret .selectize-input:after {
 		left: $selectize-arrow-offset;
 		right: auto;
 	}

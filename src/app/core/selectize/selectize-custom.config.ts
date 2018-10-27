@@ -3,6 +3,8 @@ import {SelectizeCustomItemModel} from './selectize-custom-item.model';
 
 export class SelectizeCustomConfig extends SelectizeConfig {
 
+  public hasCaret = true;
+
   public render = {
     item: (item: SelectizeCustomItemModel, escape: Function): string => {
 
