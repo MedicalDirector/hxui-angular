@@ -37,7 +37,7 @@ export const SELECTIZE_VALUE_ACCESSOR: any = {
 
 @Component({
   selector: 'hxa-selectize',
-  template: `<div class="hx-input-control" [class.is-focused]="isFocused" [class.is-valid]="isValid">
+  template: `<div class="hx-input-control" [ngClass]="config.inputControlClasses" [class.is-focused]="isFocused" [class.is-valid]="isValid">
                   <select #selectizeInput></select>
                   <label for="{{id}}" class="hx-label">{{config.label}} <sup *ngIf="config.mandatory">*</sup></label>
                   <div class="hx-help">{{config.help}}</div>

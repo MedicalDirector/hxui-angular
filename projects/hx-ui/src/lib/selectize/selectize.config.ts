@@ -34,6 +34,14 @@ export class SelectizeConfig  {
    */
   mandatory = false;
 
+
+  /**
+   * Array of css class names that can be appended to the input control element
+   *
+   * Default: []
+   */
+  inputControlClasses = [];
+
   /**
    *  The string to separate items by. When typing an item in a multi-selection control
    *  allowing creation, then the delimiter, the item is added. If you paste
