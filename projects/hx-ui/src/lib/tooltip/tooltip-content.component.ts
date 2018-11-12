@@ -9,16 +9,15 @@ import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'hx-tooltip-content, hxa-tooltip-content',
-  template: `   
-      <div class="hxui-reset"> 
+  template: `
+      <div class="hxui-reset">
         <div class="hx-tooltip is-{{ placement }}"
             [class.is-active]='visibility === visibilityEnum.Visible'
             [class.is-success]="context === contextEnum.Success"
             [class.is-warning]="context === contextEnum.Warning"
             [class.is-danger]="context === contextEnum.Danger"
             role="tooltip">
-            <div class="hx-tooltip-content">
-              {{ content }}
+            <div class="hx-tooltip-content" [innerHtml]="content" [style.max-width.px]="maxWidth">
             </div>
         </div>
       </div>
@@ -41,6 +40,9 @@ export class TooltipContentComponent {
 
   @Input()
   context: Context = Context.None;
+
+  @Input()
+  maxWidth: number = 200;
 
   /** Enums to be used in the template **/
   contextEnum = Context;
