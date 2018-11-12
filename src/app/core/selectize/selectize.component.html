@@ -114,7 +114,16 @@
       </div>
 
     </div>
-    <div class="hx-column"></div>
+    <div class="hx-column">
+
+      <div class="hx-card not-scrollable">
+        <div class="hx-card-content">
+          <hxa-selectize [config]="customSelectizeConfig" [options]="selectizeOptions2" [(ngModel)]="selectedCustomSelectValue2"></hxa-selectize>
+          <pre>Current value: {{selectedCustomSelectValue2 | json}}</pre>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <br>
