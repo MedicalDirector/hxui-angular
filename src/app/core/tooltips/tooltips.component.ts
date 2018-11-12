@@ -1,9 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PageScrollService } from 'ngx-page-scroll';
 import { DOCUMENT } from '@angular/common';
 import { CoreBaseComponent } from '../core-base.component';
 import { TooltipsCode } from './tooltips.code';
 import {Context} from '../../../../projects/hx-ui/src/lib/enums';
+
 
 @Component({
   selector: 'app-tooltips',
@@ -11,10 +12,14 @@ import {Context} from '../../../../projects/hx-ui/src/lib/enums';
   styles: [':host { display:flex; flex: 1; min-width: 0; }']
 })
 export class TooltipsComponent extends CoreBaseComponent implements OnInit {
+
+  @ViewChild('toolTipContent') toolTipContent: ElementRef;
+
   code = new TooltipsCode();
   private _dynamicTooltipText = 'sample text';
 
   public contextEnum = Context;
+  public tooltipTemplateHtml = '';
 
   public get dynamicTooltipText(): string {
     return this._dynamicTooltipText;
@@ -31,5 +36,7 @@ export class TooltipsComponent extends CoreBaseComponent implements OnInit {
     super(pageScrollService, document);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.tooltipTemplateHtml = this.toolTipContent.nativeElement.innerHTML;
+  }
 }

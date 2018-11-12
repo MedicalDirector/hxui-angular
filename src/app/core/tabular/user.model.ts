@@ -55,7 +55,8 @@ export class UserModel implements ITabularRow {
             disabled: false,
             animation: false,
             showDelay: 0,
-            hideDelay: 0
+            hideDelay: 0,
+            maxWidth: 200
           },
           content: 'Prescriptions'
         }
@@ -73,7 +74,8 @@ export class UserModel implements ITabularRow {
             disabled: false,
             animation: false,
             showDelay: 0,
-            hideDelay: 0
+            hideDelay: 0,
+            maxWidth: 200
           },
           content: 'Edit'
         }
@@ -91,7 +93,8 @@ export class UserModel implements ITabularRow {
             disabled: false,
             animation: false,
             showDelay: 0,
-            hideDelay: 0
+            hideDelay: 0,
+            maxWidth: 200
           },
           content: 'Delete'
         }
@@ -108,7 +111,8 @@ export class UserModel implements ITabularRow {
             disabled: false,
             animation: false,
             showDelay: 0,
-            hideDelay: 0
+            hideDelay: 0,
+            maxWidth: 200
           },
           content: 'More options'
         },

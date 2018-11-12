@@ -56,6 +56,9 @@ export class TooltipDirective implements OnDestroy {
   @Input()
   context: Context = Context.None;
 
+  @Input()
+  maxWidth: number = 200;
+
   @HostListener('focusin')
   @HostListener('mouseenter')
   show() {
@@ -252,6 +255,7 @@ export class TooltipDirective implements OnDestroy {
         this._tooltipInstance.content = this.content;
         this._tooltipInstance.placement = this.placement;
         this._tooltipInstance.context = this.context;
+        this._tooltipInstance.maxWidth = this.maxWidth;
 
 
       this._ngZone.onMicrotaskEmpty.asObservable().pipe(
