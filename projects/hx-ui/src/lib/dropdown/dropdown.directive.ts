@@ -148,13 +148,11 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
       this._viewContainerRef
     );
 
-    const positionStrategy = this.overlay
+     const positionStrategy = this.overlay
       .position()
       .flexibleConnectedTo(this._elementRef)
       .withFlexibleDimensions(false)
       .withDefaultOffsetX(0)
-      .withDefaultOffsetY(this._elementRef.nativeElement.clientHeight)
-      .withViewportMargin(this._elementRef.nativeElement.clientHeight)
       .withPositions([
         { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' }
       ])
@@ -246,7 +244,7 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
 
     if (placement === 'top' || placement === 'bottom') {
       originPlacement = {
-        originX: 'center',
+        originX: 'start',
         originY: placement === 'top' ? 'top' : 'bottom'
       };
     } else if (placement === 'left') {
