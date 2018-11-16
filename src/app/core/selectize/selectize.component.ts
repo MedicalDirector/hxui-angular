@@ -23,12 +23,12 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
 
 
   public selectedMultiSelectValue: string[] = [];
-  public selectedCustomSelectValue: SelectizeCustomItemModel[] = [];
   public selectedSingleSelectValue: string[] = [];
   public code = new SelectizeCode();
   public multiSelectizeConfig = new SelectizeConfig();
   public singleSelectizeConfig = new SelectizeConfig();
   public customSelectizeConfig = new SelectizeCustomConfig();
+  public customSelectizeConfig2 = new SelectizeCustomConfig();
   public selectizeOptions: SelectizeCustomItemModel[] = <SelectizeCustomItemModel[]>[
     {
       label: 'Iron studies',
@@ -79,13 +79,80 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
       info: false
     }
   ];
+  public selectizeOptions2: SelectizeCustomItemModel[] = <SelectizeCustomItemModel[]>[
+    {
+      label: 'Iron studies2',
+      value: 'ironstudies',
+      error: true,
+      info: true
+    },
+    {
+      label: 'Glucose fasting2',
+      value: 'glucosefasting',
+      error: false,
+      info: false
+    },
+    {
+      label: 'HbA1c2',
+      value: 'hba1c',
+      error: false,
+      info: false
+    },
+  ];
+  public selectizeOptions3: SelectizeCustomItemModel[] = <SelectizeCustomItemModel[]>[
+    {
+      label: 'Iron studies3',
+      value: 'ironstudies',
+      error: true,
+      info: true
+    },
+    {
+      label: 'Glucose fasting3',
+      value: 'glucosefasting',
+      error: false,
+      info: false
+    }
+  ];
+  public selectizeOptions4: SelectizeCustomItemModel[] = <SelectizeCustomItemModel[]>[
+    {
+      label: 'Iron studies4',
+      value: 'ironstudies',
+      error: true,
+      info: true
+    },
+    {
+      label: 'Glucose fasting4',
+      value: 'glucosefasting',
+      error: false,
+      info: false
+    }
+  ];
   public selectedValues: string[] = [];
+
+  private _selectedCustomSelectValue: SelectizeCustomItemModel[] = [];
+  private _selectedCustomSelectValue2: SelectizeCustomItemModel[] = [];
+
+  get selectedCustomSelectValue(): SelectizeCustomItemModel[] {
+    return this._selectedCustomSelectValue;
+  };
+  set selectedCustomSelectValue(v: SelectizeCustomItemModel[]) {
+    this._selectedCustomSelectValue = v;
+    console.log(this._selectedCustomSelectValue.length);
+    this.selectizeOptions2 = (this._selectedCustomSelectValue.length === 2)? this.selectizeOptions3 : this.selectizeOptions4;
+  };
+  get selectedCustomSelectValue2(): SelectizeCustomItemModel[]{
+    return this._selectedCustomSelectValue2;
+  }
+  set selectedCustomSelectValue2(v: SelectizeCustomItemModel[]) {
+    this._selectedCustomSelectValue2 = v;
+  };
 
 
 
   ngOnInit(): void {
     this.setMultiSelectizeConfig();
     this.selectedCustomSelectValue = [this.selectizeOptions[0], this.selectizeOptions[1], this.selectizeOptions[2], this.selectizeOptions[5]];
+    this.selectedCustomSelectValue2 = [this.selectizeOptions2[1]];
   }
 
   private setMultiSelectizeConfig() {

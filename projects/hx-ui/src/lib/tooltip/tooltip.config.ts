@@ -16,4 +16,6 @@ export class TooltipConfig {
   public showDelay = 0;
   /** delay in ms before hiding the tooltip after hide is called */
   public hideDelay = 0;
+  /** max width of the tooltip */
+  public maxWidth = 200;
 }
