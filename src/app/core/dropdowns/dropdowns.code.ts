@@ -3,12 +3,12 @@ export class DropdownsCode {
   usage =
     `
     import {DropdownModule} from "@hxui/angular";
-    
+
      @NgModule({
         imports: [DropdownModule.forRoot(),...]
      })
      export class AppModule(){
-    
+
     `;
 
   example =
@@ -32,7 +32,7 @@ export class DropdownsCode {
   exampleTemplate = `
   <div class="hx-columns">
       <div class="hx-column is-flex">
-        <div class="hx-dropdown mr-1" hxaDropdown [autoClose]="false">
+        <div class="hx-dropdown mr-1" hxaDropdown [autoClose]="false" placement="top">
          <button class="hx-button" hxDropdownToggle type="button">
             <span>Dropdown</span>
             <span class="hx-icon-control"><i class="icon icon-caret-down"></i></span>
@@ -56,27 +56,27 @@ export class DropdownsCode {
   exampleComponent = `
   import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
   import {DropdownDirective} from '../../../modules/dropdown/dropdown.directive';
-  
+
   @Component({
     selector: 'app-dropdowns',
     templateUrl: './dropdowns.component.html'
   })
   export class DropdownsComponent {
-  
+
     @ViewChild('dropdown') dropdown: DropdownDirective;
-  
+
     constructor() {}
-  
+
     toggle($event) {
       $event.stopPropagation();
       this.dropdown.toggle();
     }
-  
+
     show($event) {
       $event.stopPropagation();
       this.dropdown.show();
     }
-  
+
     hide($event) {
       $event.stopPropagation();
       this.dropdown.hide();
@@ -100,6 +100,6 @@ export class DropdownsCode {
           </div>
       </div>
      </div>
-    </div>    
+    </div>
   `;
 }
