@@ -9,10 +9,10 @@ import { PageScrollService } from 'ngx-page-scroll';
 import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/common';
 import { SelectizeConfig } from '../../../../projects/hx-ui/src/lib/selectize/selectize.config';
-import {ISelectizeItem} from '../../../../projects/hx-ui/src/lib/selectize/selectize-item.interface';
 import {SelectizeCode} from './selectize.code';
 import {SelectizeCustomItemModel} from './selectize-custom-item.model';
 import {SelectizeCustomConfig} from './selectize-custom.config';
+import {BreakpointsService} from '../../../../projects/hx-ui/src/lib/utils/breakpoint.service';
 
 @Component({
   selector: 'app-selectize',
@@ -28,7 +28,6 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
   public multiSelectizeConfig = new SelectizeConfig();
   public singleSelectizeConfig = new SelectizeConfig();
   public customSelectizeConfig = new SelectizeCustomConfig();
-  public customSelectizeConfig2 = new SelectizeCustomConfig();
   public selectizeOptions: SelectizeCustomItemModel[] = <SelectizeCustomItemModel[]>[
     {
       label: 'Iron studies',
@@ -138,9 +137,9 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
   set selectedCustomSelectValue(v: SelectizeCustomItemModel[]) {
     this._selectedCustomSelectValue = v;
     console.log(this._selectedCustomSelectValue.length);
-    this.selectizeOptions2 = (this._selectedCustomSelectValue.length === 2)? this.selectizeOptions3 : this.selectizeOptions4;
+    this.selectizeOptions2 = (this._selectedCustomSelectValue.length === 2) ? this.selectizeOptions3 : this.selectizeOptions4;
   };
-  get selectedCustomSelectValue2(): SelectizeCustomItemModel[]{
+  get selectedCustomSelectValue2(): SelectizeCustomItemModel[] {
     return this._selectedCustomSelectValue2;
   }
   set selectedCustomSelectValue2(v: SelectizeCustomItemModel[]) {
@@ -174,8 +173,9 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
 
   constructor(
     protected pageScrollService: PageScrollService,
+    protected breakpointsService: BreakpointsService,
     @Inject(DOCUMENT) protected document: any
   ) {
-    super(pageScrollService, document);
+    super(pageScrollService, breakpointsService, document);
   }
 }

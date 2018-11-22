@@ -3,6 +3,7 @@ import { PageScrollService } from 'ngx-page-scroll';
 import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/common';
 import { DatepickersCode } from './datepickers.code';
+import {BreakpointsService} from '../../../../projects/hx-ui/src/lib/utils/breakpoint.service';
 
 @Component({
   selector: 'app-datepickers',
@@ -16,8 +17,9 @@ export class DatepickersComponent extends CoreBaseComponent {
 
   constructor(
     protected pageScrollService: PageScrollService,
+    protected breakpointsService: BreakpointsService,
     @Inject(DOCUMENT) protected document: any
   ) {
-    super(pageScrollService, document);
+    super(pageScrollService, breakpointsService, document);
   }
 }

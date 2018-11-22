@@ -44,7 +44,7 @@
 
       </span>
 
-      <div class="hx-overlay"></div>
+      <div *ngIf="nav" class="hx-overlay"></div>
 
       <div class="hx-nav-navicon" [ngClass]="{ 'is-closed': !nav }" (click)="nav = !nav"><i class="hx-icon icon-navicon"></i></div>
 

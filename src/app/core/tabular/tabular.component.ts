@@ -11,6 +11,7 @@ import {DOCUMENT} from '@angular/common';
 import {ITabularRow} from '../../../../projects/hx-ui/src/lib/tabular/tabular-row.interface';
 import {TabularCode} from './tabular.code';
 import {Observable} from 'rxjs';
+import {BreakpointsService} from '../../../../projects/hx-ui/src/lib/utils/breakpoint.service';
 
 @Component({
   selector: 'app-tabular',
@@ -100,9 +101,10 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
   }
 
   constructor(protected pageScrollService: PageScrollService,
+              protected breakpointsService: BreakpointsService,
               @Inject(DOCUMENT) protected document: any,
               private service: TabularService) {
-    super(pageScrollService, document);
+    super(pageScrollService, breakpointsService, document);
 
   }
 

@@ -3,6 +3,7 @@ import {CoreBaseComponent} from '../core-base.component';
 import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/common';
 import {TabsCode} from './tabs.code';
+import {BreakpointsService} from '../../../../projects/hx-ui/src/lib/utils/breakpoint.service';
 
 @Component({
   selector: 'app-tabs',
@@ -44,8 +45,9 @@ export class TabsComponent extends CoreBaseComponent implements OnInit {
   }
 
   constructor(protected pageScrollService: PageScrollService,
+              protected breakpointsService: BreakpointsService,
               @Inject(DOCUMENT) protected document: any) {
-    super(pageScrollService, document);
+    super(pageScrollService, breakpointsService, document);
   }
 
   ngOnInit() {
