@@ -22,9 +22,11 @@ export class FiltersModel implements IFiltersConfig {
 
    setSelectedOption(option?: IFilterOption) {
     if (option) {
-      option.selected = true;
+      this.selected.selected = false;
       this.selected = option;
+      option.selected =  true;
     } else {
+      // set preselected option
       if (this.options.length && !this.selected) {
         this.selected = this.options.find((opt) => {
           return opt.selected;
@@ -35,7 +37,9 @@ export class FiltersModel implements IFiltersConfig {
 
   setDefaultOption() {
     if (this.options.length) {
+      this.selected.selected = false;
       this.selected = this.options[this.defaultIndex];
+      this.selected.selected = true;
     }
   }
 

@@ -29,7 +29,7 @@ export class EmptyStateComponent implements OnInit {
    * @param event
    * @param cb
    */
-  executeCallback(event: Event, cb: any[]) {
+  executeCallback(event: any, cb: any[]) {
     if (cb.length) {
       if (cb.length === 1) { // if callback has no arguments
         cb[0]();

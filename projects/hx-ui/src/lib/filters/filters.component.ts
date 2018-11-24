@@ -113,7 +113,7 @@ export class FiltersComponent implements OnInit, DoCheck {
    * Called when a filter is selected
    * Calls the parsed callback with optional arguments + selected filter option
    */
-  private executeFilterCallback(filter: FiltersModel) {
+  executeFilterCallback(filter: FiltersModel) {
     if (filter.callback.length) {
         const args: any[] = [];
         // if callback has 1 or more arguments
