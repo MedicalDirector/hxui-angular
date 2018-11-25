@@ -12,7 +12,7 @@ import { SelectizeConfig } from '../../../../projects/hx-ui/src/lib/selectize/se
 import {SelectizeCode} from './selectize.code';
 import {SelectizeCustomItemModel} from './selectize-custom-item.model';
 import {SelectizeCustomConfig} from './selectize-custom.config';
-import {BreakpointsService} from '../../../../projects/hx-ui/src/lib/utils/breakpoint.service';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-selectize',
@@ -173,9 +173,9 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
 
   constructor(
     protected pageScrollService: PageScrollService,
-    protected breakpointsService: BreakpointsService,
+    protected breakpointObserver: BreakpointObserver,
     @Inject(DOCUMENT) protected document: any
   ) {
-    super(pageScrollService, breakpointsService, document);
+    super(pageScrollService, breakpointObserver, document);
   }
 }

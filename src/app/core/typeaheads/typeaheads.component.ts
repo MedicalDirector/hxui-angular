@@ -3,7 +3,7 @@ import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/common';
 import {CoreBaseComponent} from '../core-base.component';
 import {TypeaheadsCode} from './typeaheads.code';
-import {BreakpointsService} from '../../../../projects/hx-ui/src/lib/utils/breakpoint.service';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-typeaheads',
@@ -35,9 +35,9 @@ export class TypeaheadsComponent extends CoreBaseComponent implements OnInit {
     'SALBUTAMOL injection 1mg/mL'];
 
   constructor(protected pageScrollService: PageScrollService,
-              protected breakpointsService: BreakpointsService,
+              protected breakpointObserver: BreakpointObserver,
               @Inject(DOCUMENT) protected document: any) {
-    super(pageScrollService, breakpointsService, document);
+    super(pageScrollService, breakpointObserver, document);
   }
   ngOnInit() {
   }

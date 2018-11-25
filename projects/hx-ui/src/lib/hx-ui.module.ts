@@ -15,7 +15,6 @@ import {AccordionModule} from './accordion/accordion.module';
 import {FiltersModule} from './filters/filters.module';
 import {LoadersModule} from './loaders/loaders.module';
 import {TextInputModule} from './text-input/text-input.module';
-import {breakpointsProviders} from './utils/breakpoint.service';
 
 @NgModule({
   imports: [
@@ -40,8 +39,7 @@ export class HxUiModule {
     return {
       ngModule: HxUiModule,
       providers: [
-        ModalService,
-        breakpointsProviders()
+        ModalService
       ]
     };
   }
