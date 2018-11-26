@@ -6,8 +6,8 @@ import {Observable, fromEvent} from 'rxjs/index';
 })
 export class OnlineStatusService {
 
-  public onlineStatus: Observable<Event> = fromEvent(window, 'online');
-  public offlineStatus: Observable<Event> = fromEvent(window, 'offline');
+  public online: Observable<Event> = fromEvent(window, 'online');
+  public offline: Observable<Event> = fromEvent(window, 'offline');
 
   constructor() { }
 }

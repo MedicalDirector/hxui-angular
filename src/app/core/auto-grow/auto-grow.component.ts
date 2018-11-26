@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {AutoGrowCode} from './auto-grow.code';
 import {CoreBaseComponent} from '../core-base.component';
 import {PageScrollService} from 'ngx-page-scroll';
-import {BreakpointsService} from '../../../../projects/hx-ui/src/lib/utils/breakpoint.service';
+import {BreakpointObserver} from '@angular/cdk/layout';
 import {DOCUMENT} from '@angular/common';
 
 @Component({
@@ -16,10 +16,10 @@ export class AutoGrowComponent extends CoreBaseComponent implements OnInit {
 
   constructor(
     protected pageScrollService: PageScrollService,
-    protected breakpointsService: BreakpointsService,
+    protected breakpointObserver: BreakpointObserver,
     @Inject(DOCUMENT) protected document: any
   ) {
-    super(pageScrollService, breakpointsService, document);
+    super(pageScrollService, breakpointObserver, document);
   }
 
   ngOnInit() {

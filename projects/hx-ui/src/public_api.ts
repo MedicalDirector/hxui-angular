@@ -96,7 +96,6 @@ export * from './lib/utils/decorators';
 export * from './lib/utils/trigger.class';
 export * from './lib/utils/triggers';
 export * from './lib/utils/utils.class';
-export * from './lib/utils/breakpoint.service';
 export * from './lib/utils/services/online-status.service';
 
 export * from './lib/component-loader/component-loader.factory';

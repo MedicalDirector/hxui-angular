@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { PageScrollService } from 'ngx-page-scroll';
 import { CoreBaseComponent } from '../core-base.component';
 import { AccordionCode } from './accordion.code';
-import {BreakpointsService} from '../../../../projects/hx-ui/src/lib/utils/breakpoint.service';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-accordion',
@@ -16,9 +16,9 @@ export class AccordionComponent extends CoreBaseComponent {
 
   constructor(
     protected pageScrollService: PageScrollService,
-    protected breakpointsService: BreakpointsService,
+    protected breakpointObserver: BreakpointObserver,
     @Inject(DOCUMENT) protected document: any
   ) {
-    super(pageScrollService, breakpointsService, document);
+    super(pageScrollService, breakpointObserver, document);
   }
 }

@@ -6,7 +6,7 @@ import {FiltersCode} from './filters.code';
 import {IFiltersConfig} from '../../../../projects/hx-ui/src/lib/filters/filters-config.interface';
 import {FilterType} from '../../../../projects/hx-ui/src/lib/filters/filters-type.enum';
 import {FiltersComponent as HxFiltersComponent } from '../../../../projects/hx-ui/src/lib/filters/filters.component';
-import {BreakpointsService} from '../../../../projects/hx-ui/src/lib/utils/breakpoint.service';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-filters',
@@ -185,10 +185,10 @@ export class FiltersComponent extends CoreBaseComponent {
 
   constructor(
     protected pageScrollService: PageScrollService,
-    protected breakpointsService: BreakpointsService,
+    protected breakpointObserver: BreakpointObserver,
     @Inject(DOCUMENT) protected document: any
   ) {
-    super(pageScrollService, breakpointsService, document);
+    super(pageScrollService, breakpointObserver, document);
   }
 
   resetFilters() {

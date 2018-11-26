@@ -3,7 +3,7 @@ import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/common';
 import {CoreBaseComponent} from '../core-base.component';
 import {PaginationCode} from './pagination.code';
-import {BreakpointsService} from '../../../../projects/hx-ui/src/lib/utils/breakpoint.service';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-pagination',
@@ -18,9 +18,9 @@ export class PaginationComponent extends CoreBaseComponent implements OnInit {
   public smallnumPages = 0;
 
   constructor(protected pageScrollService: PageScrollService,
-              protected breakpointsService: BreakpointsService,
+              protected breakpointObserver: BreakpointObserver,
               @Inject(DOCUMENT) protected document: any) {
-    super(pageScrollService, breakpointsService, document);
+    super(pageScrollService, breakpointObserver, document);
   }
 
   public setPage(pageNo: number): void {

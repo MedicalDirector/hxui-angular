@@ -4,7 +4,7 @@ import { DOCUMENT } from '@angular/common';
 import { CoreBaseComponent } from '../core-base.component';
 import { TooltipsCode } from './tooltips.code';
 import {Context} from '../../../../projects/hx-ui/src/lib/enums';
-import {BreakpointsService} from '../../../../projects/hx-ui/src/lib/utils/breakpoint.service';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 
 @Component({
@@ -32,10 +32,10 @@ export class TooltipsComponent extends CoreBaseComponent implements OnInit {
 
   constructor(
     protected pageScrollService: PageScrollService,
-    protected breakpointsService: BreakpointsService,
+    protected breakpointObserver: BreakpointObserver,
     @Inject(DOCUMENT) protected document: any
   ) {
-    super(pageScrollService, breakpointsService, document);
+    super(pageScrollService, breakpointObserver, document);
   }
 
   ngOnInit() {

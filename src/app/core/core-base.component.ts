@@ -1,7 +1,7 @@
 import {ElementRef, Inject, Injectable, ViewChild} from '@angular/core';
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/common';
-import {BreakpointEvent, BreakpointsService} from '../../../projects/hx-ui/src/lib/utils/breakpoint.service';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 @Injectable()
 export class CoreBaseComponent {
@@ -11,11 +11,13 @@ export class CoreBaseComponent {
   protected contentsNav = true;
 
   constructor(protected pageScrollService: PageScrollService,
-              protected breakpointsService: BreakpointsService,
+              protected breakpointObserver: BreakpointObserver,
               @Inject(DOCUMENT) protected document: any) {
 
-    this.breakpointsService.changes.subscribe((data: BreakpointEvent) => {
-      this.contentsNav = (data.name !== 'mobile');
+    breakpointObserver.observe([
+      Breakpoints.Handset
+    ]).subscribe(result => {
+      this.contentsNav = (!result.matches);
     });
   }
 
