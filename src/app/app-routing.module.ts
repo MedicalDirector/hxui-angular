@@ -18,6 +18,7 @@ import { AccordionComponent } from './core/accordion/accordion.component';
 import {FiltersComponent} from './core/filters/filters.component';
 import {LoadersComponent} from './core/loaders/loaders.component';
 import {TextInputComponent} from './core/text-input/text-input.component';
+import {OnlineStatusComponent} from './core/online-status/online-status.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'filters',  component: FiltersComponent },
   { path: 'loaders',  component: LoadersComponent },
   { path: 'text-input',  component: TextInputComponent },
+  { path: 'online-status',  component: OnlineStatusComponent },
   { path: '**',  component: PageNotFoundComponent },
 ];
 @NgModule({

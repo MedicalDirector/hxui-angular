@@ -109,6 +109,15 @@ export class AppComponent {
           link: '/text-input'
         }
       ]
+    },
+    {
+      cat: 'Services',
+      items: [
+        {
+          name: 'Online Status',
+          link: '/online-status'
+        }
+      ]
     }
     // {
     //   cat: 'Feedback',

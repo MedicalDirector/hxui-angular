@@ -15,6 +15,7 @@ import {AccordionModule} from './accordion/accordion.module';
 import {FiltersModule} from './filters/filters.module';
 import {LoadersModule} from './loaders/loaders.module';
 import {TextInputModule} from './text-input/text-input.module';
+import {OnlineStatusService} from './utils/services/online-status.service';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ export class HxUiModule {
     return {
       ngModule: HxUiModule,
       providers: [
-        ModalService
+        ModalService,
+        OnlineStatusService
       ]
     };
   }

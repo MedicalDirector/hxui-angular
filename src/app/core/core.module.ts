@@ -23,6 +23,7 @@ import { AccordionComponent } from './accordion/accordion.component';
 import { FiltersComponent } from './filters/filters.component';
 import { LoadersComponent } from './loaders/loaders.component';
 import { TextInputComponent } from './text-input/text-input.component';
+import { OnlineStatusComponent } from './online-status/online-status.component';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { TextInputComponent } from './text-input/text-input.component';
       FiltersComponent,
       LoadersComponent,
       TextInputComponent,
+      OnlineStatusComponent,
 
   ],
   providers: [
