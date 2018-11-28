@@ -19,6 +19,7 @@ import {FiltersComponent} from './core/filters/filters.component';
 import {LoadersComponent} from './core/loaders/loaders.component';
 import {TextInputComponent} from './core/text-input/text-input.component';
 import {OnlineStatusComponent} from './core/online-status/online-status.component';
+import {ToastrComponent} from './core/toastr/toastr.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'loaders',  component: LoadersComponent },
   { path: 'text-input',  component: TextInputComponent },
   { path: 'online-status',  component: OnlineStatusComponent },
+  { path: 'toastr',  component: ToastrComponent },
   { path: '**',  component: PageNotFoundComponent },
 ];
 @NgModule({

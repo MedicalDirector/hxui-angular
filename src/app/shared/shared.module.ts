@@ -8,6 +8,7 @@ import {NgxPageScrollModule, PageScrollService} from 'ngx-page-scroll';
 import {HttpClientModule} from '@angular/common/http';
 import {HighlightModule} from 'ngx-highlightjs';
 import {HxUiModule} from '../../../projects/hx-ui/src/lib/hx-ui.module';
+import {ToastrModule} from '../../../projects/hx-ui/src/lib/toastr/toastr.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {HxUiModule} from '../../../projects/hx-ui/src/lib/hx-ui.module';
     BrowserAnimationsModule,
     HxUiModule,
     NgxPageScrollModule,
-    HighlightModule
+    HighlightModule,
+    ToastrModule
   ],
   declarations: [],
   exports: [
@@ -34,7 +36,8 @@ import {HxUiModule} from '../../../projects/hx-ui/src/lib/hx-ui.module';
     BrowserAnimationsModule,
     HxUiModule,
     NgxPageScrollModule,
-    HighlightModule
+    HighlightModule,
+    ToastrModule
   ]
 })
 export class SharedModule {

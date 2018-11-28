@@ -24,6 +24,7 @@ import { FiltersComponent } from './filters/filters.component';
 import { LoadersComponent } from './loaders/loaders.component';
 import { TextInputComponent } from './text-input/text-input.component';
 import { OnlineStatusComponent } from './online-status/online-status.component';
+import { ToastrComponent } from './toastr/toastr.component';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { OnlineStatusComponent } from './online-status/online-status.component';
       LoadersComponent,
       TextInputComponent,
       OnlineStatusComponent,
+      ToastrComponent,
 
   ],
   providers: [
