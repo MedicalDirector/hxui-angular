@@ -12,13 +12,16 @@
         position: absolute;
         z-index: 99;
         left: 0;
-
+        max-width: 21rem;
         &-top {
             bottom: 100%;
         }
 
         &-bottom {
             top: 70%;
+        }
+        & hxa-datepicker {
+          max-width: 21rem;
         }
     }
 
@@ -33,4 +36,8 @@
     top: -.5rem;
     font-size: .75rem;
     color: #41b987;
+}
+hxa-datepicker {
+  border: 1px lightgray solid;
+  max-width: 21rem;
 }

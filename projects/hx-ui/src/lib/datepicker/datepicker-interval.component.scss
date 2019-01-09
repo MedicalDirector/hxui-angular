@@ -1,0 +1,30 @@
+
+.hx-intervals-css {
+  height :12em;
+  background-color: white;
+  // width: 35%;
+  & .hx-dropdowns {
+    display: inline-flex;
+    padding-right: 0%;
+    height: 70%;
+    border-bottom: 1px solid lightgray;
+    background-color: white;
+    & .hx-dropdown-number{
+      width: 13%;
+      margin-right: 5%;
+    }
+    & .choosed-date {
+      margin-left: 9%;
+    }
+  }
+  & .buttonDiv {
+    padding-top: 2.5%;
+    & .chooseButton {
+      float: right;
+      margin-right: 5%;
+    }
+    & .camcelButton {
+      margin-left: 5%;
+    }
+  }
+}

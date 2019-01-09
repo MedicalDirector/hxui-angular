@@ -116,3 +116,18 @@
         }
     }
 }
+hxa-datepicker-calendar {
+  max-width: 21rem;
+
+}
+.hxa-tabs {
+  border: 1px lightgray solid;
+  .hx-tab-container {
+    .hx-nav-tab {
+      margin-bottom: 0 !important;
+    }
+  }
+  .hx-tab-content {
+    padding: 0!important;
+  }
+}

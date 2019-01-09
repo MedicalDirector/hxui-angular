@@ -37,6 +37,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   _calendarInstance: DatepickerComponent | null;
   private _portal: ComponentPortal<DatepickerComponent>;
   private readonly _destroyed = new Subject();
+  public _ChoosedDueDate: any;
 
   @Input()
   disabled = false;
