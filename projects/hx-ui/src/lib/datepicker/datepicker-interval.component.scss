@@ -12,18 +12,28 @@
     & .hx-dropdown-number{
       width: 13%;
       margin-right: 5%;
+      margin-left: 4%;
+      margin-top: 5%;
+    }
+    & .month {
+      select {
+        margin-top: 23%;
+      }
     }
     & .choosed-date {
       margin-left: 9%;
+      margin-top: 5%;
     }
   }
   & .buttonDiv {
-    padding-top: 2.5%;
+    padding-top: 2.6%;
+    padding-bottom: 2.6%;
+    background-color:  rgba(0, 0, 0, 0.04);
     & .chooseButton {
       float: right;
       margin-right: 5%;
     }
-    & .camcelButton {
+    & .cancelButton {
       margin-left: 5%;
     }
   }
