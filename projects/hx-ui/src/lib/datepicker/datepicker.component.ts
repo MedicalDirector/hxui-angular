@@ -11,7 +11,7 @@ import {Visibility} from '../enums';
   styleUrls: ['./datepicker.component.scss']
 })
 export class DatepickerComponent implements OnInit, OnChanges {
-
+  public OpenDiv: Boolean = true;
   @Input()
   selectedDate: Date;
 
