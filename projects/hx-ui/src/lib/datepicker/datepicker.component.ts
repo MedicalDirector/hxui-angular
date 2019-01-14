@@ -1,5 +1,5 @@
 import {
-  Component, OnInit, EventEmitter, Output, Input, SimpleChanges, OnChanges, ElementRef,
+  Component, OnInit, Output, Input, SimpleChanges, OnChanges,
   ChangeDetectorRef
 } from '@angular/core';
 import {Observable, Subject} from 'rxjs/index';
@@ -12,6 +12,8 @@ import {Visibility} from '../enums';
 })
 export class DatepickerComponent implements OnInit, OnChanges {
   public OpenDiv: Boolean = true;
+  public showCalendar: Boolean = true;
+
   @Input()
   selectedDate: Date;
 
@@ -21,6 +23,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
   @Input()
   placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
 
+  @Input()
+  allowInterval = false;
 
   onDateSelected: (inputDate: Date) => void;
   visibilityEnum = Visibility;
@@ -40,7 +44,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
   /** The timeout ID of any current timer set to hide the calendar */
   private _hideTimeoutId: number;
 
-  constructor(private _changeDetectionRef: ChangeDetectorRef) {}
+  constructor(private _changeDetectionRef: ChangeDetectorRef) {
+    }
 
   // Populates the days array with the current month, and completes the view with partial dates from sibling months
   public renderCalendar(): void {
@@ -119,6 +124,14 @@ export class DatepickerComponent implements OnInit, OnChanges {
       this._changeDetectionRef.markForCheck();
       this.visibility = Visibility.Visible;
     }, delay);
+
+    if (this.allowInterval) {
+       this.OpenDiv = true;
+       this.showCalendar = false;
+    } else {
+     this.OpenDiv = false;
+     this.showCalendar = true;
+    }
   }
 
   /**
