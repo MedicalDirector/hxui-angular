@@ -8,8 +8,8 @@ import { state, style, transition, animate, trigger } from "@angular/animations"
         <a class="hx-accordion-header" (click)="toggle()">
             <div class="header-title"><ng-content select="hx-accordion-header, hxa-accordion-header"></ng-content></div>
             <div class="header-icon">
-                <i class="hx-icon is-small icon-angle-down" *ngIf="!expanded"></i>
-                <i class="hx-icon is-small icon-angle-up" *ngIf="expanded"></i>
+                <i class="hx-icon icon-angle-down" *ngIf="!expanded"></i>
+                <i class="hx-icon icon-angle-up" *ngIf="expanded"></i>
             </div>
         </a>
         <div class="hx-accordion-body" [@slideIn]="expanded" *ngIf="expanded">

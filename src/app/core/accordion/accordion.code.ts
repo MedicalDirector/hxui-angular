@@ -1,33 +1,39 @@
 export class AccordionCode {
   usage =
     `
-    import { AccordianModule } from "@hxui/angular";
+    import { AccordionModule } from "@hxui/angular";
 
     @NgModule({
-      imports: [AccordianModule, ...]
+      imports: [AccordionModule, ...]
     })
     export class AppModule() {}
     `;
 
   exampleTemplate =
     `
-    <hx-accordion>
-      <hx-accordion-container>
-        <hx-accordion-header>
-          FIRST CONTAINER HEADER
-        </hx-accordion-header>
-        <hx-accordion-body>
-          FIRST CONTAINER BODY
-        </hx-accordion-body>
-      </hx-accordion-container>
-      <hx-accordion-container>
-        <hx-accordion-header>
-          SECOND CONTAINER HEADER
-        </hx-accordion-header>
-        <hx-accordion-body>
-          SECOND CONTAINER BODY
-        </hx-accordion-body>
-      </hx-accordion-container>
-    </hx-accordian>
+  <hx-accordion>
+    <hx-accordion-container>
+      <hx-accordion-header>
+        This is the header
+      </hx-accordion-header>
+      <hx-accordion-body>
+        <p>This is the body</p>
+      </hx-accordion-body>
+    </hx-accordion-container>
+    <hx-accordion-container [expanded]="false">
+      <hx-accordion-header>
+        This is the second header. <b>You can even style it!</b> 
+        <i class="hx-icon icon-helix is-small is-info"></i>
+      </hx-accordion-header>
+      <hx-accordion-body>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Integer eu suscipit ante. Nulla nec nulla eget quam fringilla blandit.
+          Vivamus gravida purus erat, id ultrices lacus sagittis vel.
+          Etiam nec nulla eleifend velit tristique faucibus sed ut nisl.
+        </p>
+      </hx-accordion-body>
+    </hx-accordion-container>
+  </hx-accordion>
     `;
 }
