@@ -36,7 +36,7 @@ Run ```ng serve``` .
 ### How do I package and publish to NPM
 Run ```npm run packagr```
 then
-Run ```npm publish lib --access=public```
+Run ```npm publish lib```
 
 
 ### trouble shooting during development 
