@@ -32,4 +32,27 @@ export class DatepickersCode {
     }
 
     `;
+
+  intervalExampleTemplate =
+    `
+    <hxa-datepicker-input align="bottom" [interval]="true" [(ngModel)]="date"></hxa-datepicker-input>
+    `;
+
+  intervalExampleTypescript =
+    `
+    import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+    import { CoreBaseComponent } from '../core-base.component';
+
+    @Component({
+      selector: 'app-datepickers',
+      templateUrl: './datepickers.component.html'
+    })
+    export class DatepickersComponent extends CoreBaseComponent {
+    
+      date: string;
+    
+      constructor() { }    
+    }
+
+    `;
 }

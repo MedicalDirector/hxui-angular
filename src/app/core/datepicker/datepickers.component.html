@@ -14,7 +14,7 @@
 
     <hr>
 
-    <h4 id="example">Example</h4>
+    <h4 id="example">Basic Example</h4>
 
     <div class="hx-columns">
       <div class="hx-column">
@@ -38,7 +38,7 @@
 
     <br>
 
-    <h5 id="code">Code</h5>
+    <h5 id="basic_code">Code</h5>
 
     <hx-tabset>
       <hx-tab heading="Template">
@@ -49,6 +49,46 @@
       <hx-tab heading="Typescript">
             <pre>
               <code highlight [code]="code.exampleTypescript"></code>
+            </pre>
+      </hx-tab>
+    </hx-tabset>
+
+    <h4 id="interval_example">With Interval Example</h4>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <form #form="ngForm">
+          <hxa-datepicker-input
+            name="datepicker"
+            align="bottom"
+            [interval]="true"
+            #d="ngModel"
+            [(ngModel)]="dayte"
+          ></hxa-datepicker-input>
+          <div>
+            <span>Emitted Date object: {{dayte}}</span><br>
+            <span>NgForm Valid: {{form.valid}}</span> <br>
+            <span>NgModel Valid: {{d.valid}}</span><br>
+            <span>NgForm Touched: {{form.touched}}</span><br>
+            <span>NgModel Touched: {{d.touched}}</span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <br>
+
+    <h5 id="interval_code">Code</h5>
+
+    <hx-tabset>
+      <hx-tab heading="Template">
+            <pre>
+              <code highlight [code]="code.intervalExampleTemplate"></code>
+            </pre>
+      </hx-tab>
+      <hx-tab heading="Typescript">
+            <pre>
+              <code highlight [code]="code.intervalExampleTypescript"></code>
             </pre>
       </hx-tab>
     </hx-tabset>
@@ -139,6 +179,11 @@
               <td><kbd>"dd/mm/yyyy"</kbd></td>
               <td>Specifies the inclusive end date for allowed date values</td>
             </tr>
+            <tr>
+              <td>interval</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Enables interval selection. Defaults to "false"</td>
+            </tr>
             </tbody>
         </table>
       </div>
@@ -176,10 +221,11 @@
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Examples</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Basic Example</span></a>
     </li>
+
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#code')"><span>Code</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#interval_example')"><span>Interval Example</span></a>
     </li>
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
