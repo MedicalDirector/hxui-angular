@@ -14,7 +14,7 @@ export class DatepickerIntervalComponent implements OnInit {
   protected close: Function;
   protected Duration: any = 'days';
   protected dropdownNumber: any = 1;
-  protected text: any =   moment().add(this.dropdownNumber , this.Duration);
+  public text: any =   moment().add(this.dropdownNumber , this.Duration);
   public _DueDate: string = (this.text).format('ddd DD/MM/YYYY');
 
   @Input()
