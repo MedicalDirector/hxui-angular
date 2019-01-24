@@ -8,8 +8,7 @@
       [ngModel]="date | date:dateFormat"
       (change)="onChange(datePickerForm.value)"
       (focus)="onFocus()"
-      (keydown.Tab)="onTab(datePickerForm.value)"
-      [(ngModel)] ="_ChoosedDueDate">
+      (keydown.Tab)="onTab(datePickerForm.value)">
     <label class="hx-label" *ngIf="placeholder">{{placeholder}} <sup *ngIf="required">*</sup></label>
     <div class="hx-help">{{helpText}}</div>
   </div>
