@@ -1,9 +1,9 @@
 <div class="hxa-tabs" *ngIf="OpenDiv">
   <hx-tabset class="hxa-tabset">
-    <hx-tab  heading = "Interval" [active]=true>
+    <hx-tab  heading = "Interval" (select)="onTabSelect('tab1')">
       <hxa-datepicker-interval></hxa-datepicker-interval>
     </hx-tab>
-    <hx-tab  heading = "Specific Date">
+    <hx-tab  heading = "Specific Date" (select)="onTabSelect('tab2')">
       <div class="hxui-reset">
         <div class="hx-card hxa-datepicker-container">
           <div class="hx-card-header hxa-datepicker-header">

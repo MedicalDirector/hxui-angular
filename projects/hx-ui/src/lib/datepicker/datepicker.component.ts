@@ -1,9 +1,12 @@
+import { DatepickerIntervalComponent } from './datepicker-interval.component';
 import {
   Component, OnInit, Output, Input, SimpleChanges, OnChanges,
   ChangeDetectorRef
 } from '@angular/core';
 import {Observable, Subject} from 'rxjs/index';
 import {Visibility} from '../enums';
+import {DatepickerConfig} from './datepicker.config';
+import * as moment from 'moment';
 
 @Component({
   selector: 'hxa-datepicker',
@@ -13,6 +16,7 @@ import {Visibility} from '../enums';
 export class DatepickerComponent implements OnInit, OnChanges {
   public OpenDiv: Boolean = true;
   public showCalendar: Boolean = true;
+  public tabname1: String;
 
   @Input()
   selectedDate: Date;
@@ -34,7 +38,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
   week: Array<string> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   private presentDate: Date;
   private cellCount = 41;
-
+  private _dp: DatepickerIntervalComponent | null;
   /** Subject for notifying that the calendar has been hidden from the view */
   private readonly _onHide: Subject<any> = new Subject();
 
@@ -44,7 +48,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
   /** The timeout ID of any current timer set to hide the calendar */
   private _hideTimeoutId: number;
 
-  constructor(private _changeDetectionRef: ChangeDetectorRef) {
+  constructor(private _changeDetectionRef: ChangeDetectorRef, private datePickerConfig: DatepickerConfig) {
     }
 
   // Populates the days array with the current month, and completes the view with partial dates from sibling months
@@ -94,6 +98,9 @@ export class DatepickerComponent implements OnInit, OnChanges {
       this.selectedDate = date;
       this.onDateSelected(date);
     }
+    this.datePickerConfig.interval_number = 0;
+    this.datePickerConfig.interval_duration = 'days';
+    this.datePickerConfig.selected_interval = (moment().add(this.datePickerConfig.interval_number , this.datePickerConfig.interval_duration)).format('ddd DD/MM/YYYY')
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -158,4 +165,13 @@ export class DatepickerComponent implements OnInit, OnChanges {
   isVisible(): boolean {
     return this.visibility === Visibility.Visible;
   }
+  onTabSelect(tabname: String) {
+     if (tabname === 'tab1') {
+      if (this._dp) {
+       this._dp.dropdownNumber = this.datePickerConfig.interval_number;
+       this._dp.Duration = this.datePickerConfig.interval_duration;
+       this._dp._DueDate = this.datePickerConfig.selected_interval;
+      }
+     }
+   }
 }
