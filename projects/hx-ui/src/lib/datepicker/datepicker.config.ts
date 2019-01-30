@@ -19,4 +19,6 @@ export class DatepickerConfig {
 
   public selected_interval: string = (this.text).format('ddd DD/MM/YYYY');
 
+  public tabSelected: String ;
+
 }

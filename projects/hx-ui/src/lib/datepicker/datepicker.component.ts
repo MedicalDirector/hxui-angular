@@ -17,6 +17,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
   public OpenDiv: Boolean = true;
   public showCalendar: Boolean = true;
   public tabname1: String;
+  public activeVariable: Boolean = true;
+  public activeVariable1: Boolean;
 
   @Input()
   selectedDate: Date;
@@ -100,7 +102,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
     }
     this.datePickerConfig.interval_number = 0;
     this.datePickerConfig.interval_duration = 'days';
-    this.datePickerConfig.selected_interval = (moment().add(this.datePickerConfig.interval_number , this.datePickerConfig.interval_duration)).format('ddd DD/MM/YYYY')
+    this.datePickerConfig.selected_interval = (moment().add(this.datePickerConfig.interval_number , this.datePickerConfig.interval_duration)).format('ddd DD/MM/YYYY');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -114,6 +116,14 @@ export class DatepickerComponent implements OnInit, OnChanges {
     this.presentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     this.viewDate = this.viewDate || new Date(date.getFullYear(), date.getMonth());
     this.renderCalendar();
+    if ( this.datePickerConfig.tabSelected === 'tab1') {
+     this.activeVariable1 = false;
+      this.activeVariable = true;
+    }
+    if ( this.datePickerConfig.tabSelected === 'tab2') {
+      this.activeVariable1 = true;
+      this.activeVariable = false;
+     }
   }
 
   /**
@@ -167,11 +177,14 @@ export class DatepickerComponent implements OnInit, OnChanges {
   }
   onTabSelect(tabname: String) {
      if (tabname === 'tab1') {
+      this.datePickerConfig.tabSelected = tabname;
       if (this._dp) {
        this._dp.dropdownNumber = this.datePickerConfig.interval_number;
        this._dp.Duration = this.datePickerConfig.interval_duration;
        this._dp._DueDate = this.datePickerConfig.selected_interval;
       }
+     } else {
+      this.datePickerConfig.tabSelected = tabname;
      }
    }
 }
