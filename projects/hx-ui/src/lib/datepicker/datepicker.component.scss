@@ -1,4 +1,5 @@
 @import "~@hxui/css/static/static/scss/variables";
+// @import "../tabs/tabset.component";
 
 .hxa-datepicker {
     &-container {
@@ -116,3 +117,29 @@
         }
     }
 }
+
+  :host {
+    max-width: 24rem;
+    border: 1px lightgray solid;
+    .hxa-tabs {
+        ::ng-deep hx-tabset {
+          ::ng-deep ul {
+            background-color: white;
+            margin-bottom: 0;
+            ::ng-deep li {
+              width: 50%;
+              a {
+                span {
+                  font-size: medium;
+                  margin: auto;
+                }
+              }
+            }
+          }
+          ::ng-deep div {
+            padding: 0;
+          }
+      }
+    }
+  }
+

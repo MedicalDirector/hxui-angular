@@ -86,6 +86,9 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   @Input()
   to = '';
 
+  @Input()
+  interval = false;
+
   @Output()
   onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
@@ -474,6 +477,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
       this._calendarInstance.placement = this.placement;
       this._calendarInstance.validators = this.dateValidators;
       this._calendarInstance.onDateSelected = this.onDateSelectEvent;
+      this._calendarInstance.allowInterval = this.interval;
 
 
       this._ngZone.onMicrotaskEmpty.asObservable().pipe(

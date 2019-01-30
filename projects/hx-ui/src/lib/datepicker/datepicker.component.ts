@@ -1,9 +1,12 @@
+import { DatepickerIntervalComponent } from './datepicker-interval.component';
 import {
-  Component, OnInit, EventEmitter, Output, Input, SimpleChanges, OnChanges, ElementRef,
+  Component, OnInit, Output, Input, SimpleChanges, OnChanges,
   ChangeDetectorRef
 } from '@angular/core';
 import {Observable, Subject} from 'rxjs/index';
 import {Visibility} from '../enums';
+import {DatepickerConfig} from './datepicker.config';
+import * as moment from 'moment';
 
 @Component({
   selector: 'hxa-datepicker',
@@ -11,6 +14,11 @@ import {Visibility} from '../enums';
   styleUrls: ['./datepicker.component.scss']
 })
 export class DatepickerComponent implements OnInit, OnChanges {
+  public OpenDiv: Boolean = true;
+  public showCalendar: Boolean = true;
+  public tabname1: String;
+  public activeVariable: Boolean = true;
+  public activeVariable1: Boolean;
 
   @Input()
   selectedDate: Date;
@@ -21,6 +29,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
   @Input()
   placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
 
+  @Input()
+  allowInterval = false;
 
   onDateSelected: (inputDate: Date) => void;
   visibilityEnum = Visibility;
@@ -30,7 +40,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
   week: Array<string> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   private presentDate: Date;
   private cellCount = 41;
-
+  private _dp: DatepickerIntervalComponent | null;
   /** Subject for notifying that the calendar has been hidden from the view */
   private readonly _onHide: Subject<any> = new Subject();
 
@@ -40,7 +50,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
   /** The timeout ID of any current timer set to hide the calendar */
   private _hideTimeoutId: number;
 
-  constructor(private _changeDetectionRef: ChangeDetectorRef) {}
+  constructor(private _changeDetectionRef: ChangeDetectorRef, private datePickerConfig: DatepickerConfig) {
+    }
 
   // Populates the days array with the current month, and completes the view with partial dates from sibling months
   public renderCalendar(): void {
@@ -89,6 +100,9 @@ export class DatepickerComponent implements OnInit, OnChanges {
       this.selectedDate = date;
       this.onDateSelected(date);
     }
+    this.datePickerConfig.interval_number = 0;
+    this.datePickerConfig.interval_duration = 'days';
+    this.datePickerConfig.selected_interval = (moment().add(this.datePickerConfig.interval_number , this.datePickerConfig.interval_duration)).format('ddd DD/MM/YYYY');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -102,6 +116,14 @@ export class DatepickerComponent implements OnInit, OnChanges {
     this.presentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     this.viewDate = this.viewDate || new Date(date.getFullYear(), date.getMonth());
     this.renderCalendar();
+    if ( this.datePickerConfig.tabSelected === 'tab1') {
+     this.activeVariable1 = false;
+      this.activeVariable = true;
+    }
+    if ( this.datePickerConfig.tabSelected === 'tab2') {
+      this.activeVariable1 = true;
+      this.activeVariable = false;
+     }
   }
 
   /**
@@ -119,6 +141,14 @@ export class DatepickerComponent implements OnInit, OnChanges {
       this._changeDetectionRef.markForCheck();
       this.visibility = Visibility.Visible;
     }, delay);
+
+    if (this.allowInterval) {
+       this.OpenDiv = true;
+       this.showCalendar = false;
+    } else {
+     this.OpenDiv = false;
+     this.showCalendar = true;
+    }
   }
 
   /**
@@ -145,4 +175,16 @@ export class DatepickerComponent implements OnInit, OnChanges {
   isVisible(): boolean {
     return this.visibility === Visibility.Visible;
   }
+  onTabSelect(tabname: String) {
+     if (tabname === 'tab1') {
+      this.datePickerConfig.tabSelected = tabname;
+      if (this._dp) {
+       this._dp.dropdownNumber = this.datePickerConfig.interval_number;
+       this._dp.Duration = this.datePickerConfig.interval_duration;
+       this._dp._DueDate = this.datePickerConfig.selected_interval;
+      }
+     } else {
+      this.datePickerConfig.tabSelected = tabname;
+     }
+   }
 }

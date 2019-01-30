@@ -3,11 +3,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DatepickerFormComponent } from './datepicker-form.component';
 import { DatepickerComponent } from './datepicker.component';
-
+import { DatepickerIntervalComponent } from './datepicker-interval.component';
 
 describe('DatepickerFormComponent', () => {
   let component: DatepickerFormComponent;
   let fixture: ComponentFixture<DatepickerFormComponent>;
+  let intervalComponent: DatepickerIntervalComponent;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -153,6 +154,18 @@ describe('DatepickerFormComponent', () => {
       expect(component.date).toBe(date);
       expect(component.onDateChange.emit).toHaveBeenCalledWith(date);
       expect(component.propogateChange).toHaveBeenCalledWith(date);
+    });
+  });
+  describe('onChoose', () => {
+
+    beforeEach(() => {
+      spyOn(intervalComponent, 'onChoose')
+    });
+
+    it('should be true if date populated on choosed clicked is same as _Duedate in interval component', () => {
+      intervalComponent.onChoose();
+      expect(intervalComponent.onChoose()).toHaveBeenCalled();
+      expect(component.date === new Date(intervalComponent.text)).toBe(true);
     });
   });
 });
