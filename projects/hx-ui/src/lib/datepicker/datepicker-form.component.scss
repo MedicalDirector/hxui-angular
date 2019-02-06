@@ -1,7 +1,7 @@
 .hxa-datepicker {
     &-form {
         position: relative;
-        max-width: 21rem;
+        max-width: 19rem;
     }
 
     &-control {
@@ -12,7 +12,7 @@
         position: absolute;
         z-index: 99;
         left: 0;
-        max-width: 21rem;
+        max-width: 19rem;
         &-top {
             bottom: 100%;
         }
@@ -21,7 +21,7 @@
             top: 70%;
         }
         & hxa-datepicker {
-          max-width: 21rem;
+          max-width: 19rem;
         }
     }
 
@@ -39,5 +39,5 @@
 }
 hxa-datepicker {
   border: 1px lightgray solid;
-  max-width: 21rem;
+  max-width: 19rem;
 }
