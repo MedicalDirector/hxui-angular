@@ -1,22 +1,43 @@
-<div class="hx-intervals-css">
-  <div class="hx-dropdowns">
-    <div class="hx-dropdown-number" hxaDropdown>
-      <input type="number" class = "hx-input" min = 1  [(ngModel)]="dropdownNumber" (change)="onSelect()">
-    </div>
-    <div class="hx-dropdown month" hxaDropdown  >
-      <select class= "hx-input"  (change)="onSelect()" [(ngModel)]="Duration">
-          <option>days</option>
-          <option>weeks</option>
-          <option>months</option>
-          <option>years</option>
-        </select>
-    </div>
-    <div class="choosed-date">
-      <input class="hx-input" type="text" type="text" readonly [(ngModel)] ="_DueDate">
+<div class="hx-datepicker-set-interval is-flex hx-flex-justify-between hx-flex-column">
+
+  <div class="hx-datepicker-set-interval-content is-flex hx-flex-column hx-flex-auto hx-flex-align-center hx-flex-justify-center  pa-3">
+
+
+      <div class="mb-5">
+        <div class="hx-datepicker-set-interval-number mr-5">
+          <input type="number" class="hx-input" min=1  [(ngModel)]="dropdownNumber" (change)="onSelect()">
+        </div>
+
+        <span class="hx-dropdown month mr-5" hxaDropdown>
+          <select class= "hx-input"  (change)="onSelect()" [(ngModel)]="Duration">
+            <option>days</option>
+            <option>weeks</option>
+            <option>months</option>
+            <option>years</option>
+          </select>
+        </span>
+
+        <span><small>from</small> <span class="hx-datepicker-set-interval-today ml-2">today</span></span>
+      </div>
+
+      <div class="mb-3">
+        <span><small>will be</small></span>
+        <span class="hx-datepicker-set-interval-selected-date ml-1">
+        {{ _DueDate }}
+        </span>
+      </div>
+
+  </div>
+
+  <div class="hx-datepicker-set-interval-footer pa-3">
+    <div class="hx-columns">
+      <div class="hx-column">
+        <button class="hx-button" (click)="onCancel()">Cancel</button>
+      </div>
+      <div class="hx-column is-text-right">
+        <button class="hx-button is-primary" (click)="onChoose()">Select</button>
+      </div>
     </div>
   </div>
-  <div class="buttonDiv">
-      <button class="hx-button is-primary chooseButton" (click)="onChoose()">Choose</button>
-      <button class="hx-button cancelButton" (click)="onCancel()">Cancel</button>
-  </div>
+
 </div>

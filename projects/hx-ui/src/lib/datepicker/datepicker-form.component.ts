@@ -400,7 +400,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     let originPlacement: OriginConnectionPosition;
 
     if (placement === 'top' || placement === 'bottom') {
-      originPlacement = {originX: 'center', originY: placement === 'top' ? 'top' : 'bottom'};
+      originPlacement = {originX: 'start', originY: placement === 'top' ? 'top' : 'bottom'};
     } else if (placement === 'left') {
       originPlacement = {originX: 'start', originY: 'center'};
     } else if (placement === 'right') {
@@ -423,9 +423,9 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     let overlayPlacement: OverlayConnectionPosition;
 
     if (placement === 'top') {
-      overlayPlacement = {overlayX: 'center', overlayY: 'bottom'};
+      overlayPlacement = {overlayX: 'start', overlayY: 'bottom'};
     } else if (placement === 'bottom') {
-      overlayPlacement = {overlayX: 'center', overlayY: 'top'};
+      overlayPlacement = {overlayX: 'start', overlayY: 'top'};
     } else if (placement === 'left') {
       overlayPlacement = {overlayX: 'end', overlayY: 'center'};
     } else if (placement === 'right') {
