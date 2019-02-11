@@ -26,10 +26,6 @@ export class AppComponent {
       cat: 'Getting started',
       items: [
         {
-          name: 'Welcome',
-          link: '/welcome'
-        },
-        {
           name: 'Install guide',
           link: '/install-guide'
         }

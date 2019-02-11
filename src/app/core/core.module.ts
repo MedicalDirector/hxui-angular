@@ -1,7 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SharedModule } from '../shared/shared.module';
-import { WelcomeComponent } from './welcome/welcome.component';
 import { DatepickersComponent } from './datepicker/datepickers.component';
 import { DropdownsComponent } from './dropdowns/dropdowns.component';
 import { ModalsComponent } from './modals/modals.component';
@@ -33,7 +32,6 @@ import { ToastrComponent } from './toastr/toastr.component';
   ],
   declarations: [
       PageNotFoundComponent,
-      WelcomeComponent,
       DatepickersComponent,
       DropdownsComponent,
       ModalsComponent,

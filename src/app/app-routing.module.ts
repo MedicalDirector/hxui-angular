@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
-import { WelcomeComponent } from './core/welcome/welcome.component';
 import { DatepickersComponent } from './core/datepicker/datepickers.component';
 import { DropdownsComponent } from './core/dropdowns/dropdowns.component';
 import { ModalsComponent } from './core/modals/modals.component';
@@ -22,8 +21,7 @@ import {OnlineStatusComponent} from './core/online-status/online-status.componen
 import {ToastrComponent} from './core/toastr/toastr.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
-  { path: 'welcome',  component: WelcomeComponent },
+  { path: '', redirectTo: '/install-guide', pathMatch: 'full' },
   { path: 'install-guide',  component: InstallGuideComponent },
   { path: 'accordion',  component: AccordionComponent },
   { path: 'datepickers',  component: DatepickersComponent },
