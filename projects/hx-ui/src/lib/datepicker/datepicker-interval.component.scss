@@ -1,40 +1,28 @@
+@import "datepicker-variables";
 
-.hx-intervals-css {
-  height :12em;
+.hx-datepicker-set-interval {
+  max-width: $hx-datepicker-calendar-width;
+  width: $hx-datepicker-calendar-width;
+  height: $hx-datepicker-calendar-height * .66;
   background-color: white;
-  // width: 35%;
-  & .hx-dropdowns {
-    display: inline-flex;
-    padding-right: 0%;
-    height: 70%;
-    border-bottom: 1px solid lightgray;
-    background-color: white;
-    & .hx-dropdown-number{
-      width: 13%;
-      margin-right: 5%;
-      margin-left: 4%;
-      margin-top: 5%;
+
+  .hx-datepicker-set-interval-content {
+    .hx-datepicker-set-interval-number {
+      width: 2.5rem;
+      display: inline-block;
     }
-    & .month {
-      select {
-        margin-top: 23%;
-      }
+
+    .hx-datepicker-set-interval-today {
+      font-size: 1rem;
     }
-    & .choosed-date {
-      margin-left: 9%;
-      margin-top: 5%;
+    .hx-datepicker-set-interval-selected-date {
+      font-size: 1.1rem;
+      font-weight: 500;
     }
   }
-  & .buttonDiv {
-    padding-top: 2.6%;
-    padding-bottom: 2.6%;
+  .hx-datepicker-set-interval-footer {
+    flex: 0 0 auto;
     background-color:  rgba(0, 0, 0, 0.04);
-    & .chooseButton {
-      float: right;
-      margin-right: 5%;
-    }
-    & .cancelButton {
-      margin-left: 5%;
-    }
   }
+
 }
