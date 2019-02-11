@@ -6,7 +6,8 @@ import {
 import {Observable, Subject} from 'rxjs/index';
 import {Visibility} from '../enums';
 import {DatepickerConfig} from './datepicker.config';
-import * as moment from 'moment';
+import * as moment_ from 'moment';
+const moment = moment_;
 
 @Component({
   selector: 'hxa-datepicker',

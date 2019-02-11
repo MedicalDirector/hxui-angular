@@ -1,5 +1,6 @@
 import {Injectable, Input} from '@angular/core';
-import * as moment from 'moment';
+import * as moment_ from 'moment';
+const moment = moment_;
 
 /** Default values provider for calendar */
 @Injectable()
