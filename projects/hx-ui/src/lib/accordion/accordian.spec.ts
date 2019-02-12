@@ -11,7 +11,7 @@ describe('AccordionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ AppModule ],
+      imports: [  ],
       declarations: [
         AccordionComponent,
         AccordionContainerComponent,
