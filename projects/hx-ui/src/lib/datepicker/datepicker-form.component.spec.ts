@@ -3,23 +3,43 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatepickerFormComponent } from './datepicker-form.component';
 import { DatepickerComponent } from './datepicker.component';
 import { DatepickerIntervalComponent } from './datepicker-interval.component';
-import {AppModule} from '../../../../../src/app/app.module';
-import {FormsModule} from '@angular/forms';
-import {TabsModule} from '../tabs/tabs.module';
-import {Overlay} from '@angular/cdk/overlay';
-import {DatepickerConfig} from './datepicker.config';
+import { FormsModule } from '@angular/forms';
+import { TabsModule } from '../tabs/tabs.module';
+import { Overlay } from '@angular/cdk/overlay';
+import { DatepickerConfig } from './datepicker.config';
+import { ElementRef, Injectable } from '@angular/core';
+
+@Injectable()
+export class MockElementRef extends ElementRef {
+  nativeElement = {
+    getElementsByTagName : () => {
+      return [];
+    }
+  };
+  constructor(nativeElement) {
+    super(nativeElement);
+  }
+}
 
 describe('DatepickerFormComponent', () => {
   let component: DatepickerFormComponent;
   let fixture: ComponentFixture<DatepickerFormComponent>;
 
   beforeEach(async(() => {
+
     TestBed.configureTestingModule({
       imports: [ FormsModule, TabsModule ],
       declarations: [ DatepickerFormComponent, DatepickerComponent, DatepickerIntervalComponent ],
-      providers: [ Overlay, DatepickerConfig, DatepickerFormComponent ]
+      providers: [
+        Overlay,
+        DatepickerConfig,
+        DatepickerFormComponent,
+        { provide: ElementRef, useValue: new MockElementRef(null) }
+      ]
     })
     .compileComponents();
+
+
   }));
 
   beforeEach(() => {
@@ -185,3 +205,4 @@ describe('DatepickerFormComponent', () => {
   //   });
   // });
 });
+
