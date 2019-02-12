@@ -3,6 +3,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatepickerComponent } from './datepicker.component';
 import { DatepickerFormComponent } from './datepicker-form.component';
 import {PositioningService} from '../positioning/positioning.service';
+import {FormsModule} from '@angular/forms';
+import {TabsModule} from '../tabs/tabs.module';
+import {DatepickerIntervalComponent} from './datepicker-interval.component';
+import {DatepickerConfig} from './datepicker.config';
+import {TabsetConfig} from '../tabs/tabset.config';
+
 
 
 describe('DatepickerComponent', () => {
@@ -11,8 +17,9 @@ describe('DatepickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DatepickerFormComponent, DatepickerComponent ],
-      providers: [PositioningService]
+      imports: [ FormsModule, TabsModule ],
+      declarations: [ DatepickerFormComponent, DatepickerComponent, DatepickerIntervalComponent ],
+      providers: [ PositioningService, DatepickerConfig, TabsetConfig, DatepickerFormComponent ]
     })
     .compileComponents();
   }));

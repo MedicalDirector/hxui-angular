@@ -44,7 +44,7 @@ export class DatepickerIntervalComponent implements OnInit {
      return this._DueDate;
      }
   }
-  onChoose() {
+  public onChoose() {
     this.datePickerConfig.interval_duration = this.Duration;
     this.datePickerConfig.interval_number = this.dropdownNumber;
     this.datePickerConfig.selected_interval = this._DueDate;
