@@ -3,6 +3,7 @@ import {FilterType} from './filters-type.enum';
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {FiltersModel} from './filters.model';
 import * as _ from 'lodash';
+import {Subject} from 'rxjs/index';
 
 @Component({
   selector: 'hxa-filters',
@@ -15,6 +16,9 @@ export class FiltersComponent implements OnInit, DoCheck {
 
   FilterType = FilterType;
   data: FiltersModel[] = [];
+  onFilterOptionChanged$ = new Subject<FiltersModel>();
+
+
   private _filters: IFiltersConfig[] = [];
   private _oldFilters: IFiltersConfig[] = [];
   private _collapsed = false;
@@ -54,7 +58,7 @@ export class FiltersComponent implements OnInit, DoCheck {
     for (const filter of this.data) {
       if (filter.type === FilterType.SingleSelect) {
         filter.setDefaultOption();
-        this.executeFilterCallback(filter);
+        this.onFilterOptionChanged$.next(filter);
       } else if (filter.type === FilterType.Search) {
         this.clearSearch(filter);
       }
@@ -63,7 +67,7 @@ export class FiltersComponent implements OnInit, DoCheck {
 
   clearSearch(filter: FiltersModel) {
       filter.value = '';
-      filter.callback[0].apply(this, ['']);
+      this.onFilterOptionChanged$.next(filter);
   }
 
 
@@ -72,19 +76,19 @@ export class FiltersComponent implements OnInit, DoCheck {
    */
   onFilterOptionSelected(filter: FiltersModel, option: IFilterOption) {
     filter.setSelectedOption(option);
-    this.executeFilterCallback(filter);
-  }
-
-
-  onCollapsedFilter($event) {
-   this.onFilterOptionSelected($event.filter,  $event.option);
+    this.onFilterOptionChanged$.next(filter);
   }
 
   /**
    * Called when character is typed in the search filter type
    */
   onSearchFilterChange(filter: FiltersModel, value: string) {
-    filter.callback[0].apply(this, [value]);
+    this.onFilterOptionChanged$.next(filter);
+  }
+
+
+  onCollapsedFilter($event) {
+   this.onFilterOptionSelected($event.filter,  $event.option);
   }
 
   onCollapsedSearch($event) {
@@ -107,22 +111,5 @@ export class FiltersComponent implements OnInit, DoCheck {
     this._filters.forEach((filter: IFiltersConfig, index) => {
       this.data.push(new FiltersModel(_.cloneDeep(filter)));
     });
-  }
-
-  /**
-   * Called when a filter is selected
-   * Calls the parsed callback with optional arguments + selected filter option
-   */
-  private executeFilterCallback(filter: FiltersModel) {
-    if (filter.callback.length) {
-        const args: any[] = [];
-        // if callback has 1 or more arguments
-        for (let i = 1; i < filter.callback.length; i++) {
-          args.push(filter.callback[i]);
-        }
-        // add selected filter as argument
-        args.push(filter.selected);
-        filter.callback[0].apply(this, args);
-    }
   }
 }

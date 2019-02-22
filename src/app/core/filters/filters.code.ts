@@ -26,12 +26,14 @@ export class FiltersCode {
   import {IFiltersConfig} from '@hxui-angular/filters/filters-config.interface';
   import {FilterType} from '@hxui-angular/filters/filters-type.enum';
   import {FiltersComponent as HxFiltersComponent } from '@hxui-angular/filters/filters.component';
+  import {Subscription} from 'rxjs/index';
+  import {FiltersModel} from '@hxui-angular/filters/filters.model';
   
   @Component({
     selector: 'app-filters',
     templateUrl: './filters.component.html'
   })
-  export class FiltersComponent  {
+  export class FiltersComponent implements OnInit, OnDestroy  {
   
     @ViewChild('filterComp') filtersComponent: HxFiltersComponent;
   
@@ -194,8 +196,20 @@ export class FiltersCode {
         callback: [this.onSearchFilterHandler]
       }
     ];
+    onFilterChangeEvent$ = new Subscription();
   
     constructor() {}
+    
+   ngOnInit() {
+      this.onFilterChangeEvent$ = this.filtersComponent.onFilterOptionChanged$
+        .subscribe((filter: FiltersModel) => {
+          console.log(filter);
+      });
+    }
+    
+    ngOnDestroy() {
+      this.onFilterChangeEvent$.unsubscribe();
+    }
   
     resetFilters() {
       this.filtersComponent.resetFilters();
@@ -203,14 +217,6 @@ export class FiltersCode {
   
     toggleCollapsed() {
       this.collapsed = !this.collapsed;
-    }
-  
-    onFilterHandler(type, data) {
-      console.log(type, data);
-    }
-  
-    onSearchFilterHandler(term) {
-      console.log(term);
     }
   
   }

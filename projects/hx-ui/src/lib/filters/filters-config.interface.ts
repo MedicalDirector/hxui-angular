@@ -41,9 +41,4 @@ export interface IFiltersConfig {
    */
   defaultIndex?: number;
 
-  /**
-   * The function to call when filter option is selected
-   */
-  callback: any;
-
 }

@@ -73,6 +73,31 @@
         </table>
       </div>
     </div>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <table class="hx-table is-striped">
+          <thead>
+          <tr>
+            <th>Outputs</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>onFilterOptionChanged$</td>
+            <td><kbd>Observable</kbd></td>
+            <td>Observable that returns the FilterModel of the changed filter</td>
+          </tr>
+          <tr>
+            <td>filters</td>
+            <td><kbd>IFilterConfig[]</kbd></td>
+            <td>An array of filter configurations</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
     <h5 class="is-primary">IFilterConfig</h5>
     <div class="hx-columns">
@@ -116,11 +141,6 @@
             <td>defaultIndex</td>
             <td><kbd>number</kbd></td>
             <td>Index of default filter option. The option to set when filters are cleared.</td>
-          </tr>
-          <tr>
-            <td>callback</td>
-            <td><kbd>Function</kbd></td>
-            <td>Function to call when filter selected.</td>
           </tr>
           </tbody>
         </table>

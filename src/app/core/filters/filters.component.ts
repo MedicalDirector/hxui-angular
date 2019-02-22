@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CoreBaseComponent} from '../core-base.component';
 import {DOCUMENT} from '@angular/common';
 import {PageScrollService} from 'ngx-page-scroll';
@@ -7,13 +7,15 @@ import {IFiltersConfig} from '../../../../projects/hx-ui/src/lib/filters/filters
 import {FilterType} from '../../../../projects/hx-ui/src/lib/filters/filters-type.enum';
 import {FiltersComponent as HxFiltersComponent } from '../../../../projects/hx-ui/src/lib/filters/filters.component';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {Subscription} from 'rxjs/index';
+import {FiltersModel} from '../../../../projects/hx-ui/src/lib/filters/filters.model';
 
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
   styles: [':host { display: flex; flex: 1; min-width: 0; }']
 })
-export class FiltersComponent extends CoreBaseComponent {
+export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDestroy {
 
   @ViewChild('filterComp') filtersComponent: HxFiltersComponent;
 
@@ -56,8 +58,7 @@ export class FiltersComponent extends CoreBaseComponent {
           selected: false
         }
       ],
-      defaultIndex: 1,
-      callback: [this.onFilterHandler, 'workarea']
+      defaultIndex: 1
     },
     {
       id: 'statusFilter',
@@ -94,8 +95,7 @@ export class FiltersComponent extends CoreBaseComponent {
           value: 4,
           selected: false
         }
-      ],
-      callback: [this.onFilterHandler, 'status']
+      ]
     },
     {
       id: 'hcpFilter',
@@ -172,16 +172,15 @@ export class FiltersComponent extends CoreBaseComponent {
           value: 4,
           selected: false
         }
-      ],
-      callback: [this.onFilterHandler, 'status']
+      ]
     },
     {
       id: 'searchFilter',
       type: FilterType.Search,
-      label: 'Filter by name',
-      callback: [this.onSearchFilterHandler]
+      label: 'Filter by name'
     }
   ];
+  onFilterChangeEvent$ = new Subscription();
 
   constructor(
     protected pageScrollService: PageScrollService,
@@ -191,20 +190,23 @@ export class FiltersComponent extends CoreBaseComponent {
     super(pageScrollService, breakpointObserver, document);
   }
 
+  ngOnInit() {
+    this.onFilterChangeEvent$ = this.filtersComponent.onFilterOptionChanged$
+      .subscribe((filter: FiltersModel) => {
+        console.log(filter);
+    });
+  }
+
+  ngOnDestroy() {
+    this.onFilterChangeEvent$.unsubscribe();
+  }
+
   resetFilters() {
     this.filtersComponent.resetFilters();
   }
 
   toggleCollapsed() {
     this.collapsed = !this.collapsed;
-  }
-
-  onFilterHandler(type, data) {
-    console.log(type, data);
-  }
-
-  onSearchFilterHandler(term) {
-    console.log('search:'+term);
   }
 
 }
