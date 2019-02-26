@@ -60,8 +60,7 @@ export class TabularComponent implements OnInit {
     new TabularColumn('checkboxes', 'Checkboxes', TabularColumnTypes.Checkbox, false),
     new TabularColumn('id', 'Id', TabularColumnTypes.String, true),
     new TabularColumn('usercode', 'User Code', TabularColumnTypes.String, true),
-    new TabularColumn('firstname', 'First Name', TabularColumnTypes.String, true),
-    new TabularColumn('surname', 'Surname', TabularColumnTypes.String, true),
+    new TabularColumn('name', 'Name', TabularColumnTypes.Html, true),
     new TabularColumn('flag', 'Flag', TabularColumnTypes.Badge, false),
     new TabularColumn('created', 'Created', TabularColumnTypes.Date, true),
     new TabularColumn('modified', 'Modified', TabularColumnTypes.DateTime, true),
@@ -668,6 +667,7 @@ export class UserModel implements ITabularRow {
   public info: ITabularColumnIconType;
   public icon: string;
   public actions: IActionsConfig[] = [];
+  public name: string;
 
 
   constructor(data?: any) {
@@ -677,6 +677,7 @@ export class UserModel implements ITabularRow {
     this.setIcon();
     this.setActions();
     this.setTitle();
+    this.setName();
   }
 
   setIcon() {
@@ -740,7 +741,9 @@ export class UserModel implements ITabularRow {
     this.title = 'This is a custom title tag for: ' + this.usercode + ':' + this.firstname + ':' + this.surname;
   }
 
-
+ setName() {
+    this.name = '<div class="is-text-weight-bolder">' + this.surname + ',</div><div>' + this.firstname + '</div>';
+  }
 
   /**
    * Function used in the callback actions
@@ -785,6 +788,7 @@ TabularColumnTypes.Actions
 TabularColumnTypes.Status
 TabularColumnTypes.DateTime
 TabularColumnTypes.Badge
+TabularColumnTypes.Html
 
 `;
 

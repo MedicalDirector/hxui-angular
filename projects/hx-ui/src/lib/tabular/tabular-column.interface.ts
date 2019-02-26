@@ -9,7 +9,8 @@ export enum TabularColumnTypes {
   DateTime,
   Checkbox,
   Badge,
-  Number
+  Number,
+  Html
 }
 
 export abstract class ITabularColumn {
