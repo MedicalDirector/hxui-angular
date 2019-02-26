@@ -108,8 +108,10 @@ export class FiltersComponent implements OnInit, DoCheck {
    */
   setData() {
     this.data = [];
-    this._filters.forEach((filter: IFiltersConfig, index) => {
-      this.data.push(new FiltersModel(_.cloneDeep(filter)));
-    });
+    if (this._filters) {
+      this._filters.forEach((filter: IFiltersConfig, index) => {
+        this.data.push(new FiltersModel(_.cloneDeep(filter)));
+      });
+    }
   }
 }
