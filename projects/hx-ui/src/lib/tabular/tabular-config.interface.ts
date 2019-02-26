@@ -9,6 +9,8 @@ export abstract class ITabularConfig {
   };
   clickableRows?: boolean;
   sortBy?: ISortByProperty[];
+  cssClass?: string;
+  stickyHeader?: boolean;
 }
 
 

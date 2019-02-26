@@ -20,7 +20,8 @@ export class TabularConfig {
             itemsPerPage: 5,
             currentPage: 1
         },
-        clickableRows: false
+        clickableRows: false,
+        stickyHeader: true
     };
 
 }

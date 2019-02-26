@@ -1,4 +1,7 @@
-<table class="tabular hx-table is-striped" [class.is-hover]="config.clickableRows" [class.is-narrow]="config.size === TabularSize.Small">
+<table class="tabular hx-table is-striped {{config.cssClass}}"
+       [class.is-hover]="config.clickableRows"
+       [class.is-narrow]="config.size === TabularSize.Small"
+       [class.has-sticky-header]="config.stickyHeader">
   <thead>
   <tr>
     <th *ngFor="let col of columns" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox, 'tabular__sortable': col.sortable}">

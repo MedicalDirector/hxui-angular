@@ -767,7 +767,9 @@ tabularConfig =
       itemsPerPage: 5,
       currentPage: 1
   },
-  clickableRows: true;
+  clickableRows: true,
+  stickyHeader: true,
+  cssClass: '',
   sortBy: [{
     property: 'firstname',
     direction: SortByDirection.Descending,
