@@ -104,10 +104,12 @@ export class SelectizeComponent
   }
 
   ngOnDestroy() {
-    this.selectize.off('change');
-    this.selectize.off('blur');
-    this.selectize.off('focus');
-    this.selectize.off('type');
+    if (this.selectize) {
+      this.selectize.off('change');
+      this.selectize.off('blur');
+      this.selectize.off('focus');
+      this.selectize.off('type');
+    }
   }
 
   /**
