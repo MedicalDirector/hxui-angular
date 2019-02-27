@@ -60,6 +60,10 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
     console.log($event);
   }
 
+  onSortHandler($event) {
+    console.log($event);
+  }
+
 
   printSelected = ($event) => {
     let count = 0;

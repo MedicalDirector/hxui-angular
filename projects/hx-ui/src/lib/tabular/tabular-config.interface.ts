@@ -11,6 +11,7 @@ export abstract class ITabularConfig {
   sortBy?: ISortByProperty[];
   cssClass?: string;
   stickyHeader?: boolean;
+  remoteSorting?: boolean;
 }
 
 

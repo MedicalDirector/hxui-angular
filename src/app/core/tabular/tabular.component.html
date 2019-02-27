@@ -35,7 +35,8 @@
           [config]="tabularConfig"
           [callback]="onActionClickHandler"
           (refresh)="refreshDataHandler($event)"
-          (rowClick)="rowClickHandler($event)">
+          (rowClick)="rowClickHandler($event)"
+          (onSort)="onSortHandler($event)">
         </hxa-tabular>
 
       </div>
@@ -135,6 +136,16 @@
               <td>refresh</td>
               <td><kbd>EventEmitter</kbd></td>
               <td>Event fired when refresh is called. Host should refresh data of input.</td>
+            </tr>
+            <tr>
+              <td>rowClick</td>
+              <td><kbd>EventEmitter</kbd></td>
+              <td>Event fired when a row is clicked.</td>
+            </tr>
+            <tr>
+              <td>onSort</td>
+              <td><kbd>EventEmitter:ISortByProperty[]</kbd></td>
+              <td>Event fired when a column is sorted. </td>
             </tr>
           </tbody>
         </table>

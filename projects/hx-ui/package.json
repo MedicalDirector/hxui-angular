@@ -1,6 +1,6 @@
 {
   "name": "@hxui/angular",
-  "version": "7.0.13",
+  "version": "7.0.14",
   "peerDependencies": {
     "@angular/animations": "^7.0.2",
     "@angular/cdk": "^7.0.2",

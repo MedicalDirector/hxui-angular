@@ -32,7 +32,8 @@ exampleTemplate =
   [config]="tabularConfig"
   [callback]="onActionClickHandler"
   (refresh)="refreshDataHandler($event)"
-  (rowClick)="rowClickHandler($event)">
+  (rowClick)="rowClickHandler($event)"
+  (onSort)="onSortHandler($event)">
 </hx-tabular>
 
 `;
@@ -85,6 +86,10 @@ export class TabularComponent implements OnInit {
   }
 
    rowClickHandler($event) {
+    console.log($event);
+  }
+  
+  onSortHandler($event) {
     console.log($event);
   }
 

@@ -88,6 +88,12 @@ export class TabularComponent implements OnInit, DoCheck {
    */
   @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
 
+
+  /**
+   * Event fired when a column is sorted
+   */
+  @Output() onSort: EventEmitter<ISortByProperty[]> = new EventEmitter<ISortByProperty[]>();
+
   public oldRows: ITabularRow[] = [];
   public pagedItems: any[] = [];
   public TabularColumnTypes = TabularColumnTypes;
@@ -115,7 +121,7 @@ export class TabularComponent implements OnInit, DoCheck {
   ngDoCheck() {
     if (!_.isEqual(this.rows, this.oldRows)) {
       this.oldRows = _.cloneDeep(this.rows);
-      this.orderByData();
+      this.orderByData(false);
     }
   }
 
@@ -205,7 +211,7 @@ export class TabularComponent implements OnInit, DoCheck {
       this.config.sortBy.push({property: key, direction: SortByDirection.Descending, type: type});
     }
 
-    this.orderByData();
+    this.orderByData(true);
     return false;
   }
 
@@ -231,16 +237,21 @@ export class TabularComponent implements OnInit, DoCheck {
     }
   }
 
-  private orderByData() {
+  private orderByData(emitSortEvent: boolean) {
     if (this.config.sortBy.length > 0) {
-      this.rows = [...this.rows]; // Required as array-sort-by mutates the original array
-      this.sortByService.sortBy(this.rows, this.config.sortBy);
+      if (!this.config.remoteSorting) {
+        this.rows = [...this.rows]; // Required as array-sort-by mutates the original array
+        this.sortByService.sortBy(this.rows, this.config.sortBy);
+      }
+      if (emitSortEvent) {
+        this.onSort.emit(this.config.sortBy);
+      }
     }
     this.setPage();
   }
 
 
-  get totalItemCount(): number{
+  get totalItemCount(): number {
     return this.rows.length;
   }
 
