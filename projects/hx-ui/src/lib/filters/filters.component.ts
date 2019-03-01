@@ -1,23 +1,26 @@
-import {Component, DoCheck, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FilterType} from './filters-type.enum';
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {FiltersModel} from './filters.model';
 import * as _ from 'lodash';
-import {Subject} from 'rxjs/index';
+import {BehaviorSubject, from, Observable, pipe, Subject, Subscription} from 'rxjs/index';
+import {FiltersConfig} from './filters.config';
+import {debounceTime} from 'rxjs/internal/operators';
 
 @Component({
   selector: 'hxa-filters',
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.scss']
 })
-export class FiltersComponent implements OnInit, DoCheck {
+export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
 
   @ViewChild('carousel') private carousel: ElementRef;
 
   FilterType = FilterType;
   data: FiltersModel[] = [];
   onFilterOptionChanged$ = new Subject<FiltersModel>();
-
+  searchFilter$: Subject<FiltersModel> = new Subject<FiltersModel>();
+  subscriptions: Subscription = new Subscription();
 
   private _filters: IFiltersConfig[] = [];
   private _oldFilters: IFiltersConfig[] = [];
@@ -42,9 +45,23 @@ export class FiltersComponent implements OnInit, DoCheck {
     this.setData();
   }
 
-  constructor() { }
+  constructor(
+    private conf: FiltersConfig
+  ) {
+    Object.assign(this, conf);
+  }
+
 
   ngOnInit() {
+    this.subscriptions.add(
+      this.searchFilter$
+        .pipe(debounceTime(this.conf.debounce))
+        .subscribe((x) =>  this.onFilterOptionChanged$.next(x))
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   ngDoCheck() {
@@ -83,7 +100,7 @@ export class FiltersComponent implements OnInit, DoCheck {
    * Called when character is typed in the search filter type
    */
   onSearchFilterChange(filter: FiltersModel, value: string) {
-    this.onFilterOptionChanged$.next(filter);
+    this.searchFilter$.next(filter);
   }
 
 
