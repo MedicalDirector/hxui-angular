@@ -208,6 +208,9 @@ export class TabularComponent implements OnInit, DoCheck {
         }
       }
     } else {
+      if (!this.config.multiSorting) {
+          this.config.sortBy = [];
+      }
       this.config.sortBy.push({property: key, direction: SortByDirection.Descending, type: type});
     }
 
@@ -243,9 +246,9 @@ export class TabularComponent implements OnInit, DoCheck {
         this.rows = [...this.rows]; // Required as array-sort-by mutates the original array
         this.sortByService.sortBy(this.rows, this.config.sortBy);
       }
-      if (emitSortEvent) {
-        this.onSort.emit(this.config.sortBy);
-      }
+    }
+    if (emitSortEvent) {
+      this.onSort.emit(this.config.sortBy);
     }
     this.setPage();
   }

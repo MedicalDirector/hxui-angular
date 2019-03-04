@@ -12,6 +12,7 @@ export abstract class ITabularConfig {
   cssClass?: string;
   stickyHeader?: boolean;
   remoteSorting?: boolean;
+  multiSorting?: boolean;
 }
 
 
