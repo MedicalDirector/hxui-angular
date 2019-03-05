@@ -99,8 +99,10 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   /**
    * Called when character is typed in the search filter type
    */
-  onSearchFilterChange(filter: FiltersModel, value: string) {
-    this.searchFilter$.next(filter);
+  onSearchFilterChange(filter: FiltersModel) {
+    if (filter.value.length === 0 || filter.value.length >= filter.charLimit) {
+      this.searchFilter$.next(filter);
+    }
   }
 
 
@@ -109,7 +111,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   onCollapsedSearch($event) {
-    this.onSearchFilterChange($event.filter,  $event.value);
+    this.onSearchFilterChange($event.filter);
   }
 
 
