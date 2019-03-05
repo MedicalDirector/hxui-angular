@@ -71,20 +71,24 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     }
   }
 
-  resetFilters() {
+  resetFilters(silent: boolean = false) {
     for (const filter of this.data) {
       if (filter.type === FilterType.SingleSelect) {
         filter.setDefaultOption();
-        this.onFilterOptionChanged$.next(filter);
+        if (!silent) {
+          this.onFilterOptionChanged$.next(filter);
+        }
       } else if (filter.type === FilterType.Search) {
-        this.clearSearch(filter);
+        this.clearSearch(filter, silent);
       }
     }
   }
 
-  clearSearch(filter: FiltersModel) {
+  clearSearch(filter: FiltersModel, silent: boolean = false) {
       filter.value = '';
-      this.onFilterOptionChanged$.next(filter);
+      if (!silent) {
+        this.onFilterOptionChanged$.next(filter);
+      }
   }
 
 
