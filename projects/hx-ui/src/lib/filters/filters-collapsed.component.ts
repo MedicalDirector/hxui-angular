@@ -52,8 +52,8 @@ export class FiltersCollapsedComponent implements OnInit {
     this.back();
   }
 
-  searchFilter(filter: FiltersModel, value: string) {
-    this.onSearchFilter.emit({filter: filter, value: value});
+  searchFilter(filter: FiltersModel) {
+    this.onSearchFilter.emit({filter: filter});
   }
 
   back() {
