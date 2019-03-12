@@ -5,11 +5,11 @@
 
       <div class="mb-5">
         <div class="hx-datepicker-set-interval-number mr-5">
-          <input type="number" class="hx-input" min=1  [(ngModel)]="dropdownNumber" (change)="onSelect()">
+          <input type="number" id="numberText" class="hx-input" min=1  [(ngModel)]="dropdownNumber" (change)="onSelect()" #numberText>
         </div>
 
         <span class="hx-dropdown month mr-5" hxaDropdown>
-          <select class= "hx-input"  (change)="onSelect()" [(ngModel)]="Duration">
+          <select id="durationText" class= "hx-input"  (change)="onSelect()" [(ngModel)]="Duration" #durationText>
             <option>days</option>
             <option>weeks</option>
             <option>months</option>

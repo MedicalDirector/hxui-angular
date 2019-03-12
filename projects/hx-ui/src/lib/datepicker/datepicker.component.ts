@@ -101,9 +101,6 @@ export class DatepickerComponent implements OnInit, OnChanges {
       this.selectedDate = date;
       this.onDateSelected(date);
     }
-    this.datePickerConfig.interval_number = 0;
-    this.datePickerConfig.interval_duration = 'days';
-    this.datePickerConfig.selected_interval = (moment().add(this.datePickerConfig.interval_number , this.datePickerConfig.interval_duration)).format('ddd DD/MM/YYYY');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -182,7 +179,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
       if (this._dp) {
        this._dp.dropdownNumber = this.datePickerConfig.interval_number;
        this._dp.Duration = this.datePickerConfig.interval_duration;
-       this._dp._DueDate = this.datePickerConfig.selected_interval;
+      // this._dp._DueDate = this.datePickerConfig.selected_interval;
       }
      } else {
       this.datePickerConfig.tabSelected = tabname;
