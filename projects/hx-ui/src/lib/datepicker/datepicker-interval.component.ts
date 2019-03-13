@@ -28,19 +28,30 @@ export class DatepickerIntervalComponent implements OnInit , AfterViewInit {
  // public _dueDatestring: string = (this.text).format('DD/MM/YYYY');
  public durationText1: any;
  public numberText1: any;
- public
+
+
   @Input()
   selectedDateInterval: Date;
 
   @Input()
   placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
 
+  @Input()
+  dueDateIntervalDate: String = '5 days';
+
+  public stringDate: any ;
+  public part1: any ;
+ public part2: any;
+
   constructor(private _datepickerForm: DatepickerFormComponent, private datePickerConfig: DatepickerConfig,
     private _datepickerComponent: DatepickerComponent) { }
 
   ngOnInit() {
-    this.Duration = this.datePickerConfig.interval_duration;
-    this.dropdownNumber = this.datePickerConfig.interval_number;
+    this.stringDate = this.dueDateIntervalDate.trim();
+    this.part1 = (this.stringDate).split(' ')[0];
+    this.part2 = (this.stringDate).split(' ')[1];
+    this.Duration = this.part1;
+    this.dropdownNumber = this.part2;
     // this._DueDate = this.datePickerConfig.selected_interval;
     this.durationText1 = this.SelectElement(this.durationText , this.Duration);
     this.numberText1 = this.SelectElement(this.numberText, this.dropdownNumber);

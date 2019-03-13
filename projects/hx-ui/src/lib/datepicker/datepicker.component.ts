@@ -33,6 +33,9 @@ export class DatepickerComponent implements OnInit, OnChanges {
   @Input()
   allowInterval = false;
 
+  @Input()
+  intervalDueDate: String = ' ';
+
   onDateSelected: (inputDate: Date) => void;
   visibilityEnum = Visibility;
   visibility: Visibility = Visibility.Hidden;
@@ -117,6 +120,9 @@ export class DatepickerComponent implements OnInit, OnChanges {
     if ( this.datePickerConfig.tabSelected === 'tab1') {
      this.activeVariable1 = false;
       this.activeVariable = true;
+      if(this._dp) {
+      this._dp.dueDateIntervalDate = this.intervalDueDate;
+      }
     }
     if ( this.datePickerConfig.tabSelected === 'tab2') {
       this.activeVariable1 = true;
@@ -143,10 +149,14 @@ export class DatepickerComponent implements OnInit, OnChanges {
     if (this.allowInterval) {
        this.OpenDiv = true;
        this.showCalendar = false;
+
     } else {
      this.OpenDiv = false;
      this.showCalendar = true;
     }
+    if(this._dp) {
+      this._dp.dueDateIntervalDate = this.intervalDueDate;
+      }
   }
 
   /**
@@ -180,6 +190,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
        this._dp.dropdownNumber = this.datePickerConfig.interval_number;
        this._dp.Duration = this.datePickerConfig.interval_duration;
       // this._dp._DueDate = this.datePickerConfig.selected_interval;
+      //  this._dp.dueDateIntervalDate = this.intervalDueDate;
       }
      } else {
       this.datePickerConfig.tabSelected = tabname;
