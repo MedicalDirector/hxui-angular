@@ -33,6 +33,9 @@ export class DatepickerComponent implements OnInit, OnChanges {
   @Input()
   allowInterval = false;
 
+  @Input()
+  selectedDueDateInterval = '0 day(s)';
+
   onDateSelected: (inputDate: Date) => void;
   visibilityEnum = Visibility;
   visibility: Visibility = Visibility.Hidden;
@@ -101,9 +104,6 @@ export class DatepickerComponent implements OnInit, OnChanges {
       this.selectedDate = date;
       this.onDateSelected(date);
     }
-    this.datePickerConfig.interval_number = 0;
-    this.datePickerConfig.interval_duration = 'days';
-    this.datePickerConfig.selected_interval = (moment().add(this.datePickerConfig.interval_number , this.datePickerConfig.interval_duration)).format('ddd DD/MM/YYYY');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -146,6 +146,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
     if (this.allowInterval) {
        this.OpenDiv = true;
        this.showCalendar = false;
+
     } else {
      this.OpenDiv = false;
      this.showCalendar = true;
@@ -179,11 +180,6 @@ export class DatepickerComponent implements OnInit, OnChanges {
   onTabSelect(tabname: String) {
      if (tabname === 'tab1') {
       this.datePickerConfig.tabSelected = tabname;
-      if (this._dp) {
-       this._dp.dropdownNumber = this.datePickerConfig.interval_number;
-       this._dp.Duration = this.datePickerConfig.interval_duration;
-       this._dp._DueDate = this.datePickerConfig.selected_interval;
-      }
      } else {
       this.datePickerConfig.tabSelected = tabname;
      }
