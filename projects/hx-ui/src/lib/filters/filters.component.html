@@ -29,7 +29,7 @@
         <input class="hx-input"
                type="search"
                placeholder="{{filter.label}}"
-               (input)="onSearchFilterChange(filter, $event.target.value)"
+               (input)="onSearchFilterChange(filter)"
                [(ngModel)]="filter.value">
         <label class="hx-label"></label>
         <div class="hx-help"></div>

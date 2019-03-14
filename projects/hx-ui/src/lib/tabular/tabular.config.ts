@@ -21,7 +21,8 @@ export class TabularConfig {
             currentPage: 1
         },
         clickableRows: false,
-        stickyHeader: true
+        stickyHeader: true,
+        multiSorting: true
     };
 
 }

@@ -34,6 +34,12 @@ export interface IFiltersConfig {
    */
   value?: string;
 
+  /**
+   * Filter character limit for Search filter type
+   * Fire filter event if character >= this value
+   *  Defaults to 2
+   */
+  charLimit?: number;
 
   /**
    * Index of default filter option.
