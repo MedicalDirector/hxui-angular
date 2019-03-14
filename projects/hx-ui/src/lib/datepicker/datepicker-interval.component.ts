@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, Input, ViewChild, ElementRef , AfterViewInit} from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef} from '@angular/core';
 import {DatepickerFormComponent} from './datepicker-form.component';
 import * as moment_ from 'moment';
 const moment = moment_;
