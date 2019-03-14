@@ -15,7 +15,6 @@ import {DatepickerComponent} from './datepicker.component';
 import {take, takeUntil} from 'rxjs/operators';
 import {Directionality} from '@angular/cdk/bidi';
 import {DatepickerConfig} from './datepicker.config';
-import { DatepickerIntervalComponent } from './datepicker-interval.component';
 
 @Component({
   selector: 'hxa-datepicker-input, hxa-datepicker-form',
@@ -36,7 +35,6 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
 
   _overlayRef: OverlayRef | null;
   _calendarInstance: DatepickerComponent | null;
-  _intervalInstance: DatepickerIntervalComponent | null;
   private _portal: ComponentPortal<DatepickerComponent>;
   private readonly _destroyed = new Subject();
 
@@ -92,7 +90,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   interval = false;
 
   @Input()
-  dueDateInterval = '0 day(s)'; // '0 day(s)' | '1 week(s)' | '2 month(s)' | '3 year(s)'
+  dueDateInterval = '5 month(s)'; // '0 day(s)' | '1 week(s)' | '2 month(s)' | '3 year(s)'
 
   @Output()
   onDateChange: EventEmitter<Date> = new EventEmitter<Date>();

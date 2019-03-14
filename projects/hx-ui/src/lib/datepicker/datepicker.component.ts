@@ -120,9 +120,6 @@ export class DatepickerComponent implements OnInit, OnChanges {
     if ( this.datePickerConfig.tabSelected === 'tab1') {
      this.activeVariable1 = false;
       this.activeVariable = true;
-      if(this._dp) {
-      this._dp.dueDateIntervalDate = this.intervalDueDate;
-      }
     }
     if ( this.datePickerConfig.tabSelected === 'tab2') {
       this.activeVariable1 = true;
@@ -154,9 +151,6 @@ export class DatepickerComponent implements OnInit, OnChanges {
      this.OpenDiv = false;
      this.showCalendar = true;
     }
-    if(this._dp) {
-      this._dp.dueDateIntervalDate = this.intervalDueDate;
-      }
   }
 
   /**
@@ -186,12 +180,6 @@ export class DatepickerComponent implements OnInit, OnChanges {
   onTabSelect(tabname: String) {
      if (tabname === 'tab1') {
       this.datePickerConfig.tabSelected = tabname;
-      if (this._dp) {
-       this._dp.dropdownNumber = this.datePickerConfig.interval_number;
-       this._dp.Duration = this.datePickerConfig.interval_duration;
-      // this._dp._DueDate = this.datePickerConfig.selected_interval;
-      //  this._dp.dueDateIntervalDate = this.intervalDueDate;
-      }
      } else {
       this.datePickerConfig.tabSelected = tabname;
      }
