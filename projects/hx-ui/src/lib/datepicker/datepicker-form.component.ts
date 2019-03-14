@@ -89,6 +89,9 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   @Input()
   interval = false;
 
+  @Input()
+  dueDateInterval = '0 day(s)'; // '0 day(s)' | '1 week(s)' | '2 month(s)' | '3 year(s)'
+
   @Output()
   onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
@@ -478,6 +481,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
       this._calendarInstance.validators = this.dateValidators;
       this._calendarInstance.onDateSelected = this.onDateSelectEvent;
       this._calendarInstance.allowInterval = this.interval;
+      this._calendarInstance.selectedDueDateInterval = this.dueDateInterval;
 
 
       this._ngZone.onMicrotaskEmpty.asObservable().pipe(

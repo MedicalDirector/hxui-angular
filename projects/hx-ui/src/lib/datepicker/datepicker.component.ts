@@ -33,6 +33,9 @@ export class DatepickerComponent implements OnInit, OnChanges {
   @Input()
   allowInterval = false;
 
+  @Input()
+  selectedDueDateInterval = '0 day(s)';
+
   onDateSelected: (inputDate: Date) => void;
   visibilityEnum = Visibility;
   visibility: Visibility = Visibility.Hidden;
