@@ -65,6 +65,7 @@ export class DatepickerIntervalComponent implements OnInit {
       this.text = moment().add(numbervalue , durationValue.replace('(s)', 's'));
       this._DueDate = (this.text).format('ddd DD/MM/YYYY');
       this._dueDatestring = (this.text).format('DD/MM/YYYY');
+      this._datepickerForm.onChange(this._dueDatestring);
       return this._DueDate;
   }
   public onChoose() {
