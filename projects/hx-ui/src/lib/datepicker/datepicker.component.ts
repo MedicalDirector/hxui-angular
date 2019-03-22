@@ -113,7 +113,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    const date: Date = new Date();
+    const date: Date = this.selectedDate ? this.selectedDate : new Date();
     this.presentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     this.viewDate = this.viewDate || new Date(date.getFullYear(), date.getMonth());
     this.renderCalendar();
