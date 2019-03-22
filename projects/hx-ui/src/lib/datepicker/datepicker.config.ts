@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
+
 
 /** Default values provider for calendar */
 @Injectable()
@@ -11,9 +11,5 @@ export class DatepickerConfig {
   /** delay in ms before hiding the calendar after hide is called */
   public hideDelay = 0;
   public tabSelected: String ;
-  public interval_duration: any = 'days';
-  // public _selectedDate: Date;
-  public interval_number: any = 0;
-  public text: any ;//=  moment().add(this.interval_number , this.interval_duration);
-  public selected_interval: string ;//= (this.text).format('ddd DD/MM/YYYY');
+  public selectedDueDateInterval: string = undefined;
 }
