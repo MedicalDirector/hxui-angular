@@ -90,10 +90,13 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   interval = false;
 
   @Input()
-  dueDateInterval = '0 day(s)'; // '0 day(s)' | '1 week(s)' | '2 month(s)' | '3 year(s)'
+  dueDateInterval = '5 month(s)'; // '0 day(s)' | '1 week(s)' | '2 month(s)' | '3 year(s)'
 
   @Output()
   onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
+
+  @Input()
+  changeDate = false;
 
   public date: Date;
   public visible = false;
