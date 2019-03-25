@@ -95,6 +95,9 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   @Output()
   onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
+  @Input()
+  changeDate = false;
+
   public date: Date;
   public visible = false;
   public presentDate: Date;

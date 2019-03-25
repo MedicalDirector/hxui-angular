@@ -22,6 +22,7 @@ export class DatepickerIntervalComponent implements OnInit {
   public _dueDatestring: string;
   public durationText1: any;
   public numberText1: any;
+  public selectedDuration: string;
 
 
   @Input()
@@ -31,23 +32,26 @@ export class DatepickerIntervalComponent implements OnInit {
   placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
 
   constructor(private _datepickerForm: DatepickerFormComponent, private datePickerConfig: DatepickerConfig,
-    private _datepickerComponent: DatepickerComponent) { }
+    private _datepickerComponent: DatepickerComponent) {
+     }
 
   ngOnInit() {
-    const selectedDueDateInterval = this._datepickerComponent.selectedDueDateInterval ? this._datepickerComponent.selectedDueDateInterval.split(' ') : undefined;
-    if (selectedDueDateInterval && selectedDueDateInterval.length > 1 ) {
+    const selectedDueDateInterval = this.datePickerConfig.selectedDueDateInterval === undefined ?
+     (this._datepickerComponent.selectedDueDateInterval ? this._datepickerComponent.selectedDueDateInterval.split(' ') : undefined) :
+      this.datePickerConfig.selectedDueDateInterval.split(' ');
+    if (selectedDueDateInterval && selectedDueDateInterval.length > 1) {
       this.dropdownNumber = selectedDueDateInterval[0];
-      this.Duration = selectedDueDateInterval[1];
+      this.Duration = this.resetDurationText(selectedDueDateInterval[1]);
+      if (this.datePickerConfig && this.datePickerConfig.tabSelected === 'tab1') {
+        this.durationText1 = this.SelectElement(this.durationText, this.Duration);
+        this.numberText1 = this.SelectElement(this.numberText, this.dropdownNumber);
+        this._DueDate = this.onSelectoptions(this.numberText1, this.durationText1);
+      } else if (this.datePickerConfig && this.datePickerConfig.tabSelected === 'tab2') {
+        this.text = moment().add(this.dropdownNumber, this.Duration.replace('(s)', 's'));
+        this._DueDate = (this.text).format('ddd DD/MM/YYYY');
+      }
     }
-
-    if (this.Duration === 'day' || this.Duration === 'week' || this.Duration === 'month' || this.Duration === 'year') {
-      this.Duration = this.Duration + '(s)';
-    } else if (this.Duration === 'days' || this.Duration === 'weeks' || this.Duration === 'months' || this.Duration === 'years') {
-      this.Duration = this.Duration.replace('s', '(s)');
-    }
-    this.durationText1 = this.SelectElement(this.durationText , this.Duration);
-    this.numberText1 = this.SelectElement(this.numberText, this.dropdownNumber);
-    this._DueDate = this.onSelectoptions(this.numberText1 , this.durationText1);
+    this.datePickerConfig.selectedDueDateInterval = undefined;
   }
 
   onCancel = () => {
@@ -58,14 +62,17 @@ export class DatepickerIntervalComponent implements OnInit {
       this.text = moment().add(this.dropdownNumber , this.Duration.replace('(s)', 's'));
       this._DueDate = (this.text).format('ddd DD/MM/YYYY');
       this._dueDatestring = (this.text).format('DD/MM/YYYY');
+      this._datepickerComponent.selectedDueDateInterval = undefined;
      return this._DueDate;
      }
   }
   onSelectoptions(numbervalue , durationValue) {
+      this.datePickerConfig.selectedDueDateInterval = undefined;
       this.text = moment().add(numbervalue , durationValue.replace('(s)', 's'));
       this._DueDate = (this.text).format('ddd DD/MM/YYYY');
       this._dueDatestring = (this.text).format('DD/MM/YYYY');
       this._datepickerForm.onChange(this._dueDatestring);
+
       return this._DueDate;
   }
   public onChoose() {
@@ -73,10 +80,25 @@ export class DatepickerIntervalComponent implements OnInit {
     this._datepickerForm.setDate(new Date(this.text));
     this._datepickerComponent.OpenDiv = false;
     this._datepickerForm.onChange(this._dueDatestring);
+    this._datepickerComponent.selectedDueDateInterval = undefined;
+    if(this._datepickerForm.changeDate === true) {
+      this.datePickerConfig.selectedDueDateInterval = this._datepickerComponent.selectedDueDateInterval;
+    } else {
+      this.datePickerConfig.selectedDueDateInterval = this.dropdownNumber + ' ' + this.Duration;
+    }
   }
 
   public SelectElement(id , valueToSelect) {
     (id.nativeElement).value = valueToSelect;
     return ((id.nativeElement).value);
+  }
+  public resetDurationText(duration: string): string {
+    if (duration === 'day' || duration === 'week' || duration === 'month' || duration === 'year') {
+      return duration + '(s)';
+    } else if (duration === 'days' || duration === 'weeks' || duration === 'months' || duration === 'years') {
+      return duration.replace('s', '(s)');
+    } else {
+      return duration;
+    }
   }
 }

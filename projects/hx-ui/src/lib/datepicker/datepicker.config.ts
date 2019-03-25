@@ -11,4 +11,5 @@ export class DatepickerConfig {
   /** delay in ms before hiding the calendar after hide is called */
   public hideDelay = 0;
   public tabSelected: String ;
+  public selectedDueDateInterval: string = undefined;
 }
