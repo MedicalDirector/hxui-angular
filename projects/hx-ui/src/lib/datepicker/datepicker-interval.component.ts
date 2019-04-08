@@ -23,7 +23,8 @@ export class DatepickerIntervalComponent implements OnInit {
   public durationText1: any;
   public numberText1: any;
   public selectedDuration: string;
-
+  private presentDate: Date;
+  viewDate: Date;
 
   @Input()
   selectedDateInterval: Date;
@@ -51,7 +52,7 @@ export class DatepickerIntervalComponent implements OnInit {
         this._DueDate = (this.text).format('ddd DD/MM/YYYY');
       }
     }
-    this.datePickerConfig.selectedDueDateInterval = undefined;
+   // this.datePickerConfig.selectedDueDateInterval = undefined;
   }
 
   onCancel = () => {
@@ -62,12 +63,16 @@ export class DatepickerIntervalComponent implements OnInit {
       this.text = moment().add(this.dropdownNumber , this.Duration.replace('(s)', 's'));
       this._DueDate = (this.text).format('ddd DD/MM/YYYY');
       this._dueDatestring = (this.text).format('DD/MM/YYYY');
-      this._datepickerComponent.selectedDueDateInterval = undefined;
+      const date: Date = this.text ? new Date( this.text) : new Date();
+      this.presentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      this._datepickerComponent.viewDate =  new Date(date.getFullYear(), date.getMonth());
+      this._datepickerComponent.renderCalendar();
+      this._datepickerForm.onChange(this._dueDatestring);
      return this._DueDate;
      }
   }
   onSelectoptions(numbervalue , durationValue) {
-      this.datePickerConfig.selectedDueDateInterval = undefined;
+       // this.datePickerConfig.selectedDueDateInterval = undefined;
       this.text = moment().add(numbervalue , durationValue.replace('(s)', 's'));
       this._DueDate = (this.text).format('ddd DD/MM/YYYY');
       this._dueDatestring = (this.text).format('DD/MM/YYYY');
@@ -81,7 +86,7 @@ export class DatepickerIntervalComponent implements OnInit {
     this._datepickerComponent.OpenDiv = false;
     this._datepickerForm.onChange(this._dueDatestring);
     this._datepickerComponent.selectedDueDateInterval = undefined;
-    if(this._datepickerForm.changeDate === true) {
+    if (this._datepickerForm.changeDate === true) {
       this.datePickerConfig.selectedDueDateInterval = this._datepickerComponent.selectedDueDateInterval;
     } else {
       this.datePickerConfig.selectedDueDateInterval = this.dropdownNumber + ' ' + this.Duration;
