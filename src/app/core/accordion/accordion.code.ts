@@ -40,10 +40,10 @@ export class AccordionCode {
   exampleTemplate2 =
     `
   <hx-accordion [cssClass]="{'is-elevate-3': true}">
-    <hx-accordion-container>
+    <hx-accordion-container [expanded]="false" [position]="0" (headerClick)="someFunction($event)">
       <hx-accordion-header>
         <p>
-          <b>The header with an additional HXUI elevation class</b>
+          <b>The header, emitting an event if a position is provided</b>
         </p>
       </hx-accordion-header>
       <hx-accordion-body>
@@ -51,5 +51,18 @@ export class AccordionCode {
       </hx-accordion-body>
     </hx-accordion-container>
   </hx-accordion>
+  `;
+
+  exampleComponent2 =
+  `
+    export class ClassUsingTheAccordion extends SomeOtherClassOrComponent {
+
+      constructor() {
+      }
+
+      public someFunction($event: number){
+        alert($event);
+      }
+    }
   `;
 }

@@ -4,6 +4,7 @@ import { PageScrollService } from 'ngx-page-scroll';
 import { CoreBaseComponent } from '../core-base.component';
 import { AccordionCode } from './accordion.code';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import { Alert } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-accordion',
@@ -20,5 +21,9 @@ export class AccordionComponent extends CoreBaseComponent {
     @Inject(DOCUMENT) protected document: any
   ) {
     super(pageScrollService, breakpointObserver, document);
+  }
+
+  public someFunction($event: number) {
+    alert($event);
   }
 }

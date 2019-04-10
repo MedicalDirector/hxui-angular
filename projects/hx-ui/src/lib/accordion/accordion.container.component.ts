@@ -1,9 +1,9 @@
-import { Component, ChangeDetectorRef, Input } from "@angular/core";
-import { state, style, transition, animate, trigger } from "@angular/animations";
+import { Component, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
+import { state, style, transition, animate, trigger } from '@angular/animations';
 
 @Component({
-    selector: 'hx-accordion-container, hxa-accordion-container',
-    template: `    
+  selector: 'hx-accordion-container, hxa-accordion-container',
+  template: `
     <li class="hx-accordion-container" [class.is-active]="expanded">
         <a class="hx-accordion-header" (click)="toggle()">
             <div class="header-title"><ng-content select="hx-accordion-header, hxa-accordion-header"></ng-content></div>
@@ -19,29 +19,35 @@ import { state, style, transition, animate, trigger } from "@angular/animations"
         </div>
     </li>
 `,
-    styleUrls: ['./accordian.container.scss'],
-    animations: [
-        trigger('slideIn', [
-            state('*', style({ 'overflow-y': 'hidden' })),
-            state('void', style({ 'overflow-y': 'hidden' })),
-            transition('* => void', [
-                style({ height: '*' }),
-                animate('0.25s ease-out', style({ height: 0, opacity: 0 }))
-            ]),
-            transition('void => *', [
-                style({ height: '0' }),
-                animate('0.25s ease-out', style({ height: '*', opacity: 1 }))
-            ])
-        ])
-    ]
+  styleUrls: ['./accordian.container.scss'],
+  animations: [
+    trigger('slideIn', [
+      state('*', style({ 'overflow-y': 'hidden' })),
+      state('void', style({ 'overflow-y': 'hidden' })),
+      transition('* => void', [
+        style({ height: '*' }),
+        animate('0.25s ease-out', style({ height: 0, opacity: 0 }))
+      ]),
+      transition('void => *', [
+        style({ height: '0' }),
+        animate('0.25s ease-out', style({ height: '*', opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class AccordionContainerComponent {
-    @Input() expanded = true;
+  @Input() expanded = true;
+  @Input() position: number = null;
+  @Output() headerClick: EventEmitter<number> = new EventEmitter<number>();
 
-    constructor(private _changeDetectionRef: ChangeDetectorRef) { }
+  constructor(private _changeDetectionRef: ChangeDetectorRef) { }
 
-    public toggle(): void {
-        this.expanded = !this.expanded;
-        this._changeDetectionRef.markForCheck();
+  public toggle(): void {
+    if (!this.expanded && this.position !== null) {
+      this.headerClick.emit(this.position);
+      console.log('emitttted');
     }
+    this.expanded = !this.expanded;
+    this._changeDetectionRef.markForCheck();
+  }
 }

@@ -29,7 +29,8 @@
           </hx-accordion-container>
           <hx-accordion-container [expanded]="false">
             <hx-accordion-header>
-              This is the second header. <b>You can even style it!</b> <i class="hx-icon icon-helix is-small is-info"></i>
+              This is the second header. <b>You can even style it!</b> <i
+                class="hx-icon icon-helix is-small is-info"></i>
             </hx-accordion-header>
             <hx-accordion-body>
               <p>
@@ -50,7 +51,7 @@
 
     <hx-tabset>
       <hx-tab heading="Template">
-            <pre>
+        <pre>
               <code highlight [code]="code.exampleTemplate"></code>
             </pre>
       </hx-tab>
@@ -63,10 +64,10 @@
     <h4 id="example">Example 2 - With additional class binding</h4>
 
     <hx-accordion [cssClass]="{'is-elevate-3': true}">
-      <hx-accordion-container>
+      <hx-accordion-container [position]="0" (headerClick)="someFunction($event)" [expanded]="false">
         <hx-accordion-header>
           <p>
-            <b>The header with an additional HXUI elevation class</b>
+            <b>The header, which can emit an event when a position is provided as an input binding</b>
           </p>
         </hx-accordion-header>
         <hx-accordion-body>
@@ -79,13 +80,22 @@
 
     <h5 id="code">Code</h5>
 
-    <hx-tabset>
-      <hx-tab heading="Template">
+    <div class="hx-columns">
+      <div class="hx-column">
+        <hx-tabset>
+          <hx-tab heading="Template">
             <pre>
               <code highlight [code]="code.exampleTemplate2"></code>
             </pre>
-      </hx-tab>
-    </hx-tabset>
+          </hx-tab>
+          <hx-tab heading="Component">
+            <pre>
+              <code highlight [code]="code.exampleComponent2"></code>
+            </pre>
+          </hx-tab>
+        </hx-tabset>
+      </div>
+    </div>
 
     <hr>
 
@@ -98,23 +108,47 @@
       <div class="hx-column">
         <table class="hx-table is-striped">
           <thead>
-          <tr>
-            <th>Inputs</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
+            <tr>
+              <th>Inputs</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>expanded</td>
-            <td><kbd>boolean</kbd></td>
-            <td>Determines if the accordion container is expanded by default on load.</td>
-          </tr>
-          <tr>
-            <td>cssClass</td>
-            <td><kbd>string</kbd></td>
-            <td>Determines if the accordion container contains an additional class, binding via [ngClass]</td>
-          </tr>
+            <tr>
+              <td>expanded</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Determines if the accordion container is expanded by default on load.</td>
+            </tr>
+            <tr>
+              <td>cssClass</td>
+              <td><kbd>string</kbd></td>
+              <td>Determines if the accordion container contains an additional class, binding via [ngClass].</td>
+            </tr>
+            <tr>
+              <td>position</td>
+              <td><kbd>number</kbd></td>
+              <td>Provides an index to the accordion component for each container.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <br>
+
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Outputs</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>headerClick</td>
+              <td><kbd>number</kbd></td>
+              <td>Used in conjunction with [position]; This will emit an event with the [position] number provided.</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -124,7 +158,9 @@
 
 <aside *ngIf="contentsNav" class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
   <ul class="hx-nav hx-nav-vertical">
-    <li class="hx-nav-heading"><h6>Contents</h6></li>
+    <li class="hx-nav-heading">
+      <h6>Contents</h6>
+    </li>
 
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
