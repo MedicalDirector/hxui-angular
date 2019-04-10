@@ -58,6 +58,39 @@
 
     <hr>
 
+    <br>
+
+    <h4 id="example">Example 2 - With additional class binding</h4>
+
+    <hx-accordion [additionalClass]="{'is-elevate-3': true}">
+      <hx-accordion-container>
+        <hx-accordion-header>
+          <p>
+            <b>The header with an additional HXUI elevation class</b>
+          </p>
+        </hx-accordion-header>
+        <hx-accordion-body>
+          <p>The body with an additional HXUI elevation class</p>
+        </hx-accordion-body>
+      </hx-accordion-container>
+    </hx-accordion>
+
+    <br>
+
+    <h5 id="code">Code</h5>
+
+    <hx-tabset>
+      <hx-tab heading="Template">
+            <pre>
+              <code highlight [code]="code.exampleTemplate2"></code>
+            </pre>
+      </hx-tab>
+    </hx-tabset>
+
+    <hr>
+
+    <br>
+
     <h4 id="api">API Reference</h4>
 
     <h5 class="is-primary">Accordion Component</h5>
@@ -65,19 +98,24 @@
       <div class="hx-column">
         <table class="hx-table is-striped">
           <thead>
-            <tr>
-              <th>Inputs</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
+          <tr>
+            <th>Inputs</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>expanded</td>
-              <td><kbd>boolean</kbd></td>
-              <td>Determines if the accordion container is expanded by default on load.</td>
-            </tr>
-            </tbody>
+          <tr>
+            <td>expanded</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Determines if the accordion container is expanded by default on load.</td>
+          </tr>
+          <tr>
+            <td>cssClass</td>
+            <td><kbd>string</kbd></td>
+            <td>Determines if the accordion container contains an additional class, binding via [ngClass]</td>
+          </tr>
+          </tbody>
         </table>
       </div>
     </div>

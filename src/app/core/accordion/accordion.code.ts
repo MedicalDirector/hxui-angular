@@ -22,7 +22,7 @@ export class AccordionCode {
     </hx-accordion-container>
     <hx-accordion-container [expanded]="false">
       <hx-accordion-header>
-        This is the second header. <b>You can even style it!</b> 
+        This is the second header. <b>You can even style it!</b>
         <i class="hx-icon icon-helix is-small is-info"></i>
       </hx-accordion-header>
       <hx-accordion-body>
@@ -36,4 +36,20 @@ export class AccordionCode {
     </hx-accordion-container>
   </hx-accordion>
     `;
+
+  exampleTemplate2 =
+    `
+  <hx-accordion [additionalClass]="{'is-elevate-3': true}">
+    <hx-accordion-container>
+      <hx-accordion-header>
+        <p>
+          <b>The header with an additional HXUI elevation class</b>
+        </p>
+      </hx-accordion-header>
+      <hx-accordion-body>
+        <p>The body with an additional HXUI elevation class</p>
+      </hx-accordion-body>
+    </hx-accordion-container>
+  </hx-accordion>
+  `;
 }

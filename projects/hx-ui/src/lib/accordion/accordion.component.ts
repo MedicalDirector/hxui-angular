@@ -1,13 +1,14 @@
-import { Component } from "@angular/core";
+import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'hx-accordion, hxa-accordion',
-    template: `
+  selector: 'hx-accordion, hxa-accordion',
+  template: `
     <div class="hxui-reset">
-        <ul class="hx-accordion">
-            <ng-content></ng-content>
-        </ul>
+      <ul class="hx-accordion" [ngClass]="additionalClass">
+        <ng-content></ng-content>
+      </ul>
     </div>`
 })
 export class AccordionComponent {
+  @Input() additionalClass?: string = null;
 }
