@@ -4,11 +4,11 @@ import { Component, Input } from '@angular/core';
   selector: 'hx-accordion, hxa-accordion',
   template: `
     <div class="hxui-reset">
-      <ul class="hx-accordion" [ngClass]="additionalClass">
+      <ul class="hx-accordion" [ngClass]="cssClass">
         <ng-content></ng-content>
       </ul>
     </div>`
 })
 export class AccordionComponent {
-  @Input() additionalClass?: string = null;
+  @Input() cssClass?: string = null;
 }

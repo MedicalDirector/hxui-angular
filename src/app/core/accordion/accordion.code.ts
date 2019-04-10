@@ -39,7 +39,7 @@ export class AccordionCode {
 
   exampleTemplate2 =
     `
-  <hx-accordion [additionalClass]="{'is-elevate-3': true}">
+  <hx-accordion [cssClass]="{'is-elevate-3': true}">
     <hx-accordion-container>
       <hx-accordion-header>
         <p>
