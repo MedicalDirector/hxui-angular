@@ -63,8 +63,8 @@
 
     <h4 id="example">Example 2 - With additional class binding</h4>
 
-    <hx-accordion [cssClass]="{'is-elevate-3': true}">
-      <hx-accordion-container *ngFor="let item of items; index as i" [expanded]="false" [index]="i" (headerClick)="someFunction($event)">
+    <hx-accordion [cssClass]="{'is-elevate-3': true, 'is-text-unselectable': true}">
+      <hx-accordion-container *ngFor="let item of items; index as i" [expanded]="false" [index]="i" [disabled]="item.body === null" (headerClick)="someFunction($event)">
         <hx-accordion-header>
           <p>
             <b>{{ item.header }}</b>
@@ -129,6 +129,11 @@
               <td>index</td>
               <td><kbd>number</kbd></td>
               <td>Provides an index to the accordion component for each container.</td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td><kbd>boolean</kbd></td>
+              <td>False by default. Disables the accordion from expanding on any row which fits the condition. (headerClick) will still emit an output if configured.</td>
             </tr>
           </tbody>
         </table>
