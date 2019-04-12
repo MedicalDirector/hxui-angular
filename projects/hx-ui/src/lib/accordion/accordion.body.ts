@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'hx-accordion-body, hxa-accordion-body',

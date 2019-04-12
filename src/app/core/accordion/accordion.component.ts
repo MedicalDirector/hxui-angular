@@ -25,6 +25,7 @@ export class AccordionComponent extends CoreBaseComponent {
 
     this.items.push({header: 'This is the first header', body: 'This is the body of the first accordion component'});
     this.items.push({header: 'Drug reference for Paracetamole', body: 'Paracetamole is a drug'});
+    this.items.push({header: 'Item with a null body', body: null});
   }
 
   public someFunction($event: number) {

@@ -39,8 +39,8 @@ export class AccordionCode {
 
   exampleTemplate2 =
     `
-    <hx-accordion [cssClass]="{'is-elevate-3': true}">
-      <hx-accordion-container *ngFor="let item of items; index as i" [expanded]="false" [index]="i" (headerClick)="someFunction($event)">
+    <hx-accordion [cssClass]="{'is-elevate-3': true, 'is-text-unselectable': true}">
+      <hx-accordion-container *ngFor="let item of items; index as i" [expanded]="false" [index]="i" [disabled]="item.body === null" (headerClick)="someFunction($event)">
         <hx-accordion-header>
           <p>
             <b>{{ item.header }}</b>
@@ -62,6 +62,7 @@ export class AccordionCode {
       constructor() {
         this.items.push({header: 'This is the first header', body: 'This is the body of the first accordion component'});
         this.items.push({header: 'Drug reference for Paracetamole', body: 'Paracetamole is a drug'});
+        this.items.push({header: 'Item with a null body', body: null});
       }
 
       public someFunction($event: number){
