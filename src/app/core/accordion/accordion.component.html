@@ -64,14 +64,14 @@
     <h4 id="example">Example 2 - With additional class binding</h4>
 
     <hx-accordion [cssClass]="{'is-elevate-3': true}">
-      <hx-accordion-container [position]="0" (headerClick)="someFunction($event)" [expanded]="false">
+      <hx-accordion-container *ngFor="let item of items; index as i" [expanded]="false" [index]="i" (headerClick)="someFunction($event)">
         <hx-accordion-header>
           <p>
-            <b>The header, which can emit an event when a position is provided as an input binding</b>
+            <b>{{ item.header }}</b>
           </p>
         </hx-accordion-header>
         <hx-accordion-body>
-          <p>The body with an additional HXUI elevation class</p>
+          <p>{{ item.body }}</p>
         </hx-accordion-body>
       </hx-accordion-container>
     </hx-accordion>
@@ -126,7 +126,7 @@
               <td>Determines if the accordion container contains an additional class, binding via [ngClass].</td>
             </tr>
             <tr>
-              <td>position</td>
+              <td>index</td>
               <td><kbd>number</kbd></td>
               <td>Provides an index to the accordion component for each container.</td>
             </tr>
@@ -147,7 +147,7 @@
             <tr>
               <td>headerClick</td>
               <td><kbd>number</kbd></td>
-              <td>Used in conjunction with [position]; This will emit an event with the [position] number provided.</td>
+              <td>Used in conjunction with [index]; This will emit an event with the [index] number provided.</td>
             </tr>
           </tbody>
         </table>

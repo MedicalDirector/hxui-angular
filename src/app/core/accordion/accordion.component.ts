@@ -14,6 +14,7 @@ import { Alert } from 'selenium-webdriver';
 export class AccordionComponent extends CoreBaseComponent {
 
   public code = new AccordionCode();
+  public items: {'header': string, 'body': string}[] = [];
 
   constructor(
     protected pageScrollService: PageScrollService,
@@ -21,6 +22,9 @@ export class AccordionComponent extends CoreBaseComponent {
     @Inject(DOCUMENT) protected document: any
   ) {
     super(pageScrollService, breakpointObserver, document);
+
+    this.items.push({header: 'This is the first header', body: 'This is the body of the first accordion component'});
+    this.items.push({header: 'Drug reference for Paracetamole', body: 'Paracetamole is a drug'});
   }
 
   public someFunction($event: number) {

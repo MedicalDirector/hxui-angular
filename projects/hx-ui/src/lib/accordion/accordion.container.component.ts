@@ -37,15 +37,14 @@ import { state, style, transition, animate, trigger } from '@angular/animations'
 })
 export class AccordionContainerComponent {
   @Input() expanded = true;
-  @Input() position: number = null;
+  @Input() index: number = null;
   @Output() headerClick: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private _changeDetectionRef: ChangeDetectorRef) { }
 
   public toggle(): void {
-    if (!this.expanded && this.position !== null) {
-      this.headerClick.emit(this.position);
-      console.log('emitttted');
+    if (this.index !== null) {
+      this.headerClick.emit(this.index);
     }
     this.expanded = !this.expanded;
     this._changeDetectionRef.markForCheck();

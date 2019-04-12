@@ -39,25 +39,29 @@ export class AccordionCode {
 
   exampleTemplate2 =
     `
-  <hx-accordion [cssClass]="{'is-elevate-3': true}">
-    <hx-accordion-container [expanded]="false" [position]="0" (headerClick)="someFunction($event)">
-      <hx-accordion-header>
-        <p>
-          <b>The header, emitting an event if a position is provided</b>
-        </p>
-      </hx-accordion-header>
-      <hx-accordion-body>
-        <p>The body with an additional HXUI elevation class</p>
-      </hx-accordion-body>
-    </hx-accordion-container>
-  </hx-accordion>
+    <hx-accordion [cssClass]="{'is-elevate-3': true}">
+      <hx-accordion-container *ngFor="let item of items; index as i" [expanded]="false" [index]="i" (headerClick)="someFunction($event)">
+        <hx-accordion-header>
+          <p>
+            <b>{{ item.header }}</b>
+          </p>
+        </hx-accordion-header>
+        <hx-accordion-body>
+          <p>{{ item.body }}</p>
+        </hx-accordion-body>
+      </hx-accordion-container>
+    </hx-accordion>
   `;
 
   exampleComponent2 =
   `
-    export class ClassUsingTheAccordion extends SomeOtherClassOrComponent {
+    @Component()
+    export class ClassUsingTheAccordionComponent extends SomeOtherClassOrComponent {
+      public items: {'header': string, 'body': string}[] = [];
 
       constructor() {
+        this.items.push({header: 'This is the first header', body: 'This is the body of the first accordion component'});
+        this.items.push({header: 'Drug reference for Paracetamole', body: 'Paracetamole is a drug'});
       }
 
       public someFunction($event: number){
