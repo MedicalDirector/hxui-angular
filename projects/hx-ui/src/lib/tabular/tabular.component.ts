@@ -132,22 +132,14 @@ export class TabularComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     if (!_.isEqual(this.rows, this.oldRows)) {
-      console.log(this.rows);
-      console.log(this.oldRows);
       this.oldRows = _.cloneDeep(this.rows);
 
       // on sorting we dont need change detection to run and call sorting again
-      if (!this._isSorting && !this._initialLoad) {
+      if (!this._isSorting ) {
         this.orderByData(false);
       }
 
-      // on initial load we don't need to call sort, just set page
-      if (this._initialLoad) {
-        this.setPage();
-      }
-
       this._isSorting = false;
-      this._initialLoad = false;
     }
   }
 

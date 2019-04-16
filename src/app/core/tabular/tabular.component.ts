@@ -44,7 +44,14 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
     pagination: {
       itemsPerPage: 5,
       currentPage: 1
-    }
+    },
+    sortBy: [
+      {
+        property: 'modified',
+        type: TabularColumnTypes.DateTime,
+        direction: SortByDirection.Descending
+      }
+    ]
   };
 
 
