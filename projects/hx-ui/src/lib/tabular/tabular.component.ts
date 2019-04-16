@@ -105,6 +105,7 @@ export class TabularComponent implements OnInit, DoCheck {
   protected _callback: Function;
   protected _config: ITabularConfig;
   protected _searchTerm: string;
+  private _isSorting = false;
 
 
    constructor(
@@ -120,8 +121,15 @@ export class TabularComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     if (!_.isEqual(this.rows, this.oldRows)) {
+      console.log(this.rows);
+      console.log(this.oldRows);
       this.oldRows = _.cloneDeep(this.rows);
-      this.orderByData(false);
+
+      if (!this._isSorting) {
+        this.orderByData(false);
+      }
+
+      this._isSorting = false;
     }
   }
 
@@ -243,6 +251,7 @@ export class TabularComponent implements OnInit, DoCheck {
   private orderByData(emitSortEvent: boolean) {
     if (this.config.sortBy.length > 0) {
       if (!this.config.remoteSorting) {
+        this._isSorting = true;
         this.rows = [...this.rows]; // Required as array-sort-by mutates the original array
         this.sortByService.sortBy(this.rows, this.config.sortBy);
       }

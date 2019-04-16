@@ -451,7 +451,7 @@ export class InMemoryDataService implements InMemoryDbService {
         email: 'biggie.smalls@medicaldirector.com',
         active: true,
         created: new Date(),
-        modified: new Date()
+        modified:  new Date()
       }
     ];
     return {users};
