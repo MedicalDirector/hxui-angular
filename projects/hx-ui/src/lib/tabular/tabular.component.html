@@ -40,7 +40,7 @@
 
       <!-- checkbox type -->
       <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
-        <input id="checkbox-{{row.id}}" name="{{col.label}}-checkbox" type="checkbox" class="hx-checkbox" title="{{col.label}}" (change)="toggleIndividualSelect($event)" [(ngModel)]="row.checked" />
+        <input id="checkbox-{{row.id}}" name="{{col.label}}-checkbox" type="checkbox" class="hx-checkbox" title="{{col.label}}" (change)="toggleIndividualSelect(row)" [(ngModel)]="row.checked" />
         <label for="checkbox-{{row.id}}" class="hx-label"></label>
       </div>
 
