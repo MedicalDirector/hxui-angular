@@ -116,6 +116,7 @@ export class TabularComponent implements OnInit, DoCheck {
   protected _config: ITabularConfig;
   protected _searchTerm: string;
   private _isSorting = false;
+  private _initialLoad = true;
 
 
   constructor(
@@ -135,11 +136,18 @@ export class TabularComponent implements OnInit, DoCheck {
       console.log(this.oldRows);
       this.oldRows = _.cloneDeep(this.rows);
 
-      if (!this._isSorting) {
+      // on sorting we dont need change detection to run and call sorting again
+      if (!this._isSorting && !this._initialLoad) {
         this.orderByData(false);
       }
 
+      // on initial load we don't need to call sort, just set page
+      if (this._initialLoad) {
+        this.setPage();
+      }
+
       this._isSorting = false;
+      this._initialLoad = false;
     }
   }
 

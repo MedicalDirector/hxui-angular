@@ -12,6 +12,7 @@ import {ITabularRow} from '../../../../projects/hx-ui/src/lib/tabular/tabular-ro
 import {TabularCode} from './tabular.code';
 import {Observable} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {SortByDirection} from '../../../../projects/hx-ui/src/lib/tabular/tabular-sort-by.service';
 
 @Component({
   selector: 'app-tabular',
