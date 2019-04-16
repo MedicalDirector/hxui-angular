@@ -33,7 +33,9 @@ exampleTemplate =
   [callback]="onActionClickHandler"
   (refresh)="refreshDataHandler($event)"
   (rowClick)="rowClickHandler($event)"
-  (onSort)="onSortHandler($event)">
+  (onSort)="onSortHandler($event)"
+  (onCheck)="singleCheckHandler($event)"
+  (onCheckAll)="groupCheckHandler($event)">
 </hx-tabular>
 
 `;
@@ -88,7 +90,7 @@ export class TabularComponent implements OnInit {
    rowClickHandler($event) {
     console.log($event);
   }
-  
+
   onSortHandler($event) {
     console.log($event);
   }
@@ -127,6 +129,15 @@ export class TabularComponent implements OnInit {
       });
   }
 
+  singleCheckHandler($event): void {
+    alert('single check event: ' + $event);
+    console.log($event);
+  }
+
+  groupCheckHandler($event): void {
+    alert('group check ' + $event)
+  }
+
   constructor(private service: TabularService) {
     this.getTabularData();
   }
@@ -161,7 +172,7 @@ export class TabularService {
   }
 
   getUser(id: number): Observable<UserModel> {
-   
+
     return this.http.get<UserModel>(url)
       .pipe(
         catchError(this.handleError<UserModel>('getUsers id=id'))
@@ -802,7 +813,7 @@ TabularColumnTypes.Html
 badgeColumnType =
 `
 {
-  label:string, 
+  label:string,
   cssClass:string
 }
 

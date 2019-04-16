@@ -119,4 +119,13 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
 
   }
 
+  singleCheckHandler($event): void {
+    alert('single check event: ' + $event);
+    console.log($event);
+  }
+
+  groupCheckHandler($event): void {
+    alert('group check ' + $event)
+  }
+
 }
