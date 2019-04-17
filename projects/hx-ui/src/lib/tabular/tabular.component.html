@@ -14,8 +14,8 @@
 
       <!-- checkbox column -->
       <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
-        <input id="selectAll" name="selectAll" type="checkbox" class="hx-checkbox" (change)="toggleSelectAll($event)" title="Select All" [(ngModel)]="selectAll" />
-        <label for="selectAll" class="hx-label"></label>
+        <input id="{{config.id}}-selectAll" name="{{config.id}}-selectAll" type="checkbox" class="hx-checkbox" (change)="toggleSelectAll($event)" title="Select All" [(ngModel)]="selectAll" />
+        <label for="{{config.id}}-selectAll" class="hx-label"></label>
       </div>
     </th>
   </tr>
@@ -40,8 +40,8 @@
 
       <!-- checkbox type -->
       <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
-        <input id="checkbox-{{row.id}}" name="{{col.label}}-checkbox" type="checkbox" class="hx-checkbox" title="{{col.label}}" (change)="toggleIndividualSelect($event)" [(ngModel)]="row.checked" />
-        <label for="checkbox-{{row.id}}" class="hx-label"></label>
+        <input id="{{config.id}}-checkbox-{{row.id}}" name="{{col.label}}-checkbox" type="checkbox" class="hx-checkbox" title="{{col.label}}" (change)="toggleIndividualSelect($event)" [(ngModel)]="row.checked" />
+        <label for="{{config.id}}-checkbox-{{row.id}}" class="hx-label"></label>
       </div>
 
       <!-- string type | number type -->

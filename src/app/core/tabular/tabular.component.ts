@@ -38,6 +38,7 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
   ];
 
   tabularConfig: ITabularConfig = {
+    id: 'UniqueId',
     size: TabularSize.Default,
     clickableRows: true,
     pagination: {

@@ -2,6 +2,7 @@ import {TabularSize} from './tabular-size.enum';
 import {ISortByProperty, SortByDirection} from './tabular-sort-by.service';
 
 export abstract class ITabularConfig {
+  id: string;
   size: TabularSize;
   pagination: {
     itemsPerPage: number,
