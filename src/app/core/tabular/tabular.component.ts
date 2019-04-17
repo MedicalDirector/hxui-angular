@@ -12,6 +12,7 @@ import {ITabularRow} from '../../../../projects/hx-ui/src/lib/tabular/tabular-ro
 import {TabularCode} from './tabular.code';
 import {Observable} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {SortByDirection} from '../../../../projects/hx-ui/src/lib/tabular/tabular-sort-by.service';
 
 @Component({
   selector: 'app-tabular',
@@ -44,7 +45,14 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
     pagination: {
       itemsPerPage: 5,
       currentPage: 1
-    }
+    },
+    sortBy: [
+      {
+        property: 'modified',
+        type: TabularColumnTypes.DateTime,
+        direction: SortByDirection.Descending
+      }
+    ]
   };
 
 
@@ -118,6 +126,15 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
 
   onActionClickHandler = () => {
 
+  }
+
+  singleCheckHandler($event): void {
+    alert('single check event: ' + $event);
+    console.log($event);
+  }
+
+  groupCheckHandler($event): void {
+    alert('group check ' + $event)
   }
 
 }

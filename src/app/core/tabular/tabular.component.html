@@ -24,7 +24,7 @@
         <div class="hx-columns">
           <div class="hx-column">
             <span hxTooltip="Select 1 or more users" [disabled]="!isPrintDisabled()" placement="right">
-              <button class="hx-button is-small" (click)="printSelected($event)" [disabled]="isPrintDisabled()" >Print</button>
+              <button class="hx-button is-small" (click)="printSelected($event)" [disabled]="isPrintDisabled()">Print</button>
           </span>
           </div>
         </div>
@@ -36,7 +36,9 @@
           [callback]="onActionClickHandler"
           (refresh)="refreshDataHandler($event)"
           (rowClick)="rowClickHandler($event)"
-          (onSort)="onSortHandler($event)">
+          (onSort)="onSortHandler($event)"
+          (onCheck)="singleCheckHandler($event)"
+          (onCheckAll)="groupCheckHandler($event)">
         </hxa-tabular>
 
       </div>
@@ -144,8 +146,18 @@
             </tr>
             <tr>
               <td>onSort</td>
-              <td><kbd>EventEmitter:ISortByProperty[]</kbd></td>
+              <td><kbd>EventEmitter: ISortByProperty[]</kbd></td>
               <td>Event fired when a column is sorted. </td>
+            </tr>
+            <tr>
+              <td>onCheck</td>
+              <td><kbd>EventEmitter: ITabularRow</kbd></td>
+              <td>Event fired when a row checkbox is checked or unchecked. </td>
+            </tr>
+            <tr>
+              <td>onCheckAll</td>
+              <td><kbd>EventEmitter: boolean</kbd></td>
+              <td>Event fired when the header checkbox is checked or unchecked. </td>
             </tr>
           </tbody>
         </table>
