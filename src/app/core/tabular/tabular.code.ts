@@ -72,12 +72,20 @@ export class TabularComponent implements OnInit {
   ];
 
   tabularConfig: ITabularConfig = {
+    id: 'UniqueId',
     size: TabularSize.Default,
     clickableRows: true,
     pagination: {
       itemsPerPage: 5,
       currentPage: 1
     },
+    sortBy: [
+      {
+        property: 'modified',
+        type: TabularColumnTypes.DateTime,
+        direction: SortByDirection.Descending
+      }
+    ]
   };
 
   /**
