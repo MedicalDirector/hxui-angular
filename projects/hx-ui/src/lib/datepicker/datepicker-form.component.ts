@@ -15,6 +15,7 @@ import {DatepickerComponent} from './datepicker.component';
 import {take, takeUntil} from 'rxjs/operators';
 import {Directionality} from '@angular/cdk/bidi';
 import {DatepickerConfig} from './datepicker.config';
+import { DatepickerIntervalComponent } from './datepicker-interval.component';
 
 @Component({
   selector: 'hxa-datepicker-input, hxa-datepicker-form',
@@ -35,6 +36,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
 
   _overlayRef: OverlayRef | null;
   _calendarInstance: DatepickerComponent | null;
+  _intervalInstance: DatepickerIntervalComponent | null;
   private _portal: ComponentPortal<DatepickerComponent>;
   private readonly _destroyed = new Subject();
 
@@ -464,11 +466,12 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     return {x, y};
   }
 
-  private _detach() {
+  public _detach() {
     if (this._overlayRef && this._overlayRef.hasAttached()) {
       this._overlayRef.detach();
     }
     this._calendarInstance = null;
+    this._intervalInstance = null;
   }
 
   /** Updates the tooltip content and repositions the overlay according to the new content length */

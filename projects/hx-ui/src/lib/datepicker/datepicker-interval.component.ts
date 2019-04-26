@@ -56,6 +56,7 @@ export class DatepickerIntervalComponent implements OnInit {
 
   onCancel = () => {
     this._datepickerComponent.OpenDiv = false;
+    this._datepickerForm._detach();
   }
   onSelect = () => {
     if (this.dropdownNumber && this.Duration) {
@@ -86,6 +87,7 @@ export class DatepickerIntervalComponent implements OnInit {
     this._datepickerForm.onChange(this._dueDatestring);
     this._datepickerComponent.selectedDueDateInterval = undefined;
     this._datepickerForm.dueDateInterval = this.dropdownNumber + ' ' + this.Duration;
+    this._datepickerForm._detach();
   }
 
   public SelectElement(id , valueToSelect) {
