@@ -23,11 +23,8 @@ export class FiltersCode {
   exampleTypescript =
     `
   import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-  import {IFiltersConfig} from '@hxui-angular/filters/filters-config.interface';
-  import {FilterType} from '@hxui-angular/filters/filters-type.enum';
-  import {FiltersComponent as HxFiltersComponent } from '@hxui-angular/filters/filters.component';
   import {Subscription} from 'rxjs/index';
-  import {FiltersModel} from '@hxui-angular/filters/filters.model';
+  import {IFiltersConfig, FilterType, FiltersComponent as HxFiltersComponent, FiltersModel } from '@hxui/angular';
   
   @Component({
     selector: 'app-filters',
