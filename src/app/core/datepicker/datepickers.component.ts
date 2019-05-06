@@ -14,6 +14,20 @@ export class DatepickersComponent extends CoreBaseComponent {
 
   public code = new DatepickersCode();
   public dayte: string;
+  
+  intervalOptions: string[]  = [
+    'Today',
+    'Yesterday',
+    'Tomorrow',
+    'Last Year',
+    'Next Year',
+    'Last Month',
+    'Next Month',
+    'Last Week',
+    'Next Week',
+    'Last Fortnight',
+    'Next Fortnight'
+  ];
 
   constructor(
     protected pageScrollService: PageScrollService,

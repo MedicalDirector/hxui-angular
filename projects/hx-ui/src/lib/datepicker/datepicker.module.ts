@@ -14,6 +14,7 @@ import {TabsModule} from '../tabs/tabs.module';
   exports: [DatepickerComponent, DatepickerFormComponent],
   entryComponents: [DatepickerComponent]
 })
+
 export class DatepickerModule {
   public static forRoot(): ModuleWithProviders {
     return { ngModule: DatepickerModule, providers: [DatepickerConfig] };

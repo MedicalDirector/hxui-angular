@@ -24,6 +24,7 @@ import { LoadersComponent } from './loaders/loaders.component';
 import { TextInputComponent } from './text-input/text-input.component';
 import { OnlineStatusComponent } from './online-status/online-status.component';
 import { ToastrComponent } from './toastr/toastr.component';
+import { DateRangePickerComponent } from './date-range-picker/date-range-picker.component';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { ToastrComponent } from './toastr/toastr.component';
       TextInputComponent,
       OnlineStatusComponent,
       ToastrComponent,
+      DateRangePickerComponent,
 
   ],
   providers: [

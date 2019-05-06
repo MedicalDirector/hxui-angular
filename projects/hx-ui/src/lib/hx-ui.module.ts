@@ -17,6 +17,8 @@ import {LoadersModule} from './loaders/loaders.module';
 import {TextInputModule} from './text-input/text-input.module';
 import {OnlineStatusService} from './utils/services/online-status.service';
 import {ToastrModule} from './toastr/toastr.module';
+import { DateRangePickerModule } from './date-range-picker/date-range-picker.module';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -24,12 +26,13 @@ import {ToastrModule} from './toastr/toastr.module';
     TabsModule.forRoot(), TooltipModule.forRoot(),
     TypeaheadModule.forRoot(), TabularModule.forRoot(),
     SelectizeModule.forRoot(), DatepickerModule.forRoot(),
+    DateRangePickerModule.forRoot(),
     AutoGrowModule.forRoot(), EmptyStateModule.forRoot(),
     AccordionModule, FiltersModule.forRoot(), LoadersModule,
     TextInputModule, ToastrModule.forRoot()
   ],
   exports: [
-    DatepickerModule, DropdownModule, ModalModule,
+    DatepickerModule,DateRangePickerModule, DropdownModule, ModalModule,
     PaginationModule, TabsModule, TooltipModule,
     TypeaheadModule, TabularModule, SelectizeModule,
     AutoGrowModule, EmptyStateModule, AccordionModule,
@@ -42,7 +45,8 @@ export class HxUiModule {
       ngModule: HxUiModule,
       providers: [
         ModalService,
-        OnlineStatusService
+        OnlineStatusService,
+        DatePipe
       ]
     };
   }

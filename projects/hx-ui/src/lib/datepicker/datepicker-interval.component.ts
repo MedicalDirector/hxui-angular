@@ -32,8 +32,7 @@ export class DatepickerIntervalComponent implements OnInit {
   @Input()
   placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
 
-  constructor(private _datepickerForm: DatepickerFormComponent, private datePickerConfig: DatepickerConfig,
-    private _datepickerComponent: DatepickerComponent) {
+  constructor(private _datepickerForm: DatepickerFormComponent, private datePickerConfig: DatepickerConfig, private _datepickerComponent: DatepickerComponent) {
      }
 
   ngOnInit() {
@@ -58,6 +57,7 @@ export class DatepickerIntervalComponent implements OnInit {
     this._datepickerComponent.OpenDiv = false;
     this._datepickerForm._detach();
   }
+
   onSelect = () => {
     if (this.dropdownNumber && this.Duration) {
       this.text = moment().add(this.dropdownNumber , this.Duration.replace('(s)', 's'));
@@ -72,6 +72,7 @@ export class DatepickerIntervalComponent implements OnInit {
      return this._DueDate;
      }
   }
+  
   onSelectoptions(numbervalue , durationValue) {
       this.text = moment().add(numbervalue , durationValue.replace('(s)', 's'));
       this._DueDate = (this.text).format('ddd DD/MM/YYYY');
