@@ -14,62 +14,86 @@
 
     <hr>
 
-    <h4 id="example">Basic Example</h4>
+    <h4 id="customexample">Basic Example - Custom tab only</h4>
 
     <div class="hx-columns">
       <div class="hx-column">
-        <hxa-date-range-picker [displayMode]=2></hxa-date-range-picker>
-      </div>
-    </div>
-
-    <br>
-
-    <h5 id="basic_code">Code</h5>
-
-    <hx-tabset>
-      <hx-tab heading="Template">
-        <pre>
-                    <code highlight [code]="code.exampleTemplate"></code>
-                  </pre>
-      </hx-tab>
-      <hx-tab heading="Typescript">
-        <pre>
-                    <code highlight [code]="code.exampleTypescript"></code>
-                  </pre>
-      </hx-tab>
-    </hx-tabset>
-
-    <h4 id="example">Basic Example 2</h4>
-
-    <div class="hx-columns">
-      <div class="hx-column">
-        <hxa-date-range-picker [displayMode]=3 *ngIf="intervalOptions" [intervalOptions]="intervalOptions"></hxa-date-range-picker>
-      </div>
-    </div>
-
-    <br>
-
-    <h5 id="basic_code">Code</h5>
-
-    <hx-tabset>
-      <hx-tab heading="Template">
-        <pre>
-                    <code highlight [code]="code.exampleTemplate2"></code>
-                  </pre>
-      </hx-tab>
-      <hx-tab heading="Typescript">
-        <pre>
-                    <code highlight [code]="code.exampleTypescript2"></code>
-                  </pre>
-      </hx-tab>
-    </hx-tabset>
-
-    <h4 id="interval_example">With 2 tabs Example</h4>
-
-    <div class="hx-columns">
-      <div class="hx-column">
-        <hxa-date-range-picker [intervalOptions]=intervalOptions [displayMode]=1 [dateFormat]=dateFormat>
+        <hxa-date-range-picker [displayMode]=2 (onDateRangeSelected)="getSelectedDateRange($event)">
         </hxa-date-range-picker>
+        <div>
+          <br><span>Emitted Date Range object:</span>
+          <ul>
+            <li>From Date: {{selectedDateRange.fromDate}}</li>
+            <li>To Date: {{selectedDateRange.toDate}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <h5 id="basic_code">Code</h5>
+
+    <hx-tabset>
+      <hx-tab heading="Template">
+        <pre>
+                    <code highlight [code]="code.exampleTemplateforcustomtab"></code>
+                  </pre>
+      </hx-tab>
+      <hx-tab heading="Typescript">
+        <pre>
+                    <code highlight [code]="code.exampleTypescriptforcustomtab"></code>
+                  </pre>
+      </hx-tab>
+    </hx-tabset>
+
+    <h4 id="intervalexample">Basic Example - Interval tab only</h4>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <hxa-date-range-picker [displayMode]=3 [intervalOptions]="intervalOptions"
+          (onDateRangeSelected)="getSelectedDateRange($event)">
+        </hxa-date-range-picker>
+        <div>
+          <br><span>Emitted Date Range object:</span>
+          <ul>
+            <li>From Date: {{selectedDateRange.fromDate}}</li>
+            <li>To Date: {{selectedDateRange.toDate}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <h5 id="basic_code">Code</h5>
+
+    <hx-tabset>
+      <hx-tab heading="Template">
+        <pre>
+                    <code highlight [code]="code.exampleTemplateforintervaltab"></code>
+                  </pre>
+      </hx-tab>
+      <hx-tab heading="Typescript">
+        <pre>
+                    <code highlight [code]="code.exampleTypescriptforintervaltab"></code>
+                  </pre>
+      </hx-tab>
+    </hx-tabset>
+
+    <h4 id="tabsexample">Example with 2 tabs</h4>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <hxa-date-range-picker [intervalOptions]="intervalOptions" [displayMode]=1 [dateFormat]="dateFormat" 
+        (onDateRangeSelected)="getSelectedDateRange($event)">
+        </hxa-date-range-picker>
+        <div>
+            <br><span>Emitted Date Range object:</span>
+            <ul>
+              <li>From Date: {{selectedDateRange.fromDate}}</li>
+              <li>To Date: {{selectedDateRange.toDate}}</li>
+            </ul>
+          </div>
       </div>
     </div>
 
@@ -80,12 +104,12 @@
     <hx-tabset>
       <hx-tab heading="Template">
         <pre>
-                    <code highlight [code]="code.intervalExampleTemplate"></code>
+                    <code highlight [code]="code.exampleTemplatefortabs"></code>
                   </pre>
       </hx-tab>
       <hx-tab heading="Typescript">
         <pre>
-                    <code highlight [code]="code.intervalExampleTypescript"></code>
+                    <code highlight [code]="code.exampleTypescriptfortabs"></code>
                   </pre>
       </hx-tab>
     </hx-tabset>
@@ -94,7 +118,7 @@
 
     <h4 id="api">API Reference</h4>
 
-    <h5 class="is-primary">DateRangePickerComponent Component</h5>
+    <h5 class="is-primary">DateRangePickerComponent</h5>
     <div class="hx-columns">
       <div class="hx-column">
         <table class="hx-table is-striped">
@@ -124,26 +148,15 @@
               <td>Adds the disabled html attribute to the components dropdown element. Defaults to false.</td>
             </tr>
             <tr>
-              <td>required</td>
-              <td><kbd>boolean</kbd></td>
-              <td>Adds the required html attribute to the components input element and a required asterisk on the input
-                label. Defaults to true.</td>
-            </tr>
-            <tr>
-              <td>align</td>
-              <td><kbd>"top" | "bottom"</kbd></td>
-              <td>Specifies to open the datepicker at the top of the input element or at the bottom</td>
-            </tr>
-            <tr>
               <td>displayMode</td>
               <td><kbd>number</kbd></td>
-              <td>To choose from: 1 - Show tabs(default) 2 - Show Custom Selection only 3 - Show Interval Selection only
+              <td>This attribute specified how tab(s) will be displayed. Options are: 1 - Show both tabs(default); 2 - Show Custom Selection only; 3 - Show Interval Selection only.
               </td>
             </tr>
             <tr>
               <td>autoClose</td>
               <td><kbd>boolean</kbd></td>
-              <td>Indicates that dropdown will be closed on item or document click, and after pressing ESC</td>
+              <td>Indicates that dropdown will be closed on item or document click, and after pressing ESC. Defaults to true.</td>
             </tr>
             <tr>
               <td>Placement</td>
@@ -153,8 +166,7 @@
             <tr>
               <td>intervalOptions</td>
               <td><kbd>string[]</kbd></td>
-              <td>This attribute enalble customisation of interval options displayed in interval tab. Options refer to a
-                pre-defined list as below</td>
+              <td>This attribute specifies interval options displayed under interval selection tab. Please see available options as below.</td>
             </tr>
           </tbody>
         </table>
@@ -167,7 +179,7 @@
         <table class="hx-table is-striped">
           <thead>
             <tr>
-              <th>INTERVAL OPTIONS</th>
+              <th>AVAILABLE INTERVAL OPTIONS</th>
               <th>DESCRIPTION</th>
             </tr>
           </thead>
@@ -249,8 +261,8 @@
           </thead>
           <tbody>
             <tr>
-              <td>onDateChange</td>
-              <td>Emits a Date is selected from the Datepicker or a valid date string is entered into input field</td>
+              <td>onDateRangeChange</td>
+              <td>Emits a Date Range Object containing fromDate and toDate selected from the DateRangePicker. Need to import data type: DateRange.</td>
             </tr>
           </tbody>
         </table>
@@ -272,11 +284,15 @@
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Basic Example</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#customexample')"><span>Basic Example - Custom tab</span></a>
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#interval_example')"><span>Interval Example</span></a>
+        <a class="hx-nav-link" (click)="scrollTo('#intervalexample')"><span>Basic Example - Interval tab</span></a>
+      </li>
+
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#tabsexample')"><span>Example with 2 tabs</span></a>
     </li>
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
