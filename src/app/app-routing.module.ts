@@ -19,12 +19,14 @@ import {LoadersComponent} from './core/loaders/loaders.component';
 import {TextInputComponent} from './core/text-input/text-input.component';
 import {OnlineStatusComponent} from './core/online-status/online-status.component';
 import {ToastrComponent} from './core/toastr/toastr.component';
+import { DateRangePickerComponent } from './core/date-range-picker/date-range-picker.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/install-guide', pathMatch: 'full' },
   { path: 'install-guide',  component: InstallGuideComponent },
   { path: 'accordion',  component: AccordionComponent },
   { path: 'datepickers',  component: DatepickersComponent },
+  { path:  'daterangepickers', component: DateRangePickerComponent},
   { path: 'dropdowns',  component: DropdownsComponent },
   { path: 'modals',  component: ModalsComponent },
   { path: 'tabs',  component: TabsComponent },

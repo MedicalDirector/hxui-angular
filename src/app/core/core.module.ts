@@ -34,6 +34,7 @@ import { DateRangePickerComponent } from './date-range-picker/date-range-picker.
   declarations: [
       PageNotFoundComponent,
       DatepickersComponent,
+      DateRangePickerComponent,
       DropdownsComponent,
       ModalsComponent,
       CustomModalComponent,

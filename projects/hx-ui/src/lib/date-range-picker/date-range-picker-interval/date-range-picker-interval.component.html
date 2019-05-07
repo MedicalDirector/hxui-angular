@@ -1,5 +1,4 @@
 <div class="dropdown-menu" (mouseenter)="mouseHover($event)">
-<!-- <div class="dropdown-menu"> -->
  <a class="hx-dropdown-item"  *ngFor="let intervalItem of intervalOptionList" 
   (click)="sendSelection(intervalItem)" 
   id="{{intervalItem.id}}">

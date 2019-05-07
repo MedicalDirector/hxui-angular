@@ -11,33 +11,38 @@
       <hx-tabset [justified]="true"  class="hxa-tabset hx-tab-container">
         <hx-tab heading="INTERVAL" (select)="onTabSelect('interval')">
           <hxa-date-range-picker-interval 
-            [intervalOptionList]=intervalList
-            [currentSelectedInterval]=selectedInterval 
-            (newSelectedInterval)="onIntervalSelection($event)">
+            [intervalOptionList]="intervalList"
+            [currentSelectedInterval]="selectedInterval"
+            (newSelectedInterval)="onIntervalSelection($event)"
+            (closeDropdown)="hide($event)">
           </hxa-date-range-picker-interval>
         </hx-tab>
         <hx-tab heading="CUSTOM" (select)="onTabSelect('custom')" [active]="activeVariable1">
           <hxa-date-range-picker-custom 
-            [currentFromDate]=fromDate 
-            [currentToDate]=toDate
+            [currentFromDate]="fromDate"
+            [currentToDate]="toDate"
+            [dateFormat]="dateFormat"
             (newSelectedCustomDate)="onCustomDateSelection($event)" 
             (closeDropdown)="hide($event)">
           </hxa-date-range-picker-custom>
         </hx-tab>
       </hx-tabset>
     </div>
-    <div *ngIf="!showTab && showIntervalOnly" style="padding: 1rem;">
+    <div *ngIf="!showTab && showIntervalOnly" class="internal-custom-tab">
       <hxa-date-range-picker-interval 
-        [intervalOptionList]=intervalList 
-        [currentSelectedInterval]=selectedInterval
-        (newSelectedInterval)="onIntervalSelection($event)">
+        [intervalOptionList]="intervalList"
+        [currentSelectedInterval]="selectedInterval"
+        (newSelectedInterval)="onIntervalSelection($event)"
+        (closeDropdown)="hide($event)">
       </hxa-date-range-picker-interval>
     </div>
-    <div *ngIf="!showTab && showCustomOnly" style="padding: 1rem;">
+    <div *ngIf="!showTab && showCustomOnly" class="internal-custom-tab">
       <hxa-date-range-picker-custom 
-      [currentFromDate]=fromDate 
-      [currentToDate]=toDate
-      (newSelectedCustomDate)="onCustomDateSelection($event)" (closeDropdown)="hide($event)">
+      [currentFromDate]="fromDate"
+      [currentToDate]="toDate"
+      [dateFormat]="dateFormat"
+      (newSelectedCustomDate)="onCustomDateSelection($event)" 
+      (closeDropdown)="hide($event)">
       </hxa-date-range-picker-custom>
     </div>
   </div>

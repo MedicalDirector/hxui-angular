@@ -1,6 +1,6 @@
 import {
   Component, Input, Output, OnInit, ElementRef, HostListener, EventEmitter, forwardRef,
-  OnDestroy, NgZone, ComponentFactoryResolver, ViewContainerRef, Optional, ViewChild, ContentChild
+  OnDestroy, NgZone, ComponentFactoryResolver, ViewContainerRef, Optional, ViewChild, ContentChild, OnChanges, SimpleChanges, DoCheck
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, Validator, AbstractControl } from '@angular/forms';
 import {
@@ -32,8 +32,17 @@ import { DatepickerIntervalComponent } from './datepicker-interval.component';
     multi: true,
   }]
 })
-export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Validator, OnDestroy {
+export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Validator, OnDestroy, DoCheck {
 
+  ngDoCheck(): void {
+    const from = this.parseDate(this.from) || new Date(-8630000000000000);
+    const to = this.parseDate(this.to) || new Date(8630000000000000);
+
+    if (!!this.from || !!this.to) {
+      this.validateDateRange = this.createDateRangeValidator(from, to);
+      this.dateValidators = [this.validateDateRange.bind(this)];
+    }
+  }
   _overlayRef: OverlayRef | null;
   _calendarInstance: DatepickerComponent | null;
   _intervalInstance: DatepickerIntervalComponent | null;
@@ -201,21 +210,24 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     this.propogateTouched();
   }
 
-  public parseDate(inputDate: string): Date {
+  public parseDate(inputDate: string | Date): Date {
     // Since Date.Parse() only acceps m/d/y dates, we have to swap the day and month
-    const dateArray = inputDate.split(/[.,\/ -]/);
-    if (dateArray.length === 3 && dateArray[2].length !== 0) {
-      const day: string = dateArray.shift();
-      dateArray.splice(1, 0, day);
-
-      const parseInput: number = Date.parse(dateArray.join('/'));
-      if (!isNaN(parseInput)) {
-        return new Date(parseInput);
+    if((typeof inputDate) === 'string'){
+      const dateArray = (inputDate as string).split(/[.,\/ -]/);
+      if (dateArray.length === 3 && dateArray[2].length !== 0) {
+        const day: string = dateArray.shift();
+        dateArray.splice(1, 0, day);
+  
+        const parseInput: number = Date.parse(dateArray.join('/'));
+        if (!isNaN(parseInput)) {
+          return new Date(parseInput);
+        }
       }
+      return null;
+    } else {
+      return <Date>inputDate;
     }
-    return null;
   }
-
   public validateIsNotBeforeDate(date: Date): boolean {
     const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 

@@ -10,6 +10,7 @@ export class DateRangePickerIntervalComponent implements OnInit {
    @Input() intervalOptionList: IntervalItem[];
    @Input() currentSelectedInterval: IntervalItem;
    @Output() newSelectedInterval = new EventEmitter<IntervalItem>();
+   @Output() closeDropdown = new EventEmitter<boolean>();
   
   constructor() { }
 
@@ -23,6 +24,7 @@ export class DateRangePickerIntervalComponent implements OnInit {
 
   sendSelection(selectedItem: IntervalItem) {
     this.newSelectedInterval.emit(selectedItem);
+    this.closeDropdown.emit(true);
   }
 
   mouseHover(e) {

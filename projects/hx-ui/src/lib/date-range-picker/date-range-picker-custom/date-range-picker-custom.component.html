@@ -1,5 +1,5 @@
-<div><hxa-datepicker-input align="bottom" [(ngModel)]="newFromDate" placeholder="From"  [defaultToPresentDate]="false"></hxa-datepicker-input></div>
-<div><hxa-datepicker-input align="bottom" [(ngModel)]="newToDate" placeholder="To"  [defaultToPresentDate]="false" ></hxa-datepicker-input></div>
+<div><hxa-datepicker-input align="bottom" [(ngModel)]="newFromDate" placeholder="From"  [defaultToPresentDate]="false" [dateFormat]="dateFormat" [to]="boundaryForFromDate"></hxa-datepicker-input></div>
+<div><hxa-datepicker-input align="bottom" [(ngModel)]="newToDate" placeholder="To"  [defaultToPresentDate]="false" [dateFormat]="dateFormat" [from]="boundaryForToDate"></hxa-datepicker-input></div>
 <div class="hx-date-range-picker-interval-footer pa-3">
     <div class="hx-columns">
       <div class="hx-column">

@@ -29,6 +29,8 @@ export class DatepickersComponent extends CoreBaseComponent {
     'Next Fortnight'
   ];
 
+  dateFormat = "yyyy-MM-dd";
+
   constructor(
     protected pageScrollService: PageScrollService,
     protected breakpointObserver: BreakpointObserver,

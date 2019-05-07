@@ -13,12 +13,12 @@ export class IntervalItem {
 }
 
 //Possible options to choose from, can be expanded in future
-const  IntervalOptionList: IntervalItem[] = [
+export const fullIntervalList: IntervalItem[] = [
     new IntervalItem('Today','day',0,'today'),
     new IntervalItem('Yesterdy','day', -1,'yesterday'),
     new IntervalItem('Tomorrow','day',1,'tomorrow'),
-    new IntervalItem('Last Year','year',1,'lastyear'),
-    new IntervalItem('Next Year','year',-1,'nextyear'),
+    new IntervalItem('Last Year','year',-1,'lastyear'),
+    new IntervalItem('Next Year','year',1,'nextyear'),
     new IntervalItem('Last 6 Months','month',-6,'last6month'),
     new IntervalItem('Next 6 Months','month',6,'next6months'),
     new IntervalItem('Last 3 Months','month',-3,'last3months'),

@@ -43,6 +43,10 @@ export class AppComponent {
           link: '/datepickers'
         },
         {
+          name: 'DateRangePickers',
+          link: '/daterangepickers'
+        },
+        {
           name: 'Dropdowns',
           link: '/dropdowns'
         },
