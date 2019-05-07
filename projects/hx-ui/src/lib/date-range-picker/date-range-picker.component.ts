@@ -46,7 +46,7 @@ export class DateRangePickerComponent implements OnInit {
   @Input() placeholder: string = 'Date';
   @Input() disabled: boolean = false;
   @Input() autoClose: boolean = true;
-  @Input() placement: string;
+  @Input() placement:  'top' | 'bottom' | 'left' | 'right' = 'bottom';
   @Input() displayMode: DisplayMode = DisplayMode.showTab;
   @Input() dateFormat: string = 'dd/MM/yyyy';
 
