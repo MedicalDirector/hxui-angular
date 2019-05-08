@@ -6,7 +6,7 @@ import { TabsetConfig } from './tabset.config';
 @Component({
   selector: 'hx-tabset',
   template: `
-    <ul class="hx-nav" [ngClass]="classMap" (click)="$event.preventDefault()">
+    <ul class="hx-nav" [ngStyle]="{'position': getStickyHeaderPosition() , 'top.rem': stickyHeaderOffset}" [ngClass]="classMap" (click)="$event.preventDefault()">
         <li *ngFor="let tabz of tabs" [ngClass]="['hx-nav-item', tabz.customClass || '']"
           [class.is-active]="tabz.active" [class.is-disabled]="tabz.disabled">
           <a href="javascript:void(0);" class="hx-nav-link"
@@ -19,10 +19,11 @@ import { TabsetConfig } from './tabset.config';
           </a>
         </li>
     </ul>
-    <div class="hx-tab-content">
+    <div class="hx-tab-content {{contentCustomClass}}">
       <ng-content></ng-content>
     </div>
-  `
+  `,
+  styles: [':host { background-color: inherit; }']
 })
 export class TabsetComponent implements OnDestroy {
   /** if true tabs will be placed vertically */
@@ -63,6 +64,10 @@ export class TabsetComponent implements OnDestroy {
     this._type = value;
     this.setClassMap();
   }
+
+  @Input() contentCustomClass: string;
+  @Input() stickyHeader = false;
+  @Input() stickyHeaderOffset = 0;
 
   @HostBinding('class.hx-tab-container') public clazn = true;
 
@@ -148,4 +153,9 @@ export class TabsetComponent implements OnDestroy {
       [`hx-nav-${this.type}`]: true
     };
   }
+
+  public getStickyHeaderPosition(): string {
+    return (this.stickyHeader) ? 'sticky' : 'relative';
+  }
+
 }
