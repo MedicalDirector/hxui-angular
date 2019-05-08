@@ -23,7 +23,7 @@ import { TabsetConfig } from './tabset.config';
       <ng-content></ng-content>
     </div>
   `,
-  styles: [':host { background-color: inherit; }']
+  styles: [':host, ul.hx-nav { background-color: inherit; }']
 })
 export class TabsetComponent implements OnDestroy {
   /** if true tabs will be placed vertically */
