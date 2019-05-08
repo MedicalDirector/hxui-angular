@@ -23,8 +23,8 @@
         <div>
           <br><span>Emitted Date Range object:</span>
           <ul>
-            <li>From Date: {{selectedDateRange.fromDate}}</li>
-            <li>To Date: {{selectedDateRange.toDate}}</li>
+            <li>fromDate: {{selectedDateRange.fromDate}}</li>
+            <li>toDate: {{selectedDateRange.toDate}}</li>
           </ul>
         </div>
       </div>
@@ -56,8 +56,8 @@
         <div>
           <br><span>Emitted Date Range object:</span>
           <ul>
-            <li>From Date: {{selectedDateRange.fromDate}}</li>
-            <li>To Date: {{selectedDateRange.toDate}}</li>
+            <li>fromDate: {{selectedDateRange.fromDate}}</li>
+            <li>toDate: {{selectedDateRange.toDate}}</li>
           </ul>
         </div>
       </div>
@@ -151,6 +151,7 @@
               <td>displayMode</td>
               <td><kbd>number</kbd></td>
               <td>This attribute specified how tab(s) will be displayed. Options are: 1 - Show both tabs(default); 2 - Show Custom Selection only; 3 - Show Interval Selection only.
+                Defaults to 1.
               </td>
             </tr>
             <tr>
@@ -161,7 +162,7 @@
             <tr>
               <td>Placement</td>
               <td><kbd>string</kbd></td>
-              <td>Placement of a popover. Accepts: "top", "bottom", "left", "right"</td>
+              <td>Placement of a popover. Accepts: "top", "bottom", "left", "right".</td>
             </tr>
             <tr>
               <td>intervalOptions</td>

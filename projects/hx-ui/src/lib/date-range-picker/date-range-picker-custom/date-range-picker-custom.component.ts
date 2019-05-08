@@ -1,8 +1,22 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef, DoCheck } from '@angular/core';
-import { DropdownDirective } from '../../dropdown/dropdown.directive';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectorRef,
+  DoCheck
+} from '@angular/core';
+import {
+  DropdownDirective
+} from '../../dropdown/dropdown.directive';
 import {
   DatePipe
 } from '@angular/common';
+import {
+  DateSelectionType
+} from '../date-range-picker.component';
 
 @Component({
   selector: 'hxa-date-range-picker-custom',
@@ -10,33 +24,32 @@ import {
   styleUrls: ['./date-range-picker-custom.component.scss']
 })
 export class DateRangePickerCustomComponent implements OnInit, DoCheck {
-  
+
   @Input() currentFromDate: Date;
   @Input() currentToDate: Date;
   @Input() dateFormat: string;
-  @Output() newSelectedCustomDate = new EventEmitter<Date[]>();
-  @Output() closeDropdown = new EventEmitter<boolean>();
-  
-  constructor(private ref: ChangeDetectorRef,private datePipe: DatePipe) { }
-  
+  @Output() newSelectedCustomDate = new EventEmitter < Date[] > ();
+  @Output() closeDropdown = new EventEmitter < boolean > ();
+
+  constructor(private ref: ChangeDetectorRef, private datePipe: DatePipe) {}
+
+  DateSelectionType = DateSelectionType;
   newFromDate: Date;
   newToDate: Date;
 
   boundaryForFromDate: string;
   boundaryForToDate: string;
- 
+
   ngOnInit() {
-    if(this.currentFromDate){
-    this.newFromDate = this.currentFromDate;
+    if (this.currentFromDate) {
+      this.newFromDate = this.currentFromDate;
+    } else {
+      this.newFromDate = new Date();
     }
-    else {
-    this.newFromDate = new Date();
-    }
-    if(this.currentToDate){
-    this.newToDate = this.currentToDate;
-    }
-    else {
-    this.newToDate = new Date();
+    if (this.currentToDate) {
+      this.newToDate = this.currentToDate;
+    } else {
+      this.newToDate = new Date();
     }
     this.boundaryForToDate = this.datePipe.transform(this.newFromDate, 'dd/MM/yyyy');
     this.boundaryForFromDate = this.datePipe.transform(this.newToDate, 'dd/MM/yyyy');
@@ -53,7 +66,7 @@ export class DateRangePickerCustomComponent implements OnInit, DoCheck {
   }
 
   onSelected() {
-    this.newSelectedCustomDate.emit([this.newFromDate,this.newToDate]);
+    this.newSelectedCustomDate.emit([this.newFromDate, this.newToDate]);
     this.closeDropdown.emit(true);
   }
 }

@@ -33,6 +33,12 @@ export interface DateRange {
   toDate: Date;
 }
 
+//expanded when more tabs be added
+export enum DateSelectionType {
+  interval,
+  custom
+}
+
 @Component({
   selector: 'hxa-date-range-picker',
   templateUrl: './date-range-picker.component.html',
@@ -46,7 +52,7 @@ export class DateRangePickerComponent implements OnInit {
   @Input() placeholder: string = 'Date';
   @Input() disabled: boolean = false;
   @Input() autoClose: boolean = true;
-  @Input() placement:  'top' | 'bottom' | 'left' | 'right' = 'bottom';
+  @Input() placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
   @Input() displayMode: DisplayMode = DisplayMode.showTab;
   @Input() dateFormat: string = 'dd/MM/yyyy';
 
@@ -54,7 +60,9 @@ export class DateRangePickerComponent implements OnInit {
 
   constructor(private datePipe: DatePipe, private dateRangePickerConfig: DateRangePickerConfig) {}
 
-  public OpenDiv: Boolean = true;
+  // import to DateSElectionType into the instance of this class
+  DateSelectionType = DateSelectionType;
+  currentTab: DateSelectionType = DateSelectionType.interval
   fromDate: Date = new Date();
   toDate: Date = new Date();
   _displayRange: string;
@@ -94,9 +102,10 @@ export class DateRangePickerComponent implements OnInit {
         fromDate: this.fromDate,
         toDate: this.toDate
       });
+      this.currentTab = DateSelectionType.custom;
+      this.selectedInterval = null;
     }
   }
-
 
   onIntervalSelection(selectedItem: IntervalItem) {
     if (selectedItem) {
@@ -119,24 +128,21 @@ export class DateRangePickerComponent implements OnInit {
         this.toDate = today;
       }
       this._displayRange = this.createDateRange();
-      
+
       this.onDateRangeSelected.emit( < DateRange > {
         fromDate: this.fromDate,
         toDate: this.toDate
       });
+      this.currentTab = DateSelectionType.interval;
     }
   }
 
   createDateRange(): string {
     const fromDateStr = this.datePipe.transform(this.fromDate, this.dateFormat);
     const toDateStr = this.datePipe.transform(this.toDate, this.dateFormat);
-    if(fromDateStr === toDateStr) {
+    if (fromDateStr === toDateStr) {
       return fromDateStr;
     }
     return `${fromDateStr} - ${toDateStr}`;
-  }
-
-  onTabSelect(tabname: String) {
-    this.dateRangePickerConfig.tabSelected = tabname;
   }
 }

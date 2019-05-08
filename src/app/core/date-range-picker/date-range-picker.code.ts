@@ -29,9 +29,10 @@ export class DateRangePickersCode {
       })
       export class DateRangePickerComponent extends CoreBaseComponent {
       
-        selectedDateRange: DateRange = {fromDate:new Date(),toDate:new Date()};
+        selectedDateRange: DateRange = {fromDate:new Date(), toDate:new Date()};
       
-        constructor() { }    
+        constructor() { 
+        }    
       }
 
       getSelectedDateRange(dateRange: DateRange){
