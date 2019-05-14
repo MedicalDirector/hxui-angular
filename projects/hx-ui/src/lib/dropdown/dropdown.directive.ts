@@ -85,6 +85,12 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   @Input()
   minWidthRelativeTo: string;
 
+  @Input()
+  offsetY = 0;
+
+  @Input()
+  offsetX = 0;
+
   constructor(
     private _elementRef: ElementRef,
     private _viewContainerRef: ViewContainerRef,
@@ -152,7 +158,8 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
       .position()
       .flexibleConnectedTo(this._elementRef)
       .withFlexibleDimensions(false)
-      .withDefaultOffsetX(0)
+      .withDefaultOffsetX(this.offsetX)
+      .withDefaultOffsetY(this.offsetY)
       .withPositions([
         { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' }
       ])
