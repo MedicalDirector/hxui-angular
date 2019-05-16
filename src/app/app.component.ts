@@ -114,15 +114,19 @@ export class AppComponent {
           link: '/online-status'
         }
       ]
+    },
+    {
+      cat: 'Other',
+      items: [
+        {
+          name: 'Change Log',
+          url: 'https://bitbucket.org/md-design/angular-hxui/src/master/CHANGELOG'
+        },
+        {
+          name: 'License',
+          url: 'https://bitbucket.org/md-design/angular-hxui/src/master/LICENSE'
+        }
+      ]
     }
-    // {
-    //   cat: 'Feedback',
-    //   items: [
-    //     {
-    //       name: 'Feedback',
-    //       url: 'https://bitbucket.org/md-design/angular-hxui'
-    //     }
-    //   ]
-    // }
   ];
 }
