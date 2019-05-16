@@ -1,5 +1,4 @@
 
-<a name="7.0.35"></a>
 ## [7.0.35](https://www.npmjs.com/package/@hxui/angular/v/7.0.35) (2019-05-14)
 
 
@@ -26,7 +25,6 @@ example:
       </div>
 ```
 
-<a name="7.0.34"></a>
 ## [7.0.34](https://www.npmjs.com/package/@hxui/angular/v/7.0.34) (2019-05-08)
 
 

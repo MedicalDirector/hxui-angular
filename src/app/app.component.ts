@@ -120,11 +120,11 @@ export class AppComponent {
       items: [
         {
           name: 'Change Log',
-          url: 'https://bitbucket.org/md-design/angular-hxui/src/master/CHANGELOG'
+          url: 'https://bitbucket.org/md-design/angular-hxui/src/master/CHANGELOG.md'
         },
         {
           name: 'License',
-          url: 'https://bitbucket.org/md-design/angular-hxui/src/master/LICENSE'
+          url: 'https://bitbucket.org/md-design/angular-hxui/src/master/LICENCE'
         }
       ]
     }
