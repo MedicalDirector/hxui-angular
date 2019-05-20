@@ -1,3 +1,26 @@
+## [7.0.36](https://www.npmjs.com/package/@hxui/angular/v/7.0.36) (2019-05-20)
+
+
+### Features
+
+* **Tooltips:** Added support for projecting content into the tooltip content area via a tooltip dynamic content directive  ([fa6b11626b68b3a0183bc2b2a759edb273b4168f](https://bitbucket.org/md-design/angular-hxui/commits/fa6b11626b68b3a0183bc2b2a759edb273b4168f))
+* **Tooltips:** Added autoClose input, which allows tooltips to remain open until user clicks anywhere outside of tooltip  ([fa6b11626b68b3a0183bc2b2a759edb273b4168f](https://bitbucket.org/md-design/angular-hxui/commits/fa6b11626b68b3a0183bc2b2a759edb273b4168f))
+
+example:
+```html
+  <i class="hx-icon icon-information-outline" hxTooltip [autoClose]="false" placement="right">
+     <div *hxaTooltipDynamicContent>
+       <div class='is-text-left pa-3'>
+         ENABLED FOR
+         <ul>
+           <li>Card payments</li>
+           <li>Fully paid patient claims with EasyClaim</li>
+           <li>Dynamic content with <a (click)="onClickHandler($event)">links</a></li>
+         </ul>
+       </div>
+     </div>
+   </i>
+```
 
 ## [7.0.35](https://www.npmjs.com/package/@hxui/angular/v/7.0.35) (2019-05-14)
 
