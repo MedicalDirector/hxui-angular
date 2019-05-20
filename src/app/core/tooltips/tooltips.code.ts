@@ -25,27 +25,70 @@ export class TooltipsCode {
       <a href hxTooltip="Danger!"  placement="bottom" [context]="contextEnum.Danger">danger</a>.
     </p>
 
+    <p>
+        You can use formatted HTML in the tooltip and you can set the width in pixels of the tooltip:
+        <i class="hx-icon icon-information-outline" hxTooltip [autoClose]="false" placement="right" maxWidth="350">
+          <div *hxaTooltipDynamicContent>
+            <div class='is-text-left pa-3'>
+              ENABLED FOR
+              <ul>
+                <li>Card payments</li>
+                <li>Fully paid patient claims with EasyClaim</li>
+                <li>Dynamic content with <a (click)="onClickHandler($event)">links</a></li>
+              </ul>
+            </div>
+          </div>
+        </i>
+      </p>
     `;
 
   exampleTypescript =
     `
-    import { Component, OnInit } from '@angular/core';
-
+    import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
+    import { PageScrollService } from 'ngx-page-scroll';
+    import { DOCUMENT } from '@angular/common';
+    import { CoreBaseComponent } from '../core-base.component';
+    import { TooltipsCode } from './tooltips.code';
+    import {Context} from '@hxui/angular';
+    import {BreakpointObserver} from '@angular/cdk/layout';
+    
+    
     @Component({
       selector: 'app-tooltips',
-      templateUrl: './tooltips.component.html'
+      templateUrl: './tooltips.component.html',
     })
     export class TooltipsComponent implements OnInit {
-
+    
+      @ViewChild('toolTipContent') toolTipContent: ElementRef;
+    
+      code = new TooltipsCode();
+      private _dynamicTooltipText = 'sample text';
+    
       public contextEnum = Context;
-
-
-      constructor() { }
-
-      ngOnInit() {
+      public tooltipTemplateHtml = '';
+    
+      public get dynamicTooltipText(): string {
+        return this._dynamicTooltipText;
       }
-
+    
+      public set dynamicTooltipText(txt: string) {
+        this._dynamicTooltipText = txt;
+      }
+    
+      constructor() {
+      }
+    
+      ngOnInit() {
+        
+      }
+    
+      onClickHandler($event) {
+        alert('clicked');
+        $event.preventDefault();
+        $event.stopPropagation();
+      }
     }
+
 
     `;
 }

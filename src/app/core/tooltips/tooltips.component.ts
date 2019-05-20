@@ -39,6 +39,12 @@ export class TooltipsComponent extends CoreBaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tooltipTemplateHtml = this.toolTipContent.nativeElement.innerHTML;
+    this.tooltipTemplateHtml = (this.toolTipContent) ? this.toolTipContent.nativeElement.innerHTML : '';
+  }
+
+  onClickHandler($event) {
+    alert('clicked');
+    $event.preventDefault();
+    $event.stopPropagation();
   }
 }
