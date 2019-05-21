@@ -6,6 +6,7 @@ import {TooltipContentComponent} from './tooltip-content.component';
 import {TooltipDirective} from './tooltip.directive';
 import {TooltipConfig} from './tooltip.config';
 import {PortalModule} from '@angular/cdk/portal';
+import {TooltipDynamicContentDirective} from './tooltip-dynamic-content.directive';
 
 @NgModule({
   imports: [
@@ -14,8 +15,8 @@ import {PortalModule} from '@angular/cdk/portal';
     OverlayModule,
     PortalModule
   ],
-  declarations: [TooltipContentComponent, TooltipDirective],
-  exports: [TooltipContentComponent, TooltipDirective],
+  declarations: [TooltipContentComponent, TooltipDirective, TooltipDynamicContentDirective],
+  exports: [TooltipContentComponent, TooltipDirective, TooltipDynamicContentDirective],
   entryComponents: [TooltipContentComponent]
 })
 export class TooltipModule {

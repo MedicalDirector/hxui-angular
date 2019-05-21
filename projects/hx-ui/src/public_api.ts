@@ -91,6 +91,7 @@ export * from './lib/tooltip/tooltip.config';
 export * from './lib/tooltip/tooltip.directive';
 export * from './lib/tooltip/tooltip.module';
 export * from './lib/tooltip/tooltip-content.component';
+export * from './lib/tooltip/tooltip-dynamic-content.directive';
 
 export * from './lib/typeahead/latin-map';
 export * from './lib/typeahead/typeahead.directive';

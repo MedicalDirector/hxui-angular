@@ -221,7 +221,6 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
       overlayRef.updateSize({ maxWidth: elem.clientWidth });
     } else if (this.minWidthRelativeTo) {
       const elem: Element = document.getElementById(this.minWidthRelativeTo);
-      console.log(this.menu.templateRef);
       overlayRef.updateSize({ minWidth: elem.clientWidth });
     }
   }
