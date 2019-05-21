@@ -1,3 +1,10 @@
+## [7.0.37](https://www.npmjs.com/package/@hxui/angular/v/7.0.37) (2019-05-21)
+
+### Features
+
+* **Selectize styling:** Selectize font and labels standardized to be consistent with css form styling. ([d701a5f3bd6a9a3f4eae51060f35a1a89227d4fd](https://bitbucket.org/md-design/angular-hxui/commits/d701a5f3bd6a9a3f4eae51060f35a1a89227d4fd))
+
+
 ## [7.0.36](https://www.npmjs.com/package/@hxui/angular/v/7.0.36) (2019-05-20)
 
 
