@@ -1,3 +1,10 @@
+## [7.0.38](https://www.npmjs.com/package/@hxui/angular/v/7.0.38) (2019-05-24)
+
+### Bug Fix
+
+* **Tabular:** Fixed issue with check all checkboxes not un-checking when all rowData items have been unselected via the external source  ([6a527d7ce4bc7e0cbc6e7234ad8b14e471028c56](https://bitbucket.org/md-design/angular-hxui/commits/6a527d7ce4bc7e0cbc6e7234ad8b14e471028c56))
+
+
 ## [7.0.37](https://www.npmjs.com/package/@hxui/angular/v/7.0.37) (2019-05-21)
 
 ### Features
