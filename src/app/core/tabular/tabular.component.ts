@@ -55,6 +55,15 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
     ]
   };
 
+  get totalSelected() {
+    let count = 0;
+    this.rowData.forEach((row) => {
+      if (row.checked) {
+        count++;
+      }
+    });
+    return count;
+  }
 
 
   /**
@@ -110,6 +119,13 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
         }
       });
     this.rowData = data;
+  }
+
+
+  setCheckAllState(state: boolean = false) {
+    this.rowData.forEach((row) => {
+      row.checked = state;
+    });
   }
 
   constructor(protected pageScrollService: PageScrollService,

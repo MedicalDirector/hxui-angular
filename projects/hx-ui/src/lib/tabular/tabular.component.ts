@@ -140,6 +140,8 @@ export class TabularComponent implements OnInit, DoCheck {
       }
 
       this._isSorting = false;
+
+      this.checkSelectAllState();
     }
   }
 
@@ -169,6 +171,11 @@ export class TabularComponent implements OnInit, DoCheck {
 
 
   toggleIndividualSelect = ($event: ITabularRow) => {
+    this.checkSelectAllState();
+    this.onCheck.emit($event);
+  }
+
+  private checkSelectAllState() {
     let count = 0;
     for (let i = 0; i < this.rows.length; i++) {
       if (this.rows[i].checked) {
@@ -177,13 +184,7 @@ export class TabularComponent implements OnInit, DoCheck {
     }
 
     const oldSelectAll = this.selectAll;
-    if (this.rows.length === count) {
-      this.selectAll = true;
-    } else {
-      this.selectAll = false;
-    }
-    this.onCheck.emit($event);
-
+    this.selectAll =  (this.rows.length === count);
     if (oldSelectAll !== this.selectAll) {
       this.onCheckAll.emit(this.selectAll)
     }
