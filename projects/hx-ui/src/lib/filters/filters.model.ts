@@ -12,6 +12,7 @@ export class FiltersModel implements IFiltersConfig {
   selected: IFilterOption;
   defaultIndex = 0;
   charLimit = 2;
+  width: number;
 
   constructor(data?: IFiltersConfig) {
     Object.assign(this, data);

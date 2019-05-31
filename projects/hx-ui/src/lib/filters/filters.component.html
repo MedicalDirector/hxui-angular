@@ -9,38 +9,39 @@
   <ng-container *ngIf="!collapsed">
     <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last;">
 
-    <!-- single select filter -->
-    <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.SingleSelect">
-      <a [id]="filter?.id + '-trigger'" class="hx-button hx-button-dropdown expandedFilter__button" hxaDropdownToggle>
-        <span class="is-text-weight-light">{{filter?.label}}:&nbsp;</span>
-        <span class="hx-icon-control" *ngIf="filter?.selected?.icon"><i class="{{filter?.selected?.icon}} mr-1"></i></span>
-        <span class="is-text-weight-bolder is-text-ellipsed" title="{{filter?.selected?.label}}">{{filter?.selected?.label}}</span>
-        <span class="hx-icon-control"><i class="hx-icon icon-caret-down"></i></span>
-      </a>
-      <div [id]="filter?.id + '-options'" class="hx-dropdown-menu  has-limited-width has-limited-height expandedFilter__menu" [class.hx-dropdown-icon]="filter.isIconised()" *hxaDropdownMenu>
-        <a hxaDropdownItem *ngFor="let option of filter?.options;trackBy: trackByFn" (click)="onFilterOptionSelected(filter,option)" class="hx-dropdown-item is-text-ellipsed" title="{{option?.label}}"> <span class="hx-icon-control" *ngIf="option?.icon"><i class="{{option?.icon}}"></i></span> {{option?.label}}</a>
-      </div>
-    </div>
-
-    <!-- search filter -->
-    <div [id]="filter.id" *ngIf="filter.type === FilterType.Search"  class="hx-input-group ml-4" [class.mx-1]="!lastItem">
-      <i class="hx-icon icon-search mt-1"></i>
-      <div class="hx-input-control my-0">
-        <input class="hx-input"
-               type="search"
-               placeholder="{{filter.label}}"
-               (input)="onSearchFilterChange(filter)"
-               [(ngModel)]="filter.value">
-        <label class="hx-label"></label>
-        <div class="hx-help"></div>
-      </div>
-      <div class="hx-input-actions" *ngIf="filter.value">
-        <!--<div id="searchLoadingIndicator" class="hx-loader is-small" *ngIf="patientSearchService.showPatientSearchLoader"><div></div><div></div><div></div><div></div></div>-->
-        <div class="hx-button-group">
-          <button class="hx-button is-flat" (click)="clearSearch(filter)"><span class="hx-icon-control"><i class="icon icon-close-empty"></i></span></button>
+      <!-- single select filter -->
+      <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.SingleSelect">
+        <a [id]="filter?.id + '-trigger'" class="hx-button hx-button-dropdown expandedFilter__button" hxaDropdownToggle>
+          <span class="is-text-weight-light">{{filter?.label}}:&nbsp;</span>
+          <span class="hx-icon-control" *ngIf="filter?.selected?.icon"><i class="{{filter?.selected?.icon}} mr-1"></i></span>
+          <span class="is-text-weight-bolder is-text-ellipsed" title="{{filter?.selected?.label}}">{{filter?.selected?.label}}</span>
+          <span class="hx-icon-control"><i class="hx-icon icon-caret-down"></i></span>
+        </a>
+        <div [id]="filter?.id + '-options'" class="hx-dropdown-menu  has-limited-width has-limited-height expandedFilter__menu" [class.hx-dropdown-icon]="filter.isIconised()" *hxaDropdownMenu>
+          <a hxaDropdownItem *ngFor="let option of filter?.options;trackBy: trackByFn" (click)="onFilterOptionSelected(filter,option)" class="hx-dropdown-item is-text-ellipsed" title="{{option?.label}}"> <span class="hx-icon-control" *ngIf="option?.icon"><i class="{{option?.icon}}"></i></span> {{option?.label}}</a>
         </div>
       </div>
-    </div>
-  </ng-container>
+
+      <!-- search filter -->
+      <div [id]="filter.id" *ngIf="filter.type === FilterType.Search"  class="hx-input-group ml-4" [class.mx-1]="!lastItem">
+        <i class="hx-icon icon-search mt-1"></i>
+        <div class="hx-input-control my-0">
+          <input class="hx-input"
+                  type="search"
+                  placeholder="{{filter.label}}"
+                  (input)="onSearchFilterChange(filter)"
+                  [(ngModel)]="filter.value"
+                  [ngStyle]="{'width': filter.width + 'rem'}">
+          <label class="hx-label"></label>
+          <div class="hx-help"></div>
+        </div>
+        <div class="hx-input-actions" *ngIf="filter.value">
+          <!--<div id="searchLoadingIndicator" class="hx-loader is-small" *ngIf="patientSearchService.showPatientSearchLoader"><div></div><div></div><div></div><div></div></div>-->
+          <div class="hx-button-group">
+            <button class="hx-button is-flat" (click)="clearSearch(filter)"><span class="hx-icon-control"><i class="icon icon-close-empty"></i></span></button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </ng-container>
 </div>

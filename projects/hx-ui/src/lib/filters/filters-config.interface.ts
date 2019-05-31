@@ -47,4 +47,10 @@ export interface IFiltersConfig {
    */
   defaultIndex?: number;
 
+    /**
+   * Width in REM for Search filter type.
+   * Defaults if not set
+   */
+  width?: number;
+
 }
