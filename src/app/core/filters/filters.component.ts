@@ -177,7 +177,8 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
     {
       id: 'searchFilter',
       type: FilterType.Search,
-      label: 'Filter by name'
+      label: 'Filter by name',
+      width: this.getSearchWidth('Filter by name')
     }
   ];
   onFilterChangeEvent$ = new Subscription();
@@ -195,6 +196,8 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
       .subscribe((filter: FiltersModel) => {
         console.log(filter);
     });
+
+    this.filters.forEach(f => console.log(f.width));
   }
 
   ngOnDestroy() {
@@ -209,4 +212,24 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
     this.collapsed = !this.collapsed;
   }
 
+  // as an example,
+  // a consumer of hx-ui filter component
+  // can dynamically assign a width to the
+  // search filter and create their own logic
+  // to determine the value passed to the filter
+  getSearchWidth(label: string) {
+    const min = 8;
+    const max = 12;
+
+    // .42rem = 1 char, 3.9rem = empty search filter
+    const calc = label.length * .42 + 3.9;
+
+    // check if the calulated length is
+    // within the range of min and max
+    if(min <= calc && calc <= max) {
+      return calc;
+    }
+
+    return min > calc ? min : max;
+  }
 }
