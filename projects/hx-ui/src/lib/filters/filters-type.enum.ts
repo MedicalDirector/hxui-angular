@@ -1,4 +1,5 @@
 export enum FilterType {
   SingleSelect,
-  Search
+  Search,
+  DateRange
 }

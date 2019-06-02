@@ -6,6 +6,8 @@ import * as _ from 'lodash';
 import {BehaviorSubject, from, Observable, pipe, Subject, Subscription} from 'rxjs/index';
 import {FiltersConfig} from './filters.config';
 import {debounceTime} from 'rxjs/internal/operators';
+import { DateRange } from '../date-range-picker/date-range-picker.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'hxa-filters',
@@ -46,11 +48,11 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   constructor(
-    private conf: FiltersConfig
+    private conf: FiltersConfig,
+    private datePipe: DatePipe
   ) {
     Object.assign(this, conf);
   }
-
 
   ngOnInit() {
     this.subscriptions.add(
@@ -70,6 +72,16 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
       this.setData();
     }
   }
+
+   getIntervalOptions(options: IFilterOption[]){ 
+    let intervalOption: string[] = [];
+    if(options){
+    for(let i=0; i<options.length; i++){
+      intervalOption.push(options[i].label);
+    }
+  }
+  return intervalOption;
+} 
 
   resetFilters(silent: boolean = false) {
     for (const filter of this.data) {
@@ -91,7 +103,6 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
       }
   }
 
-
   /**
    * Called when filter option is selected
    */
@@ -107,6 +118,15 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     if (filter.value.length === 0 || filter.value.length >= filter.charLimit) {
       this.searchFilter$.next(filter);
     }
+  }
+
+  /**
+   * Called when selection is made in the date range filter type
+   */
+  onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRange){
+    let dateRangeValue = this.datePipe.transform(dateRange.fromDate,filter.dateRangePicker_displayDateFormat) + ' - '+ this.datePipe.transform(dateRange.toDate,filter.dateRangePicker_displayDateFormat);
+    filter.value = dateRangeValue;
+    this.searchFilter$.next(filter);
   }
 
 

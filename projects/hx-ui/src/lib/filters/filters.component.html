@@ -41,6 +41,13 @@
         </div>
       </div>
     </div>
+
+    <!-- date range picker -->
+    <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.DateRange">
+        <hxa-date-range-picker [displayMode]=1 [intervalOptions]="getIntervalOptions(filter.options)"
+        (onDateRangeSelected)="onDateRangeFilterChange(filter,$event)">
+      </hxa-date-range-picker>
+    </div>
   </ng-container>
   </ng-container>
 </div>

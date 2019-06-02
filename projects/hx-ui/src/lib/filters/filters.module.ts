@@ -5,12 +5,14 @@ import {FiltersConfig} from './filters.config';
 import {DropdownModule} from '../dropdown/dropdown.module';
 import {FiltersCollapsedComponent} from './filters-collapsed.component';
 import { FormsModule } from '@angular/forms';
+import { DateRangePickerModule } from '../date-range-picker/date-range-picker.module';
 
 @NgModule({
   imports: [
     CommonModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    DateRangePickerModule
   ],
   declarations: [
     FiltersComponent,

@@ -175,6 +175,63 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
       ]
     },
     {
+    id: 'dateRangeFilter',
+    type: FilterType.DateRange,
+    label: 'Date Range',
+    options: [
+      {
+        label: 'Yesterday',
+        value: 0,
+        selected: false
+      },
+      {
+        label: 'Tomorrow',
+        value: 1,
+        selected: false
+      },
+      {
+        label: 'Last Year',
+        value: 2,
+        selected: false
+      },
+      {
+        label: 'Next Year',
+        value: 3,
+        selected: false
+      },
+      {
+        label: 'Last Month',
+        value: 4,
+        selected: false
+      },
+      {
+        label: 'Next Month',
+        value: 5,
+        selected: false
+      },
+      {
+        label: 'Last Week',
+        value: 6,
+        selected: false
+      },
+      {
+        label: 'Next Week',
+        value: 7,
+        selected: false
+      },
+      {
+        label: 'Last Fortnight',
+        value: 8,
+        selected: false
+      },
+      {
+        label: 'Next Fortnight',
+        value: 9,
+        selected: false
+      }
+    ]
+  },
+    {
       id: 'searchFilter',
       type: FilterType.Search,
       label: 'Filter by name'

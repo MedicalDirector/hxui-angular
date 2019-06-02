@@ -26,7 +26,9 @@ export class DateRangePickerIntervalComponent implements AfterViewInit {
   ngAfterViewInit() {
     if (this.currentSelectedInterval) {
       const element = document.getElementById(this.currentSelectedInterval.id);
-      element.classList.add("label-selected");
+      if(element) {
+        element.classList.add("label-selected");
+      }
     }
   }
 
