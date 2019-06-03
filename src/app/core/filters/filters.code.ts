@@ -216,27 +216,28 @@ export class FiltersCode {
     toggleCollapsed() {
       this.collapsed = !this.collapsed;
     }
+
+    // dynamically calculate an appropriate width (rem)
+    getSearchWidth(label: string) {
+      const min = 8;
+      const max = 12;
   
-  }
-
-  // dynamically calculate an appropriate width (rem)
-  getSearchWidth(label: string) {
-    const min = 8;
-    const max = 12;
-
-    // based on root html font size
-    const charwidth = .42;
-
-    // base search filter
-    const filter = 3.9;
-
-    const calc = label.length * charwidth + filter;
-
-    if(min <= calc && calc <= max) {
-      return calc;
+      // based on root html font size
+      const charwidth = .42;
+  
+      // base search filter
+      const filter = 3.9;
+  
+      const calc = label.length * charwidth + filter;
+  
+      if(min <= calc && calc <= max) {
+        return calc;
+      }
+  
+      return min > calc ? min : max;
     }
-
-    return min > calc ? min : max;
   }
+
+
     `;
 }
