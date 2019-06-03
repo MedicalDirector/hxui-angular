@@ -1,3 +1,10 @@
+## [7.0.39](https://www.npmjs.com/package/@hxui/angular/v/7.0.39) (2019-06-03)
+
+### Bug Fix
+
+* **Tabular:** Fixed issue with check all checkboxes running change detection multiple times  ([e8c7bad37075b18a7996246bf3e5d8e97ccfa401](https://bitbucket.org/md-design/angular-hxui/commits/e8c7bad37075b18a7996246bf3e5d8e97ccfa401))
+
+
 ## [7.0.38](https://www.npmjs.com/package/@hxui/angular/v/7.0.38) (2019-05-24)
 
 ### Bug Fix
