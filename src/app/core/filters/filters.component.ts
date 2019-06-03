@@ -212,20 +212,19 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
     this.collapsed = !this.collapsed;
   }
 
-  // as an example,
-  // a consumer of hx-ui filter component
-  // can dynamically assign a width to the
-  // search filter and create their own logic
-  // to determine the value passed to the filter
+  // dynamically calculate an appropriate width (rem)
   getSearchWidth(label: string) {
     const min = 8;
     const max = 12;
 
-    // .42rem = 1 char, 3.9rem = empty search filter
-    const calc = label.length * .42 + 3.9;
+    // based on root html font size
+    const charwidth = .42;
 
-    // check if the calulated length is
-    // within the range of min and max
+    // base search filter
+    const filter = 3.9;
+
+    const calc = label.length * charwidth + filter;
+
     if(min <= calc && calc <= max) {
       return calc;
     }
