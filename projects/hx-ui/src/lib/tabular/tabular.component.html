@@ -4,7 +4,7 @@
        [class.has-sticky-header]="config.stickyHeader">
   <thead>
   <tr>
-    <th *ngFor="let col of columns; trackBy: trackById;" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox, 'tabular__sortable': col.sortable}">
+    <th *ngFor="let col of columns; trackBy: trackByFn;" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox, 'tabular__sortable': col.sortable}">
 
       <!-- sortable column -->
       <a class="tabular__sorter" href="#" *ngIf="col.sortable && col.dataType != TabularColumnTypes.Checkbox" (click)="onSortClickHandler(col.id, col.dataType)">{{col.label}} <i class="hx-icon icon-arrow-up is-small" [class.icon-arrow-up]="isColumnSorted(col.id, SortByDirection.Ascending)" [class.icon-arrow-down]="isColumnSorted(col.id, SortByDirection.Descending)" *ngIf="isColumnSorted(col.id, SortByDirection.Descending) || isColumnSorted(col.id, SortByDirection.Ascending)"></i></a>
@@ -23,7 +23,7 @@
 
   <tbody>
   <!--<tr *ngFor="let row of rows | paginate: config.pagination | simpleSearch: searchTerm">-->
-  <tr *ngFor="let row of pagedItems; trackBy: trackById"
+  <tr *ngFor="let row of pagedItems; trackBy: trackByFn"
       (click)="onRowClickHandler($event, row)"
       [class.is-selected]="row.selected"
       [class.is-danger]="row.context && row.context === Context.Danger"
