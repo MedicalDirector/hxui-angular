@@ -47,4 +47,15 @@ export interface IFiltersConfig {
    */
   defaultIndex?: number;
 
+  /**
+   * Display mode for type date range picker
+   * 1:both tabs 2:custom tab only 3:interval tab only.
+   */
+  dateRangePicker_displayMode?: number;
+
+  /**
+   * Display date format for type date range picker
+   */
+  dateRangePicker_displayDateFormat?: string;
+
 }

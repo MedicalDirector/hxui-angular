@@ -83,6 +83,12 @@ export class DateRangePickerComponent implements OnInit {
     this.generateIntervalOptionItems(this.intervalOptions || []);
   }
 
+  resetDateRange() {
+    this.fromDate = new Date();
+    this.toDate = new Date();
+    this._displayRange = this.createDateRange();
+  }
+
   generateIntervalOptionItems(itemList: string[]) {
     this.intervalList = fullIntervalList.filter(item => itemList.includes(item.displayName));
   }

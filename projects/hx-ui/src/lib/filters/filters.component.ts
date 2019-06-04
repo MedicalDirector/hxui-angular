@@ -1,4 +1,4 @@
-import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewChildren, QueryList, AfterViewInit} from '@angular/core';
 import {FilterType} from './filters-type.enum';
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {FiltersModel} from './filters.model';
@@ -6,8 +6,10 @@ import * as _ from 'lodash';
 import {BehaviorSubject, from, Observable, pipe, Subject, Subscription} from 'rxjs/index';
 import {FiltersConfig} from './filters.config';
 import {debounceTime} from 'rxjs/internal/operators';
-import { DateRange } from '../date-range-picker/date-range-picker.component';
+import { DateRange,DateRangePickerComponent } from '../date-range-picker/date-range-picker.component';
 import { DatePipe } from '@angular/common';
+import { FiltersCollapsedComponent } from './filters-collapsed.component';
+
 
 @Component({
   selector: 'hxa-filters',
@@ -17,6 +19,8 @@ import { DatePipe } from '@angular/common';
 export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
 
   @ViewChild('carousel') private carousel: ElementRef;
+  @ViewChild ('dateRangePicker') dateRangePickerComponent: DateRangePickerComponent;
+  @ViewChild ('filterCollapse') filtersCollapsedComponent: FiltersCollapsedComponent;
 
   FilterType = FilterType;
   data: FiltersModel[] = [];
@@ -73,7 +77,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     }
   }
 
-   getIntervalOptions(options: IFilterOption[]){ 
+   getIntervalOptions(options: IFilterOption[]) { 
     let intervalOption: string[] = [];
     if(options){
     for(let i=0; i<options.length; i++){
@@ -93,6 +97,9 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
       } else if (filter.type === FilterType.Search) {
         this.clearSearch(filter, silent);
       }
+      else if (filter.type === FilterType.DateRange) {
+        this.setDefaultDate(filter);
+      }
     }
   }
 
@@ -101,6 +108,20 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
       if (!silent) {
         this.onFilterOptionChanged$.next(filter);
       }
+  }
+
+  setDefaultDate(filter: FiltersModel){
+    filter.value = '';
+    //filter.value = this.datePipe.transform(new Date(),filter.dateRangePicker_displayDateFormat);
+    if(this._collapsed){
+      console.log("collapsed");
+      console.log(this.filtersCollapsedComponent);
+      this.filtersCollapsedComponent.setDefaultDate();
+    }
+    else {
+    this.dateRangePickerComponent.resetDateRange();
+    }
+    this.onFilterOptionChanged$.next(filter);
   }
 
   /**
@@ -138,6 +159,9 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     this.onSearchFilterChange($event.filter);
   }
 
+  onCollapsedDateRangePicker($event){
+    this.onDateRangeFilterChange($event.filter, $event.dateRange)
+  }
 
   /**
    * Used for track by and boost performance

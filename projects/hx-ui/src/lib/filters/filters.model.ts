@@ -48,6 +48,9 @@ export class FiltersModel implements IFiltersConfig {
     } else if (this.type === FilterType.Search) {
       return (this.value === '' || this.value === undefined);
     }
+    else if (this.type === FilterType.DateRange){
+      return (this.value === '' || this.value === undefined);
+    }
   }
 
   isIconised() {

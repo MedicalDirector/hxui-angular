@@ -40,7 +40,9 @@ export class DateRangePickerIntervalComponent implements AfterViewInit {
   mouseHover(e) {
     if (this.currentSelectedInterval) {
       const element = document.getElementById(this.currentSelectedInterval.id);
+      if(element) {
       element.classList.remove("label-selected");
+      }
     }
   }
 }

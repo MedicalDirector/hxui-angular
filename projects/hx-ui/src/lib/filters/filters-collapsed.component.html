@@ -5,11 +5,10 @@
   </button>
   <div class="hx-dropdown-menu has-limited-width collapsedFilter__menu panes" *hxaDropdownMenu>
     <ul class="panes__inner" [@slide]="activePane" (@slide.done)="onSlideDone($event)">
+      
       <li id="filterSelections" class="panes__item">
         <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last;">
-
           <div class="hx-dropdown-header itemHeader">{{filter.label}}</div>
-
           <!-- single select -->
           <ng-container *ngIf="filter.type === FilterType.SingleSelect">
             <ul class="hx-list-group">
@@ -26,7 +25,6 @@
               </li>
             </ul>
           </ng-container>
-
           <!-- search filter -->
           <div *ngIf="filter.type === FilterType.Search" class="pl-3 pr-4">
             <div [id]="filter.id"  class="hx-input-group">
@@ -41,18 +39,38 @@
               </div>
               <div class="hx-input-actions" *ngIf="filter.value">
                 <div class="hx-button-group">
-                  <button class="hx-button is-flat" (click)="clearSearch(filter)"><span class="hx-icon-control"><i class="icon icon-close-empty"></i></span></button>
+                  <button class="hx-button is-flat" (click)="clearSearch(filter)"><span class="hx-icon-control">
+                    <i class="icon icon-close-empty"></i>
+                  </span></button>
                 </div>
               </div>
             </div>
           </div>
+        <!-- date range picker filter -->
+        <ng-container *ngIf="filter.type === FilterType.DateRange">
+          <ul class="hx-list-group">
+            <li>
+              <a [id]="filter?.id + '-trigger'"  title="{{filter.selected?.label}}">
+                <hxa-date-range-picker  
+                [dateFormat]="filter.dateRangePicker_displayDateFormat" 
+                [displayMode]="filter.dateRangePicker_displayMode" 
+                [intervalOptions]="getIntervalOptions(filter.options)"
+                (onDateRangeSelected)="onDateRangeFilterChange(filter,$event)" 
+                #daterange>
+              </hxa-date-range-picker>
+              </a>
+            </li>
+          </ul>
+        </ng-container>
         </ng-container>
       </li>
+
       <li id="filterOptions" class="panes__item">
         <div class="hx-toolbar is-xsmall">
           <button id="paneBack" class="hx-button is-flat" (click)="back()"><i class="hx-icon icon-arrow-left"></i></button>
           <span>{{selectedFilter?.label}}</span>
         </div>
+        <!-- <ng-container ngIf="selectedFilter?.type!=== 'daterangepicker'></ng-container> -->
         <ul [id]="selectedFilter?.id + '-options'" class="hx-list-group options">
           <li class="options__item"  *ngFor="let option of selectedFilter?.options;trackBy: trackByFn">
             <a hxaDropdownItem (click)="selectFilterOption(option)" title="{{option?.label}}">

@@ -4,6 +4,8 @@ import {FiltersModel} from './filters.model';
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {DropdownDirective} from '../dropdown/dropdown.directive';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { DateRange, DateRangePickerComponent } from '../date-range-picker/date-range-picker.component';
+import { DatePipe } from '@angular/common';
 
 type PaneType = 'left' | 'right';
 
@@ -22,6 +24,7 @@ type PaneType = 'left' | 'right';
 export class FiltersCollapsedComponent implements OnInit {
 
   @ViewChild('dropdown') dropdown: DropdownDirective;
+  @ViewChild ('daterange') dateRangePickerComp: DateRangePickerComponent;
 
   FilterType = FilterType;
   activePane = 'left';
@@ -29,13 +32,25 @@ export class FiltersCollapsedComponent implements OnInit {
 
   @Input() data: FiltersModel[] = [];
 
+
   @Output() onFilter = new EventEmitter();
   @Output() onSearchFilter = new EventEmitter();
+  @Output() onDateRangePickerFilter =  new EventEmitter();
 
-  constructor() { }
+  constructor( private datePipe: DatePipe) { }
 
   ngOnInit() {
   }
+
+  getIntervalOptions(options: IFilterOption[]) { 
+    let intervalOption: string[] = [];
+    if(options){
+    for(let i=0; i<options.length; i++){
+      intervalOption.push(options[i].label);
+    }
+  }
+  return intervalOption;
+} 
 
   clearSearch(filter: FiltersModel) {
     filter.value = '';
@@ -76,6 +91,15 @@ export class FiltersCollapsedComponent implements OnInit {
     return count;
   }
 
+  onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRange){
+    this.onDateRangePickerFilter.emit({filter: filter,dateRange: dateRange});
+  }
+
+  setDefaultDate(){
+    console.log("Set default from collapsed");
+    console.log(this.dateRangePickerComp);
+    this.dateRangePickerComp.resetDateRange();
+  }
 
   /**
    * Used for track by and boost performance

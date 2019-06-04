@@ -178,6 +178,8 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
     id: 'dateRangeFilter',
     type: FilterType.DateRange,
     label: 'Date Range',
+    dateRangePicker_displayMode: 1,
+    dateRangePicker_displayDateFormat: 'yyyy-MM-dd',
     options: [
       {
         label: 'Yesterday',
@@ -237,7 +239,9 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
       label: 'Filter by name'
     }
   ];
+  displayFilterResult: string;
   onFilterChangeEvent$ = new Subscription();
+  filterLists: FiltersModel[];
 
   constructor(
     protected pageScrollService: PageScrollService,
@@ -250,8 +254,12 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
   ngOnInit() {
     this.onFilterChangeEvent$ = this.filtersComponent.onFilterOptionChanged$
       .subscribe((filter: FiltersModel) => {
-        console.log(filter);
+        this.filterLists = this.filtersComponent.data;
+        this.displayFilterResult = `filter name: ${filter.label}
+        filter value: ${filter.value}
+        filter selected value: ${filter.selected?filter.selected.label:'empty' }`;
     });
+    
   }
 
   ngOnDestroy() {
@@ -264,6 +272,15 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
 
   toggleCollapsed() {
     this.collapsed = !this.collapsed;
+  }
+
+  displayFilterValue(filter: FiltersModel) {
+    if(filter.type === FilterType.SingleSelect) {
+      return filter.selected?filter.selected.label: 'empty';
+    }
+    else if (filter.type === FilterType.Search || filter.type === FilterType.DateRange){
+      return filter.value? filter.value:'empty';
+    }
   }
 
 }

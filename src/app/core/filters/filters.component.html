@@ -27,8 +27,21 @@
 
 
     <br>
-
-    <h5 id="code">Code</h5>
+    <h5 id="code">Output</h5>
+    <div>
+      onFilterChangeEvent: 
+    </div>
+    <div>
+      {{displayFilterResult}}
+    </div>
+    <div>
+      <br><span>Filter Array:</span>
+      <ul>
+        <li *ngFor="let filter of filterLists">filter Name: {{filter.label}} filter Value:{{displayFilterValue(filter)}} </li>
+      </ul>
+    </div>
+    <br>
+    <h5 id="code">Code</h5> 
 
     <hx-tabset>
       <hx-tab heading="Template">
