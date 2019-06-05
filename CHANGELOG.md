@@ -1,3 +1,17 @@
+## [7.0.40](https://www.npmjs.com/package/@hxui/angular/v/7.0.40) (2019-06-04)
+
+### Enhancements
+
+* **Filters:** Added an optional width property to search type filters  ([1e4bb5cfddbb3fae7ab436edf145f1fc303869a5](https://bitbucket.org/md-design/angular-hxui/commits/1e4bb5cfddbb3fae7ab436edf145f1fc303869a5))
+
+
+## [7.0.39](https://www.npmjs.com/package/@hxui/angular/v/7.0.39) (2019-06-03)
+
+### Bug Fix
+
+* **Tabular:** Fixed issue with check all checkboxes running change detection multiple times  ([e8c7bad37075b18a7996246bf3e5d8e97ccfa401](https://bitbucket.org/md-design/angular-hxui/commits/e8c7bad37075b18a7996246bf3e5d8e97ccfa401))
+
+
 ## [7.0.38](https://www.npmjs.com/package/@hxui/angular/v/7.0.38) (2019-05-24)
 
 ### Bug Fix
@@ -7,7 +21,7 @@
 
 ## [7.0.37](https://www.npmjs.com/package/@hxui/angular/v/7.0.37) (2019-05-21)
 
-### Features
+### Enhancements
 
 * **Selectize styling:** Selectize font and labels standardized to be consistent with css form styling. ([d701a5f3bd6a9a3f4eae51060f35a1a89227d4fd](https://bitbucket.org/md-design/angular-hxui/commits/d701a5f3bd6a9a3f4eae51060f35a1a89227d4fd))
 
@@ -15,7 +29,7 @@
 ## [7.0.36](https://www.npmjs.com/package/@hxui/angular/v/7.0.36) (2019-05-20)
 
 
-### Features
+### Enhancements
 
 * **Tooltips:** Added support for projecting content into the tooltip content area via a tooltip dynamic content directive  ([fa6b11626b68b3a0183bc2b2a759edb273b4168f](https://bitbucket.org/md-design/angular-hxui/commits/fa6b11626b68b3a0183bc2b2a759edb273b4168f))
 * **Tooltips:** Added autoClose input, which allows tooltips to remain open until user clicks anywhere outside of tooltip  ([fa6b11626b68b3a0183bc2b2a759edb273b4168f](https://bitbucket.org/md-design/angular-hxui/commits/fa6b11626b68b3a0183bc2b2a759edb273b4168f))
@@ -39,7 +53,7 @@ example:
 ## [7.0.35](https://www.npmjs.com/package/@hxui/angular/v/7.0.35) (2019-05-14)
 
 
-### Features
+### Enhancements
 
 * **Dropdowns:** Added the ability to set an x and/or y offset to set a dropdowns position. ([1b0137ddfbbf0bf413176be92fa1a7c95549480a](https://bitbucket.org/md-design/angular-hxui/commits/1b0137ddfbbf0bf413176be92fa1a7c95549480a))
 
