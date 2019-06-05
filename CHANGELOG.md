@@ -1,3 +1,10 @@
+## [7.0.41](https://www.npmjs.com/package/@hxui/angular/v/7.0.41) (2019-06-06)
+
+### Bugfix
+
+* **Datepicker:** Fixed issue with the onDateChange event which was triggering before ngModel was propegated and triggering multiple times on initialise  ([5c3e9f1896b05819caf2eaf49eec234316ccb86d](https://bitbucket.org/md-design/angular-hxui/commits/5c3e9f1896b05819caf2eaf49eec234316ccb86d))
+
+
 ## [7.0.40](https://www.npmjs.com/package/@hxui/angular/v/7.0.40) (2019-06-04)
 
 ### Enhancements
