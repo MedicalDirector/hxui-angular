@@ -22,4 +22,8 @@ export class DatepickersComponent extends CoreBaseComponent {
   ) {
     super(pageScrollService, breakpointObserver, document);
   }
+
+  onDateChanged($event) {
+    console.log(this.dayte, $event);
+  }
 }

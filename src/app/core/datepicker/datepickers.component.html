@@ -25,6 +25,7 @@
               #d="ngModel"
               [(ngModel)]="dayte"
               [allowPreviousDates]="false"
+              (onDateChange)="onDateChanged($event)"
             ></hxa-datepicker-input>
             <div>
               <span>Emitted Date object: {{dayte}}</span><br>
