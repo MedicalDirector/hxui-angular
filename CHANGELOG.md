@@ -1,3 +1,10 @@
+## [7.0.42](https://www.npmjs.com/package/@hxui/angular/v/7.0.41) (2019-06-06)
+
+### Bugfix
+
+* **Tabular:** Fixed issue which caused change detection to not run  ([0f19207c34429d19a72255c6af1e3d73439c982a](https://bitbucket.org/md-design/angular-hxui/commits/0f19207c34429d19a72255c6af1e3d73439c982a))
+
+
 ## [7.0.41](https://www.npmjs.com/package/@hxui/angular/v/7.0.41) (2019-06-06)
 
 ### Bugfix
