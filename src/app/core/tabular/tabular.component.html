@@ -37,6 +37,8 @@
             <button class="hx-button" (click)="setCheckAllState(false)">Uncheck All</button>
             <div class="hx-divider"></div>
             <div><span class="is-info is-text-weight-bolder">{{totalSelected}}</span> of <span class="is-info is-text-weight-bolder">{{rowData.length}}</span><span class="is-text-weight-light"> items selected</span></div>
+            <div class="hx-spacer"></div>
+            <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters"></hxa-filters>
         </div>
         <hxa-tabular
           [rows]="rowData"

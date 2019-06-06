@@ -132,16 +132,15 @@ export class TabularComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     if (!_.isEqual(this.rows, this.oldRows)) {
-      this.oldRows = _.cloneDeep(this.rows);
 
-      // on sorting or checkbox toggling we don't need change detection to run and call sorting again
-      if (!this._isMutatingInternally ) {
-        this.orderByData(false);
+      this.orderByData(false);
+
+      if (this.columns.filter(c => c.dataType === TabularColumnTypes.Checkbox).length > 0) {
+        this.checkSelectAllState(false);
       }
 
-      this._isMutatingInternally = false;
-
-      this.checkSelectAllState();
+      // this must run last so equality checking checks after the row data mutates
+      this.oldRows = _.cloneDeep(this.rows);
     }
   }
 
@@ -172,11 +171,11 @@ export class TabularComponent implements OnInit, DoCheck {
 
 
   toggleIndividualSelect = ($event: ITabularRow) => {
-    this.checkSelectAllState();
+    this.checkSelectAllState(false);
     this.onCheck.emit($event);
   }
 
-  private checkSelectAllState() {
+  private checkSelectAllState(emitEvent: boolean = true) {
     let count = 0;
     for (let i = 0; i < this.rows.length; i++) {
       if (this.rows[i].checked) {
@@ -187,7 +186,7 @@ export class TabularComponent implements OnInit, DoCheck {
     const oldSelectAll = this.selectAll;
     this._isMutatingInternally = true;
     this.selectAll =  (this.rows.length === count);
-    if (oldSelectAll !== this.selectAll) {
+    if (oldSelectAll !== this.selectAll && emitEvent) {
       this.onCheckAll.emit(this.selectAll)
     }
   }
@@ -274,6 +273,7 @@ export class TabularComponent implements OnInit, DoCheck {
   }
 
   private orderByData(emitSortEvent: boolean) {
+
     if (this.config.sortBy.length > 0) {
       if (!this.config.remoteSorting) {
         this._isMutatingInternally = true;
