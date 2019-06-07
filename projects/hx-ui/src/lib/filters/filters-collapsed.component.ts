@@ -24,14 +24,12 @@ type PaneType = 'left' | 'right';
 export class FiltersCollapsedComponent implements OnInit {
 
   @ViewChild('dropdown') dropdown: DropdownDirective;
-  @ViewChild ('daterange') dateRangePickerComp: DateRangePickerComponent;
 
   FilterType = FilterType;
   activePane = 'left';
   selectedFilter: FiltersModel;
 
   @Input() data: FiltersModel[] = [];
-
 
   @Output() onFilter = new EventEmitter();
   @Output() onSearchFilter = new EventEmitter();
@@ -93,12 +91,6 @@ export class FiltersCollapsedComponent implements OnInit {
 
   onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRange){
     this.onDateRangePickerFilter.emit({filter: filter,dateRange: dateRange});
-  }
-
-  setDefaultDate(){
-    console.log("Set default from collapsed");
-    console.log(this.dateRangePickerComp);
-    this.dateRangePickerComp.resetDateRange();
   }
 
   /**

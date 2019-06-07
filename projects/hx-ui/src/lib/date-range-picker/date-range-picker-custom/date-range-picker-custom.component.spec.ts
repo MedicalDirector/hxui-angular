@@ -49,7 +49,7 @@ import {
   By
 } from '@angular/platform-browser';
 
-describe('DateRangePickerCustomComponent', () => {
+fdescribe('DateRangePickerCustomComponent', () => {
   let component: DateRangePickerCustomComponent;
   let fixture: ComponentFixture < DateRangePickerCustomComponent > ;
 

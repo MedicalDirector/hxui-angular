@@ -55,6 +55,7 @@ export class DateRangePickerComponent implements OnInit {
   @Input() placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
   @Input() displayMode: DisplayMode = DisplayMode.showTab;
   @Input() dateFormat: string = 'dd/MM/yyyy';
+  @Input() defaultDateRange: DateRange = {fromDate:new Date(), toDate:new Date()};
 
   @Output() onDateRangeSelected = new EventEmitter < DateRange > ();
 
@@ -63,8 +64,8 @@ export class DateRangePickerComponent implements OnInit {
   // import to DateSElectionType into the instance of this class
   DateSelectionType = DateSelectionType;
   currentTab: DateSelectionType = DateSelectionType.interval
-  fromDate: Date = new Date();
-  toDate: Date = new Date();
+  fromDate: Date;
+  toDate: Date;
   _displayRange: string;
 
   showIntervalOnly: boolean;
@@ -76,11 +77,19 @@ export class DateRangePickerComponent implements OnInit {
   intervalList: IntervalItem[];
 
   ngOnInit() {
-    this._displayRange = this.datePipe.transform(new Date(), this.dateFormat);
+    this.setInitialDateRange();
     this.showTab = this.displayMode === DisplayMode.showTab ? true : false;
     this.showIntervalOnly = this.displayMode === DisplayMode.showIntervalOnly ? true : false;
     this.showCustomOnly = this.displayMode === DisplayMode.showCustomOnly ? true : false;
     this.generateIntervalOptionItems(this.intervalOptions || []);
+  }
+
+  setInitialDateRange(){
+    this.defaultDateRange = this.defaultDateRange || {fromDate:new Date(), toDate:new Date()};
+    this.dateFormat = this.dateFormat || 'dd/MM/yyyy';
+    this.fromDate = this.defaultDateRange.fromDate;
+    this.toDate =  this.defaultDateRange.toDate;
+    this._displayRange = this.createDateRange();
   }
 
   resetDateRange() {

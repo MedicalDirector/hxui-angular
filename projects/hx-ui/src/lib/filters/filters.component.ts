@@ -20,7 +20,6 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
 
   @ViewChild('carousel') private carousel: ElementRef;
   @ViewChild ('dateRangePicker') dateRangePickerComponent: DateRangePickerComponent;
-  @ViewChild ('filterCollapse') filtersCollapsedComponent: FiltersCollapsedComponent;
 
   FilterType = FilterType;
   data: FiltersModel[] = [];
@@ -112,15 +111,11 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
 
   setDefaultDate(filter: FiltersModel){
     filter.value = '';
-    //filter.value = this.datePipe.transform(new Date(),filter.dateRangePicker_displayDateFormat);
-    if(this._collapsed){
-      console.log("collapsed");
-      console.log(this.filtersCollapsedComponent);
-      this.filtersCollapsedComponent.setDefaultDate();
-    }
-    else {
-    this.dateRangePickerComponent.resetDateRange();
-    }
+    filter.sourceValue = undefined;
+    if(!this._collapsed)
+     {
+        this.dateRangePickerComponent.resetDateRange();
+     }
     this.onFilterOptionChanged$.next(filter);
   }
 
@@ -147,9 +142,9 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRange){
     let dateRangeValue = this.datePipe.transform(dateRange.fromDate,filter.dateRangePicker_displayDateFormat) + ' - '+ this.datePipe.transform(dateRange.toDate,filter.dateRangePicker_displayDateFormat);
     filter.value = dateRangeValue;
+    filter.sourceValue = dateRange;
     this.searchFilter$.next(filter);
   }
-
 
   onCollapsedFilter($event) {
    this.onFilterOptionSelected($event.filter,  $event.option);

@@ -1,5 +1,6 @@
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {FilterType} from './filters-type.enum';
+import { DateRange } from '../date-range-picker/date-range-picker.component';
 
 export class FiltersModel implements IFiltersConfig {
 
@@ -8,6 +9,8 @@ export class FiltersModel implements IFiltersConfig {
   label: string;
   options?: IFilterOption[];
   value?: string;
+  //value comes from source component without type parse
+  sourceValue?: any;
   callback: any;
   selected: IFilterOption;
   defaultIndex = 0;

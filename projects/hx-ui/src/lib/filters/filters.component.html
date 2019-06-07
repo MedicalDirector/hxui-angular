@@ -7,11 +7,11 @@
   (onFilter)="onCollapsedFilter($event)" 
   (onSearchFilter)="onCollapsedSearch($event)"
   (onDateRangePickerFilter)="onCollapsedDateRangePicker($event)"
-  [data]="data" *ngIf="collapsed" #filterCollapse></hxa-filters-collapsed>
+  [data]="data" *ngIf="collapsed"></hxa-filters-collapsed>
 
   <!-- expanded filters -->
   <ng-container *ngIf="!collapsed">
-    <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last;">
+  <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last;">
 
     <!-- single select filter -->
     <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.SingleSelect">
@@ -39,7 +39,6 @@
         <div class="hx-help"></div>
       </div>
       <div class="hx-input-actions" *ngIf="filter.value">
-        <!--<div id="searchLoadingIndicator" class="hx-loader is-small" *ngIf="patientSearchService.showPatientSearchLoader"><div></div><div></div><div></div><div></div></div>-->
         <div class="hx-button-group">
           <button class="hx-button is-flat" (click)="clearSearch(filter)"><span class="hx-icon-control"><i class="icon icon-close-empty"></i></span></button>
         </div>
@@ -48,8 +47,13 @@
 
     <!-- date range picker -->
     <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.DateRange">
-        <hxa-date-range-picker  [dateFormat]="filter.dateRangePicker_displayDateFormat" [displayMode]="filter.dateRangePicker_displayMode" [intervalOptions]="getIntervalOptions(filter.options)"
-        (onDateRangeSelected)="onDateRangeFilterChange(filter,$event)" #dateRangePicker>
+        <hxa-date-range-picker  
+        [dateFormat]="filter.dateRangePicker_displayDateFormat" 
+        [displayMode]="filter.dateRangePicker_displayMode" 
+        [intervalOptions]="getIntervalOptions(filter.options)"
+        (onDateRangeSelected)="onDateRangeFilterChange(filter,$event)"  
+        [defaultDateRange]="filter.sourceValue" 
+        #dateRangePicker>
       </hxa-date-range-picker>
     </div>
   </ng-container>

@@ -241,7 +241,6 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
   ];
   displayFilterResult: string;
   onFilterChangeEvent$ = new Subscription();
-  filterLists: FiltersModel[];
 
   constructor(
     protected pageScrollService: PageScrollService,
@@ -254,12 +253,8 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
   ngOnInit() {
     this.onFilterChangeEvent$ = this.filtersComponent.onFilterOptionChanged$
       .subscribe((filter: FiltersModel) => {
-        this.filterLists = this.filtersComponent.data;
-        this.displayFilterResult = `filter name: ${filter.label}
-        filter value: ${filter.value}
-        filter selected value: ${filter.selected?filter.selected.label:'empty' }`;
+        console.log(filter);
     });
-    
   }
 
   ngOnDestroy() {

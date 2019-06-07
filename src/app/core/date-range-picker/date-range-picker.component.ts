@@ -15,7 +15,9 @@ export class DateRangePickerComponent extends CoreBaseComponent {
 
   public code = new DateRangePickersCode();
   public selectedDateRange: DateRange = {fromDate:new Date(),toDate:new Date()};
-  
+
+  defaultDateRange = {fromDate:new Date('01/06/2018'), toDate: new Date('02/06/2018')};
+
   intervalOptions: string[] = [
     'Today',
     'Yesterday',

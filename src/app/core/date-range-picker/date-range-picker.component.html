@@ -50,8 +50,10 @@
 
     <div class="hx-columns">
       <div class="hx-column">
-        <hxa-date-range-picker [displayMode]=3 [intervalOptions]="intervalOptions"
-          (onDateRangeSelected)="getSelectedDateRange($event)">
+        <hxa-date-range-picker [displayMode]=3 
+        [intervalOptions]="intervalOptions"
+        (onDateRangeSelected)="getSelectedDateRange($event)" 
+        [defaultDateRange]="defaultDateRange">
         </hxa-date-range-picker>
         <div>
           <br><span>Emitted Date Range object:</span>
@@ -168,6 +170,11 @@
               <td>intervalOptions</td>
               <td><kbd>string[]</kbd></td>
               <td>This attribute specifies interval options displayed under interval selection tab. Please see available options as below.</td>
+            </tr>
+            <tr>
+              <td>defaultDateRange</td>
+              <td><kbd>DateRange</kbd></td>
+              <td>Default date range initially displayed in date range picker. Default to today's date.</td>
             </tr>
           </tbody>
         </table>

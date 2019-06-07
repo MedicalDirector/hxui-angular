@@ -33,6 +33,10 @@ export interface IFiltersConfig {
    * Filter value for Search filter type
    */
   value?: string;
+ /**
+   * The original value from corresponding source component
+   */
+  sourceValue?: any;
 
   /**
    * Filter character limit for Search filter type

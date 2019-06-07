@@ -23,26 +23,7 @@
           <div class="hx-spacer"></div>
          <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters"></hxa-filters>
       </div>
-
-
-
     <br>
-    <h5 id="code">Output</h5>
-    <div>
-      onFilterChangeEvent: 
-    </div>
-    <div>
-      {{displayFilterResult}}
-    </div>
-    <div>
-      <br><span>Filter Array:</span>
-      <ul>
-        <li *ngFor="let filter of filterLists">filter Name: {{filter.label}} filter Value:{{displayFilterValue(filter)}} </li>
-      </ul>
-    </div>
-    <br>
-    <h5 id="code">Code</h5> 
-
     <hx-tabset>
       <hx-tab heading="Template">
             <pre>
@@ -132,7 +113,7 @@
           <tr>
             <td>type</td>
             <td><kbd>FilterType</kbd></td>
-            <td>Filter type, can be SingleSelect, MultiSelect or Search</td>
+            <td>Filter type, can be SingleSelect, MultiSelect, Search or DateRangePicker</td>
           </tr>
           <tr>
             <td>label</td>
@@ -147,13 +128,27 @@
           <tr>
             <td>value</td>
             <td><kbd>string</kbd></td>
-            <td><span class="hx-badge is-info"><span class="hx-badge-content">OPTIONAL</span></span> Filter value for Search filter type</td>
+            <td><span class="hx-badge is-info"><span class="hx-badge-content">OPTIONAL</span></span> Filter value for Search filter type and DateRangePicker type</td>
           </tr>
-
+          <tr>
+            <td>sourceValue</td>
+            <td><kbd>any</kbd></td>
+            <td><span class="hx-badge is-info"><span class="hx-badge-content">OPTIONAL</span></span> Original value derivied from source component. e.g string for search type, DateRange for DateRangePicker type</td>
+          </tr>
           <tr>
             <td>defaultIndex</td>
             <td><kbd>number</kbd></td>
             <td>Index of default filter option. The option to set when filters are cleared.</td>
+          </tr>
+          <tr>
+            <td>dateRangePicker_displayMode</td>
+            <td><kbd>any</kbd></td>
+            <td><span class="hx-badge is-info"><span class="hx-badge-content">OPTIONAL</span></span> Original value derivied from source component. e.g string for search type, DateRange for DateRangePicker type</td>
+          </tr>
+          <tr>
+            <td>dateRangePicker_displayDateFormat</td>
+            <td><kbd>any</kbd></td>
+            <td><span class="hx-badge is-info"><span class="hx-badge-content">OPTIONAL</span></span> Original value derivied from source component. e.g string for search type, DateRange for DateRangePicker type</td>
           </tr>
           </tbody>
         </table>

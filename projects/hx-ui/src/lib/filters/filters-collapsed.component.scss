@@ -1,6 +1,6 @@
 .collapsedFilter__menu{
   &.panes{
-    width:15rem;
+    width:18rem;
     overflow:hidden;
 
     .panes__inner{
@@ -11,8 +11,8 @@
     }
 
     .panes__item{
-      min-width:15rem;
-      max-width:15rem;
+      min-width:18rem;
+      max-width:18rem;
 
       > ul {
         max-height: 20rem;

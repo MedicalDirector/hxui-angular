@@ -46,6 +46,7 @@ export class DateRangePickersCode {
       <hxa-date-range-picker 
       [displayMode]=3 
       [intervalOptions]="intervalOptions" 
+      [defaultDateRange]="defaultDateRange"
       (onDateRangeSelected)="getSelectedDateRange($event)">
       </hxa-date-range-picker>
       `;
@@ -79,6 +80,8 @@ export class DateRangePickersCode {
       
         constructor() { }    
       }
+
+      defaultDateRange = {fromDate:new Date('01/06/2018'), toDate: new Date('02/06/2018')};
 
       getSelectedDateRange(dateRange: DateRange){
         this.selectedDateRange = dateRange;
