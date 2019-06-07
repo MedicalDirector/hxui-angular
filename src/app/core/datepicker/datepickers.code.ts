@@ -12,7 +12,7 @@ export class DatepickersCode {
 
   exampleTemplate =
     `
-    <hxa-datepicker-input align="bottom" [(ngModel)]="date"></hxa-datepicker-input>
+    <hxa-datepicker-input align="bottom" [allowPreviousDates]="false" [(ngModel)]="date"></hxa-datepicker-input>
     `;
 
   exampleTypescript =

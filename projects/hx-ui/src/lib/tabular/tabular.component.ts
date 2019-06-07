@@ -115,7 +115,7 @@ export class TabularComponent implements OnInit, DoCheck {
   protected _callback: Function;
   protected _config: ITabularConfig;
   protected _searchTerm: string;
-  private _isSorting = false;
+  private _isMutatingInternally = false;
   private _initialLoad = true;
 
 
@@ -132,14 +132,15 @@ export class TabularComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     if (!_.isEqual(this.rows, this.oldRows)) {
-      this.oldRows = _.cloneDeep(this.rows);
 
-      // on sorting we dont need change detection to run and call sorting again
-      if (!this._isSorting ) {
-        this.orderByData(false);
+      this.orderByData(false);
+
+      if (this.columns.filter(c => c.dataType === TabularColumnTypes.Checkbox).length > 0) {
+        this.checkSelectAllState(false);
       }
 
-      this._isSorting = false;
+      // this must run last so equality checking checks after the row data mutates
+      this.oldRows = _.cloneDeep(this.rows);
     }
   }
 
@@ -161,14 +162,20 @@ export class TabularComponent implements OnInit, DoCheck {
   }
 
   toggleSelectAll = ($event) => {
-    for (let i = 0; i < this.rows.length; i++) {
-      this.rows[i].checked = this.selectAll;
-    }
-    this.onCheckAll.emit(this.selectAll);
+      for (let i = 0; i < this.rows.length; i++) {
+        this._isMutatingInternally = true;
+        this.rows[i].checked = this.selectAll;
+      }
+      this.onCheckAll.emit(this.selectAll);
   }
 
 
   toggleIndividualSelect = ($event: ITabularRow) => {
+    this.checkSelectAllState(false);
+    this.onCheck.emit($event);
+  }
+
+  private checkSelectAllState(emitEvent: boolean = true) {
     let count = 0;
     for (let i = 0; i < this.rows.length; i++) {
       if (this.rows[i].checked) {
@@ -177,14 +184,9 @@ export class TabularComponent implements OnInit, DoCheck {
     }
 
     const oldSelectAll = this.selectAll;
-    if (this.rows.length === count) {
-      this.selectAll = true;
-    } else {
-      this.selectAll = false;
-    }
-    this.onCheck.emit($event);
-
-    if (oldSelectAll !== this.selectAll) {
+    this._isMutatingInternally = true;
+    this.selectAll =  (this.rows.length === count);
+    if (oldSelectAll !== this.selectAll && emitEvent) {
       this.onCheckAll.emit(this.selectAll)
     }
   }
@@ -271,9 +273,10 @@ export class TabularComponent implements OnInit, DoCheck {
   }
 
   private orderByData(emitSortEvent: boolean) {
+
     if (this.config.sortBy.length > 0) {
       if (!this.config.remoteSorting) {
-        this._isSorting = true;
+        this._isMutatingInternally = true;
         this.rows = [...this.rows]; // Required as array-sort-by mutates the original array
         this.sortByService.sortBy(this.rows, this.config.sortBy);
       }
@@ -344,8 +347,9 @@ export class TabularComponent implements OnInit, DoCheck {
     return (action.children && action.children.length > 0);
   }
 
-  trackByFn(index, action) {
-    return index; // or action.id
+  trackByFn(index, item) {
+    return (item.id) ? item.id : index;
   }
+
 
 }

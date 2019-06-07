@@ -85,6 +85,12 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   @Input()
   minWidthRelativeTo: string;
 
+  @Input()
+  offsetY = 0;
+
+  @Input()
+  offsetX = 0;
+
   constructor(
     private _elementRef: ElementRef,
     private _viewContainerRef: ViewContainerRef,
@@ -152,7 +158,8 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
       .position()
       .flexibleConnectedTo(this._elementRef)
       .withFlexibleDimensions(false)
-      .withDefaultOffsetX(0)
+      .withDefaultOffsetX(this.offsetX)
+      .withDefaultOffsetY(this.offsetY)
       .withPositions([
         { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' }
       ])
@@ -214,7 +221,6 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
       overlayRef.updateSize({ maxWidth: elem.clientWidth });
     } else if (this.minWidthRelativeTo) {
       const elem: Element = document.getElementById(this.minWidthRelativeTo);
-      console.log(this.menu.templateRef);
       overlayRef.updateSize({ minWidth: elem.clientWidth });
     }
   }

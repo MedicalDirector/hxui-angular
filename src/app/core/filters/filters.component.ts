@@ -236,7 +236,8 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
     {
       id: 'searchFilter',
       type: FilterType.Search,
-      label: 'Filter by name'
+      label: 'Filter by name',
+      width: this.getSearchWidth('Filter by name')
     }
   ];
   displayFilterResult: string;
@@ -255,6 +256,8 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
       .subscribe((filter: FiltersModel) => {
         console.log(filter);
     });
+
+    this.filters.forEach(f => console.log(f.width));
   }
 
   ngOnDestroy() {
@@ -269,6 +272,7 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
     this.collapsed = !this.collapsed;
   }
 
+
   displayFilterValue(filter: FiltersModel) {
     if(filter.type === FilterType.SingleSelect) {
       return filter.selected?filter.selected.label: 'empty';
@@ -278,4 +282,23 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
     }
   }
 
+  // dynamically calculate an appropriate width (rem)
+  getSearchWidth(label: string) {
+    const min = 8;
+    const max = 12;
+
+    // based on root html font size
+    const charwidth = .42;
+
+    // base search filter
+    const filter = 3.9;
+
+    const calc = label.length * charwidth + filter;
+
+    if(min <= calc && calc <= max) {
+      return calc;
+    }
+
+    return min > calc ? min : max;
+  }
 }

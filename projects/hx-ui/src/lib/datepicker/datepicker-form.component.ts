@@ -106,7 +106,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   @Output()
   onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
-  public date: Date;
+  public date: Date = null;
   public visible = false;
   public presentDate: Date;
   public isValid: boolean;
@@ -178,8 +178,8 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
 
   public setDate(date: Date): void {
     this.date = date;
-    this.onDateChange.emit(date);
     this.propogateChange(date);
+    this.onDateChange.emit(date);
   }
 
   public onDateSelectEvent = (inputDate: Date): void => {
@@ -231,13 +231,13 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   public validateIsNotBeforeDate(date: Date): boolean {
     const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-    return normalisedDate.getTime() <= this.presentDate.getTime();
+    return normalisedDate.getTime() < this.presentDate.getTime();
   }
 
   public validateIsNotAfterDate(date: Date): boolean {
     const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-    return normalisedDate.getTime() >= this.presentDate.getTime();
+    return normalisedDate.getTime() > this.presentDate.getTime();
   }
 
   public createDateRangeValidator(from: Date, to: Date): (date: Date) => boolean {
@@ -252,7 +252,10 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   }
 
   public writeValue(value: Date): void {
-    if (value !== this.date) {
+    if (value !== this.date && value !== undefined) {
+      if (value && this.date && value.valueOf() === this.date.valueOf()) {
+        return;
+      }
       this.setDate(value);
     }
   }

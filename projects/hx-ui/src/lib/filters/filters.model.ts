@@ -17,6 +17,7 @@ export class FiltersModel implements IFiltersConfig {
   charLimit = 2;
   dateRangePicker_displayMode?:number = 1;
   dateRangePicker_displayDateFormat?: string = 'dd/MM/yyyy';
+  width: number;
 
   constructor(data?: IFiltersConfig) {
     Object.assign(this, data);

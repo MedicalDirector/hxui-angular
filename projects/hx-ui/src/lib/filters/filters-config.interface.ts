@@ -50,7 +50,6 @@ export interface IFiltersConfig {
    * The option to set when filters are cleared.
    */
   defaultIndex?: number;
-
   /**
    * Display mode for type date range picker
    * 1:both tabs 2:custom tab only 3:interval tab only.
@@ -61,5 +60,12 @@ export interface IFiltersConfig {
    * Display date format for type date range picker
    */
   dateRangePicker_displayDateFormat?: string;
+
+    /**
+   * Width in REM for Search filter type.
+   * Defaults if not set
+   */
+  width?: number;
+
 
 }

@@ -23,11 +23,8 @@ export class FiltersCode {
   exampleTypescript =
     `
   import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-  import {IFiltersConfig} from '@hxui-angular/filters/filters-config.interface';
-  import {FilterType} from '@hxui-angular/filters/filters-type.enum';
-  import {FiltersComponent as HxFiltersComponent } from '@hxui-angular/filters/filters.component';
   import {Subscription} from 'rxjs/index';
-  import {FiltersModel} from '@hxui-angular/filters/filters.model';
+  import {IFiltersConfig, FilterType, FiltersComponent as HxFiltersComponent, FiltersModel } from '@hxui/angular';
   
   @Component({
     selector: 'app-filters',
@@ -252,7 +249,8 @@ export class FiltersCode {
         id: 'searchFilter',
         type: FilterType.Search,
         label: 'Filter by name',
-        callback: [this.onSearchFilterHandler]
+        callback: [this.onSearchFilterHandler],
+        width: this.getSearchWidth('Filter by name')
       }
     ];
     onFilterChangeEvent$ = new Subscription();
@@ -277,7 +275,26 @@ export class FiltersCode {
     toggleCollapsed() {
       this.collapsed = !this.collapsed;
     }
+
+    // dynamically calculate an appropriate width (rem)
+    getSearchWidth(label: string) {
+      const min = 8;
+      const max = 12;
   
+      // based on root html font size
+      const charwidth = .42;
+  
+      // base search filter
+      const filter = 3.9;
+  
+      const calc = label.length * charwidth + filter;
+  
+      if(min <= calc && calc <= max) {
+        return calc;
+      }
+  
+      return min > calc ? min : max;
+    }
   }
 
 
