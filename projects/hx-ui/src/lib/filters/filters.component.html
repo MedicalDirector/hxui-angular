@@ -11,8 +11,7 @@
 
   <!-- expanded filters -->
   <ng-container *ngIf="!collapsed">
-  <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last;">
-
+  <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last; index as i">
       <!-- single select filter -->
       <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.SingleSelect">
         <a [id]="filter?.id + '-trigger'" class="hx-button hx-button-dropdown expandedFilter__button" hxaDropdownToggle>
@@ -54,6 +53,7 @@
         [intervalOptions]="getIntervalOptions(filter.options)"
         (onDateRangeSelected)="onDateRangeFilterChange(filter,$event)"  
         [defaultDateRange]="filter.sourceValue" 
+        [id]="i"
         #dateRangePicker>
       </hxa-date-range-picker>
     </div>

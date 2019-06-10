@@ -1,4 +1,4 @@
-import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewChildren, QueryList, AfterViewInit} from '@angular/core';
+import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewChildren, QueryList, AfterViewInit, ContentChildren, AfterContentInit, AfterContentChecked} from '@angular/core';
 import {FilterType} from './filters-type.enum';
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {FiltersModel} from './filters.model';
@@ -19,7 +19,7 @@ import { FiltersCollapsedComponent } from './filters-collapsed.component';
 export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
 
   @ViewChild('carousel') private carousel: ElementRef;
-  @ViewChild ('dateRangePicker') dateRangePickerComponent: DateRangePickerComponent;
+  @ViewChildren("dateRangePicker") dateRangePickers: QueryList<any>
 
   FilterType = FilterType;
   data: FiltersModel[] = [];
@@ -113,8 +113,10 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     filter.value = '';
     filter.sourceValue = undefined;
     if(!this._collapsed)
-     {
-        this.dateRangePickerComponent.resetDateRange();
+     {      
+        for(let i = 0 ; i < this.dateRangePickers.toArray().length; i++){
+          this.dateRangePickers.toArray()[i].resetDateRange();
+        }
      }
     this.onFilterOptionChanged$.next(filter);
   }

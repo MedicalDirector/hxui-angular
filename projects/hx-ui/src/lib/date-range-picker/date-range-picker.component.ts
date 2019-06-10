@@ -21,6 +21,7 @@ import {
 import {
   fullIntervalList
 } from './interval-option-model';
+import { identifierModuleUrl } from '@angular/compiler';
 
 export enum DisplayMode {
   showTab = 1,
@@ -56,6 +57,8 @@ export class DateRangePickerComponent implements OnInit {
   @Input() displayMode: DisplayMode = DisplayMode.showTab;
   @Input() dateFormat: string = 'dd/MM/yyyy';
   @Input() defaultDateRange: DateRange = {fromDate:new Date(), toDate:new Date()};
+  @Input() id: number;
+  @Input() showCaretDown: boolean = true;
 
   @Output() onDateRangeSelected = new EventEmitter < DateRange > ();
 
@@ -106,6 +109,10 @@ export class DateRangePickerComponent implements OnInit {
     if (closeDropdown) {
       this.dropdown.hide();
     }
+  }
+
+  toggle(){
+    this.dropdown.toggle(); 
   }
 
   onCustomDateSelection(newCustomDate: Date[]) {

@@ -1,4 +1,4 @@
-import {Component, Input, Output, OnInit, ViewChild, EventEmitter} from '@angular/core';
+import {Component, Input, Output, OnInit, ViewChild, EventEmitter, ContentChildren, QueryList, ViewChildren} from '@angular/core';
 import {FilterType} from './filters-type.enum';
 import {FiltersModel} from './filters.model';
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
@@ -24,6 +24,7 @@ type PaneType = 'left' | 'right';
 export class FiltersCollapsedComponent implements OnInit {
 
   @ViewChild('dropdown') dropdown: DropdownDirective;
+  @ViewChildren("dateRangePicker") dateRangePickers: QueryList<any>
 
   FilterType = FilterType;
   activePane = 'left';
@@ -98,5 +99,17 @@ export class FiltersCollapsedComponent implements OnInit {
    */
   trackByFn(index, action) {
     return index;
+  }
+
+  toggleDateRangePicker(id:number, e: any) {
+    if(e.target.type === 'button' && e.target.innerText.indexOf('Date') > -1){
+      return;
+    }
+    for(let i = 0 ; i < this.dateRangePickers.toArray().length ; i ++){
+      if(this.dateRangePickers.toArray()[i].id === id){
+        this.dateRangePickers.toArray()[i].toggle();
+        e.stopPropagation();
+      }
+    }
   }
 }
