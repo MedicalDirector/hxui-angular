@@ -1,6 +1,15 @@
 .internal-custom-tab {
     padding: 1rem;
 }
+
 .dropdown-menu-wider {
-    width:320px;
+    width: 320px;
+}
+
+::ng-deep .hxa-tabs {
+    hx-tabset {
+        .hx-tab-content {
+            padding: 0;
+        }
+    }
 }
