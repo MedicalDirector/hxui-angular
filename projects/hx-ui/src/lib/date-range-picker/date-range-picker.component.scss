@@ -1,5 +1,5 @@
 .internal-custom-tab {
-    padding: 1rem;
+    padding: 0;
 }
 
 .dropdown-menu-wider {
@@ -10,6 +10,9 @@
     hx-tabset {
         .hx-tab-content {
             padding: 0;
+        }
+        ul:not(:last-child) {
+            margin-bottom: 0;
         }
     }
 }
