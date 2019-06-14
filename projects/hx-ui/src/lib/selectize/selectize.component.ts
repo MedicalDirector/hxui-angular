@@ -37,7 +37,7 @@ export const SELECTIZE_VALUE_ACCESSOR: any = {
 
 @Component({
   selector: 'hxa-selectize',
-  template: `<div class="hx-input-control" [class.is-focused]="isFocused" [class.is-valid]="isValid">
+  template: `<div class="hx-input-control" [ngClass]="config.inputControlClasses" [class.is-focused]="isFocused" [class.is-valid]="isValid">
                   <select #selectizeInput></select>
                   <label for="{{id}}" class="hx-label">{{config.label}} <sup *ngIf="config.mandatory">*</sup></label>
                   <div class="hx-help">{{config.help}}</div>
@@ -100,13 +100,16 @@ export class SelectizeComponent
     this.selectize.on('item_add', this.onSelectizeItemSelected.bind(this));
     this.updatePlaceholder();
     this.onEnabledStatusChange();
+    this.hasCaret();
   }
 
   ngOnDestroy() {
-    this.selectize.off('change');
-    this.selectize.off('blur');
-    this.selectize.off('focus');
-    this.selectize.off('type');
+    if (this.selectize) {
+      this.selectize.off('change');
+      this.selectize.off('blur');
+      this.selectize.off('focus');
+      this.selectize.off('type');
+    }
   }
 
   /**
@@ -148,22 +151,22 @@ export class SelectizeComponent
   }
 
   private _applyOptionsChanges(changes: IterableChanges<any>): void {
-    changes.forEachAddedItem((record: IterableChangeRecord<any>) => {
-      this.onSelectizeOptionAdd(record.item);
-    });
     changes.forEachRemovedItem((record: IterableChangeRecord<any>) => {
       this.onSelectizeOptionRemove(record.item);
+    });
+    changes.forEachAddedItem((record: IterableChangeRecord<any>) => {
+      this.onSelectizeOptionAdd(record.item);
     });
     this.updatePlaceholder();
     this.evalHasError();
   }
 
   private _applyOptionGroupChanges(changes: any): void {
-    changes.forEachAddedItem((record: IterableChangeRecord<any>) => {
-      this.onSelectizeOptGroupAdd(record.item);
-    });
     changes.forEachRemovedItem((record: IterableChangeRecord<any>) => {
       this.onSelectizeOptGroupRemove(record.item);
+    });
+    changes.forEachAddedItem((record: IterableChangeRecord<any>) => {
+      this.onSelectizeOptGroupAdd(record.item);
     });
     this.updatePlaceholder();
     this.evalHasError();
@@ -262,6 +265,14 @@ export class SelectizeComponent
    */
   onEnabledStatusChange(): void {
     this.enabled ? this.selectize.enable() : this.selectize.disable();
+  }
+
+
+  hasCaret() {
+    if (this.config.hasCaret) {
+      const parent = $(this.selectize.$control).parent();
+      parent.addClass('hasCaret');
+    }
   }
 
   /**

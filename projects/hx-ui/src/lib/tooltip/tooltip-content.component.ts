@@ -2,23 +2,25 @@ import {
   Component,
   Input,
   ViewEncapsulation,
-  ChangeDetectorRef
+  ChangeDetectorRef, TemplateRef
 } from '@angular/core';
 import {Context, Visibility} from '../enums';
 import {Observable, Subject} from 'rxjs';
+import {TooltipDynamicContentDirective} from './tooltip-dynamic-content.directive';
 
 @Component({
   selector: 'hx-tooltip-content, hxa-tooltip-content',
-  template: `   
-      <div class="hxui-reset"> 
+  template: `
+      <div class="hxui-reset">
         <div class="hx-tooltip is-{{ placement }}"
             [class.is-active]='visibility === visibilityEnum.Visible'
             [class.is-success]="context === contextEnum.Success"
             [class.is-warning]="context === contextEnum.Warning"
             [class.is-danger]="context === contextEnum.Danger"
             role="tooltip">
-            <div class="hx-tooltip-content">
-              {{ content }}
+            <div *ngIf="!dynamicContent" class="hx-tooltip-content" [innerHtml]="content" [style.max-width.px]="maxWidth"></div>
+            <div *ngIf="dynamicContent" class="hx-tooltip-content" [style.max-width.px]="maxWidth">
+              <ng-container [ngTemplateOutlet]="dynamicContent"></ng-container>
             </div>
         </div>
       </div>
@@ -41,6 +43,12 @@ export class TooltipContentComponent {
 
   @Input()
   context: Context = Context.None;
+
+  @Input()
+  maxWidth = 200;
+
+  @Input()
+  dynamicContent: TemplateRef<TooltipDynamicContentDirective>;
 
   /** Enums to be used in the template **/
   contextEnum = Context;

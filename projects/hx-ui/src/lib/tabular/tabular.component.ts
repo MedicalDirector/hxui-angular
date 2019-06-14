@@ -1,15 +1,15 @@
 import {
   Component, Input, Output, EventEmitter, OnInit, DoCheck, OnChanges, SimpleChanges
 } from '@angular/core';
-import {TabularColumn} from './tabular';
-import {ITabularConfig} from './tabular-config.interface';
-import {ActionConfigRouteType, IActionsConfig} from './actions-config.interface';
-import {TabularSortByService, SortByDirection, ISortByProperty} from './tabular-sort-by.service';
-import {TabularConfig} from './tabular.config';
-import {TabularSize} from './tabular-size.enum';
-import {ITabularColumnBadgeType, ITabularColumnIconType, TabularColumnTypes} from './tabular-column.interface';
-import {ITabularRow} from './tabular-row.interface';
-import {Context} from '../enums';
+import { TabularColumn } from './tabular';
+import { ITabularConfig } from './tabular-config.interface';
+import { ActionConfigRouteType, IActionsConfig } from './actions-config.interface';
+import { TabularSortByService, SortByDirection, ISortByProperty } from './tabular-sort-by.service';
+import { TabularConfig } from './tabular.config';
+import { TabularSize } from './tabular-size.enum';
+import { ITabularColumnBadgeType, ITabularColumnIconType, TabularColumnTypes } from './tabular-column.interface';
+import { ITabularRow } from './tabular-row.interface';
+import { Context } from '../enums';
 import * as _ from 'lodash';
 
 @Component({
@@ -38,17 +38,17 @@ export class TabularComponent implements OnInit, DoCheck {
    * Collection of data rows
    */
   // todo - this is not strict. should it be when it's dynamic?.
-   @Input() rows: ITabularRow[];
+  @Input() rows: ITabularRow[];
 
   /**
    * Tabular configuration
    * IPaginationInstance, ISearchConfig
    */
   @Input()
-  public get config(): ITabularConfig  {
+  public get config(): ITabularConfig {
     return this._config;
   }
-  public set config(c: ITabularConfig)  {
+  public set config(c: ITabularConfig) {
     if (!c.sortBy) {
       c.sortBy = [];
     }
@@ -57,10 +57,10 @@ export class TabularComponent implements OnInit, DoCheck {
 
   /** The function to call when a action item is clicked **/
   @Input()
-  public get callback(): Function{
+  public get callback(): Function {
     return this._callback;
   }
-  public set callback(Fn: Function){
+  public set callback(Fn: Function) {
     this._callback = Fn;
   }
 
@@ -70,10 +70,10 @@ export class TabularComponent implements OnInit, DoCheck {
    * Array of objects: *ngFor="#row of rows | simpleSearch : 'the search term'"
    */
   @Input()
-  public get searchTerm(): string{
+  public get searchTerm(): string {
     return this._searchTerm;
   }
-  public set searchTerm(term: string){
+  public set searchTerm(term: string) {
     this._searchTerm = term;
   }
 
@@ -88,6 +88,22 @@ export class TabularComponent implements OnInit, DoCheck {
    */
   @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
 
+
+  /**
+   * Event fired when a column is sorted
+   */
+  @Output() onSort: EventEmitter<ISortByProperty[]> = new EventEmitter<ISortByProperty[]>();
+
+  /**
+   * Event fired when selecting a checkbox on a tabular row
+   */
+  @Output() onCheck: EventEmitter<ITabularRow> = new EventEmitter<ITabularRow>();
+
+  /**
+   * Event fired when selecting a group checkbox on a tabular column
+   */
+  @Output() onCheckAll: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public oldRows: ITabularRow[] = [];
   public pagedItems: any[] = [];
   public TabularColumnTypes = TabularColumnTypes;
@@ -99,9 +115,11 @@ export class TabularComponent implements OnInit, DoCheck {
   protected _callback: Function;
   protected _config: ITabularConfig;
   protected _searchTerm: string;
+  private _isMutatingInternally = false;
+  private _initialLoad = true;
 
 
-   constructor(
+  constructor(
     private conf: TabularConfig,
     private sortByService: TabularSortByService
   ) {
@@ -114,15 +132,22 @@ export class TabularComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     if (!_.isEqual(this.rows, this.oldRows)) {
+
+      this.orderByData(false);
+
+      if (this.columns.filter(c => c.dataType === TabularColumnTypes.Checkbox).length > 0) {
+        this.checkSelectAllState(false);
+      }
+
+      // this must run last so equality checking checks after the row data mutates
       this.oldRows = _.cloneDeep(this.rows);
-      this.orderByData();
     }
   }
 
   /**
    * Calls the parsed callback with optional arguments
    */
-   executeCallback(event: Event, cb: any[]) {
+  executeCallback(event: Event, cb: any[]) {
     if (cb.length) {
       if (cb.length === 1) { // if callback has no arguments
         cb[0]();
@@ -136,25 +161,38 @@ export class TabularComponent implements OnInit, DoCheck {
     }
   }
 
-   toggleSelectAll = ($event) => {
-    for (let i = 0; i < this.rows.length; i++) {
-      this.rows[i].checked = this.selectAll;
-    }
+  toggleSelectAll = ($event) => {
+      for (let i = 0; i < this.rows.length; i++) {
+        this._isMutatingInternally = true;
+        this.rows[i].checked = this.selectAll;
+      }
+      this.onCheckAll.emit(this.selectAll);
   }
 
 
-   toggleIndividualSelect = ($event) => {
+  toggleIndividualSelect = ($event: ITabularRow) => {
+    this.checkSelectAllState(false);
+    this.onCheck.emit($event);
+  }
+
+  private checkSelectAllState(emitEvent: boolean = true) {
     let count = 0;
     for (let i = 0; i < this.rows.length; i++) {
       if (this.rows[i].checked) {
         count++;
       }
     }
-    this.selectAll = (this.rows.length === count);
+
+    const oldSelectAll = this.selectAll;
+    this._isMutatingInternally = true;
+    this.selectAll =  (this.rows.length === count);
+    if (oldSelectAll !== this.selectAll && emitEvent) {
+      this.onCheckAll.emit(this.selectAll)
+    }
   }
 
 
-  setPage($event: {page: number, itemsPerPage: number} = {
+  setPage($event: { page: number, itemsPerPage: number } = {
     page: this.config.pagination.currentPage,
     itemsPerPage: this.config.pagination.itemsPerPage
   }) {
@@ -196,16 +234,19 @@ export class TabularComponent implements OnInit, DoCheck {
         prop.direction = SortByDirection.Descending;
       } else if (prop.direction === SortByDirection.Descending) {
         prop.direction = SortByDirection.Ascending;
-      }  else if (prop.direction === SortByDirection.Ascending) {
+      } else if (prop.direction === SortByDirection.Ascending) {
         if (index > -1) {
           this.config.sortBy.splice(index, 1);
         }
       }
     } else {
-      this.config.sortBy.push({property: key, direction: SortByDirection.Descending, type: type});
+      if (!this.config.multiSorting) {
+        this.config.sortBy = [];
+      }
+      this.config.sortBy.push({ property: key, direction: SortByDirection.Descending, type: type });
     }
 
-    this.orderByData();
+    this.orderByData(true);
     return false;
   }
 
@@ -223,24 +264,31 @@ export class TabularComponent implements OnInit, DoCheck {
     const el: Element = $event.target;
     if (this.config.clickableRows) {
       if (el.parentElement.tagName === 'BUTTON' ||
-          el.tagName === 'BUTTON' ||
-          el.parentElement.classList.contains('hx-checkbox-control')) {
+        el.tagName === 'BUTTON' ||
+        el.parentElement.classList.contains('hx-checkbox-control')) {
         return;
       }
       this.rowClick.emit(data);
     }
   }
 
-  private orderByData() {
+  private orderByData(emitSortEvent: boolean) {
+
     if (this.config.sortBy.length > 0) {
-      this.rows = [...this.rows]; // Required as array-sort-by mutates the original array
-      this.sortByService.sortBy(this.rows, this.config.sortBy);
+      if (!this.config.remoteSorting) {
+        this._isMutatingInternally = true;
+        this.rows = [...this.rows]; // Required as array-sort-by mutates the original array
+        this.sortByService.sortBy(this.rows, this.config.sortBy);
+      }
+    }
+    if (emitSortEvent) {
+      this.onSort.emit(this.config.sortBy);
     }
     this.setPage();
   }
 
 
-  get totalItemCount(): number{
+  get totalItemCount(): number {
     return this.rows.length;
   }
 
@@ -258,7 +306,7 @@ export class TabularComponent implements OnInit, DoCheck {
       if (typeof colData.label !== 'undefined') {
         return true;
       } else {
-        console.error('Record for column type badge is invalid, make sure you have the right type. ITabularColumnTypeBadge', {columnValue: colData});
+        console.error('Record for column type badge is invalid, make sure you have the right type. ITabularColumnTypeBadge', { columnValue: colData });
       }
     }
     return false;
@@ -270,7 +318,7 @@ export class TabularComponent implements OnInit, DoCheck {
       if (typeof colData.icon !== 'undefined') {
         if (typeof colData.tooltip.config !== 'undefined' && typeof colData.tooltip.content !== 'undefined') {
           if (typeof colData.tooltip.config.context !== 'undefined' || typeof colData.tooltip.config.placement !== 'undefined') {
-              return true;
+            return true;
           } else {
             hasError = true;
           }
@@ -283,7 +331,7 @@ export class TabularComponent implements OnInit, DoCheck {
     }
 
     if (hasError) {
-      console.error('Record for column type icon is invalid, make sure you have the right type. ITabularColumnTypeIcon', {columnValue: colData});
+      console.error('Record for column type icon is invalid, make sure you have the right type. ITabularColumnTypeIcon', { columnValue: colData });
     }
 
     return false;
@@ -299,8 +347,9 @@ export class TabularComponent implements OnInit, DoCheck {
     return (action.children && action.children.length > 0);
   }
 
-  trackByFn(index, action) {
-    return index; // or action.id
+  trackByFn(index, item) {
+    return (item.id) ? item.id : index;
   }
+
 
 }

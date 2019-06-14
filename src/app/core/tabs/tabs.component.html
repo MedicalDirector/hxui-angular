@@ -27,7 +27,7 @@
 
           <br>
 
-          <hx-tabset>
+          <hx-tabset [stickyHeader]="true" [stickyHeaderOffset]="-1">
             <hx-tab heading="Static title">Static content</hx-tab>
             <hx-tab *ngFor="let tabz of tabs" [heading]="tabz.title" [active]="tabz.active" (select)="onSelect(tabz)" (deselect)="onDeselect(tabz)" [disabled]="tabz.disabled" [removable]="tabz.removable" (removed)="removeTabHandler(tabz)" [customClass]="tabz.customClass">
               {{tabz?.content}}
@@ -37,6 +37,21 @@
                 <i class="icon icon-bell is-small"></i> Alert!
               </ng-template>
               Html tab heading and callback!
+              Html tab heading and callback!Html tab heading and callback!Html tab heading and callback!
+              Html tab heading and callback!
+              Html tab heading and callback!Html tab heading and callback!
+              Html tab heading and callback!Html tab heading and callback!<br>
+              Html tab heading and callback!Html tab heading and callback! Html tab heading and callback!
+              Html tab heading and callback!Html tab heading and callback!Html tab heading and callback!
+              Html tab heading and callback!
+              Html tab heading and callback!Html tab heading and callback!
+              Html tab heading and callback!Html tab heading and callback!<br>
+              Html tab heading and callback!Html tab heading and callback!
+
+
+
+
+
             </hx-tab>
           </hx-tabset>
 
@@ -226,6 +241,21 @@
               <td><kbd>boolean</kbd></td>
               <td>if true info tab classes will be added</td>
             </tr>
+            <tr>
+              <td>contentCustomClass</td>
+              <td><kbd>string</kbd></td>
+              <td>if set, will be added to the tab's content class attribute</td>
+            </tr>
+            <tr>
+              <td>stickyHeader</td>
+              <td><kbd>boolean</kbd></td>
+              <td>if set, will make the tab nav items sticky</td>
+            </tr>
+            <tr>
+              <td>stickyHeaderOffset</td>
+              <td><kbd>string</kbd></td>
+              <td>Add an offset (usually negative) to the position of sticky. REM is the unit of value.</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -327,7 +357,7 @@
   </div>
 </section>
 
-<aside class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
+<aside *ngIf="contentsNav" class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
   <ul class="hx-nav hx-nav-vertical">
     <li class="hx-nav-heading">
       <h6>Contents</h6>

@@ -12,10 +12,33 @@ export class DatepickersCode {
 
   exampleTemplate =
     `
-    <hxa-datepicker-input align="bottom" [(ngModel)]="date"></hxa-datepicker-input>
+    <hxa-datepicker-input align="bottom" [allowPreviousDates]="false" [(ngModel)]="date"></hxa-datepicker-input>
     `;
 
   exampleTypescript =
+    `
+    import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+    import { CoreBaseComponent } from '../core-base.component';
+
+    @Component({
+      selector: 'app-datepickers',
+      templateUrl: './datepickers.component.html'
+    })
+    export class DatepickersComponent extends CoreBaseComponent {
+    
+      date: string;
+    
+      constructor() { }    
+    }
+
+    `;
+
+  intervalExampleTemplate =
+    `
+    <hxa-datepicker-input align="bottom" [interval]="true" [(ngModel)]="date"></hxa-datepicker-input>
+    `;
+
+  intervalExampleTypescript =
     `
     import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
     import { CoreBaseComponent } from '../core-base.component';

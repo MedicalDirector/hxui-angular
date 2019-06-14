@@ -114,7 +114,16 @@
       </div>
 
     </div>
-    <div class="hx-column"></div>
+    <div class="hx-column">
+
+      <div class="hx-card not-scrollable">
+        <div class="hx-card-content">
+          <hxa-selectize [config]="customSelectizeConfig" [options]="selectizeOptions2" [(ngModel)]="selectedCustomSelectValue2"></hxa-selectize>
+          <pre>Current value: {{selectedCustomSelectValue2 | json}}</pre>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <br>
@@ -253,6 +262,30 @@
         </thead>
         <tbody>
         <tr>
+          <td>label</td>
+          <td><kbd>string</kbd></td>
+          <td><pre><code>Selectize Label</code></pre></td>
+          <td>The form label text</td>
+        </tr>
+        <tr>
+          <td>help</td>
+          <td><kbd>string</kbd></td>
+          <td><pre><code>Selectize help text</code></pre></td>
+          <td>Helper text shown on focus or error</td>
+        </tr>
+        <tr>
+          <td>hasCaret</td>
+          <td><kbd>boolean</kbd></td>
+          <td><pre><code>false</code></pre></td>
+          <td>Force caret to show. Only applies to multi select.</td>
+        </tr>
+        <tr>
+          <td>mandatory</td>
+          <td><kbd>boolean</kbd></td>
+          <td><pre><code>false</code></pre></td>
+          <td>Mandatory boolean controls whether the is shown in the label or not. Has nothing to do with formControl.</td>
+        </tr>
+        <tr>
           <td>delimiter</td>
           <td><kbd>string</kbd></td>
           <td><pre><code>','</code></pre></td>
@@ -351,7 +384,7 @@
   </div>
 </section>
 
-<aside class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
+<aside *ngIf="contentsNav" class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
   <ul class="hx-nav hx-nav-vertical">
     <li class="hx-nav-heading">
       <h6>Contents</h6></li>

@@ -11,6 +11,8 @@ export class FiltersModel implements IFiltersConfig {
   callback: any;
   selected: IFilterOption;
   defaultIndex = 0;
+  charLimit = 2;
+  width: number;
 
   constructor(data?: IFiltersConfig) {
     Object.assign(this, data);

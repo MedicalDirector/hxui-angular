@@ -31,6 +31,21 @@
           <a href hxTooltip="Danger!"  placement="bottom" [context]="contextEnum.Danger">danger</a>.
         </p>
 
+        <p>
+          You can use formatted HTML in the tooltip and you can set the width in pixels of the tooltip:
+          <i class="hx-icon icon-information-outline" hxTooltip [autoClose]="false" placement="right" maxWidth="350">
+            <div *hxaTooltipDynamicContent>
+              <div class='is-text-left pa-3'>
+                ENABLED FOR
+                <ul>
+                  <li>Card payments</li>
+                  <li>Fully paid patient claims with EasyClaim</li>
+                  <li>Dynamic content with <a (click)="onClickHandler($event)">links</a></li>
+                </ul>
+              </div>
+            </div>
+          </i>
+        </p>
 
       </div>
     </div>
@@ -114,6 +129,11 @@
           </thead>
           <tbody>
             <tr>
+              <td>autoClose</td>
+              <td><kbd>Boolean</kbd></td>
+              <td>Indicates that the tooltip will be closed on document click</td>
+            </tr>
+            <tr>
               <td>content</td>
               <td><kbd>String</kbd></td>
               <td>the content that shows inside the tooltip</td>
@@ -136,7 +156,7 @@
   </div>
 </section>
 
-<aside class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
+<aside *ngIf="contentsNav" class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
   <ul class="hx-nav hx-nav-vertical">
     <li class="hx-nav-heading">
       <h6>Contents</h6>

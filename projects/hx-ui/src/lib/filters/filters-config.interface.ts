@@ -34,6 +34,12 @@ export interface IFiltersConfig {
    */
   value?: string;
 
+  /**
+   * Filter character limit for Search filter type
+   * Fire filter event if character >= this value
+   *  Defaults to 2
+   */
+  charLimit?: number;
 
   /**
    * Index of default filter option.
@@ -41,9 +47,10 @@ export interface IFiltersConfig {
    */
   defaultIndex?: number;
 
-  /**
-   * The function to call when filter option is selected
+    /**
+   * Width in REM for Search filter type.
+   * Defaults if not set
    */
-  callback: any;
+  width?: number;
 
 }

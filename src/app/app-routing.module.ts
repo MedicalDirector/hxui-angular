@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
-import { WelcomeComponent } from './core/welcome/welcome.component';
 import { DatepickersComponent } from './core/datepicker/datepickers.component';
 import { DropdownsComponent } from './core/dropdowns/dropdowns.component';
 import { ModalsComponent } from './core/modals/modals.component';
@@ -18,10 +17,11 @@ import { AccordionComponent } from './core/accordion/accordion.component';
 import {FiltersComponent} from './core/filters/filters.component';
 import {LoadersComponent} from './core/loaders/loaders.component';
 import {TextInputComponent} from './core/text-input/text-input.component';
+import {OnlineStatusComponent} from './core/online-status/online-status.component';
+import {ToastrComponent} from './core/toastr/toastr.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
-  { path: 'welcome',  component: WelcomeComponent },
+  { path: '', redirectTo: '/install-guide', pathMatch: 'full' },
   { path: 'install-guide',  component: InstallGuideComponent },
   { path: 'accordion',  component: AccordionComponent },
   { path: 'datepickers',  component: DatepickersComponent },
@@ -38,6 +38,8 @@ const routes: Routes = [
   { path: 'filters',  component: FiltersComponent },
   { path: 'loaders',  component: LoadersComponent },
   { path: 'text-input',  component: TextInputComponent },
+  { path: 'online-status',  component: OnlineStatusComponent },
+  { path: 'toastr',  component: ToastrComponent },
   { path: '**',  component: PageNotFoundComponent },
 ];
 @NgModule({

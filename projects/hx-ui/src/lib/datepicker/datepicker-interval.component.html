@@ -1,0 +1,43 @@
+<div class="hx-datepicker-set-interval is-flex hx-flex-justify-between hx-flex-column">
+
+  <div class="hx-datepicker-set-interval-content is-flex hx-flex-column hx-flex-auto hx-flex-align-center hx-flex-justify-center  pa-3">
+
+
+      <div class="mb-5">
+        <div class="hx-datepicker-set-interval-number mr-5">
+          <input type="number" id="numberText" class="hx-input" min=1  [(ngModel)]="dropdownNumber" (change)="onSelect()" #numberText>
+        </div>
+
+        <span class="hx-dropdown month mr-5" hxaDropdown>
+          <select id="durationText" class= "hx-input"  (change)="onSelect()" [(ngModel)]="Duration" #durationText>
+            <option>day(s)</option>
+            <option>week(s)</option>
+            <option>month(s)</option>
+            <option>year(s)</option>
+          </select>
+        </span>
+
+        <span><small>from</small> <span class="hx-datepicker-set-interval-today ml-2">today</span></span>
+      </div>
+
+      <div class="mb-3">
+        <span><small>will be</small></span>
+        <span class="hx-datepicker-set-interval-selected-date ml-1">
+        {{ _DueDate }}
+        </span>
+      </div>
+
+  </div>
+
+  <div class="hx-datepicker-set-interval-footer pa-3">
+    <div class="hx-columns">
+      <div class="hx-column">
+        <button class="hx-button" (click)="onCancel()">Cancel</button>
+      </div>
+      <div class="hx-column is-text-right">
+        <button class="hx-button is-primary" (click)="onChoose()">Select</button>
+      </div>
+    </div>
+  </div>
+
+</div>

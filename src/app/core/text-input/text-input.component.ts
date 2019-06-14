@@ -4,6 +4,7 @@ import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/common';
 import {CoreBaseComponent} from '../core-base.component';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-text-input',
@@ -15,9 +16,10 @@ export class TextInputComponent extends CoreBaseComponent implements OnInit {
 
   constructor(
     protected pageScrollService: PageScrollService,
+    protected breakpointObserver: BreakpointObserver,
     @Inject(DOCUMENT) protected document: any
   ) {
-    super(pageScrollService, document);
+    super(pageScrollService, breakpointObserver, document);
   }
 
   ngOnInit() {

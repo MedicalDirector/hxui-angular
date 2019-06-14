@@ -1,7 +1,7 @@
 <section class="hx-section scrollable-y" #container>
   <div class="hx-section is-comfortable">
 
-    <h1 class="hx-title">Accordian</h1>
+    <h1 class="hx-title">Accordion</h1>
     <h2 class="hx-subtitle">Handles growing and contracting accordions</h2>
     <hr>
 
@@ -27,42 +27,17 @@
               <p>This is the body</p>
             </hx-accordion-body>
           </hx-accordion-container>
-          <hx-accordion-container>
+          <hx-accordion-container [expanded]="false">
             <hx-accordion-header>
-              This is the second header. <b>You can even style it!</b> <i class="hx-icon icon-helix is-small is-info"></i>
+              This is the second header. <b>You can even style it!</b> <i
+                class="hx-icon icon-helix is-small is-info"></i>
             </hx-accordion-header>
             <hx-accordion-body>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Integer eu suscipit ante. Nulla nec nulla eget quam fringilla blandit. 
-                Vivamus gravida purus erat, id ultrices lacus sagittis vel. 
-                Etiam nec nulla eleifend velit tristique faucibus sed ut nisl. 
-                Suspendisse diam enim, varius eget augue vitae, rhoncus varius nulla. 
-                Donec mattis libero sed velit rutrum, id dapibus elit imperdiet. 
-                Duis semper tincidunt urna, eget cursus augue semper non. 
-                Nulla nunc enim, semper eu tellus ut, feugiat sollicitudin nisl. 
-                Integer dictum nibh id metus ullamcorper, a pharetra dolor sagittis. 
-                Duis magna augue, laoreet in condimentum sit amet, fringilla vel neque. 
-                Etiam gravida, dolor gravida rhoncus pulvinar, odio sapien faucibus tortor, id efficitur magna ex iaculis neque. 
-                Duis convallis condimentum nisi, in commodo tortor mattis a. 
-                Vestibulum gravida est sed semper pretium. 
-                Duis interdum, mi vel consectetur aliquam, ligula velit vestibulum eros, vitae ullamcorper libero ante a nunc. 
-                Sed id purus a magna tincidunt tincidunt aliquam a nulla.
-              </p>
-              <p>
-                Pellentesque at dictum velit. Nulla nec cursus eros. Curabitur pellentesque laoreet tristique. 
-                Praesent velit felis, convallis malesuada luctus et, pharetra eget leo. 
-                Mauris blandit lorem consequat tristique mollis. Nam ut eros non lacus dignissim feugiat. 
-                Integer vulputate urna interdum malesuada congue. 
-                Sed rhoncus tempor mauris, quis luctus dolor facilisis in. Donec ac nunc massa.
-              </p>
-              <p>
-                  Praesent eget elit cursus, hendrerit nisi et, laoreet tellus. 
-                  Nullam viverra commodo orci, at euismod neque scelerisque eu. 
-                  Phasellus pellentesque ante quis porttitor hendrerit. 
-                  Aenean quam nibh, fermentum at ante vitae, vestibulum sagittis lorem. 
-                  Nam quis mi a neque egestas cursus sed nec risus. Nunc rhoncus pellentesque pellentesque. 
-                  Aliquam sagittis mi ut diam pulvinar, vitae tempor felis ultrices. Ut semper vitae mi nec dictum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Integer eu suscipit ante. Nulla nec nulla eget quam fringilla blandit.
+                Vivamus gravida purus erat, id ultrices lacus sagittis vel.
+                Etiam nec nulla eleifend velit tristique faucibus sed ut nisl.
               </p>
             </hx-accordion-body>
           </hx-accordion-container>
@@ -76,13 +51,55 @@
 
     <hx-tabset>
       <hx-tab heading="Template">
-            <pre>
+        <pre>
               <code highlight [code]="code.exampleTemplate"></code>
             </pre>
       </hx-tab>
     </hx-tabset>
 
     <hr>
+
+    <br>
+
+    <h4 id="example">Example 2 - With additional class binding</h4>
+
+    <hx-accordion [cssClass]="{'is-elevate-3': true, 'is-text-unselectable': true}">
+      <hx-accordion-container *ngFor="let item of items; index as i" [expanded]="false" [index]="i" [disabled]="item.body === null" (headerClick)="someFunction($event)">
+        <hx-accordion-header>
+          <p>
+            <b>{{ item.header }}</b>
+          </p>
+        </hx-accordion-header>
+        <hx-accordion-body>
+          <p>{{ item.body }}</p>
+        </hx-accordion-body>
+      </hx-accordion-container>
+    </hx-accordion>
+
+    <br>
+
+    <h5 id="code">Code</h5>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <hx-tabset>
+          <hx-tab heading="Template">
+            <pre>
+              <code highlight [code]="code.exampleTemplate2"></code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Component">
+            <pre>
+              <code highlight [code]="code.exampleComponent2"></code>
+            </pre>
+          </hx-tab>
+        </hx-tabset>
+      </div>
+    </div>
+
+    <hr>
+
+    <br>
 
     <h4 id="api">API Reference</h4>
 
@@ -102,17 +119,53 @@
               <td>expanded</td>
               <td><kbd>boolean</kbd></td>
               <td>Determines if the accordion container is expanded by default on load.</td>
-            </tr>            
-            </tbody>
+            </tr>
+            <tr>
+              <td>cssClass</td>
+              <td><kbd>string</kbd></td>
+              <td>Determines if the accordion container contains an additional class, binding via [ngClass].</td>
+            </tr>
+            <tr>
+              <td>index</td>
+              <td><kbd>number</kbd></td>
+              <td>Provides an index to the accordion component for each container.</td>
+            </tr>
+            <tr>
+              <td>disabled</td>
+              <td><kbd>boolean</kbd></td>
+              <td>False by default. Disables the accordion from expanding on any row which fits the condition. (headerClick) will still emit an output if configured.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <br>
+
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Outputs</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>headerClick</td>
+              <td><kbd>number</kbd></td>
+              <td>Used in conjunction with [index]; This will emit an event with the [index] number provided.</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
   </div>
 </section>
 
-<aside class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
+<aside *ngIf="contentsNav" class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
   <ul class="hx-nav hx-nav-vertical">
-    <li class="hx-nav-heading"><h6>Contents</h6></li>
+    <li class="hx-nav-heading">
+      <h6>Contents</h6>
+    </li>
 
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>

@@ -1,15 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {AutoGrowCode} from './auto-grow.code';
+import {CoreBaseComponent} from '../core-base.component';
+import {PageScrollService} from 'ngx-page-scroll';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'app-auto-grow',
   templateUrl: './auto-grow.component.html',
   styles: [':host { display:flex; flex: 1; min-width: 0; }']
 })
-export class AutoGrowComponent implements OnInit {
+export class AutoGrowComponent extends CoreBaseComponent implements OnInit {
 
   code = new AutoGrowCode();
-  constructor() { }
+
+  constructor(
+    protected pageScrollService: PageScrollService,
+    protected breakpointObserver: BreakpointObserver,
+    @Inject(DOCUMENT) protected document: any
+  ) {
+    super(pageScrollService, breakpointObserver, document);
+  }
 
   ngOnInit() {
   }

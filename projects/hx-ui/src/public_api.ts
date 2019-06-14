@@ -2,6 +2,17 @@
  * Public API Surface of hx-ui
  */
 
+export * from './lib/toastr/toastr.directive';
+export * from './lib/toastr/toastr.component';
+export * from './lib/toastr/toastr.service';
+export * from './lib/toastr/toastr-config';
+export * from './lib/toastr/toastr.module';
+export * from './lib/toastr/toastr-injector';
+
+export * from './lib/toastr/portal/portal';
+export * from './lib/toastr/overlay/overlay';
+export * from './lib/toastr/overlay/overlay-container';
+export * from './lib/toastr/overlay/overlay-ref';
 
 export * from './lib/text-input/text-input.directive';
 export * from './lib/text-input/text-input.module';
@@ -80,6 +91,7 @@ export * from './lib/tooltip/tooltip.config';
 export * from './lib/tooltip/tooltip.directive';
 export * from './lib/tooltip/tooltip.module';
 export * from './lib/tooltip/tooltip-content.component';
+export * from './lib/tooltip/tooltip-dynamic-content.directive';
 
 export * from './lib/typeahead/latin-map';
 export * from './lib/typeahead/typeahead.directive';
@@ -96,6 +108,7 @@ export * from './lib/utils/decorators';
 export * from './lib/utils/trigger.class';
 export * from './lib/utils/triggers';
 export * from './lib/utils/utils.class';
+export * from './lib/utils/services/online-status.service';
 
 export * from './lib/component-loader/component-loader.factory';
 export * from './lib/component-loader/content-ref.class';

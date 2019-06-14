@@ -26,10 +26,6 @@ export class AppComponent {
       cat: 'Getting started',
       items: [
         {
-          name: 'Welcome',
-          link: '/welcome'
-        },
-        {
           name: 'Install guide',
           link: '/install-guide'
         }
@@ -109,15 +105,28 @@ export class AppComponent {
           link: '/text-input'
         }
       ]
+    },
+    {
+      cat: 'Services',
+      items: [
+        {
+          name: 'Online Status',
+          link: '/online-status'
+        }
+      ]
+    },
+    {
+      cat: 'Other',
+      items: [
+        {
+          name: 'Change Log',
+          url: 'https://bitbucket.org/md-design/angular-hxui/src/master/CHANGELOG.md'
+        },
+        {
+          name: 'License',
+          url: 'https://bitbucket.org/md-design/angular-hxui/src/master/LICENCE'
+        }
+      ]
     }
-    // {
-    //   cat: 'Feedback',
-    //   items: [
-    //     {
-    //       name: 'Feedback',
-    //       url: 'https://bitbucket.org/md-design/angular-hxui'
-    //     }
-    //   ]
-    // }
   ];
 }

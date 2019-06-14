@@ -4,6 +4,7 @@ import {LoadersCode} from './loaders.code';
 import {CoreBaseComponent} from '../core-base.component';
 import {DOCUMENT} from '@angular/common';
 import {PageScrollService} from 'ngx-page-scroll';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-loaders',
@@ -20,9 +21,10 @@ export class LoadersComponent extends CoreBaseComponent {
 
   constructor(
     protected pageScrollService: PageScrollService,
+    protected breakpointObserver: BreakpointObserver,
     @Inject(DOCUMENT) protected document: any
   ) {
-    super(pageScrollService, document);
+    super(pageScrollService, breakpointObserver, document);
   }
 
 }

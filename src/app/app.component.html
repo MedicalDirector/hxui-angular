@@ -35,7 +35,7 @@
           <ul class="hx-nav hx-nav-vertical" *ngFor="let navItem of navs">
             <li class="hx-nav-heading"><h6><span class="oi" data-glyph="home"></span> {{ navItem.cat }}</h6></li>
             <li class="hx-nav-item" *ngFor="let item of navItem.items">
-              <a class="hx-nav-link" *ngIf="item.url" [href]="item.url" routerLinkActive="is-active"><span>{{ item.name }}</span></a>
+              <a class="hx-nav-link" *ngIf="item.url" [href]="item.url" target="_blank"><span>{{ item.name }}</span></a>
               <a class="hx-nav-link" *ngIf="item.link" [routerLink]="item.link" routerLinkActive="is-active"><span>{{ item.name }}</span></a>
             </li>
           </ul>
@@ -44,7 +44,7 @@
 
       </span>
 
-      <div class="hx-overlay"></div>
+      <div *ngIf="nav" class="hx-overlay"></div>
 
       <div class="hx-nav-navicon" [ngClass]="{ 'is-closed': !nav }" (click)="nav = !nav"><i class="hx-icon icon-navicon"></i></div>
 

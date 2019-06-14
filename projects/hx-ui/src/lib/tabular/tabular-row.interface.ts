@@ -3,6 +3,10 @@ import {Context} from '../enums';
 
 export interface ITabularRow {
   /**
+   * Set an ID property. It's optional unless you have a checkbox column
+   */
+  id?: number|string;
+  /**
    * Set context, default, danger, warning, success or info
    */
   context?: Context;

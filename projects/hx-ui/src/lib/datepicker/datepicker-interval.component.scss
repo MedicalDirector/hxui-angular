@@ -1,0 +1,28 @@
+@import "datepicker-variables";
+
+.hx-datepicker-set-interval {
+  max-width: $hx-datepicker-calendar-width;
+  width: $hx-datepicker-calendar-width;
+  height: $hx-datepicker-calendar-height * .66;
+  background-color: white;
+
+  .hx-datepicker-set-interval-content {
+    .hx-datepicker-set-interval-number {
+      width: 2.5rem;
+      display: inline-block;
+    }
+
+    .hx-datepicker-set-interval-today {
+      font-size: 1rem;
+    }
+    .hx-datepicker-set-interval-selected-date {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+  }
+  .hx-datepicker-set-interval-footer {
+    flex: 0 0 auto;
+    background-color:  rgba(0, 0, 0, 0.04);
+  }
+
+}

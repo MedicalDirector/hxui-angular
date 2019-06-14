@@ -7,16 +7,24 @@ export class SelectizeConfig  {
   /**
    * Form label text
    *
-   * Default: ''
+   * Default: 'Selectize Label'
    */
   label = 'Selectize Label';
 
   /**
    * Helper text shown on focus or error
    *
-   * Default: ''
+   * Default: 'Selectize help text'
    */
   help = 'Selectize help text';
+
+  /**
+   * Force caret to show.
+   * Only applies to multi select.
+   *
+   * Default: false
+   */
+  hasCaret = false;
 
   /**
    * Mandatory boolean controls whether the * is shown in the label or not.
@@ -25,6 +33,14 @@ export class SelectizeConfig  {
    *  * Default: false
    */
   mandatory = false;
+
+
+  /**
+   * Array of css class names that can be appended to the input control element
+   *
+   * Default: []
+   */
+  inputControlClasses = [];
 
   /**
    *  The string to separate items by. When typing an item in a multi-selection control

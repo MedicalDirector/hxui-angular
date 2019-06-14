@@ -18,22 +18,31 @@ export class AppModule(){}
 
 exampleTemplate =
 `
-<div class="hx-columns">
-  <div class="hx-column">
-    <span hxTooltip="Select 1 or more users" [disabled]="!isPrintDisabled()" placement="right">
-        <button class="hx-button is-small" (click)="printSelected()" [disabled]="isPrintDisabled()" >Print</button>
-    </span>
-  </div>
+<div class="hx-toolbar is-small is-perforated">
+  <span hxTooltip="Select 1 or more users" [disabled]="!isPrintDisabled()" placement="right">
+    <button class="hx-button mr-1" (click)="printSelected($event)" [disabled]="isPrintDisabled()">
+      <div class="hx-icon-control"><i class="hx-icon icon-printer-outline"></i></div>
+      <div>Print</div>
+    </button>
+  </span>
+  <button class="hx-button  mr-1" (click)="setCheckAllState(true)">Check All</button>
+  <button class="hx-button" (click)="setCheckAllState(false)">Uncheck All</button>
+  <div class="hx-divider"></div>
+  <div><span class="is-info is-text-weight-bolder">{{totalSelected}}</span> of <span class="is-info is-text-weight-bolder">{{rowData.length}}</span><span class="is-text-weight-light"> items selected</span></div>
+  <div class="hx-spacer"></div>
+  <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters"></hxa-filters>
 </div>
-
-<hx-tabular
+<hxa-tabular
   [rows]="rowData"
   [columns]="columnData"
   [config]="tabularConfig"
   [callback]="onActionClickHandler"
   (refresh)="refreshDataHandler($event)"
-  (rowClick)="rowClickHandler($event)">
-</hx-tabular>
+  (rowClick)="rowClickHandler($event)"
+  (onSort)="onSortHandler($event)"
+  (onCheck)="singleCheckHandler($event)"
+  (onCheckAll)="groupCheckHandler($event)">
+</hxa-tabular>
 
 `;
 
@@ -47,45 +56,64 @@ import {TabularSize} from '@hxui/angular';
 import {ActionConfigRouteType} from '@hxui/angular';
 import {TabularService} from '@hxui/angular';
 import {UserModel} from '@hxui/angular';
+import {IFiltersConfig, FilterType, FiltersComponent as HxFiltersComponent, FiltersModel } from '@hxui/angular';
 
 @Component({
   selector: 'app-tabular',
-  templateUrl: './tabular.component.html'
+  templateUrl: './tabular.component.html',
+  styles: [':host { display:flex; flex: 1; min-width: 0; }'],
 })
-export class TabularComponent implements OnInit {
+export class TabularComponent extends CoreBaseComponent implements OnInit {
 
+  @ViewChild('filterComp') filtersComponent: FiltersComponent;
+  onFilterChangeEvent$ = new Subscription();
+  users$: Observable<UserModel[]>;
+  code = new TabularCode();
   searchTerm: string;
   rowData: ITabularRow[] = [];
   columnData: TabularColumn[] = [
     new TabularColumn('checkboxes', 'Checkboxes', TabularColumnTypes.Checkbox, false),
-    new TabularColumn('id', 'Id', TabularColumnTypes.String, true),
+    new TabularColumn('id', 'Id', TabularColumnTypes.Number, true),
     new TabularColumn('usercode', 'User Code', TabularColumnTypes.String, true),
-    new TabularColumn('firstname', 'First Name', TabularColumnTypes.String, true),
-    new TabularColumn('surname', 'Surname', TabularColumnTypes.String, true),
+    new TabularColumn('name', 'Name', TabularColumnTypes.Html, true),
+    new TabularColumn('rolename', 'Role', TabularColumnTypes.String, true),
     new TabularColumn('flag', 'Flag', TabularColumnTypes.Badge, false),
     new TabularColumn('created', 'Created', TabularColumnTypes.Date, true),
     new TabularColumn('modified', 'Modified', TabularColumnTypes.DateTime, true),
+    new TabularColumn('info', 'info', TabularColumnTypes.Icon, false),
     new TabularColumn('active', 'Active', TabularColumnTypes.Status, false, 'is-text-center'),
     new TabularColumn('actions', 'Actions', TabularColumnTypes.Actions, false)
   ];
 
   tabularConfig: ITabularConfig = {
+    id: 'UniqueId',
     size: TabularSize.Default,
     clickableRows: true,
     pagination: {
       itemsPerPage: 5,
       currentPage: 1
     },
+    sortBy: [
+      {
+        property: 'modified',
+        type: TabularColumnTypes.DateTime,
+        direction: SortByDirection.Descending
+      }
+    ]
   };
 
   /**
    * Refresh data handler for data grid.
    */
-  refreshDataHandler($event) {
-    this.getTabularData();
+  refreshDataHandler = ($event) => {
+    this.getAllUsers();
   }
 
-   rowClickHandler($event) {
+  rowClickHandler($event) {
+    console.log($event);
+  }
+
+  onSortHandler($event) {
     console.log($event);
   }
 
@@ -110,25 +138,35 @@ export class TabularComponent implements OnInit {
   }
 
   /**
-  * Static data for example
-  **/
-  private getTabularData() {
-    this.rowData = [];
-    this.service.getUsers()
-      .then((users) => {
-        for (let i = 0; i < users.length; i++) {
-          const user = new UserModel(users[i]);
-          this.rowData.push(user);
-        }
-      });
+   * Static data for example
+   */
+  private getAllUsers() {
+    const data: ITabularRow[] = [];
+    this.service.getUsers().subscribe((users) => this.setRowData(users));
   }
 
-  constructor(private service: TabularService) {
-    this.getTabularData();
+
+  setCheckAllState(state: boolean = false) {
+    this.rowData.forEach((row) => {
+      row.checked = state;
+    });
   }
 
   ngOnInit() {
   }
+
+  onActionClickHandler = () => {
+  }
+
+  singleCheckHandler($event): void {
+    alert('single check event: ' + $event);
+    console.log($event);
+  }
+
+  groupCheckHandler($event): void {
+    alert('group check ' + $event)
+  }
+
 }
 
 `;
@@ -157,7 +195,7 @@ export class TabularService {
   }
 
   getUser(id: number): Observable<UserModel> {
-   
+
     return this.http.get<UserModel>(url)
       .pipe(
         catchError(this.handleError<UserModel>('getUsers id=id'))
@@ -668,6 +706,7 @@ export class UserModel implements ITabularRow {
   public info: ITabularColumnIconType;
   public icon: string;
   public actions: IActionsConfig[] = [];
+  public name: string;
 
 
   constructor(data?: any) {
@@ -677,6 +716,7 @@ export class UserModel implements ITabularRow {
     this.setIcon();
     this.setActions();
     this.setTitle();
+    this.setName();
   }
 
   setIcon() {
@@ -740,7 +780,9 @@ export class UserModel implements ITabularRow {
     this.title = 'This is a custom title tag for: ' + this.usercode + ':' + this.firstname + ':' + this.surname;
   }
 
-
+ setName() {
+    this.name = '<div class="is-text-weight-bolder">' + this.surname + ',</div><div>' + this.firstname + '</div>';
+  }
 
   /**
    * Function used in the callback actions
@@ -764,7 +806,9 @@ tabularConfig =
       itemsPerPage: 5,
       currentPage: 1
   },
-  clickableRows: true;
+  clickableRows: true,
+  stickyHeader: true,
+  cssClass: '',
   sortBy: [{
     property: 'firstname',
     direction: SortByDirection.Descending,
@@ -785,13 +829,14 @@ TabularColumnTypes.Actions
 TabularColumnTypes.Status
 TabularColumnTypes.DateTime
 TabularColumnTypes.Badge
+TabularColumnTypes.Html
 
 `;
 
 badgeColumnType =
 `
 {
-  label:string, 
+  label:string,
   cssClass:string
 }
 

@@ -4,6 +4,7 @@ import {CoreBaseComponent} from '../core-base.component';
 import {DOCUMENT} from '@angular/common';
 import {DropdownsCode} from './dropdowns.code';
 import {DropdownDirective} from '../../../../projects/hx-ui/src/lib/dropdown/dropdown.directive';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-dropdowns',
@@ -16,8 +17,9 @@ export class DropdownsComponent extends CoreBaseComponent {
 
   code = new DropdownsCode();
   constructor(protected pageScrollService: PageScrollService,
+              protected breakpointObserver: BreakpointObserver,
               @Inject(DOCUMENT) protected document: any) {
-    super(pageScrollService, document);
+    super(pageScrollService, breakpointObserver, document);
   }
 
   toggle($event) {

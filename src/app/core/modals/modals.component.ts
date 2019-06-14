@@ -5,6 +5,7 @@ import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/common';
 import {CoreBaseComponent} from '../core-base.component';
 import {ModalsCode} from './modals.code';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-modals',
@@ -15,9 +16,10 @@ export class ModalsComponent extends CoreBaseComponent implements OnInit {
 
   code = new ModalsCode();
   constructor(protected pageScrollService: PageScrollService,
+              protected breakpointObserver: BreakpointObserver,
               @Inject(DOCUMENT) protected document: any,
               private modalService: ModalService) {
-    super(pageScrollService, document);
+    super(pageScrollService, breakpointObserver, document);
   }
 
   ngOnInit() {

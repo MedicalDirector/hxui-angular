@@ -15,6 +15,7 @@ import {DatepickerComponent} from './datepicker.component';
 import {take, takeUntil} from 'rxjs/operators';
 import {Directionality} from '@angular/cdk/bidi';
 import {DatepickerConfig} from './datepicker.config';
+import { DatepickerIntervalComponent } from './datepicker-interval.component';
 
 @Component({
   selector: 'hxa-datepicker-input, hxa-datepicker-form',
@@ -35,6 +36,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
 
   _overlayRef: OverlayRef | null;
   _calendarInstance: DatepickerComponent | null;
+  _intervalInstance: DatepickerIntervalComponent | null;
   private _portal: ComponentPortal<DatepickerComponent>;
   private readonly _destroyed = new Subject();
 
@@ -86,10 +88,16 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   @Input()
   to = '';
 
+  @Input()
+  interval = false;
+
+  @Input()
+  dueDateInterval = '0 day(s)'; // '1 week(s)' | '2 month(s)' | '3 year(s)'
+
   @Output()
   onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
-  public date: Date;
+  public date: Date = null;
   public visible = false;
   public presentDate: Date;
   public isValid: boolean;
@@ -161,8 +169,8 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
 
   public setDate(date: Date): void {
     this.date = date;
-    this.onDateChange.emit(date);
     this.propogateChange(date);
+    this.onDateChange.emit(date);
   }
 
   public onDateSelectEvent = (inputDate: Date): void => {
@@ -230,7 +238,10 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   }
 
   public writeValue(value: Date): void {
-    if (value !== this.date) {
+    if (value !== this.date && value !== undefined) {
+      if (value && this.date && value.valueOf() === this.date.valueOf()) {
+        return;
+      }
       this.setDate(value);
     }
   }
@@ -367,7 +378,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
         } else if (pos.connectionPair.originX === 'end') {
           this.placement = 'right';
         }
-        this._updateTooltipContent();
+       this._updateTooltipContent();
       });
 
     return this._overlayRef;
@@ -395,7 +406,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     let originPlacement: OriginConnectionPosition;
 
     if (placement === 'top' || placement === 'bottom') {
-      originPlacement = {originX: 'center', originY: placement === 'top' ? 'top' : 'bottom'};
+      originPlacement = {originX: 'start', originY: placement === 'top' ? 'top' : 'bottom'};
     } else if (placement === 'left') {
       originPlacement = {originX: 'start', originY: 'center'};
     } else if (placement === 'right') {
@@ -418,9 +429,9 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     let overlayPlacement: OverlayConnectionPosition;
 
     if (placement === 'top') {
-      overlayPlacement = {overlayX: 'center', overlayY: 'bottom'};
+      overlayPlacement = {overlayX: 'start', overlayY: 'bottom'};
     } else if (placement === 'bottom') {
-      overlayPlacement = {overlayX: 'center', overlayY: 'top'};
+      overlayPlacement = {overlayX: 'start', overlayY: 'top'};
     } else if (placement === 'left') {
       overlayPlacement = {overlayX: 'end', overlayY: 'center'};
     } else if (placement === 'right') {
@@ -456,11 +467,12 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     return {x, y};
   }
 
-  private _detach() {
+  public _detach() {
     if (this._overlayRef && this._overlayRef.hasAttached()) {
       this._overlayRef.detach();
     }
     this._calendarInstance = null;
+    this._intervalInstance = null;
   }
 
   /** Updates the tooltip content and repositions the overlay according to the new content length */
@@ -472,8 +484,8 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
       this._calendarInstance.placement = this.placement;
       this._calendarInstance.validators = this.dateValidators;
       this._calendarInstance.onDateSelected = this.onDateSelectEvent;
-
-
+      this._calendarInstance.allowInterval = this.interval;
+      this._calendarInstance.selectedDueDateInterval = this.dueDateInterval;
       this._ngZone.onMicrotaskEmpty.asObservable().pipe(
         take(1),
         takeUntil(this._destroyed)

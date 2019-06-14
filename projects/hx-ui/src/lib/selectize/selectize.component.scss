@@ -3,7 +3,7 @@
 
 $selectize-font-family: inherit;
 $selectize-font-smoothing: inherit;
-$selectize-font-size: $hx-font-size-base;
+$selectize-font-size: $hx-font-form-elements-size;
 $selectize-line-height: $hx-line-height-base;
 
 $selectize-color-text: $hx-color-dark;
@@ -43,6 +43,8 @@ $selectize-max-height-dropdown: 200px;
 
 $selectize-padding-x: 8px;
 $selectize-padding-y: 8px;
+$selectize-padding-top-rem: .6rem;
+$selectize-padding-bottom-rem: .55rem;
 $selectize-padding-item-x: 6px;
 $selectize-padding-item-y: 2px;
 $selectize-padding-dropdown-item-x: $selectize-padding-x;
@@ -108,7 +110,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 
 .selectize-input {
 	border: $selectize-border;
-	padding: $selectize-padding-y 0;
+	padding: $selectize-padding-top-rem 0 $selectize-padding-bottom-rem 0;
 	display: inline-block;
 	width: 100%;
 	overflow: hidden;
@@ -126,6 +128,10 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 		$padding-bottom: $selectize-padding-y - $selectize-padding-item-y - $selectize-margin-item-y - $selectize-width-item-border;
 		padding: $padding-top 0 $padding-bottom;
 	}
+
+  .selectize-control.multi.hasCaret &.has-items{
+    padding-right:1rem;
+  }
 
 	&.full {
 		background-color: $selectize-color-input-full;
@@ -216,7 +222,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	z-index: 10;
 	border: $selectize-dropdown-border;
 	background: $selectize-color-dropdown;
-	margin: -1px 0 0 0;
+	margin: 1px 0 0 0;
 	border-top: 0 none;
 	@include selectize-box-sizing(border-box);
 	@include selectize-box-shadow(0 6px 12px rgba(0,0,0,.145));
@@ -261,7 +267,8 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	-webkit-overflow-scrolling: touch;
 }
 
-.selectize-control.single .selectize-input {
+.selectize-control.single .selectize-input,
+.selectize-control.hasCaret .selectize-input{
 	&, input { cursor: pointer; }
 	&.input-active, &.input-active input { cursor: text; }
 
@@ -285,8 +292,16 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	}
 }
 
+.selectize-control.multi.hasCaret .selectize-input.has-items{
+  &:after {
+    top: initial;
+    bottom:1.3rem;
+  }
+}
+
 .selectize-control.rtl {
-	&.single .selectize-input:after {
+	&.single .selectize-input:after,
+  &.hasCaret .selectize-input:after {
 		left: $selectize-arrow-offset;
 		right: auto;
 	}
@@ -354,12 +369,19 @@ hxa-selectize {
       .hx-label {
         color: $hx-color-primary;
       }
+      .hx-help{
+        opacity: 1;
+        &:before,
+        &:after {
+          width: 50%;
+        }
+      }
     }
 
     &.is-focused,
     &.is-valid {
       .hx-label {
-        top: -.5rem;
+        top: $hx-font-form-label-focus-top;
         font-size: .75rem;
         sup {
           top: -.3rem;
@@ -377,7 +399,7 @@ hxa-selectize {
     &:focus ~ .hx-label,
     &:valid ~ .hx-label,
     &:-webkit-autofill ~ .hx-label {
-      top: -.5rem;
+      top: $hx-font-form-label-focus-top;
       font-size: .75rem;
       sup {
         top: -.3rem;
@@ -407,7 +429,7 @@ hxa-selectize {
       cursor: $hx-cursor-disabled;
 
       & ~ .hx-label {
-        top: -.5rem;
+        top: $hx-font-form-label-focus-top;
         font-size: .75rem;
         color: $hx-input-disabled;
         cursor: $hx-cursor-disabled;

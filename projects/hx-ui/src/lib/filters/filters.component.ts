@@ -1,20 +1,27 @@
-import {Component, DoCheck, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FilterType} from './filters-type.enum';
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {FiltersModel} from './filters.model';
 import * as _ from 'lodash';
+import {BehaviorSubject, from, Observable, pipe, Subject, Subscription} from 'rxjs/index';
+import {FiltersConfig} from './filters.config';
+import {debounceTime} from 'rxjs/internal/operators';
 
 @Component({
   selector: 'hxa-filters',
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.scss']
 })
-export class FiltersComponent implements OnInit, DoCheck {
+export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
 
   @ViewChild('carousel') private carousel: ElementRef;
 
   FilterType = FilterType;
   data: FiltersModel[] = [];
+  onFilterOptionChanged$ = new Subject<FiltersModel>();
+  searchFilter$: Subject<FiltersModel> = new Subject<FiltersModel>();
+  subscriptions: Subscription = new Subscription();
+
   private _filters: IFiltersConfig[] = [];
   private _oldFilters: IFiltersConfig[] = [];
   private _collapsed = false;
@@ -38,9 +45,23 @@ export class FiltersComponent implements OnInit, DoCheck {
     this.setData();
   }
 
-  constructor() { }
+  constructor(
+    private conf: FiltersConfig
+  ) {
+    Object.assign(this, conf);
+  }
+
 
   ngOnInit() {
+    this.subscriptions.add(
+      this.searchFilter$
+        .pipe(debounceTime(this.conf.debounce))
+        .subscribe((x) =>  this.onFilterOptionChanged$.next(x))
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   ngDoCheck() {
@@ -50,20 +71,24 @@ export class FiltersComponent implements OnInit, DoCheck {
     }
   }
 
-  resetFilters() {
+  resetFilters(silent: boolean = false) {
     for (const filter of this.data) {
       if (filter.type === FilterType.SingleSelect) {
         filter.setDefaultOption();
-        this.executeFilterCallback(filter);
+        if (!silent) {
+          this.onFilterOptionChanged$.next(filter);
+        }
       } else if (filter.type === FilterType.Search) {
-        this.clearSearch(filter);
+        this.clearSearch(filter, silent);
       }
     }
   }
 
-  clearSearch(filter: FiltersModel) {
+  clearSearch(filter: FiltersModel, silent: boolean = false) {
       filter.value = '';
-      filter.callback[0].apply(this, ['']);
+      if (!silent) {
+        this.onFilterOptionChanged$.next(filter);
+      }
   }
 
 
@@ -72,7 +97,16 @@ export class FiltersComponent implements OnInit, DoCheck {
    */
   onFilterOptionSelected(filter: FiltersModel, option: IFilterOption) {
     filter.setSelectedOption(option);
-    this.executeFilterCallback(filter);
+    this.onFilterOptionChanged$.next(filter);
+  }
+
+  /**
+   * Called when character is typed in the search filter type
+   */
+  onSearchFilterChange(filter: FiltersModel) {
+    if (filter.value.length === 0 || filter.value.length >= filter.charLimit) {
+      this.searchFilter$.next(filter);
+    }
   }
 
 
@@ -80,15 +114,8 @@ export class FiltersComponent implements OnInit, DoCheck {
    this.onFilterOptionSelected($event.filter,  $event.option);
   }
 
-  /**
-   * Called when character is typed in the search filter type
-   */
-  onSearchFilterChange(filter: FiltersModel, value: string) {
-    filter.callback[0].apply(this, [value]);
-  }
-
   onCollapsedSearch($event) {
-    this.onSearchFilterChange($event.filter,  $event.value);
+    this.onSearchFilterChange($event.filter);
   }
 
 
@@ -104,25 +131,10 @@ export class FiltersComponent implements OnInit, DoCheck {
    */
   setData() {
     this.data = [];
-    this._filters.forEach((filter: IFiltersConfig, index) => {
-      this.data.push(new FiltersModel(_.cloneDeep(filter)));
-    });
-  }
-
-  /**
-   * Called when a filter is selected
-   * Calls the parsed callback with optional arguments + selected filter option
-   */
-  executeFilterCallback(filter: FiltersModel) {
-    if (filter.callback.length) {
-        const args: any[] = [];
-        // if callback has 1 or more arguments
-        for (let i = 1; i < filter.callback.length; i++) {
-          args.push(filter.callback[i]);
-        }
-        // add selected filter as argument
-        args.push(filter.selected);
-        filter.callback[0].apply(this, args);
+    if (this._filters) {
+      this._filters.forEach((filter: IFiltersConfig, index) => {
+        this.data.push(new FiltersModel(_.cloneDeep(filter)));
+      });
     }
   }
 }

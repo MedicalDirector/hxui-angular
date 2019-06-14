@@ -9,7 +9,11 @@ import {Modal} from '../../../../../projects/hx-ui/src/lib/modal/modal.annotatio
       <div class="hx-modal-card">
         <header class="hx-modal-card-head">
           <h1 class="hx-modal-card-title">HxUI Modal Title</h1>
-          <button class="delete" (click)="onCancel()"></button>
+          <a class="hx-button is-round is-small is-white" (click)="onCancel()">
+            <span class="hx-icon-control">
+              <i class="icon icon-close-empty is-large"></i>
+            </span>
+          </a>
         </header>
         <section class="hx-modal-card-content">
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque.</p>

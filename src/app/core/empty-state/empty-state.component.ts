@@ -4,6 +4,7 @@ import {PageScrollService} from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/common';
 import {CoreBaseComponent} from '../core-base.component';
 import {IEmptyStateAction} from '../../../../projects/hx-ui/src/lib/empty-state/empty-state-action.interface';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-empty-state',
@@ -29,8 +30,9 @@ export class EmptyStateComponent extends CoreBaseComponent {
     }];
 
   constructor(protected pageScrollService: PageScrollService,
+              protected breakpointObserver: BreakpointObserver,
               @Inject(DOCUMENT) protected document: any) {
-    super(pageScrollService, document);
+    super(pageScrollService, breakpointObserver, document);
   }
 
   onNotTakingMeds() {

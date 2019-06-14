@@ -21,21 +21,32 @@
     <div class="hx-columns">
       <div class="hx-column">
 
-        <div class="hx-columns">
-          <div class="hx-column">
-            <span hxTooltip="Select 1 or more users" [disabled]="!isPrintDisabled()" placement="right">
-              <button class="hx-button is-small" (click)="printSelected($event)" [disabled]="isPrintDisabled()" >Print</button>
-          </span>
-          </div>
-        </div>
 
+
+        <div class="hx-toolbar is-small is-perforated">
+           <span hxTooltip="Select 1 or more users" [disabled]="!isPrintDisabled()" placement="right">
+             <button class="hx-button mr-1" (click)="printSelected($event)" [disabled]="isPrintDisabled()">
+                <div class="hx-icon-control"><i class="hx-icon icon-printer-outline"></i></div>
+                <div>Print</div>
+              </button>
+          </span>
+            <button class="hx-button  mr-1" (click)="setCheckAllState(true)">Check All</button>
+            <button class="hx-button" (click)="setCheckAllState(false)">Uncheck All</button>
+            <div class="hx-divider"></div>
+            <div><span class="is-info is-text-weight-bolder">{{totalSelected}}</span> of <span class="is-info is-text-weight-bolder">{{rowData.length}}</span><span class="is-text-weight-light"> items selected</span></div>
+            <div class="hx-spacer"></div>
+            <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters"></hxa-filters>
+        </div>
         <hxa-tabular
           [rows]="rowData"
           [columns]="columnData"
           [config]="tabularConfig"
           [callback]="onActionClickHandler"
           (refresh)="refreshDataHandler($event)"
-          (rowClick)="rowClickHandler($event)">
+          (rowClick)="rowClickHandler($event)"
+          (onSort)="onSortHandler($event)"
+          (onCheck)="singleCheckHandler($event)"
+          (onCheckAll)="groupCheckHandler($event)">
         </hxa-tabular>
 
       </div>
@@ -136,6 +147,26 @@
               <td><kbd>EventEmitter</kbd></td>
               <td>Event fired when refresh is called. Host should refresh data of input.</td>
             </tr>
+            <tr>
+              <td>rowClick</td>
+              <td><kbd>EventEmitter</kbd></td>
+              <td>Event fired when a row is clicked.</td>
+            </tr>
+            <tr>
+              <td>onSort</td>
+              <td><kbd>EventEmitter: ISortByProperty[]</kbd></td>
+              <td>Event fired when a column is sorted. </td>
+            </tr>
+            <tr>
+              <td>onCheck</td>
+              <td><kbd>EventEmitter: ITabularRow</kbd></td>
+              <td>Event fired when a row checkbox is checked or unchecked. </td>
+            </tr>
+            <tr>
+              <td>onCheckAll</td>
+              <td><kbd>EventEmitter: boolean</kbd></td>
+              <td>Event fired when the header checkbox is checked or unchecked. </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -223,6 +254,11 @@
           </tr>
           </thead>
           <tbody>
+          <tr>
+            <td>id</td>
+            <td><kbd>number|string</kbd></td>
+            <td> Set an ID property. It's optional unless you have a checkbox column.</td>
+          </tr>
           <tr>
             <td>actions</td>
             <td><kbd>IActionsConfig[]</kbd></td>
@@ -343,7 +379,7 @@
   </div>
 </section>
 
-<aside class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
+<aside *ngIf="contentsNav" class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
   <ul class="hx-nav hx-nav-vertical">
     <li class="hx-nav-heading">
       <h6>Contents</h6></li>

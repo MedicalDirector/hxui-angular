@@ -1,4 +1,46 @@
-<div class="hxui-reset">
+<div class="hxui-reset" *ngIf="OpenDiv">
+  <div class="hxa-tabs">
+    <hx-tabset class="hxa-tabset">
+      <hx-tab  heading="Set interval" (select)="onTabSelect('tab1')" [active]="activeVariable">
+        <hxa-datepicker-interval></hxa-datepicker-interval>
+      </hx-tab>
+      <hx-tab  heading="Specific date" (select)="onTabSelect('tab2')" [active]="activeVariable1">
+        <div class="hxui-reset">
+          <div class="hx-card hxa-datepicker-container">
+            <div class="hx-card-header hxa-datepicker-header">
+              <div class="hxa-datepicker-month">
+                <div class="hxa-datepicker-icon" title="Previous Month" (click)="previousMonth()">
+                    <a class="hx-button is-transparent"><i class="hx-icon icon-angle-left"></i></a>
+                </div>
+                <div class="hxa-datepicker-month-title">
+                  <span>{{viewDate.toLocaleString("en-au", { month: "long", year: "numeric" })}}</span></div>
+                <div class="hxa-datepicker-icon" title="Next Month" (click)="nextMonth()">
+                    <a class="hx-button is-transparent"><i class="hx-icon icon-angle-right"></i></a>
+                </div>
+              </div>
+              <div class="hxa-datepicker-week">
+                <div class="hxa-datepicker-weekday" *ngFor="let weekday of week">
+                  {{weekday | slice:0:3}}
+                </div>
+              </div>
+            </div>
+            <div class="hxa-datepicker-contents">
+              <div class="hxa-datepicker-day" *ngFor="let day of days"
+                [ngClass]="{'hxa-datepicker-day-siblingmonth': !isCurrentMonth(day),
+                'hxa-datepicker-day-currentday': isCurrentDay(day),
+                'hxa-datepicker-day-selectedday': isSelectedDay(day),
+                'hxa-datepicker-day-invalidday': isInvalidDay(day)}"
+                (click)="setSelectedDate(day)">
+              <a class="hx-button is-transparent">{{day.getDate()}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </hx-tab>
+    </hx-tabset>
+  </div>
+</div>
+<div class="hxui-reset" *ngIf="showCalendar">
   <div class="hx-card hxa-datepicker-container">
     <div class="hx-card-header hxa-datepicker-header">
       <div class="hxa-datepicker-month">
@@ -18,8 +60,8 @@
       </div>
     </div>
     <div class="hxa-datepicker-contents">
-      <div class="hxa-datepicker-day" *ngFor="let day of days" 
-        [ngClass]="{'hxa-datepicker-day-siblingmonth': !isCurrentMonth(day), 
+      <div class="hxa-datepicker-day" *ngFor="let day of days"
+        [ngClass]="{'hxa-datepicker-day-siblingmonth': !isCurrentMonth(day),
         'hxa-datepicker-day-currentday': isCurrentDay(day),
         'hxa-datepicker-day-selectedday': isSelectedDay(day),
         'hxa-datepicker-day-invalidday': isInvalidDay(day)}"
@@ -29,3 +71,4 @@
     </div>
   </div>
 </div>
+

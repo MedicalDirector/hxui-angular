@@ -4,12 +4,12 @@ import {
   ViewContainerRef,
   Input,
   HostBinding, ElementRef,
-  OnDestroy, NgZone, ComponentFactoryResolver, Optional
+  OnDestroy, NgZone, ComponentFactoryResolver, Optional, ContentChild
 } from '@angular/core';
 import { TooltipContentComponent } from './tooltip-content.component';
 import { TooltipConfig } from './tooltip.config';
 import { Context } from '../enums';
-import { ComponentPortal } from '@angular/cdk/portal';
+import {ComponentPortal, TemplatePortal} from '@angular/cdk/portal';
 import {
   FlexibleConnectedPositionStrategy,
   HorizontalConnectionPos,
@@ -23,11 +23,14 @@ import {
 import {Directionality} from '@angular/cdk/bidi';
 import {takeUntil, take} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {TooltipDynamicContentDirective} from './tooltip-dynamic-content.directive';
+
 
 @Directive({
   selector: '[hxTooltip], [hxaTooltip]'
 })
 export class TooltipDirective implements OnDestroy {
+  @ContentChild(TooltipDynamicContentDirective) dynamicContent: TooltipDynamicContentDirective;
 
   _overlayRef: OverlayRef | null;
   _tooltipInstance: TooltipContentComponent | null;
@@ -56,6 +59,12 @@ export class TooltipDirective implements OnDestroy {
   @Input()
   context: Context = Context.None;
 
+  @Input()
+  maxWidth = 200;
+
+  @Input()
+  autoClose = true;
+
   @HostListener('focusin')
   @HostListener('mouseenter')
   show() {
@@ -64,8 +73,10 @@ export class TooltipDirective implements OnDestroy {
 
   @HostListener('focusout')
   @HostListener('mouseleave')
-  hide() {
-   this._hide();
+  close() {
+    if (this.autoClose) {
+      this._hide();
+    }
   }
 
   constructor(
@@ -94,9 +105,13 @@ export class TooltipDirective implements OnDestroy {
     this._destroyed.complete();
   }
 
+  hide() {
+    this._hide();
+  }
+
   private _show(delay: number = this.showDelay) {
 
-    if (this.disabled || !this.content) { return; }
+    if (this.disabled || (!this.content && !this.dynamicContent)) { return; }
 
     const overlayRef = this._createOverlay();
 
@@ -130,7 +145,9 @@ export class TooltipDirective implements OnDestroy {
     this._overlayRef = this.overlay.create({
       positionStrategy: positionStrategy,
       panelClass: 'hxa-tooltip-panel',
-      scrollStrategy: this.overlay.scrollStrategies.reposition()
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+      hasBackdrop: !!(this.dynamicContent),
+      backdropClass: 'cdk-overlay-transparent-backdrop'
     });
 
      this._updatePosition();
@@ -138,6 +155,8 @@ export class TooltipDirective implements OnDestroy {
     this._overlayRef.detachments()
       .pipe(takeUntil(this._destroyed))
       .subscribe(() => this._detach());
+
+    this._overlayRef.backdropClick().subscribe(() => this._hide());
 
     const position = this._overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
     position.positionChanges
@@ -252,6 +271,10 @@ export class TooltipDirective implements OnDestroy {
         this._tooltipInstance.content = this.content;
         this._tooltipInstance.placement = this.placement;
         this._tooltipInstance.context = this.context;
+        this._tooltipInstance.maxWidth = this.maxWidth;
+        if (this.dynamicContent) {
+          this._tooltipInstance.dynamicContent = this.dynamicContent.templateRef;
+        }
 
 
       this._ngZone.onMicrotaskEmpty.asObservable().pipe(

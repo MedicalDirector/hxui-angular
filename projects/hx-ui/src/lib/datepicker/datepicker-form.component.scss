@@ -1,7 +1,9 @@
+@import "datepicker-variables";
+
 .hxa-datepicker {
     &-form {
         position: relative;
-        max-width: 21rem;
+        max-width: $hx-datepicker-calendar-width;
     }
 
     &-control {
@@ -12,13 +14,16 @@
         position: absolute;
         z-index: 99;
         left: 0;
-
+        max-width: $hx-datepicker-calendar-width;
         &-top {
             bottom: 100%;
         }
 
         &-bottom {
             top: 70%;
+        }
+        & hxa-datepicker {
+          max-width: $hx-datepicker-calendar-width;
         }
     }
 
@@ -33,4 +38,8 @@
     top: -.5rem;
     font-size: .75rem;
     color: #41b987;
+}
+hxa-datepicker {
+  border: 1px lightgray solid;
+  max-width: $hx-datepicker-calendar-width;
 }

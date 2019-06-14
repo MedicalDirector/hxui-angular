@@ -1,3 +1,4 @@
+
 $icons-path: '../node_modules/@hxui/css/static/static/fonts/';
 @import '../node_modules/@hxui/css/static/static/scss/hxui.scss';
 
@@ -23,6 +24,10 @@ $icons-path: '../node_modules/@hxui/css/static/static/fonts/';
 
 code.hljs {
   border-radius: 0.25rem;
+}
+
+.hx-section {
+  height:100vh;
 }
 
 

@@ -1,17 +1,18 @@
 @import "~@hxui/css/static/static/scss/variables";
+@import "datepicker-variables";
 
 .hxa-datepicker {
     &-container {
-        max-width: 21em;
-        width: 21em;
-        height: 24em;
+        max-width: $hx-datepicker-calendar-width;
+        width: $hx-datepicker-calendar-width;
+        height: $hx-datepicker-calendar-height;
         display: flex;
         flex-direction: column;
         font-size: 1rem;
     }
 
     &-header {
-        padding: 1rem 1rem 0;
+        padding: 0.5rem 0.5rem 0;
         flex-direction: column;
         align-items: initial;
         justify-content: space-around;
@@ -36,7 +37,7 @@
         }
 
         & .hx-icon {
-            font-size: 2.3em;
+            font-size: 2em;
             position: initial !important;
             top: initial !important;
             color: $hx-color-blue;
@@ -46,10 +47,11 @@
     &-month {
         display: flex;
         text-align: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
 
         &-title {
-            font-size: 1.5em;
+            font-size: 1.25em;
+            font-weight: 400;
             flex: 3;
             display: flex;
             justify-content: center;
@@ -66,11 +68,12 @@
         &day {
             flex: 1;
             color: $hx-color-blue;
+            font-size: 0.85em;
         }
     }
 
     &-contents {
-        padding: 1rem;
+        padding: 0.5rem;
         background-color: rgba(246, 246, 249, 0.5);
         display: flex;
         flex-flow: row wrap;
@@ -116,3 +119,30 @@
         }
     }
 }
+
+  :host {
+    max-width: 24rem;
+    border: 1px lightgray solid;
+    background: white;
+    .hxa-tabs {
+        ::ng-deep hx-tabset {
+          ::ng-deep ul {
+            background-color: white;
+            margin-bottom: 0;
+            ::ng-deep li {
+              width: 50%;
+              a {
+                span {
+                  font-size: medium;
+                  margin: auto;
+                }
+              }
+            }
+          }
+          ::ng-deep .hx-tab-content {
+            padding: 0;
+          }
+      }
+    }
+  }
+

@@ -9,6 +9,7 @@ describe('TextInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      declarations: [ TextInputComponent ]
       imports: [ AppModule ]
     })
     .compileComponents();

@@ -5,7 +5,7 @@ import {TabularSize} from './tabular-size.enum';
 
 
 /**
- * Configuration service, provides default values for the NavComponent.
+ * Configuration service, provides default values for the TabularComponent.
  */
 @Injectable()
 export class TabularConfig {
@@ -15,12 +15,15 @@ export class TabularConfig {
      * IPaginationInstance, ISearchConfig
      */
     public config: ITabularConfig = {
+        id: 'Unique-Id',
         size: TabularSize.Default,
         pagination: {
             itemsPerPage: 5,
             currentPage: 1
         },
-        clickableRows: false
+        clickableRows: false,
+        stickyHeader: true,
+        multiSorting: true
     };
 
 }
