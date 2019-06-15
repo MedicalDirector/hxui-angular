@@ -12,5 +12,6 @@ pipelines:
           - node
         script: # Modify the commands below to build your repository.
           - npm install
+          - npm install -g @angular/cli
           - ng test HxUi
           - ng build HxUi
