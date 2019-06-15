@@ -13,5 +13,5 @@ pipelines:
         script: # Modify the commands below to build your repository.
           - npm install
           - npm install -g @angular/cli
-          - ng test HxUi
+          - ng test HxUi --browsers PhantomJS --watch=false
           - ng build HxUi
