@@ -10,7 +10,7 @@ pipelines:
     - step:
         caches:
           - node
-        image: atlassianlabs/node-jdk-chrome-firefox
+        image: selenium/node-chrome
         script: # Modify the commands below to build your repository.
           - npm install
           - npm run HxUi-UnitTests
