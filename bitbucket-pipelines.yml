@@ -10,7 +10,6 @@ pipelines:
     - step:
         caches:
           - node
-        image: selenium/node-chrome
         script: # Modify the commands below to build your repository.
           - npm install
           - npm run HxUi-UnitTests
