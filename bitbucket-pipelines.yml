@@ -8,8 +8,6 @@ image: node:10.15.3
 pipelines:
   default:
     - step:
-        caches:
-          - node
         image: rastasheep/alpine-node-chromium:10-alpine
         script: # Modify the commands below to build your repository.
           - npm install
