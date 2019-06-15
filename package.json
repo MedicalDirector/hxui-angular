@@ -6,12 +6,14 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --browsers=Chrome",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "packagr": "ng build HxUi",
     "install-peers": "npm install array-sort-by @angular/animations @angular/cdk @angular/cli @angular/common @angular/compiler @angular/core @angular/forms @angular/http @angular/platform-browser @angular/platform-browser-dynamic @angular/platform-server @angular/router @hxui/css angular-in-memory-web-api core-js jquery lodash.clonedeep ngx-highlightjs ngx-page-scroll rxjs selectize zone.js",
-    "deploy": "npm run install-peers && npm run build"
+    "deploy": "npm run install-peers && npm run build",
+    "HxUi-UnitTests": "ng test HxUi --code-coverage=true --watch=false --browsers=ChromeHeadless",
+    "HxUi-Build": "ng build HxUi"
   },
   "private": false,
   "dependencies": {
@@ -54,7 +56,7 @@
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "karma": "~1.4.1",
-    "karma-chrome-launcher": "~2.0.0",
+    "karma-chrome-launcher": "~2.2.0",
     "karma-cli": "~1.0.1",
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
