@@ -10,7 +10,7 @@ pipelines:
     - step:
         caches:
           - node
-        image: jenkins/jenkins
+        image: avatsaev/angular-chrome-headless
         script: # Modify the commands below to build your repository.
           - npm install
           - npm run HxUi-UnitTests
