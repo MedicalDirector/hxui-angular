@@ -10,7 +10,7 @@ pipelines:
     - step:
         caches:
           - node
-        image: rastasheep/alpine-node-chromium
+        image: rastasheep/alpine-node-chromium:10-alpine
         script: # Modify the commands below to build your repository.
           - npm install
           - npm run HxUi-UnitTests
@@ -18,7 +18,7 @@ pipelines:
   pull-requests:
     '**': #this runs as default for any branch not elsewhere defined
       - step:
-         image: rastasheep/alpine-node-chromium
+         image: rastasheep/alpine-node-chromium:10-alpine
          script: # Modify the commands below to build your repository.
            - npm install
            - npm run HxUi-UnitTests
