@@ -11,29 +11,29 @@ pipelines:
         script:
         # install chromium and dependencies
         - apt-get update && apt-get install -yq libgconf-2-4
-        - >
-          apt-get update && apt-get install -y wget --no-install-recommends && \
-             wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -  && \
-             sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
-             apt-get update && \
-             apt-get install -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont --no-install-recommends
-             # Dont worry about cleaning up files left after installation.
-          - npm install
-          - npm run HxUi-UnitTests
-          - npm run HxUi-Build
+        - apt-get update; apt-get install -y gettext-base;
+        - echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' &gt; /etc/apt/sources.list.d/chrome.list
+        - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+        - set -x &amp;&amp; apt-get update &amp;&amp; apt-get install -y xvfb google-chrome-stable
+        - wget -q -O /usr/bin/xvfb-chrome https://bitbucket.org/atlassian/docker-node-chrome-firefox/raw/ff180e2f16ea8639d4ca4a3abb0017ee23c2836c/scripts/xvfb-chrome
+        - ln -sf /usr/bin/xvfb-chrome /usr/bin/google-chrome
+        - chmod 755 /usr/bin/google-chrome
+        - npm install
+        - npm run HxUi-UnitTests
+        - npm run HxUi-Build
   pull-requests:
     '**': #this runs as default for any branch not elsewhere defined
       - step:
          script:
          # install chromium and dependencies
          - apt-get update && apt-get install -yq libgconf-2-4
-         - >
-           apt-get update && apt-get install -y wget --no-install-recommends && \
-              wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -  && \
-              sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' && \
-              apt-get update && \
-              apt-get install -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont --no-install-recommends
-              # Dont worry about cleaning up files left after installation.
-           - npm install
-           - npm run HxUi-UnitTests
-           - npm run HxUi-Build
+         - apt-get update; apt-get install -y gettext-base;
+         - echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' &gt; /etc/apt/sources.list.d/chrome.list
+         - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+         - set -x &amp;&amp; apt-get update &amp;&amp; apt-get install -y xvfb google-chrome-stable
+         - wget -q -O /usr/bin/xvfb-chrome https://bitbucket.org/atlassian/docker-node-chrome-firefox/raw/ff180e2f16ea8639d4ca4a3abb0017ee23c2836c/scripts/xvfb-chrome
+         - ln -sf /usr/bin/xvfb-chrome /usr/bin/google-chrome
+         - chmod 755 /usr/bin/google-chrome
+         - npm install
+         - npm run HxUi-UnitTests
+         - npm run HxUi-Build
