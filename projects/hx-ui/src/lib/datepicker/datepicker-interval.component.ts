@@ -55,6 +55,10 @@ export class DatepickerIntervalComponent implements OnInit {
   }
 
   onCancel = () => {
+    this.text = moment().add(this.numberText1 , this.durationText1.replace('(s)', 's'));
+    this._DueDate = this.onSelectoptions(this.numberText1, this.durationText1);
+    this._datepickerForm.dueDateInterval = this.numberText1 + ' ' + this.durationText1;
+    this._datepickerComponent.selectedDueDateInterval = this.numberText1 + ' ' + this.durationText1;
     this._datepickerComponent.OpenDiv = false;
     this._datepickerForm._detach();
   }
