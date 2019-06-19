@@ -1,4 +1,18 @@
-## [7.0.42](https://www.npmjs.com/package/@hxui/angular/v/7.0.41) (2019-06-06)
+## [7.0.44](https://www.npmjs.com/package/@hxui/angular/v/7.0.44) (2019-06-19)
+
+### Bugfix
+
+* **DatePicker:** Added support for 0 value in interval picker. In addition date set to today if zero or negative numbers are used  ([83021a3b1cc176fc9b982d65234895b93d40b645](https://bitbucket.org/md-design/angular-hxui/commits/83021a3b1cc176fc9b982d65234895b93d40b645))
+
+
+## [7.0.43](https://www.npmjs.com/package/@hxui/angular/v/7.0.43) (2019-06-18)
+
+### Bugfix
+
+* **DatePicker:** Reset date when cancel is clicked in drop down  ([ee0ae154ca09a6c844a77404a2e1fa246df6e153](https://bitbucket.org/md-design/angular-hxui/commits/ee0ae154ca09a6c844a77404a2e1fa246df6e153))
+
+
+## [7.0.42](https://www.npmjs.com/package/@hxui/angular/v/7.0.42) (2019-06-06)
 
 ### Bugfix
 
