@@ -50,11 +50,13 @@ export class DatepickerIntervalComponent implements OnInit {
       } else if (this.datePickerConfig && this.datePickerConfig.tabSelected === 'tab2') {
         this.text = moment().add(this.dropdownNumber, this.Duration.replace('(s)', 's'));
         this._DueDate = (this.text).format('ddd DD/MM/YYYY');
+        this.durationText1 = this.Duration;
+        this.numberText1 = this.dropdownNumber;
       }
     }
   }
 
-  onCancel = () => {
+  onCancel = () => { 
     this.text = moment().add(this.numberText1 , this.durationText1.replace('(s)', 's'));
     this._DueDate = this.onSelectoptions(this.numberText1, this.durationText1);
     this._datepickerForm.dueDateInterval = this.numberText1 + ' ' + this.durationText1;
@@ -63,7 +65,7 @@ export class DatepickerIntervalComponent implements OnInit {
     this._datepickerForm._detach();
   }
   onSelect = () => {
-    if (this.dropdownNumber && this.Duration) {
+    if (this.dropdownNumber && this.Duration && this.dropdownNumber > 0) {
       this.text = moment().add(this.dropdownNumber , this.Duration.replace('(s)', 's'));
       this._DueDate = (this.text).format('ddd DD/MM/YYYY');
       this._dueDatestring = (this.text).format('DD/MM/YYYY');
@@ -74,8 +76,9 @@ export class DatepickerIntervalComponent implements OnInit {
       this._datepickerForm.dueDateInterval = this.dropdownNumber + ' ' + this.Duration;
       this._datepickerForm.onChange(this._dueDatestring);
      return this._DueDate;
-     }
-     if (this.dropdownNumber === 0) {
+     }     
+     if (this.dropdownNumber === 0 || this.dropdownNumber < 0) {
+        this.dropdownNumber = 0;  
         this.text = moment(new Date());
         this._DueDate = (this.text).format('ddd DD/MM/YYYY') ;
         this._dueDatestring = (this.text).format('DD/MM/YYYY');
@@ -84,7 +87,7 @@ export class DatepickerIntervalComponent implements OnInit {
         this.presentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
         this._datepickerComponent.viewDate =  new Date(date.getFullYear(), date.getMonth());
         this._datepickerComponent.renderCalendar();
-     }
+     } 
   }
   onSelectoptions(numbervalue , durationValue) {
       this.text = moment().add(numbervalue , durationValue.replace('(s)', 's'));
