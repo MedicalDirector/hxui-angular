@@ -12,5 +12,5 @@
     <label class="hx-label" *ngIf="placeholder">{{placeholder}} <sup *ngIf="required">*</sup></label>
     <div class="hx-help">{{helpText}}</div>
   </div>
-  <i class="{{icon}}" *ngIf="iconPlacement === 'right'" (click)="onFocus()"></i>
+  <i class="{{icon}} has-pointer" *ngIf="iconPlacement === 'right'" (click)="onFocus()"></i>
 </div>
