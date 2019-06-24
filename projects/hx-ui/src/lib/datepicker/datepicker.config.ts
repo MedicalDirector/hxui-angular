@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AppRoutingModule } from 'app/app-routing.module';
 
 
 /** Default values provider for calendar */
@@ -11,5 +12,15 @@ export class DatepickerConfig {
   /** delay in ms before hiding the calendar after hide is called */
   public hideDelay = 0;
   public tabSelected: String ;
-  public selectedDueDateInterval: string = undefined;
+  public selectedDueDateConfiguration: ISelectedDueDateConfig = {
+    selectedDueDateInterval: '0 day(s)',
+    selectedDueDate: new Date(),
+    isSelectedFromInterval: true
+  }
+}
+
+export interface ISelectedDueDateConfig {
+  selectedDueDateInterval: string;
+  selectedDueDate: Date;
+  isSelectedFromInterval: boolean;
 }
