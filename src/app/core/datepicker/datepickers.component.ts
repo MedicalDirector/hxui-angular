@@ -13,6 +13,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 export class DatepickersComponent extends CoreBaseComponent {
 
   public code = new DatepickersCode();
+  public dayte_basic: string;
   public dayte: string;
 
   constructor(
@@ -21,6 +22,10 @@ export class DatepickersComponent extends CoreBaseComponent {
     @Inject(DOCUMENT) protected document: any
   ) {
     super(pageScrollService, breakpointObserver, document);
+  }
+
+  onDateChangedBasic($event) {
+    console.log(this.dayte_basic, $event);
   }
 
   onDateChanged($event) {
