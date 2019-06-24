@@ -65,6 +65,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
       // Shifts the week to start from Monday, rather than Sunday, this causes the index to start at 1
       const dayOffset = date.getDay() === 0 ? 7 : date.getDay();
       this.days[i] = new Date(date.setDate(2 - dayOffset + i));
+      this.datePickerConfig.selectedDueDateConfiguration.selectedDueDate = this.days[i];     
     }
   }
 
@@ -103,6 +104,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
     if (!this.isInvalidDay(date)) {
       this.selectedDate = date;
       this.onDateSelected(date);
+      this.datePickerConfig.selectedDueDateConfiguration.isSelectedFromInterval = false;
     }
   }
 
