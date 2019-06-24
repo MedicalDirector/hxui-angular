@@ -1,3 +1,10 @@
+## [7.0.46](https://www.npmjs.com/package/@hxui/angular/v/7.0.46) (2019-06-24)
+
+### Bugfix
+
+* **DatePicker:** Maintain state of date picker interval tabs on cancel ([9c60228716d97e6abe8bce63d5822784412af304](https://bitbucket.org/md-design/angular-hxui/commits/9c60228716d97e6abe8bce63d5822784412af304))
+
+
 ## [7.0.44](https://www.npmjs.com/package/@hxui/angular/v/7.0.44) (2019-06-19)
 
 ### Bugfix
