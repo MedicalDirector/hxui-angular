@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AppRoutingModule } from 'app/app-routing.module';
 
 
 /** Default values provider for calendar */
