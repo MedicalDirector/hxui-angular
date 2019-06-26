@@ -1,3 +1,10 @@
+## [7.0.47](https://www.npmjs.com/package/@hxui/angular/v/7.0.46) (2019-06-27)
+
+### Bugfix
+
+* **DatePicker:** Allow manual entry of date ([44e9db57532f4997bd3f9c3f9a72d3c5027b0322](https://bitbucket.org/md-design/angular-hxui/commits/9c60228716d97e6abe8bce63d5822784412af304))
+
+
 ## [7.0.46](https://www.npmjs.com/package/@hxui/angular/v/7.0.46) (2019-06-24)
 
 ### Bugfix
