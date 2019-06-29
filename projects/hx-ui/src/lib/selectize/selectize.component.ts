@@ -52,6 +52,7 @@ export class SelectizeComponent
   private _options_differ: IterableDiffer<any>;
   private _optgroups: any[];
   private _optgroups_differ: IterableDiffer<any>;
+  private _silent_option_added_event = false;
 
   @Input() config: SelectizeConfig;
   @Input() id: string;
@@ -67,6 +68,7 @@ export class SelectizeComponent
 
   @Output() onBlur: EventEmitter<void> = new EventEmitter<void>(false);
   @Output() onFocus: EventEmitter<void> = new EventEmitter<void>(false);
+  @Output() onOptionAdded: EventEmitter<any> = new EventEmitter<any>(false);
 
   @ViewChild('selectizeInput') selectizeInput: any;
 
@@ -98,6 +100,7 @@ export class SelectizeComponent
     this.selectize.on('focus', this.onFocusEvent.bind(this));
     this.selectize.on('type', this.onSelectizeType.bind(this));
     this.selectize.on('item_add', this.onSelectizeItemSelected.bind(this));
+    this.selectize.on('option_add', this.onSelectizeOptionAdded.bind(this));
     this.updatePlaceholder();
     this.onEnabledStatusChange();
     this.hasCaret();
@@ -209,7 +212,9 @@ export class SelectizeComponent
    * Refresh selected values when options change.
    */
   onSelectizeOptionAdd(option: any): void {
+    this._silent_option_added_event = true;
     this.selectize.addOption(_.cloneDeep(option));
+    this._silent_option_added_event = false;
     const valueField = this.config.valueField;
     if (this.value) {
       const items =
@@ -307,6 +312,12 @@ export class SelectizeComponent
 
     if (this.config.closeAfterSelect) {
       this.selectize.close();
+    }
+  }
+
+  onSelectizeOptionAdded(value, data) {
+    if (!this._silent_option_added_event) {
+      this.onOptionAdded.emit(data);
     }
   }
 

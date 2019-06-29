@@ -24,7 +24,7 @@
 
       <div class="hx-card not-scrollable">
         <div class="hx-card-content">
-          <hxa-selectize [config]="multiSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedMultiSelectValue"></hxa-selectize>
+          <hxa-selectize [config]="multiSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedMultiSelectValue" (onOptionAdded)="onOptionAdded($event)"></hxa-selectize>
           <pre>Current value: {{selectedMultiSelectValue | json}}</pre>
         </div>
       </div>
@@ -237,9 +237,19 @@
         </thead>
         <tbody>
         <tr>
+          <td>onFocus</td>
+          <td><kbd>EventEmitter</kbd></td>
+          <td>Event fired when input has focus.</td>
+        </tr>
+        <tr>
           <td>onBlur</td>
           <td><kbd>EventEmitter</kbd></td>
           <td>Event fired when input losses focus.</td>
+        </tr>
+        <tr>
+          <td>onOptionAdded</td>
+          <td><kbd>EventEmitter</kbd></td>
+          <td>Event fired when a new option is added. Returns the added option. </td>
         </tr>
         </tbody>
       </table>
