@@ -3,7 +3,7 @@
 
 ### Enhancement
 
-* **Selectize:** Added onOptionAdded event for when a new option is added ([44e9db57532f4997bd3f9c3f9a72d3c5027b0322](https://bitbucket.org/md-design/angular-hxui/commits/9c60228716d97e6abe8bce63d5822784412af304))
+* **Selectize:** Added onOptionAdded event for when a new option is added ([b3617a267543411de9ff91d88ddcd7c381490205](https://bitbucket.org/md-design/angular-hxui/commits/b3617a267543411de9ff91d88ddcd7c381490205))
 
 
 ## [7.0.47](https://www.npmjs.com/package/@hxui/angular/v/7.0.46) (2019-06-27)
