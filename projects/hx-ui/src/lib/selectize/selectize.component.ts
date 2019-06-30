@@ -29,20 +29,18 @@ import {ISelectizeItem} from './selectize-item.interface';
 
 declare var $: any;
 
-export const SELECTIZE_VALUE_ACCESSOR: any = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => SelectizeComponent),
-  multi: true
-};
-
 @Component({
   selector: 'hxa-selectize',
-  template: `<div class="hx-input-control" [ngClass]="config.inputControlClasses" [class.is-focused]="isFocused" [class.is-valid]="isValid">
+  template: `<div class="hx-input-control" [ngClass]="config?.inputControlClasses" [class.is-focused]="isFocused" [class.is-valid]="isValid">
                   <select #selectizeInput></select>
-                  <label for="{{id}}" class="hx-label">{{config.label}} <sup *ngIf="config.mandatory">*</sup></label>
-                  <div class="hx-help">{{config.help}}</div>
+                  <label for="{{id}}" class="hx-label">{{config?.label}} <sup *ngIf="config?.mandatory">*</sup></label>
+                  <div class="hx-help">{{config?.help}}</div>
               </div>`,
-  providers: [SELECTIZE_VALUE_ACCESSOR],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => SelectizeComponent),
+    multi: true
+  }],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['selectize.component.scss']
 })
@@ -274,7 +272,7 @@ export class SelectizeComponent
 
 
   hasCaret() {
-    if (this.config.hasCaret) {
+    if (this.config && this.config.hasCaret) {
       const parent = $(this.selectize.$control).parent();
       parent.addClass('hasCaret');
     }
