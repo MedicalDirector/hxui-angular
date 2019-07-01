@@ -1,3 +1,9 @@
+## [7.0.49](https://www.npmjs.com/package/@hxui/angular/v/7.0.49) (2019-07-01)
+
+### Bugfix
+
+* **Date Picker:** Fixed split of undefined bug ([27792a8566900ca90d40212eb9ea2034dc78de60](https://bitbucket.org/md-design/angular-hxui/commits/27792a8566900ca90d40212eb9ea2034dc78de60))
+
 
 ## [7.0.48](https://www.npmjs.com/package/@hxui/angular/v/7.0.48) (2019-06-29)
 
