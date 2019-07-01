@@ -146,6 +146,14 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
     this._selectedCustomSelectValue2 = v;
   };
 
+  constructor(
+    protected pageScrollService: PageScrollService,
+    protected breakpointObserver: BreakpointObserver,
+    @Inject(DOCUMENT) protected document: any
+  ) {
+    super(pageScrollService, breakpointObserver, document);
+  }
+
 
 
   ngOnInit(): void {
@@ -170,12 +178,8 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
      this.customSelectizeConfig.help = 'Select 1 or more tests';
   }
 
-
-  constructor(
-    protected pageScrollService: PageScrollService,
-    protected breakpointObserver: BreakpointObserver,
-    @Inject(DOCUMENT) protected document: any
-  ) {
-    super(pageScrollService, breakpointObserver, document);
+  onOptionAdded($event) {
+    alert('Option added: \n Label ' + $event.label + '\n Value: ' + $event.value);
   }
+
 }

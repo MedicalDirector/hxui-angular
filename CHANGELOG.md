@@ -1,3 +1,11 @@
+
+## [7.0.48](https://www.npmjs.com/package/@hxui/angular/v/7.0.48) (2019-06-29)
+
+### Enhancement
+
+* **Selectize:** Added onOptionAdded event for when a new option is added ([b3617a267543411de9ff91d88ddcd7c381490205](https://bitbucket.org/md-design/angular-hxui/commits/b3617a267543411de9ff91d88ddcd7c381490205))
+
+
 ## [7.0.47](https://www.npmjs.com/package/@hxui/angular/v/7.0.46) (2019-06-27)
 
 ### Bugfix

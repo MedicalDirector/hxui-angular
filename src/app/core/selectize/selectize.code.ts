@@ -15,7 +15,10 @@ export class AppModule(){}
  `
  <div class="hx-card not-scrollable">
     <div class="hx-card-content">
-          <hxa-selectize [config]="selectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedSingleSelectValue"></hxa-selectize>
+          <hxa-selectize 
+          [config]="selectizeConfig" 
+          [options]="selectizeOptions" 
+          [(ngModel)]="selectedSingleSelectValue"></hxa-selectize>
     </div>
   </div>
   `;
@@ -88,7 +91,11 @@ export class AppModule(){}
   `
  <div class="hx-card not-scrollable">
     <div class="hx-card-content">
-          <hxa-selectize [config]="selectizeConfig" [options]="selectizeOptions"  [(ngModel)]="selectedMultiSelectValue"></hxa-selectize>
+          <hxa-selectize 
+          [config]="selectizeConfig" 
+          [options]="selectizeOptions"  
+          [(ngModel)]="selectedMultiSelectValue"  
+          (onOptionAdded)="onOptionAdded($event)"></hxa-selectize>
     </div>
   </div>
   `;
@@ -151,6 +158,8 @@ multiExampleTypescript =
     ];
 
 
+    constructor()  {}
+
     ngOnInit(): void  {
       this.selectizeConfig.label = 'Test(s) required';
       this.selectizeConfig.help = 'Select 1 or more tests';
@@ -158,8 +167,11 @@ multiExampleTypescript =
       this.selectizeConfig.maxItems = null;
       this.selectizeConfig.hideSelected = true;
     }
+    
+     onOptionAdded($event) {
+      alert('Option added: \\n Label ' + $event.label + '\\n Value: ' + $event.value);
+    }
 
-    constructor()  {}
   }
   `;
 
@@ -167,7 +179,10 @@ multiExampleTypescript =
     `
  <div class="hx-card not-scrollable">
     <div class="hx-card-content">
-          <hxa-selectize [config]="selectizeCustomConfig" [options]="selectizeOptions"  [(ngModel)]="selectedCustomSelectValue"></hxa-selectize>
+          <hxa-selectize 
+          [config]="selectizeCustomConfig" 
+          [options]="selectizeOptions"  
+          [(ngModel)]="selectedCustomSelectValue"></hxa-selectize>
     </div>
   </div>
   `;
