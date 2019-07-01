@@ -91,6 +91,7 @@ export class DatepickerIntervalComponent implements OnInit {
   public onChoose() {
     this._datepickerForm.date =  new Date(this.text);
     this._datepickerForm.setDate(new Date(this.text));
+    this._dueDatestring = (this.text).format('DD/MM/YYYY');
     this._datepickerForm.onChange(this._dueDatestring);
     this.datePickerConfig.selectedDueDateConfiguration.selectedDueDate = new Date(this.text);
     this._datepickerComponent.OpenDiv = false;
