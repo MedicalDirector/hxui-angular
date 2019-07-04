@@ -1,3 +1,10 @@
+## [7.0.50](https://www.npmjs.com/package/@hxui/angular/v/7.0.50) (2019-07-05)
+
+### Enhancement
+
+* **Date Picker:** Added input masking to force users to enter a correctly formatted date ([183248b1744704f4f0762133fa84406eb8ee15be](https://bitbucket.org/md-design/angular-hxui/commits/183248b1744704f4f0762133fa84406eb8ee15be))
+
+
 ## [7.0.49](https://www.npmjs.com/package/@hxui/angular/v/7.0.49) (2019-07-01)
 
 ### Bugfix
