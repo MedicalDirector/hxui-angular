@@ -178,7 +178,9 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     this.setDate(inputDate);
   }
 
-  public onChange(inputDate: string): void {
+  public onChange($event): void {
+
+    const inputDate = $event.target.value;
     const date: Date = this.parseDate(inputDate);
 
     if (inputDate === '') {

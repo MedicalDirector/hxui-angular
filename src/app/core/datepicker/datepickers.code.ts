@@ -65,7 +65,7 @@ export class DatepickersCode {
             [interval]="true"
             #d="ngModel"
             [(ngModel)]="dayte"
-            [allowPreviousDates]="false"
+            [allowPreviousDates]="true"
           ></hxa-datepicker-input>
           <div>
             <span>Emitted Date object: {{dayte}}</span><br>

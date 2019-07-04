@@ -12,10 +12,19 @@
       <code highlight [code]="code.usage"></code>
     </pre>
 
+    <div class="hx-alert is-info is-inverse">
+      <span class="hx-icon-control mr-2">
+        <i class="hx-icon is-medium icon-information"></i>
+      </span>
+          <span class="hx-flex-1">
+            The date picker makes use of an excellent 3rd party angular directive called <a href="https://www.npmjs.com/package/ngx-mask" target="_blank">ngx-mask</a>.<br>
+            You will need to npm install ngx-mask into your application, in order to use the date picker component.
+      </span>
+    </div>
+
     <hr>
 
     <h4 id="example">Basic Example</h4>
-
     <div class="hx-columns">
       <div class="hx-column">
         <form #formBasic="ngForm">
@@ -67,7 +76,7 @@
             [interval]="true"
             #d="ngModel"
             [(ngModel)]="dayte"
-            [allowPreviousDates]="false"
+            [allowPreviousDates]="true"
           ></hxa-datepicker-input>
           <div>
             <span>Emitted Date object: {{dayte}}</span><br>
