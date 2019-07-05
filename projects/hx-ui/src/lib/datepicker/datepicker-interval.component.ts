@@ -88,11 +88,12 @@ export class DatepickerIntervalComponent implements OnInit {
 
       return this._DueDate;
   }
-  public onChoose() {
+  public onChoose($event) {
     this._datepickerForm.date =  new Date(this.text);
     this._datepickerForm.setDate(new Date(this.text));
     this._dueDatestring = (this.text).format('DD/MM/YYYY');
-    this._datepickerForm.onChange(this._dueDatestring);
+    $event.target.value = this._dueDatestring 
+    this._datepickerForm.onChange($event);
     this.datePickerConfig.selectedDueDateConfiguration.selectedDueDate = new Date(this.text);
     this._datepickerComponent.OpenDiv = false;
     this._datepickerComponent.selectedDueDateInterval = this.dropdownNumber + ' ' + this.Duration;
