@@ -1,3 +1,10 @@
+## [7.0.51](https://www.npmjs.com/package/@hxui/angular/v/7.0.50) (2019-07-05)
+
+### Bugfix
+
+* **Date Picker:** Fix for masking change within intervals component  ([183248b1744704f4f0762133fa84406eb8ee15be](https://bitbucket.org/md-design/angular-hxui/commits/183248b1744704f4f0762133fa84406eb8ee15be))
+
+
 ## [7.0.50](https://www.npmjs.com/package/@hxui/angular/v/7.0.50) (2019-07-05)
 
 ### Enhancement
