@@ -219,7 +219,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 .hx-select-control:after{  display:none;}
 .selectize-dropdown {
 	position: absolute;
-	z-index: 10;
+  z-index: 1000;
 	border: $selectize-dropdown-border;
 	background: $selectize-color-dropdown;
 	margin: 1px 0 0 0;
