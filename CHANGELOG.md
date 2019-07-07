@@ -1,6 +1,13 @@
+## [7.0.52](https://www.npmjs.com/package/@hxui/angular/v/7.0.52) (2019-07-07)
+
+### Bug fix
+
+* **Selectize:** Updated z-index of selectize dropdown  ([2ddde009ed8bfba25a208c09ae7e8b0a59c96184](https://bitbucket.org/md-design/angular-hxui/commits/2ddde009ed8bfba25a208c09ae7e8b0a59c96184))
+
+
 ## [7.0.51](https://www.npmjs.com/package/@hxui/angular/v/7.0.50) (2019-07-05)
 
-### Bugfix
+### Bug fix
 
 * **Date Picker:** Fix for masking change within intervals component  ([183248b1744704f4f0762133fa84406eb8ee15be](https://bitbucket.org/md-design/angular-hxui/commits/183248b1744704f4f0762133fa84406eb8ee15be))
 
@@ -14,7 +21,7 @@
 
 ## [7.0.49](https://www.npmjs.com/package/@hxui/angular/v/7.0.49) (2019-07-01)
 
-### Bugfix
+### Bug fix
 
 * **Date Picker:** Fixed split of undefined bug ([27792a8566900ca90d40212eb9ea2034dc78de60](https://bitbucket.org/md-design/angular-hxui/commits/27792a8566900ca90d40212eb9ea2034dc78de60))
 
@@ -28,42 +35,42 @@
 
 ## [7.0.47](https://www.npmjs.com/package/@hxui/angular/v/7.0.46) (2019-06-27)
 
-### Bugfix
+### Bug fix
 
 * **DatePicker:** Allow manual entry of date ([44e9db57532f4997bd3f9c3f9a72d3c5027b0322](https://bitbucket.org/md-design/angular-hxui/commits/9c60228716d97e6abe8bce63d5822784412af304))
 
 
 ## [7.0.46](https://www.npmjs.com/package/@hxui/angular/v/7.0.46) (2019-06-24)
 
-### Bugfix
+### Bug fix
 
 * **DatePicker:** Maintain state of date picker interval tabs on cancel ([9c60228716d97e6abe8bce63d5822784412af304](https://bitbucket.org/md-design/angular-hxui/commits/9c60228716d97e6abe8bce63d5822784412af304))
 
 
 ## [7.0.44](https://www.npmjs.com/package/@hxui/angular/v/7.0.44) (2019-06-19)
 
-### Bugfix
+### Bug fix
 
 * **DatePicker:** Added support for 0 value in interval picker. In addition date set to today if zero or negative numbers are used  ([83021a3b1cc176fc9b982d65234895b93d40b645](https://bitbucket.org/md-design/angular-hxui/commits/83021a3b1cc176fc9b982d65234895b93d40b645))
 
 
 ## [7.0.43](https://www.npmjs.com/package/@hxui/angular/v/7.0.43) (2019-06-18)
 
-### Bugfix
+### Bug fix
 
 * **DatePicker:** Reset date when cancel is clicked in drop down  ([ee0ae154ca09a6c844a77404a2e1fa246df6e153](https://bitbucket.org/md-design/angular-hxui/commits/ee0ae154ca09a6c844a77404a2e1fa246df6e153))
 
 
 ## [7.0.42](https://www.npmjs.com/package/@hxui/angular/v/7.0.42) (2019-06-06)
 
-### Bugfix
+### Bug fix
 
 * **Tabular:** Fixed issue which caused change detection to not run  ([0f19207c34429d19a72255c6af1e3d73439c982a](https://bitbucket.org/md-design/angular-hxui/commits/0f19207c34429d19a72255c6af1e3d73439c982a))
 
 
 ## [7.0.41](https://www.npmjs.com/package/@hxui/angular/v/7.0.41) (2019-06-06)
 
-### Bugfix
+### Bug fix
 
 * **Datepicker:** Fixed issue with the onDateChange event which was triggering before ngModel was propegated and triggering multiple times on initialise  ([5c3e9f1896b05819caf2eaf49eec234316ccb86d](https://bitbucket.org/md-design/angular-hxui/commits/5c3e9f1896b05819caf2eaf49eec234316ccb86d))
 
