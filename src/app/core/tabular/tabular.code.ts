@@ -18,15 +18,21 @@ export class AppModule(){}
 
 exampleTemplate =
 `
-<div class="hx-columns">
-  <div class="hx-column">
-    <span hxTooltip="Select 1 or more users" [disabled]="!isPrintDisabled()" placement="right">
-        <button class="hx-button is-small" (click)="printSelected()" [disabled]="isPrintDisabled()" >Print</button>
-    </span>
-  </div>
+<div class="hx-toolbar is-small is-perforated">
+  <span hxTooltip="Select 1 or more users" [disabled]="!isPrintDisabled()" placement="right">
+    <button class="hx-button mr-1" (click)="printSelected($event)" [disabled]="isPrintDisabled()">
+      <div class="hx-icon-control"><i class="hx-icon icon-printer-outline"></i></div>
+      <div>Print</div>
+    </button>
+  </span>
+  <button class="hx-button  mr-1" (click)="setCheckAllState(true)">Check All</button>
+  <button class="hx-button" (click)="setCheckAllState(false)">Uncheck All</button>
+  <div class="hx-divider"></div>
+  <div><span class="is-info is-text-weight-bolder">{{totalSelected}}</span> of <span class="is-info is-text-weight-bolder">{{rowData.length}}</span><span class="is-text-weight-light"> items selected</span></div>
+  <div class="hx-spacer"></div>
+  <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters"></hxa-filters>
 </div>
-
-<hx-tabular
+<hxa-tabular
   [rows]="rowData"
   [columns]="columnData"
   [config]="tabularConfig"
@@ -36,7 +42,7 @@ exampleTemplate =
   (onSort)="onSortHandler($event)"
   (onCheck)="singleCheckHandler($event)"
   (onCheckAll)="groupCheckHandler($event)">
-</hx-tabular>
+</hxa-tabular>
 
 `;
 
@@ -50,23 +56,31 @@ import {TabularSize} from '@hxui/angular';
 import {ActionConfigRouteType} from '@hxui/angular';
 import {TabularService} from '@hxui/angular';
 import {UserModel} from '@hxui/angular';
+import {IFiltersConfig, FilterType, FiltersComponent as HxFiltersComponent, FiltersModel } from '@hxui/angular';
 
 @Component({
   selector: 'app-tabular',
-  templateUrl: './tabular.component.html'
+  templateUrl: './tabular.component.html',
+  styles: [':host { display:flex; flex: 1; min-width: 0; }'],
 })
-export class TabularComponent implements OnInit {
+export class TabularComponent extends CoreBaseComponent implements OnInit {
 
+  @ViewChild('filterComp') filtersComponent: FiltersComponent;
+  onFilterChangeEvent$ = new Subscription();
+  users$: Observable<UserModel[]>;
+  code = new TabularCode();
   searchTerm: string;
   rowData: ITabularRow[] = [];
   columnData: TabularColumn[] = [
     new TabularColumn('checkboxes', 'Checkboxes', TabularColumnTypes.Checkbox, false),
-    new TabularColumn('id', 'Id', TabularColumnTypes.String, true),
+    new TabularColumn('id', 'Id', TabularColumnTypes.Number, true),
     new TabularColumn('usercode', 'User Code', TabularColumnTypes.String, true),
     new TabularColumn('name', 'Name', TabularColumnTypes.Html, true),
+    new TabularColumn('rolename', 'Role', TabularColumnTypes.String, true),
     new TabularColumn('flag', 'Flag', TabularColumnTypes.Badge, false),
     new TabularColumn('created', 'Created', TabularColumnTypes.Date, true),
     new TabularColumn('modified', 'Modified', TabularColumnTypes.DateTime, true),
+    new TabularColumn('info', 'info', TabularColumnTypes.Icon, false),
     new TabularColumn('active', 'Active', TabularColumnTypes.Status, false, 'is-text-center'),
     new TabularColumn('actions', 'Actions', TabularColumnTypes.Actions, false)
   ];
@@ -91,11 +105,11 @@ export class TabularComponent implements OnInit {
   /**
    * Refresh data handler for data grid.
    */
-  refreshDataHandler($event) {
-    this.getTabularData();
+  refreshDataHandler = ($event) => {
+    this.getAllUsers();
   }
 
-   rowClickHandler($event) {
+  rowClickHandler($event) {
     console.log($event);
   }
 
@@ -124,17 +138,24 @@ export class TabularComponent implements OnInit {
   }
 
   /**
-  * Static data for example
-  **/
-  private getTabularData() {
-    this.rowData = [];
-    this.service.getUsers()
-      .then((users) => {
-        for (let i = 0; i < users.length; i++) {
-          const user = new UserModel(users[i]);
-          this.rowData.push(user);
-        }
-      });
+   * Static data for example
+   */
+  private getAllUsers() {
+    const data: ITabularRow[] = [];
+    this.service.getUsers().subscribe((users) => this.setRowData(users));
+  }
+
+
+  setCheckAllState(state: boolean = false) {
+    this.rowData.forEach((row) => {
+      row.checked = state;
+    });
+  }
+
+  ngOnInit() {
+  }
+
+  onActionClickHandler = () => {
   }
 
   singleCheckHandler($event): void {
@@ -146,12 +167,6 @@ export class TabularComponent implements OnInit {
     alert('group check ' + $event)
   }
 
-  constructor(private service: TabularService) {
-    this.getTabularData();
-  }
-
-  ngOnInit() {
-  }
 }
 
 `;

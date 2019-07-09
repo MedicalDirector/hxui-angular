@@ -8,7 +8,9 @@ import localeEn from '@angular/common/locales/en-AU';
 import {HighlightModule} from 'ngx-highlightjs';
 import {HxUiModule} from '../../projects/hx-ui/src/lib/hx-ui.module';
 
+
 registerLocaleData(localeEn, 'en-AU');
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,7 @@ registerLocaleData(localeEn, 'en-AU');
     CoreModule.forRoot(),
     SharedModule.forRoot(),
     HxUiModule.forRoot(),
-    HighlightModule.forRoot({ theme: 'agate'})
+    HighlightModule.forRoot({ theme: 'agate'}),
   ],
   providers: [],
   bootstrap: [AppComponent]

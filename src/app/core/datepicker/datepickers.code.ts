@@ -12,7 +12,24 @@ export class DatepickersCode {
 
   exampleTemplate =
     `
-    <hxa-datepicker-input align="bottom" [(ngModel)]="date"></hxa-datepicker-input>
+   <form #formBasic="ngForm">
+      <hxa-datepicker-input
+        name="datepicker_basic"
+        align="bottom"
+        #db="ngModel"
+        [(ngModel)]="dayte_basic"
+        [allowPreviousDates]="false"
+        (onDateChange)="onDateChangedBasic($event)"
+        [required]="true"
+      ></hxa-datepicker-input>
+      <div>
+        <span>Emitted Date object: {{dayte_basic}}</span><br>
+        <span>NgForm Valid: {{formBasic.valid}}</span> <br>
+        <span>NgModel Valid: {{db.valid}}</span><br>
+        <span>NgForm Touched: {{formBasic.touched}}</span><br>
+        <span>NgModel Touched: {{db.touched}}</span>
+      </div>
+    </form>
     `;
 
   exampleTypescript =
@@ -24,18 +41,40 @@ export class DatepickersCode {
       selector: 'app-datepickers',
       templateUrl: './datepickers.component.html'
     })
-    export class DatepickersComponent extends CoreBaseComponent {
+    export class DatepickersComponent {
     
-      date: string;
+      public dayte_basic: string;
     
-      constructor() { }    
+      constructor() {
+      }
+    
+      onDateChangedBasic($event) {
+        console.log(this.dayte_basic, $event);
+      }
+   
     }
 
     `;
 
   intervalExampleTemplate =
     `
-    <hxa-datepicker-input align="bottom" [interval]="true" [(ngModel)]="date"></hxa-datepicker-input>
+    <form #form="ngForm">
+          <hxa-datepicker-input
+            name="datepicker"
+            align="bottom"
+            [interval]="true"
+            #d="ngModel"
+            [(ngModel)]="dayte"
+            [allowPreviousDates]="true"
+          ></hxa-datepicker-input>
+          <div>
+            <span>Emitted Date object: {{dayte}}</span><br>
+            <span>NgForm Valid: {{form.valid}}</span> <br>
+            <span>NgModel Valid: {{d.valid}}</span><br>
+            <span>NgForm Touched: {{form.touched}}</span><br>
+            <span>NgModel Touched: {{d.touched}}</span>
+          </div>
+        </form>
     `;
 
   intervalExampleTypescript =
@@ -47,11 +86,16 @@ export class DatepickersCode {
       selector: 'app-datepickers',
       templateUrl: './datepickers.component.html'
     })
-    export class DatepickersComponent extends CoreBaseComponent {
+    export class DatepickersComponent  {
     
-      date: string;
+      public dayte: string;
     
-      constructor() { }    
+      constructor() {
+      }
+    
+      onDateChanged($event) {
+        console.log(this.dayte, $event);
+      } 
     }
 
     `;

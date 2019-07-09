@@ -62,7 +62,7 @@ export class DateRangePickerComponent implements OnInit {
 
   // import to DateSElectionType into the instance of this class
   DateSelectionType = DateSelectionType;
-  currentTab: DateSelectionType = DateSelectionType.interval
+  currentTab: DateSelectionType = DateSelectionType.interval;
   fromDate: Date = new Date();
   toDate: Date = new Date();
   _displayRange: string;
@@ -77,9 +77,9 @@ export class DateRangePickerComponent implements OnInit {
 
   ngOnInit() {
     this._displayRange = this.datePipe.transform(new Date(), this.dateFormat);
-    this.showTab = this.displayMode === DisplayMode.showTab ? true : false;
-    this.showIntervalOnly = this.displayMode === DisplayMode.showIntervalOnly ? true : false;
-    this.showCustomOnly = this.displayMode === DisplayMode.showCustomOnly ? true : false;
+    this.showTab = this.displayMode === DisplayMode.showTab;
+    this.showIntervalOnly = this.displayMode === DisplayMode.showIntervalOnly;
+    this.showCustomOnly = this.displayMode === DisplayMode.showCustomOnly;
     this.generateIntervalOptionItems(this.intervalOptions || []);
   }
 

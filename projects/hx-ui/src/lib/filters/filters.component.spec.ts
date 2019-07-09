@@ -10,7 +10,7 @@ describe('FiltersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FiltersModule ],
+      imports: [ FiltersModule.forRoot() ],
       declarations: [ ]
     })
     .compileComponents();

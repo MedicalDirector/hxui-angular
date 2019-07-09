@@ -4,6 +4,7 @@ import {UserModel} from './user.model';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/internal/operators';
 
 @Injectable()
 export class TabularService {
@@ -23,7 +24,30 @@ export class TabularService {
     const url = `${this.usersUrl}/${id}`;
     return this.http.get<UserModel>(url)
       .pipe(
-        catchError(this.handleError<UserModel>('getUsers id=${id}'))
+        catchError(this.handleError<UserModel>('getUser id=${id}'))
+      );
+  }
+
+  getUserByRole(role: string): Observable<UserModel[]> {
+    return this.http.get<UserModel[]>(this.usersUrl)
+      .pipe(map((users) => {
+        users = users.filter((data) => data.rolename === role );
+        return users;
+      }))
+      .pipe(
+        catchError(this.handleError('getUsers', []))
+      );
+  }
+
+  filterUserByName(name: string): Observable<UserModel[]> {
+    return this.http.get<UserModel[]>(this.usersUrl)
+      .pipe(map((users) => {
+        const regexp = new RegExp(name, 'i');
+        users = users.filter(data => regexp.test(data.firstname) || regexp.test(data.surname));
+        return users;
+      }))
+      .pipe(
+        catchError(this.handleError('getUsers', []))
       );
   }
 

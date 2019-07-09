@@ -5,14 +5,16 @@ import { DOCUMENT } from '@angular/common';
 import { DatepickersCode } from './datepickers.code';
 import {BreakpointObserver} from '@angular/cdk/layout';
 
+
 @Component({
   selector: 'app-datepickers',
   templateUrl: './datepickers.component.html',
   styles: [':host { display: flex; flex: 1; min-width: 0; }']
 })
-export class DatepickersComponent extends CoreBaseComponent {
+export class DatepickersComponent extends CoreBaseComponent { 
 
   public code = new DatepickersCode();
+  public dayte_basic: string;
   public dayte: string;
   
   intervalOptions: string[]  = [
@@ -37,5 +39,13 @@ export class DatepickersComponent extends CoreBaseComponent {
     @Inject(DOCUMENT) protected document: any
   ) {
     super(pageScrollService, breakpointObserver, document);
+  }
+
+  onDateChangedBasic($event) {
+    console.log(this.dayte_basic, $event);
+  }
+
+  onDateChanged($event) {
+    console.log(this.dayte, $event);
   }
 }

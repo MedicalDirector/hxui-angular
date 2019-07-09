@@ -19,6 +19,9 @@ import {OnlineStatusService} from './utils/services/online-status.service';
 import {ToastrModule} from './toastr/toastr.module';
 import { DateRangePickerModule } from './date-range-picker/date-range-picker.module';
 import { DatePipe } from '@angular/common';
+import {IConfig, NgxMaskModule} from 'ngx-mask';
+
+export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
   imports: [
@@ -29,14 +32,15 @@ import { DatePipe } from '@angular/common';
     DateRangePickerModule.forRoot(),
     AutoGrowModule.forRoot(), EmptyStateModule.forRoot(),
     AccordionModule, FiltersModule.forRoot(), LoadersModule,
-    TextInputModule, ToastrModule.forRoot()
+    TextInputModule, ToastrModule.forRoot(), NgxMaskModule.forRoot(mask_options)
   ],
   exports: [
     DatepickerModule,DateRangePickerModule, DropdownModule, ModalModule,
     PaginationModule, TabsModule, TooltipModule,
     TypeaheadModule, TabularModule, SelectizeModule,
     AutoGrowModule, EmptyStateModule, AccordionModule,
-    FiltersModule, LoadersModule, TextInputModule, ToastrModule
+    FiltersModule, LoadersModule, TextInputModule, ToastrModule,
+    NgxMaskModule
   ]
 })
 export class HxUiModule {

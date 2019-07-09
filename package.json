@@ -11,7 +11,9 @@
     "e2e": "ng e2e",
     "packagr": "ng build HxUi",
     "install-peers": "npm install array-sort-by @angular/animations @angular/cdk @angular/cli @angular/common @angular/compiler @angular/core @angular/forms @angular/http @angular/platform-browser @angular/platform-browser-dynamic @angular/platform-server @angular/router @hxui/css angular-in-memory-web-api core-js jquery lodash.clonedeep ngx-highlightjs ngx-page-scroll rxjs selectize zone.js",
-    "deploy": "npm run install-peers && npm run build"
+    "deploy": "npm run install-peers && npm run build",
+    "HxUi-UnitTests": "ng test HxUi --code-coverage=true --watch=false --browsers=ChromeHeadless",
+    "HxUi-Build": "ng build HxUi"
   },
   "private": false,
   "dependencies": {
@@ -26,7 +28,7 @@
     "@angular/platform-browser-dynamic": "^7.0.2",
     "@angular/platform-server": "^7.0.2",
     "@angular/router": "^7.0.2",
-    "@hxui/css": "^1.2.8",
+    "@hxui/css": "^1.2.19",
     "angular-in-memory-web-api": "^0.6.0",
     "array-sort-by": "^1.2.1",
     "core-js": "^2.5.6",
@@ -35,6 +37,7 @@
     "lodash.clonedeep": "^4.5.0",
     "moment": "^2.23.0",
     "ngx-highlightjs": "^2.0.2",
+    "ngx-mask": "^8.0.0",
     "ngx-page-scroll": "^5.0.0",
     "rxjs": "^6.3.3",
     "selectize": "^0.12.4",
@@ -54,7 +57,7 @@
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "karma": "~1.4.1",
-    "karma-chrome-launcher": "~2.0.0",
+    "karma-chrome-launcher": "~2.2.0",
     "karma-cli": "~1.0.1",
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",

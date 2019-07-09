@@ -33,17 +33,20 @@
 
         <p>
           You can use formatted HTML in the tooltip and you can set the width in pixels of the tooltip:
-          <i class="hx-icon icon-information-outline" [hxTooltip]="tooltipTemplateHtml"  placement="right" maxWidth="350"></i>
+          <i class="hx-icon icon-information-outline" hxTooltip [autoClose]="false" placement="right" maxWidth="350">
+            <div *hxaTooltipDynamicContent>
+              <div class='is-text-left pa-3'>
+                ENABLED FOR
+                <ul>
+                  <li>Card payments</li>
+                  <li>Fully paid patient claims with EasyClaim</li>
+                  <li>Dynamic content with <a (click)="onClickHandler($event)">links</a></li>
+                </ul>
+              </div>
+            </div>
+          </i>
         </p>
-        <div class='is-hidden' #toolTipContent>
-          <div class='is-text-left pa-3'>
-            ENABLED FOR
-            <ul>
-              <li>Card payments</li>
-              <li>Fully paid patient claims with EasyClaim</li>
-            </ul>
-          </div>
-        </div>
+
       </div>
     </div>
 
@@ -125,6 +128,11 @@
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>autoClose</td>
+              <td><kbd>Boolean</kbd></td>
+              <td>Indicates that the tooltip will be closed on document click</td>
+            </tr>
             <tr>
               <td>content</td>
               <td><kbd>String</kbd></td>
