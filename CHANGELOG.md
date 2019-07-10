@@ -2,7 +2,7 @@
 
 ### Enhancement
 
-* **Date Picker:** Added onFocus output to the date picker input  ([2ddde009ed8bfba25a208c09ae7e8b0a59c96184](https://bitbucket.org/md-design/angular-hxui/commits/2ddde009ed8bfba25a208c09ae7e8b0a59c96184))
+* **Date Picker:** Added onFocus output to the date picker input  ([d1f65b7b968553a41108f8a225956ee28db9e4cf](https://bitbucket.org/md-design/angular-hxui/commits/d1f65b7b968553a41108f8a225956ee28db9e4cf))
 
 
 
