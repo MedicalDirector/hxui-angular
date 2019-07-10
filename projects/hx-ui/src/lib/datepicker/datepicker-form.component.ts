@@ -97,6 +97,9 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   @Output()
   onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
+  @Output()
+  onFocus: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public date: Date = null;
   public visible = false;
   public presentDate: Date;
@@ -192,9 +195,10 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     }
   }
 
-  public onFocus(): void {
+  public onFocused(): void {
     this._show();
     this.propogateTouched();
+    this.onFocus.emit(true);
   }
 
   public onTab(inputDate: string): void {
