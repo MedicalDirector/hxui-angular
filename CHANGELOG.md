@@ -1,3 +1,11 @@
+## [7.0.53](https://www.npmjs.com/package/@hxui/angular/v/7.0.53) (2019-07-10)
+
+### Enhancement
+
+* **Date Picker:** Added onFocus output to the date picker input  ([2ddde009ed8bfba25a208c09ae7e8b0a59c96184](https://bitbucket.org/md-design/angular-hxui/commits/2ddde009ed8bfba25a208c09ae7e8b0a59c96184))
+
+
+
 ## [7.0.52](https://www.npmjs.com/package/@hxui/angular/v/7.0.52) (2019-07-07)
 
 ### Bug fix
