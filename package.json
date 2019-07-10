@@ -39,6 +39,7 @@
     "ngx-highlightjs": "^2.0.2",
     "ngx-mask": "^8.0.0",
     "ngx-page-scroll": "^5.0.0",
+    "node-sass": "^4.12.0",
     "rxjs": "^6.3.3",
     "selectize": "^0.12.4",
     "zone.js": "^0.8.26"
