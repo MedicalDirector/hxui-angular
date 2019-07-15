@@ -260,7 +260,8 @@ export class SelectizeConfig  {
       title     : 'Remove',
       className : 'hx-delete',
       append    : true
-    }
+    },
+    'position_auto' : {}
   };
 
 }

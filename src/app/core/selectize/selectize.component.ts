@@ -165,6 +165,7 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
   private setMultiSelectizeConfig() {
      this.singleSelectizeConfig.label = 'Select a test';
      this.singleSelectizeConfig.mandatory = true;
+     this.singleSelectizeConfig.dropdownParent = 'body';
      this.multiSelectizeConfig.create = true;
      this.multiSelectizeConfig.maxItems = null;
      this.multiSelectizeConfig.hideSelected = true;

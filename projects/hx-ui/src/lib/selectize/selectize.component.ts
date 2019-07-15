@@ -26,6 +26,7 @@ import {
 import * as _ from 'lodash';
 import { SelectizeConfig } from './selectize.config';
 import {ISelectizeItem} from './selectize-item.interface';
+import './plugins/position-auto.plugin';
 
 declare var $: any;
 
