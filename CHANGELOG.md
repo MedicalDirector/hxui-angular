@@ -1,8 +1,15 @@
-## [7.0.54](https://www.npmjs.com/package/@hxui/angular/v/7.0.54) (2019-07-15)
+## [7.0.55](https://www.npmjs.com/package/@hxui/angular/v/7.0.55) (2019-07-15)
 
 ### Big fix
 
 * **Filters:** Fixed issue for when a filter does not have a default option selected  ([d1f65b7b968553a41108f8a225956ee28db9e4cf](https://bitbucket.org/md-design/angular-hxui/commits/d1f65b7b968553a41108f8a225956ee28db9e4cf))
+
+
+## [7.0.54](https://www.npmjs.com/package/@hxui/angular/v/7.0.54) (2019-07-12)
+
+### Enhancement
+
+* **Selectize:** Added Selectize plugin that allows dropdown to be screen aware  ([3477a5b77011e6847ae209a0345f00940b34ed0a](https://bitbucket.org/md-design/angular-hxui/commits/3477a5b77011e6847ae209a0345f00940b34ed0a))
 
 
 ## [7.0.53](https://www.npmjs.com/package/@hxui/angular/v/7.0.53) (2019-07-10)
