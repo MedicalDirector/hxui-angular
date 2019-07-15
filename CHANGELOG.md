@@ -1,3 +1,10 @@
+## [7.0.56](https://www.npmjs.com/package/@hxui/angular/v/7.0.56) (2019-07-15)
+
+### Enhancement
+
+* **Selectize:** Allow item param in render function to be ISelectizeItem|any  ([d1f65b7b968553a41108f8a225956ee28db9e4cf](https://bitbucket.org/md-design/angular-hxui/commits/d1f65b7b968553a41108f8a225956ee28db9e4cf))
+
+
 ## [7.0.55](https://www.npmjs.com/package/@hxui/angular/v/7.0.55) (2019-07-15)
 
 ### Big fix

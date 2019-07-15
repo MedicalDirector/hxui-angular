@@ -239,7 +239,7 @@ export class SelectizeConfig  {
    * Default override item render function
    */
   public render = {
-    item: (item: ISelectizeItem, escape: Function): string => {
+    item: (item: ISelectizeItem|any, escape: Function): string => {
       const multi = `<span class="hx-badge is-medium">
                 <span class="hx-badge-content">`
                     + escape(item.label) +
