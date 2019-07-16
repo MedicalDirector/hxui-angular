@@ -368,14 +368,14 @@ export class SelectizeComponent
       return;
     }
 
-    const stringValue = obj.map(v => {
-      if (!Object.keys(this.selectize.options).some(x => x === v.value)) {
+    const value = obj.map(v => {
+      if (!Object.keys(this.selectize.options).some(x => x === v[this.config.valueField])) {
         this.selectize.addOption(v);
       }
-      return v.value;
+      return v[this.config.valueField];
     });
 
-    this.selectize.setValue(stringValue);
+    this.selectize.setValue(value);
     this.evalHasError();
     this.isValid = (this.selectize.getValue().length > 0);
   }
