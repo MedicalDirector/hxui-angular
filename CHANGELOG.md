@@ -1,3 +1,10 @@
+## [7.0.57](https://www.npmjs.com/package/@hxui/angular/v/7.0.56) (2019-07-16)
+
+### Bug fix
+
+* **Selectize:** setValue method will now look at valueField value ([d1f65b7b968553a41108f8a225956ee28db9e4cf](https://bitbucket.org/md-design/angular-hxui/commits/d1f65b7b968553a41108f8a225956ee28db9e4cf))
+
+
 ## [7.0.56](https://www.npmjs.com/package/@hxui/angular/v/7.0.56) (2019-07-15)
 
 ### Enhancement
