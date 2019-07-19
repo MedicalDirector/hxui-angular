@@ -1,3 +1,10 @@
+## [7.0.58](https://www.npmjs.com/package/@hxui/angular/v/7.0.56) (2019-07-19)
+
+### Enhancement
+
+* **Selectize:** Added option to render function in selectize config ([11605ff92ef63409fde3eb9c484afa446285ba5e](https://bitbucket.org/md-design/angular-hxui/commits/11605ff92ef63409fde3eb9c484afa446285ba5e))
+
+
 ## [7.0.57](https://www.npmjs.com/package/@hxui/angular/v/7.0.56) (2019-07-16)
 
 ### Bug fix
