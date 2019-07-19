@@ -247,6 +247,9 @@ export class SelectizeConfig  {
               </span>`;
       const single = `<div class="item">` + escape(item.label) + `</div>`;
       return (!this.maxItems) ? multi : single;
+    },
+    option: (item: ISelectizeItem|any, escape: Function): string => {
+      return `<div class="option ${item.disabled ? 'disabled' : ''}">` + escape(item.label) + `</div>`;
     }
   };
 
