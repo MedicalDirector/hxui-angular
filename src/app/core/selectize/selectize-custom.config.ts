@@ -1,5 +1,6 @@
 import {SelectizeConfig} from '../../../../projects/hx-ui/src/lib/selectize/selectize.config';
 import {SelectizeCustomItemModel} from './selectize-custom-item.model';
+import {ISelectizeItem} from '../../../../projects/hx-ui/src/lib/selectize/selectize-item.interface';
 
 export class SelectizeCustomConfig extends SelectizeConfig {
 
@@ -18,6 +19,9 @@ export class SelectizeCustomConfig extends SelectizeConfig {
               </span>`;
       const single = `<div class="item">` + escape(item.label) + `</div>`;
       return (!this.maxItems) ? multi : single;
+    },
+    option: (item: ISelectizeItem|any, escape: Function): string => {
+      return `<div class="option ${item.disabled ? 'disabled' : ''}">` + escape(item.label) + `</div>`;
     }
   };
 
