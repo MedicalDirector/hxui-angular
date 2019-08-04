@@ -40,7 +40,11 @@ import {Observable, Subject} from 'rxjs/index';
     "class": "hx-dropdown-menu"
   },
   // tslint: enable
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  styles:[
+    'strong.is-matched { background-color: rgba(35, 49, 43, .23) }',
+    '.hx-dropdown-item { font-weight: 300 }'
+  ]
 })
 export class TypeaheadContainerComponent {
   public parent: TypeaheadDirective;
@@ -141,7 +145,7 @@ export class TypeaheadContainerComponent {
         startIdx = itemStrHelper.indexOf(query[i]);
         tokenLen = query[i].length;
         if (startIdx >= 0 && tokenLen > 0) {
-          itemStr = itemStr.substring(0, startIdx) + '<strong>' + itemStr.substring(startIdx, startIdx + tokenLen) + '</strong>' + itemStr.substring(startIdx + tokenLen);
+          itemStr = itemStr.substring(0, startIdx) + '<strong class="is-matched">' + itemStr.substring(startIdx, startIdx + tokenLen) + '</strong>' + itemStr.substring(startIdx + tokenLen);
           itemStrHelper = itemStrHelper.substring(0, startIdx) + '        ' + ' '.repeat(tokenLen) + '         ' + itemStrHelper.substring(startIdx + tokenLen);
         }
       }
@@ -150,7 +154,7 @@ export class TypeaheadContainerComponent {
       startIdx = itemStrHelper.indexOf(query);
       tokenLen = query.length;
       if (startIdx >= 0 && tokenLen > 0) {
-        itemStr = itemStr.substring(0, startIdx) + '<strong>' + itemStr.substring(startIdx, startIdx + tokenLen) + '</strong>' + itemStr.substring(startIdx + tokenLen);
+        itemStr = itemStr.substring(0, startIdx) + '<strong  class="is-matched">' + itemStr.substring(startIdx, startIdx + tokenLen) + '</strong>' + itemStr.substring(startIdx + tokenLen);
       }
     }
     return itemStr;
@@ -207,7 +211,7 @@ export class TypeaheadContainerComponent {
     }, delay);
   }
 
-  /** Returns an observable that notifies when the tooltip has been hidden from view. */
+  /** Returns an observable that notifies when the dropdown has been hidden from view. */
   afterHidden(): Observable<void> {
     return this._onHide.asObservable();
   }
