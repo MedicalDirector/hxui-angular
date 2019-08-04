@@ -1,4 +1,4 @@
-## [7.0.59](https://www.npmjs.com/package/@hxui/angular/v/7.0.59) (2019-08-04)
+## [7.0.59 - 7.0.60](https://www.npmjs.com/package/@hxui/angular/v/7.0.60) (2019-08-04)
 
 ### Enhancement
 
