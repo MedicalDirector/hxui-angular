@@ -1,9 +1,10 @@
 import {
-  Component, ElementRef, TemplateRef, ViewEncapsulation, HostListener
+  Component, ElementRef, TemplateRef, ViewEncapsulation, HostListener, ChangeDetectorRef
 } from '@angular/core';
 import { TypeaheadDirective } from './typeahead.directive';
 import { TypeaheadMatch } from './typeahead-match.class';
 import { latinize } from './typeahead-utils';
+import {Observable, Subject} from 'rxjs/index';
 
 @Component({
   selector: 'hx-typeahead-container',
@@ -36,16 +37,18 @@ import { latinize } from './typeahead-utils';
 `,
   // tslint:disable
   host: {
-    'class': 'hx-dropdown is-open hx-dropdown-menu',
-    style: 'position: absolute;display: block;'
+    "class": "hx-dropdown-menu"
   },
   // tslint: enable
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  styles:[
+    'strong.is-matched { background-color: rgba(35, 49, 43, .23) }',
+    '.hx-dropdown-item { font-weight: 300 }'
+  ]
 })
 export class TypeaheadContainerComponent {
   public parent: TypeaheadDirective;
   public query: any;
-  public element: ElementRef;
   public isFocused: boolean = false;
   public top: string;
   public left: string;
@@ -56,8 +59,18 @@ export class TypeaheadContainerComponent {
   protected _active: TypeaheadMatch;
   protected _matches: TypeaheadMatch[] = [];
 
-  public constructor(element: ElementRef) {
-    this.element = element;
+  /** Subject for notifying that the tooltip has been hidden from the view */
+  private readonly _onHide: Subject<any> = new Subject();
+
+  /** The timeout ID of any current timer set to show the tooltip */
+  private _showTimeoutId: number;
+
+  /** The timeout ID of any current timer set to hide the tooltip */
+  private _hideTimeoutId: number;
+
+  public constructor(
+    private element: ElementRef,
+    private _changeDetectionRef: ChangeDetectorRef) {
   }
 
   public get active(): TypeaheadMatch {
@@ -132,7 +145,7 @@ export class TypeaheadContainerComponent {
         startIdx = itemStrHelper.indexOf(query[i]);
         tokenLen = query[i].length;
         if (startIdx >= 0 && tokenLen > 0) {
-          itemStr = itemStr.substring(0, startIdx) + '<strong>' + itemStr.substring(startIdx, startIdx + tokenLen) + '</strong>' + itemStr.substring(startIdx + tokenLen);
+          itemStr = itemStr.substring(0, startIdx) + '<strong class="is-matched">' + itemStr.substring(startIdx, startIdx + tokenLen) + '</strong>' + itemStr.substring(startIdx + tokenLen);
           itemStrHelper = itemStrHelper.substring(0, startIdx) + '        ' + ' '.repeat(tokenLen) + '         ' + itemStrHelper.substring(startIdx + tokenLen);
         }
       }
@@ -141,7 +154,7 @@ export class TypeaheadContainerComponent {
       startIdx = itemStrHelper.indexOf(query);
       tokenLen = query.length;
       if (startIdx >= 0 && tokenLen > 0) {
-        itemStr = itemStr.substring(0, startIdx) + '<strong>' + itemStr.substring(startIdx, startIdx + tokenLen) + '</strong>' + itemStr.substring(startIdx + tokenLen);
+        itemStr = itemStr.substring(0, startIdx) + '<strong  class="is-matched">' + itemStr.substring(startIdx, startIdx + tokenLen) + '</strong>' + itemStr.substring(startIdx + tokenLen);
       }
     }
     return itemStr;
@@ -167,5 +180,39 @@ export class TypeaheadContainerComponent {
       this.parent.typeaheadOnSelect.emit(value), 0
     );
     return false;
+  }
+
+  show(delay: number): void {
+    // Cancel the delayed hide if it is scheduled
+    if (this._hideTimeoutId) {
+      clearTimeout(this._hideTimeoutId);
+    }
+    this._showTimeoutId = window.setTimeout(() => {
+      // Schedule for change detection incase the tooltip is used within a
+      // component with OnPush change detection
+      this._changeDetectionRef.markForCheck();
+      //this.visibility = Visibility.Visible;
+    }, delay);
+  }
+
+  /**
+   * Hide the tooltip after the provided delay in ms.
+   * @param delay Amount of milliseconds to delay hiding the tooltip.
+   */
+  hide(delay: number): void {
+    // Cancel the delayed show if it is scheduled
+    if (this._showTimeoutId) {
+      clearTimeout(this._showTimeoutId);
+    }
+
+    this._hideTimeoutId = window.setTimeout(() => {
+     // this.visibility = Visibility.Hidden;
+      this._onHide.next();
+    }, delay);
+  }
+
+  /** Returns an observable that notifies when the dropdown has been hidden from view. */
+  afterHidden(): Observable<void> {
+    return this._onHide.asObservable();
   }
 }
