@@ -19,8 +19,8 @@
     <div class="hx-columns">
       <div class="hx-column">
 
-        <div class="hx-input-control">
-          <input class="hx-input" type="text" [(ngModel)]="selected" [typeahead]="states" required>
+        <div class="hx-input-control" id="parentEL">
+          <input class="hx-input" type="text" hxaTextInput [(ngModel)]="selected" [typeahead]="states" minWidthRelativeTo="parentEL">
           <label class="hx-label"><i class="icon icon-search is-small"></i> Medications</label>
           <div class="hx-help">Search for medication names</div>
         </div>
@@ -67,11 +67,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>container</td>
-              <td><kbd>string</kbd></td>
-              <td>A selector specifying the element the typeahead should be appended to.<br> Currently only supports "body".</td>
-            </tr>
             <tr>
               <td>optionsListTemplate</td>
               <td><kbd>TemplateRef&lt;any&gt;</kbd></td>
@@ -136,6 +131,26 @@
               <td>typeaheadWordDelimiters</td>
               <td><kbd>string</kbd></td>
               <td>should be used only in case typeaheadSingleWords attribute is true. Sets the word delimiter to break words. Defaults to space. </td>
+            </tr>
+            <tr>
+              <td>placement</td>
+              <td><kbd>string</kbd></td>
+              <td>Placement of a popover. Accepts: "top", "bottom", "left", "right"</td>
+            </tr>
+            <tr>
+              <td>maxWidthRelativeTo</td>
+              <td><kbd>string</kbd></td>
+              <td>The element id of the element the dropdown should get it's max width from</td>
+            </tr>
+            <tr>
+              <td>minWidthRelativeTo</td>
+              <td><kbd>string</kbd></td>
+              <td>The element id of the element the dropdown should get it's min width from</td>
+            </tr>
+            <tr>
+              <td>maxHeight</td>
+              <td><kbd>number|string</kbd></td>
+              <td>The max height of the dropdown. Defaults to 20rem.</td>
             </tr>
           </tbody>
         </table>
