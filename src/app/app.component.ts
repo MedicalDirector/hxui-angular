@@ -47,6 +47,10 @@ export class AppComponent {
           link: '/dropdowns'
         },
         {
+          name: 'Dialogs',
+          link: '/dialogs'
+        },
+        {
           name: 'Modals',
           link: '/modals'
         },

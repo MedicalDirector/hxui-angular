@@ -24,6 +24,8 @@ import { LoadersComponent } from './loaders/loaders.component';
 import { TextInputComponent } from './text-input/text-input.component';
 import { OnlineStatusComponent } from './online-status/online-status.component';
 import { ToastrComponent } from './toastr/toastr.component';
+import { DialogsComponent } from './dialogs/dialogs.component';
+import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
 
 @NgModule({
   imports: [
@@ -52,14 +54,18 @@ import { ToastrComponent } from './toastr/toastr.component';
       TextInputComponent,
       OnlineStatusComponent,
       ToastrComponent,
-
+      DialogsComponent,
+      CustomDialogComponent
   ],
   providers: [
      TabularService,
      InMemoryDataService
   ],
   exports: [],
-  entryComponents: [CustomModalComponent]
+  entryComponents: [
+    CustomModalComponent,
+    CustomDialogComponent
+  ]
 })
 export class CoreModule {
   static forRoot(): ModuleWithProviders {
