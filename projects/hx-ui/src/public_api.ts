@@ -1,6 +1,9 @@
 /*
  * Public API Surface of hx-ui
  */
+export * from './lib/dialog/dialog.module';
+export * from './lib/dialog/dialog.service';
+export * from './lib/dialog/dialog-overlay.ref';
 
 export * from './lib/toastr/toastr.directive';
 export * from './lib/toastr/toastr.component';
