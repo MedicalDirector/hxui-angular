@@ -52,7 +52,8 @@ export class AppComponent {
         },
         {
           name: 'Modals',
-          link: '/modals'
+          link: '/modals',
+          deprecated: true
         },
         {
           name: 'Pagination',
