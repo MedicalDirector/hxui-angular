@@ -1,3 +1,9 @@
+## [7.2.0](https://www.npmjs.com/package/@hxui/angular/v/7.2.0) (2019-08-14)
+
+### Update 
+
+* **Licence:** Updated licence type to MIT. 
+
 ## [7.1.0](https://www.npmjs.com/package/@hxui/angular/v/7.1.0) (2019-08-05)
 
 ### New component
