@@ -5,7 +5,7 @@
   <thead>
   <tr>
     <ng-container *ngFor="let col of columns; trackBy: trackByFn;">
-      <th *ngIf="col.hidden" class="{{col.cssClass}} tabular__{{col.label}}"
+      <th *ngIf="!col.hidden" class="{{col.cssClass}} tabular__{{col.label}}"
         [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox, 'tabular__sortable': col.sortable}">
     
         <!-- sortable column -->
@@ -46,7 +46,7 @@
       [ngClass]="[row.cssClass? row.cssClass : '']"
       [attr.title]="row.title ? row.title : ''">
     <ng-container *ngFor="let col of columns">
-    <td  *ngIf="col.hidden" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox}">
+    <td  *ngIf="!col.hidden" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox}">
       
       <!-- checkbox type -->
       <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
