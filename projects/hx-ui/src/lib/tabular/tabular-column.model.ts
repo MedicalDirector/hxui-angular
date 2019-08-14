@@ -7,7 +7,7 @@ export class TabularColumn implements ITabularColumn {
               public dataType: TabularColumnTypes,
               public sortable: boolean,
               public cssClass: string = '',
-              public hidden: boolean = false,
+              public hidden: boolean = true,
               public options?: any) {
   }
 }
