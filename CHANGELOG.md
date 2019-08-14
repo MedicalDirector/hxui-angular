@@ -1,3 +1,10 @@
+## [7.3.0](https://www.npmjs.com/package/@hxui/angular/v/7.3.0) (2019-08-14)
+
+### Enhancement 
+
+* **Tabular:** Added property hidden for column. 
+
+
 ## [7.2.0](https://www.npmjs.com/package/@hxui/angular/v/7.2.0) (2019-08-14)
 
 ### Update 
