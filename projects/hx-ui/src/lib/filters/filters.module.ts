@@ -5,12 +5,14 @@ import {FiltersConfig} from './filters.config';
 import {DropdownModule} from '../dropdown/dropdown.module';
 import {FiltersCollapsedComponent} from './filters-collapsed.component';
 import { FormsModule } from '@angular/forms';
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   imports: [
     CommonModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    NgxMaskModule
   ],
   declarations: [
     FiltersComponent,
