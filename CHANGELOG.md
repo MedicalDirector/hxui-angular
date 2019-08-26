@@ -1,3 +1,9 @@
+## [7.4.0](https://www.npmjs.com/package/@hxui/angular/v/7.4.0) (2019-08-26)
+
+### Enhancement 
+
+* **Filter:** Added mask to filters to accept only numbers. 
+
 ## [7.3.0](https://www.npmjs.com/package/@hxui/angular/v/7.3.0) (2019-08-14)
 
 ### Enhancement 
