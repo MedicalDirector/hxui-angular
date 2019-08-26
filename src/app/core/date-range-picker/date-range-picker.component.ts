@@ -30,7 +30,7 @@ export class DateRangePickerComponent extends CoreBaseComponent {
     'Next Fortnight'
   ];
 
-  dateFormat = "yyyy-MM-dd";
+  dateFormat = "dd/MM/yyyy";
 
   constructor(
     protected pageScrollService: PageScrollService,

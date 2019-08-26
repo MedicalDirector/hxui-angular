@@ -123,7 +123,7 @@ export class DateRangePickersCode {
           'Next Fortnight'
         ];
 
-        dateFormat = "yyyy-MM-dd";
+        dateFormat = "dd/MM/yyyy";
       
         constructor() { }    
       }
