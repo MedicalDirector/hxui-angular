@@ -239,7 +239,7 @@ export class SelectizeConfig  {
    * Default override item render function
    */
   public render = {
-    item: (item: ISelectizeItem, escape: Function): string => {
+    item: (item: ISelectizeItem|any, escape: Function): string => {
       const multi = `<span class="hx-badge is-medium">
                 <span class="hx-badge-content">`
                     + escape(item.label) +
@@ -247,6 +247,9 @@ export class SelectizeConfig  {
               </span>`;
       const single = `<div class="item">` + escape(item.label) + `</div>`;
       return (!this.maxItems) ? multi : single;
+    },
+    option: (item: ISelectizeItem|any, escape: Function): string => {
+      return `<div class="option ${item.disabled ? 'disabled' : ''}">` + escape(item.label) + `</div>`;
     }
   };
 
@@ -260,7 +263,8 @@ export class SelectizeConfig  {
       title     : 'Remove',
       className : 'hx-delete',
       append    : true
-    }
+    },
+    'position_auto' : {}
   };
 
 }

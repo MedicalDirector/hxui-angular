@@ -36,7 +36,12 @@
             <li class="hx-nav-heading"><h6><span class="oi" data-glyph="home"></span> {{ navItem.cat }}</h6></li>
             <li class="hx-nav-item" *ngFor="let item of navItem.items">
               <a class="hx-nav-link" *ngIf="item.url" [href]="item.url" target="_blank"><span>{{ item.name }}</span></a>
-              <a class="hx-nav-link" *ngIf="item.link" [routerLink]="item.link" routerLinkActive="is-active"><span>{{ item.name }}</span></a>
+              <a class="hx-nav-link hx-flex hx-flex-justify-between" *ngIf="item.link" [routerLink]="item.link" routerLinkActive="is-active">
+                <span>{{ item.name }}</span>
+                <span class="hx-badge is-warning is-small" *ngIf="item?.deprecated">
+                  <span class="hx-badge-content">Deprecated</span>
+                </span>
+              </a>
             </li>
           </ul>
 

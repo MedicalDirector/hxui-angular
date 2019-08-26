@@ -1,3 +1,66 @@
+## [7.3.0](https://www.npmjs.com/package/@hxui/angular/v/7.3.0) (2019-08-14)
+
+### Enhancement 
+
+* **Tabular:** Added property hidden for column. 
+
+
+## [7.2.0](https://www.npmjs.com/package/@hxui/angular/v/7.2.0) (2019-08-14)
+
+### Update 
+
+* **Licence:** Updated licence type to MIT. 
+
+## [7.1.0](https://www.npmjs.com/package/@hxui/angular/v/7.1.0) (2019-08-05)
+
+### New component
+
+* **Dialog:** New component that will replaces the modal component. Modal Component is now deprecated. 
+
+
+## [7.0.59 - 7.0.60](https://www.npmjs.com/package/@hxui/angular/v/7.0.60) (2019-08-04)
+
+### Enhancement
+
+* **Typeahead:** Updated Typeahead to use HxUi dropdown. Also added optional placement and size properties 
+
+
+## [7.0.57](https://www.npmjs.com/package/@hxui/angular/v/7.0.56) (2019-07-16)
+
+### Bug fix
+
+* **Selectize:** setValue method will now look at valueField value ([d1f65b7b968553a41108f8a225956ee28db9e4cf](https://bitbucket.org/md-design/angular-hxui/commits/d1f65b7b968553a41108f8a225956ee28db9e4cf))
+
+
+## [7.0.56](https://www.npmjs.com/package/@hxui/angular/v/7.0.56) (2019-07-15)
+
+### Enhancement
+
+* **Selectize:** Allow item param in render function to be ISelectizeItem|any  ([d1f65b7b968553a41108f8a225956ee28db9e4cf](https://bitbucket.org/md-design/angular-hxui/commits/d1f65b7b968553a41108f8a225956ee28db9e4cf))
+
+
+## [7.0.55](https://www.npmjs.com/package/@hxui/angular/v/7.0.55) (2019-07-15)
+
+### Big fix
+
+* **Filters:** Fixed issue for when a filter does not have a default option selected  ([d1f65b7b968553a41108f8a225956ee28db9e4cf](https://bitbucket.org/md-design/angular-hxui/commits/d1f65b7b968553a41108f8a225956ee28db9e4cf))
+
+
+## [7.0.54](https://www.npmjs.com/package/@hxui/angular/v/7.0.54) (2019-07-12)
+
+### Enhancement
+
+* **Selectize:** Added Selectize plugin that allows dropdown to be screen aware  ([3477a5b77011e6847ae209a0345f00940b34ed0a](https://bitbucket.org/md-design/angular-hxui/commits/3477a5b77011e6847ae209a0345f00940b34ed0a))
+
+
+## [7.0.53](https://www.npmjs.com/package/@hxui/angular/v/7.0.53) (2019-07-10)
+
+### Enhancement
+
+* **Date Picker:** Added onFocus output to the date picker input  ([d1f65b7b968553a41108f8a225956ee28db9e4cf](https://bitbucket.org/md-design/angular-hxui/commits/d1f65b7b968553a41108f8a225956ee28db9e4cf))
+
+
+
 ## [7.0.52](https://www.npmjs.com/package/@hxui/angular/v/7.0.52) (2019-07-07)
 
 ### Bug fix

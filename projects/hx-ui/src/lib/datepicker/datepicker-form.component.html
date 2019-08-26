@@ -1,5 +1,5 @@
 <div class="hx-input-group hxa-datepicker-form">
-  <i class="{{icon}}" *ngIf="iconPlacement === 'left'" (click)="onFocus()"></i>
+  <i class="{{icon}}" *ngIf="iconPlacement === 'left'" (click)="onFocused($event)"></i>
   <div class="hx-input-control hxa-datepicker-control" [ngClass]="{'is-danger': !isValid && datePickerForm.touched}">
     <input
       class="hx-input" type="text"
@@ -9,11 +9,11 @@
       [readonly]="readonly ? true : null"
       [ngModel]="date | date:dateFormat"
       (change)="onChange($event)"
-      (focus)="onFocus()"
+      (focus)="onFocused($event)"
       (keydown.Tab)="onTab($event)"
        mask="d0/M0/0000">
     <label class="hx-label" *ngIf="placeholder">{{placeholder}} <sup *ngIf="required">*</sup></label>
     <div class="hx-help">{{helpText}}</div>
   </div>
-  <i class="{{icon}} has-pointer" *ngIf="iconPlacement === 'right'" (click)="onFocus()"></i>
+  <i class="{{icon}} has-pointer" *ngIf="iconPlacement === 'right'" (click)="onFocused($event)"></i>
 </div>

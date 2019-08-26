@@ -20,6 +20,8 @@ import {ToastrModule} from './toastr/toastr.module';
 import { DateRangePickerModule } from './date-range-picker/date-range-picker.module';
 import { DatePipe } from '@angular/common';
 import {IConfig, NgxMaskModule} from 'ngx-mask';
+import {DialogModule} from './dialog/dialog.module';
+import {DialogService} from './dialog/dialog.service';
 
 export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -32,7 +34,8 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     DateRangePickerModule.forRoot(),
     AutoGrowModule.forRoot(), EmptyStateModule.forRoot(),
     AccordionModule, FiltersModule.forRoot(), LoadersModule,
-    TextInputModule, ToastrModule.forRoot(), NgxMaskModule.forRoot(mask_options)
+    TextInputModule, ToastrModule.forRoot(), NgxMaskModule.forRoot(mask_options),
+    DialogModule.forRoot()
   ],
   exports: [
     DatepickerModule,DateRangePickerModule, DropdownModule, ModalModule,
@@ -40,7 +43,7 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     TypeaheadModule, TabularModule, SelectizeModule,
     AutoGrowModule, EmptyStateModule, AccordionModule,
     FiltersModule, LoadersModule, TextInputModule, ToastrModule,
-    NgxMaskModule
+    NgxMaskModule, DialogModule
   ]
 })
 export class HxUiModule {
@@ -50,7 +53,8 @@ export class HxUiModule {
       providers: [
         ModalService,
         OnlineStatusService,
-        DatePipe
+        DatePipe,
+        DialogService
       ]
     };
   }
