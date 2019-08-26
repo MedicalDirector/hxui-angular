@@ -1,3 +1,8 @@
+## [7.4.1](https://www.npmjs.com/package/@hxui/angular/v/7.4.1) (2019-08-26)
+
+### Enhancement 
+
+* **Filter:** Updated filters component to accept only numbers. 
 ## [7.4.0](https://www.npmjs.com/package/@hxui/angular/v/7.4.0) (2019-08-26)
 
 ### Enhancement 
