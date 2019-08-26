@@ -25,6 +25,9 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   private _filters: IFiltersConfig[] = [];
   private _oldFilters: IFiltersConfig[] = [];
   private _collapsed = false;
+  
+  @Input()
+  customMask
 
   @Input()
   get collapsed(): boolean {

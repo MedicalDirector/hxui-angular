@@ -21,7 +21,7 @@
           <button type="button" class="hx-button is-primary mr-1" (click)="toggleCollapsed()">Toggle collapsed state</button>
           <button type="button" class="hx-button is-primary" (click)="resetFilters()">Reset filters</button>
           <div class="hx-spacer"></div>
-         <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters"></hxa-filters>
+         <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters" [customMask] = "99999999"></hxa-filters>
       </div>
 
 

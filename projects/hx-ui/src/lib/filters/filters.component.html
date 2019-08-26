@@ -31,7 +31,8 @@
                   placeholder="{{filter.label}}"
                   (input)="onSearchFilterChange(filter)"
                   [(ngModel)]="filter.value"
-                  [style.width.rem]="filter.width">
+                  [style.width.rem]="filter.width"
+                  mask="{{customMask}}">
           <label class="hx-label"></label>
           <div class="hx-help"></div>
         </div>
