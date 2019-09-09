@@ -22,9 +22,9 @@ export class TextInputDirective {
     this.styleLabel();
   }
 
-  styleLabel() {
+  styleLabel(floatingLabel?: boolean) {
     // If the element is empty, style the label like a placeholder otherwise float the label above the input
-    if (this.el.nativeElement.value.trim().length === 0 && this.el.nativeElement.placeholder.trim().length === 0 )  {
+    if (!floatingLabel && this.el.nativeElement.value.trim().length === 0 && this.el.nativeElement.placeholder.trim().length === 0 )  {
       this.styleLabelAsPlaceholder();
     } else {
       this.styleLabelAsFloating();
