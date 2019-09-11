@@ -18,9 +18,8 @@ export class DatepickersCode {
         align="bottom"
         #db="ngModel"
         [(ngModel)]="dayte_basic"
-        [allowPreviousDates]="false"
         (onDateChange)="onDateChangedBasic($event)"
-        [required]="true"
+        [required]="false"
       ></hxa-datepicker-input>
       <div>
         <span>Emitted Date object: {{dayte_basic}}</span><br>

@@ -1,8 +1,15 @@
+## [7.4.2](https://www.npmjs.com/package/@hxui/angular/v/7.4.2) (2019-09-11)
+
+### Update
+
+* **Date Picker:** Add hxaTextInput directive so date picker input is styled correctly (eg when date is not 'required')
+
 ## [7.4.1](https://www.npmjs.com/package/@hxui/angular/v/7.4.1) (2019-08-26)
 
 ### Enhancement 
 
 * **Filter:** Updated filters component to accept only numbers. 
+
 ## [7.4.0](https://www.npmjs.com/package/@hxui/angular/v/7.4.0) (2019-08-26)
 
 ### Enhancement 
