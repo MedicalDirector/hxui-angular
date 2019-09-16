@@ -1,3 +1,9 @@
+## [7.4.4](https://www.npmjs.com/package/@hxui/angular/v/7.4.3) (2019-09-17)
+
+### Bug fix
+
+* **Date Picker:** Set date to null when an invalid date is entered
+
 ## [7.4.3](https://www.npmjs.com/package/@hxui/angular/v/7.4.3) (2019-09-16)
 
 ### Update
