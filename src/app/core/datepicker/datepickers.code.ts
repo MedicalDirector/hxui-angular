@@ -12,23 +12,22 @@ export class DatepickersCode {
 
   exampleTemplate =
     `
-   <form #formBasic="ngForm">
-      <hxa-datepicker-input
-        name="datepicker_basic"
-        align="bottom"
-        #db="ngModel"
-        [(ngModel)]="dayte_basic"
-        (onDateChange)="onDateChangedBasic($event)"
-        [required]="false"
-      ></hxa-datepicker-input>
-      <div>
-        <span>Emitted Date object: {{dayte_basic}}</span><br>
-        <span>NgForm Valid: {{formBasic.valid}}</span> <br>
-        <span>NgModel Valid: {{db.valid}}</span><br>
-        <span>NgForm Touched: {{formBasic.touched}}</span><br>
-        <span>NgModel Touched: {{db.touched}}</span>
-      </div>
-    </form>
+    <form [formGroup]="basicForm">
+            <hxa-datepicker-input
+              name="datepicker_basic"
+              align="bottom"
+              [defaultToPresentDate]="false"
+              formControlName="dayte_basic"
+              (onDateChange)="onDateChangedBasic($event)"
+              [required]="false"
+            ></hxa-datepicker-input>
+            <div>
+              <span>Emitted Date object: <b>{{basicForm.get('dayte_basic').value}}</b></span><br>
+              <span>NgForm Status: <b>{{basicForm.status}}</b></span> <br>
+              <span>NgForm Valid: <b>{{basicForm.valid}}</b></span> <br>
+              <span>NgForm Touched: <b>{{basicForm.touched}}</b></span><br>
+            </div>
+        </form>
     `;
 
   exampleTypescript =
@@ -42,9 +41,15 @@ export class DatepickersCode {
     })
     export class DatepickersComponent {
     
-      public dayte_basic: string;
+     basicForm = this.fb.group({
+        dayte_basic: [null]
+      });
     
-      constructor() {
+      intervalForm = this.fb.group({
+        dayte: [null],
+      });
+    
+      constructor(private fb: FormBuilder) {
       }
     
       onDateChangedBasic($event) {
@@ -57,21 +62,19 @@ export class DatepickersCode {
 
   intervalExampleTemplate =
     `
-    <form #form="ngForm">
+    <form [formGroup]="intervalForm">
           <hxa-datepicker-input
             name="datepicker"
             align="bottom"
             [interval]="true"
-            #d="ngModel"
-            [(ngModel)]="dayte"
+            formControlName="dayte"
             [allowPreviousDates]="true"
           ></hxa-datepicker-input>
           <div>
-            <span>Emitted Date object: {{dayte}}</span><br>
-            <span>NgForm Valid: {{form.valid}}</span> <br>
-            <span>NgModel Valid: {{d.valid}}</span><br>
-            <span>NgForm Touched: {{form.touched}}</span><br>
-            <span>NgModel Touched: {{d.touched}}</span>
+            <span>Emitted Date object: <b>{{intervalForm.get('dayte').value}}</b></span><br>
+            <span>NgForm Status: <b>{{intervalForm.status}}</b></span> <br>
+            <span>NgForm Valid: <b>{{intervalForm.valid}}</b></span> <br>
+            <span>NgForm Touched: <b>{{intervalForm.touched}}</b></span><br>
           </div>
         </form>
     `;
@@ -87,9 +90,15 @@ export class DatepickersCode {
     })
     export class DatepickersComponent  {
     
-      public dayte: string;
+      basicForm = this.fb.group({
+        dayte_basic: [null]
+      });
     
-      constructor() {
+      intervalForm = this.fb.group({
+        dayte: [null],
+      });
+    
+      constructor(private fb: FormBuilder) {
       }
     
       onDateChanged($event) {
