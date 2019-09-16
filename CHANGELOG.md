@@ -2,7 +2,7 @@
 
 ### Bug fix
 
-* **Date Picker:** Set date to null when an invalid date is entered
+* **Date Picker:** Set date to null when an invalid date is entered. Also added reactive form example to documentation.
 
 ## [7.4.3](https://www.npmjs.com/package/@hxui/angular/v/7.4.3) (2019-09-16)
 
