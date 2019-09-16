@@ -1,3 +1,9 @@
+## [7.4.3](https://www.npmjs.com/package/@hxui/angular/v/7.4.3) (2019-09-16)
+
+### Update
+
+* **Date Picker:** Add ClearIfNotMatched flag to ngx-mask so that invalid inputs are cleared on blur.
+
 ## [7.4.2](https://www.npmjs.com/package/@hxui/angular/v/7.4.2) (2019-09-11)
 
 ### Update
