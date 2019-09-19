@@ -1,5 +1,6 @@
 import {IActionsConfig} from './actions-config.interface';
 import {Context} from '../enums';
+import {TooltipConfig} from '../tooltip/tooltip.config';
 
 export interface ITabularRow {
   /**
@@ -42,6 +43,15 @@ export interface ITabularRow {
    * Used to disable/enable menu
    */
   actionDisabled?: boolean;
+
+
+  /**
+   * Tooltip config
+   */
+  tooltip?: {
+    config: TooltipConfig,
+    content: string;
+  };
 
 }
 

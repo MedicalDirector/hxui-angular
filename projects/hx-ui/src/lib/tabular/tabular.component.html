@@ -7,24 +7,24 @@
     <ng-container *ngFor="let col of columns; trackBy: trackByFn;">
       <th *ngIf="!col.hidden" class="{{col.cssClass}} tabular__{{col.label}}"
         [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox, 'tabular__sortable': col.sortable}">
-    
+
         <!-- sortable column -->
         <a class="tabular__sorter" href="#" *ngIf="col.sortable && col.dataType != TabularColumnTypes.Checkbox"
           (click)="onSortClickHandler(col.id, col.dataType)">{{col.label}} <i class="hx-icon icon-arrow-up is-small"
             [class.icon-arrow-up]="isColumnSorted(col.id, SortByDirection.Ascending)"
             [class.icon-arrow-down]="isColumnSorted(col.id, SortByDirection.Descending)"
             *ngIf="isColumnSorted(col.id, SortByDirection.Descending) || isColumnSorted(col.id, SortByDirection.Ascending)"></i></a>
-    
+
         <!-- non sortable column -->
         <span *ngIf="!col.sortable && col.dataType !== TabularColumnTypes.Checkbox">{{col.label}}</span>
-    
+
         <!-- checkbox column -->
         <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
           <input id="{{config.id}}-selectAll" name="{{config.id}}-selectAll" type="checkbox" class="hx-checkbox"
             (change)="toggleSelectAll($event)" title="Select All" [(ngModel)]="selectAll" />
           <label for="{{config.id}}-selectAll" class="hx-label"></label>
         </div>
-    
+
       </th>
     </ng-container>
   </tr>
@@ -44,10 +44,63 @@
       [class.has-stripe-info]="row.stripeContext && row.stripeContext === Context.Info"
       [class.has-stripe-success]="row.stripeContext && row.stripeContext === Context.Success"
       [ngClass]="[row.cssClass? row.cssClass : '']"
-      [attr.title]="row.title ? row.title : ''">
+      [attr.title]="row.title ? row.title : ''"
+      hxaTooltip [placement]="row.tooltip.config.placement" [context]="row.tooltip.config.context" [maxWidth]="row.tooltip.config.maxWidth">
     <ng-container *ngFor="let col of columns">
+      <!-- dynamic tooltip -->
+      <div *hxaTooltipDynamicContent class="is-text-left pa-4">
+        <div class="hx-columns">
+
+          <div class="hx-column">
+            <div class="hx-metadata">
+              <div class="hx-label">Appointment Type</div>
+              <div class="hx-value">Standard</div>
+            </div>
+          </div>
+          <div class="hx-column">
+            <div class="hx-metadata">
+              <div class="hx-label">Patient</div>
+              <div class="hx-value">Sally Caban</div>
+            </div>
+          </div>
+          <div class="hx-column">
+            <div class="hx-metadata">
+              <div class="hx-label">Work Area</div>
+              <div class="hx-value">Reception</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hx-columns ">
+
+          <div class="hx-column">
+            <div class="hx-metadata">
+              <div class="hx-label">Elapsed Time</div>
+              <div class="hx-value"><i class="hx-icon icon-clock-outline is-small"></i> 00:15</div>
+            </div>
+          </div>
+          <div class="hx-column">
+            <div class="hx-metadata">
+              <div class="hx-label">Status</div>
+              <div class="hx-value">
+            <span class="hx-badge">
+              <span class="hx-badge-content">In progress</span>
+            </span>
+              </div>
+            </div>
+          </div>
+          <div class="hx-column">
+            <div class="hx-metadata">
+              <div class="hx-label">Pulse</div>
+              <div class="hx-value"><i class="hx-icon icon-heartbeat is-small"></i> 5 bpm</div>
+            </div>
+          </div>
+        </div>
+      </div>
     <td  *ngIf="!col.hidden" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox}">
-      
+
+
+
       <!-- checkbox type -->
       <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
         <input id="{{config.id}}-checkbox-{{row.id}}" name="{{col.label}}-checkbox" type="checkbox" class="hx-checkbox" title="{{col.label}}" (change)="toggleIndividualSelect(row)" [(ngModel)]="row.checked" />
@@ -139,7 +192,7 @@
 
         </div>
       </div>
-     
+
     </td>
   </ng-container>
   </tr>

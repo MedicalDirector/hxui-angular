@@ -16,7 +16,8 @@ import {TooltipDynamicContentDirective} from './tooltip-dynamic-content.directiv
             [class.is-active]='visibility === visibilityEnum.Visible'
             [class.is-success]="context === contextEnum.Success"
             [class.is-warning]="context === contextEnum.Warning"
-            [class.is-danger]="context === contextEnum.Danger"
+            [class.is-danger]="context === contextEnum.Danger" 
+            [class.is-white]="context === contextEnum.White"
             role="tooltip">
             <div *ngIf="!dynamicContent" class="hx-tooltip-content" [innerHtml]="content" [style.max-width.px]="maxWidth"></div>
             <div *ngIf="dynamicContent" class="hx-tooltip-content" [style.max-width.px]="maxWidth">
