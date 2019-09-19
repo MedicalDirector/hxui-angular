@@ -44,63 +44,20 @@
       [class.has-stripe-info]="row.stripeContext && row.stripeContext === Context.Info"
       [class.has-stripe-success]="row.stripeContext && row.stripeContext === Context.Success"
       [ngClass]="[row.cssClass? row.cssClass : '']"
-      [attr.title]="row.title ? row.title : ''"
-      hxaTooltip [placement]="row.tooltip.config.placement" [context]="row.tooltip.config.context" [maxWidth]="row.tooltip.config.maxWidth">
-    <ng-container *ngFor="let col of columns">
+      [attr.title]="row.title ? row.title : ''">
+    <ng-container *ngFor="let col of columns" [ngTemplateOutlet]="column" 
+      [ngTemplateOutletContext]="{ col: col, tooltipInfo: getTooltipInfo(row[col.id]), cellValue: getCellValue(row[col.id]) }">
+    </ng-container>
+
+      <ng-template #column let-col="col" let-tooltipInfo="tooltipInfo" let-cellValue="cellValue">
+
+    <td  *ngIf="!col.hidden" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox}"
+      hxaTooltip [placement]="tooltipInfo.config.placement" [context]="tooltipInfo.config.context" [maxWidth]="tooltipInfo.config.maxWidth">
+
       <!-- dynamic tooltip -->
-      <div *hxaTooltipDynamicContent class="is-text-left pa-4">
-        <div class="hx-columns">
-
-          <div class="hx-column">
-            <div class="hx-metadata">
-              <div class="hx-label">Appointment Type</div>
-              <div class="hx-value">Standard</div>
-            </div>
-          </div>
-          <div class="hx-column">
-            <div class="hx-metadata">
-              <div class="hx-label">Patient</div>
-              <div class="hx-value">Sally Caban</div>
-            </div>
-          </div>
-          <div class="hx-column">
-            <div class="hx-metadata">
-              <div class="hx-label">Work Area</div>
-              <div class="hx-value">Reception</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="hx-columns ">
-
-          <div class="hx-column">
-            <div class="hx-metadata">
-              <div class="hx-label">Elapsed Time</div>
-              <div class="hx-value"><i class="hx-icon icon-clock-outline is-small"></i> 00:15</div>
-            </div>
-          </div>
-          <div class="hx-column">
-            <div class="hx-metadata">
-              <div class="hx-label">Status</div>
-              <div class="hx-value">
-            <span class="hx-badge">
-              <span class="hx-badge-content">In progress</span>
-            </span>
-              </div>
-            </div>
-          </div>
-          <div class="hx-column">
-            <div class="hx-metadata">
-              <div class="hx-label">Pulse</div>
-              <div class="hx-value"><i class="hx-icon icon-heartbeat is-small"></i> 5 bpm</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <td  *ngIf="!col.hidden" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox}">
-
-
-
+      <ng-container *ngIf="!tooltipInfo.config.disabled">
+        <div *hxaTooltipDynamicContent [innerHTML]="tooltipInfo.content"></div>
+      </ng-container>
       <!-- checkbox type -->
       <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
         <input id="{{config.id}}-checkbox-{{row.id}}" name="{{col.label}}-checkbox" type="checkbox" class="hx-checkbox" title="{{col.label}}" (change)="toggleIndividualSelect(row)" [(ngModel)]="row.checked" />
@@ -108,25 +65,25 @@
       </div>
 
       <!-- string type | number type -->
-      <span *ngIf="col.dataType === TabularColumnTypes.String || col.dataType === TabularColumnTypes.Number" title="{{row[col.id]}}">{{row[col.id]}}</span>
+      <span *ngIf="col.dataType === TabularColumnTypes.String || col.dataType === TabularColumnTypes.Number" title="{{cellValue}}">{{cellValue}}</span>
 
       <!-- html type -->
-      <div *ngIf="col.dataType === TabularColumnTypes.Html" [innerHTML]="row[col.id]"></div>
+      <div *ngIf="col.dataType === TabularColumnTypes.Html" [innerHTML]="cellValue"></div>
 
       <!-- icon type -->
-      <i *ngIf="col.dataType === TabularColumnTypes.Icon && hasValidIconTypeParams(row[col.id])" title="" class="hx-icon {{row[col.id].icon}}" [hxTooltip]="row[col.id].tooltip.content" placement="{{row[col.id].tooltip.config.placement}}" [context]="row[col.id].tooltip.config.context"></i>
+      <i *ngIf="col.dataType === TabularColumnTypes.Icon && hasValidIconTypeParams(cellValue)" title="" class="hx-icon {{cellValue.icon}}" [hxTooltip]="cellValue.tooltip.content" placement="{{cellValue.tooltip.config.placement}}" [context]="cellValue.tooltip.config.context"></i>
 
       <!-- date type -->
-      <span *ngIf="col.dataType === TabularColumnTypes.Date">{{row[col.id] | date:'d/M/yy'}}</span>
+      <span *ngIf="col.dataType === TabularColumnTypes.Date">{{cellValue | date:'d/M/yy'}}</span>
 
       <!-- status type -->
-      <span *ngIf="col.dataType === TabularColumnTypes.Status" class="hx-icon" [ngClass]="{'is-primary':row[col.id],'is-danger':!row[col.id], 'icon-check-empty': row[col.id], 'icon-close-empty':!row[col.id]}" ></span>
+      <span *ngIf="col.dataType === TabularColumnTypes.Status" class="hx-icon" [ngClass]="{'is-primary':cellValue,'is-danger':!cellValue, 'icon-check-empty': cellValue, 'icon-close-empty':!cellValue}" ></span>
 
       <!-- badge type -->
-      <span *ngIf="col.dataType === TabularColumnTypes.Badge && hasValidBadgeTypeParams(row[col.id])" class="hx-badge is-small {{row[col.id].cssClass}}"><span class="hx-badge-content">{{row[col.id].label}}</span></span>
+      <span *ngIf="col.dataType === TabularColumnTypes.Badge && hasValidBadgeTypeParams(cellValue)" class="hx-badge is-small {{cellValue.cssClass}}"><span class="hx-badge-content">{{cellValue.label}}</span></span>
 
       <!-- date time type -->
-      <span *ngIf="col.dataType === TabularColumnTypes.DateTime">{{row[col.id] | date:'d/M/yy h:mm a'}}</span>
+      <span *ngIf="col.dataType === TabularColumnTypes.DateTime">{{cellValue | date:'d/M/yy h:mm a'}}</span>
 
       <!-- actions type -->
       <div *ngIf="col.dataType === TabularColumnTypes.Actions" class="hx-dropdown tabularActions">
@@ -134,7 +91,7 @@
 
         <div class="tabularActions__action">
 
-          <ng-container *ngFor="let action of row[col.id];trackBy: trackByFn">
+          <ng-container *ngFor="let action of cellValue;trackBy: trackByFn">
 
             <!-- single action -->
             <span  [hxTooltip]="action.tooltip?.content"
@@ -194,7 +151,9 @@
       </div>
 
     </td>
-  </ng-container>
+
+    
+      </ng-template>
   </tr>
   </tbody>
 </table>

@@ -43,16 +43,6 @@ export interface ITabularRow {
    * Used to disable/enable menu
    */
   actionDisabled?: boolean;
-
-
-  /**
-   * Tooltip config
-   */
-  tooltip?: {
-    config: TooltipConfig,
-    content: string;
-  };
-
 }
 
 
