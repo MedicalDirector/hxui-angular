@@ -27,7 +27,6 @@ export class UserModel implements ITabularRow {
   public actions: IActionsConfig[] = [];
   public actionDisabled = false;
   public name: string;
-  public tooltip;
 
   constructor(data?: any) {
     if (data) {
@@ -37,7 +36,6 @@ export class UserModel implements ITabularRow {
     this.setActions();
     this.setTitle();
     this.setName();
-    this.setTooltip();
   }
 
   setIcon() {
@@ -151,22 +149,6 @@ export class UserModel implements ITabularRow {
 
   setName() {
     this.name = `<div class="is-text-weight-bolder">` + this.surname + `,</div><div>` + this.firstname + `</div>`;
-  }
-
-  setTooltip() {
-    this.tooltip = {
-      config: {
-        placement: 'top',
-        context: Context.White,
-        disabled: false,
-        animation: false,
-        showDelay: 0,
-        hideDelay: 0,
-        maxWidth: 500,
-        html: true
-      },
-      content: 'Prescriptions'
-    }
   }
 
   /**
