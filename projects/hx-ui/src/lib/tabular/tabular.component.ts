@@ -11,6 +11,7 @@ import { ITabularColumnBadgeType, ITabularColumnIconType, TabularColumnTypes } f
 import { ITabularRow } from './tabular-row.interface';
 import { Context } from '../enums';
 import * as _ from 'lodash';
+import { IWithTooltip } from './tabular-tooltip.interface';
 
 @Component({
   selector: 'hxa-tabular',
@@ -351,5 +352,29 @@ export class TabularComponent implements OnInit, DoCheck {
     return (item.id) ? item.id : index;
   }
 
+  isTypeofIWithTooltip(arg) {
+    return !!arg && !!arg.tooltip;
+  }
+
+  getCellValue(cellContent: any|IWithTooltip): any {
+    if (this.isTypeofIWithTooltip(cellContent)) {
+      return cellContent.content;
+    } 
+
+    return cellContent as any;
+  }
+
+  getTooltipInfo(cellContent: any|IWithTooltip) {
+    if (this.isTypeofIWithTooltip(cellContent)) {
+      return cellContent.tooltip;
+    }
+
+    return {
+      config: {
+        disabled: true
+      },
+      content: ''
+    };
+  }
 
 }
