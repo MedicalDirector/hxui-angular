@@ -277,7 +277,7 @@ export class InMemoryDataService implements InMemoryDbService {
           content: this.getRandomDate(new Date(2015, 0, 1), new Date()),
 
         },
-        modified: this.getRandomDate(new Date(2015, 0, 1), new Date()),
+        modified: new Date(),
         flag: {label: 'Short', cssClass: ''}
       },
       {

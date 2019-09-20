@@ -51,7 +51,7 @@
 
       <ng-template #column let-col="col" let-tooltipInfo="tooltipInfo" let-cellValue="cellValue">
 
-    <td  *ngIf="!col.hidden" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox}"
+    <td  *ngIf="!col.hidden" class="{{col.cssClass}} tabular__{{col.label}}" [ngClass]="{'tabular__checkboxes': col.dataType === TabularColumnTypes.Checkbox, 'is-text-dotted': !tooltipInfo.config.disabled}"
       hxaTooltip [placement]="tooltipInfo.config.placement" [context]="tooltipInfo.config.context" [maxWidth]="tooltipInfo.config.maxWidth">
 
       <!-- dynamic tooltip -->

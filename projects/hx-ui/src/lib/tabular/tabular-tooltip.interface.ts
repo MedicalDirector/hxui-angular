@@ -2,7 +2,7 @@ import { TooltipConfig } from '../tooltip/tooltip.config';
 
 export interface IWithTooltip {
     content: any;
-    tooltip?: {
+    tooltip: {
         config: TooltipConfig;
         content: string;
     };
