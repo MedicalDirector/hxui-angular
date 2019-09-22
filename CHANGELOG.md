@@ -1,4 +1,10 @@
-## [7.4.4](https://www.npmjs.com/package/@hxui/angular/v/7.4.3) (2019-09-17)
+## [7.4.5](https://www.npmjs.com/package/@hxui/angular/v/7.4.5) (2019-09-23)
+
+### Bug fix
+
+* **Tabular:** Added tooltip support for column types. Also added example to documentation.
+
+## [7.4.4](https://www.npmjs.com/package/@hxui/angular/v/7.4.4) (2019-09-17)
 
 ### Bug fix
 
