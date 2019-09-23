@@ -12,6 +12,7 @@ import { ITabularRow } from './tabular-row.interface';
 import { Context } from '../enums';
 import * as _ from 'lodash';
 import { IWithTooltip } from './tabular-tooltip.interface';
+import { TabularContentService } from './tabular-content.service';
 
 @Component({
   selector: 'hxa-tabular',
@@ -122,7 +123,8 @@ export class TabularComponent implements OnInit, DoCheck {
 
   constructor(
     private conf: TabularConfig,
-    private sortByService: TabularSortByService
+    private sortByService: TabularSortByService,
+    private contentService: TabularContentService
   ) {
     Object.assign(this, conf);
   }
@@ -352,29 +354,11 @@ export class TabularComponent implements OnInit, DoCheck {
     return (item.id) ? item.id : index;
   }
 
-  isTypeofIWithTooltip(arg) {
-    return !!arg && !!arg.tooltip;
-  }
-
   getCellValue(cellContent: any|IWithTooltip): any {
-    if (this.isTypeofIWithTooltip(cellContent)) {
-      return cellContent.content;
-    } 
-
-    return cellContent as any;
+    return this.contentService.getContent(cellContent);
   }
 
   getTooltipInfo(cellContent: any|IWithTooltip) {
-    if (this.isTypeofIWithTooltip(cellContent)) {
-      return cellContent.tooltip;
-    }
-
-    return {
-      config: {
-        disabled: true
-      },
-      content: ''
-    };
+    return this.contentService.getTooltipInfo(cellContent);
   }
-
 }

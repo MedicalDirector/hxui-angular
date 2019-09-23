@@ -11,6 +11,7 @@ import {SimpleSearchPipe} from '../utils/pipes/simple-search.pipe';
 import {PaginationModule} from '../pagination/pagination.module';
 import {DropdownModule} from '../dropdown/dropdown.module';
 import {FormsModule} from '@angular/forms';
+import { TabularContentService } from './tabular-content.service';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {FormsModule} from '@angular/forms';
   ],
   providers: [
     TabularSortByService,
-    TabularConfig
+    TabularConfig,
+    TabularContentService
   ],
   exports: [
     TabularComponent
@@ -44,7 +46,8 @@ export class TabularModule {
       ngModule: TabularModule,
       providers: [
         TabularSortByService,
-        TabularConfig
+        TabularConfig,
+        TabularContentService
       ]
     };
   }

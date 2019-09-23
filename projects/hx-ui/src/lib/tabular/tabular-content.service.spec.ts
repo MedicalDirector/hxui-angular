@@ -1,16 +1,10 @@
-import { TabularSortByService } from './tabular-sort-by.service';
-import { TabularComponent } from './tabular.component';
 import { Context } from '../enums';
+import { TabularContentService } from './tabular-content.service';
 
-describe('TabularComponent', () => {
+describe('TabularContentService', () => {
 
-    let tabularComponent: TabularComponent;
-    let sortByServiceMock;
+    let tabularContent = new TabularContentService();
 
-    beforeEach(() => {
-        sortByServiceMock = jasmine.createSpyObj('TabularSortByService', ['sortBy']);
-        tabularComponent = new TabularComponent(null, sortByServiceMock);
-    });
 
     describe('getTooltipInfo', () => {
         it('returns tooltip when data contains tooltip configuration and content', () => {
@@ -26,14 +20,14 @@ describe('TabularComponent', () => {
                 },
                 content: 'This is the data to be displayed on the cell'
             };
-            const tooltip = tabularComponent.getTooltipInfo(contentWithTooltip);
+            const tooltip = tabularContent.getTooltipInfo(contentWithTooltip);
 
             expect(tooltip).toEqual(contentWithTooltip.tooltip);
         });
 
         it('returns tooltip with config set as disabled when content does not contain tooltip configuration', () => {
             const content = 'This is the data to be displayed on the cell';
-            const tooltip = tabularComponent.getTooltipInfo(content);
+            const tooltip = tabularContent.getTooltipInfo(content);
 
             expect(tooltip.config.disabled).toBeTruthy();
         });
@@ -55,7 +49,7 @@ describe('TabularComponent', () => {
                 },
                 content: 'This is the data to be displayed on the cell'
             };
-            const cellValue = tabularComponent.getCellValue(contentWithTooltip);
+            const cellValue = tabularContent.getContent(contentWithTooltip);
 
             expect(cellValue).toBe(contentWithTooltip.content);
         });
@@ -63,7 +57,7 @@ describe('TabularComponent', () => {
         
         it('returns the content when data does not contain tooltip configuration', () => {
             const content = new Date(2019, 10, 21);
-            const cellValue = tabularComponent.getCellValue(content);
+            const cellValue = tabularContent.getContent(content);
 
             expect(cellValue).toBe(content);
         });
