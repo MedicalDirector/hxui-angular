@@ -1,5 +1,5 @@
-import { IWithTooltip } from '../../../../../lib/lib/tabular/tabular-tooltip.interface';
 import { Injectable } from '@angular/core';
+import { IWithTooltip } from './tabular-tooltip.interface';
 
 @Injectable()
 export class TabularContentService {
