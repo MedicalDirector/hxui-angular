@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ITabularRow} from './tabular-row.interface';
 import sortBy from 'array-sort-by';
 import {TabularColumnTypes} from './tabular-column.interface';
+import { TabularContentService } from './tabular-content.service';
 
 export enum SortByDirection {
     Ascending,
@@ -17,6 +18,8 @@ export interface ISortByProperty {
 
 @Injectable()
 export class TabularSortByService {
+
+  constructor(private contentService: TabularContentService) { }
 
 
   public sortBy(rows: ITabularRow[] = [], sortProps: ISortByProperty[] = []) {
@@ -35,19 +38,21 @@ export class TabularSortByService {
     sortBy(rows, item => {
       const sort = [];
       for (const prop of sortProps) {
+        const propVal = this.contentService.getContent(item[prop.property]);
+
         if (prop.type === TabularColumnTypes.String && prop.direction === SortByDirection.Descending) {
-          sort.push('desc:' + item[prop.property]);
+          sort.push('desc:' + propVal);
         } else if (prop.type === TabularColumnTypes.Number && prop.direction === SortByDirection.Descending) {
-          sort.push(-item[prop.property]);
+          sort.push(-propVal);
         } else if ((prop.type === TabularColumnTypes.Date || prop.type === TabularColumnTypes.DateTime) && prop.direction === SortByDirection.Descending) {
-          sort.push(-new Date(item[prop.property]));
+          sort.push(-new Date(propVal));
         } else if ((prop.type === TabularColumnTypes.Date || prop.type === TabularColumnTypes.DateTime) && prop.direction === SortByDirection.Ascending) {
-          sort.push(new Date(item[prop.property]));
+          sort.push(new Date(propVal));
         } else if (prop.type === TabularColumnTypes.Html && prop.direction === SortByDirection.Descending) {
-          const sortableValue = item[prop.property];
+          const sortableValue = propVal;
           sort.push('desc:' + sortableValue.replace(/<.*?>/g, ''));
         } else {
-          sort.push(item[prop.property]);
+          sort.push(propVal);
         }
       }
      return sort;
