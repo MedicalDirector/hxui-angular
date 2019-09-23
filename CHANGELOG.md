@@ -1,3 +1,9 @@
+## [7.4.6](https://www.npmjs.com/package/@hxui/angular/v/7.4.6) (2019-09-23)
+
+### Bug fix
+
+* **Tabular:** Fixed sorting bug in tabular where data contains tooltip info.
+
 ## [7.4.5](https://www.npmjs.com/package/@hxui/angular/v/7.4.5) (2019-09-23)
 
 ### Bug fix
