@@ -5,7 +5,7 @@ import { IWithTooltip } from './tabular-tooltip.interface';
 export class TabularContentService {
 
   private isTypeofIWithTooltip(arg) {
-    return !!arg && !!arg.tooltip;
+    return !!arg && !!arg.tooltip && !!arg.content;
   }
 
   getContent(cellContent: any|IWithTooltip): any {
