@@ -1,4 +1,4 @@
-## [7.4.9](https://www.npmjs.com/package/@hxui/angular/v/7.4.9) (2019-10-02)
+## [7.4.9 - 7.4.10](https://www.npmjs.com/package/@hxui/angular/v/7.4.10) (2019-10-02)
 
 ### Bug fix
 
