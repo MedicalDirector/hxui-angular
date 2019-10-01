@@ -74,7 +74,7 @@
       <i *ngIf="col.dataType === TabularColumnTypes.Icon && hasValidIconTypeParams(cellValue)" title="" class="hx-icon {{cellValue.icon}}" [hxTooltip]="cellValue.tooltip.content" placement="{{cellValue.tooltip.config.placement}}" [context]="cellValue.tooltip.config.context"></i>
 
       <!-- date type -->
-      <span *ngIf="col.dataType === TabularColumnTypes.Date">{{cellValue | date:'d/M/yy'}}</span>
+      <span *ngIf="col.dataType === TabularColumnTypes.Date">{{cellValue | date:'dd/MM/yyyy'}}</span>
 
       <!-- status type -->
       <span *ngIf="col.dataType === TabularColumnTypes.Status" class="hx-icon" [ngClass]="{'is-primary':cellValue,'is-danger':!cellValue, 'icon-check-empty': cellValue, 'icon-close-empty':!cellValue}" ></span>
@@ -83,7 +83,7 @@
       <span *ngIf="col.dataType === TabularColumnTypes.Badge && hasValidBadgeTypeParams(cellValue)" class="hx-badge is-small {{cellValue.cssClass}}"><span class="hx-badge-content">{{cellValue.label}}</span></span>
 
       <!-- date time type -->
-      <span *ngIf="col.dataType === TabularColumnTypes.DateTime">{{cellValue | date:'d/M/yy h:mm a'}}</span>
+      <span *ngIf="col.dataType === TabularColumnTypes.DateTime">{{cellValue | date:'dd/MM/yyyy hh:mm a'}}</span>
 
       <!-- actions type -->
       <div *ngIf="col.dataType === TabularColumnTypes.Actions" class="hx-dropdown tabularActions">
