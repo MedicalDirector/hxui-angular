@@ -1,4 +1,10 @@
-## [7.4.6 - 7.4.8](https://www.npmjs.com/package/@hxui/angular/v/7.4.6) (2019-09-23)
+## [7.4.9](https://www.npmjs.com/package/@hxui/angular/v/7.4.9) (2019-10-02)
+
+### Bug fix
+
+* **Tabular:** Updated date format in tabular component to use the format 'dd/MM/yyyy'
+
+## [7.4.6 - 7.4.8](https://www.npmjs.com/package/@hxui/angular/v/7.4.8) (2019-09-23)
 
 ### Bug fix
 
