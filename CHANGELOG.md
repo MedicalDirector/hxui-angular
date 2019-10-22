@@ -1,3 +1,9 @@
+## [7.4.13](https://www.npmjs.com/package/@hxui/angular/v/7.4.13) (2019-10-22)
+
+### Enhancement
+
+* **Dropdown:** Add createClipPathMask option
+
 ## [7.4.11 - 7.4.12](https://www.npmjs.com/package/@hxui/angular/v/7.4.12) (2019-10-15)
 
 ### Bug fix
