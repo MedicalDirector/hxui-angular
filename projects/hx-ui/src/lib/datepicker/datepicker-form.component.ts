@@ -16,6 +16,7 @@ import {take, takeUntil} from 'rxjs/operators';
 import {Directionality} from '@angular/cdk/bidi';
 import {DatepickerConfig} from './datepicker.config';
 import { DatepickerIntervalComponent } from './datepicker-interval.component';
+import {TextInputDirective} from '../text-input/text-input.directive';
 
 @Component({
   selector: 'hxa-datepicker-input, hxa-datepicker-form',
@@ -30,9 +31,11 @@ import { DatepickerIntervalComponent } from './datepicker-interval.component';
     provide: NG_VALIDATORS,
     useExisting: forwardRef(() => DatepickerFormComponent),
     multi: true,
-  }]
+ }]
 })
 export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Validator, OnDestroy {
+
+  @ViewChild(TextInputDirective) datePickerFormInput: TextInputDirective;
 
   _overlayRef: OverlayRef | null;
   _calendarInstance: DatepickerComponent | null;
@@ -174,6 +177,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     this.date = date;
     this.propogateChange(date);
     this.onDateChange.emit(date);
+    this._updateLabelStyle();
   }
 
   public onDateSelectEvent = (inputDate: Date): void => {
@@ -186,13 +190,14 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     const inputDate = $event.target.value;
     const date: Date = this.parseDate(inputDate);
 
-    if (inputDate === '') {
+    if (inputDate === '' || date === null) {
       this.setDate(null);
     } else if (!!date) {
       this.setDate(date);
     } else {
       this.propogateChange(inputDate);
     }
+
   }
 
   public onFocused($event): void {
@@ -264,7 +269,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     this.onTouched.forEach(fn => fn());
   }
 
-  public propogateChange(value): void {
+  public propogateChange = (value) => {
     this.onChanged.forEach(fn => fn(value));
   }
 
@@ -500,6 +505,13 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
           this._overlayRef!.updatePosition();
         }
       });
+    }
+  }
+
+  // only applicable if hxaInputDirective is present
+  private _updateLabelStyle() {
+    if (this.datePickerFormInput) {
+      this.datePickerFormInput.styleLabel(true);
     }
   }
 }

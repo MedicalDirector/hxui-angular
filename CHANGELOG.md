@@ -1,3 +1,51 @@
+## [7.4.9 - 7.4.10](https://www.npmjs.com/package/@hxui/angular/v/7.4.10) (2019-10-02)
+
+### Bug fix
+
+* **Tabular:** Updated date format in tabular component to use the format 'dd/MM/yyyy'
+
+## [7.4.6 - 7.4.8](https://www.npmjs.com/package/@hxui/angular/v/7.4.8) (2019-09-23)
+
+### Bug fix
+
+* **Tabular:** Fixed sorting bug in tabular where data contains tooltip info.
+
+## [7.4.5](https://www.npmjs.com/package/@hxui/angular/v/7.4.5) (2019-09-23)
+
+### Bug fix
+
+* **Tabular:** Added tooltip support for column types. Also added example to documentation.
+
+## [7.4.4](https://www.npmjs.com/package/@hxui/angular/v/7.4.4) (2019-09-17)
+
+### Bug fix
+
+* **Date Picker:** Set date to null when an invalid date is entered. Also added reactive form example to documentation.
+
+## [7.4.3](https://www.npmjs.com/package/@hxui/angular/v/7.4.3) (2019-09-16)
+
+### Update
+
+* **Date Picker:** Add ClearIfNotMatched flag to ngx-mask so that invalid inputs are cleared on blur.
+
+## [7.4.2](https://www.npmjs.com/package/@hxui/angular/v/7.4.2) (2019-09-11)
+
+### Update
+
+* **Date Picker:** Add hxaTextInput directive so date picker input is styled correctly (eg when date is not 'required')
+
+## [7.4.1](https://www.npmjs.com/package/@hxui/angular/v/7.4.1) (2019-08-26)
+
+### Enhancement 
+
+* **Filter:** Updated filters component to accept only numbers. 
+
+## [7.4.0](https://www.npmjs.com/package/@hxui/angular/v/7.4.0) (2019-08-26)
+
+### Enhancement 
+
+* **Filter:** Added mask to filters to accept only numbers. 
+
 ## [7.3.0](https://www.npmjs.com/package/@hxui/angular/v/7.3.0) (2019-08-14)
 
 ### Enhancement 

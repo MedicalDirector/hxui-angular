@@ -5,6 +5,7 @@ export interface IFilterOption {
   value: any;
   icon?: string;
   selected: boolean;
+  charLimit?: number;
 }
 
 export interface IFiltersConfig {

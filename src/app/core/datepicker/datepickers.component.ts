@@ -4,6 +4,7 @@ import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/common';
 import { DatepickersCode } from './datepickers.code';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -14,22 +15,34 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 export class DatepickersComponent extends CoreBaseComponent { 
 
   public code = new DatepickersCode();
-  public dayte_basic: string;
-  public dayte: string;
+
+  basicForm = this.fb.group({
+    dayte_basic: [null]
+  });
+
+  intervalForm = this.fb.group({
+    dayte: [null],
+  });
 
   constructor(
     protected pageScrollService: PageScrollService,
     protected breakpointObserver: BreakpointObserver,
-    @Inject(DOCUMENT) protected document: any
+    private fb: FormBuilder,
+    @Inject(DOCUMENT) protected document: any,
   ) {
     super(pageScrollService, breakpointObserver, document);
   }
 
   onDateChangedBasic($event) {
-    console.log(this.dayte_basic, $event);
+    console.log(this.basicForm.get('dayte_basic').value, $event);
   }
 
   onDateChanged($event) {
-    console.log(this.dayte, $event);
+    console.log(this.intervalForm.get('dayte').value, $event);
+  }
+
+  reset(){
+    this.basicForm.reset();
+    this.intervalForm.reset();
   }
 }

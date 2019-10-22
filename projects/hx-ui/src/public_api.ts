@@ -89,6 +89,7 @@ export * from './lib/tabular/tabular-config.interface';
 export * from './lib/tabular/tabular-row.interface';
 export * from './lib/tabular/tabular-size.enum';
 export * from './lib/tabular/tabular-sort-by.service';
+export * from './lib/tabular/tabular-tooltip.interface';
 
 export * from './lib/tooltip/tooltip.config';
 export * from './lib/tooltip/tooltip.directive';
