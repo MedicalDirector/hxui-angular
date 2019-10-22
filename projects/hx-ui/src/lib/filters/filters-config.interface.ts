@@ -54,4 +54,8 @@ export interface IFiltersConfig {
    */
   width?: number;
 
+  disabled?: boolean;
+  hidden?: boolean;
+  isLoading?: boolean;
+
 }

@@ -10,8 +10,8 @@
     <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last;">
 
       <!-- single select filter -->
-      <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.SingleSelect">
-        <a [id]="filter?.id + '-trigger'" class="hx-button hx-button-dropdown expandedFilter__button" hxaDropdownToggle>
+      <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.SingleSelect && !filter?.hidden">
+        <a [id]="filter?.id + '-trigger'" class="hx-button hx-button-dropdown expandedFilter__button" [class.is-loading]="filter?.isLoading" [class.is-disabled]="filter?.disabled" hxaDropdownToggle>
           <span class="is-text-weight-light">{{filter?.label}}:&nbsp;</span>
           <span class="hx-icon-control" *ngIf="filter?.selected?.icon"><i class="{{filter?.selected?.icon}} mr-1"></i></span>
           <span class="is-text-weight-bolder is-text-ellipsed" title="{{filter?.selected?.label}}">{{filter?.selected?.label}}</span>
@@ -23,7 +23,7 @@
       </div>
 
       <!-- search filter -->
-      <div [id]="filter.id" *ngIf="filter.type === FilterType.Search"  class="hx-input-group ml-4" [class.mx-1]="!lastItem">
+      <div [id]="filter.id" *ngIf="filter.type === FilterType.Search && !filter?.hidden"  class="hx-input-group ml-4" [class.mx-1]="!lastItem">
         <i class="hx-icon icon-search mt-1"></i>
         <div class="hx-input-control my-0">
           <input class="hx-input"
@@ -32,6 +32,7 @@
                   (input)="onSearchFilterChange(filter)"
                   [(ngModel)]="filter.value"
                   [style.width.rem]="filter.width"
+                  [disabled]="filter?.disabled"
                   mask="{{customMask}}">
           <label class="hx-label"></label>
           <div class="hx-help"></div>

@@ -1,3 +1,9 @@
+## [7.4.11 - 7.4.12](https://www.npmjs.com/package/@hxui/angular/v/7.4.12) (2019-10-15)
+
+### Bug fix
+
+* **Filter Group:** Add disabled, hidden and isLoading states to filters 
+
 ## [7.4.9 - 7.4.10](https://www.npmjs.com/package/@hxui/angular/v/7.4.10) (2019-10-02)
 
 ### Bug fix
