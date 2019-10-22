@@ -13,7 +13,7 @@
                     <a class="hx-button is-transparent"><i class="hx-icon icon-angle-left"></i></a>
                 </div>
                 <div class="hxa-datepicker-month-title">
-                  <span>{{viewDate.toLocaleString("en-au", { month: "long", year: "numeric" })}}</span></div>
+                  <span>{{viewDate?.toLocaleString("en-au", { month: "long", year: "numeric" })}}</span></div>
                 <div class="hxa-datepicker-icon" title="Next Month" (click)="nextMonth()">
                     <a class="hx-button is-transparent"><i class="hx-icon icon-angle-right"></i></a>
                 </div>
@@ -48,7 +48,7 @@
             <a class="hx-button is-transparent"><i class="hx-icon icon-angle-left"></i></a>
         </div>
         <div class="hxa-datepicker-month-title">
-          <span>{{viewDate.toLocaleString("en-au", { month: "long", year: "numeric" })}}</span></div>
+          <span>{{viewDate?.toLocaleString("en-au", { month: "long", year: "numeric" })}}</span></div>
         <div class="hxa-datepicker-icon" title="Next Month" (click)="nextMonth()">
             <a class="hx-button is-transparent"><i class="hx-icon icon-angle-right"></i></a>
         </div>

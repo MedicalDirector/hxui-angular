@@ -1,3 +1,9 @@
+## [7.4.13](https://www.npmjs.com/package/@hxui/angular/v/7.4.12) (2019-10-23)
+
+### Bug fix
+
+* **Date Picker:** Fixed bug for date range validation when date formatted string is parsed
+
 ## [7.4.11 - 7.4.12](https://www.npmjs.com/package/@hxui/angular/v/7.4.12) (2019-10-15)
 
 ### Bug fix

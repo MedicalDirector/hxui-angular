@@ -242,9 +242,13 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     const normalisedToDate = new Date(to.getFullYear(), to.getMonth(), to.getDate());
 
     return (date: Date) => {
-      const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      return !(normalisedFromDate.getTime() <= normalisedDate.getTime() &&
-        normalisedDate.getTime() <= normalisedToDate.getTime());
+      if (date instanceof Date) {
+        const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        return !(normalisedFromDate.getTime() <= normalisedDate.getTime() &&
+          normalisedDate.getTime() <= normalisedToDate.getTime());
+      } else {
+        return false;
+      }
     };
   }
 
