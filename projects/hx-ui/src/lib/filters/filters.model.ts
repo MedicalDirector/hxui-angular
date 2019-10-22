@@ -13,6 +13,9 @@ export class FiltersModel implements IFiltersConfig {
   defaultIndex = 0;
   charLimit = 2;
   width: number;
+  disabled = false;
+  hidden = false;
+  isLoading = false;
 
   constructor(data?: IFiltersConfig) {
     Object.assign(this, data);

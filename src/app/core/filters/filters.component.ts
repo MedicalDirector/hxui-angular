@@ -205,7 +205,12 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
   }
 
   resetFilters() {
+    this.filtersComponent.data.forEach(f => f.disabled = false);
     this.filtersComponent.resetFilters();
+  }
+
+  disableFilters(){
+   this.filtersComponent.data.forEach(f => f.disabled = !f.disabled);
   }
 
   toggleCollapsed() {
