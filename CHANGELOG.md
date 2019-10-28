@@ -1,3 +1,9 @@
+## [7.4.15](https://www.npmjs.com/package/@hxui/angular/v/7.4.14) (2019-10-29)
+
+### Enhancement
+
+* **Selectize:** Added focus method to call focus on selectize internally 
+
 ## [7.4.14](https://www.npmjs.com/package/@hxui/angular/v/7.4.14) (2019-10-23)
 
 ### Bug fix

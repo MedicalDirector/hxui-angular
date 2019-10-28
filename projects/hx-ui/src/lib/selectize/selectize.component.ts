@@ -245,6 +245,12 @@ export class SelectizeComponent
     }
   }
 
+  focus() {
+    setTimeout(()=> {
+      this.selectize.focus();
+    });
+  }
+
 
   updateLabel() {
   }
