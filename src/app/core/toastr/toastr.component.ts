@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {PageScrollService} from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import {CoreBaseComponent} from '../core-base.component';
 import {ToastrCode} from './toastr.code';
 import {ToastrService} from '../../../../projects/hx-ui/src/lib/toastr/toastr.service';

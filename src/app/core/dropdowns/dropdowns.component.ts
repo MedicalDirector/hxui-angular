@@ -1,5 +1,5 @@
 import {Component, ElementRef, Inject, Input, OnInit, ViewChild} from '@angular/core';
-import {PageScrollService} from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import {CoreBaseComponent} from '../core-base.component';
 import {DOCUMENT} from '@angular/common';
 import {DropdownsCode} from './dropdowns.code';
@@ -13,7 +13,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 })
 export class DropdownsComponent extends CoreBaseComponent {
 
-  @ViewChild('dropdown') dropdown: DropdownDirective;
+  @ViewChild('dropdown', { static: true }) dropdown: DropdownDirective;
 
   code = new DropdownsCode();
   constructor(protected pageScrollService: PageScrollService,

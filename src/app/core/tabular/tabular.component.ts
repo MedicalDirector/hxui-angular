@@ -6,7 +6,7 @@ import {TabularSize} from '../../../../projects/hx-ui/src/lib/tabular/tabular-si
 import {TabularService} from './tabular.service';
 import {UserModel} from './user.model';
 import {CoreBaseComponent} from '../core-base.component';
-import {PageScrollService} from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import {DOCUMENT} from '@angular/common';
 import {ITabularRow} from '../../../../projects/hx-ui/src/lib/tabular/tabular-row.interface';
 import {TabularCode} from './tabular.code';
@@ -25,7 +25,7 @@ import {FiltersModel} from '../../../../projects/hx-ui/src/lib/filters/filters.m
 })
 export class TabularComponent extends CoreBaseComponent implements OnInit {
 
-  @ViewChild('filterComp') filtersComponent: FiltersComponent;
+  @ViewChild('filterComp', { static: true }) filtersComponent: FiltersComponent;
   onFilterChangeEvent$ = new Subscription();
   users$: Observable<UserModel[]>;
   code = new TabularCode();

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {EmptyStateCode} from './empty-state.code';
-import {PageScrollService} from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import {DOCUMENT} from '@angular/common';
 import {CoreBaseComponent} from '../core-base.component';
 import {IEmptyStateAction} from '../../../../projects/hx-ui/src/lib/empty-state/empty-state-action.interface';

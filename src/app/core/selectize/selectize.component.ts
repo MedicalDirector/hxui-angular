@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { PageScrollService } from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/common';
 import { SelectizeConfig } from '../../../../projects/hx-ui/src/lib/selectize/selectize.config';

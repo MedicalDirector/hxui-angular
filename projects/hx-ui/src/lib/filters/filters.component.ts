@@ -14,7 +14,7 @@ import {debounceTime} from 'rxjs/internal/operators';
 })
 export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
 
-  @ViewChild('carousel') private carousel: ElementRef;
+  @ViewChild('carousel', { static: true }) private carousel: ElementRef;
 
   FilterType = FilterType;
   data: FiltersModel[] = [];
@@ -25,7 +25,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   private _filters: IFiltersConfig[] = [];
   private _oldFilters: IFiltersConfig[] = [];
   private _collapsed = false;
-  
+
   @Input()
   customMask
 

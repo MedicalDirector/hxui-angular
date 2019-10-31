@@ -21,7 +21,7 @@ type PaneType = 'left' | 'right';
 })
 export class FiltersCollapsedComponent implements OnInit {
 
-  @ViewChild('dropdown') dropdown: DropdownDirective;
+  @ViewChild('dropdown', { static: true }) dropdown: DropdownDirective;
 
   FilterType = FilterType;
   activePane = 'left';

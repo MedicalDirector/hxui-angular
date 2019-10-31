@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {PageScrollService} from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import {DOCUMENT} from '@angular/common';
 import {CoreBaseComponent} from '../core-base.component';
 import {TypeaheadsCode} from './typeaheads.code';

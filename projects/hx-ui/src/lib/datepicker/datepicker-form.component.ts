@@ -35,7 +35,7 @@ import {TextInputDirective} from '../text-input/text-input.directive';
 })
 export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Validator, OnDestroy {
 
-  @ViewChild(TextInputDirective) datePickerFormInput: TextInputDirective;
+  @ViewChild(TextInputDirective, { static: true }) datePickerFormInput: TextInputDirective;
 
   _overlayRef: OverlayRef | null;
   _calendarInstance: DatepickerComponent | null;

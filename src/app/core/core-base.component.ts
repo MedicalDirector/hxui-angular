@@ -1,12 +1,12 @@
 import {ElementRef, Inject, Injectable, ViewChild} from '@angular/core';
-import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 import {DOCUMENT} from '@angular/common';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import { PageScrollService } from 'ngx-page-scroll-core';
 
 @Injectable()
 export class CoreBaseComponent {
 
-  @ViewChild('container')
+  @ViewChild('container', { static: true })
   protected container: ElementRef;
   protected contentsNav = true;
 
@@ -22,14 +22,13 @@ export class CoreBaseComponent {
   }
 
   scrollTo = (target: string) => {
-    const pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
-          document: this.document,
-          scrollTarget: target,
-          scrollingViews: [
-            this.container.nativeElement
-          ]
+    this.pageScrollService.scroll({
+      document: this.document,
+      scrollTarget: target,
+      scrollViews: [
+        this.container.nativeElement
+      ]
     });
-    this.pageScrollService.start(pageScrollInstance);
   }
 
 

@@ -4,11 +4,11 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from '../app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NgxPageScrollModule, PageScrollService} from 'ngx-page-scroll';
 import {HttpClientModule} from '@angular/common/http';
 import {HighlightModule} from 'ngx-highlightjs';
 import {HxUiModule} from '../../../projects/hx-ui/src/lib/hx-ui.module';
 import {ToastrModule} from '../../../projects/hx-ui/src/lib/toastr/toastr.module';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import {ToastrModule} from '../../../projects/hx-ui/src/lib/toastr/toastr.module
     AppRoutingModule,
     BrowserAnimationsModule,
     HxUiModule,
-    NgxPageScrollModule,
+    NgxPageScrollCoreModule,
     HighlightModule,
     ToastrModule
   ],
@@ -35,7 +35,7 @@ import {ToastrModule} from '../../../projects/hx-ui/src/lib/toastr/toastr.module
     AppRoutingModule,
     BrowserAnimationsModule,
     HxUiModule,
-    NgxPageScrollModule,
+    NgxPageScrollCoreModule,
     HighlightModule,
     ToastrModule
   ]
@@ -44,9 +44,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [
-        PageScrollService
-      ]
+      providers: []
     };
   }
 }
