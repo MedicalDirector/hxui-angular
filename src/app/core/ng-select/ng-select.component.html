@@ -1,0 +1,197 @@
+<section class="hx-section scrollable-y" #container>
+  <div class="hx-section is-comfortable">
+
+    <h1 class="hx-title">Ng-Select</h1>
+    <h2 class="hx-subtitle">Is a 3rd-party all in one UI Select or Multiselect component called <a href="https://github.com/ng-select/ng-select" target="_blank">ng-select</a></h2>
+
+    <hr>
+
+    <h4 id="install">Install</h4>
+    <p>To install ng-select via npm run the following.</p>
+
+    <pre>
+     <code [highlight]="code.install"></code>
+    </pre>
+
+    <hr>
+
+    <h4 id="import">Import</h4>
+    <p>Import the scss file to your project.</p>
+
+    <pre>
+     <code [highlight]="code.import"></code>
+    </pre>
+
+    <hr>
+
+    <h4 id="usage">Usage</h4>
+    <p>Add the NgSelectModule and angular FormsModule to AppModule or SharedModule.</p>
+
+    <pre>
+     <code [highlight]="code.usage"></code>
+    </pre>
+
+    <hr>
+
+    <h4 id="multiselectexample">Multi Select Example</h4>
+
+    <p>Add and remove items in any order with or without your mouse. Use your left/right arrow keys to move the cursor between items. </p>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <div class="hx-card not-scrollable">
+          <div class="hx-card-content">
+            <ng-select
+              [items]="people$ | async"
+              [multiple]="true"
+              [closeOnSelect]="false"
+              [searchable]="false"
+              bindLabel="name"
+              placeholder="Select people"
+              [(ngModel)]="selectedPeople">
+            </ng-select>
+
+            <div class="mt-3">
+              Selected value: <br/>
+              <ul>
+                <li *ngFor="let item of selectedPeople">{{item.name}}</li>
+              </ul>
+              <button (click)="clearModel()" class="hx-button mr-2">Clear model</button>
+              <button (click)="changeModel()" class="hx-button is-primary">Change model</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hx-column">
+
+      </div>
+    </div>
+
+    <br>
+
+    <h5 id="multiselectexample">Code</h5>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+
+        <hx-tabset>
+          <hx-tab heading="Template">
+            <pre>
+              <code [highlight]="code.multiExampleTemplate"></code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Typescript">
+            <pre>
+              <code [highlight]="code.multiExampleTypescript"></code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Data Service">
+            <pre>
+              <code [highlight]="code.dataService"></code>
+            </pre>
+          </hx-tab>
+        </hx-tabset>
+      </div>
+    </div>
+
+    <hr>
+
+    <h4 id="singleselectexample">Single Select Example</h4>
+
+    <p>Most basic example that behaves like a native select drop down box. <br>
+      Most common case is showing data from backend
+      API and with ng-select this is extremely simple since you can bind directly to
+      observable when using angular <b> | async</b> pipe</p>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+
+        <div class="hx-card not-scrollable">
+          <div class="hx-card-content">
+
+            <ng-select [items]="people$ | async"
+                       bindLabel="name"
+                       autofocus
+                       bindValue="id"
+                       placeholder="Select people"
+                       [(ngModel)]="selectedPersonId">
+            </ng-select>
+
+            <br/>Selected: {{selectedPersonId}}
+          </div>
+        </div>
+
+      </div>
+      <div class="hx-column">
+
+      </div>
+    </div>
+
+    <br>
+
+    <h5 id="singleselectexamplecode">Code</h5>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+
+        <hx-tabset>
+          <hx-tab heading="Template">
+            <pre>
+              <code [highlight]="code.simpleExampleTemplate"></code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Typescript">
+            <pre>
+              <code [highlight]="code.simpleExampleTypescript"></code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Data Service">
+            <pre>
+              <code [highlight]="code.dataService"></code>
+            </pre>
+          </hx-tab>
+        </hx-tabset>
+      </div>
+    </div>
+
+    <hr>
+
+
+    <h4 id="api">API Reference</h4>
+
+    <div class="hx-columns mt-2">
+      <div class="hx-column">
+        <div class="hx-alert is-info is-inverse">
+            <span class="hx-icon-control mr-2">
+              <i class="hx-icon is-medium icon-information"></i>
+            </span>
+                    <span class="hx-flex-1">
+                      For a full list of examples and API references, view the <a href="https://ng-select.github.io/ng-select#/data-sources" target="_blank">Ng-select documentation</a>.
+            </span>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<aside *ngIf="contentsNav" class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
+  <ul class="hx-nav hx-nav-vertical">
+    <li class="hx-nav-heading">
+      <h6>Contents</h6></li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#multiselectexample')"><span>Multi Select Example</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#singleselectexample')"><span>Single Select Example</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
+    </li>
+  </ul>
+</aside>
