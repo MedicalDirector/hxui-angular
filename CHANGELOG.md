@@ -1,3 +1,9 @@
+## [7.4.16](https://www.npmjs.com/package/@hxui/angular/v/7.4.15) (2019-11-18)
+
+### New Component
+
+* **Date Range picker:** Added a new date range picker with optional interval tab
+
 ## [7.4.15](https://www.npmjs.com/package/@hxui/angular/v/7.4.14) (2019-10-29)
 
 ### Enhancement
