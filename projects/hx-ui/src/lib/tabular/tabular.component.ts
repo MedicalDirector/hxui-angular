@@ -11,6 +11,8 @@ import { ITabularColumnBadgeType, ITabularColumnIconType, TabularColumnTypes } f
 import { ITabularRow } from './tabular-row.interface';
 import { Context } from '../enums';
 import * as _ from 'lodash';
+import { IWithTooltip } from './tabular-tooltip.interface';
+import { TabularContentService } from './tabular-content.service';
 
 @Component({
   selector: 'hxa-tabular',
@@ -121,7 +123,8 @@ export class TabularComponent implements OnInit, DoCheck {
 
   constructor(
     private conf: TabularConfig,
-    private sortByService: TabularSortByService
+    private sortByService: TabularSortByService,
+    private contentService: TabularContentService
   ) {
     Object.assign(this, conf);
   }
@@ -351,5 +354,11 @@ export class TabularComponent implements OnInit, DoCheck {
     return (item.id) ? item.id : index;
   }
 
+  getCellValue(cellContent: any|IWithTooltip): any {
+    return this.contentService.getContent(cellContent);
+  }
 
+  getTooltipInfo(cellContent: any|IWithTooltip) {
+    return this.contentService.getTooltipInfo(cellContent);
+  }
 }

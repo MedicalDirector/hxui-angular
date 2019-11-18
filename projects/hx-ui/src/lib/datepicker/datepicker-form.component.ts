@@ -16,6 +16,7 @@ import {take, takeUntil} from 'rxjs/operators';
 import {Directionality} from '@angular/cdk/bidi';
 import {DatepickerConfig} from './datepicker.config';
 import { DatepickerIntervalComponent } from './datepicker-interval.component';
+import {TextInputDirective} from '../text-input/text-input.directive';
 
 @Component({
   selector: 'hxa-datepicker-input, hxa-datepicker-form',
@@ -30,19 +31,12 @@ import { DatepickerIntervalComponent } from './datepicker-interval.component';
     provide: NG_VALIDATORS,
     useExisting: forwardRef(() => DatepickerFormComponent),
     multi: true,
-  }]
+ }]
 })
 export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Validator, OnDestroy, DoCheck {
 
-  ngDoCheck(): void {
-    const from = this.parseDate(this.from) || new Date(-8630000000000000);
-    const to = this.parseDate(this.to) || new Date(8630000000000000);
+  @ViewChild(TextInputDirective) datePickerFormInput: TextInputDirective;
 
-    if (!!this.from || !!this.to) {
-      this.validateDateRange = this.createDateRangeValidator(from, to);
-      this.dateValidators = [this.validateDateRange.bind(this)];
-    }
-  }
   _overlayRef: OverlayRef | null;
   _calendarInstance: DatepickerComponent | null;
   _intervalInstance: DatepickerIntervalComponent | null;
@@ -134,6 +128,17 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     this._elementHtmlCollection = this._elementRef.nativeElement.getElementsByTagName('input');
   }
 
+
+  ngDoCheck(): void {
+    const from = this.parseDate(this.from) || new Date(-8630000000000000);
+    const to = this.parseDate(this.to) || new Date(8630000000000000);
+
+    if (!!this.from || !!this.to) {
+      this.validateDateRange = this.createDateRangeValidator(from, to);
+      this.dateValidators = [this.validateDateRange.bind(this)];
+    }
+  }
+
   /**
    * Dispose the tooltip when destroyed.
    */
@@ -183,6 +188,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     this.date = date;
     this.propogateChange(date);
     this.onDateChange.emit(date);
+    this._updateLabelStyle();
   }
 
   public onDateSelectEvent = (inputDate: Date): void => {
@@ -195,13 +201,14 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     const inputDate = $event.target.value;
     const date: Date = this.parseDate(inputDate);
 
-    if (inputDate === '') {
+    if (inputDate === '' || date === null) {
       this.setDate(null);
     } else if (!!date) {
       this.setDate(date);
     } else {
       this.propogateChange(inputDate);
     }
+
   }
 
   public onFocused($event): void {
@@ -223,7 +230,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
       if (dateArray.length === 3 && dateArray[2].length !== 0) {
         const day: string = dateArray.shift();
         dateArray.splice(1, 0, day);
-  
+
         const parseInput: number = Date.parse(dateArray.join('/'));
         if (!isNaN(parseInput)) {
           return new Date(parseInput);
@@ -249,9 +256,13 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     const normalisedToDate = new Date(to.getFullYear(), to.getMonth(), to.getDate());
 
     return (date: Date) => {
-      const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      return !(normalisedFromDate.getTime() <= normalisedDate.getTime() &&
-        normalisedDate.getTime() <= normalisedToDate.getTime());
+      if (date instanceof Date) {
+        const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        return !(normalisedFromDate.getTime() <= normalisedDate.getTime() &&
+          normalisedDate.getTime() <= normalisedToDate.getTime());
+      } else {
+        return false;
+      }
     };
   }
 
@@ -276,7 +287,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     this.onTouched.forEach(fn => fn());
   }
 
-  public propogateChange(value): void {
+  public propogateChange = (value) => {
     this.onChanged.forEach(fn => fn(value));
   }
 
@@ -512,6 +523,13 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
           this._overlayRef!.updatePosition();
         }
       });
+    }
+  }
+
+  // only applicable if hxaInputDirective is present
+  private _updateLabelStyle() {
+    if (this.datePickerFormInput) {
+      this.datePickerFormInput.styleLabel(true);
     }
   }
 }

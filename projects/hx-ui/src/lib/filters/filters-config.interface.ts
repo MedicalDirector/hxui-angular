@@ -5,6 +5,7 @@ export interface IFilterOption {
   value: any;
   icon?: string;
   selected: boolean;
+  charLimit?: number;
 }
 
 export interface IFiltersConfig {
@@ -52,5 +53,9 @@ export interface IFiltersConfig {
    * Defaults if not set
    */
   width?: number;
+
+  disabled?: boolean;
+  hidden?: boolean;
+  isLoading?: boolean;
 
 }

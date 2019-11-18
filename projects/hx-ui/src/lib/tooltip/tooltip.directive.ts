@@ -146,7 +146,7 @@ export class TooltipDirective implements OnDestroy {
       positionStrategy: positionStrategy,
       panelClass: 'hxa-tooltip-panel',
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
-      hasBackdrop: !!(this.dynamicContent),
+      hasBackdrop: !this.autoClose,
       backdropClass: 'cdk-overlay-transparent-backdrop'
     });
 

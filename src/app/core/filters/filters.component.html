@@ -19,9 +19,11 @@
 
       <div class="hx-flex hx-flex-align-center">
           <button type="button" class="hx-button is-primary mr-1" (click)="toggleCollapsed()">Toggle collapsed state</button>
-          <button type="button" class="hx-button is-primary" (click)="resetFilters()">Reset filters</button>
+          <button type="button" class="hx-button is-primary mr-1" (click)="disableFilters()">Toggle disabled state</button>
+          <button type="button" class="hx-button mr-1" (click)="resetFilters()">Reset</button>
+
           <div class="hx-spacer"></div>
-         <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters"></hxa-filters>
+         <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters" [customMask] = "99999999"></hxa-filters>
       </div>
 
 
@@ -141,6 +143,30 @@
             <td>defaultIndex</td>
             <td><kbd>number</kbd></td>
             <td>Index of default filter option. The option to set when filters are cleared.</td>
+          </tr>
+
+          <tr>
+            <td>width</td>
+            <td><kbd>number</kbd></td>
+            <td>Width in REM for Search filter type.</td>
+          </tr>
+
+          <tr>
+            <td>disabled</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Disabled state of filter type</td>
+          </tr>
+
+          <tr>
+            <td>hidden</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Hidden state of filter type</td>
+          </tr>
+
+          <tr>
+            <td>isLoading</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Loading state of filter type. Displays preloader animation.</td>
           </tr>
           </tbody>
         </table>
