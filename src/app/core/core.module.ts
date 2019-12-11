@@ -27,6 +27,8 @@ import { ToastrComponent } from './toastr/toastr.component';
 import { DateRangePickerComponent } from './date-range-picker/date-range-picker.component';
 import { DialogsComponent } from './dialogs/dialogs.component';
 import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
+import { InspectorComponent } from './inspector/inspector.component';
+import {BasicCustomInspectorComponent} from './inspector/custom-inspectors/basic-custom-inspector.component';
 
 @NgModule({
   imports: [
@@ -58,7 +60,9 @@ import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.compo
       ToastrComponent,
       DateRangePickerComponent,
       DialogsComponent,
-      CustomDialogComponent
+      CustomDialogComponent,
+      InspectorComponent,
+      BasicCustomInspectorComponent
   ],
   providers: [
      TabularService,
@@ -67,7 +71,8 @@ import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.compo
   exports: [],
   entryComponents: [
     CustomModalComponent,
-    CustomDialogComponent
+    CustomDialogComponent,
+    BasicCustomInspectorComponent
   ]
 })
 export class CoreModule {

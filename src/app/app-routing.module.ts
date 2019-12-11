@@ -21,6 +21,7 @@ import {OnlineStatusComponent} from './core/online-status/online-status.componen
 import {ToastrComponent} from './core/toastr/toastr.component';
 import { DateRangePickerComponent } from './core/date-range-picker/date-range-picker.component';
 import {DialogsComponent} from './core/dialogs/dialogs.component';
+import {InspectorComponent} from './core/inspector/inspector.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/install-guide', pathMatch: 'full' },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path:  'date-range-pickers', component: DateRangePickerComponent},
   { path: 'dropdowns',  component: DropdownsComponent },
   { path: 'dialogs',  component: DialogsComponent },
+  { path: 'inspector',  component: InspectorComponent },
   { path: 'modals',  component: ModalsComponent },
   { path: 'tabs',  component: TabsComponent },
   { path: 'typeaheads',  component: TypeaheadsComponent },
