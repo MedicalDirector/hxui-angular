@@ -24,6 +24,7 @@ import { LoadersComponent } from './loaders/loaders.component';
 import { TextInputComponent } from './text-input/text-input.component';
 import { OnlineStatusComponent } from './online-status/online-status.component';
 import { ToastrComponent } from './toastr/toastr.component';
+import { DateRangePickerComponent } from './date-range-picker/date-range-picker.component';
 import { DialogsComponent } from './dialogs/dialogs.component';
 import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
 
@@ -35,6 +36,7 @@ import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.compo
   declarations: [
       PageNotFoundComponent,
       DatepickersComponent,
+      DateRangePickerComponent,
       DropdownsComponent,
       ModalsComponent,
       CustomModalComponent,
@@ -54,6 +56,7 @@ import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.compo
       TextInputComponent,
       OnlineStatusComponent,
       ToastrComponent,
+      DateRangePickerComponent,
       DialogsComponent,
       CustomDialogComponent
   ],
