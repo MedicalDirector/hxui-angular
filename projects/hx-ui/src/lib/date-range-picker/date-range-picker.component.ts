@@ -46,7 +46,7 @@ export enum DateSelectionType {
 })
 export class DateRangePickerComponent implements OnInit {
 
-  @ViewChild('dropdown') dropdown: DropdownDirective;
+  @ViewChild('dropdown', { static: true }) dropdown: DropdownDirective;
 
   @Input() intervalOptions: string[];
   @Input() placeholder: string = 'Date';

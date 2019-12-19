@@ -1,3 +1,9 @@
+## [8.2.0](https://www.npmjs.com/package/@hxui/angular/v/8.2.0) (2019-10-31)
+
+### Upgrade
+
+* **Angular 8:** Upgraded Angular core and dependencies to Version 8 
+
 ## [7.4.16](https://www.npmjs.com/package/@hxui/angular/v/7.4.15) (2019-11-18)
 
 ### New Component
