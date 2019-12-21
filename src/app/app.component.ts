@@ -81,7 +81,12 @@ export class AppComponent {
         },
         {
           name: 'Selectize',
-          link: '/selectize'
+          link: '/selectize',
+          deprecated: true
+        },
+        {
+          name: 'Ng-Select',
+          link: '/ng-select'
         },
         {
           name: 'Loaders',

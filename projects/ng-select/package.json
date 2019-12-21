@@ -1,0 +1,11 @@
+{
+  "name": "@hxui/ng-select",
+  "version": "1.0.0",
+  "description": "A HxUi theme for ng-select",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Design @ MD <design@medicaldirector.com>",
+  "private": false,
+  "license": "MIT"
+}

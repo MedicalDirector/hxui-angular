@@ -21,6 +21,7 @@ import {OnlineStatusComponent} from './core/online-status/online-status.componen
 import {ToastrComponent} from './core/toastr/toastr.component';
 import { DateRangePickerComponent } from './core/date-range-picker/date-range-picker.component';
 import {DialogsComponent} from './core/dialogs/dialogs.component';
+import {NgSelectComponent} from './core/ng-select/ng-select.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/install-guide', pathMatch: 'full' },
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'text-input',  component: TextInputComponent },
   { path: 'online-status',  component: OnlineStatusComponent },
   { path: 'toastr',  component: ToastrComponent },
+  { path: 'ng-select',  component: NgSelectComponent },
   { path: '**',  component: PageNotFoundComponent },
 ];
 @NgModule({
