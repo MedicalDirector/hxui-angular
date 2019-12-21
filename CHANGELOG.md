@@ -1,4 +1,4 @@
-## [8.2.1](https://www.npmjs.com/package/@hxui/angular/v/8.2.1) (2019-12-21)
+## [8.2.1 - 8.2.2](https://www.npmjs.com/package/@hxui/angular/v/8.2.2) (2019-12-21)
 
 ### New Component
 
