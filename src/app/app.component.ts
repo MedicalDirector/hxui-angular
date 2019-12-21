@@ -39,8 +39,12 @@ export class AppComponent {
           link: '/accordion'
         },
         {
-          name: 'Datepickers',
-          link: '/datepickers'
+          name: 'Date Pickers',
+          link: '/date-pickers'
+        },
+        {
+          name: 'Date Range Pickers',
+          link: '/date-range-pickers'
         },
         {
           name: 'Dropdowns',

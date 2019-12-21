@@ -24,6 +24,7 @@ import { LoadersComponent } from './loaders/loaders.component';
 import { TextInputComponent } from './text-input/text-input.component';
 import { OnlineStatusComponent } from './online-status/online-status.component';
 import { ToastrComponent } from './toastr/toastr.component';
+import { DateRangePickerComponent } from './date-range-picker/date-range-picker.component';
 import { DialogsComponent } from './dialogs/dialogs.component';
 import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
 import { NgSelectComponent } from './ng-select/ng-select.component';
@@ -36,6 +37,7 @@ import { NgSelectComponent } from './ng-select/ng-select.component';
   declarations: [
       PageNotFoundComponent,
       DatepickersComponent,
+      DateRangePickerComponent,
       DropdownsComponent,
       ModalsComponent,
       CustomModalComponent,
@@ -55,6 +57,7 @@ import { NgSelectComponent } from './ng-select/ng-select.component';
       TextInputComponent,
       OnlineStatusComponent,
       ToastrComponent,
+      DateRangePickerComponent,
       DialogsComponent,
       CustomDialogComponent,
       NgSelectComponent

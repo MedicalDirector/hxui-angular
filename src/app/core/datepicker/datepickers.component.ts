@@ -24,6 +24,21 @@ export class DatepickersComponent extends CoreBaseComponent { 
     dayte: [null],
   });
 
+  dateFormat = "yyyy-MM-dd";
+  intervalOptions: string[]  = [
+    'Today',
+    'Yesterday',
+    'Tomorrow',
+    'Last Year',
+    'Next Year',
+    'Last Month',
+    'Next Month',
+    'Last Week',
+    'Next Week',
+    'Last Fortnight',
+    'Next Fortnight'
+  ];
+
   constructor(
     protected pageScrollService: PageScrollService,
     protected breakpointObserver: BreakpointObserver,
