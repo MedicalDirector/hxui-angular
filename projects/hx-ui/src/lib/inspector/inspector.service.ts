@@ -1,8 +1,9 @@
 import {ComponentRef, Inject, Injectable, Injector, Optional} from '@angular/core';
 import {Overlay, OverlayConfig, OverlayRef} from '@angular/cdk/overlay';
 import {InspectorOverlayRef} from './inspector-overlay.ref';
-import {ComponentPortal, PortalInjector} from '@angular/cdk/portal';
+import {CdkPortalOutlet, ComponentPortal, PortalInjector} from '@angular/cdk/portal';
 import {FocusTrapFactory} from '@angular/cdk/a11y';
+import {InspectorComponent} from './inspector.component';
 
 interface InspectorConfig {
   panelClass?: string | string[];
@@ -13,7 +14,7 @@ interface InspectorConfig {
 const DEFAULT_CONFIG: InspectorConfig = {
   hasBackdrop: true,
   backdropClass: 'hx-modal-background',
-  panelClass: ['hx-inspector']
+  panelClass: []
 };
 
 @Injectable()
@@ -47,7 +48,7 @@ export class InspectorService {
     const containerRef = this.attachInspectorContainer(component, overlayRef, inspectorConfig, inspectorRef);
 
     // pass the @Input parameters to the instance
-    Object.assign(containerRef.instance, parameters);
+    Object.assign(containerRef.instance.inspectorComponent, parameters);
 
     // Subscribe to a stream that emits when the backdrop was clicked
     overlayRef.backdropClick().subscribe(_ => inspectorRef.close());
@@ -98,9 +99,9 @@ export class InspectorService {
 
   private attachInspectorContainer(component: any, overlayRef: OverlayRef, config: InspectorConfig, inspectorRef: InspectorOverlayRef) {
     const injector = this.createInjector(inspectorRef);
-
-    const containerPortal = new ComponentPortal(component, null, injector);
-    const containerRef: ComponentRef<any> = overlayRef.attach(containerPortal);
+    const containerPortal = new ComponentPortal(InspectorComponent, null, injector);
+    const containerRef: ComponentRef<InspectorComponent> = overlayRef.attach(containerPortal);
+    containerRef.instance.componentPortal = new ComponentPortal(component);
 
     return containerRef;
   }

@@ -1,0 +1,5 @@
+<div class="hxa-inspector"
+     [@slide]="status"
+     (@slide.done)="slideOutComplete($event)">
+  <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
+</div>

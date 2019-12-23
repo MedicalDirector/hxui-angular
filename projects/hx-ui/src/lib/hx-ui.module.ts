@@ -40,7 +40,7 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     DialogModule.forRoot(), InspectorModule.forRoot()
   ],
   exports: [
-    DatepickerModule,DateRangePickerModule, DropdownModule, ModalModule,
+    DatepickerModule, DateRangePickerModule, DropdownModule, ModalModule,
     PaginationModule, TabsModule, TooltipModule,
     TypeaheadModule, TabularModule, SelectizeModule,
     AutoGrowModule, EmptyStateModule, AccordionModule,
