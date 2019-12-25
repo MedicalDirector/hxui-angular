@@ -30,7 +30,7 @@ import {TooltipDynamicContentDirective} from './tooltip-dynamic-content.directiv
   selector: '[hxTooltip], [hxaTooltip]'
 })
 export class TooltipDirective implements OnDestroy {
-  @ContentChild(TooltipDynamicContentDirective) dynamicContent: TooltipDynamicContentDirective;
+  @ContentChild(TooltipDynamicContentDirective, { static: true }) dynamicContent: TooltipDynamicContentDirective;
 
   _overlayRef: OverlayRef | null;
   _tooltipInstance: TooltipContentComponent | null;

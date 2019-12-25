@@ -3,7 +3,7 @@ import {Context, Size} from '../../../../projects/hx-ui/src/lib/enums';
 import {LoadersCode} from './loaders.code';
 import {CoreBaseComponent} from '../core-base.component';
 import {DOCUMENT} from '@angular/common';
-import {PageScrollService} from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({

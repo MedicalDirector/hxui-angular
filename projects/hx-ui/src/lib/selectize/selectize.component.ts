@@ -69,7 +69,7 @@ export class SelectizeComponent
   @Output() onFocus: EventEmitter<void> = new EventEmitter<void>(false);
   @Output() onOptionAdded: EventEmitter<any> = new EventEmitter<any>(false);
 
-  @ViewChild('selectizeInput') selectizeInput: any;
+  @ViewChild('selectizeInput', { static: true }) selectizeInput: any;
 
   private selectize: any;
 

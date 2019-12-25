@@ -4,11 +4,13 @@ import {InspectorOverlayRef} from './inspector-overlay.ref';
 import {CdkPortalOutlet, ComponentPortal, PortalInjector} from '@angular/cdk/portal';
 import {FocusTrapFactory} from '@angular/cdk/a11y';
 import {InspectorComponent} from './inspector.component';
+import {InspectorSize} from './inspector-size.enum';
 
 interface InspectorConfig {
   panelClass?: string | string[];
   hasBackdrop?: boolean;
   backdropClass?: string;
+  size?: InspectorSize;
 }
 
 const DEFAULT_CONFIG: InspectorConfig = {
@@ -45,13 +47,25 @@ export class InspectorService {
 
     // Create ComponentPortal that can be attached to a PortalHost
     // and then attach ComponentPortal to PortalHost
-    const containerRef = this.attachInspectorContainer(component, overlayRef, inspectorConfig, inspectorRef);
+    const containerRef = this.attachInspectorContainer(component, overlayRef, inspectorConfig, inspectorRef, parameters);
+
+    // get reference to the inspector instance
+    const inspectorInstance = containerRef.instance;
+
+    // set size
+    inspectorInstance.size = (inspectorConfig.size && inspectorConfig.size === InspectorSize.Large) ? 'large' : 'small';
 
     // pass the @Input parameters to the instance
-    Object.assign(containerRef.instance.inspectorComponent, parameters);
+    Object.assign(inspectorInstance.parameters, parameters);
+
+    // add reference to inspector component
+    inspectorRef.inspectorInstance = inspectorInstance;
 
     // Subscribe to a stream that emits when the backdrop was clicked
     overlayRef.backdropClick().subscribe(_ => inspectorRef.close());
+
+    // subscribe to events when close animation completes
+    inspectorInstance.onSlideOutComplete$.subscribe(_ => overlayRef.dispose());
 
     // create and manage focus trap
     this.componentNativeElement = containerRef.location.nativeElement;
@@ -86,7 +100,7 @@ export class InspectorService {
     return overlayConfig;
   }
 
-  private createInjector(inspectorRef: InspectorOverlayRef): PortalInjector {
+  private createOverlayInjector(inspectorRef: InspectorOverlayRef): PortalInjector {
     // Instantiate new WeakMap for our custom injection tokens
     const injectionTokens = new WeakMap();
 
@@ -97,9 +111,9 @@ export class InspectorService {
     return new PortalInjector(this.injector, injectionTokens);
   }
 
-  private attachInspectorContainer(component: any, overlayRef: OverlayRef, config: InspectorConfig, inspectorRef: InspectorOverlayRef) {
-    const injector = this.createInjector(inspectorRef);
-    const containerPortal = new ComponentPortal(InspectorComponent, null, injector);
+  private attachInspectorContainer(component: any, overlayRef: OverlayRef, config: InspectorConfig, inspectorRef: InspectorOverlayRef, parameters?: Object) {
+    const injector = this.createOverlayInjector(inspectorRef);
+    const containerPortal = new ComponentPortal(InspectorComponent , null, injector);
     const containerRef: ComponentRef<InspectorComponent> = overlayRef.attach(containerPortal);
     containerRef.instance.componentPortal = new ComponentPortal(component);
 

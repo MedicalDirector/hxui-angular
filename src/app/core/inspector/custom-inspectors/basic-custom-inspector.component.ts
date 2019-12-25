@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {InspectorOverlayRef} from '../../../../../projects/hx-ui/src/lib/inspector/inspector-overlay.ref';
 import {InspectorSize} from '../../../../../projects/hx-ui/src/lib/inspector/inspector-size.enum';
+import {Subscription} from 'rxjs/index';
+import {InspectorService} from '../../../../../projects/hx-ui/src/lib/inspector/inspector.service';
 
 @Component({
   selector: 'app-basic-custom-inspector',
@@ -14,21 +16,37 @@ import {InspectorSize} from '../../../../../projects/hx-ui/src/lib/inspector/ins
       <span>Resize</span>
       <div class="hx-spacer"></div>
       <button class="hx-button is-flat" (click)="small()">Small</button>
-      <button class="hx-button is-flat" (click)="medium()">Medium</button>
       <button class="hx-button is-flat" (click)="large()">Large</button>
+      <button class="hx-button is-flat" (click)="openInspector()">Open Another</button>
     </div>
   `,
   styles:[':host{ width:100% }']
 })
 
-export class BasicCustomInspectorComponent implements OnInit {
+export class BasicCustomInspectorComponent implements OnInit, AfterViewInit, OnDestroy {
 
   protected onClose: Function;
   protected onResize: Function;
+  protected visitId = 0;
 
-  constructor(public inspectorRef: InspectorOverlayRef) { }
+  private subscriptions: Subscription = new Subscription();
+
+  constructor(public inspectorRef: InspectorOverlayRef,
+              private inspectorService: InspectorService) { }
 
   ngOnInit() {
+    console.log(this.visitId);
+    this.subscriptions.add(this.inspectorRef.inspectorInstance.onSlideInComplete$.subscribe((_) => this.onSlideInComplete(_)));
+    this.subscriptions.add(this.inspectorRef.inspectorInstance.onSlideOutComplete$.subscribe((_) => this.onSlideOutComplete(_)));
+    this.subscriptions.add(this.inspectorRef.inspectorInstance.onResizeComplete$.subscribe((_) => this.onResizeComplete(_)));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
+
+  ngAfterViewInit() {
+
   }
 
   close() {
@@ -41,14 +59,33 @@ export class BasicCustomInspectorComponent implements OnInit {
     this.inspectorRef.resize(InspectorSize.Small);
   }
 
-  medium() {
-    this.onResize('Resizing!');
-    this.inspectorRef.resize(InspectorSize.Medium);
-  }
 
   large() {
     this.onResize('Resizing!');
     this.inspectorRef.resize(InspectorSize.Large);
+  }
+
+  openInspector = () => {
+    const inspector: InspectorOverlayRef = this.inspectorService.open(BasicCustomInspectorComponent, { }, {
+      visitId: 11,
+      onClose: (data) => {
+        console.log(data);
+      },
+      onResize: (data) => {
+        console.log(data);
+      }
+    });
+  }
+
+  onSlideInComplete(inspector) {
+    console.log(inspector, 'Slide IN animation finished');
+  }
+
+  onSlideOutComplete(inspector) {
+    console.log(inspector, 'Slide OUT animation finished');
+  }
+  onResizeComplete(size: InspectorSize) {
+    console.log(size, 'Resize animation finished');
   }
 
 }

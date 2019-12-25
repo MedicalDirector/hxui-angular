@@ -1,21 +1,20 @@
 import {OverlayRef} from '@angular/cdk/overlay';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {InspectorSize} from './inspector-size.enum';
+import {InspectorComponent} from './inspector.component';
+import {Observable} from 'rxjs/index';
 
 export class InspectorOverlayRef {
 
-  private cssList = ['is-small','is-medium','is-large'];
+  inspectorInstance: InspectorComponent;
 
   constructor(private overlayRef: OverlayRef) {}
 
   close(): void {
-    this.overlayRef.dispose();
+    this.inspectorInstance.close();
   }
 
-  resize(size: InspectorSize) : void {
-    if ( size < this.cssList.length) {
-      this.overlayRef.removePanelClass(this.cssList);
-      this.overlayRef.addPanelClass(this.cssList[size]);
-    }
+  resize(size: InspectorSize): void {
+    this.inspectorInstance.resize(size);
   }
 }

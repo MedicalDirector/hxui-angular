@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {CoreBaseComponent} from '../core-base.component';
 import {DialogsCode} from './dialogs.code';
-import {PageScrollService} from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {DOCUMENT} from '@angular/common';
 import {DialogService} from '../../../../projects/hx-ui/src/lib/dialog/dialog.service';

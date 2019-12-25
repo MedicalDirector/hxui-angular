@@ -27,6 +27,7 @@ import { ToastrComponent } from './toastr/toastr.component';
 import { DateRangePickerComponent } from './date-range-picker/date-range-picker.component';
 import { DialogsComponent } from './dialogs/dialogs.component';
 import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
+import { NgSelectComponent } from './ng-select/ng-select.component';
 import { InspectorComponent } from './inspector/inspector.component';
 import {BasicCustomInspectorComponent} from './inspector/custom-inspectors/basic-custom-inspector.component';
 
@@ -62,7 +63,8 @@ import {BasicCustomInspectorComponent} from './inspector/custom-inspectors/basic
       DialogsComponent,
       CustomDialogComponent,
       InspectorComponent,
-      BasicCustomInspectorComponent
+      BasicCustomInspectorComponent,
+      NgSelectComponent
   ],
   providers: [
      TabularService,

@@ -1,3 +1,15 @@
+## [8.2.1 - 8.2.2](https://www.npmjs.com/package/@hxui/angular/v/8.2.2) (2019-12-21)
+
+### New Component
+
+* **Ng-select:** Introduced and new 3rd party component called ng-select which replaces the depricated selectize 
+
+## [8.2.0](https://www.npmjs.com/package/@hxui/angular/v/8.2.0) (2019-10-31)
+
+### Upgrade
+
+* **Angular 8:** Upgraded Angular core and dependencies to Version 8 
+
 ## [7.4.16](https://www.npmjs.com/package/@hxui/angular/v/7.4.15) (2019-11-18)
 
 ### New Component
