@@ -40,8 +40,20 @@ import {InspectorSize} from './inspector-size.enum';
       state('large',   style({
         width: (document.documentElement.clientWidth - 100) + 'px'
       })),
+      state('fullWidth',   style({
+        width: (document.documentElement.clientWidth) + 'px'
+      })),
+      state('offsetWidth',   style({
+        width: '47rem'
+      })),
       transition('small => large', animate('200ms ease-in')),
       transition('large => small', animate('200ms ease-out')),
+      transition('small => fullWidth', animate('200ms ease-out')),
+      transition('large => fullWidth', animate('200ms ease-out')),
+      transition('fullWidth => small', animate('200ms ease-in')),
+      transition('fullWidth => large', animate('200ms ease-in')),
+      transition('small => offsetWidth', animate('200ms ease-out')),
+      transition('offsetWidth => small', animate('200ms ease-in')),
       transition('void => *', [
         style({ width: '0'}),
         animate('200ms ease-in')
@@ -52,12 +64,17 @@ import {InspectorSize} from './inspector-size.enum';
 export class InspectorComponent implements OnInit {
 
   onSlideInComplete$ = new Subject<boolean>();
+  onSlideInStart$ = new Subject<boolean>();
   onSlideOutComplete$ = new Subject<boolean>();
+  onSlideOutStart$ = new Subject<boolean>();
   onResizeComplete$ = new Subject<InspectorSize>();
   componentPortal: ComponentPortal<any>;
   parameters: Object = {};
   state = 'slideOut';
   size = 'small';
+  sizes = ['small', 'large', 'offsetWidth', 'fullWidth'];
+  previousSize = 'small';
+  hideClose = false;
 
   private portalHost: DomPortalOutlet;
   private animationCount = 0;
@@ -86,7 +103,15 @@ export class InspectorComponent implements OnInit {
   }
 
   resize(size: InspectorSize) {
-    this.size = (size === InspectorSize.Small) ? 'small' : 'large';
+    this.size = this.sizes[size];
+  }
+
+  slideStart = ($event) => {
+    if ($event.fromState === 'void') {
+      this.onSlideInStart$.next(true);
+    } else {
+      this.onSlideOutStart$.next(true);
+    }
   }
 
   slideDone = ($event) => {

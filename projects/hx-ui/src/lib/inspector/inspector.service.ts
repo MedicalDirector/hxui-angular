@@ -24,6 +24,7 @@ export class InspectorService {
 
   private focusTrap;
   private componentNativeElement;
+  private overlayCollection: InspectorOverlayRef[] = [];
 
   constructor(
     private injector: Injector,
@@ -65,11 +66,33 @@ export class InspectorService {
     overlayRef.backdropClick().subscribe(_ => inspectorRef.close());
 
     // subscribe to events when close animation completes
-    inspectorInstance.onSlideOutComplete$.subscribe(_ => overlayRef.dispose());
+    inspectorInstance.onSlideOutComplete$.subscribe(_ => {
+      overlayRef.dispose();
+      this.overlayCollection.pop();
+        const lastInspector = this.overlayCollection[this.overlayCollection.length - 1];
+        if (lastInspector) {
+          lastInspector.inspectorInstance.size = lastInspector.inspectorInstance.previousSize;
+          lastInspector.inspectorInstance.hideClose = false;
+        }
+    });
+
+    // subscribe to events when open animation starts
+    inspectorInstance.onSlideInStart$.subscribe(_ => {
+      if (this.overlayCollection.length > 1) {
+        const previousInspector = this.overlayCollection[this.overlayCollection.length - 2];
+        previousInspector.inspectorInstance.previousSize = previousInspector.inspectorInstance.size;
+        const offsetSize = (previousInspector.inspectorInstance.size === previousInspector.inspectorInstance.sizes[InspectorSize.Small] && inspectorInstance.size === inspectorInstance.sizes[InspectorSize.Small]) ? InspectorSize.Offset : InspectorSize.FullWidth;
+        previousInspector.resize(offsetSize);
+        previousInspector.inspectorInstance.hideClose = true;
+      }
+    });
 
     // create and manage focus trap
     this.componentNativeElement = containerRef.location.nativeElement;
     this.trapFocus();
+
+    // assign inspector ref
+    this.overlayCollection.push(inspectorRef);
 
     return inspectorRef;
   }

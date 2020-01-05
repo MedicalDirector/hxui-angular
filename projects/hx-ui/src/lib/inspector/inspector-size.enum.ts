@@ -1,4 +1,6 @@
 export enum InspectorSize {
   Small,
-  Large
+  Large,
+  Offset,
+  FullWidth
 }

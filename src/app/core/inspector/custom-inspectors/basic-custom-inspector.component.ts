@@ -10,14 +10,14 @@ import {InspectorService} from '../../../../../projects/hx-ui/src/lib/inspector/
     <div class="hx-toolbar">
       <span>Heading</span>
       <div class="hx-spacer"></div>
-      <button class="hx-button is-flat" (click)="close()"><i class="hx-icon icon-close"></i></button>
     </div>
     <div class="hx-toolbar">
       <span>Resize</span>
       <div class="hx-spacer"></div>
       <button class="hx-button is-flat" (click)="small()">Small</button>
       <button class="hx-button is-flat" (click)="large()">Large</button>
-      <button class="hx-button is-flat" (click)="openInspector()">Open Another</button>
+      <button class="hx-button is-flat" (click)="openInspector(sizeEnum.Small)">Open Another (SM)</button>
+      <button class="hx-button is-flat" (click)="openInspector(sizeEnum.Large)">Open Another (LG)</button>
     </div>
   `,
   styles:[':host{ width:100% }']
@@ -28,6 +28,7 @@ export class BasicCustomInspectorComponent implements OnInit, AfterViewInit, OnD
   protected onClose: Function;
   protected onResize: Function;
   protected visitId = 0;
+  sizeEnum = InspectorSize;
 
   private subscriptions: Subscription = new Subscription();
 
@@ -65,8 +66,8 @@ export class BasicCustomInspectorComponent implements OnInit, AfterViewInit, OnD
     this.inspectorRef.resize(InspectorSize.Large);
   }
 
-  openInspector = () => {
-    const inspector: InspectorOverlayRef = this.inspectorService.open(BasicCustomInspectorComponent, { }, {
+  openInspector = (size: InspectorSize) => {
+    const inspector: InspectorOverlayRef = this.inspectorService.open(BasicCustomInspectorComponent, { size: size }, {
       visitId: 11,
       onClose: (data) => {
         console.log(data);
