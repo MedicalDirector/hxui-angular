@@ -28,6 +28,7 @@ import { DateRangePickerComponent } from './date-range-picker/date-range-picker.
 import { DialogsComponent } from './dialogs/dialogs.component';
 import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
 import { NgSelectComponent } from './ng-select/ng-select.component';
+import { LineClampComponent } from './line-clamp/line-clamp.component';
 
 @NgModule({
   imports: [
@@ -60,7 +61,8 @@ import { NgSelectComponent } from './ng-select/ng-select.component';
       DateRangePickerComponent,
       DialogsComponent,
       CustomDialogComponent,
-      NgSelectComponent
+      NgSelectComponent,
+      LineClampComponent
   ],
   providers: [
      TabularService,

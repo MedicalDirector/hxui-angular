@@ -1,6 +1,9 @@
 /*
  * Public API Surface of hx-ui
  */
+export * from './lib/line-clamp/line-clamp.module';
+export * from './lib/line-clamp/line-clamp.component';
+
 export * from './lib/dialog/dialog.module';
 export * from './lib/dialog/dialog.service';
 export * from './lib/dialog/dialog-overlay.ref';
