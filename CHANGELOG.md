@@ -1,3 +1,9 @@
+## [8.2.3](https://www.npmjs.com/package/@hxui/angular/v/8.2.3) (2020-01-14)
+
+### New Component
+
+* **Line Clamp:** Added a new component that allows line clamping on text and html
+
 ## [8.2.1 - 8.2.2](https://www.npmjs.com/package/@hxui/angular/v/8.2.2) (2019-12-21)
 
 ### New Component
