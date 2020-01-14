@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .toggle{
+    align-self: flex-end;
+  }
+}
+
+.box {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  visibility: hidden;
+}
