@@ -11,7 +11,7 @@ import {
 @Component({
   selector: 'hxa-line-clamp',
   template: `
-  <div #box class="box">
+  <div #box class="hxa-line-clamp-box">
     <ng-content></ng-content>
   </div>
   <a class="toggle {{toggleCss}}" *ngIf="enabled" (click)=" toggle() ">
@@ -25,7 +25,7 @@ export class LineClampComponent implements AfterContentInit {
   @ViewChild('box', { static: false }) box: ElementRef;
 
   @Input() row = 1;
-  @Input() toggleCss: string = "hx-button is-link";
+  @Input() toggleCss: string = "hx-button is-link is-small";
 
   enabled = false;
   opened = false;

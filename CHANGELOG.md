@@ -1,3 +1,9 @@
+## [8.2.4](https://www.npmjs.com/package/@hxui/angular/v/8.2.4) (2020-01-14)
+
+### Bugfix
+
+* **Line Clamp:** Change .box name to something more specific as it could clash with 3rd party css selectors
+
 ## [8.2.3](https://www.npmjs.com/package/@hxui/angular/v/8.2.3) (2020-01-14)
 
 ### New Component
