@@ -1,3 +1,9 @@
+## [8.2.5](https://www.npmjs.com/package/@hxui/angular/v/8.2.5) (2020-01-22)
+
+### Bugfix
+
+* **Tooltips:** Bugfix for dynamic tooltips after Angular 8 upgrade 
+
 ## [8.2.4](https://www.npmjs.com/package/@hxui/angular/v/8.2.4) (2020-01-14)
 
 ### Bugfix

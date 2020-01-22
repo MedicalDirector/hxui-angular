@@ -28,7 +28,7 @@
     "@angular/platform-browser-dynamic": "^8.2.13",
     "@angular/platform-server": "^8.2.13",
     "@angular/router": "^8.2.13",
-    "@hxui/css": "^1.3.10",
+    "@hxui/css": "^1.3.18",
     "@ng-select/ng-select": "^3.6.0",
     "angular-in-memory-web-api": "^0.9.0",
     "array-sort-by": "^1.2.1",
