@@ -1,3 +1,9 @@
+## [8.2.6](https://www.npmjs.com/package/@hxui/angular/v/8.2.6) (2020-02-04)
+
+### Enhancement
+
+* **Tabular:** Added fixed left and right column options
+
 ## [8.2.5](https://www.npmjs.com/package/@hxui/angular/v/8.2.5) (2020-01-22)
 
 ### Bugfix

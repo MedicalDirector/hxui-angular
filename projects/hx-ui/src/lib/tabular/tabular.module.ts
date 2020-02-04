@@ -12,6 +12,7 @@ import {PaginationModule} from '../pagination/pagination.module';
 import {DropdownModule} from '../dropdown/dropdown.module';
 import {FormsModule} from '@angular/forms';
 import { TabularContentService } from './tabular-content.service';
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TabularContentService } from './tabular-content.service';
     PaginationModule,
     TooltipModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    ScrollDispatchModule
   ],
   providers: [
     TabularSortByService,
