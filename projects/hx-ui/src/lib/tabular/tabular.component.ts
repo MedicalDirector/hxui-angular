@@ -287,7 +287,7 @@ export class TabularComponent implements OnInit, DoCheck, OnDestroy {
   onRowClickHandler($event: any, data: any) {
     const el: Element = $event.target;
     if (this.config.clickableRows) {
-      if (el.parentElement.tagName === 'BUTTON' ||
+      if (!el.parentElement || el.parentElement.tagName === 'BUTTON' ||
         el.tagName === 'BUTTON' ||
         el.parentElement.classList.contains('hx-checkbox-control')) {
         return;

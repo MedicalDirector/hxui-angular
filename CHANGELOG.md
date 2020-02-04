@@ -1,3 +1,9 @@
+## [8.2.7](https://www.npmjs.com/package/@hxui/angular/v/8.2.7) (2020-02-04)
+
+### Enhancement
+
+* **Tabular:** Added isLoading property to actions
+
 ## [8.2.6](https://www.npmjs.com/package/@hxui/angular/v/8.2.6) (2020-02-04)
 
 ### Enhancement
