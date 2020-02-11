@@ -55,6 +55,10 @@ export class AppComponent {
           link: '/dialogs'
         },
         {
+          name: 'Inspector',
+          link: '/inspector'
+        },
+        {
           name: 'Modals',
           link: '/modals',
           deprecated: true

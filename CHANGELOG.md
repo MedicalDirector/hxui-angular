@@ -1,3 +1,9 @@
+## [8.2.8](https://www.npmjs.com/package/@hxui/angular/v/8.2.8) (2020-02-11)
+
+### New component
+
+* **Inspector:** Added inspector component and documentation
+
 ## [8.2.7](https://www.npmjs.com/package/@hxui/angular/v/8.2.7) (2020-02-04)
 
 ### Enhancement

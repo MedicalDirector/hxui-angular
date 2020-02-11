@@ -28,6 +28,8 @@ import { DateRangePickerComponent } from './date-range-picker/date-range-picker.
 import { DialogsComponent } from './dialogs/dialogs.component';
 import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
 import { NgSelectComponent } from './ng-select/ng-select.component';
+import { InspectorComponent } from './inspector/inspector.component';
+import {BasicCustomInspectorComponent} from './inspector/custom-inspectors/basic-custom-inspector.component';
 import { LineClampComponent } from './line-clamp/line-clamp.component';
 
 @NgModule({
@@ -62,7 +64,10 @@ import { LineClampComponent } from './line-clamp/line-clamp.component';
       DialogsComponent,
       CustomDialogComponent,
       NgSelectComponent,
-      LineClampComponent
+      LineClampComponent,
+      InspectorComponent,
+      BasicCustomInspectorComponent,
+      NgSelectComponent
   ],
   providers: [
      TabularService,
@@ -71,7 +76,8 @@ import { LineClampComponent } from './line-clamp/line-clamp.component';
   exports: [],
   entryComponents: [
     CustomModalComponent,
-    CustomDialogComponent
+    CustomDialogComponent,
+    BasicCustomInspectorComponent
   ]
 })
 export class CoreModule {

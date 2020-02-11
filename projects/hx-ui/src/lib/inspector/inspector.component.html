@@ -1,0 +1,9 @@
+<div class="hxa-inspector"
+     [@slide]="state"
+     (@slide.done)="slideDone($event)"
+     (@slide.start)="slideStart($event)"
+     [@size]="size"
+     (@size.done)="sizeDone($event)">
+  <div class="portalHost"></div>
+  <a class="close" [class.hide]="hideClose" (click)="close()"></a>
+</div>

@@ -1,6 +1,11 @@
 /*
  * Public API Surface of hx-ui
  */
+export * from './lib/inspector/inspector.module';
+export * from './lib/inspector/inspector.service';
+export * from './lib/inspector/inspector-overlay.ref';
+export * from './lib/inspector/inspector-size.enum';
+
 export * from './lib/line-clamp/line-clamp.module';
 export * from './lib/line-clamp/line-clamp.component';
 

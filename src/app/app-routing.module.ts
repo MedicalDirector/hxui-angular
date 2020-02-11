@@ -22,6 +22,7 @@ import {ToastrComponent} from './core/toastr/toastr.component';
 import { DateRangePickerComponent } from './core/date-range-picker/date-range-picker.component';
 import {DialogsComponent} from './core/dialogs/dialogs.component';
 import {NgSelectComponent} from './core/ng-select/ng-select.component';
+import {InspectorComponent} from './core/inspector/inspector.component';
 import {LineClampComponent} from './core/line-clamp/line-clamp.component';
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path:  'date-range-pickers', component: DateRangePickerComponent},
   { path: 'dropdowns',  component: DropdownsComponent },
   { path: 'dialogs',  component: DialogsComponent },
+  { path: 'inspector',  component: InspectorComponent },
   { path: 'modals',  component: ModalsComponent },
   { path: 'tabs',  component: TabsComponent },
   { path: 'typeaheads',  component: TypeaheadsComponent },
