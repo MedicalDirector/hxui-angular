@@ -1,7 +1,13 @@
-<table class="tabular hx-table is-striped {{config.cssClass}}"
+<div class="tabular__wrapper">
+  <div [class.tabular__scroller]="config.stickyColumns" cdkScrollable #scrollable>
+      <table #table class="tabular hx-table is-striped {{config.cssClass}}"
        [class.is-hover]="config.clickableRows"
        [class.is-narrow]="config.size === TabularSize.Small"
-       [class.has-sticky-header]="config.stickyHeader">
+       [class.has-sticky-header]="config.stickyHeader"
+       [class.is-sticky-left]="(isStickyLeft$ | async)"
+       [class.is-sticky-right]="(isStickyRight$ | async)"
+       [class.is-dark]="config.theme === TabularTheme.Dark"
+       [class.is-light]="config.theme === TabularTheme.Light">
   <thead>
   <tr>
     <ng-container *ngFor="let col of columns; trackBy: trackByFn;">
@@ -45,7 +51,7 @@
       [class.has-stripe-success]="row.stripeContext && row.stripeContext === Context.Success"
       [ngClass]="[row.cssClass? row.cssClass : '']"
       [attr.title]="row.title ? row.title : ''">
-    <ng-container *ngFor="let col of columns" [ngTemplateOutlet]="column" 
+    <ng-container *ngFor="let col of columns" [ngTemplateOutlet]="column"
       [ngTemplateOutletContext]="{ col: col, tooltipInfo: getTooltipInfo(row[col.id]), cellValue: getCellValue(row[col.id]) }">
     </ng-container>
 
@@ -98,24 +104,28 @@
                    placement="{{action.tooltip?.config.placement}}"
                    [context]="action.tooltip?.config.context"
                    [disabled]="action.tooltip?.config.disabled">
-              <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small"
+              <button type="button" class="hx-button is-flat"
+                      [class.is-small]="config.size === TabularSize.Small"
+                      [class.is-loading]="action.isLoading"
                       *ngIf="!getActionDisabledState(action) && action.routeType === ActionConfigRouteType.Route && !hasChildren(action)"
                       [routerLink]="action.route"
                       class="hx-button is-flat {{action.css}}"
                       title="{{action.label}}"
-                     ><span class="hx-icon {{action.icon}}"></span></button>
+                     ><span *ngIf="!action.isLoading" class="hx-icon {{action.icon}}"></span></button>
             </span>
             <span  [hxTooltip]="action.tooltip?.content"
                    placement="{{action.tooltip?.config.placement}}"
                    [context]="action.tooltip?.config.context"
                    [disabled]="action.tooltip?.config.disabled">
-              <button type="button" class="hx-button is-flat" [class.is-small]="config.size === TabularSize.Small"
+              <button type="button" class="hx-button is-flat"
+                      [class.is-small]="config.size === TabularSize.Small"
+                      [class.is-loading]="action.isLoading"
                       *ngIf="!getActionDisabledState(action) && action.routeType === ActionConfigRouteType.Callback && !hasChildren(action)"
                     (click)='executeCallback($event,action.callback)'
                     class="hx-button is-flat {{action.css}}"
                       [hxTooltip]="action.tooltip?.content"
                       placement="{{action.tooltip?.config.placement}}"
-                      [context]="action.tooltip?.config.context"><span class="hx-icon {{action.icon}}"></span></button>
+                      [context]="action.tooltip?.config.context"><span *ngIf="!action.isLoading" class="hx-icon {{action.icon}}"></span></button>
             </span>
 
             <!-- action with children -->
@@ -152,11 +162,13 @@
 
     </td>
 
-    
+
       </ng-template>
   </tr>
   </tbody>
 </table>
+  </div>
+</div>
 
 <hx-pagination [directionLinks]="true" [boundaryLinks]="true" [rotate]="false" [maxSize]="10"
                [totalItems]="totalItemCount" [itemsPerPage]="config.pagination.itemsPerPage"

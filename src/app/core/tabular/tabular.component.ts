@@ -17,6 +17,7 @@ import {IFiltersConfig} from '../../../../projects/hx-ui/src/lib/filters/filters
 import {FilterType} from '../../../../projects/hx-ui/src/lib/filters/filters-type.enum';
 import {FiltersComponent} from '../../../../projects/hx-ui/src/lib/filters/filters.component';
 import {FiltersModel} from '../../../../projects/hx-ui/src/lib/filters/filters.model';
+import {TabularTheme} from '../../../../projects/hx-ui/src/lib/tabular/tabular-theme.enum';
 
 @Component({
   selector: 'app-tabular',
@@ -48,6 +49,7 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
   tabularConfig: ITabularConfig = {
     id: 'UniqueId',
     size: TabularSize.Default,
+    theme: TabularTheme.Dark,
     clickableRows: true,
     pagination: {
       itemsPerPage: 5,
@@ -59,7 +61,11 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
         type: TabularColumnTypes.DateTime,
         direction: SortByDirection.Descending
       }
-    ]
+    ],
+    stickyColumns: {
+      left: true,
+      right: true
+    }
   };
 
   collapsed = false;

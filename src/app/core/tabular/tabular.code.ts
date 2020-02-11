@@ -28,7 +28,11 @@ exampleTemplate =
   <button class="hx-button  mr-1" (click)="setCheckAllState(true)">Check All</button>
   <button class="hx-button" (click)="setCheckAllState(false)">Uncheck All</button>
   <div class="hx-divider"></div>
-  <div><span class="is-info is-text-weight-bolder">{{totalSelected}}</span> of <span class="is-info is-text-weight-bolder">{{rowData.length}}</span><span class="is-text-weight-light"> items selected</span></div>
+  <div>
+    <span class="is-info is-text-weight-bolder">{{totalSelected}}</span> of 
+    <span class="is-info is-text-weight-bolder">{{rowData.length}}</span>
+    <span class="is-text-weight-light"> items selected</span>
+  </div>
   <div class="hx-spacer"></div>
   <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters"></hxa-filters>
 </div>
@@ -99,7 +103,11 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
         type: TabularColumnTypes.DateTime,
         direction: SortByDirection.Descending
       }
-    ]
+    ],
+    stickyColumns: {
+      left: true,
+      right: true
+    }
   };
 
   /**

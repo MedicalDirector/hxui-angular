@@ -30,6 +30,7 @@ import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.compo
 import { NgSelectComponent } from './ng-select/ng-select.component';
 import { InspectorComponent } from './inspector/inspector.component';
 import {BasicCustomInspectorComponent} from './inspector/custom-inspectors/basic-custom-inspector.component';
+import { LineClampComponent } from './line-clamp/line-clamp.component';
 
 @NgModule({
   imports: [
@@ -62,6 +63,8 @@ import {BasicCustomInspectorComponent} from './inspector/custom-inspectors/basic
       DateRangePickerComponent,
       DialogsComponent,
       CustomDialogComponent,
+      NgSelectComponent,
+      LineClampComponent,
       InspectorComponent,
       BasicCustomInspectorComponent,
       NgSelectComponent

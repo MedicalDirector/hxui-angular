@@ -1,5 +1,6 @@
 import {
-  Component, Input, Output, EventEmitter, OnInit, DoCheck, OnChanges, SimpleChanges
+  Component, Input, Output, EventEmitter, OnInit, DoCheck, OnChanges, SimpleChanges, ViewChild, ElementRef, OnDestroy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { TabularColumn } from './tabular';
 import { ITabularConfig } from './tabular-config.interface';
@@ -13,11 +14,17 @@ import { Context } from '../enums';
 import * as _ from 'lodash';
 import { IWithTooltip } from './tabular-tooltip.interface';
 import { TabularContentService } from './tabular-content.service';
+import {TabularTheme} from './tabular-theme.enum';
+import {CdkScrollable, ScrollDispatcher} from '@angular/cdk/scrolling';
+import {BehaviorSubject, Subscription} from 'rxjs/index';
 
 @Component({
   selector: 'hxa-tabular',
   templateUrl: './tabular.component.html',
   styles: [
+    '.tabular__wrapper { position: relative; }',
+    '.tabular__scroller {  overflow-x: scroll; overflow-y: visible;  width: 100%; margin-bottom: 1.5rem;}',
+    '.tabular__scroller > table.hx-table { margin-bottom: 0; }',
     '.tabular__sortable {}',
     '.tabular__sorter {cursor:pointer; display:flex; align-items: center;}',
     '.tabular__sorter .hx-icon {margin-left:.1rem;}',
@@ -29,7 +36,10 @@ import { TabularContentService } from './tabular-content.service';
 })
 
 
-export class TabularComponent implements OnInit, DoCheck {
+export class TabularComponent implements OnInit, DoCheck, OnDestroy {
+
+  @ViewChild('table', { static: true }) private table: ElementRef;
+  @ViewChild('scrollable', { static: true }) private scrollable: ElementRef;
 
   /**
    * Collection of column models
@@ -110,27 +120,34 @@ export class TabularComponent implements OnInit, DoCheck {
   public pagedItems: any[] = [];
   public TabularColumnTypes = TabularColumnTypes;
   public TabularSize = TabularSize;
+  public TabularTheme = TabularTheme;
   public ActionConfigRouteType = ActionConfigRouteType;
   public selectAll = false;
   public Context = Context;
   public SortByDirection = SortByDirection;
+  public isStickyLeft$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public isStickyRight$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   protected _callback: Function;
   protected _config: ITabularConfig;
   protected _searchTerm: string;
   private _isMutatingInternally = false;
   private _initialLoad = true;
+  private subscriptions: Subscription = new Subscription();
 
 
   constructor(
     private conf: TabularConfig,
     private sortByService: TabularSortByService,
-    private contentService: TabularContentService
+    private contentService: TabularContentService,
+    public scroll: ScrollDispatcher,
+    private cdr: ChangeDetectorRef
   ) {
     Object.assign(this, conf);
   }
 
   ngOnInit() {
-
+      this.subscriptions.add(this.scroll.scrolled().subscribe((cdk: CdkScrollable) => this.scrolling()));
+      this.scrolling();
   }
 
   ngDoCheck() {
@@ -145,6 +162,10 @@ export class TabularComponent implements OnInit, DoCheck {
       // this must run last so equality checking checks after the row data mutates
       this.oldRows = _.cloneDeep(this.rows);
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   /**
@@ -266,7 +287,7 @@ export class TabularComponent implements OnInit, DoCheck {
   onRowClickHandler($event: any, data: any) {
     const el: Element = $event.target;
     if (this.config.clickableRows) {
-      if (el.parentElement.tagName === 'BUTTON' ||
+      if (!el.parentElement || el.parentElement.tagName === 'BUTTON' ||
         el.tagName === 'BUTTON' ||
         el.parentElement.classList.contains('hx-checkbox-control')) {
         return;
@@ -360,5 +381,16 @@ export class TabularComponent implements OnInit, DoCheck {
 
   getTooltipInfo(cellContent: any|IWithTooltip) {
     return this.contentService.getTooltipInfo(cellContent);
+  }
+
+  private scrolling() {
+    if (this.config.stickyColumns) {
+      const el = this.scrollable.nativeElement;
+      const left = el.scrollLeft;
+      const offset = this.table.nativeElement.clientWidth - el.clientWidth;
+      this.isStickyLeft$.next((offset > 0 && this.config.stickyColumns.left && left !== 0));
+      this.isStickyRight$.next((offset > 0 && this.config.stickyColumns.right && left !== offset));
+      this.cdr.detectChanges();
+    }
   }
 }

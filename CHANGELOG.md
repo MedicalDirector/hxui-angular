@@ -1,3 +1,39 @@
+## [8.2.8](https://www.npmjs.com/package/@hxui/angular/v/8.2.8) (2020-02-11)
+
+### New component
+
+* **Inspector:** Added inspector component and documentation
+
+## [8.2.7](https://www.npmjs.com/package/@hxui/angular/v/8.2.7) (2020-02-04)
+
+### Enhancement
+
+* **Tabular:** Added isLoading property to actions
+
+## [8.2.6](https://www.npmjs.com/package/@hxui/angular/v/8.2.6) (2020-02-04)
+
+### Enhancement
+
+* **Tabular:** Added fixed left and right column options
+
+## [8.2.5](https://www.npmjs.com/package/@hxui/angular/v/8.2.5) (2020-01-22)
+
+### Bugfix
+
+* **Tooltips:** Bugfix for dynamic tooltips after Angular 8 upgrade 
+
+## [8.2.4](https://www.npmjs.com/package/@hxui/angular/v/8.2.4) (2020-01-14)
+
+### Bugfix
+
+* **Line Clamp:** Change .box name to something more specific as it could clash with 3rd party css selectors
+
+## [8.2.3](https://www.npmjs.com/package/@hxui/angular/v/8.2.3) (2020-01-14)
+
+### New Component
+
+* **Line Clamp:** Added a new component that allows line clamping on text and html
+
 ## [8.2.1 - 8.2.2](https://www.npmjs.com/package/@hxui/angular/v/8.2.2) (2019-12-21)
 
 ### New Component

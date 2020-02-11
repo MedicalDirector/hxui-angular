@@ -13,9 +13,9 @@ export class InspectorCode {
 
   exampleTemplate =
     `
-    <button class="hx-button is-primary is-outlined"  type="button" (click)="openDialog()">
-      Open Inspector
-    </button>
+      <button class="hx-button is-primary is-outlined" type="button" (click)="openInspector()">
+          Open Inspector
+        </button>
     `;
 
   exampleTypescript =
@@ -36,106 +36,123 @@ export class InspectorCode {
       }
 
       openInspector = () => {
-        const inspector: InspectorOverlayRef = this.inspectorService.open(CustomInspectorComponent, {}, {
-          onClose: (data) => {
-            alert(data);
-          },
-          onResize: (data) => {
-            alert(data);
-          }
-        });
-      }
+          const inspector: InspectorOverlayRef = this.inspectorService.open(BasicCustomInspectorComponent, { }, {
+            visitId: 10,
+            onClose: (data) => {
+              console.log(data);
+            },
+            onResize: (data) => {
+              console.log(data);
+            }
+          });
+        }
 
     }
     `;
 
   exampleInspector =
     `
-    import { Component, OnInit } from '@angular/core';
+    import {AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
     import {InspectorOverlayRef} from '@hxui/angular';
+    import {InspectorSize} from '@hxui/angular';
+    import {Subscription} from 'rxjs/index';
+    import {InspectorService} from '@hxui/angular';
 
     @Component({
-      selector: 'app-custom-inspector',
+      selector: 'app-basic-custom-inspector',
       template: \`
-        <div class="hx-modal is-active">
-          <div class="hx-modal-background"></div>
-          <div class="hx-modal-card">
-            <header class="hx-modal-card-head">
-              <h1 class="hx-modal-card-title">HxUI Modal Title</h1>
-              <a class="hx-button is-round is-small is-white" (click)="onCancel()">
-                <span class="hx-icon-control">
-                  <i class="icon icon-close-empty is-large"></i>
-                </span>
-              </a>
-            </header>
-            <section class="hx-modal-card-content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque.</p>
-              <div class="hx-input-control" id="parentEL">
-                <input class="hx-input" hxaTextInput type="text" [(ngModel)]="selected"
-                       [typeahead]="medications" minWidthRelativeTo="parentEL">
-                <label class="hx-label"><i class="icon icon-search is-small"></i> Medications</label>
-                <div class="hx-help">Search for medication names</div>
-              </div>
-            </section>
-            <footer class="hx-modal-card-foot">
-              <button class="hx-button is-primary" (click)="onOk()">Save changes</button>
-              <button class="hx-button" (click)="onCancel()">Cancel</button>
-            </footer>
-          </div>
+        <div class="hx-toolbar">
+          <span>Heading</span>
+          <div class="hx-spacer"></div>
         </div>
-      \`
+        <div class="hx-toolbar">
+          <span>Resize</span>
+          <div class="hx-spacer"></div>
+          <button class="hx-button is-flat" (click)="small()">Small</button>
+          <button class="hx-button is-flat" (click)="large()">Large</button>
+          <button class="hx-button is-flat" (click)="openInspector(sizeEnum.Small)">Open Another (SM)</button>
+          <button class="hx-button is-flat" (click)="openInspector(sizeEnum.Large)">Open Another (LG)</button>
+        </div>
+      \`,
+      styles:[':host{ width:100% }']
     })
 
-    export class CustomDialogComponent implements OnInit {
+    export class BasicCustomInspectorComponent implements OnInit, AfterViewInit, OnDestroy {
 
-      protected onSuccess: Function;
-      protected onCancelled: Function;
-      public selected: string;
-      public medications: string[] = [
-        'SABRIL powder for oral solution 500mg',
-        'SABRIL tablet 500mg',
-        'SACROSIDASE oral liquid, solution 8,500 Units/mL',
-        'SACUBITRIL/VALSARTAN tablet 24.3mg/25.7mg',
-        'SACUBITRIL/VALSARTAN tablet 48.6mg/51.4mg',
-        'SACUBITRIL/VALSARTAN tablet 97.3mg/102.8mg',
-        'SAFLUTAN eye drops 0.0015% (4.5mcg/0.3mL)',
-        'SAIZEN 8 CLICK.EASY powder for injection 8mg (24 units)',
-        'SAIZEN powder for injection 3mg (10 units)',
-        'SAIZEN injection 6mg (18 units)',
-        'SAIZEN injection 12mg (36 units)',
-        'SAIZEN injection 20mg (60 units)',
-        'SALAZOPYRIN-EN enteric-coated tablet 500mg',
-        'SALBUTAMOL ACTAVIS inhalation 2.5mg/2.5mL',
-        'SALBUTAMOL ACTAVIS inhalation 5mg/2.5mL',
-        'SALBUTAMOL SANDOZ inhalation 2.5mg/2.5mL',
-        'SALBUTAMOL SANDOZ inhalation 5mg/2.5mL',
-        'SALBUTAMOL metered-dose aerosol 100mcg/dose',
-        'SALBUTAMOL injection 1mg/mL'];
+      protected onClose: Function;
+      protected onResize: Function;
+      protected visitId = 0;
+      sizeEnum = InspectorSize;
 
-      constructor(public dialogRef: DialogOverlayRef) { }
+      private subscriptions: Subscription = new Subscription();
+
+      constructor(public inspectorRef: InspectorOverlayRef,
+                  private inspectorService: InspectorService) { }
 
       ngOnInit() {
+        console.log(this.visitId);
+        this.subscriptions.add(this.inspectorRef.inspectorInstance.onSlideInComplete$.subscribe((_) => this.onSlideInComplete(_)));
+        this.subscriptions.add(this.inspectorRef.inspectorInstance.onSlideOutComplete$.subscribe((_) => this.onSlideOutComplete(_)));
+        this.subscriptions.add(this.inspectorRef.inspectorInstance.onResizeComplete$.subscribe((_) => this.onResizeComplete(_)));
       }
 
-      onCancel() {
-        this.onCancelled('Cancelled!');
-        this.dialogRef.close();
+      ngOnDestroy() {
+        this.subscriptions.unsubscribe();
       }
 
-      onOk() {
-        this.onSuccess('Success!');
-        this.dialogRef.close();
+      ngAfterViewInit() {
+
+      }
+
+      close() {
+        this.onClose('Closing');
+        this.inspectorRef.close();
+      }
+
+      small() {
+        this.onResize('Resizing!');
+        this.inspectorRef.resize(InspectorSize.Small);
+      }
+
+
+      large() {
+        this.onResize('Resizing!');
+        this.inspectorRef.resize(InspectorSize.Large);
+      }
+
+      openInspector = (size: InspectorSize) => {
+        const inspector: InspectorOverlayRef = this.inspectorService.open(BasicCustomInspectorComponent, { size: size }, {
+          visitId: 11,
+          onClose: (data) => {
+            console.log(data);
+          },
+          onResize: (data) => {
+            console.log(data);
+          }
+        });
+      }
+
+      onSlideInComplete(inspector) {
+        console.log(inspector, 'Slide IN animation finished');
+      }
+
+      onSlideOutComplete(inspector) {
+        console.log(inspector, 'Slide OUT animation finished');
+      }
+      onResizeComplete(size: InspectorSize) {
+        console.log(size, 'Resize animation finished');
       }
 
     }
+
     `;
 
   exampleModule =
     `
     @NgModule({
       ...
-      declarations: [CustomInspectorComponent],
-      entryComponents: [CustomInspectorComponent]
+      declarations: [BasicCustomInspectorComponent],
+      entryComponents: [BasicCustomInspectorComponent]
     })
     `;
 }

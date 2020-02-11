@@ -22,6 +22,7 @@ import { DatePipe } from '@angular/common';
 import {IConfig, NgxMaskModule} from 'ngx-mask';
 import {DialogModule} from './dialog/dialog.module';
 import {DialogService} from './dialog/dialog.service';
+import {LineClampModule} from './line-clamp/line-clamp.module';
 import {InspectorService} from './inspector/inspector.service';
 import {InspectorModule} from './inspector/inspector.module';
 
@@ -37,7 +38,8 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     AutoGrowModule.forRoot(), EmptyStateModule.forRoot(),
     AccordionModule, FiltersModule.forRoot(), LoadersModule,
     TextInputModule, ToastrModule.forRoot(), NgxMaskModule.forRoot(mask_options),
-    DialogModule.forRoot(), InspectorModule.forRoot()
+    DialogModule.forRoot(), InspectorModule.forRoot(),
+    LineClampModule
   ],
   exports: [
     DatepickerModule, DateRangePickerModule, DropdownModule, ModalModule,
@@ -45,7 +47,8 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     TypeaheadModule, TabularModule, SelectizeModule,
     AutoGrowModule, EmptyStateModule, AccordionModule,
     FiltersModule, LoadersModule, TextInputModule, ToastrModule,
-    NgxMaskModule, DialogModule, InspectorModule
+    NgxMaskModule, DialogModule, LineClampModule,
+    InspectorModule
   ]
 })
 export class HxUiModule {

@@ -6,6 +6,9 @@ export * from './lib/inspector/inspector.service';
 export * from './lib/inspector/inspector-overlay.ref';
 export * from './lib/inspector/inspector-size.enum';
 
+export * from './lib/line-clamp/line-clamp.module';
+export * from './lib/line-clamp/line-clamp.component';
+
 export * from './lib/dialog/dialog.module';
 export * from './lib/dialog/dialog.service';
 export * from './lib/dialog/dialog-overlay.ref';
@@ -95,6 +98,7 @@ export * from './lib/tabular/tabular-row.interface';
 export * from './lib/tabular/tabular-size.enum';
 export * from './lib/tabular/tabular-sort-by.service';
 export * from './lib/tabular/tabular-tooltip.interface';
+export * from './lib/tabular/tabular-theme.enum';
 
 export * from './lib/tooltip/tooltip.config';
 export * from './lib/tooltip/tooltip.directive';

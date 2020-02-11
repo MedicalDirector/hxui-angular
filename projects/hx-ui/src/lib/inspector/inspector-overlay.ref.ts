@@ -1,8 +1,7 @@
 import {OverlayRef} from '@angular/cdk/overlay';
-import {BreakpointObserver} from '@angular/cdk/layout';
 import {InspectorSize} from './inspector-size.enum';
 import {InspectorComponent} from './inspector.component';
-import {Observable} from 'rxjs/index';
+
 
 export class InspectorOverlayRef {
 

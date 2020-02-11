@@ -157,6 +157,10 @@ export class UserModel implements ITabularRow {
    * @param data
    */
   onActionClickHandler = (type, data) => {
-     alert('You clicked the ' + type + ' button. Arguments:' + type + ' and ' + data);
+     console.log('You clicked the ' + type + ' button. Arguments:' + type + ' and ' + data);
+     if (type === 'delete') {
+       this.actions[2].isLoading = true;
+       setTimeout(() => this.actions[2].isLoading = false, 1000);
+     }
   }
 }

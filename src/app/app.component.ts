@@ -95,6 +95,10 @@ export class AppComponent {
         {
           name: 'Loaders',
           link: '/loaders'
+        },
+        {
+          name: 'Line Clamp',
+          link: '/line-clamp'
         }
       ]
     },
