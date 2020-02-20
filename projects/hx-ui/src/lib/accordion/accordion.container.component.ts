@@ -7,7 +7,7 @@ import { state, style, transition, animate, trigger } from '@angular/animations'
     <li class="hx-accordion-container" [class.is-active]="expanded && !disabled">
         <a class="hx-accordion-header" (click)="toggle()">
             <div class="header-title"><ng-content select="hx-accordion-header, hxa-accordion-header"></ng-content></div>
-            <div class="header-icon">
+            <div class="header-icon" *ngIf = "contents">
                 <i class="hx-icon icon-angle-down" *ngIf="!expanded || disabled"></i>
                 <i class="hx-icon icon-angle-up" *ngIf="expanded && !disabled"></i>
             </div>
@@ -39,6 +39,7 @@ export class AccordionContainerComponent {
   @Input() expanded = true;
   @Input() index: number = null;
   @Input() disabled = false;
+  @Input() contents : boolean  = true;
   @Output() headerClick: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private _changeDetectionRef: ChangeDetectorRef) { }

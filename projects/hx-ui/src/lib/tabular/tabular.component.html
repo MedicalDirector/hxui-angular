@@ -26,7 +26,7 @@
 
         <!-- checkbox column -->
         <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
-          <input id="{{config.id}}-selectAll" name="{{config.id}}-selectAll" type="checkbox" class="hx-checkbox"
+          <input id="{{config.id}}-selectAll" name="{{config.id}}-selectAll" type="checkbox" class="hx-checkbox" [ngClass]="{'is-indeterminate': selectAllValue }"
             (change)="toggleSelectAll($event)" title="Select All" [(ngModel)]="selectAll" />
           <label for="{{config.id}}-selectAll" class="hx-label"></label>
         </div>
@@ -117,7 +117,7 @@
                    placement="{{action.tooltip?.config.placement}}"
                    [context]="action.tooltip?.config.context"
                    [disabled]="action.tooltip?.config.disabled">
-              <button type="button" class="hx-button is-flat"
+              <a type="button" class="hx-button is-flat"
                       [class.is-small]="config.size === TabularSize.Small"
                       [class.is-loading]="action.isLoading"
                       *ngIf="!getActionDisabledState(action) && action.routeType === ActionConfigRouteType.Callback && !hasChildren(action)"
@@ -125,7 +125,7 @@
                     class="hx-button is-flat {{action.css}}"
                       [hxTooltip]="action.tooltip?.content"
                       placement="{{action.tooltip?.config.placement}}"
-                      [context]="action.tooltip?.config.context"><span *ngIf="!action.isLoading" class="hx-icon {{action.icon}}"></span></button>
+                      [context]="action.tooltip?.config.context"><span *ngIf="!action.isLoading" class="hx-icon {{action.icon}}"></span></a>
             </span>
 
             <!-- action with children -->
@@ -134,9 +134,9 @@
                   placement="{{action.tooltip?.config.placement}}"
                   [context]="action.tooltip?.config.context"
                   [disabled]="action.tooltip?.config.disabled">
-                <button class="hx-button is-flat hx-button-dropdown" [class.is-small]="config.size === TabularSize.Small" hxaDropdownToggle type="button">
+                <a class="hx-button is-flat hx-button-dropdown" [class.is-small]="config.size === TabularSize.Small" hxaDropdownToggle type="button">
                 <i class="icon {{action.icon}}"></i>
-                </button>
+                </a>
             </span>
 
               <div class="hx-dropdown-menu" *hxaDropdownMenu>
