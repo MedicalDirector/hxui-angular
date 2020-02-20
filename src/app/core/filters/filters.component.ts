@@ -62,15 +62,9 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
     },
     {
       id: 'statusFilter',
-      type: FilterType.SingleSelect,
+      type: FilterType.MultiSelect,
       label: 'Status',
       options: [
-        {
-          icon: '',
-          label: 'All',
-          value: 0,
-          selected: true
-        },
         {
           icon: 'hx-icon icon-clock',
           label: 'Waiting',
