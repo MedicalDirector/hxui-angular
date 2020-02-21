@@ -1,3 +1,9 @@
+## [8.2.9](https://www.npmjs.com/package/@hxui/angular/v/8.2.9) (2020-02-21)
+
+### Enhancement
+
+* **Tabular:** Added indeterminate to checkbox in tabular
+
 ## [8.2.8](https://www.npmjs.com/package/@hxui/angular/v/8.2.8) (2020-02-11)
 
 ### New component
