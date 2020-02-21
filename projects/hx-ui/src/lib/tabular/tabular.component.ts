@@ -30,7 +30,7 @@ import {BehaviorSubject, Subscription} from 'rxjs/index';
     '.tabular__sorter .hx-icon {margin-left:.1rem;}',
     '.tabular__checkboxes{width:2%;}',
     '.tabular__checkboxes .hx-checkbox-control{display:flex;}',
-    '.tabularActions__action button.hx-button{ width: 1rem;}',
+    '.tabularActions__action button.hx-button,a.hx-button{ width: 1rem;}',
     '.tabularActions__action {display:flex;}'
   ]
 })
@@ -133,6 +133,7 @@ export class TabularComponent implements OnInit, DoCheck, OnDestroy {
   private _isMutatingInternally = false;
   private _initialLoad = true;
   private subscriptions: Subscription = new Subscription();
+  public selectAllValue: Boolean = false;
 
 
   constructor(
@@ -206,12 +207,19 @@ export class TabularComponent implements OnInit, DoCheck, OnDestroy {
         count++;
       }
     }
-
+    
     const oldSelectAll = this.selectAll;
     this._isMutatingInternally = true;
     this.selectAll =  (this.rows.length === count);
     if (oldSelectAll !== this.selectAll && emitEvent) {
       this.onCheckAll.emit(this.selectAll)
+    }
+
+    if(this.rows.length === count || count === 0) {
+      this.selectAllValue = false;
+    }
+    else  if (this.rows.length != count &&  this.rows.length != 0){
+      this.selectAllValue = true;
     }
   }
 

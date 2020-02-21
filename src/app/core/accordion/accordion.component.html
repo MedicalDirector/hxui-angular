@@ -23,9 +23,9 @@
             <hx-accordion-header>
               This is the header
             </hx-accordion-header>
-            <hx-accordion-body>
+             <hx-accordion-body>
               <p>This is the body</p>
-            </hx-accordion-body>
+            </hx-accordion-body> 
           </hx-accordion-container>
           <hx-accordion-container [expanded]="false">
             <hx-accordion-header>
@@ -64,7 +64,7 @@
     <h4 id="example">Example 2 - With additional class binding</h4>
 
     <hx-accordion [cssClass]="{'is-elevate-3': true, 'is-text-unselectable': true}">
-      <hx-accordion-container *ngFor="let item of items; index as i" [expanded]="false" [index]="i" [disabled]="item.body === null" (headerClick)="someFunction($event)">
+      <hx-accordion-container *ngFor="let item of items; index as i" [expanded]="false" [index]="i" [disabled]="item.body === null" [empty]="item.body" (headerClick)="someFunction($event)">
         <hx-accordion-header>
           <p>
             <b>{{ item.header }}</b>

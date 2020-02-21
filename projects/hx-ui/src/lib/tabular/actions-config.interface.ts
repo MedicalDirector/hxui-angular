@@ -68,4 +68,8 @@ export abstract class IActionsConfig {
    */
   isLoading?: boolean;
 
+  /**
+   * target , to open navigate to same page or different page
+   */
+  target?: string;
 }
