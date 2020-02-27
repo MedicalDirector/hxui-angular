@@ -1,6 +1,6 @@
 <div class="hx-dropdown  ml-1 collapsedFilter" #dropdown="hx-dropdown"  hxaDropdown  [autoClose]="false" >
   <button id="collapsedFilterTrigger" type="button" class="hx-button hx-button-dropdown" hxaDropdownToggle>
-    <span>{{(totalActiveFilters() > 0)? 'Filtered ('+totalActiveFilters()+')' : 'Filters' }}</span>
+    <span>{{ getFilterLabel() }}</span>
     <span class="hx-icon-control"><i class="icon icon-caret-down"></i></span>
   </button>
   <div class="hx-dropdown-menu has-limited-width collapsedFilter__menu panes" *hxaDropdownMenu>
@@ -14,11 +14,25 @@
           <ng-container *ngIf="filter.type === FilterType.SingleSelect && !filter?.hidden">
             <ul class="hx-list-group">
               <li>
-                <a [id]="filter?.id + '-trigger'" (click)="changeFilterSelection(filter)" title="{{filter.selected?.label}}"  [class.is-disabled]="filter?.disabled">
-                  <div class="hx-list-action" *ngIf="filter.selected?.icon">
-                    <i class="{{filter.selected?.icon}}"></i>
+                <a [id]="filter?.id + '-trigger'" (click)="changeFilterSelection(filter)" title="{{filter.getSelectedLabel()}}"  [class.is-disabled]="filter?.disabled">
+                  <div class="hx-list-action" *ngIf="filter.selected[0]?.icon">
+                    <i class="{{filter.selected[0]?.icon}}"></i>
                   </div>
-                  <div class="hx-list-content pl-1 is-text-ellipsed is-text-weight-bolder">{{filter.selected?.label}}</div>
+                  <div class="hx-list-content pl-1 is-text-ellipsed is-text-weight-bolder">{{filter.getSelectedLabel()}}</div>
+                  <div class="hx-list-action">
+                    <i class="icon icon-angle-right"></i>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </ng-container>
+
+          <!-- multi select -->
+          <ng-container *ngIf="filter.type === FilterType.MultiSelect && !filter?.hidden">
+            <ul class="hx-list-group">
+              <li>
+                <a [id]="filter?.id + '-trigger'" (click)="changeFilterSelection(filter)" title="{{filter.getSelectedLabel()}}"  [class.is-disabled]="filter?.disabled">
+                  <div class="hx-list-content pl-1 is-text-ellipsed is-text-weight-bolder">{{filter.getSelectedLabel()}}</div>
                   <div class="hx-list-action">
                     <i class="icon icon-angle-right"></i>
                   </div>
@@ -55,13 +69,34 @@
           <span>{{selectedFilter?.label}}</span>
         </div>
         <ul [id]="selectedFilter?.id + '-options'" class="hx-list-group options">
-          <li class="options__item"  *ngFor="let option of selectedFilter?.options;trackBy: trackByFn">
-            <a hxaDropdownItem (click)="selectFilterOption(option)" title="{{option?.label}}">
+          <li class="options__item"  *ngFor="let option of selectedFilter?.options;trackBy: trackByFn; let i = index">
+
+            <!-- single select -->
+            <a hxaDropdownItem (click)="selectFilterOption(option)" title="{{option?.label}}" *ngIf="selectedFilter?.type === FilterType.SingleSelect">
               <div class="hx-list-action" *ngIf="option?.icon">
                 <i class="{{option?.icon}}"></i>
               </div>
               <div class="hx-list-content pl-1 is-text-ellipsed">{{option?.label}}</div>
             </a>
+
+            <!-- multi-select-->
+            <div class="checkboxRow" *ngIf="selectedFilter?.type === FilterType.MultiSelect">
+              <div class="hx-list-action">
+                <div class="hx-checkbox-control ma-0 pa-0 hx-flex">
+                  <input [name]="selectedFilter?.id + '-checkbox-'+i" type="checkbox" class="hx-checkbox"
+                         [id]="selectedFilter?.id + '-checkbox-'+i"
+                         (change)="selectFilterOption(option, false)"
+                         [(ngModel)]="option.selected"
+                         [class.is-indeterminate]="option?.value === selectedFilter?.selectAllValue && selectedFilter?.selectAllState.indeterminate"/>
+                  <label [for]="selectedFilter?.id + '-checkbox-'+i" class="hx-label">
+                    <div class="hx-flex hx-flex-align-center">
+                      <i *ngIf="option?.icon" class="{{option?.icon}} mr-2"></i>
+                      {{option?.label}}
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
       </li>

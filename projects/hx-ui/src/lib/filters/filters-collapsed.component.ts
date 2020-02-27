@@ -47,9 +47,11 @@ export class FiltersCollapsedComponent implements OnInit {
     this.activePane = 'right';
   }
 
-  selectFilterOption( option: IFilterOption) {
+  selectFilterOption( option: IFilterOption, goBack = true) {
     this.onFilter.emit({filter: this.selectedFilter, option: option});
-    this.back();
+    if (goBack) {
+      this.back();
+    }
   }
 
   searchFilter(filter: FiltersModel) {
@@ -74,6 +76,11 @@ export class FiltersCollapsedComponent implements OnInit {
         }
     });
     return count;
+  }
+
+  getFilterLabel() {
+    const plural = (this.totalActiveFilters() > 1) ? 'filters' : 'filter';
+    return (this.totalActiveFilters() > 0) ? this.totalActiveFilters() + ` ${plural} applied` : `Filters`;
   }
 
 

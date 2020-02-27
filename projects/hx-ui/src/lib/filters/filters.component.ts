@@ -26,8 +26,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   private _oldFilters: IFiltersConfig[] = [];
   private _collapsed = false;
 
-  @Input()
-  customMask
+  @Input() customMask: string;
 
   @Input()
   get collapsed(): boolean {
@@ -76,7 +75,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
 
   resetFilters(silent: boolean = false) {
     for (const filter of this.data) {
-      if (filter.type === FilterType.SingleSelect) {
+      if (filter.type === FilterType.SingleSelect || filter.type === FilterType.MultiSelect ) {
         filter.setDefaultOption();
         if (!silent) {
           this.onFilterOptionChanged$.next(filter);
@@ -99,7 +98,14 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
    * Called when filter option is selected
    */
   onFilterOptionSelected(filter: FiltersModel, option: IFilterOption) {
-    filter.setSelectedOption(option);
+    switch (filter.type) {
+      case FilterType.SingleSelect:
+        filter.setSingleSelectOption(option);
+        break;
+      case FilterType.MultiSelect:
+        filter.setMultiSelectOptions(option);
+        break;
+    }
     this.onFilterOptionChanged$.next(filter);
   }
 

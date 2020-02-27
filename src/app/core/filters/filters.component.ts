@@ -58,7 +58,7 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
           selected: false
         }
       ],
-      defaultIndex: 1
+      defaultIndex: [1]
     },
     {
       id: 'statusFilter',
@@ -69,27 +69,28 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
           icon: 'hx-icon icon-clock',
           label: 'Waiting',
           value: 1,
-          selected: false
+          selected: true
         },
         {
           icon: 'hx-icon icon-doctor',
           label: 'In consult',
           value: 2,
-          selected: false
+          selected: true
         },
         {
           icon: 'hx-icon icon-check',
           label: 'Finished consult',
           value: 3,
-          selected: false
+          selected: true
         },
         {
           icon: 'hx-icon icon-did-not-wait',
           label: 'Did not wait',
           value: 4,
-          selected: false
+          selected: true
         }
-      ]
+      ],
+      defaultIndex: [1, 2, 3, 4]
     },
     {
       id: 'hcpFilter',
@@ -169,6 +170,44 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
       ]
     },
     {
+      id: 'billingFilter',
+      type: FilterType.MultiSelect,
+      label: 'Billing',
+      options: [
+        {
+          icon: 'hx-icon icon-circle is-text-light is-small',
+          label: 'No billing',
+          value: 1,
+          selected: true
+        },
+        {
+          icon: 'hx-icon icon-circle is-text-caution is-small',
+          label: 'Billing not set',
+          value: 2,
+          selected: true
+        },
+        {
+          icon: 'hx-icon icon-circle is-text-success is-small',
+          label: 'Ready to bill',
+          value: 3,
+          selected: true
+        },
+        {
+          icon: 'hx-icon icon-circle is-text-warning is-small',
+          label: 'Draft',
+          value: 4,
+          selected: true
+        },
+        {
+          icon: 'hx-icon icon-circle-outline is-small',
+          label: 'Issued',
+          value: 5,
+          selected: false
+        }
+      ],
+      defaultIndex: [1, 2, 3, 4]
+    },
+    {
       id: 'searchFilter',
       type: FilterType.Search,
       label: 'Filter by name',
@@ -203,7 +242,7 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
     this.filtersComponent.resetFilters();
   }
 
-  disableFilters(){
+  disableFilters() {
    this.filtersComponent.data.forEach(f => f.disabled = !f.disabled);
   }
 
@@ -224,7 +263,7 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
 
     const calc = label.length * charwidth + filter;
 
-    if(min <= calc && calc <= max) {
+    if (min <= calc && calc <= max) {
       return calc;
     }
 
