@@ -18,8 +18,7 @@
 
 
       <div class="hx-flex hx-flex-align-center">
-          <button type="button" class="hx-button is-primary mr-1" (click)="toggleCollapsed()">Toggle collapsed state</button>
-          <button type="button" class="hx-button is-primary mr-1" (click)="disableFilters()">Toggle disabled state</button>
+          <button type="button" class="hx-button is-primary mr-1" (click)="toggleCollapsed()">{{ (collapsed) ? 'Expand' : 'Collapse' }}</button>
           <button type="button" class="hx-button mr-1" (click)="resetFilters()">Reset</button>
 
           <div class="hx-spacer"></div>

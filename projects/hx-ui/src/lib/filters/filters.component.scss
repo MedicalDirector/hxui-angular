@@ -3,6 +3,7 @@
 
     &__button{
       max-width:15rem;
+      min-width: 7.2rem;
     }
 
     &__menu{
@@ -11,6 +12,14 @@
       max-width: 15rem;
       overflow-x: hidden;
       overflow-y: auto;
+
+      .hx-checkbox-control{
+        height:23px;
+        .hx-checkbox + .hx-label {
+          padding-left: 23px;
+        }
+      }
     }
   }
+
 }

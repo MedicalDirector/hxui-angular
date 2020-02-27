@@ -111,7 +111,7 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
           selected: false
         }
       ],
-      defaultIndex: 1
+      defaultIndex: [1]
     },
     {
       id: 'searchFilter',
@@ -197,10 +197,10 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
       .subscribe((filter: FiltersModel) => {
         console.log(filter);
         if (filter.type === FilterType.SingleSelect) {
-          if (filter.selected.value === 'All') {
+          if (filter.selected[0].value === 'All') {
             this.getAllUsers();
           } else {
-            this.service.getUserByRole(filter.selected.value).subscribe((users) => this.setRowData(users));
+            this.service.getUserByRole(filter.selected[0].value).subscribe((users) => this.setRowData(users));
           }
         } else if (filter.type === FilterType.Search) {
           this.service.filterUserByName(filter.value).subscribe((users) => this.setRowData(users));

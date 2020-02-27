@@ -44,9 +44,9 @@ export interface IFiltersConfig {
 
   /**
    * Index of default filter option.
-   * The option to set when filters are cleared.
+   * The options to set when filters are cleared.
    */
-  defaultIndex?: number;
+  defaultIndex?: number[];
 
     /**
    * Width in REM for Search filter type.
