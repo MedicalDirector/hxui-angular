@@ -48,6 +48,7 @@ import {
 import {
   By
 } from '@angular/platform-browser';
+import {NgxMaskModule} from 'ngx-mask';
 
 describe('DateRangePickerCustomComponent', () => {
   let component: DateRangePickerCustomComponent;
@@ -56,7 +57,7 @@ describe('DateRangePickerCustomComponent', () => {
 
   beforeEach(async (() => {
     TestBed.configureTestingModule({
-        imports: [FormsModule, TabsModule, DatepickerModule, DropdownModule],
+        imports: [FormsModule, TabsModule, DatepickerModule, DropdownModule, NgxMaskModule.forRoot()],
         declarations: [DateRangePickerComponent, DateRangePickerIntervalComponent, DateRangePickerCustomComponent, DropdownStubDirective],
         providers: [
           Overlay,

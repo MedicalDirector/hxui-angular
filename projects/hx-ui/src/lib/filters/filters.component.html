@@ -33,7 +33,12 @@
           <span class="hx-icon-control"><i class="hx-icon icon-caret-down"></i></span>
         </a>
         <div [id]="filter?.id + '-options'" class="hx-dropdown-menu  has-limited-width has-limited-height expandedFilter__menu" *hxaDropdownMenu>
-          <div *ngFor="let option of filter?.options;trackBy: trackByFn; let i = index" class="hx-flex is-text-ellipsed px-3 py-2" title="{{option?.label}}">
+          <div *ngFor="let option of filter?.options;trackBy: trackByFn; let i = index"
+               class="hx-flex is-text-ellipsed px-3 py-2"
+               title="{{option?.label}}"
+                [class.is-perforated]="i === 0"
+                [class.mb-2]="i === 0"
+                [class.pb-3]="i === 0">
             <div class="hx-checkbox-control ma-0 pa-0 hx-flex">
               <input [name]="filter?.id + '-checkbox-'+i" type="checkbox" class="hx-checkbox"
                      [id]="filter?.id + '-checkbox-'+i"

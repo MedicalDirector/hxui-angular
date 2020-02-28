@@ -13,7 +13,7 @@ import {
   IntervalItem
 } from '../interval-option-model';
 
-fdescribe('DateRangePickerIntervalComponent', () => {
+describe('DateRangePickerIntervalComponent', () => {
   let component: DateRangePickerIntervalComponent;
   let fixture: ComponentFixture < DateRangePickerIntervalComponent > ;
 

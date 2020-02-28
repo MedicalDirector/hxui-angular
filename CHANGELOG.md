@@ -1,3 +1,9 @@
+## [8.3.0](https://www.npmjs.com/package/@hxui/angular/v/8.3.0) (2020-02-27)
+
+### Enhancement (Breaking Change)
+
+* **Filters:** Added multi select filter type
+
 ## [8.2.9](https://www.npmjs.com/package/@hxui/angular/v/8.2.9) (2020-02-21)
 
 ### Enhancement

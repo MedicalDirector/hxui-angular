@@ -10,6 +10,7 @@ import { DatepickerConfig } from './datepicker.config';
 import { TabsetConfig } from '../tabs/tabset.config';
 import { ElementRef, Injectable, ViewContainerRef } from '@angular/core';
 import { Overlay } from '@angular/cdk/overlay';
+import {NgxMaskModule} from 'ngx-mask';
 
 @Injectable()
 export class MockElementRef extends ElementRef {
@@ -29,7 +30,7 @@ describe('DatepickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, TabsModule ],
+      imports: [ FormsModule, TabsModule, NgxMaskModule ],
       declarations: [ DatepickerFormComponent, DatepickerComponent, DatepickerIntervalComponent ],
       providers: [
         PositioningService,

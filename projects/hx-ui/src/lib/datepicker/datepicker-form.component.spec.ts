@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatepickerFormComponent } from './datepicker-form.component';
 import {DatepickerModule} from './datepicker.module';
 import {OverlayModule} from '@angular/cdk/overlay';
+import {NgxMaskModule} from 'ngx-mask';
 
 
 describe('DatepickerFormComponent', () => {
@@ -11,7 +12,7 @@ describe('DatepickerFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [DatepickerModule.forRoot(), OverlayModule]
+      imports: [DatepickerModule.forRoot(), OverlayModule, NgxMaskModule.forRoot()]
     })
     .compileComponents();
   }));
@@ -70,15 +71,15 @@ describe('DatepickerFormComponent', () => {
     });
 
     it('should try to call setDate() if passed a valid date', () => {
-      component.onChange("11/01/1993");
+      component.onChange({ target: { value: '11/01/1993' }});
 
       expect(component.setDate).toHaveBeenCalled();
     });
 
-    it('should not try to call setDate() if passed an invalid date', () => {
-      component.onChange("abc");
+    it('should try to call setDate(null) if passed an invalid date', () => {
+      component.onChange({ target: { value: 'abc' }});
 
-      expect(component.setDate).not.toHaveBeenCalled();
+      expect(component.setDate).toHaveBeenCalledWith(null);
     });
   });
 

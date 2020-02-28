@@ -17,12 +17,12 @@ export class FiltersModel implements IFiltersConfig {
   disabled = false;
   hidden = false;
   isLoading = false;
-  selectAllState = {
+  private selectAllState = {
     all: false,
     indeterminate: false,
     none: true
   };
-  selectAllValue = 'Select all';
+  private selectAllValue = 'Select all';
 
   constructor(data?: IFiltersConfig) {
     Object.assign(this, data);
@@ -48,7 +48,6 @@ export class FiltersModel implements IFiltersConfig {
 
   /**
    * Set single select option
-   * @param {IFilterOption} option
    */
    setSingleSelectOption(option?: IFilterOption) {
     if (option) {
@@ -67,7 +66,6 @@ export class FiltersModel implements IFiltersConfig {
 
   /**
    * Set multi select options
-   * @param {IFilterOption} option
    */
   setMultiSelectOptions(option?: IFilterOption) {
     if (option) {
@@ -161,14 +159,12 @@ export class FiltersModel implements IFiltersConfig {
   }
 
   getSelectedLabel() {
-    const labels = [];
     if (this.selected.length === (this.options.length - 1)) {
       return 'All';
+    } else if (this.selected.length === 1) {
+      return this.selected[0].label;
     } else if (this.selected.length) {
-      this.selected.forEach((opt, i) => {
-        labels.push(opt.label);
-      });
-      return labels.join(', ');
+     return this.selected.length + ' selected';
     } else {
       return 'None';
     }
