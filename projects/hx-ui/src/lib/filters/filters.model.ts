@@ -17,12 +17,12 @@ export class FiltersModel implements IFiltersConfig {
   disabled = false;
   hidden = false;
   isLoading = false;
-  private selectAllState = {
+  selectAllState = {
     all: false,
     indeterminate: false,
     none: true
   };
-  private selectAllValue = 'Select all';
+  selectAllValue = 'Select all';
 
   constructor(data?: IFiltersConfig) {
     Object.assign(this, data);
