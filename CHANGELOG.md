@@ -1,4 +1,4 @@
-## [8.3.0](https://www.npmjs.com/package/@hxui/angular/v/8.3.0) (2020-02-27)
+## [8.3.0-8.3.1](https://www.npmjs.com/package/@hxui/angular/v/8.3.1) (2020-02-27)
 
 ### Enhancement (Breaking Change)
 
