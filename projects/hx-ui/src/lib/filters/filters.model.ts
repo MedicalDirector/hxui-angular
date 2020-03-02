@@ -132,6 +132,16 @@ export class FiltersModel implements IFiltersConfig {
     }
   }
 
+  setSelectAll() {
+    this.selected = [];
+    this.options.forEach((opt, i) => {
+        opt.selected = true;
+        if (opt.value !== this.selectAllValue) {
+          this.selected.push(opt);
+        }
+    });
+  }
+
   isDefaultOptionActive() {
     if (this.type === FilterType.SingleSelect) {
       return (this.selected[0] === this.options[this.defaultIndex[0]]);
@@ -166,7 +176,7 @@ export class FiltersModel implements IFiltersConfig {
     } else if (this.selected.length) {
      return this.selected.length + ' selected';
     } else {
-      return 'None';
+      return 'All';
     }
   }
 }

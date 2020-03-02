@@ -3,7 +3,7 @@
   <i  class="hx-icon icon-filter-outline mx-1"></i>
 
   <!-- collapsed filters -->
-  <hxa-filters-collapsed (onFilter)="onCollapsedFilter($event)" (onSearchFilter)="onCollapsedSearch($event)" [data]="data" *ngIf="collapsed"></hxa-filters-collapsed>
+  <hxa-filters-collapsed (onFilter)="onCollapsedFilter($event)" (onBack)="onCollapsedFilterBack($event)" (onSearchFilter)="onCollapsedSearch($event)" [data]="data" *ngIf="collapsed"></hxa-filters-collapsed>
 
   <!-- expanded filters -->
   <ng-container *ngIf="!collapsed">
@@ -26,7 +26,12 @@
 
 
       <!-- multi select filter -->
-      <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.MultiSelect && !filter?.hidden">
+      <div [id]="filter?.id"
+           class="hx-dropdown mx-1 expandedFilter"
+           hxaDropdown
+           [minWidthRelativeTo]="filter?.id + '-trigger'"
+           *ngIf="filter?.type === FilterType.MultiSelect && !filter?.hidden"
+           (onHidden)="onMultiSelectHidden(filter)">
         <a [id]="filter?.id + '-trigger'" class="hx-button hx-button-dropdown expandedFilter__button" [class.is-loading]="filter?.isLoading" [class.is-disabled]="filter?.disabled" hxaDropdownToggle>
           <span class="is-text-weight-light">{{filter?.label}}:&nbsp;</span>
           <span class="is-text-weight-bolder is-text-ellipsed" title="{{filter?.getSelectedLabel()}}">{{filter?.getSelectedLabel()}}</span>

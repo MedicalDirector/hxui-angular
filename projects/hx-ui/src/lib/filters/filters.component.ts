@@ -118,13 +118,23 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     }
   }
 
-
   onCollapsedFilter($event) {
    this.onFilterOptionSelected($event.filter,  $event.option);
   }
 
   onCollapsedSearch($event) {
     this.onSearchFilterChange($event.filter);
+  }
+
+  onCollapsedFilterBack($event) {
+    this.onMultiSelectHidden($event.filter);
+  }
+
+  onMultiSelectHidden(filter: FiltersModel) {
+    if (filter.selected.length === 0) {
+      filter.setSelectAll();
+      this.onFilterOptionChanged$.next(filter);
+    }
   }
 
 

@@ -31,6 +31,7 @@ export class FiltersCollapsedComponent implements OnInit {
 
   @Output() onFilter = new EventEmitter();
   @Output() onSearchFilter = new EventEmitter();
+  @Output() onBack = new EventEmitter();
 
   constructor() { }
 
@@ -60,6 +61,7 @@ export class FiltersCollapsedComponent implements OnInit {
 
   back() {
     this.activePane = 'left';
+    this.onBack.emit({filter: this.selectedFilter});
   }
 
   onSlideDone($event) {
@@ -71,7 +73,11 @@ export class FiltersCollapsedComponent implements OnInit {
   totalActiveFilters(): number {
     let count = 0;
     this.data.forEach((filter: FiltersModel, index: number) => {
-        if (!filter.isDefaultOptionActive()) {
+        if (filter.type === FilterType.SingleSelect) {
+          count++;
+        } else if (filter.type === FilterType.MultiSelect && filter.selected.length !== 0 && filter.selected.length < (filter.options.length - 1)) {
+          count++;
+        } else if (filter.type === FilterType.Search && filter.value) {
           count++;
         }
     });
