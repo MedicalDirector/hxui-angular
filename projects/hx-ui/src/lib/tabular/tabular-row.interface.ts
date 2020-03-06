@@ -43,6 +43,11 @@ export interface ITabularRow {
    * Used to disable/enable menu
    */
   actionDisabled?: boolean;
+
+   /**
+   * Used to disable/enable checkbox
+   */
+  checkboxDisabled?: boolean;
 }
 
 
