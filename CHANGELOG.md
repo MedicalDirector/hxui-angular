@@ -1,3 +1,9 @@
+## [8.2.10](https://www.npmjs.com/package/@hxui/angular/v/8.2.10) (2020-03-11)
+
+### Enhancement
+
+* **Tabular:** Added disabled to checkbox in tabular
+
 ## [8.2.9](https://www.npmjs.com/package/@hxui/angular/v/8.2.9) (2020-02-21)
 
 ### Enhancement
