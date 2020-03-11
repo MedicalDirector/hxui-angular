@@ -134,6 +134,7 @@ export class TabularComponent implements OnInit, DoCheck, OnDestroy {
   private _initialLoad = true;
   private subscriptions: Subscription = new Subscription();
   public selectAllValue: Boolean = false;
+  public selectAllDisabled: Boolean = false;
 
 
   constructor(
@@ -164,6 +165,10 @@ export class TabularComponent implements OnInit, DoCheck, OnDestroy {
       this.oldRows = _.cloneDeep(this.rows);
     }
   }
+  
+  ngAfterViewChecked() {
+    this.scrolling();
+  }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
@@ -188,38 +193,56 @@ export class TabularComponent implements OnInit, DoCheck, OnDestroy {
 
   toggleSelectAll = ($event) => {
       for (let i = 0; i < this.rows.length; i++) {
-        this._isMutatingInternally = true;
-        this.rows[i].checked = this.selectAll;
+       if(!this.rows[i].checkboxDisabled) {
+          this._isMutatingInternally = true;
+          this.rows[i].checked = this.selectAll;
+        }
       }
       this.onCheckAll.emit(this.selectAll);
   }
 
 
   toggleIndividualSelect = ($event: ITabularRow) => {
-    this.checkSelectAllState(false);
-    this.onCheck.emit($event);
+      this.checkSelectAllState(false);
+      this.onCheck.emit($event);
   }
 
   private checkSelectAllState(emitEvent: boolean = true) {
     let count = 0;
+    let valueOfDisabled = 0;
+    let totalRows = this.rows.length;
+    this.selectAllDisabled = false;
+    this.selectAll = false;
+    this.selectAllValue = false;
     for (let i = 0; i < this.rows.length; i++) {
-      if (this.rows[i].checked) {
+      if (this.rows[i].checked && !this.rows[i].checkboxDisabled) {
         count++;
       }
+      if (this.rows[i].checkboxDisabled) {
+        this.rows[i].checked = false;
+        valueOfDisabled++;
+        totalRows--;
+      }
     }
-    
+
     const oldSelectAll = this.selectAll;
     this._isMutatingInternally = true;
-    this.selectAll =  (this.rows.length === count);
+    this.selectAll = (this.rows.length === count);
     if (oldSelectAll !== this.selectAll && emitEvent) {
       this.onCheckAll.emit(this.selectAll)
     }
 
-    if(this.rows.length === count || count === 0) {
+    if (totalRows === count && valueOfDisabled != this.rows.length) {
+      this.selectAll = true;
+    } else if (this.rows.length != count && count != 0 && this.rows.length != 0) {
+      this.selectAllValue = true
+    } else if (this.rows.length === valueOfDisabled) {
+      this.selectAllDisabled = true;
+      this.selectAll = false;
       this.selectAllValue = false;
-    }
-    else  if (this.rows.length != count &&  this.rows.length != 0){
-      this.selectAllValue = true;
+    } else if (count === 0) {
+      this.selectAllValue = false;
+      this.selectAll = false;
     }
   }
 
