@@ -20,7 +20,7 @@ import {DialogOverlayRef} from '../../../../../projects/hx-ui/src/lib/dialog/dia
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque.</p>
           <div class="hx-input-control" id="parentEL">
             <input class="hx-input" hxaTextInput type="text" [(ngModel)]="selected"
-                   [hxa_typeahead]="medications" minWidthRelativeTo="parentEL">
+                   [hxaTypeahead]="medications" minWidthRelativeTo="parentEL">
             <label clas="hx-label"><i class="icon icon-search is-small"></i> Medications</label>
             <div class="hx-help">Search for medication names</div>
           </div>
