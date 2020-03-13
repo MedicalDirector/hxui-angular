@@ -20,7 +20,7 @@
       <div class="hx-column">
 
         <div class="hx-input-control" id="parentEL">
-          <input class="hx-input" type="text" hxaTextInput [(ngModel)]="selected" [typeahead]="states" minWidthRelativeTo="parentEL">
+          <input class="hx-input" type="text" hxaTextInput [(ngModel)]="selected" [hxaTypeahead]="states" minWidthRelativeTo="parentEL">
           <label class="hx-label"><i class="icon icon-search is-small"></i> Medications</label>
           <div class="hx-help">Search for medication names</div>
         </div>
@@ -73,7 +73,7 @@
               <td>used to specify a custom options list template. Template variables: matches, itemTemplate, query</td>
             </tr>
             <tr>
-              <td>typeahead</td>
+              <td>hxaTypeahead</td>
               <td><kbd>any</kbd></td>
               <td>options source, can be Array of strings, objects or an Observable for external matching process</td>
             </tr>
