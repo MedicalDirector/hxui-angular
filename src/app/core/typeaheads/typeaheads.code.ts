@@ -16,7 +16,7 @@ exampleTemplate =
 
 <div class="hx-input-control" id="parentEL">
   <input class="hx-input" hxaTextInput type="text" [(ngModel)]="selected" 
-    [typeahead]="medications" minWidthRelativeTo="parentEL">
+    [hxa_typeahead]="medications" minWidthRelativeTo="parentEL">
   <label class="hx-label"><i class="icon icon-search is-small"></i> Medications</label>
   <div class="hx-help">Search for medication names</div>
 </div>
