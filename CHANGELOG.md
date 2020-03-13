@@ -1,3 +1,9 @@
+## [8.2.11](https://www.npmjs.com/package/@hxui/angular/v/8.2.11) (2020-03-13)
+
+### Enhancement
+
+* **Typeaheads:** Renamed Typeaheads selector 
+
 ## [8.2.10](https://www.npmjs.com/package/@hxui/angular/v/8.2.10) (2020-03-11)
 
 ### Enhancement
