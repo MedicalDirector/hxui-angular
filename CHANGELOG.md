@@ -1,3 +1,10 @@
+## [8.2.12](https://www.npmjs.com/package/@hxui/angular/v/8.2.12) (2020-03-16)
+
+### Bugfix
+
+* **Tabular:** Fixed row click event bug when clicking actions
+
+
 ## [8.2.11](https://www.npmjs.com/package/@hxui/angular/v/8.2.11) (2020-03-13)
 
 ### Enhancement

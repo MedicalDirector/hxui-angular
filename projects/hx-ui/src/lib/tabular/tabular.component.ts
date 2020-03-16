@@ -165,7 +165,7 @@ export class TabularComponent implements OnInit, DoCheck, OnDestroy {
       this.oldRows = _.cloneDeep(this.rows);
     }
   }
-  
+
   ngAfterViewChecked() {
     this.scrolling();
   }
@@ -318,8 +318,8 @@ export class TabularComponent implements OnInit, DoCheck, OnDestroy {
   onRowClickHandler($event: any, data: any) {
     const el: Element = $event.target;
     if (this.config.clickableRows) {
-      if (!el.parentElement || el.parentElement.tagName === 'BUTTON' ||
-        el.tagName === 'BUTTON' ||
+      if (!el.parentElement || el.parentElement.tagName === 'A' ||
+        el.tagName === 'A' ||
         el.parentElement.classList.contains('hx-checkbox-control')) {
         return;
       }
