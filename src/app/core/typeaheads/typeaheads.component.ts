@@ -1,16 +1,20 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { PageScrollService } from 'ngx-page-scroll-core';
 import {DOCUMENT} from '@angular/common';
 import {CoreBaseComponent} from '../core-base.component';
 import {TypeaheadsCode} from './typeaheads.code';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {TextInputDirective} from '../../../../projects/hx-ui/src/lib/text-input/text-input.directive';
 
 @Component({
   selector: 'app-typeaheads',
   templateUrl: './typeaheads.component.html',
   styles: [':host { display:flex; flex: 1; min-width: 0; }']
 })
-export class TypeaheadsComponent extends CoreBaseComponent implements OnInit {
+export class TypeaheadsComponent extends CoreBaseComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('phoneTypeahead', { read: TextInputDirective, static: false }) txtInputDirective: TextInputDirective;
+
   code = new TypeaheadsCode();
   public selected: string;
   public states: string[] = [
@@ -34,12 +38,30 @@ export class TypeaheadsComponent extends CoreBaseComponent implements OnInit {
     'SALBUTAMOL metered-dose aerosol 100mcg/dose',
     'SALBUTAMOL injection 1mg/mL'];
 
+  public selected_number;
+  public phone_numbers: {category:  string; type: string, number: string}[] = [
+    { category: 'Saved Phone Numbers', type: 'icon-mobile', number: '0405238765' },
+    { category: 'Saved Phone Numbers', type: 'icon-telephone', number: '(03) 97275154' },
+    { category: 'Saved Phone Numbers', type: 'icon-mobile', number: '0404235766' }
+  ];
+
   constructor(protected pageScrollService: PageScrollService,
               protected breakpointObserver: BreakpointObserver,
               @Inject(DOCUMENT) protected document: any) {
     super(pageScrollService, breakpointObserver, document);
   }
+
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.txtInputDirective.styleLabel();
+    });
+  }
+
+  onSelect($event) {
+    this.txtInputDirective.styleLabel();
   }
 
 }
