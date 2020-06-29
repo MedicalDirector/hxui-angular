@@ -1,3 +1,9 @@
+## [8.2.14](https://www.npmjs.com/package/@hxui/angular/v/8.2.14) (2020-06-29)
+
+### Enhancement
+
+* **typeahead:** Added hxaHighlight component to take care of highlighted results in custom templates
+
 ## [8.2.13](https://www.npmjs.com/package/@hxui/angular/v/8.2.13) (2020-06-29)
 
 ### Bugfix

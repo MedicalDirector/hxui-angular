@@ -78,8 +78,8 @@
           </div>
         </div>
 
-        <ng-template #customItemTemplate let-model="item" let-index="index">
-          <div><i class="hx-icon {{model.type}} is-small"></i> {{ model.number }}</div>
+        <ng-template #customItemTemplate let-model="item" let-index="index" let-query="query">
+          <hxa-highlight [result]="model.number" [term]="query"></hxa-highlight>
         </ng-template>
 
 
