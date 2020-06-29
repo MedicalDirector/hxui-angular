@@ -40,9 +40,9 @@ export class TypeaheadsComponent extends CoreBaseComponent implements OnInit, Af
 
   public selected_number;
   public phone_numbers: {category:  string; type: string, number: string}[] = [
-    { category: 'Saved Phone Numbers', type: 'icon-mobile', number: '0405238765' },
+    { category: 'Saved Phone Numbers', type: 'icon-mobile', number: '0405 238 765' },
     { category: 'Saved Phone Numbers', type: 'icon-telephone', number: '(03) 97275154' },
-    { category: 'Saved Phone Numbers', type: 'icon-mobile', number: '0404235766' }
+    { category: 'Saved Phone Numbers', type: 'icon-mobile', number: '0404 235 766' }
   ];
 
   constructor(protected pageScrollService: PageScrollService,

@@ -62,6 +62,7 @@
           <input class="hx-input" type="text"
                  #phoneTypeahead
                  hxaTextInput
+                 mask="0000 000 000"
                  [(ngModel)]="selected_number"
                  [hxaTypeahead]="phone_numbers"
                  minWidthRelativeTo="parentEL2"
@@ -79,7 +80,7 @@
         </div>
 
         <ng-template #customItemTemplate let-model="item" let-index="index" let-query="query">
-          <hxa-highlight [result]="model.number" [term]="query"></hxa-highlight>
+          <hxa-highlight [result]="model.number" [term]="query | mask: '0000 000 000'"></hxa-highlight>
         </ng-template>
 
 

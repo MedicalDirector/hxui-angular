@@ -55,6 +55,6 @@ export class TypeaheadHighlightComponent implements OnChanges {
     const terms = Array.isArray(this.term) ? this.term : [this.term];
     const escapedTerms = terms.map(term => this.regExpEscape(this.toString(term))).filter(term => term);
 
-    this.parts = escapedTerms.length ? result.split(new RegExp(`(${escapedTerms.join('|')})`, 'gmi')) : [result];
+    this.parts = escapedTerms.length  ? result.split(new RegExp(`(${escapedTerms.join('|')})`, 'gmi')) : [result];
   }
 }
