@@ -2,25 +2,25 @@ export class NgSelectCode {
 
   install = `
   npm install @ng-select/ng-select @hxui/ng-select --save
-  
+
 `;
 
   import = `
    @import "@hxui/ng-select/themes/hxui.theme.scss";
-  
+
 `;
 
   usage = `
   import { NgSelectModule } from '@ng-select/ng-select';
   import { FormsModule } from '@angular/forms';
-  
+
   @NgModule({
     declarations: [AppComponent],
     imports: [NgSelectModule, FormsModule],
     bootstrap: [AppComponent]
   })
   export class AppModule {}
-  
+
 `;
 
 
@@ -47,36 +47,36 @@ export class NgSelectCode {
  import {Component, Inject, OnInit} from '@angular/core';
   import {Observable} from 'rxjs/index';
   import {DataService} from './data.service';
-  
+
   @Component({
     selector: 'app-ng-select',
     templateUrl: './ng-select.component.html',
     styleUrls: ['./ng-select.component.scss']
   })
   export class NgSelectComponent implements OnInit {
-  
+
     people$: Observable<any[]>;
     selectedPersonId = '5a15b13c36e7a7f00cf0d7cb';
-  
-  
+
+
     constructor(
       private dataService: DataService
     ) {
-     
+
     }
-  
+
     ngOnInit() {
       this.people$ = this.dataService.getPeople();
     }
-  
+
     clearModel() {
       this.selectedPeople = [];
     }
-  
+
     changeModel() {
       this.selectedPeople = [{ name: 'New person' }];
     }
-  
+
   }
   `;
 
@@ -111,36 +111,36 @@ export class NgSelectCode {
   import {Component, Inject, OnInit} from '@angular/core';
   import {Observable} from 'rxjs/index';
   import {DataService} from './data.service';
-  
+
   @Component({
     selector: 'app-ng-select',
     templateUrl: './ng-select.component.html',
     styleUrls: ['./ng-select.component.scss']
   })
   export class NgSelectComponent implements OnInit {
-  
+
     people$: Observable<any[]>;
     selectedPeople = [{ name: 'Karyn Wright' }];
-  
-  
+
+
     constructor(
       private dataService: DataService
     ) {
-     
+
     }
-  
+
     ngOnInit() {
       this.people$ = this.dataService.getPeople();
     }
-  
+
     clearModel() {
       this.selectedPeople = [];
     }
-  
+
     changeModel() {
       this.selectedPeople = [{ name: 'New person' }];
     }
-  
+
   }
 
   `;
@@ -151,7 +151,7 @@ export class NgSelectCode {
     import { Observable, of } from 'rxjs';
     import { delay, map, tap } from 'rxjs/operators';
     import { HttpClient } from '@angular/common/http';
-    
+
     export interface Person {
       id: string;
       isActive: boolean;
@@ -163,22 +163,22 @@ export class NgSelectCode {
       phone: string;
       disabled?: boolean;
     }
-    
+
     @Injectable({
       providedIn: 'root'
     })
     export class DataService {
-    
+
       private _gitHubAccountsCache = new Map<string, []>();
-    
+
       constructor(private http: HttpClient) {
       }
-    
+
       getGithubAccounts(term: string = null) {
         if (this._gitHubAccountsCache.has(term)) {
           return of(this._gitHubAccountsCache.get(term));
         }
-    
+
         if (term) {
           return this.http
             .get<any>('https://api.github.com/search/users?q=term')
@@ -187,15 +187,15 @@ export class NgSelectCode {
           return of([]);
         }
       }
-    
+
       getAlbums() {
         return this.http.get<any[]>('https://jsonplaceholder.typicode.com/albums');
       }
-    
+
       getPhotos() {
         return this.http.get<any[]>('https://jsonplaceholder.typicode.com/photos');
       }
-    
+
       getPeople(term: string = null): Observable<Person[]> {
         let items = getMockPeople();
         if (term) {
@@ -204,7 +204,7 @@ export class NgSelectCode {
         return of(items).pipe(delay(500));
       }
     }
-    
+
     function getMockPeople() {
       return [
         {
@@ -404,6 +404,71 @@ export class NgSelectCode {
       ]
     }
 
+  `;
+
+  customExampleTemplate =
+    `
+  <div class="hx-card not-scrollable">
+    <div class="hx-card-content">
+
+     <ng-select [items]="people$ | async"
+                       bindLabel="name"
+                       autofocus
+                       bindValue="id"
+                       placeholder="Select people"
+                       [(ngModel)]="selectedPersonId">
+
+              <ng-template ng-label-tmp let-item="item">
+                <img height="15" width="15" [src]="item.picture"/>
+                {{item.name}}
+              </ng-template>
+
+              <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                <div [ngOptionHighlight]="search">{{item.name}}</div>
+              </ng-template>
+            </ng-select>
+
+      <br/>Selected: {{selectedPersonId}}
+    </div>
+  </div>
+  `;
+
+  customExampleTypescript =
+    `
+ import {Component, Inject, OnInit} from '@angular/core';
+  import {Observable} from 'rxjs/index';
+  import {DataService} from './data.service';
+
+  @Component({
+    selector: 'app-ng-select',
+    templateUrl: './ng-select.component.html',
+    styleUrls: ['./ng-select.component.scss']
+  })
+  export class NgSelectComponent implements OnInit {
+
+    people$: Observable<any[]>;
+    selectedPersonId = '5a15b13c36e7a7f00cf0d7cb';
+
+
+    constructor(
+      private dataService: DataService
+    ) {
+
+    }
+
+    ngOnInit() {
+      this.people$ = this.dataService.getPeople();
+    }
+
+    clearModel() {
+      this.selectedPeople = [];
+    }
+
+    changeModel() {
+      this.selectedPeople = [{ name: 'New person' }];
+    }
+
+  }
   `;
 
 

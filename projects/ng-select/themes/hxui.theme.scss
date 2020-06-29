@@ -350,6 +350,12 @@ $ng-select-bg: #ffffff !default;
         font-weight: 400;
         color: $ng-select-disabled-text;
       }
+      .highlighted {
+        text-decoration: none !important;
+        background: rgba(35, 49, 43, 0.23);
+        border-radius: 1px;
+        font-weight: bold;
+      }
     }
   }
 }
