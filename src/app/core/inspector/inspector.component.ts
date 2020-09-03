@@ -7,7 +7,7 @@ import {InspectorService} from '../../../../projects/hx-ui/src/lib/inspector/ins
 import {InspectorOverlayRef} from '../../../../projects/hx-ui/src/lib/inspector/inspector-overlay.ref';
 import {BasicCustomInspectorComponent} from './custom-inspectors/basic-custom-inspector.component';
 import {PageScrollService} from 'ngx-page-scroll-core';
-import {InspectorSize} from '../../../../projects/hx-ui/src/lib/inspector/inspector-size.enum';
+import {InspectorLocation} from "../../../../projects/hx-ui/src/lib/inspector/inspector-location.enum";
 
 @Component({
   selector: 'hxa-inspector',

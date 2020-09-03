@@ -172,6 +172,7 @@
                        autofocus
                        bindValue="id"
                        placeholder="Select people"
+                       (typed)="onKeyup"
                        [(ngModel)]="selectedPersonId">
 
               <ng-template ng-label-tmp let-item="item">

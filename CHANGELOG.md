@@ -1,3 +1,9 @@
+## [8.2.15](https://www.npmjs.com/package/@hxui/angular/v/8.2.15) (2020-09-03)
+
+### Enhancement
+
+* **inspector:** Added location config option to slide in inspector from left or right
+
 ## [8.2.14](https://www.npmjs.com/package/@hxui/angular/v/8.2.14) (2020-06-29)
 
 ### Enhancement

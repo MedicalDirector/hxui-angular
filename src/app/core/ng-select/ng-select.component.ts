@@ -42,4 +42,8 @@ export class NgSelectComponent extends CoreBaseComponent implements OnInit {
     this.selectedPeople = [{ name: 'New person' }];
   }
 
+  onKeyup(val) {
+    console.log(val);
+  }
+
 }

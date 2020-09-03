@@ -70,7 +70,8 @@
                  typeaheadGroupField="category"
                  [typeaheadMinLength]="0"
                  [typeaheadItemTemplate]="customItemTemplate"
-                 (typeaheadOnSelect)="onSelect($event)">
+                 (typeaheadOnSelect)="onSelect($event)"
+                (typeaheadOnBlur)="onBlur()">
           <label class="hx-label">Phone number</label>
           <div class="hx-help">Select a phone number</div>
         </div>

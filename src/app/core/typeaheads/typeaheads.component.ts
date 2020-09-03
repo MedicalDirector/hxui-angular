@@ -64,4 +64,8 @@ export class TypeaheadsComponent extends CoreBaseComponent implements OnInit, Af
     this.txtInputDirective.styleLabel();
   }
 
+  onBlur(){
+    console.log('on blur!');
+  }
+
 }
