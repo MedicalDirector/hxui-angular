@@ -1,3 +1,11 @@
+## [8.2.16](https://www.npmjs.com/package/@hxui/angular/v/8.2.16) (2020-09-30)
+
+### Enhancement
+
+* **empty state:** Added support for content transclusion
+* **inspector:** Added height:100% to portalHost class for mobile support
+
+
 ## [8.2.15](https://www.npmjs.com/package/@hxui/angular/v/8.2.15) (2020-09-03)
 
 ### Enhancement

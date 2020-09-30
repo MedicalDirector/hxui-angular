@@ -19,7 +19,10 @@
     <div class="hx-columns">
       <div class="hx-column">
 
-       <hxa-empty-state  icon="icon-medications" [msg]="emptyStateMsg" [actions]="emptyStateActions"></hxa-empty-state>
+       <hxa-empty-state  icon="icon-medications" [msg]="emptyStateMsg">
+         <button class="hx-button is-small" id="currentNotTakingMedsBtn" (click)="onNotTakingMeds()">Not taking any medications</button>
+         <button class="hx-button is-small is-primary" id="addCurrentMedicationBtn" (click)="onAddMeds()">Add current medication</button>
+       </hxa-empty-state>
 
 
 
@@ -72,11 +75,6 @@
             <td>msg</td>
             <td><kbd>string</kbd></td>
             <td>The message to describe why the state is empty.</td>
-          </tr>
-          <tr>
-            <td>actions</td>
-            <td><kbd>IEmptyStateAction[]</kbd></td>
-            <td>1 or more actions that the user can perform.</td>
           </tr>
           </tbody>
         </table>
