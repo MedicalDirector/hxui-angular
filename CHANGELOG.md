@@ -1,4 +1,10 @@
-## [8.2.16](https://www.npmjs.com/package/@hxui/angular/v/8.2.16) (2020-09-30)
+## [8.2.18](https://www.npmjs.com/package/@hxui/angular/v/8.2.18) (2020-10-01)
+
+### Enhancement
+
+* **date picker:** Added the ability to browse years
+
+## [8.2.16 - 8.2.17](https://www.npmjs.com/package/@hxui/angular/v/8.2.17) (2020-09-30)
 
 ### Enhancement
 
