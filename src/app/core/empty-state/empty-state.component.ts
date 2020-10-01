@@ -15,19 +15,6 @@ export class EmptyStateComponent extends CoreBaseComponent {
 
   code = new EmptyStateCode();
   emptyStateMsg = 'No current medications have been recorded';
-  emptyStateActions: IEmptyStateAction[] = [
-    {
-      id: 'currentNotTakingMedsBtn',
-      label: 'Not taking any medications',
-      css: '',
-      callback: [this.onNotTakingMeds]
-    },
-    {
-      id: 'currentAddMedsBtn',
-      label: 'Add current medication',
-      css: 'is-primary',
-      callback: [this.onAddMeds]
-    }];
 
   constructor(protected pageScrollService: PageScrollService,
               protected breakpointObserver: BreakpointObserver,

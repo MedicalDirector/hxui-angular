@@ -4,7 +4,7 @@ import {PageScrollService} from 'ngx-page-scroll-core';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {DOCUMENT} from '@angular/common';
 import {NgSelectCode} from './ng-select.code';
-import {Observable} from 'rxjs/index';
+import {Observable, Subject} from 'rxjs/index';
 import {DataService} from './data.service';
 
 @Component({
@@ -18,6 +18,7 @@ export class NgSelectComponent extends CoreBaseComponent implements OnInit {
   people$: Observable<any[]>;
   selectedPeople = [{ name: 'Karyn Wright' }];
   selectedPersonId = '5a15b13c36e7a7f00cf0d7cb';
+  peopleInput$ = new Subject<string>();
 
 
   constructor(
@@ -39,6 +40,10 @@ export class NgSelectComponent extends CoreBaseComponent implements OnInit {
 
   changeModel() {
     this.selectedPeople = [{ name: 'New person' }];
+  }
+
+  onKeyup(val) {
+    console.log(val);
   }
 
 }

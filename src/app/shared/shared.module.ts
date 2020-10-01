@@ -10,6 +10,7 @@ import {HxUiModule} from '../../../projects/hx-ui/src/lib/hx-ui.module';
 import {ToastrModule} from '../../../projects/hx-ui/src/lib/toastr/toastr.module';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgSelectModule } from '@ng-select/ng-select'
+import {NgOptionHighlightModule} from "@ng-select/ng-option-highlight";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { NgSelectModule } from '@ng-select/ng-select'
     NgxPageScrollCoreModule,
     HighlightModule,
     ToastrModule,
-    NgSelectModule
+    NgSelectModule,
+    NgOptionHighlightModule
   ],
   declarations: [],
   exports: [
@@ -40,7 +42,8 @@ import { NgSelectModule } from '@ng-select/ng-select'
     NgxPageScrollCoreModule,
     HighlightModule,
     ToastrModule,
-    NgSelectModule
+    NgSelectModule,
+    NgOptionHighlightModule
   ]
 })
 export class SharedModule {

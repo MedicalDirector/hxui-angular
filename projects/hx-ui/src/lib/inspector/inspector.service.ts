@@ -5,12 +5,14 @@ import {CdkPortalOutlet, ComponentPortal, PortalInjector} from '@angular/cdk/por
 import {FocusTrapFactory} from '@angular/cdk/a11y';
 import {InspectorComponent} from './inspector.component';
 import {InspectorSize} from './inspector-size.enum';
+import {InspectorLocation} from "./inspector-location.enum";
 
 interface InspectorConfig {
   panelClass?: string | string[];
   hasBackdrop?: boolean;
   backdropClass?: string;
   size?: InspectorSize;
+  location?: InspectorLocation;
 }
 
 const DEFAULT_CONFIG: InspectorConfig = {
@@ -55,6 +57,9 @@ export class InspectorService {
 
     // set size
     inspectorInstance.size = (inspectorConfig.size && inspectorConfig.size === InspectorSize.Large) ? 'large' : 'small';
+
+    // set location
+    inspectorInstance.location = (inspectorConfig.location === InspectorLocation.Left) ? InspectorLocation.Left : InspectorLocation.Right;
 
     // pass the @Input parameters to the instance
     Object.assign(inspectorInstance.parameters, parameters);
@@ -109,8 +114,13 @@ export class InspectorService {
   private getOverlayConfig(config: InspectorConfig): OverlayConfig {
     const positionStrategy = this.overlay.position()
       .global()
-      .centerHorizontally()
-      .right('0');
+      .centerHorizontally();
+
+    if (config.location === InspectorLocation.Left){
+      positionStrategy.left('0');
+    } else {
+      positionStrategy.right('0');
+    }
 
     const overlayConfig = new OverlayConfig({
       hasBackdrop: config.hasBackdrop,

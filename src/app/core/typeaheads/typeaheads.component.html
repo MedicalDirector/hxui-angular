@@ -16,11 +16,11 @@
 
     <h4 id="example">Example</h4>
 
-    <div class="hx-columns">
+    <div class="hx-columns mt-5">
       <div class="hx-column">
 
         <div class="hx-input-control" id="parentEL">
-          <input class="hx-input" type="text" hxaTextInput [(ngModel)]="selected" [typeahead]="states" minWidthRelativeTo="parentEL">
+          <input class="hx-input" type="text" hxaTextInput [(ngModel)]="selected" [hxaTypeahead]="states" minWidthRelativeTo="parentEL">
           <label class="hx-label"><i class="icon icon-search is-small"></i> Medications</label>
           <div class="hx-help">Search for medication names</div>
         </div>
@@ -31,6 +31,66 @@
     <br>
 
     <h5 id="code">Code</h5>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+
+        <hx-tabset>
+          <hx-tab heading="Template">
+            <pre>
+              <code [highlight]="code.exampleTemplate"></code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Typescript">
+            <pre>
+              <code [highlight]="code.exampleTypescript"></code>
+            </pre>
+          </hx-tab>
+        </hx-tabset>
+      </div>
+    </div>
+
+    <hr>
+
+    <h4 id="predefinedOptionsExample">Predefined Options Example</h4>
+
+    <div class="hx-columns mt-5">
+      <div class="hx-column is-half">
+
+        <div class="hx-input-group">
+        <div class="hx-input-control" id="parentEL2">
+          <input class="hx-input" type="text"
+                 #phoneTypeahead
+                 hxaTextInput
+                 mask="0000 000 000"
+                 [(ngModel)]="selected_number"
+                 [hxaTypeahead]="phone_numbers"
+                 minWidthRelativeTo="parentEL2"
+                 typeaheadOptionField="number"
+                 typeaheadGroupField="category"
+                 [typeaheadMinLength]="0"
+                 [typeaheadItemTemplate]="customItemTemplate"
+                 (typeaheadOnSelect)="onSelect($event)"
+                (typeaheadOnBlur)="onBlur()">
+          <label class="hx-label">Phone number</label>
+          <div class="hx-help">Select a phone number</div>
+        </div>
+          <div class="hx-input-actions">
+            <i class="hx-icon icon-caret-down"></i>
+          </div>
+        </div>
+
+        <ng-template #customItemTemplate let-model="item" let-index="index" let-query="query">
+          <hxa-highlight [result]="model.number" [term]="query | mask: '0000 000 000'"></hxa-highlight>
+        </ng-template>
+
+
+      </div>
+    </div>
+
+    <br>
+
+    <h5 id="predefinedOptionsCode">Code</h5>
 
     <div class="hx-columns">
       <div class="hx-column">
@@ -73,7 +133,7 @@
               <td>used to specify a custom options list template. Template variables: matches, itemTemplate, query</td>
             </tr>
             <tr>
-              <td>typeahead</td>
+              <td>hxaTypeahead</td>
               <td><kbd>any</kbd></td>
               <td>options source, can be Array of strings, objects or an Observable for external matching process</td>
             </tr>

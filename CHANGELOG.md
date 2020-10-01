@@ -4,6 +4,57 @@
 
 * **Filters:** Added multi select filter type
 
+## [8.2.18](https://www.npmjs.com/package/@hxui/angular/v/8.2.18) (2020-10-01)
+
+### Enhancement
+
+* **date picker:** Added the ability to browse years
+
+## [8.2.16 - 8.2.17](https://www.npmjs.com/package/@hxui/angular/v/8.2.17) (2020-09-30)
+
+### Enhancement
+
+* **empty state:** Added support for content transclusion
+* **inspector:** Added height:100% to portalHost class for mobile support
+
+
+## [8.2.15](https://www.npmjs.com/package/@hxui/angular/v/8.2.15) (2020-09-03)
+
+### Enhancement
+
+* **inspector:** Added location config option to slide in inspector from left or right
+
+## [8.2.14](https://www.npmjs.com/package/@hxui/angular/v/8.2.14) (2020-06-29)
+
+### Enhancement
+
+* **typeahead:** Added hxaHighlight component to take care of highlighted results in custom templates
+
+## [8.2.13](https://www.npmjs.com/package/@hxui/angular/v/8.2.13) (2020-06-29)
+
+### Bugfix
+
+* **ng-select:** Added ngHighlight module and updated styles
+
+## [8.2.12](https://www.npmjs.com/package/@hxui/angular/v/8.2.12) (2020-03-16)
+
+### Bugfix
+
+* **Tabular:** Fixed row click event bug when clicking actions
+
+
+## [8.2.11](https://www.npmjs.com/package/@hxui/angular/v/8.2.11) (2020-03-13)
+
+### Enhancement
+
+* **Typeaheads:** Renamed Typeaheads selector 
+
+## [8.2.10](https://www.npmjs.com/package/@hxui/angular/v/8.2.10) (2020-03-11)
+
+### Enhancement
+
+* **Tabular:** Added disabled to checkbox in tabular
+
 ## [8.2.9](https://www.npmjs.com/package/@hxui/angular/v/8.2.9) (2020-02-21)
 
 ### Enhancement

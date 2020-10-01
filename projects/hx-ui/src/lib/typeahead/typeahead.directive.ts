@@ -17,10 +17,10 @@ import {
 import {ComponentPortal} from '@angular/cdk/portal';
 import {take, takeUntil} from 'rxjs/internal/operators';
 
-@Directive({selector: '[typeahead]', exportAs: 'hx-typeahead'})
+@Directive({selector: '[hxaTypeahead]', exportAs: 'hx-typeahead'})
 export class TypeaheadDirective implements OnInit, OnDestroy {
   /** options source, can be Array of strings, objects or an Observable for external matching process */
-  @Input() public typeahead: any;
+  @Input() public hxaTypeahead: any;
   /** minimal no of characters that needs to be entered before typeahead kicks-in. When set to 0, typeahead shows on focus with full list of options (limited as normal by typeaheadOptionsLimit) */
   @Input() public typeaheadMinLength: number = void 0;
   /** minimal wait time after last character typed before typeahead kicks-in */
@@ -169,11 +169,11 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
     this.typeaheadWaitMs = this.typeaheadWaitMs || 0;
 
     // async should be false in case of array
-    if (this.typeaheadAsync === undefined && !(this.typeahead instanceof Observable)) {
+    if (this.typeaheadAsync === undefined && !(this.hxaTypeahead instanceof Observable)) {
       this.typeaheadAsync = false;
     }
 
-    if (this.typeahead instanceof Observable) {
+    if (this.hxaTypeahead instanceof Observable) {
       this.typeaheadAsync = true;
     }
 
@@ -235,7 +235,7 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
   protected asyncActions(): void {
     this.keyUpEventEmitter.pipe(
       debounceTime(this.typeaheadWaitMs),
-      mergeMap(() => this.typeahead)
+      mergeMap(() => this.hxaTypeahead)
     ).subscribe(
         (matches: any[]) => {
           this.finalizeAsyncCall(matches);
@@ -252,7 +252,7 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
       mergeMap((value: string) => {
         const normalizedQuery = this.normalizeQuery(value);
 
-        return from(this.typeahead).pipe(
+        return from(this.hxaTypeahead).pipe(
           filter((option: any) => {
             return option && this.testMatch(this.normalizeOption(option), normalizedQuery);
           }),

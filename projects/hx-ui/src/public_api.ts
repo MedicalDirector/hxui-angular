@@ -5,6 +5,7 @@ export * from './lib/inspector/inspector.module';
 export * from './lib/inspector/inspector.service';
 export * from './lib/inspector/inspector-overlay.ref';
 export * from './lib/inspector/inspector-size.enum';
+export * from './lib/inspector/inspector-location.enum';
 
 export * from './lib/line-clamp/line-clamp.module';
 export * from './lib/line-clamp/line-clamp.component';
@@ -110,6 +111,7 @@ export * from './lib/typeahead/latin-map';
 export * from './lib/typeahead/typeahead.directive';
 export * from './lib/typeahead/typeahead.module';
 export * from './lib/typeahead/typeahead-container.component';
+export * from './lib/typeahead/typeahead-highlight.component';
 export * from './lib/typeahead/typeahead-match.class';
 export * from './lib/typeahead/typeahead-options.class';
 export * from './lib/typeahead/typeahead-utils';

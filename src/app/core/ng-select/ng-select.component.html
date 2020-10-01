@@ -157,6 +157,74 @@
     <hr>
 
 
+    <h4 id="customtemplateexample">Custom Template Example</h4>
+
+    <p>Custom selected item label and options. You can customise either or.</p>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+
+        <div class="hx-card not-scrollable">
+          <div class="hx-card-content">
+
+            <ng-select [items]="people$ | async"
+                       bindLabel="name"
+                       autofocus
+                       bindValue="id"
+                       placeholder="Select people"
+                       (typed)="onKeyup"
+                       [(ngModel)]="selectedPersonId">
+
+              <ng-template ng-label-tmp let-item="item">
+                <img height="15" width="15" [src]="item.picture"/>
+                {{item.name}}
+              </ng-template>
+
+              <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                <div [ngOptionHighlight]="search">{{item.name}}</div>
+              </ng-template>
+            </ng-select>
+
+            <br/>Selected: {{selectedPersonId}}
+          </div>
+        </div>
+
+      </div>
+      <div class="hx-column">
+
+      </div>
+    </div>
+
+    <br>
+
+    <h5 id="customtemplateexamplecode">Code</h5>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+
+        <hx-tabset>
+          <hx-tab heading="Template">
+            <pre>
+              <code [highlight]="code.customExampleTemplate"></code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Typescript">
+            <pre>
+              <code [highlight]="code.customExampleTypescript"></code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Data Service">
+            <pre>
+              <code [highlight]="code.dataService"></code>
+            </pre>
+          </hx-tab>
+        </hx-tabset>
+      </div>
+    </div>
+
+    <hr>
+
+
     <h4 id="api">API Reference</h4>
 
     <div class="hx-columns mt-2">

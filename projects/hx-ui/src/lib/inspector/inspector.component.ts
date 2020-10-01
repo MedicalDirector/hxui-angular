@@ -12,6 +12,7 @@ import {
 import { ComponentPortal, DomPortalOutlet} from '@angular/cdk/portal';
 import {Subject} from 'rxjs/index';
 import {InspectorSize} from './inspector-size.enum';
+import {InspectorLocation} from "./inspector-location.enum";
 
 
 @Component({
@@ -19,9 +20,9 @@ import {InspectorSize} from './inspector-size.enum';
   templateUrl: './inspector.component.html',
   styleUrls: ['./inspector.component.scss'],
   animations: [
-    trigger('slide', [
+    trigger('slideFromRight', [
       state('slideOut', style({
-        transform: 'translate3d(100%, 0, 0)'
+        transform: 'translate3d(100%, 0, 0)',
       })),
       state('slideIn',   style({
         transform: 'translate3d(0, 0, 0)'
@@ -33,7 +34,21 @@ import {InspectorSize} from './inspector-size.enum';
         animate('200ms ease-in')
       ]),
     ]),
-    trigger('size', [
+    trigger('slideFromLeft', [
+      state('slideOut', style({
+        transform: 'translateX(-100%)'
+      })),
+      state('slideIn',   style({
+        transform: 'translateX(0)'
+      })),
+      transition('slideOut => slideIn', animate('200ms ease-in')),
+      transition('slideIn => slideOut', animate('200ms ease-out')),
+      transition('void => *', [
+        style({transform: 'translateX(-100%)'}),
+        animate('200ms ease-in')
+      ]),
+    ]),
+    trigger('sizeFromRight', [
       state('small', style({
         width: '37rem'
       })),
@@ -58,6 +73,32 @@ import {InspectorSize} from './inspector-size.enum';
         style({ width: '0'}),
         animate('200ms ease-in')
       ]),
+    ]),
+    trigger('sizeFromLeft', [
+      state('small', style({
+        width: '37rem'
+      })),
+      state('large',   style({
+        width: (document.documentElement.clientWidth - 100) + 'px'
+      })),
+      state('fullWidth',   style({
+        width: (document.documentElement.clientWidth) + 'px'
+      })),
+      state('offsetWidth',   style({
+        width: '47rem'
+      })),
+      transition('small => large', animate('200ms ease-in')),
+      transition('large => small', animate('200ms ease-out')),
+      transition('small => fullWidth', animate('200ms ease-out')),
+      transition('large => fullWidth', animate('200ms ease-out')),
+      transition('fullWidth => small', animate('200ms ease-in')),
+      transition('fullWidth => large', animate('200ms ease-in')),
+      transition('small => offsetWidth', animate('200ms ease-out')),
+      transition('offsetWidth => small', animate('200ms ease-in')),
+      transition('void => *', [
+        style({ width: '37rem'}),
+        animate('200ms ease-in')
+      ]),
     ])
   ]
 })
@@ -75,6 +116,8 @@ export class InspectorComponent implements OnInit {
   sizes = ['small', 'large', 'offsetWidth', 'fullWidth'];
   previousSize = 'small';
   hideClose = false;
+  location = InspectorLocation.Right;
+  InspectorLocation = InspectorLocation;
 
   private portalHost: DomPortalOutlet;
   private animationCount = 0;
@@ -86,9 +129,12 @@ export class InspectorComponent implements OnInit {
               private appRef: ApplicationRef) { }
 
   ngOnInit() {
-    this.attachComponent();
-    this.slideIn();
+    setTimeout(()=> {
+      this.attachComponent();
+      this.slideIn();
+    })
   }
+
 
   close = () => {
     this.slideOut();
