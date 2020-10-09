@@ -8,6 +8,7 @@ $ng-select-border: #d9d9d9 !default;
 $ng-select-bg: #ededed;
 $ng-select-selected: rgba(24, 144, 255, 0.2);
 $ng-select-marked: #e6f7ff !default;
+$ng-select-danger: #b81e4f;
 
 .ng-select.is-legacy {
   position: relative;
@@ -61,8 +62,15 @@ $ng-select-marked: #e6f7ff !default;
       opacity: 1;
     }
     .ng-arrow-wrapper {
-      opacity: 0;
+      opacity: 1;
       pointer-events: none;
+    }
+  }
+
+  &.is-danger {
+    .ng-select-container {
+      border: 2px solid $ng-select-danger;
+      color: $ng-select-danger;
     }
   }
 
