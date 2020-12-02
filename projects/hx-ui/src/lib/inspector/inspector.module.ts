@@ -15,7 +15,7 @@ import {BrowserModule} from '@angular/platform-browser';
   entryComponents: [ InspectorComponent ]
 })
 export class InspectorModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<InspectorModule> {
     return {
       ngModule: InspectorModule,
       providers: [InspectorService]

@@ -47,7 +47,7 @@ import {NgOptionHighlightModule} from "@ng-select/ng-option-highlight";
   ]
 })
 export class SharedModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SharedModule> {
     return {
       ngModule: SharedModule,
       providers: []

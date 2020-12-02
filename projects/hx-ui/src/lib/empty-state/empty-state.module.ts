@@ -16,7 +16,7 @@ import {EmptyStateConfig} from './empty-state.config';
   ]
 })
 export class EmptyStateModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<EmptyStateModule> {
     return {
       ngModule: EmptyStateModule,
       providers: [EmptyStateConfig]

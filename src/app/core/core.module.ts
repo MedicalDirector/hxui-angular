@@ -81,7 +81,7 @@ import { LineClampComponent } from './line-clamp/line-clamp.component';
   ]
 })
 export class CoreModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
       providers: [

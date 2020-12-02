@@ -11,7 +11,7 @@ import {AutoGrowDirective} from './auto-grow.directive';
   ]
 })
 export class AutoGrowModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<AutoGrowModule> {
     return {
       ngModule: AutoGrowModule, providers: []
     };

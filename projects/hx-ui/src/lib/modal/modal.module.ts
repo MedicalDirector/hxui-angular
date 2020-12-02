@@ -9,7 +9,7 @@ import {ModalBackdropComponent} from './modal-backdrop.component';
     entryComponents: [ModalBackdropComponent]
 })
 export class ModalModule {
-    public static forRoot(): ModuleWithProviders {
+    public static forRoot(): ModuleWithProviders<ModalModule> {
         return {
             ngModule: ModalModule,
             providers: [ModalService]

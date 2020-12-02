@@ -38,7 +38,7 @@ import {
 })
 
 export class DateRangePickerModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<DateRangePickerModule> {
     return {
       ngModule: DateRangePickerModule,
       providers: [DateRangePickerConfig]

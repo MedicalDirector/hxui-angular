@@ -24,7 +24,7 @@ import {NgxMaskModule} from 'ngx-mask';
   ]
 })
 export class FiltersModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<FiltersModule> {
     return {
       ngModule: FiltersModule,
       providers: [FiltersConfig]

@@ -20,5 +20,5 @@ import {TooltipDynamicContentDirective} from './tooltip-dynamic-content.directiv
   entryComponents: [TooltipContentComponent]
 })
 export class TooltipModule {
-  public static forRoot(): ModuleWithProviders {return {ngModule: TooltipModule, providers: [TooltipConfig]}; }
+  public static forRoot(): ModuleWithProviders<TooltipModule> {return {ngModule: TooltipModule, providers: [TooltipConfig]}; }
 }

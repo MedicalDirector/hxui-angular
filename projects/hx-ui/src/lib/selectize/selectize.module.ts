@@ -17,7 +17,7 @@ import {CommonModule} from '@angular/common';
   entryComponents: [SelectizeComponent]
 })
 export class SelectizeModule {
-  public static forRoot(config?: any): ModuleWithProviders {
+  public static forRoot(config?: any): ModuleWithProviders<SelectizeModule> {
     return {
       ngModule: SelectizeModule,
       providers: [

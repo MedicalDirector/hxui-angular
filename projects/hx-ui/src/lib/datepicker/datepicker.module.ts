@@ -17,7 +17,7 @@ import { TextInputModule } from '../text-input/text-input.module';
 })
 
 export class DatepickerModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<DatepickerModule> {
     return { ngModule: DatepickerModule, providers: [DatepickerConfig] };
   }
 }

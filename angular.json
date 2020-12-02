@@ -11,6 +11,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -35,6 +36,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -148,7 +155,8 @@
           "configurations": {
             "production": {
               "project": "projects/hx-ui/ng-package.prod.json"
-            }
+            ,              "tsConfig": "projects/hx-ui/tsconfig.lib.prod.json"
+}
           }
         },
         "test": {
@@ -178,7 +186,7 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "hxa",
-      "styleext": "scss"
+      "style": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "hxa"

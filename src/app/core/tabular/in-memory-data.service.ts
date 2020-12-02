@@ -1,5 +1,7 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import {Context} from '../../../../projects/hx-ui/src/lib/enums';
+import { Injectable } from "@angular/core";
+@Injectable()
 export class InMemoryDataService implements InMemoryDbService {
   date = new Date();
   createDb() {

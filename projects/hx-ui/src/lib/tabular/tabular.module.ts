@@ -43,7 +43,7 @@ import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 })
 
 export class TabularModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<TabularModule> {
     return {
       ngModule: TabularModule,
       providers: [

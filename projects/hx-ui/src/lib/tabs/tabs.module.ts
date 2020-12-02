@@ -13,7 +13,7 @@ import { TabsetConfig } from './tabset.config';
   exports: [TabDirective, TabsetComponent, TabHeadingDirective, NgTranscludeDirective]
 })
 export class TabsModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<TabsModule> {
     return {
       ngModule: TabsModule,
       providers: [TabsetConfig]

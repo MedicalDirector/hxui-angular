@@ -14,7 +14,7 @@ import {TypeaheadHighlightComponent} from "./typeahead-highlight.component";
   entryComponents: [TypeaheadContainerComponent]
 })
 export class TypeaheadModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<TypeaheadModule> {
     return {
       ngModule: TypeaheadModule,
       providers: [ComponentLoaderFactory, PositioningService]
