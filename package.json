@@ -40,7 +40,7 @@
     "moment": "^2.29.1",
     "ngx-highlightjs": "^3.0.3",
     "ngx-mask": "^8.2.0",
-    "ngx-page-scroll-core": "^7.0.3",
+    "ngx-page-scroll-core": "7.0.1",
     "node-sass": "^4.14.1",
     "rxjs": "^6.6.3",
     "selectize": "^0.12.4",

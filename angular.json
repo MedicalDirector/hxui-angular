@@ -139,7 +139,6 @@
         }
       }
     },
-
     "HxUi": {
       "root": "projects/hx-ui",
       "sourceRoot": "projects/hx-ui/src",
@@ -154,9 +153,9 @@
           },
           "configurations": {
             "production": {
-              "project": "projects/hx-ui/ng-package.prod.json"
-            ,              "tsConfig": "projects/hx-ui/tsconfig.lib.prod.json"
-}
+              "project": "projects/hx-ui/ng-package.prod.json",
+              "tsConfig": "projects/hx-ui/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -191,5 +190,8 @@
     "@schematics/angular:directive": {
       "prefix": "hxa"
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

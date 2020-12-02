@@ -9,7 +9,7 @@ export class CoreBaseComponent {
 
   @ViewChild('container', { static: true })
   protected container: ElementRef;
-  protected contentsNav = true;
+  public contentsNav = true;
 
   constructor(protected pageScrollService: PageScrollService,
               protected breakpointObserver: BreakpointObserver,
