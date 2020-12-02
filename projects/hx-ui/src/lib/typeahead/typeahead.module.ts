@@ -10,8 +10,7 @@ import {TypeaheadHighlightComponent} from "./typeahead-highlight.component";
 @NgModule({
   imports: [CommonModule],
   declarations: [TypeaheadContainerComponent, TypeaheadDirective, TypeaheadHighlightComponent],
-  exports: [TypeaheadContainerComponent, TypeaheadDirective, TypeaheadHighlightComponent],
-  entryComponents: [TypeaheadContainerComponent]
+  exports: [TypeaheadContainerComponent, TypeaheadDirective, TypeaheadHighlightComponent]
 })
 export class TypeaheadModule {
   public static forRoot(): ModuleWithProviders<TypeaheadModule> {

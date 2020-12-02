@@ -151,8 +151,7 @@ export class InspectorCode {
     `
     @NgModule({
       ...
-      declarations: [BasicCustomInspectorComponent],
-      entryComponents: [BasicCustomInspectorComponent]
+      declarations: [BasicCustomInspectorComponent]
     })
     `;
 }

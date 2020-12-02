@@ -33,8 +33,7 @@ import {
 @NgModule({
   imports: [CommonModule, FormsModule, TabsModule, DatepickerModule, DropdownModule],
   declarations: [DateRangePickerComponent, DateRangePickerIntervalComponent, DateRangePickerCustomComponent],
-  exports: [DateRangePickerComponent],
-  entryComponents: [DateRangePickerComponent]
+  exports: [DateRangePickerComponent]
 })
 
 export class DateRangePickerModule {

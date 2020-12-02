@@ -23,18 +23,18 @@ export class DialogsCode {
     import { Component, OnInit } from '@angular/core';
     import {DialogsService} from "@hxui/angular";
     import {CustomDialogComponent} from "./custom-dialog/custom-dialog.component";
-    
+
     @Component({
       selector: 'app-dialogs',
       templateUrl: './dialogs.component.html'
     })
     export class DialogsComponent implements OnInit {
-    
+
       constructor(private dialogService: DialogService) {
-    
+
       ngOnInit() {
       }
-    
+
       openDialog = () => {
         const dialog: DialogOverlayRef = this.dialogService.open(CustomDialogComponent, {}, {
           onSuccess: (data) => {
@@ -45,7 +45,7 @@ export class DialogsCode {
           }
         });
       }
-    
+
     }
     `;
 
@@ -54,7 +54,7 @@ export class DialogsCode {
     import { Component, OnInit } from '@angular/core';
     import {Modal} from '../../../../../projects/hx-ui/src/lib/modal/modal.annotation';
     import {DialogOverlayRef} from '../../../../../projects/hx-ui/src/lib/dialog/dialog-overlay.ref';
-    
+
     @Component({
       selector: 'app-custom-dialog',
       template: \`
@@ -86,9 +86,9 @@ export class DialogsCode {
         </div>
       \`
     })
-    
+
     export class CustomDialogComponent implements OnInit {
-    
+
       protected onSuccess: Function;
       protected onCancelled: Function;
       public selected: string;
@@ -112,22 +112,22 @@ export class DialogsCode {
         'SALBUTAMOL SANDOZ inhalation 5mg/2.5mL',
         'SALBUTAMOL metered-dose aerosol 100mcg/dose',
         'SALBUTAMOL injection 1mg/mL'];
-    
+
       constructor(public dialogRef: DialogOverlayRef) { }
-    
+
       ngOnInit() {
       }
-    
+
       onCancel() {
         this.onCancelled('Cancelled!');
         this.dialogRef.close();
       }
-    
+
       onOk() {
         this.onSuccess('Success!');
         this.dialogRef.close();
       }
-    
+
     }
     `;
 
@@ -135,8 +135,7 @@ export class DialogsCode {
     `
     @NgModule({
       ...
-      declarations: [CustomDialogComponent],
-      entryComponents: [CustomDialogComponent]
+      declarations: [CustomDialogComponent]
     })
     `;
 }

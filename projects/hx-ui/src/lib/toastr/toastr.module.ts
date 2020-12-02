@@ -16,8 +16,7 @@ export const DefaultGlobalConfig: GlobalConfig = {
 @NgModule({
   imports: [CommonModule],
   declarations: [ToastrComponent],
-  exports: [ToastrComponent],
-  entryComponents: [ToastrComponent],
+  exports: [ToastrComponent]
 })
 export class ToastrModule {
   static forRoot(config: Partial<GlobalConfig> = {}): ModuleWithProviders<ToastrModule> {

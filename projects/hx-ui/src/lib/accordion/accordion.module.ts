@@ -22,7 +22,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
         AccordionContainerComponent,
         AccordionHeaderComponent,
         AccordionBodyComponent
-    ],
-    entryComponents: [AccordionComponent]
+    ]
 })
 export class AccordionModule { }

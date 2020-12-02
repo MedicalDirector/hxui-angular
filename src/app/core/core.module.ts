@@ -73,12 +73,7 @@ import { LineClampComponent } from './line-clamp/line-clamp.component';
      TabularService,
      InMemoryDataService
   ],
-  exports: [],
-  entryComponents: [
-    CustomModalComponent,
-    CustomDialogComponent,
-    BasicCustomInspectorComponent
-  ]
+  exports: []
 })
 export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {

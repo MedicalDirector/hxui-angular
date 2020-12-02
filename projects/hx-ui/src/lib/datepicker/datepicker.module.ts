@@ -12,8 +12,7 @@ import { TextInputModule } from '../text-input/text-input.module';
 @NgModule({
   imports: [CommonModule, FormsModule, TabsModule,  NgxMaskModule, TextInputModule ],
   declarations: [DatepickerComponent, DatepickerFormComponent, DatepickerIntervalComponent],
-  exports: [DatepickerComponent, DatepickerFormComponent],
-  entryComponents: [DatepickerComponent]
+  exports: [DatepickerComponent, DatepickerFormComponent]
 })
 
 export class DatepickerModule {
