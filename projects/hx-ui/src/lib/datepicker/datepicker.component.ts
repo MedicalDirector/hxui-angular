@@ -44,6 +44,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
   viewDate: Date;
   days: Array<Date> = new Array<Date>();
   week: Array<string> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  month: Array<string> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   years: Array<number> = new Array<number>() ;
   private presentDate: Date;
   private cellCount = 41;
@@ -166,7 +167,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
   }
 
   private getYearCollection(startFrom = null){
-    const activeYear = (startFrom) ? startFrom : this.viewDate.getFullYear();
+    const yearsBeforeActive = 7;
+    const activeYear = (startFrom) ? startFrom : this.viewDate.getFullYear() - yearsBeforeActive;
     this.years = [];
     for(let i = 0; i < this.yearCellCount; i++) {
       this.years.push((activeYear + i));
