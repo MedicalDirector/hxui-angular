@@ -1,3 +1,9 @@
+## [11.0.0-11.0.1](https://www.npmjs.com/package/@hxui/angular/v/11.0.0) (2020-12-03)
+
+### Angular Upgrade (Breaking Change)
+
+* **UPGRADE:** Upgraded Angular to version 11 and all its dependencies
+
 ## [8.3.0-8.3.1](https://www.npmjs.com/package/@hxui/angular/v/8.3.1) (2020-02-27)
 
 ### Enhancement (Breaking Change)
@@ -8,7 +14,7 @@
 
 ### Enhancement
 
-* **date picker:** Added the ability to browse years
+* **Date picker:** Added the ability to browse years
 
 ## [8.2.16 - 8.2.17](https://www.npmjs.com/package/@hxui/angular/v/8.2.17) (2020-09-30)
 
