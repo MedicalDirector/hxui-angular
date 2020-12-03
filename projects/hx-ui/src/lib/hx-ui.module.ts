@@ -52,7 +52,7 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
   ]
 })
 export class HxUiModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<HxUiModule> {
     return {
       ngModule: HxUiModule,
       providers: [

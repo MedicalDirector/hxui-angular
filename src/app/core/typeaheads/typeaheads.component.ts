@@ -13,7 +13,7 @@ import {TextInputDirective} from '../../../../projects/hx-ui/src/lib/text-input/
 })
 export class TypeaheadsComponent extends CoreBaseComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('phoneTypeahead', { read: TextInputDirective, static: false }) txtInputDirective: TextInputDirective;
+  @ViewChild('phoneTypeahead', { read: TextInputDirective }) txtInputDirective: TextInputDirective;
 
   code = new TypeaheadsCode();
   public selected: string;

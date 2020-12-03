@@ -11,8 +11,8 @@ import {SimpleSearchPipe} from '../utils/pipes/simple-search.pipe';
 import {PaginationModule} from '../pagination/pagination.module';
 import {DropdownModule} from '../dropdown/dropdown.module';
 import {FormsModule} from '@angular/forms';
-import { TabularContentService } from './tabular-content.service';
-import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+import {TabularContentService} from './tabular-content.service';
+import {ScrollingModule} from "@angular/cdk/scrolling";
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import {ScrollDispatchModule} from '@angular/cdk/scrolling';
     TooltipModule,
     DropdownModule,
     FormsModule,
-    ScrollDispatchModule
+    ScrollingModule
   ],
   providers: [
     TabularSortByService,
@@ -43,7 +43,7 @@ import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 })
 
 export class TabularModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<TabularModule> {
     return {
       ngModule: TabularModule,
       providers: [

@@ -1,6 +1,6 @@
 
-$icons-path: '../node_modules/@hxui/css/static/static/fonts/';
-@import '../node_modules/@hxui/css/static/static/scss/hxui.scss';
+$icons-path: '~@hxui/css/static/static/fonts/';
+@import '~@hxui/css/static/static/scss/hxui.scss';
 
 /* Structural css needed for CDK to work correctly */
 @import   '~@angular/cdk/overlay-prebuilt.css';

@@ -1,14 +1,15 @@
-import {ElementRef, Inject, Injectable, ViewChild} from '@angular/core';
+import { ElementRef, Inject, Injectable, ViewChild, Directive } from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import { PageScrollService } from 'ngx-page-scroll-core';
 
+@Directive()
 @Injectable()
 export class CoreBaseComponent {
 
   @ViewChild('container', { static: true })
   protected container: ElementRef;
-  protected contentsNav = true;
+  public contentsNav = true;
 
   constructor(protected pageScrollService: PageScrollService,
               protected breakpointObserver: BreakpointObserver,

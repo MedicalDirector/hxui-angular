@@ -28,18 +28,18 @@ export class ModalsCode {
     import { Component, OnInit } from '@angular/core';
     import {ModalService} from "@hxui/angular";
     import {CustomModalComponent} from "./custom-modal/custom-modal.component";
-    
+
     @Component({
       selector: 'app-modals',
       templateUrl: './modals.component.html'
     })
     export class ModalsComponent implements OnInit {
-    
+
       constructor(private modalService: ModalService) {
-    
+
       ngOnInit() {
       }
-    
+
       openModal = () => {
         this.modalService.create<CustomModalComponent>(CustomModalComponent, {
           onSuccess: (data) => {
@@ -47,7 +47,7 @@ export class ModalsCode {
           }
         });
       }
-    
+
     }
     `;
 
@@ -55,7 +55,7 @@ export class ModalsCode {
     `
     import { Component, OnInit } from '@angular/core';
     import { Modal} from '@hxui/angular';
-    
+
     @Component({
       selector: 'app-custom-modal',
       template: \`
@@ -77,27 +77,27 @@ export class ModalsCode {
         </div>
       \`
     })
-    
+
     @Modal()
     export class CustomModalComponent implements OnInit {
-    
+
       protected onSuccess: Function;
       protected close: Function;
-    
+
       constructor() {
-    
+
       ngOnInit() {
       }
-    
+
       onCancel = () => {
         this.close();
       }
-    
+
       onOk = () => {
         this.onSuccess('Callback');
         this.close();
       }
-    
+
     }
     `;
 
@@ -105,8 +105,7 @@ export class ModalsCode {
     `
     @NgModule({
       ...
-      declarations: [CustomModalComponent],
-      entryComponents: [CustomModalComponent]
+      declarations: [CustomModalComponent]
     })
     `;
 }

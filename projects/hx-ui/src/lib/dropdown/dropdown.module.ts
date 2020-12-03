@@ -21,7 +21,7 @@ import {DropdownItemDirective} from './dropdown-item.directive';
   ]
 })
 export class DropdownModule {
-  public static forRoot(config?: any): ModuleWithProviders {
+  public static forRoot(config?: any): ModuleWithProviders<DropdownModule> {
     return {
       ngModule: DropdownModule, providers: [
         {provide: DropdownConfig, useValue: config ? config : {autoClose: true}}

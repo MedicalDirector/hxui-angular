@@ -1,6 +1,13 @@
 /*
  * Public API Surface of hx-ui
  */
+
+export * from './lib/accordion/accordion.body';
+export * from './lib/accordion/accordion.component';
+export * from './lib/accordion/accordion.container.component';
+export * from './lib/accordion/accordion.header.component';
+export * from './lib/accordion/accordion.module';
+
 export * from './lib/inspector/inspector.module';
 export * from './lib/inspector/inspector.service';
 export * from './lib/inspector/inspector-overlay.ref';
@@ -52,11 +59,19 @@ export * from './lib/datepicker/datepicker-form.component';
 export * from './lib/datepicker/datepicker.module';
 export * from './lib/datepicker/datepicker.config'
 
+export * from './lib/date-range-picker/interval-option-model';
+export * from './lib/date-range-picker/date-range-picker.module';
+export * from './lib/date-range-picker/date-range-picker.config';
+export * from './lib/date-range-picker/date-range-picker.component';
+export * from './lib/date-range-picker/date-range-picker-interval/date-range-picker-interval.component';
+export * from './lib/date-range-picker/date-range-picker-custom/date-range-picker-custom.component';
+
 export * from './lib/dropdown/dropdown.config';
 export * from './lib/dropdown/dropdown.directive';
 export * from './lib/dropdown/dropdown.module';
 export * from './lib/dropdown/dropdown-menu.directive';
 export * from './lib/dropdown/dropdown-toggle.directive';
+export * from './lib/dropdown/dropdown-item.directive';
 
 export * from './lib/empty-state/empty-state.component';
 export * from './lib/empty-state/empty-state.config';

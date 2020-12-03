@@ -20,9 +20,9 @@ import {
   styleUrls: ['./line-clamp.component.scss'],
 })
 export class LineClampComponent implements AfterContentInit {
-  @ContentChild('content', { static: false }) content: ElementRef;
+  @ContentChild('content') content: ElementRef;
 
-  @ViewChild('box', { static: false }) box: ElementRef;
+  @ViewChild('box') box: ElementRef;
 
   @Input() row = 1;
   @Input() toggleCss: string = "hx-button is-link is-small";

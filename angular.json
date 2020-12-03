@@ -11,6 +11,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -35,10 +36,15 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -132,7 +138,6 @@
         }
       }
     },
-
     "HxUi": {
       "root": "projects/hx-ui",
       "sourceRoot": "projects/hx-ui/src",
@@ -140,14 +145,15 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/hx-ui/tsconfig.lib.json",
             "project": "projects/hx-ui/ng-package.json"
           },
           "configurations": {
             "production": {
-              "project": "projects/hx-ui/ng-package.prod.json"
+              "project": "projects/hx-ui/ng-package.prod.json",
+              "tsConfig": "projects/hx-ui/tsconfig.lib.prod.json"
             }
           }
         },
@@ -178,10 +184,13 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "hxa",
-      "styleext": "scss"
+      "style": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "hxa"
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

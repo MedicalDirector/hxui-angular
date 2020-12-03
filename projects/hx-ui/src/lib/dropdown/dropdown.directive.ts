@@ -44,7 +44,7 @@ import { DropdownItemDirective } from './dropdown-item.directive';
   exportAs: 'hx-dropdown, hxa-dropdown'
 })
 export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
-  @ContentChild(DropdownMenuDirective, { static: false }) menu: DropdownMenuDirective;
+  @ContentChild(DropdownMenuDirective) menu: DropdownMenuDirective;
 
   _overlayRef: OverlayRef | null;
   private _portal: TemplatePortal;

@@ -16,9 +16,8 @@ import {TooltipDynamicContentDirective} from './tooltip-dynamic-content.directiv
     PortalModule
   ],
   declarations: [TooltipContentComponent, TooltipDirective, TooltipDynamicContentDirective],
-  exports: [TooltipContentComponent, TooltipDirective, TooltipDynamicContentDirective],
-  entryComponents: [TooltipContentComponent]
+  exports: [TooltipContentComponent, TooltipDirective, TooltipDynamicContentDirective]
 })
 export class TooltipModule {
-  public static forRoot(): ModuleWithProviders {return {ngModule: TooltipModule, providers: [TooltipConfig]}; }
+  public static forRoot(): ModuleWithProviders<TooltipModule> {return {ngModule: TooltipModule, providers: [TooltipConfig]}; }
 }

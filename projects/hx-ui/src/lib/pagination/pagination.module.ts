@@ -11,7 +11,7 @@ import { PaginationComponent } from './pagination.component';
   exports: [PagerComponent, PaginationComponent]
 })
 export class PaginationModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<PaginationModule> {
     return {ngModule: PaginationModule, providers: [PaginationConfig]};
   }
 }

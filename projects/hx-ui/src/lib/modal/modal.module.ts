@@ -5,11 +5,10 @@ import {ModalBackdropComponent} from './modal-backdrop.component';
 
 @NgModule({
     declarations: [ModalPlaceholderComponent, ModalBackdropComponent],
-    exports: [ModalPlaceholderComponent],
-    entryComponents: [ModalBackdropComponent]
+    exports: [ModalPlaceholderComponent]
 })
 export class ModalModule {
-    public static forRoot(): ModuleWithProviders {
+    public static forRoot(): ModuleWithProviders<ModalModule> {
         return {
             ngModule: ModalModule,
             providers: [ModalService]
