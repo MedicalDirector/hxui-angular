@@ -58,6 +58,7 @@ export * from './lib/datepicker/datepicker.component';
 export * from './lib/datepicker/datepicker-form.component';
 export * from './lib/datepicker/datepicker.module';
 export * from './lib/datepicker/datepicker.config'
+export * from './lib/datepicker/datepicker-view-mode-enum';
 
 export * from './lib/date-range-picker/interval-option-model';
 export * from './lib/date-range-picker/date-range-picker.module';
