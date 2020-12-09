@@ -1,12 +1,11 @@
-import { DatepickerIntervalComponent } from './datepicker-interval.component';
-import {
-  Component, OnInit, Output, Input, SimpleChanges, OnChanges,
-  ChangeDetectorRef
-} from '@angular/core';
+import {DatepickerIntervalComponent} from './datepicker-interval.component';
+import {ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from 'rxjs/index';
 import {Visibility} from '../enums';
 import {DatepickerConfig} from './datepicker.config';
 import * as moment_ from 'moment';
+import {DatepickerViewModeEnum} from "./datepicker-view-mode-enum";
+
 const moment = moment_;
 
 @Component({
@@ -16,7 +15,8 @@ const moment = moment_;
 })
 export class DatepickerComponent implements OnInit, OnChanges {
 
-  isShowingYear$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  viewMode$ = new BehaviorSubject<DatepickerViewModeEnum>(DatepickerViewModeEnum.Days);
+  DatepickerViewModeEnum = DatepickerViewModeEnum;
   public OpenDiv: Boolean = true;
   public showCalendar: Boolean = true;
   public tabname1: String;
@@ -44,7 +44,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
   viewDate: Date;
   days: Array<Date> = new Array<Date>();
   week: Array<string> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  month: Array<string> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  months: Array<string> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   years: Array<number> = new Array<number>() ;
   private presentDate: Date;
   private cellCount = 41;
@@ -75,17 +75,17 @@ export class DatepickerComponent implements OnInit, OnChanges {
   }
 
   public next(){
-    if(!this.isShowingYear$.value){
+    if(this.viewMode$.value === DatepickerViewModeEnum.Days){
       this.nextMonth();
-    } else {
+    } else if (this.viewMode$.value === DatepickerViewModeEnum.Years) {
       this.nextYear();
     }
   }
 
   public previous(){
-    if(!this.isShowingYear$.value){
+    if(this.viewMode$.value === DatepickerViewModeEnum.Days){
       this.previousMonth();
-    } else {
+    } else if (this.viewMode$.value === DatepickerViewModeEnum.Years) {
       this.previousYear();
     }
   }
@@ -135,6 +135,19 @@ export class DatepickerComponent implements OnInit, OnChanges {
     return this.validators.map((fn) => fn(newDate)).reduce((prev, next) => prev || next, false);
   }
 
+  isCurrentMonthByIndex(month: number): boolean {
+    return month === this.presentDate.getMonth();
+  }
+
+  public isSelectedMonthByIndex(month: number): boolean {
+    return month === this.viewDate.getMonth();
+  }
+
+  public isInvalidMonthByIndex(month: number): boolean {
+    const newDate = new Date(new Date(this.viewDate.getTime()).setMonth(month));
+    return this.validators.map((fn) => fn(newDate)).reduce((prev, next) => prev || next, false);
+  }
+
   public previousYear(): void {
    this.getYearCollection(this.years[0] - this.yearCellCount);
   }
@@ -151,6 +164,14 @@ export class DatepickerComponent implements OnInit, OnChanges {
     }
   }
 
+  public setMonth(month) {
+    if(!this.isInvalidMonthByIndex(month)){
+      this.viewDate.setMonth(month);
+      this.renderCalendar();
+      this.viewMode$.next(DatepickerViewModeEnum.Days);
+    }
+  }
+
   public setSelectedDate(date: Date): void {
     if (!this.isInvalidDay(date)) {
       this.selectedDate = date;
@@ -160,8 +181,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
   }
 
   toggleYear(){
-    this.isShowingYear$.next(!this.isShowingYear$.value);
-    if (this.isShowingYear$.value) {
+    this.viewMode$.next((this.viewMode$.value === DatepickerViewModeEnum.Years) ? DatepickerViewModeEnum.Months : DatepickerViewModeEnum.Years);
+    if (this.viewMode$.value === DatepickerViewModeEnum.Years) {
       this.getYearCollection();
     }
   }

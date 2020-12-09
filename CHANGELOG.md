@@ -1,4 +1,10 @@
-## [11.0.0-11.0.1](https://www.npmjs.com/package/@hxui/angular/v/11.0.0) (2020-12-03)
+## [11.0.2](https://www.npmjs.com/package/@hxui/angular/v/11.0.2) (2020-12-09)
+
+### Enhancement 
+
+* **Date picker:** Added support for a month view in the date picking workflow
+
+## [11.0.0-11.0.1](https://www.npmjs.com/package/@hxui/angular/v/11.0.1) (2020-12-03)
 
 ### Angular Upgrade (Breaking Change)
 
