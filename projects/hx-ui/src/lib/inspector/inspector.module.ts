@@ -4,6 +4,7 @@ import {InspectorComponent} from './inspector.component';
 import {PortalModule} from '@angular/cdk/portal';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
+import {InspectorOverlayRef} from "./inspector-overlay.ref";
 
 @NgModule({
   imports: [
@@ -17,7 +18,10 @@ export class InspectorModule {
   public static forRoot(): ModuleWithProviders<InspectorModule> {
     return {
       ngModule: InspectorModule,
-      providers: [InspectorService]
+      providers: [
+        InspectorService,
+        InspectorOverlayRef
+      ]
     };
   }
 }
