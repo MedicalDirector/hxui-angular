@@ -1,4 +1,4 @@
-## [11.0.3](https://www.npmjs.com/package/@hxui/angular/v/11.0.3) (2020-12-15)
+## [11.0.3-11.0.4](https://www.npmjs.com/package/@hxui/angular/v/11.0.4) (2020-12-15)
 
 ### Bugfix 
 

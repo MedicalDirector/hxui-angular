@@ -25,8 +25,6 @@ import {DialogService} from './dialog/dialog.service';
 import {LineClampModule} from './line-clamp/line-clamp.module';
 import {InspectorService} from './inspector/inspector.service';
 import {InspectorModule} from './inspector/inspector.module';
-import {DialogOverlayRef} from "./dialog/dialog-overlay.ref";
-import {InspectorOverlayRef} from "./inspector/inspector-overlay.ref";
 
 export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -62,9 +60,7 @@ export class HxUiModule {
         OnlineStatusService,
         DatePipe,
         DialogService,
-        InspectorService,
-        DialogOverlayRef,
-        InspectorOverlayRef
+        InspectorService
       ]
     };
   }

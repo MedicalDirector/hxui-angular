@@ -8,8 +8,7 @@ export class DialogModule {
     return {
       ngModule: DialogModule,
       providers: [
-        DialogService,
-        DialogOverlayRef
+        DialogService
       ]
     };
   }
