@@ -1,3 +1,10 @@
+## [11.0.3](https://www.npmjs.com/package/@hxui/angular/v/11.0.3) (2020-12-15)
+
+### Bugfix 
+
+* **Dialog:** Fixed dependency injection issue with dialog overlay ref
+* **Inspector:** Fixed dependency injection issue with inspector overlay ref
+
 ## [11.0.2](https://www.npmjs.com/package/@hxui/angular/v/11.0.2) (2020-12-09)
 
 ### Enhancement 
