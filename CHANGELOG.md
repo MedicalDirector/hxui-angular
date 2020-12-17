@@ -1,3 +1,10 @@
+## [11.0.5](https://www.npmjs.com/package/@hxui/angular/v/11.0.5) (2020-12-18)
+
+### Enhancement 
+
+* **Online status:** Added additional observable to indicate online status
+
+
 ## [11.0.3-11.0.4](https://www.npmjs.com/package/@hxui/angular/v/11.0.4) (2020-12-15)
 
 ### Bugfix 
