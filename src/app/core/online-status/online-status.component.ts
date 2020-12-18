@@ -24,10 +24,10 @@ export class OnlineStatusComponent extends CoreBaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.onlineStatusService.online.subscribe((data) => {
+    this.onlineStatusService.online$.subscribe((data) => {
       this.isOnline = true;
     });
-    this.onlineStatusService.offline.subscribe((data) => {
+    this.onlineStatusService.offline$.subscribe((data) => {
       this.isOnline = false;
     });
   }

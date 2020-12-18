@@ -9,12 +9,14 @@ interface DialogConfig {
   panelClass?: string;
   hasBackdrop?: boolean;
   backdropClass?: string;
+  backdropClickable?: boolean;
 }
 
 const DEFAULT_CONFIG: DialogConfig = {
   hasBackdrop: true,
   backdropClass: 'dark-backdrop',
-  panelClass: 'hx-modal-panel'
+  panelClass: 'hx-modal-panel',
+  backdropClickable: true
 };
 
 @Injectable()
@@ -51,7 +53,9 @@ export class DialogService {
     Object.assign(containerRef.instance, parameters);
 
     // Subscribe to a stream that emits when the backdrop was clicked
-    overlayRef.backdropClick().subscribe(_ => dialogRef.close());
+    if (dialogConfig.backdropClickable) {
+      overlayRef.backdropClick().subscribe(_ => dialogRef.close());
+    }
 
     // create and manage focus trap
     this.componentNativeElement = containerRef.location.nativeElement;

@@ -1,4 +1,11 @@
-## [11.0.5](https://www.npmjs.com/package/@hxui/angular/v/11.0.5) (2020-12-18)
+[11.0.6](https://www.npmjs.com/package/@hxui/angular/v/11.0.6) (2020-12-18)
+
+### Enhancement 
+
+* **Dialog:** Added config option to disable backdrop click
+
+## 
+[11.0.5](https://www.npmjs.com/package/@hxui/angular/v/11.0.5) (2020-12-18)
 
 ### Enhancement 
 
