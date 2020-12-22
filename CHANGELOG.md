@@ -1,3 +1,9 @@
+[11.0.7](https://www.npmjs.com/package/@hxui/angular/v/11.0.7) (2020-12-22)
+
+### Enhancement 
+
+* **Inspector:** Add config option to remove close button
+
 [11.0.6](https://www.npmjs.com/package/@hxui/angular/v/11.0.6) (2020-12-18)
 
 ### Enhancement 

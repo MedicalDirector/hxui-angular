@@ -116,6 +116,7 @@ export class InspectorComponent implements OnInit {
   sizes = ['small', 'large', 'offsetWidth', 'fullWidth'];
   previousSize = 'small';
   hideClose = false;
+  hasClose = true;
   location = InspectorLocation.Right;
   InspectorLocation = InspectorLocation;
 

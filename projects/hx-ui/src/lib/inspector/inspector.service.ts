@@ -13,12 +13,14 @@ interface InspectorConfig {
   backdropClass?: string;
   size?: InspectorSize;
   location?: InspectorLocation;
+  hasClose?: boolean;
 }
 
 const DEFAULT_CONFIG: InspectorConfig = {
   hasBackdrop: true,
   backdropClass: 'hx-modal-background',
-  panelClass: []
+  panelClass: [],
+  hasClose: true
 };
 
 @Injectable()
