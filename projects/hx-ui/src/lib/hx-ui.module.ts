@@ -25,6 +25,7 @@ import {DialogService} from './dialog/dialog.service';
 import {LineClampModule} from './line-clamp/line-clamp.module';
 import {InspectorService} from './inspector/inspector.service';
 import {InspectorModule} from './inspector/inspector.module';
+import {TimepickerModule} from "./time-picker/timepicker.module";
 
 export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -39,7 +40,7 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     AccordionModule, FiltersModule.forRoot(), LoadersModule,
     TextInputModule, ToastrModule.forRoot(), NgxMaskModule.forRoot(mask_options),
     DialogModule.forRoot(), InspectorModule.forRoot(),
-    LineClampModule
+    LineClampModule, TimepickerModule
   ],
   exports: [
     DatepickerModule, DateRangePickerModule, DropdownModule, ModalModule,
@@ -48,7 +49,7 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     AutoGrowModule, EmptyStateModule, AccordionModule,
     FiltersModule, LoadersModule, TextInputModule, ToastrModule,
     NgxMaskModule, DialogModule, LineClampModule,
-    InspectorModule
+    InspectorModule, TimepickerModule
   ]
 })
 export class HxUiModule {

@@ -16,12 +16,13 @@ export class DatepickersComponent extends CoreBaseComponent { 
 
   public code = new DatepickersCode();
 
+
   basicForm = this.fb.group({
     dayte_basic: [null]
   });
 
   intervalForm = this.fb.group({
-    dayte: [null],
+    dayte: [null]
   });
 
   dateFormat = "yyyy-MM-dd";
