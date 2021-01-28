@@ -1,3 +1,9 @@
+[11.0.8](https://www.npmjs.com/package/@hxui/angular/v/11.0.8) (2020-12-22)
+
+### New component 
+
+* **Timepicker:** Add time picker component
+
 [11.0.7](https://www.npmjs.com/package/@hxui/angular/v/11.0.7) (2020-12-22)
 
 ### Enhancement 
