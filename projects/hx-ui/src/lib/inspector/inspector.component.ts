@@ -53,10 +53,10 @@ import {InspectorLocation} from "./inspector-location.enum";
         width: '37rem'
       })),
       state('large',   style({
-        width: (document.documentElement.clientWidth - 100) + 'px'
+        width: '90vw'
       })),
       state('fullWidth',   style({
-        width: (document.documentElement.clientWidth) + 'px'
+        width: '100vw'
       })),
       state('offsetWidth',   style({
         width: '47rem'
@@ -79,10 +79,10 @@ import {InspectorLocation} from "./inspector-location.enum";
         width: '37rem'
       })),
       state('large',   style({
-        width: (document.documentElement.clientWidth - 100) + 'px'
+        width: '90vw'
       })),
       state('fullWidth',   style({
-        width: (document.documentElement.clientWidth) + 'px'
+        width: '100vw'
       })),
       state('offsetWidth',   style({
         width: '47rem'
