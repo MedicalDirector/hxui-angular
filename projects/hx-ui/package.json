@@ -1,6 +1,6 @@
 {
   "name": "@hxui/angular",
-  "version": "11.0.8",
+  "version": "11.0.9",
   "license": "MIT",
   "dependencies": {
     "tslib": "^2.0.0"

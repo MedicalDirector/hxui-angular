@@ -1,3 +1,9 @@
+[11.0.9](https://www.npmjs.com/package/@hxui/angular/v/11.0.9) (2021-02-15)
+
+### Bugfix
+
+* **Inspector:** Fix for dynamic width and orientation change
+
 [11.0.8](https://www.npmjs.com/package/@hxui/angular/v/11.0.8) (2020-12-22)
 
 ### New component 
