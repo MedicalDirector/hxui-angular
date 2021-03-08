@@ -1,3 +1,9 @@
+## [8.2.19](https://www.npmjs.com/package/@hxui/angular/v/8.2.19) (2021-03-08)
+
+### Bugfix
+
+* **Filter group:** Added disabled state for collapsed mode
+
 ## [8.2.18](https://www.npmjs.com/package/@hxui/angular/v/8.2.18) (2020-10-01)
 
 ### Enhancement
