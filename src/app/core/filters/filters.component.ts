@@ -26,6 +26,7 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
       id: 'workareaFilter',
       type: FilterType.SingleSelect,
       label: 'Work area',
+      disabled: true,
       options: [
         {
           label: 'Dental',

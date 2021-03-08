@@ -1,4 +1,9 @@
 .collapsedFilter__menu{
+
+  a.is-disabled{
+    opacity: 0.3;
+  }
+
   &.panes{
     width:15rem;
     overflow:hidden;

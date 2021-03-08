@@ -132,7 +132,6 @@
         }
       }
     },
-
     "HxUi": {
       "root": "projects/hx-ui",
       "sourceRoot": "projects/hx-ui/src",
@@ -183,5 +182,8 @@
     "@schematics/angular:directive": {
       "prefix": "hxa"
     }
+  },
+  "cli": {
+    "analytics": "0cba718c-598c-4dbf-93e7-a15b54cb755b"
   }
 }
