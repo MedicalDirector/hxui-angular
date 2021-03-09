@@ -30,14 +30,14 @@ export class NgSelectCode {
     <div class="hx-card-content">
 
       <ng-select [items]="people$ | async"
-                 bindLabel="name"
-                 autofocus
-                 bindValue="id"
-                 placeholder="Select people"
-                 [(ngModel)]="selectedPersonId">
-      </ng-select>
+                       bindLabel="name"
+                       autofocus
+                       bindValue="id"
+                       placeholder="Select people"
+                       formControlName="selectedPersonId">
+            </ng-select>
 
-      <br/>Selected: {{selectedPersonId}}
+      <br/>Selected: {{ form.get('selectedPersonId').value }}
     </div>
   </div>
   `;
@@ -55,28 +55,37 @@ export class NgSelectCode {
   })
   export class NgSelectComponent implements OnInit {
 
-    people$: Observable<any[]>;
-    selectedPersonId = '5a15b13c36e7a7f00cf0d7cb';
+   people$: Observable<any[]>;
+  peopleInput$ = new Subject<string>();
 
+  form: FormGroup
 
-    constructor(
-      private dataService: DataService
-    ) {
+  constructor(
+    private dataService: DataService,
+    private fb: FormBuilder
+  ) {
 
-    }
+  }
 
-    ngOnInit() {
-      this.people$ = this.dataService.getPeople();
-    }
+  ngOnInit() {
+    this.form = this.fb.group({
+      selectedPeople:  new FormControl([{ name: 'Karyn Wright' }], Validators.required),
+      selectedPersonId:  new FormControl('5a15b13c36e7a7f00cf0d7cb', Validators.required)
+    });
 
-    clearModel() {
-      this.selectedPeople = [];
-    }
+    this.people$ = this.dataService.getPeople();
+  }
 
-    changeModel() {
-      this.selectedPeople = [{ name: 'New person' }];
-    }
+  clearModel() {
+    this.form.get('selectedPeople').patchValue([]);
+  }
 
+  changeModel() {
+    this.form.get('selectedPeople').patchValue([{ name: 'New person' }]);
+  }
+
+  onKeyup(val) {
+    console.log(val);
   }
   `;
 
@@ -84,20 +93,20 @@ export class NgSelectCode {
     `
   <div class="hx-card not-scrollable">
           <div class="hx-card-content">
-            <ng-select
+           <ng-select
               [items]="people$ | async"
               [multiple]="true"
               [closeOnSelect]="false"
               [searchable]="false"
               bindLabel="name"
               placeholder="Select people"
-              [(ngModel)]="selectedPeople">
+             formControlName="selectedPeople">
             </ng-select>
 
             <div class="mt-3">
-              Selected value: <br/>
+             Selected value: <br/>
               <ul>
-                <li *ngFor="let item of selectedPeople">{{item.name}}</li>
+                <li *ngFor="let item of form.get('selectedPeople').value">{{item.name}}</li>
               </ul>
               <button (click)="clearModel()" class="hx-button mr-2">Clear model</button>
               <button (click)="changeModel()" class="hx-button is-primary">Change model</button>
@@ -120,27 +129,37 @@ export class NgSelectCode {
   export class NgSelectComponent implements OnInit {
 
     people$: Observable<any[]>;
-    selectedPeople = [{ name: 'Karyn Wright' }];
+    peopleInput$ = new Subject<string>();
 
+    form: FormGroup
 
     constructor(
-      private dataService: DataService
+      private dataService: DataService,
+      private fb: FormBuilder
     ) {
 
     }
 
     ngOnInit() {
+      this.form = this.fb.group({
+        selectedPeople:  new FormControl([{ name: 'Karyn Wright' }], Validators.required),
+        selectedPersonId:  new FormControl('5a15b13c36e7a7f00cf0d7cb', Validators.required)
+      });
+
       this.people$ = this.dataService.getPeople();
     }
 
     clearModel() {
-      this.selectedPeople = [];
+      this.form.get('selectedPeople').patchValue([]);
     }
 
     changeModel() {
-      this.selectedPeople = [{ name: 'New person' }];
+      this.form.get('selectedPeople').patchValue([{ name: 'New person' }]);
     }
 
+    onKeyup(val) {
+      console.log(val);
+    }
   }
 
   `;

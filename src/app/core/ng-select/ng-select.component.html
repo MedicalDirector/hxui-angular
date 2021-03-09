@@ -1,4 +1,4 @@
-<section class="hx-section scrollable-y" #container>
+<section class="hx-section scrollable-y" #container [formGroup]="form">
   <div class="hx-section is-comfortable">
 
     <h1 class="hx-title">Ng-Select</h1>
@@ -48,13 +48,13 @@
               [searchable]="false"
               bindLabel="name"
               placeholder="Select people"
-              [(ngModel)]="selectedPeople">
+             formControlName="selectedPeople">
             </ng-select>
 
             <div class="mt-3">
               Selected value: <br/>
               <ul>
-                <li *ngFor="let item of selectedPeople">{{item.name}}</li>
+                <li *ngFor="let item of form.get('selectedPeople').value">{{item.name}}</li>
               </ul>
               <button (click)="clearModel()" class="hx-button mr-2">Clear model</button>
               <button (click)="changeModel()" class="hx-button is-primary">Change model</button>
@@ -69,7 +69,7 @@
 
     <br>
 
-    <h5 id="multiselectexample">Code</h5>
+    <h5 id="multiselectexamplecode">Code</h5>
 
     <div class="hx-columns">
       <div class="hx-column">
@@ -114,10 +114,10 @@
                        autofocus
                        bindValue="id"
                        placeholder="Select people"
-                       [(ngModel)]="selectedPersonId">
+                       formControlName="selectedPersonId">
             </ng-select>
 
-            <br/>Selected: {{selectedPersonId}}
+            <br/>Selected: {{ form.get('selectedPersonId').value }}
           </div>
         </div>
 
@@ -172,8 +172,8 @@
                        autofocus
                        bindValue="id"
                        placeholder="Select people"
-                       (typed)="onKeyup"
-                       [(ngModel)]="selectedPersonId">
+                       (keyup)="onKeyup"
+                       formControlName="selectedPersonId">
 
               <ng-template ng-label-tmp let-item="item">
                 <img height="15" width="15" [src]="item.picture"/>
@@ -185,7 +185,7 @@
               </ng-template>
             </ng-select>
 
-            <br/>Selected: {{selectedPersonId}}
+            <br/>Selected: {{ form.get('selectedPersonId').value }}
           </div>
         </div>
 

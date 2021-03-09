@@ -6,6 +6,7 @@ import {DOCUMENT} from '@angular/common';
 import {NgSelectCode} from './ng-select.code';
 import {Observable, Subject} from 'rxjs/index';
 import {DataService} from './data.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-ng-select',
@@ -16,30 +17,35 @@ export class NgSelectComponent extends CoreBaseComponent implements OnInit {
 
   public code = new NgSelectCode();
   people$: Observable<any[]>;
-  selectedPeople = [{ name: 'Karyn Wright' }];
-  selectedPersonId = '5a15b13c36e7a7f00cf0d7cb';
   peopleInput$ = new Subject<string>();
 
+  form: FormGroup
 
   constructor(
     protected pageScrollService: PageScrollService,
     protected breakpointObserver: BreakpointObserver,
     @Inject(DOCUMENT) protected document: any,
-    private dataService: DataService
+    private dataService: DataService,
+    private fb: FormBuilder
   ) {
     super(pageScrollService, breakpointObserver, document);
   }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      selectedPeople:  new FormControl([{ name: 'Karyn Wright' }], Validators.required),
+      selectedPersonId:  new FormControl('5a15b13c36e7a7f00cf0d7cb', Validators.required)
+    });
+
     this.people$ = this.dataService.getPeople();
   }
 
   clearModel() {
-    this.selectedPeople = [];
+    this.form.get('selectedPeople').patchValue([]);
   }
 
   changeModel() {
-    this.selectedPeople = [{ name: 'New person' }];
+    this.form.get('selectedPeople').patchValue([{ name: 'New person' }]);
   }
 
   onKeyup(val) {
