@@ -69,7 +69,8 @@ $ng-select-danger: #b81e4f;
     }
   }
 
-  &.is-danger {
+  &.is-danger,
+    &.ng-invalid {
     .ng-select-container {
       &:after {
         border-color: $ng-select-danger;
