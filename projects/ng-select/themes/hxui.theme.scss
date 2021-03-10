@@ -70,7 +70,7 @@ $ng-select-danger: #b81e4f;
   }
 
   &.is-danger,
-    &.ng-invalid {
+    &.ng-invalid:not(.ng-pristine) {
     .ng-select-container {
       &:after {
         border-color: $ng-select-danger;
