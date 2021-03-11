@@ -169,9 +169,7 @@ export class FiltersModel implements IFiltersConfig {
   }
 
   getSelectedLabel() {
-    if (this.selected.length === (this.options.length - 1)) {
-      return 'All';
-    } else if (this.selected.length === 1) {
+    if (this.selected.length === 1) {
       return this.selected[0].label;
     } else if (this.selected.length) {
      return this.selected.length + ' selected';

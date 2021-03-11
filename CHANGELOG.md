@@ -1,3 +1,9 @@
+[11.0.10](https://www.npmjs.com/package/@hxui/angular/v/11.0.10) (2021-03-11)
+
+### Bugfix
+
+* **Filters:** Fix issue with 'ALL' label when single filter only has 2 or less options
+
 [11.0.9](https://www.npmjs.com/package/@hxui/angular/v/11.0.9) (2021-02-15)
 
 ### Bugfix
