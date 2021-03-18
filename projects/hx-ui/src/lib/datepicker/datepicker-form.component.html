@@ -1,6 +1,7 @@
 <div class="hx-input-group hxa-datepicker-form">
   <i class="{{icon}}" *ngIf="iconPlacement === 'left'" (click)="onFocused($event)"></i>
-  <div class="hx-input-control hxa-datepicker-control" [ngClass]="{'is-danger': !isValid && datePickerForm.touched}">
+  <div class="hx-input-control hxa-datepicker-control"
+       [ngClass]="{'is-danger': !isValid && datePickerForm.touched, 'is-help-visible': helpTextVisible, 'is-warning': isWarning && isValid && datePickerForm.touched }">
     <input
       class="hx-input" type="text"
            #datePickerForm="ngModel"

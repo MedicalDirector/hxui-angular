@@ -71,6 +71,12 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   helpText = 'Please select a date';
 
   @Input()
+  helpTextVisible = false;
+
+  @Input()
+  isWarning = false;
+
+  @Input()
   icon = 'hx-icon icon-calendar-outline';
 
   @Input()

@@ -1,3 +1,10 @@
+[11.0.11](https://www.npmjs.com/package/@hxui/angular/v/11.0.11) (2021-03-18)
+
+### Enhancement
+
+* **Date picker:** added help text visible and is warning inputs
+
+
 [11.0.10](https://www.npmjs.com/package/@hxui/angular/v/11.0.10) (2021-03-11)
 
 ### Bugfix
