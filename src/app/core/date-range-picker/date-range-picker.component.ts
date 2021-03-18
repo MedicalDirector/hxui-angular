@@ -4,7 +4,8 @@ import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/common';
 import { DateRangePickersCode } from './date-range-picker.code';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import { DateRange } from '../../../../projects/hx-ui/src/lib/date-range-picker/date-range-picker.component';
+import {DateRangeInterface} from "../../../../projects/hx-ui/src/lib/date-range-picker/date-range.interface";
+import {DisplayModeEnum} from "../../../../projects/hx-ui/src/lib/date-range-picker/display-mode.enum";
 
 @Component({
   selector: 'app-date-range-picker',
@@ -14,7 +15,8 @@ import { DateRange } from '../../../../projects/hx-ui/src/lib/date-range-picker/
 export class DateRangePickerComponent extends CoreBaseComponent {
 
   public code = new DateRangePickersCode();
-  public selectedDateRange: DateRange = {fromDate:new Date(),toDate:new Date()};
+  public selectedDateRange: DateRangeInterface = {fromDate:new Date(),toDate:new Date()};
+  DisplayModeEnum = DisplayModeEnum;
 
   defaultDateRange = {fromDate:new Date('01/06/2018'), toDate: new Date('02/06/2018')};
 
@@ -42,7 +44,7 @@ export class DateRangePickerComponent extends CoreBaseComponent {
     super(pageScrollService, breakpointObserver, document);
   }
 
-  getSelectedDateRange(dateRange: DateRange){
+  getSelectedDateRange(dateRange: DateRangeInterface){
       this.selectedDateRange = dateRange;
   }
 }

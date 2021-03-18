@@ -4,8 +4,8 @@ import {FiltersModel} from './filters.model';
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {DropdownDirective} from '../dropdown/dropdown.directive';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import { DateRange, DateRangePickerComponent } from '../date-range-picker/date-range-picker.component';
 import { DatePipe } from '@angular/common';
+import {DateRangeInterface} from "../date-range-picker/date-range.interface";
 
 type PaneType = 'left' | 'right';
 
@@ -41,7 +41,7 @@ export class FiltersCollapsedComponent implements OnInit {
   ngOnInit() {
   }
 
-  getIntervalOptions(options: IFilterOption[]) { 
+  getIntervalOptions(options: IFilterOption[]) {
     let intervalOption: string[] = [];
     if(options){
     for(let i=0; i<options.length; i++){
@@ -49,7 +49,7 @@ export class FiltersCollapsedComponent implements OnInit {
     }
   }
   return intervalOption;
-} 
+}
 
   clearSearch(filter: FiltersModel) {
     filter.value = '';
@@ -90,7 +90,7 @@ export class FiltersCollapsedComponent implements OnInit {
     return count;
   }
 
-  onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRange){
+  onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRangeInterface){
     this.onDateRangePickerFilter.emit({filter: filter,dateRange: dateRange});
   }
 

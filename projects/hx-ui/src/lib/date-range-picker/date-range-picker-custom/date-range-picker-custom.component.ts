@@ -14,9 +14,8 @@ import {
 import {
   DatePipe
 } from '@angular/common';
-import {
-  DateSelectionType
-} from '../date-range-picker.component';
+import {DateSelectionTypeEnum} from "../date-selection-type.enum";
+
 
 @Component({
   selector: 'hxa-date-range-picker-custom',
@@ -33,7 +32,7 @@ export class DateRangePickerCustomComponent implements OnInit, DoCheck {
 
   constructor(private ref: ChangeDetectorRef, private datePipe: DatePipe) {}
 
-  DateSelectionType = DateSelectionType;
+  DateSelectionType = DateSelectionTypeEnum;
   newFromDate: Date;
   newToDate: Date;
 

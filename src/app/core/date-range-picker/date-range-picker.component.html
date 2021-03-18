@@ -18,7 +18,7 @@
 
     <div class="hx-columns">
       <div class="hx-column">
-        <hxa-date-range-picker [displayMode]=2 (onDateRangeSelected)="getSelectedDateRange($event)">
+        <hxa-date-range-picker  [displayMode]="DisplayModeEnum.showCustomOnly"  (onDateRangeSelected)="getSelectedDateRange($event)">
         </hxa-date-range-picker>
         <div>
           <br><span>Emitted Date Range object:</span>
@@ -50,9 +50,9 @@
 
     <div class="hx-columns">
       <div class="hx-column">
-        <hxa-date-range-picker [displayMode]=3 
+        <hxa-date-range-picker [displayMode]="DisplayModeEnum.showIntervalOnly"
         [intervalOptions]="intervalOptions"
-        (onDateRangeSelected)="getSelectedDateRange($event)" 
+        (onDateRangeSelected)="getSelectedDateRange($event)"
         [defaultDateRange]="defaultDateRange">
         </hxa-date-range-picker>
         <div>
@@ -86,7 +86,9 @@
 
     <div class="hx-columns">
       <div class="hx-column">
-        <hxa-date-range-picker [intervalOptions]="intervalOptions" [displayMode]=1 [dateFormat]="dateFormat" 
+        <hxa-date-range-picker [intervalOptions]="intervalOptions"
+                               [displayMode]="DisplayModeEnum.showTab"
+                               [dateFormat]="dateFormat"
         (onDateRangeSelected)="getSelectedDateRange($event)">
         </hxa-date-range-picker>
         <div>

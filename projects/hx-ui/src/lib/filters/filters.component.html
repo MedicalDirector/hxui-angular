@@ -3,8 +3,8 @@
   <i  class="hx-icon icon-filter-outline mx-1"></i>
 
   <!-- collapsed filters -->
-  <hxa-filters-collapsed 
-  (onFilter)="onCollapsedFilter($event)" 
+  <hxa-filters-collapsed
+  (onFilter)="onCollapsedFilter($event)"
   (onSearchFilter)="onCollapsedSearch($event)"
   (onDateRangePickerFilter)="onCollapsedDateRangePicker($event)"
   [data]="data" *ngIf="collapsed"></hxa-filters-collapsed>
@@ -47,12 +47,12 @@
 
     <!-- date range picker -->
     <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.DateRange">
-        <hxa-date-range-picker  
-        [dateFormat]="filter.dateRangePicker_displayDateFormat" 
-        [displayMode]="filter.dateRangePicker_displayMode" 
+        <hxa-date-range-picker
+        [dateFormat]="filter.dateRangePickerDisplayDateFormat"
+        [displayMode]="filter.dateRangePickerDisplayMode"
         [intervalOptions]="getIntervalOptions(filter.options)"
-        (onDateRangeSelected)="onDateRangeFilterChange(filter,$event)"  
-        [defaultDateRange]="filter.sourceValue" 
+        (onDateRangeSelected)="onDateRangeFilterChange(filter,$event)"
+        [defaultDateRange]="filter.sourceValue"
         [id]="i"
         #dateRangePicker>
       </hxa-date-range-picker>

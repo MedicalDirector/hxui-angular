@@ -1,4 +1,5 @@
 import {FilterType} from './filters-type.enum';
+import {DisplayModeEnum} from "../date-range-picker/display-mode.enum";
 
 export interface IFilterOption {
   label: string;
@@ -52,9 +53,8 @@ export interface IFiltersConfig {
   defaultIndex?: number;
   /**
    * Display mode for type date range picker
-   * 1:both tabs 2:custom tab only 3:interval tab only.
    */
-  dateRangePicker_displayMode?: number;
+  dateRangePickerDisplayMode?: DisplayModeEnum;
 
   /**
    * Display date format for type date range picker

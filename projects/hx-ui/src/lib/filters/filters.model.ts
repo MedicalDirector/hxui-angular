@@ -1,6 +1,6 @@
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {FilterType} from './filters-type.enum';
-import { DateRange } from '../date-range-picker/date-range-picker.component';
+import {DisplayModeEnum} from "../date-range-picker/display-mode.enum";
 
 export class FiltersModel implements IFiltersConfig {
 
@@ -15,8 +15,8 @@ export class FiltersModel implements IFiltersConfig {
   selected: IFilterOption;
   defaultIndex = 0;
   charLimit = 2;
-  dateRangePicker_displayMode?:number = 1;
-  dateRangePicker_displayDateFormat?: string = 'dd/MM/yyyy';
+  dateRangePickerDisplayMode?: DisplayModeEnum = DisplayModeEnum.showCustomOnly;
+  dateRangePickerDisplayDateFormat?: string = 'dd/MM/yyyy';
   width: number;
 
   constructor(data?: IFiltersConfig) {

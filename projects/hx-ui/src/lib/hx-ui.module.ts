@@ -32,7 +32,7 @@ import { DatePipe } from '@angular/common';
     TextInputModule, ToastrModule.forRoot()
   ],
   exports: [
-    DatepickerModule,DateRangePickerModule, DropdownModule, ModalModule,
+    DatepickerModule, DateRangePickerModule, DropdownModule, ModalModule,
     PaginationModule, TabsModule, TooltipModule,
     TypeaheadModule, TabularModule, SelectizeModule,
     AutoGrowModule, EmptyStateModule, AccordionModule,

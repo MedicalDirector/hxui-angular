@@ -25,15 +25,15 @@ export class FiltersCode {
   import {Component, Inject, OnInit, ViewChild} from '@angular/core';
   import {Subscription} from 'rxjs/index';
   import {IFiltersConfig, FilterType, FiltersComponent as HxFiltersComponent, FiltersModel } from '@hxui/angular';
-  
+
   @Component({
     selector: 'app-filters',
     templateUrl: './filters.component.html'
   })
   export class FiltersComponent implements OnInit, OnDestroy  {
-  
+
     @ViewChild('filterComp') filtersComponent: HxFiltersComponent;
-  
+
     collapsed = false;
     filters: IFiltersConfig[] = [
       {
@@ -190,8 +190,8 @@ export class FiltersCode {
         id: 'dateRangeFilter',
         type: FilterType.DateRange,
         label: 'Date Range',
-        dateRangePicker_displayMode: 1,
-        dateRangePicker_displayDateFormat: 'yyyy-MM-dd',
+        dateRangePickerDisplayMode: 1,
+        dateRangePickerDisplayDateFormat: 'yyyy-MM-dd',
         options: [
           {
             label: 'Yesterday',
@@ -254,24 +254,24 @@ export class FiltersCode {
       }
     ];
     onFilterChangeEvent$ = new Subscription();
-  
+
     constructor() {}
-    
+
    ngOnInit() {
       this.onFilterChangeEvent$ = this.filtersComponent.onFilterOptionChanged$
         .subscribe((filter: FiltersModel) => {
           console.log(filter);
       });
     }
-    
+
     ngOnDestroy() {
       this.onFilterChangeEvent$.unsubscribe();
     }
-  
+
     resetFilters() {
       this.filtersComponent.resetFilters();
     }
-  
+
     toggleCollapsed() {
       this.collapsed = !this.collapsed;
     }
@@ -280,19 +280,19 @@ export class FiltersCode {
     getSearchWidth(label: string) {
       const min = 8;
       const max = 12;
-  
+
       // based on root html font size
       const charwidth = .42;
-  
+
       // base search filter
       const filter = 3.9;
-  
+
       const calc = label.length * charwidth + filter;
-  
+
       if(min <= calc && calc <= max) {
         return calc;
       }
-  
+
       return min > calc ? min : max;
     }
   }

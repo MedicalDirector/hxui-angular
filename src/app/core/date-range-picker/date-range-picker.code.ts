@@ -3,66 +3,68 @@ export class DateRangePickersCode {
     usage =
       `
       import { DateRangePickerModule } from "@hxui/angular";
-  
+
       @NgModule({
         imports: [DateRangePickerModule.forRoot(), ...]
       })
       export class AppModule() {}
       `;
-  
+
     exampleTemplateforcustomtab =
       `
-      <hxa-date-range-picker 
-      [displayMode]=2 
+      <hxa-date-range-picker
+      [displayMode]="DisplayModeEnum.showCustomOnly"
       (onDateRangeSelected)="getSelectedDateRange($event)">
       </hxa-date-range-picker>
       `;
-  
+
     exampleTypescriptforcustomtab =
       `
       import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
       import { CoreBaseComponent } from '../core-base.component';
-  
+
       @Component({
         selector: 'app-date-range-picker',
         templateUrl: './date-range-picker.component.html'
       })
       export class DateRangePickerComponent extends CoreBaseComponent {
-      
+
         selectedDateRange: DateRange = {fromDate:new Date(), toDate:new Date()};
-      
-        constructor() { 
-        }    
+        DisplayModeEnum = DisplayModeEnum;
+
+        constructor() {
+        }
       }
 
-      getSelectedDateRange(dateRange: DateRange){
+      getSelectedDateRange(dateRange: DateRangeInterface){
         this.selectedDateRange = dateRange;
     }
-  
+
       `;
 
       exampleTemplateforintervaltab =
       `
-      <hxa-date-range-picker 
-      [displayMode]=3 
-      [intervalOptions]="intervalOptions" 
+      <hxa-date-range-picker
+      [displayMode]="DisplayModeEnum.showIntervalOnly"
+      [intervalOptions]="intervalOptions"
       [defaultDateRange]="defaultDateRange"
       (onDateRangeSelected)="getSelectedDateRange($event)">
       </hxa-date-range-picker>
       `;
-  
+
     exampleTypescriptforintervaltab =
       `
       import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
       import { CoreBaseComponent } from '../core-base.component';
-  
+
       @Component({
         selector: 'app-date-range-picker',
         templateUrl: './date-range-picker.component.html'
       })
       export class DateRangePickerComponent extends CoreBaseComponent {
-      
+
         selectedDateRange: DateRange = {fromDate:new Date(),toDate:new Date()};
+        DisplayModeEnum = DisplayModeEnum;
 
         intervalOptions: string[] = [
           'Today',
@@ -77,8 +79,8 @@ export class DateRangePickersCode {
           'Last Fortnight',
           'Next Fortnight'
         ];
-      
-        constructor() { }    
+
+        constructor() { }
       }
 
       defaultDateRange = {fromDate:new Date('01/06/2018'), toDate: new Date('02/06/2018')};
@@ -86,31 +88,32 @@ export class DateRangePickersCode {
       getSelectedDateRange(dateRange: DateRange){
         this.selectedDateRange = dateRange;
     }
-  
+
       `;
-  
+
       exampleTemplatefortabs =
       `
-      <hxa-date-range-picker 
-      [intervalOptions]="intervalOptions" 
-      [displayMode]=1 
-      [dateFormat]="dateFormat" 
+      <hxa-date-range-picker
+      [intervalOptions]="intervalOptions"
+      [displayMode]="DisplayModeEnum.showTab"
+      [dateFormat]="dateFormat"
       (onDateRangeSelected)="getSelectedDateRange($event)">
       </hxa-date-range-picker>
       `;
-  
+
       exampleTypescriptfortabs =
       `
       import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
       import { CoreBaseComponent } from '../core-base.component';
-  
+
       @Component({
         selector: 'app-date-range-picker',
         templateUrl: './date-range-picker.component.html'
       })
       export class DateRangePickerComponent extends CoreBaseComponent {
-      
+
         selectedDateRange: DateRange = {fromDate:new Date(),toDate:new Date()};
+        DisplayModeEnum = DisplayModeEnum;
 
         intervalOptions: string[] = [
           'Today',
@@ -127,8 +130,8 @@ export class DateRangePickersCode {
         ];
 
         dateFormat = "yyyy-MM-dd";
-      
-        constructor() { }    
+
+        constructor() { }
       }
 
       getSelectedDateRange(dateRange: DateRange){

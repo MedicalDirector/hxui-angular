@@ -6,9 +6,8 @@ import * as _ from 'lodash';
 import {BehaviorSubject, from, Observable, pipe, Subject, Subscription} from 'rxjs/index';
 import {FiltersConfig} from './filters.config';
 import {debounceTime} from 'rxjs/internal/operators';
-import { DateRange,DateRangePickerComponent } from '../date-range-picker/date-range-picker.component';
 import { DatePipe } from '@angular/common';
-import { FiltersCollapsedComponent } from './filters-collapsed.component';
+import {DateRangeInterface} from "../date-range-picker/date-range.interface";
 
 
 @Component({
@@ -76,7 +75,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     }
   }
 
-   getIntervalOptions(options: IFilterOption[]) { 
+   getIntervalOptions(options: IFilterOption[]) {
     let intervalOption: string[] = [];
     if(options){
     for(let i=0; i<options.length; i++){
@@ -84,7 +83,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     }
   }
   return intervalOption;
-} 
+}
 
   resetFilters(silent: boolean = false) {
     for (const filter of this.data) {
@@ -113,7 +112,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     filter.value = '';
     filter.sourceValue = undefined;
     if(!this._collapsed)
-     {      
+     {
         for(let i = 0 ; i < this.dateRangePickers.toArray().length; i++){
           this.dateRangePickers.toArray()[i].resetDateRange();
         }
@@ -141,8 +140,8 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   /**
    * Called when selection is made in the date range filter type
    */
-  onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRange){
-    let dateRangeValue = this.datePipe.transform(dateRange.fromDate,filter.dateRangePicker_displayDateFormat) + ' - '+ this.datePipe.transform(dateRange.toDate,filter.dateRangePicker_displayDateFormat);
+  onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRangeInterface){
+    let dateRangeValue = this.datePipe.transform(dateRange.fromDate,filter.dateRangePickerDisplayDateFormat) + ' - '+ this.datePipe.transform(dateRange.toDate,filter.dateRangePickerDisplayDateFormat);
     filter.value = dateRangeValue;
     filter.sourceValue = dateRange;
     this.searchFilter$.next(filter);

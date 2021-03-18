@@ -21,24 +21,9 @@ import {
 import {
   fullIntervalList
 } from './interval-option-model';
-import { identifierModuleUrl } from '@angular/compiler';
-
-export enum DisplayMode {
-  showTab = 1,
-    showCustomOnly,
-    showIntervalOnly
-}
-
-export interface DateRange {
-  fromDate: Date;
-  toDate: Date;
-}
-
-//expanded when more tabs be added
-export enum DateSelectionType {
-  interval,
-  custom
-}
+import {DisplayModeEnum} from "./display-mode.enum";
+import {DateRangeInterface} from "./date-range.interface";
+import {DateSelectionTypeEnum} from "./date-selection-type.enum";
 
 @Component({
   selector: 'hxa-date-range-picker',
@@ -54,19 +39,19 @@ export class DateRangePickerComponent implements OnInit {
   @Input() disabled: boolean = false;
   @Input() autoClose: boolean = true;
   @Input() placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
-  @Input() displayMode: DisplayMode = DisplayMode.showTab;
+  @Input() displayMode: DisplayModeEnum = DisplayModeEnum.showTab;
   @Input() dateFormat: string = 'dd/MM/yyyy';
-  @Input() defaultDateRange: DateRange = {fromDate:new Date(), toDate:new Date()};
+  @Input() defaultDateRange: DateRangeInterface = {fromDate:new Date(), toDate:new Date()};
   @Input() id: number;
   @Input() showCaretDown: boolean = true;
 
-  @Output() onDateRangeSelected = new EventEmitter < DateRange > ();
+  @Output() onDateRangeSelected = new EventEmitter < DateRangeInterface > ();
 
   constructor(private datePipe: DatePipe, private dateRangePickerConfig: DateRangePickerConfig) {}
 
   // import to DateSElectionType into the instance of this class
-  DateSelectionType = DateSelectionType;
-  currentTab: DateSelectionType = DateSelectionType.interval
+  DateSelectionType = DateSelectionTypeEnum;
+  currentTab: DateSelectionTypeEnum = DateSelectionTypeEnum.interval
   fromDate: Date;
   toDate: Date;
   _displayRange: string;
@@ -81,9 +66,9 @@ export class DateRangePickerComponent implements OnInit {
 
   ngOnInit() {
     this.setInitialDateRange();
-    this.showTab = this.displayMode === DisplayMode.showTab ? true : false;
-    this.showIntervalOnly = this.displayMode === DisplayMode.showIntervalOnly ? true : false;
-    this.showCustomOnly = this.displayMode === DisplayMode.showCustomOnly ? true : false;
+    this.showTab = this.displayMode === DisplayModeEnum.showTab;
+    this.showIntervalOnly = this.displayMode === DisplayModeEnum.showIntervalOnly;
+    this.showCustomOnly = this.displayMode === DisplayModeEnum.showCustomOnly;
     this.generateIntervalOptionItems(this.intervalOptions || []);
   }
 
@@ -112,7 +97,7 @@ export class DateRangePickerComponent implements OnInit {
   }
 
   toggle(){
-    this.dropdown.toggle(); 
+    this.dropdown.toggle();
   }
 
   onCustomDateSelection(newCustomDate: Date[]) {
@@ -120,11 +105,11 @@ export class DateRangePickerComponent implements OnInit {
       this.fromDate = newCustomDate[0];
       this.toDate = newCustomDate[1];
       this._displayRange = this.createDateRange();
-      this.onDateRangeSelected.emit( < DateRange > {
+      this.onDateRangeSelected.emit( < DateRangeInterface > {
         fromDate: this.fromDate,
         toDate: this.toDate
       });
-      this.currentTab = DateSelectionType.custom;
+      this.currentTab = DateSelectionTypeEnum.custom;
       this.selectedInterval = null;
     }
   }
@@ -151,11 +136,11 @@ export class DateRangePickerComponent implements OnInit {
       }
       this._displayRange = this.createDateRange();
 
-      this.onDateRangeSelected.emit( < DateRange > {
+      this.onDateRangeSelected.emit( < DateRangeInterface > {
         fromDate: this.fromDate,
         toDate: this.toDate
       });
-      this.currentTab = DateSelectionType.interval;
+      this.currentTab = DateSelectionTypeEnum.interval;
     }
   }
 
