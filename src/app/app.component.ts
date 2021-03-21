@@ -39,20 +39,29 @@ export class AppComponent {
           link: '/accordion'
         },
         {
-          name: 'Datepickers',
-          link: '/datepickers'
+          name: 'Date Pickers',
+          link: '/date-pickers'
         },
         {
-          name: 'DateRangePickers',
-          link: '/daterangepickers'
+          name: 'Date Range Pickers',
+          link: '/date-range-pickers'
         },
         {
           name: 'Dropdowns',
           link: '/dropdowns'
         },
         {
+          name: 'Dialogs',
+          link: '/dialogs'
+        },
+        {
+          name: 'Inspector',
+          link: '/inspector'
+        },
+        {
           name: 'Modals',
-          link: '/modals'
+          link: '/modals',
+          deprecated: true
         },
         {
           name: 'Pagination',
@@ -76,11 +85,20 @@ export class AppComponent {
         },
         {
           name: 'Selectize',
-          link: '/selectize'
+          link: '/selectize',
+          deprecated: true
+        },
+        {
+          name: 'Ng-Select',
+          link: '/ng-select'
         },
         {
           name: 'Loaders',
           link: '/loaders'
+        },
+        {
+          name: 'Line Clamp',
+          link: '/line-clamp'
         }
       ]
     },

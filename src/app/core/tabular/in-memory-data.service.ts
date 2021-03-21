@@ -212,8 +212,72 @@ export class InMemoryDataService implements InMemoryDbService {
             content: 'Information'
           }
         },
-        created: this.getRandomDate(new Date(2015, 0, 1), new Date()),
-        modified: this.getRandomDate(new Date(2015, 0, 1), new Date()),
+        created: {
+          tooltip: {
+            config: {
+              placement: 'top',
+              context: Context.White,
+              disabled: false,
+              animation: false,
+              showDelay: 0,
+              hideDelay: 0,
+              maxWidth: 500,
+              html: true
+            },
+            content: `
+            <div class="is-text-left pa-4">
+              <div class="hx-columns">
+                <div class="hx-column">
+                  <div class="hx-metadata">
+                    <div class="hx-label">Appointment Type</div>
+                    <div class="hx-value">Standard</div>
+                  </div>
+                </div>
+                <div class="hx-column">
+                  <div class="hx-metadata">
+                    <div class="hx-label">Patient</div>
+                    <div class="hx-value">Sally Caban</div>
+                  </div>
+                </div>
+                <div class="hx-column">
+                  <div class="hx-metadata">
+                    <div class="hx-label">Work Area</div>
+                    <div class="hx-value">Reception</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hx-columns">
+                <div class="hx-column">
+                  <div class="hx-metadata">
+                    <div class="hx-label">Elapsed Time</div>
+                    <div class="hx-value"><i class="hx-icon icon-clock-outline is-small"></i> 00:15</div>
+                  </div>
+                </div>
+                <div class="hx-column">
+                  <div class="hx-metadata">
+                    <div class="hx-label">Status</div>
+                    <div class="hx-value">
+                      <span class="hx-badge">
+                        <span class="hx-badge-content">In progress</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="hx-column">
+                  <div class="hx-metadata">
+                    <div class="hx-label">Pulse</div>
+                    <div class="hx-value"><i class="hx-icon icon-heartbeat is-small"></i> 5 bpm</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>`
+          },
+          content: this.getRandomDate(new Date(2015, 0, 1), new Date()),
+
+        },
+        modified: new Date(),
         flag: {label: 'Short', cssClass: ''}
       },
       {

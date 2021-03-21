@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { PageScrollService } from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/common';
 import { DateRangePickersCode } from './date-range-picker.code';
@@ -34,7 +34,7 @@ export class DateRangePickerComponent extends CoreBaseComponent {
     'Next Fortnight'
   ];
 
-  dateFormat = "yyyy-MM-dd";
+  dateFormat = "dd/MM/yyyy";
 
   constructor(
     protected pageScrollService: PageScrollService,

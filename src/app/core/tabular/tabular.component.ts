@@ -6,7 +6,7 @@ import {TabularSize} from '../../../../projects/hx-ui/src/lib/tabular/tabular-si
 import {TabularService} from './tabular.service';
 import {UserModel} from './user.model';
 import {CoreBaseComponent} from '../core-base.component';
-import {PageScrollService} from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import {DOCUMENT} from '@angular/common';
 import {ITabularRow} from '../../../../projects/hx-ui/src/lib/tabular/tabular-row.interface';
 import {TabularCode} from './tabular.code';
@@ -17,6 +17,7 @@ import {IFiltersConfig} from '../../../../projects/hx-ui/src/lib/filters/filters
 import {FilterType} from '../../../../projects/hx-ui/src/lib/filters/filters-type.enum';
 import {FiltersComponent} from '../../../../projects/hx-ui/src/lib/filters/filters.component';
 import {FiltersModel} from '../../../../projects/hx-ui/src/lib/filters/filters.model';
+import {TabularTheme} from '../../../../projects/hx-ui/src/lib/tabular/tabular-theme.enum';
 
 @Component({
   selector: 'app-tabular',
@@ -25,7 +26,7 @@ import {FiltersModel} from '../../../../projects/hx-ui/src/lib/filters/filters.m
 })
 export class TabularComponent extends CoreBaseComponent implements OnInit {
 
-  @ViewChild('filterComp') filtersComponent: FiltersComponent;
+  @ViewChild('filterComp', { static: true }) filtersComponent: FiltersComponent;
   onFilterChangeEvent$ = new Subscription();
   users$: Observable<UserModel[]>;
   code = new TabularCode();
@@ -40,7 +41,7 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
     new TabularColumn('flag', 'Flag', TabularColumnTypes.Badge, false),
     new TabularColumn('created', 'Created', TabularColumnTypes.Date, true),
     new TabularColumn('modified', 'Modified', TabularColumnTypes.DateTime, true),
-    new TabularColumn('info', 'info', TabularColumnTypes.Icon, false),
+    new TabularColumn('info', 'info', TabularColumnTypes.Icon, false, '', true),
     new TabularColumn('active', 'Active', TabularColumnTypes.Status, false, 'is-text-center'),
     new TabularColumn('actions', 'Actions', TabularColumnTypes.Actions, false)
   ];
@@ -48,6 +49,7 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
   tabularConfig: ITabularConfig = {
     id: 'UniqueId',
     size: TabularSize.Default,
+    theme: TabularTheme.Dark,
     clickableRows: true,
     pagination: {
       itemsPerPage: 5,
@@ -59,7 +61,11 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
         type: TabularColumnTypes.DateTime,
         direction: SortByDirection.Descending
       }
-    ]
+    ],
+    stickyColumns: {
+      left: true,
+      right: true
+    }
   };
 
   collapsed = false;

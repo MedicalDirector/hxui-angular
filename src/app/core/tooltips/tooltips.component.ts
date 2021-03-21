@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { PageScrollService } from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import { DOCUMENT } from '@angular/common';
 import { CoreBaseComponent } from '../core-base.component';
 import { TooltipsCode } from './tooltips.code';
@@ -14,7 +14,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 })
 export class TooltipsComponent extends CoreBaseComponent implements OnInit {
 
-  @ViewChild('toolTipContent') toolTipContent: ElementRef;
+  @ViewChild('toolTipContent', { static: true }) toolTipContent: ElementRef;
 
   code = new TooltipsCode();
   private _dynamicTooltipText = 'sample text';

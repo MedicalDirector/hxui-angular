@@ -26,23 +26,22 @@ import {
 import * as _ from 'lodash';
 import { SelectizeConfig } from './selectize.config';
 import {ISelectizeItem} from './selectize-item.interface';
+import './plugins/position-auto.plugin';
 
 declare var $: any;
 
-export const SELECTIZE_VALUE_ACCESSOR: any = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => SelectizeComponent),
-  multi: true
-};
-
 @Component({
   selector: 'hxa-selectize',
-  template: `<div class="hx-input-control" [ngClass]="config.inputControlClasses" [class.is-focused]="isFocused" [class.is-valid]="isValid">
+  template: `<div class="hx-input-control" [ngClass]="config?.inputControlClasses" [class.is-focused]="isFocused" [class.is-valid]="isValid">
                   <select #selectizeInput></select>
-                  <label for="{{id}}" class="hx-label">{{config.label}} <sup *ngIf="config.mandatory">*</sup></label>
-                  <div class="hx-help">{{config.help}}</div>
+                  <label for="{{id}}" class="hx-label">{{config?.label}} <sup *ngIf="config?.mandatory">*</sup></label>
+                  <div class="hx-help">{{config?.help}}</div>
               </div>`,
-  providers: [SELECTIZE_VALUE_ACCESSOR],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => SelectizeComponent),
+    multi: true
+  }],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['selectize.component.scss']
 })
@@ -52,6 +51,7 @@ export class SelectizeComponent
   private _options_differ: IterableDiffer<any>;
   private _optgroups: any[];
   private _optgroups_differ: IterableDiffer<any>;
+  private _silent_option_added_event = false;
 
   @Input() config: SelectizeConfig;
   @Input() id: string;
@@ -67,8 +67,9 @@ export class SelectizeComponent
 
   @Output() onBlur: EventEmitter<void> = new EventEmitter<void>(false);
   @Output() onFocus: EventEmitter<void> = new EventEmitter<void>(false);
+  @Output() onOptionAdded: EventEmitter<any> = new EventEmitter<any>(false);
 
-  @ViewChild('selectizeInput') selectizeInput: any;
+  @ViewChild('selectizeInput', { static: true }) selectizeInput: any;
 
   private selectize: any;
 
@@ -98,6 +99,7 @@ export class SelectizeComponent
     this.selectize.on('focus', this.onFocusEvent.bind(this));
     this.selectize.on('type', this.onSelectizeType.bind(this));
     this.selectize.on('item_add', this.onSelectizeItemSelected.bind(this));
+    this.selectize.on('option_add', this.onSelectizeOptionAdded.bind(this));
     this.updatePlaceholder();
     this.onEnabledStatusChange();
     this.hasCaret();
@@ -209,7 +211,9 @@ export class SelectizeComponent
    * Refresh selected values when options change.
    */
   onSelectizeOptionAdd(option: any): void {
+    this._silent_option_added_event = true;
     this.selectize.addOption(_.cloneDeep(option));
+    this._silent_option_added_event = false;
     const valueField = this.config.valueField;
     if (this.value) {
       const items =
@@ -241,6 +245,12 @@ export class SelectizeComponent
     }
   }
 
+  focus() {
+    setTimeout(()=> {
+      this.selectize.focus();
+    });
+  }
+
 
   updateLabel() {
   }
@@ -269,7 +279,7 @@ export class SelectizeComponent
 
 
   hasCaret() {
-    if (this.config.hasCaret) {
+    if (this.config && this.config.hasCaret) {
       const parent = $(this.selectize.$control).parent();
       parent.addClass('hasCaret');
     }
@@ -307,6 +317,12 @@ export class SelectizeComponent
 
     if (this.config.closeAfterSelect) {
       this.selectize.close();
+    }
+  }
+
+  onSelectizeOptionAdded(value, data) {
+    if (!this._silent_option_added_event) {
+      this.onOptionAdded.emit(data);
     }
   }
 
@@ -358,14 +374,14 @@ export class SelectizeComponent
       return;
     }
 
-    const stringValue = obj.map(v => {
-      if (!Object.keys(this.selectize.options).some(x => x === v.value)) {
+    const value = obj.map(v => {
+      if (!Object.keys(this.selectize.options).some(x => x === v[this.config.valueField])) {
         this.selectize.addOption(v);
       }
-      return v.value;
+      return v[this.config.valueField];
     });
 
-    this.selectize.setValue(stringValue);
+    this.selectize.setValue(value);
     this.evalHasError();
     this.isValid = (this.selectize.getValue().length > 0);
   }

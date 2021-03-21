@@ -6,13 +6,15 @@ import {DropdownModule} from '../dropdown/dropdown.module';
 import {FiltersCollapsedComponent} from './filters-collapsed.component';
 import { FormsModule } from '@angular/forms';
 import { DateRangePickerModule } from '../date-range-picker/date-range-picker.module';
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   imports: [
     CommonModule,
     DropdownModule,
     FormsModule,
-    DateRangePickerModule
+    DateRangePickerModule,
+    NgxMaskModule
   ],
   declarations: [
     FiltersComponent,

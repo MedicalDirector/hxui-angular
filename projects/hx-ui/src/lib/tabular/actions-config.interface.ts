@@ -63,4 +63,13 @@ export abstract class IActionsConfig {
     content: string;
   };
 
+  /**
+   * Is Loading state, will show a loading indicator in replacement of icon/text
+   */
+  isLoading?: boolean;
+
+  /**
+   * target , to open navigate to same page or different page
+   */
+  target?: string;
 }

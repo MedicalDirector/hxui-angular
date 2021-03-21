@@ -30,7 +30,7 @@ import {TooltipDynamicContentDirective} from './tooltip-dynamic-content.directiv
   selector: '[hxTooltip], [hxaTooltip]'
 })
 export class TooltipDirective implements OnDestroy {
-  @ContentChild(TooltipDynamicContentDirective) dynamicContent: TooltipDynamicContentDirective;
+  @ContentChild(TooltipDynamicContentDirective, { static: false }) dynamicContent: TooltipDynamicContentDirective;
 
   _overlayRef: OverlayRef | null;
   _tooltipInstance: TooltipContentComponent | null;
@@ -146,7 +146,7 @@ export class TooltipDirective implements OnDestroy {
       positionStrategy: positionStrategy,
       panelClass: 'hxa-tooltip-panel',
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
-      hasBackdrop: !!(this.dynamicContent),
+      hasBackdrop: !this.autoClose,
       backdropClass: 'cdk-overlay-transparent-backdrop'
     });
 

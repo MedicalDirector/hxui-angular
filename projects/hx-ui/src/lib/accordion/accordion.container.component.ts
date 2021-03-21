@@ -5,12 +5,16 @@ import { state, style, transition, animate, trigger } from '@angular/animations'
   selector: 'hx-accordion-container, hxa-accordion-container',
   template: `
     <li class="hx-accordion-container" [class.is-active]="expanded && !disabled">
-        <a class="hx-accordion-header" (click)="toggle()">
-            <div class="header-title"><ng-content select="hx-accordion-header, hxa-accordion-header"></ng-content></div>
-            <div class="header-icon">
+        <a class="hx-accordion-header"  [class.is-disabled]="!empty && disabled" (click)="toggle()">
+          <ng-container *ngIf="!customHeader">
+            <div class="header-title"><ng-container *ngTemplateOutlet="headerTpl"></ng-container></div>
+            <div class="header-icon" *ngIf="empty">
                 <i class="hx-icon icon-angle-down" *ngIf="!expanded || disabled"></i>
                 <i class="hx-icon icon-angle-up" *ngIf="expanded && !disabled"></i>
             </div>
+          </ng-container>
+          <ng-container *ngIf="customHeader"><ng-container *ngTemplateOutlet="headerTpl"></ng-container></ng-container>
+          <ng-template #headerTpl><ng-content select="hx-accordion-header, hxa-accordion-header"></ng-content></ng-template>
         </a>
         <div class="hx-accordion-body" [@slideIn]="expanded && !disabled" *ngIf="expanded && !disabled">
             <div class="hx-accordion-body-wrapper">
@@ -39,6 +43,8 @@ export class AccordionContainerComponent {
   @Input() expanded = true;
   @Input() index: number = null;
   @Input() disabled = false;
+  @Input() empty: boolean  = true;
+  @Input() customHeader = false;
   @Output() headerClick: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private _changeDetectionRef: ChangeDetectorRef) { }

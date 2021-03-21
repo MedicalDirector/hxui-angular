@@ -6,6 +6,7 @@ import {
   ITabularColumnIconType
 } from '../../../../projects/hx-ui/src/lib/tabular/tabular-column.interface';
 import {Context} from '../../../../projects/hx-ui/src/lib/enums';
+import { IWithTooltip } from '../../../../projects/hx-ui/src/lib/tabular/tabular-tooltip.interface';
 
 export class UserModel implements ITabularRow {
   public id: number;
@@ -16,7 +17,7 @@ export class UserModel implements ITabularRow {
   public email: string;
   public flag: ITabularColumnBadgeType;
   public active: boolean;
-  public created: Date;
+  public created: Date|IWithTooltip;
   public modified: Date;
   public selected: boolean;
   public checked: boolean;
@@ -156,6 +157,10 @@ export class UserModel implements ITabularRow {
    * @param data
    */
   onActionClickHandler = (type, data) => {
-     alert('You clicked the ' + type + ' button. Arguments:' + type + ' and ' + data);
+     console.log('You clicked the ' + type + ' button. Arguments:' + type + ' and ' + data);
+     if (type === 'delete') {
+       this.actions[2].isLoading = true;
+       setTimeout(() => this.actions[2].isLoading = false, 1000);
+     }
   }
 }

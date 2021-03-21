@@ -5,7 +5,7 @@
 
       <div class="mb-5">
         <div class="hx-datepicker-set-interval-number mr-5">
-          <input type="number" id="numberText" class="hx-input" min=1  [(ngModel)]="dropdownNumber" (change)="onSelect()" #numberText>
+          <input type="number" id="numberText" class="hx-input" min=0  [(ngModel)]="dropdownNumber" (change)="onSelect()" #numberText>
         </div>
 
         <span class="hx-dropdown month mr-5" hxaDropdown>
@@ -35,7 +35,7 @@
         <button class="hx-button" (click)="onCancel()">Cancel</button>
       </div>
       <div class="hx-column is-text-right">
-        <button class="hx-button is-primary" (click)="onChoose()">Select</button>
+        <button class="hx-button is-primary" (click)="onChoose($event)">Select</button>
       </div>
     </div>
   </div>

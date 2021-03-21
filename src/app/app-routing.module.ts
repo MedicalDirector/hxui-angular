@@ -20,14 +20,20 @@ import {TextInputComponent} from './core/text-input/text-input.component';
 import {OnlineStatusComponent} from './core/online-status/online-status.component';
 import {ToastrComponent} from './core/toastr/toastr.component';
 import { DateRangePickerComponent } from './core/date-range-picker/date-range-picker.component';
+import {DialogsComponent} from './core/dialogs/dialogs.component';
+import {NgSelectComponent} from './core/ng-select/ng-select.component';
+import {InspectorComponent} from './core/inspector/inspector.component';
+import {LineClampComponent} from './core/line-clamp/line-clamp.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/install-guide', pathMatch: 'full' },
   { path: 'install-guide',  component: InstallGuideComponent },
   { path: 'accordion',  component: AccordionComponent },
-  { path: 'datepickers',  component: DatepickersComponent },
-  { path:  'daterangepickers', component: DateRangePickerComponent},
+  { path: 'date-pickers',  component: DatepickersComponent },
+  { path:  'date-range-pickers', component: DateRangePickerComponent},
   { path: 'dropdowns',  component: DropdownsComponent },
+  { path: 'dialogs',  component: DialogsComponent },
+  { path: 'inspector',  component: InspectorComponent },
   { path: 'modals',  component: ModalsComponent },
   { path: 'tabs',  component: TabsComponent },
   { path: 'typeaheads',  component: TypeaheadsComponent },
@@ -42,6 +48,8 @@ const routes: Routes = [
   { path: 'text-input',  component: TextInputComponent },
   { path: 'online-status',  component: OnlineStatusComponent },
   { path: 'toastr',  component: ToastrComponent },
+  { path: 'ng-select',  component: NgSelectComponent },
+  { path: 'line-clamp',  component: LineClampComponent },
   { path: '**',  component: PageNotFoundComponent },
 ];
 @NgModule({

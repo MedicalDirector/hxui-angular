@@ -5,11 +5,12 @@ import { DatepickerComponent } from './datepicker.component';
 import { DatepickerFormComponent } from './datepicker-form.component';
 import { DatepickerConfig } from './datepicker.config';
 import { DatepickerIntervalComponent } from './datepicker-interval.component';
-import {TabsModule} from '../tabs/tabs.module';
-
+import { TabsModule } from '../tabs/tabs.module';
+import { NgxMaskModule } from 'ngx-mask';
+import { TextInputModule } from '../text-input/text-input.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, TabsModule],
+  imports: [CommonModule, FormsModule, TabsModule,  NgxMaskModule, TextInputModule ],
   declarations: [DatepickerComponent, DatepickerFormComponent, DatepickerIntervalComponent],
   exports: [DatepickerComponent, DatepickerFormComponent],
   entryComponents: [DatepickerComponent]

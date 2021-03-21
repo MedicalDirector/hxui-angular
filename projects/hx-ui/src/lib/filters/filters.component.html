@@ -13,8 +13,8 @@
   <ng-container *ngIf="!collapsed">
   <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last; index as i">
       <!-- single select filter -->
-      <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.SingleSelect">
-        <a [id]="filter?.id + '-trigger'" class="hx-button hx-button-dropdown expandedFilter__button" hxaDropdownToggle>
+      <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.SingleSelect && !filter?.hidden">
+        <a [id]="filter?.id + '-trigger'" class="hx-button hx-button-dropdown expandedFilter__button" [class.is-loading]="filter?.isLoading" [class.is-disabled]="filter?.disabled" hxaDropdownToggle>
           <span class="is-text-weight-light">{{filter?.label}}:&nbsp;</span>
           <span class="hx-icon-control" *ngIf="filter?.selected?.icon"><i class="{{filter?.selected?.icon}} mr-1"></i></span>
           <span class="is-text-weight-bolder is-text-ellipsed" title="{{filter?.selected?.label}}">{{filter?.selected?.label}}</span>

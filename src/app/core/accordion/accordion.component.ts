@@ -1,10 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { PageScrollService } from 'ngx-page-scroll';
 import { CoreBaseComponent } from '../core-base.component';
 import { AccordionCode } from './accordion.code';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import { Alert } from 'selenium-webdriver';
+import { PageScrollService } from 'ngx-page-scroll-core';
 
 @Component({
   selector: 'app-accordion',

@@ -1,7 +1,7 @@
 import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CoreBaseComponent} from '../core-base.component';
 import {DOCUMENT} from '@angular/common';
-import {PageScrollService} from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import {FiltersCode} from './filters.code';
 import {IFiltersConfig} from '../../../../projects/hx-ui/src/lib/filters/filters-config.interface';
 import {FilterType} from '../../../../projects/hx-ui/src/lib/filters/filters-type.enum';
@@ -17,7 +17,7 @@ import {FiltersModel} from '../../../../projects/hx-ui/src/lib/filters/filters.m
 })
 export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDestroy {
 
-  @ViewChild('filterComp') filtersComponent: HxFiltersComponent;
+  @ViewChild('filterComp', { static: true }) filtersComponent: HxFiltersComponent;
 
   code = new FiltersCode();
   collapsed = false;
@@ -26,6 +26,7 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
       id: 'workareaFilter',
       type: FilterType.SingleSelect,
       label: 'Work area',
+      disabled: true,
       options: [
         {
           label: 'Dental',
@@ -213,7 +214,12 @@ export class FiltersComponent extends CoreBaseComponent implements OnInit, OnDes
   }
 
   resetFilters() {
+    this.filtersComponent.data.forEach(f => f.disabled = false);
     this.filtersComponent.resetFilters();
+  }
+
+  disableFilters(){
+   this.filtersComponent.data.forEach(f => f.disabled = !f.disabled);
   }
 
   toggleCollapsed() {

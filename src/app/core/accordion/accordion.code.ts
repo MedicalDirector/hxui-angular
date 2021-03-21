@@ -70,4 +70,42 @@ export class AccordionCode {
       }
     }
   `;
+
+
+  customHeaderTemplate =
+    `
+  <hx-accordion>
+          <hx-accordion-container [customHeader]="true">
+            <hx-accordion-header>
+              <div class="hx-flex hx-flex-align-center">
+                <div class="hx-input-control mt-2">
+                  <div class="hx-checkbox-control my-0">
+                    <input name="checkboxGroup1" type="checkbox" class="hx-checkbox" id="option-multiline">
+                    <label for="option-multiline" class="hx-label"></label>
+                  </div>
+                </div>
+                <i class="hx-icon icon-caret-down"></i>
+                <div class="header-title">Accordion title</div>
+              </div>
+            </hx-accordion-header>
+            <hx-accordion-body>
+              <p>This is the body</p>
+            </hx-accordion-body>
+          </hx-accordion-container>
+          <hx-accordion-container [expanded]="false">
+            <hx-accordion-header>
+              This is the second header. <b>You can even style it!</b> <i
+              class="hx-icon icon-helix is-small is-info"></i>
+            </hx-accordion-header>
+            <hx-accordion-body>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Integer eu suscipit ante. Nulla nec nulla eget quam fringilla blandit.
+                Vivamus gravida purus erat, id ultrices lacus sagittis vel.
+                Etiam nec nulla eleifend velit tristique faucibus sed ut nisl.
+              </p>
+            </hx-accordion-body>
+          </hx-accordion-container>
+        </hx-accordion>
+    `;
 }

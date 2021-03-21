@@ -11,7 +11,7 @@ import {EmptyStateConfig} from './empty-state.config';
     ':host .emptyState__icon { height:3.5rem; width:3.5rem; font-size:64px; margin: 1rem; }',
     ':host .emptyState__msg { margin: 1rem; }',
     ':host .emptyState__actions{ margin: 1.5rem 1rem ; }',
-    ':host .emptyState__actions button { margin: 0 .5rem; }'
+    ':host .emptyState__actions::ng-deep .hx-button { margin: 0 .5rem; }'
   ]
 })
 export class EmptyStateComponent implements OnInit {
@@ -29,7 +29,7 @@ export class EmptyStateComponent implements OnInit {
    * @param event
    * @param cb
    */
-  executeCallback(event: Event, cb: any[]) {
+  executeCallback(event: any, cb: any[]) {
     if (cb.length) {
       if (cb.length === 1) { // if callback has no arguments
         cb[0]();

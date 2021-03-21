@@ -9,7 +9,7 @@
     <p>Add the FiltersModule to AppModule or SharedModule.</p>
 
     <pre>
-      <code highlight [code]="code.usage"></code>
+      <code [highlight]="code.usage"></code>
     </pre>
 
     <hr>
@@ -19,20 +19,22 @@
 
       <div class="hx-flex hx-flex-align-center">
           <button type="button" class="hx-button is-primary mr-1" (click)="toggleCollapsed()">Toggle collapsed state</button>
-          <button type="button" class="hx-button is-primary" (click)="resetFilters()">Reset filters</button>
+          <button type="button" class="hx-button is-primary mr-1" (click)="disableFilters()">Toggle disabled state</button>
+          <button type="button" class="hx-button mr-1" (click)="resetFilters()">Reset</button>
+
           <div class="hx-spacer"></div>
-         <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters"></hxa-filters>
+         <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters" [customMask] = "99999999"></hxa-filters>
       </div>
     <br>
     <hx-tabset>
       <hx-tab heading="Template">
             <pre>
-              <code highlight [code]="code.exampleTemplate"></code>
+              <code [highlight]="code.exampleTemplate"></code>
             </pre>
       </hx-tab>
       <hx-tab heading="Typescript">
             <pre>
-              <code highlight [code]="code.exampleTypescript"></code>
+              <code [highlight]="code.exampleTypescript"></code>
             </pre>
       </hx-tab>
     </hx-tabset>
@@ -149,6 +151,30 @@
             <td>dateRangePickerDisplayDateFormat</td>
             <td><kbd>any</kbd></td>
             <td><span class="hx-badge is-info"><span class="hx-badge-content">OPTIONAL</span></span> Original value derivied from source component. e.g string for search type, DateRange for DateRangePicker type</td>
+          </tr>
+
+          <tr>
+            <td>width</td>
+            <td><kbd>number</kbd></td>
+            <td>Width in REM for Search filter type.</td>
+          </tr>
+
+          <tr>
+            <td>disabled</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Disabled state of filter type</td>
+          </tr>
+
+          <tr>
+            <td>hidden</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Hidden state of filter type</td>
+          </tr>
+
+          <tr>
+            <td>isLoading</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Loading state of filter type. Displays preloader animation.</td>
           </tr>
           </tbody>
         </table>

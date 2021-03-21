@@ -1,5 +1,6 @@
 import {IActionsConfig} from './actions-config.interface';
 import {Context} from '../enums';
+import {TooltipConfig} from '../tooltip/tooltip.config';
 
 export interface ITabularRow {
   /**
@@ -43,6 +44,10 @@ export interface ITabularRow {
    */
   actionDisabled?: boolean;
 
+   /**
+   * Used to disable/enable checkbox
+   */
+  checkboxDisabled?: boolean;
 }
 
 

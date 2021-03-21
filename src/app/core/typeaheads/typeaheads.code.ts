@@ -14,9 +14,9 @@ export class AppModule(){}
 exampleTemplate =
 `
 
-<div class="hx-input-control">
-  <input class="hx-input" type="text" [(ngModel)]="selected"
-    [typeahead]="states" required>
+<div class="hx-input-control" id="parentEL">
+  <input class="hx-input" hxaTextInput type="text" [(ngModel)]="selected" 
+    [hxaTypeahead]="medications" minWidthRelativeTo="parentEL">
   <label class="hx-label"><i class="icon icon-search is-small"></i> Medications</label>
   <div class="hx-help">Search for medication names</div>
 </div>
@@ -33,7 +33,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TypeaheadsComponent implements OnInit {
   public selected: string;
-  public states: string[] = [
+  public medications: string[] = [
     'SABRIL powder for oral solution 500mg',
     'SABRIL tablet 500mg',
     'SACROSIDASE oral liquid, solution 8,500 Units/mL',

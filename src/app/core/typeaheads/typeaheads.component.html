@@ -9,18 +9,18 @@
     <p>Add the TypeaheadsModule to AppModule or SharedModule.</p>
 
     <pre>
-      <code highlight [code]="code.usage"></code>
+      <code [highlight]="code.usage"></code>
     </pre>
 
     <hr>
 
     <h4 id="example">Example</h4>
 
-    <div class="hx-columns">
+    <div class="hx-columns mt-5">
       <div class="hx-column">
 
-        <div class="hx-input-control">
-          <input class="hx-input" type="text" [(ngModel)]="selected" [typeahead]="states" required>
+        <div class="hx-input-control" id="parentEL">
+          <input class="hx-input" type="text" hxaTextInput [(ngModel)]="selected" [hxaTypeahead]="states" minWidthRelativeTo="parentEL">
           <label class="hx-label"><i class="icon icon-search is-small"></i> Medications</label>
           <div class="hx-help">Search for medication names</div>
         </div>
@@ -38,12 +38,72 @@
         <hx-tabset>
           <hx-tab heading="Template">
             <pre>
-              <code highlight [code]="code.exampleTemplate"></code>
+              <code [highlight]="code.exampleTemplate"></code>
             </pre>
           </hx-tab>
           <hx-tab heading="Typescript">
             <pre>
-              <code highlight [code]="code.exampleTypescript"></code>
+              <code [highlight]="code.exampleTypescript"></code>
+            </pre>
+          </hx-tab>
+        </hx-tabset>
+      </div>
+    </div>
+
+    <hr>
+
+    <h4 id="predefinedOptionsExample">Predefined Options Example</h4>
+
+    <div class="hx-columns mt-5">
+      <div class="hx-column is-half">
+
+        <div class="hx-input-group">
+        <div class="hx-input-control" id="parentEL2">
+          <input class="hx-input" type="text"
+                 #phoneTypeahead
+                 hxaTextInput
+                 mask="0000 000 000"
+                 [(ngModel)]="selected_number"
+                 [hxaTypeahead]="phone_numbers"
+                 minWidthRelativeTo="parentEL2"
+                 typeaheadOptionField="number"
+                 typeaheadGroupField="category"
+                 [typeaheadMinLength]="0"
+                 [typeaheadItemTemplate]="customItemTemplate"
+                 (typeaheadOnSelect)="onSelect($event)"
+                (typeaheadOnBlur)="onBlur()">
+          <label class="hx-label">Phone number</label>
+          <div class="hx-help">Select a phone number</div>
+        </div>
+          <div class="hx-input-actions">
+            <i class="hx-icon icon-caret-down"></i>
+          </div>
+        </div>
+
+        <ng-template #customItemTemplate let-model="item" let-index="index" let-query="query">
+          <hxa-highlight [result]="model.number" [term]="query | mask: '0000 000 000'"></hxa-highlight>
+        </ng-template>
+
+
+      </div>
+    </div>
+
+    <br>
+
+    <h5 id="predefinedOptionsCode">Code</h5>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+
+        <hx-tabset>
+          <hx-tab heading="Template">
+            <pre>
+              <code [highlight]="code.exampleTemplate"></code>
+            </pre>
+          </hx-tab>
+          <hx-tab heading="Typescript">
+            <pre>
+              <code [highlight]="code.exampleTypescript"></code>
             </pre>
           </hx-tab>
         </hx-tabset>
@@ -68,17 +128,12 @@
           </thead>
           <tbody>
             <tr>
-              <td>container</td>
-              <td><kbd>string</kbd></td>
-              <td>A selector specifying the element the typeahead should be appended to.<br> Currently only supports "body".</td>
-            </tr>
-            <tr>
               <td>optionsListTemplate</td>
               <td><kbd>TemplateRef&lt;any&gt;</kbd></td>
               <td>used to specify a custom options list template. Template variables: matches, itemTemplate, query</td>
             </tr>
             <tr>
-              <td>typeahead</td>
+              <td>hxaTypeahead</td>
               <td><kbd>any</kbd></td>
               <td>options source, can be Array of strings, objects or an Observable for external matching process</td>
             </tr>
@@ -136,6 +191,26 @@
               <td>typeaheadWordDelimiters</td>
               <td><kbd>string</kbd></td>
               <td>should be used only in case typeaheadSingleWords attribute is true. Sets the word delimiter to break words. Defaults to space. </td>
+            </tr>
+            <tr>
+              <td>placement</td>
+              <td><kbd>string</kbd></td>
+              <td>Placement of a popover. Accepts: "top", "bottom", "left", "right"</td>
+            </tr>
+            <tr>
+              <td>maxWidthRelativeTo</td>
+              <td><kbd>string</kbd></td>
+              <td>The element id of the element the dropdown should get it's max width from</td>
+            </tr>
+            <tr>
+              <td>minWidthRelativeTo</td>
+              <td><kbd>string</kbd></td>
+              <td>The element id of the element the dropdown should get it's min width from</td>
+            </tr>
+            <tr>
+              <td>maxHeight</td>
+              <td><kbd>number|string</kbd></td>
+              <td>The max height of the dropdown. Defaults to 20rem.</td>
             </tr>
           </tbody>
         </table>

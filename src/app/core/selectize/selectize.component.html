@@ -10,7 +10,7 @@
   <p>Add the SelectizeModule to AppModule or SharedModule.</p>
 
   <pre>
-     <code highlight [code]="code.usage"></code>
+     <code [highlight]="code.usage"></code>
     </pre>
 
   <hr>
@@ -24,13 +24,12 @@
 
       <div class="hx-card not-scrollable">
         <div class="hx-card-content">
-          <hxa-selectize [config]="multiSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedMultiSelectValue"></hxa-selectize>
+          <hxa-selectize [config]="multiSelectizeConfig" [options]="selectizeOptions" [(ngModel)]="selectedMultiSelectValue" (onOptionAdded)="onOptionAdded($event)"></hxa-selectize>
           <pre>Current value: {{selectedMultiSelectValue | json}}</pre>
         </div>
       </div>
 
     </div>
-    <div class="hx-column"></div>
   </div>
 
   <br>
@@ -43,12 +42,12 @@
       <hx-tabset>
         <hx-tab heading="Template">
             <pre>
-              <code highlight [code]="code.multiExampleTemplate"></code>
+              <code [highlight]="code.multiExampleTemplate"></code>
             </pre>
         </hx-tab>
         <hx-tab heading="Typescript">
             <pre>
-              <code highlight [code]="code.multiExampleTypescript"></code>
+              <code [highlight]="code.multiExampleTypescript"></code>
             </pre>
         </hx-tab>
       </hx-tabset>
@@ -85,12 +84,12 @@
       <hx-tabset>
         <hx-tab heading="Template">
             <pre>
-              <code highlight [code]="code.simpleExampleTemplate"></code>
+              <code [highlight]="code.simpleExampleTemplate"></code>
             </pre>
         </hx-tab>
         <hx-tab heading="Typescript">
             <pre>
-              <code highlight [code]="code.simpleExampleTypescript"></code>
+              <code [highlight]="code.simpleExampleTypescript"></code>
             </pre>
         </hx-tab>
       </hx-tabset>
@@ -136,22 +135,22 @@
       <hx-tabset>
         <hx-tab heading="Template">
             <pre>
-              <code highlight [code]="code.customItemExampleTemplate"></code>
+              <code [highlight]="code.customItemExampleTemplate"></code>
             </pre>
         </hx-tab>
         <hx-tab heading="Typescript">
             <pre>
-              <code highlight [code]="code.customItemExampleTypescript"></code>
+              <code [highlight]="code.customItemExampleTypescript"></code>
             </pre>
         </hx-tab>
         <hx-tab heading="Custom Config">
             <pre>
-              <code highlight [code]="code.customItemConfig"></code>
+              <code [highlight]="code.customItemConfig"></code>
             </pre>
         </hx-tab>
         <hx-tab heading="Custom Item Model">
             <pre>
-              <code highlight [code]="code.customItemModel"></code>
+              <code [highlight]="code.customItemModel"></code>
             </pre>
         </hx-tab>
       </hx-tabset>
@@ -237,9 +236,19 @@
         </thead>
         <tbody>
         <tr>
+          <td>onFocus</td>
+          <td><kbd>EventEmitter</kbd></td>
+          <td>Event fired when input has focus.</td>
+        </tr>
+        <tr>
           <td>onBlur</td>
           <td><kbd>EventEmitter</kbd></td>
           <td>Event fired when input losses focus.</td>
+        </tr>
+        <tr>
+          <td>onOptionAdded</td>
+          <td><kbd>EventEmitter</kbd></td>
+          <td>Event fired when a new option is added. Returns the added option. </td>
         </tr>
         </tbody>
       </table>

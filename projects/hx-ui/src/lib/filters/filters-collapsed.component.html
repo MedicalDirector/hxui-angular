@@ -10,11 +10,10 @@
         <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last; index as i">
           <div class="hx-dropdown-header itemHeader">{{filter.label}}</div>
           <!-- single select -->
-          <ng-container *ngIf="filter.type === FilterType.SingleSelect">
+          <ng-container *ngIf="filter.type === FilterType.SingleSelect && !filter?.hidden">
             <ul class="hx-list-group">
               <li>
-                <a [id]="filter?.id + '-trigger'" (click)="changeFilterSelection(filter)"
-                  title="{{filter.selected?.label}}">
+                <a [id]="filter?.id + '-trigger'" (click)="changeFilterSelection(filter)" title="{{filter.selected?.label}}"  [class.is-disabled]="filter?.disabled">
                   <div class="hx-list-action" *ngIf="filter.selected?.icon">
                     <i class="{{filter.selected?.icon}}"></i>
                   </div>
@@ -28,11 +27,15 @@
             </ul>
           </ng-container>
           <!-- search filter -->
-          <div *ngIf="filter.type === FilterType.Search" class="pl-3 pr-4">
-            <div [id]="filter.id" class="hx-input-group">
+          <div *ngIf="filter.type === FilterType.Search && !filter?.hidden" class="pl-3 pr-4">
+            <div [id]="filter.id"  class="hx-input-group">
               <i class="hx-icon icon-search mt-1"></i>
               <div class="hx-input-control my-0">
-                <input class="hx-input" type="search" (input)="searchFilter(filter)" [(ngModel)]="filter.value">
+                <input class="hx-input"
+                       type="search"
+                       (input)="searchFilter(filter)"
+                       [(ngModel)]="filter.value"
+                       [disabled]="filter?.disabled">
                 <label class="hx-label"></label>
                 <div class="hx-help"></div>
               </div>

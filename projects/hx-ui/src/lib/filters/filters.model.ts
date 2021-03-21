@@ -18,6 +18,9 @@ export class FiltersModel implements IFiltersConfig {
   dateRangePickerDisplayMode?: DisplayModeEnum = DisplayModeEnum.showCustomOnly;
   dateRangePickerDisplayDateFormat?: string = 'dd/MM/yyyy';
   width: number;
+  disabled = false;
+  hidden = false;
+  isLoading = false;
 
   constructor(data?: IFiltersConfig) {
     Object.assign(this, data);
@@ -29,9 +32,13 @@ export class FiltersModel implements IFiltersConfig {
 
    setSelectedOption(option?: IFilterOption) {
     if (option) {
-      option.selected = true;
+      if (this.selected) {
+        this.selected.selected = false;
+      }
       this.selected = option;
+      option.selected =  true;
     } else {
+      // set preselected option
       if (this.options.length && !this.selected) {
         this.selected = this.options.find((opt) => {
           return opt.selected;
@@ -42,7 +49,9 @@ export class FiltersModel implements IFiltersConfig {
 
   setDefaultOption() {
     if (this.options.length) {
+      this.selected.selected = false;
       this.selected = this.options[this.defaultIndex];
+      this.selected.selected = true;
     }
   }
 

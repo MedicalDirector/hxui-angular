@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {CoreBaseComponent} from '../core-base.component';
-import {PageScrollService} from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import {DOCUMENT} from '@angular/common';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {OnlineStatusCode} from './online-status.code';

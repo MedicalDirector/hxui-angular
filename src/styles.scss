@@ -7,6 +7,9 @@ $icons-path: '../node_modules/@hxui/css/static/static/fonts/';
 @import   '~@angular/cdk/a11y-prebuilt.css';
 @import   '~@angular/cdk/text-field-prebuilt.css';
 
+/* Ng-Select */
+@import "../projects/ng-select/themes/hxui.theme.scss";
+@import "../projects/ng-select/themes/legacy.theme.scss";
 
 .helixLogo{
   width:2rem;

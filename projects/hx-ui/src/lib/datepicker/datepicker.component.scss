@@ -82,7 +82,16 @@
         align-content: space-around;
     }
 
-    &-day {
+    &-year{
+      margin:.5rem;
+
+      & .hx-button{
+        padding: .5rem;
+      }
+    }
+
+    &-day,
+    &-year {
         flex: 1 1 14%;
         height: 16.666%;
         display: flex;

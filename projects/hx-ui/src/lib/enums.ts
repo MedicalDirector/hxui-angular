@@ -3,7 +3,8 @@ export enum Context {
   Success,
   Warning,
   Danger,
-  Info
+  Info,
+  White
 }
 
 

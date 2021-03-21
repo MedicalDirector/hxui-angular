@@ -10,7 +10,7 @@
     <p>Add the TabularModule to AppModule or SharedModule.</p>
 
     <pre>
-      <code highlight [code]="code.usage"></code>
+      <code [highlight]="code.usage"></code>
     </pre>
 
 
@@ -28,9 +28,6 @@
              <button class="hx-button mr-1" (click)="printSelected($event)" [disabled]="isPrintDisabled()">
                 <div class="hx-icon-control"><i class="hx-icon icon-printer-outline"></i></div>
                 <div>Print</div>
-              </button>
-              <button class="hx-button mr-1" >
-                Print
               </button>
           </span>
             <button class="hx-button  mr-1" (click)="setCheckAllState(true)">Check All</button>
@@ -65,29 +62,29 @@
         <hx-tabset>
           <hx-tab heading="Template">
             <pre>
-              <code highlight [code]="code.exampleTemplate"></code>
+              <code [highlight]="code.exampleTemplate"></code>
             </pre>
           </hx-tab>
           <hx-tab heading="Component">
             <pre>
-              <code highlight [code]="code.exampleComponent"></code>
+              <code [highlight]="code.exampleComponent"></code>
             </pre>
           </hx-tab>
 
           <hx-tab heading="Service">
             <pre>
-              <code highlight [code]="code.exampleService"></code>
+              <code [highlight]="code.exampleService"></code>
             </pre>
           </hx-tab>
 
           <hx-tab heading="Mock Data">
             <pre>
-              <code highlight [code]="code.exampleMockData"></code>
+              <code [highlight]="code.exampleMockData"></code>
             </pre>
           </hx-tab>
           <hx-tab heading="User Model">
             <pre>
-              <code highlight [code]="code.exampleUserModel"></code>
+              <code [highlight]="code.exampleUserModel"></code>
             </pre>
           </hx-tab>
         </hx-tabset>
@@ -192,7 +189,7 @@
             <tr>
               <td>config</td>
               <td><kbd>ITabularConfig</kbd></td>
-              <td><pre><code highlight [code]="code.tabularConfig"></code></pre></td>
+              <td><pre><code [highlight]="code.tabularConfig"></code></pre></td>
               <td>Configuration options for a tabular instance, ex: Pagination, size etc..</td>
             </tr>
 
@@ -229,9 +226,9 @@
               <td><kbd>TabularColumnTypes</kbd></td>
               <td>
                 <p>The supported column data types:</p>
-                <pre><code highlight [code]="code.columnTypes"></code></pre>
+                <pre><code [highlight]="code.columnTypes"></code></pre>
                 <p>Note: Value for the <kbd>badge column type</kbd> must be in the following format</p>
-                <pre><code highlight [code]="code.badgeColumnType"></code></pre>
+                <pre><code [highlight]="code.badgeColumnType"></code></pre>
               </td>
             </tr>
             <tr>
@@ -291,6 +288,11 @@
             <td>cssClass</td>
             <td><kbd>string</kbd></td>
             <td>Add any css class names to each row.</td>
+          </tr>
+          <tr>
+            <td>checkboxDisabled</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Used to control disabled state of checkbox.</td>
           </tr>
           </tbody>
         </table>
@@ -378,6 +380,42 @@
 
       </div>
     </div>
+
+
+    <div class="hx-columns">
+        <div class="hx-column">
+          <h5 class="is-primary">IWithTooltip</h5>
+
+          <table class="hx-table is-striped">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>tooltip</td>
+                <td><kbd>
+                  {{ '{' }}
+                    config: TooltipConfig;
+                    content: string;
+                  {{ '}' }}
+                </kbd></td>
+                <td>Tooltip configuration and message to displayed in the tooltip</td>
+              </tr>
+              <tr>
+                <td>content</td>
+                <td><kbd>any</kbd></td>
+                <td>Content to be displayed in the cell</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
 
   </div>
 </section>

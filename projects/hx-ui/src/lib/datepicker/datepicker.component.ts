@@ -3,7 +3,7 @@ import {
   Component, OnInit, Output, Input, SimpleChanges, OnChanges,
   ChangeDetectorRef
 } from '@angular/core';
-import {Observable, Subject} from 'rxjs/index';
+import {BehaviorSubject, Observable, Subject} from 'rxjs/index';
 import {Visibility} from '../enums';
 import {DatepickerConfig} from './datepicker.config';
 import * as moment_ from 'moment';
@@ -15,6 +15,8 @@ const moment = moment_;
   styleUrls: ['./datepicker.component.scss']
 })
 export class DatepickerComponent implements OnInit, OnChanges {
+
+  isShowingYear$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public OpenDiv: Boolean = true;
   public showCalendar: Boolean = true;
   public tabname1: String;
@@ -42,8 +44,11 @@ export class DatepickerComponent implements OnInit, OnChanges {
   viewDate: Date;
   days: Array<Date> = new Array<Date>();
   week: Array<string> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  month: Array<string> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  years: Array<number> = new Array<number>() ;
   private presentDate: Date;
   private cellCount = 41;
+  private yearCellCount = 20;
   private _dp: DatepickerIntervalComponent | null;
   /** Subject for notifying that the calendar has been hidden from the view */
   private readonly _onHide: Subject<any> = new Subject();
@@ -65,6 +70,23 @@ export class DatepickerComponent implements OnInit, OnChanges {
       // Shifts the week to start from Monday, rather than Sunday, this causes the index to start at 1
       const dayOffset = date.getDay() === 0 ? 7 : date.getDay();
       this.days[i] = new Date(date.setDate(2 - dayOffset + i));
+      this.datePickerConfig.selectedDueDateConfiguration.selectedDueDate = this.days[i];
+    }
+  }
+
+  public next(){
+    if(!this.isShowingYear$.value){
+      this.nextMonth();
+    } else {
+      this.nextYear();
+    }
+  }
+
+  public previous(){
+    if(!this.isShowingYear$.value){
+      this.previousMonth();
+    } else {
+      this.previousYear();
     }
   }
 
@@ -99,10 +121,57 @@ export class DatepickerComponent implements OnInit, OnChanges {
     return this.validators.map((fn) => fn(inputDate)).reduce((prev, next) => prev || next, false);
   }
 
+
+  public isCurrentYear(year: number): boolean {
+    return year === this.presentDate.getFullYear()
+  }
+
+  public isSelectedYear(year: number): boolean {
+      return year === this.viewDate.getFullYear();
+  }
+
+  public isInvalidYear(year: number): boolean {
+    const newDate = new Date(new Date(this.viewDate.getTime()).setFullYear(year));
+    return this.validators.map((fn) => fn(newDate)).reduce((prev, next) => prev || next, false);
+  }
+
+  public previousYear(): void {
+   this.getYearCollection(this.years[0] - this.yearCellCount);
+  }
+
+  public nextYear(): void {
+    this.getYearCollection(this.years[0] + this.yearCellCount);
+  }
+
+  public setYear(year){
+    if (!this.isInvalidYear(year)) {
+      this.viewDate.setFullYear(year);
+      this.renderCalendar();
+      this.toggleYear();
+    }
+  }
+
   public setSelectedDate(date: Date): void {
     if (!this.isInvalidDay(date)) {
       this.selectedDate = date;
       this.onDateSelected(date);
+      this.datePickerConfig.selectedDueDateConfiguration.isSelectedFromInterval = false;
+    }
+  }
+
+  toggleYear(){
+    this.isShowingYear$.next(!this.isShowingYear$.value);
+    if (this.isShowingYear$.value) {
+      this.getYearCollection();
+    }
+  }
+
+  private getYearCollection(startFrom = null){
+    const yearsBeforeActive = 7;
+    const activeYear = (startFrom) ? startFrom : this.viewDate.getFullYear() - yearsBeforeActive;
+    this.years = [];
+    for(let i = 0; i < this.yearCellCount; i++) {
+      this.years.push((activeYear + i));
     }
   }
 

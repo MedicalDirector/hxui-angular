@@ -7,5 +7,6 @@
             [attr.id]="action.id"
             [ngClass]="action.css"
             (click)='executeCallback($event,action.callback)'>{{action.label}}</button>
+    <ng-content></ng-content>
   </div>
 </div>

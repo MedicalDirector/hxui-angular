@@ -9,7 +9,7 @@
     <p>Add the DropdownModule to AppModule or SharedModule.</p>
 
     <pre>
-      <code highlight [code]="code.usage"></code>
+      <code [highlight]="code.usage"></code>
     </pre>
 
     <hr>
@@ -42,7 +42,7 @@
     <div class="hx-columns">
       <div class="hx-column">
         <pre>
-         <code highlight [code]="code.example"></code>
+         <code [highlight]="code.example"></code>
         </pre>
       </div>
     </div>
@@ -86,7 +86,7 @@
     <div class="hx-columns">
       <div class="hx-column">
         <pre>
-         <code highlight [code]="code.maxWidthExample"></code>
+         <code [highlight]="code.maxWidthExample"></code>
         </pre>
       </div>
     </div>
@@ -126,12 +126,12 @@
         <hx-tabset>
           <hx-tab heading="Template">
             <pre>
-              <code highlight [code]="code.exampleTemplate"></code>
+              <code [highlight]="code.exampleTemplate"></code>
             </pre>
           </hx-tab>
           <hx-tab heading="Component">
             <pre>
-              <code highlight [code]="code.exampleComponent"></code>
+              <code [highlight]="code.exampleComponent"></code>
             </pre>
           </hx-tab>
         </hx-tabset>
@@ -139,6 +139,49 @@
     </div>
 
     <hr>
+
+    <h4 id="basicexample2">Example with createClipPathMask = true</h4>
+    <p>Allows interaction with the element that triggers the dropdown</p>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <div class="hx-dropdown" hxDropdown [autoClose]="true" [createClipPathMask]="true">
+          <div class="hx-input-control">
+            <input hxTextInput
+                   hxDropdownToggle
+                   id="directions"
+                   type="text"
+                   class="hx-input"
+                   maxlength="320"
+            />
+            <label for="directions" class="hx-label">Directions</label>
+            <div class="hx-help"></div>
+          </div>
+
+
+          <div class="hx-dropdown-menu" *hxDropdownMenu>
+            <div class="hx-dropdown-header">Dropdown header</div>
+            <a class="hx-dropdown-item"   hxDropdownItem>Action</a>
+            <a class="hx-dropdown-item"   hxDropdownItem>Another action</a>
+            <div class="hx-dropdown-divider"></div>
+            <a class="hx-dropdown-item"  hxDropdownItem>Action</a>
+            <a class="hx-dropdown-item"  hxDropdownItem>Another action</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h5 id="codeClip">Code</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <pre>
+         <code [highlight]="code.exampleClip"></code>
+        </pre>
+      </div>
+    </div>
+
+    <hr>
+
+
 
     <h4 id="api">API Reference</h4>
 
@@ -184,6 +227,12 @@
               <td><kbd>string</kbd></td>
               <td>The element id of the element the dropdown should get it's min width from</td>
             </tr>
+            <tr>
+              <td>createClipPathMask</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Creates clip-path mask in the backdrop overlay, which allows interaction with the element that triggered the dropdown</td>
+            </tr>
+
           </tbody>
         </table>
       </div>

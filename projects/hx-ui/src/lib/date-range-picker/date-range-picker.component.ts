@@ -32,7 +32,7 @@ import {DateSelectionTypeEnum} from "./date-selection-type.enum";
 })
 export class DateRangePickerComponent implements OnInit {
 
-  @ViewChild('dropdown') dropdown: DropdownDirective;
+  @ViewChild('dropdown', { static: true }) dropdown: DropdownDirective;
 
   @Input() intervalOptions: string[];
   @Input() placeholder: string = 'Date';
@@ -52,8 +52,8 @@ export class DateRangePickerComponent implements OnInit {
   // import to DateSElectionType into the instance of this class
   DateSelectionType = DateSelectionTypeEnum;
   currentTab: DateSelectionTypeEnum = DateSelectionTypeEnum.interval
-  fromDate: Date;
-  toDate: Date;
+  fromDate: Date = new Date();
+  toDate: Date = new Date();
   _displayRange: string;
 
   showIntervalOnly: boolean;

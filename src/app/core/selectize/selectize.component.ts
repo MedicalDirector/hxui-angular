@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { PageScrollService } from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/common';
 import { SelectizeConfig } from '../../../../projects/hx-ui/src/lib/selectize/selectize.config';
@@ -146,6 +146,14 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
     this._selectedCustomSelectValue2 = v;
   };
 
+  constructor(
+    protected pageScrollService: PageScrollService,
+    protected breakpointObserver: BreakpointObserver,
+    @Inject(DOCUMENT) protected document: any
+  ) {
+    super(pageScrollService, breakpointObserver, document);
+  }
+
 
 
   ngOnInit(): void {
@@ -157,6 +165,7 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
   private setMultiSelectizeConfig() {
      this.singleSelectizeConfig.label = 'Select a test';
      this.singleSelectizeConfig.mandatory = true;
+     this.singleSelectizeConfig.dropdownParent = 'body';
      this.multiSelectizeConfig.create = true;
      this.multiSelectizeConfig.maxItems = null;
      this.multiSelectizeConfig.hideSelected = true;
@@ -170,12 +179,8 @@ export class SelectizeComponent extends CoreBaseComponent implements OnInit {
      this.customSelectizeConfig.help = 'Select 1 or more tests';
   }
 
-
-  constructor(
-    protected pageScrollService: PageScrollService,
-    protected breakpointObserver: BreakpointObserver,
-    @Inject(DOCUMENT) protected document: any
-  ) {
-    super(pageScrollService, breakpointObserver, document);
+  onOptionAdded($event) {
+    alert('Option added: \n Label ' + $event.label + '\n Value: ' + $event.value);
   }
+
 }

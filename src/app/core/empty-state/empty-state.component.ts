@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {EmptyStateCode} from './empty-state.code';
-import {PageScrollService} from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import {DOCUMENT} from '@angular/common';
 import {CoreBaseComponent} from '../core-base.component';
 import {IEmptyStateAction} from '../../../../projects/hx-ui/src/lib/empty-state/empty-state-action.interface';
@@ -15,19 +15,6 @@ export class EmptyStateComponent extends CoreBaseComponent {
 
   code = new EmptyStateCode();
   emptyStateMsg = 'No current medications have been recorded';
-  emptyStateActions: IEmptyStateAction[] = [
-    {
-      id: 'currentNotTakingMedsBtn',
-      label: 'Not taking any medications',
-      css: '',
-      callback: [this.onNotTakingMeds]
-    },
-    {
-      id: 'currentAddMedsBtn',
-      label: 'Add current medication',
-      css: 'is-primary',
-      callback: [this.onAddMeds]
-    }];
 
   constructor(protected pageScrollService: PageScrollService,
               protected breakpointObserver: BreakpointObserver,

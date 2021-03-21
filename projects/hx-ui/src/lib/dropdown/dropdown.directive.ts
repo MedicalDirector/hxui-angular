@@ -14,7 +14,7 @@ import {
   OnInit,
   Optional,
   Output,
-  QueryList,
+  QueryList, Renderer2,
   ViewChildren,
   ViewContainerRef
 } from '@angular/core';
@@ -44,7 +44,7 @@ import { DropdownItemDirective } from './dropdown-item.directive';
   exportAs: 'hx-dropdown, hxa-dropdown'
 })
 export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
-  @ContentChild(DropdownMenuDirective) menu: DropdownMenuDirective;
+  @ContentChild(DropdownMenuDirective, { static: false }) menu: DropdownMenuDirective;
 
   _overlayRef: OverlayRef | null;
   private _portal: TemplatePortal;
@@ -91,11 +91,15 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   @Input()
   offsetX = 0;
 
+  @Input()
+  createClipPathMask = false;
+
   constructor(
     private _elementRef: ElementRef,
     private _viewContainerRef: ViewContainerRef,
     public overlay: Overlay,
-    public _config: DropdownConfig
+    public _config: DropdownConfig,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {}
@@ -131,6 +135,11 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     const overlayRef = this._createOverlay();
     this._detach();
     overlayRef.attach(this._portal);
+
+    if (this.createClipPathMask) {
+      this._addClipPathMaskStyles();
+    }
+
     this._setWidthsRelativeTo(overlayRef);
     this.isOpen = true;
     this.isOpenChange.emit(this.isOpen);
@@ -322,5 +331,17 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     }
 
     return { x, y };
+  }
+
+  // Create a clip path mask in the backdrop. The mask is a rectangle, the size of the viewcontainer
+  // This enables the user to interact with the contents of the viewcontainer without closing the dropdown
+  private _addClipPathMaskStyles() {
+    const HTMLEl = this._overlayRef.backdropElement;
+    const viewRefNativeEl = this._viewContainerRef.element.nativeElement;
+    const elRect = viewRefNativeEl.getBoundingClientRect();
+    if (elRect) {
+      const clipPathStyle = `polygon(0% 0%, 0% 100%, ${elRect.left}px 100%, ${elRect.left}px ${elRect.top}px, ${elRect.right}px ${elRect.top}px, ${elRect.right}px ${elRect.bottom}px, ${elRect.left}px ${elRect.bottom}px, ${elRect.left}px 100%, 100% 100%, 100% 0%)`;
+      this.renderer.setStyle(HTMLEl, 'clip-path', clipPathStyle);
+    }
   }
 }
