@@ -33,6 +33,7 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Mendez',
         rolename: 'GP',
         email: 'mercedes.mendez@medicaldirector.com',
+        rowDisabled: true,
         active: false,
         info: {
           icon: 'icon-information-outline',
@@ -46,7 +47,7 @@ export class InMemoryDataService implements InMemoryDbService {
         },
         created: this.getRandomDate(new Date(2015, 0, 1), new Date()),
         modified: this.getRandomDate(new Date(2015, 0, 1), new Date()),
-        checked: true,
+        checked: false,
         flag: {label: 'S', cssClass: ''}
       },
       {
@@ -57,6 +58,7 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Specialist',
         email: 'john.smith@medicaldirector.com',
         active: true,
+        rowDisabled: false,
         info: {
           icon: 'icon-information-outline',
           tooltip: {

@@ -29,7 +29,7 @@ exampleTemplate =
   <button class="hx-button" (click)="setCheckAllState(false)">Uncheck All</button>
   <div class="hx-divider"></div>
   <div>
-    <span class="is-info is-text-weight-bolder">{{totalSelected}}</span> of 
+    <span class="is-info is-text-weight-bolder">{{totalSelected}}</span> of
     <span class="is-info is-text-weight-bolder">{{rowData.length}}</span>
     <span class="is-text-weight-light"> items selected</span>
   </div>
@@ -325,6 +325,7 @@ export class InMemoryDataService implements InMemoryDbService {
         surname: 'Mendez',
         rolename: 'GP',
         email: 'mercedes.mendez@medicaldirector.com',
+        rowDisabled: true,
         active: false,
         info: {
           icon: 'icon-information-outline',
@@ -337,8 +338,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -346,10 +347,10 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
-        checked: true,
+        checked: false,
         flag: {label: 'S', cssClass: ''}
       },
       {
@@ -360,6 +361,7 @@ export class InMemoryDataService implements InMemoryDbService {
         rolename: 'Specialist',
         email: 'john.smith@medicaldirector.com',
         active: true,
+        rowDisabled: false,
         info: {
           icon: 'icon-information-outline',
           tooltip: {
@@ -371,8 +373,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -380,7 +382,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {
@@ -398,8 +400,8 @@ export class InMemoryDataService implements InMemoryDbService {
         email: 'julia.sampson@medicaldirector.com',
         active: true,
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -407,7 +409,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {
@@ -425,8 +427,8 @@ export class InMemoryDataService implements InMemoryDbService {
         email: 'john.gipps@medicaldirector.com',
         active: true,
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -434,7 +436,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-warning'},
@@ -460,8 +462,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -469,7 +471,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {label: 'S', cssClass: ''}
@@ -493,8 +495,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -502,7 +504,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-error'}
@@ -526,8 +528,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -535,7 +537,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-outlined'}
@@ -559,8 +561,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -568,7 +570,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {label: 'S', cssClass: ''},
@@ -593,8 +595,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -602,7 +604,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {label: 'Short', cssClass: ''}
@@ -626,8 +628,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -635,7 +637,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-outlined'}
@@ -659,8 +661,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -668,7 +670,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-primary'}
@@ -692,8 +694,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -701,7 +703,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-primary'}
@@ -725,8 +727,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -734,7 +736,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-primary'}
@@ -758,8 +760,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -767,7 +769,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {label: 'S', cssClass: ' is-outlined'}
@@ -791,8 +793,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -800,7 +802,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         context: Context.Warning
@@ -824,8 +826,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -833,7 +835,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date()
       },
@@ -856,8 +858,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -865,7 +867,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date()
       },
@@ -888,8 +890,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -897,7 +899,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date(),
         flag: {label: 'S', cssClass: 'is-outlined'}
@@ -921,8 +923,8 @@ export class InMemoryDataService implements InMemoryDbService {
           }
         },
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -930,7 +932,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date()
       },
@@ -953,8 +955,8 @@ export class InMemoryDataService implements InMemoryDbService {
         email: 'biggie.smalls@medicaldirector.com',
         active: true,
         created: {
-          content: new Date(), 
-          tooltip: { 
+          content: new Date(),
+          tooltip: {
             config: {
               placement: 'top',
               context: Context.White,
@@ -962,7 +964,7 @@ export class InMemoryDataService implements InMemoryDbService {
               maxWidth: 500
             },
             content: 'This is a sample tooltip'
-          } 
+          }
         },
         modified: new Date()
       }

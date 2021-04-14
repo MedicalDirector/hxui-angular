@@ -49,6 +49,9 @@
       [class.has-stripe-warning]="row.stripeContext && row.stripeContext === Context.Warning"
       [class.has-stripe-info]="row.stripeContext && row.stripeContext === Context.Info"
       [class.has-stripe-success]="row.stripeContext && row.stripeContext === Context.Success"
+      [class.is-disabled]="row.rowDisabled"
+
+      [ngStyle]="{opacity: row.rowDisabled ? '0.3' : '0.9', cursor: row.rowDisabled ? 'default' : 'pointer'}"
       [ngClass]="[row.cssClass? row.cssClass : '']"
       [attr.title]="row.title ? row.title : ''">
     <ng-container *ngFor="let col of columns" [ngTemplateOutlet]="column"
