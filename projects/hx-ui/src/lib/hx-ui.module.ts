@@ -16,7 +16,6 @@ import {FiltersModule} from './filters/filters.module';
 import {LoadersModule} from './loaders/loaders.module';
 import {TextInputModule} from './text-input/text-input.module';
 import {OnlineStatusService} from './utils/services/online-status.service';
-import {ToastrModule} from './toastr/toastr.module';
 import { DateRangePickerModule } from './date-range-picker/date-range-picker.module';
 import { DatePipe } from '@angular/common';
 import {IConfig, NgxMaskModule} from 'ngx-mask';
@@ -26,6 +25,9 @@ import {LineClampModule} from './line-clamp/line-clamp.module';
 import {InspectorService} from './inspector/inspector.service';
 import {InspectorModule} from './inspector/inspector.module';
 import {TimepickerModule} from "./time-picker/timepicker.module";
+import {HxaToastrModule} from "./toastr/hxa-toastr.module";
+import {ToastrModule} from "ngx-toastr";
+import {HxaToastrComponent} from "./toastr/hxa-toastr.component";
 
 export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
@@ -38,18 +40,27 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     DateRangePickerModule.forRoot(),
     AutoGrowModule.forRoot(), EmptyStateModule.forRoot(),
     AccordionModule, FiltersModule.forRoot(), LoadersModule,
-    TextInputModule, ToastrModule.forRoot(), NgxMaskModule.forRoot(mask_options),
+    TextInputModule, NgxMaskModule.forRoot(mask_options),
     DialogModule.forRoot(), InspectorModule.forRoot(),
-    LineClampModule, TimepickerModule
+    LineClampModule, TimepickerModule,  ToastrModule.forRoot({
+      toastComponent: HxaToastrComponent,
+      toastClass: 'hxa-toastr',
+      iconClasses: {
+        error: 'is-danger',
+        info: 'is-info',
+        success: 'is-success',
+        warning: 'is-warning',
+      }
+    })
   ],
   exports: [
     DatepickerModule, DateRangePickerModule, DropdownModule, ModalModule,
     PaginationModule, TabsModule, TooltipModule,
     TypeaheadModule, TabularModule, SelectizeModule,
     AutoGrowModule, EmptyStateModule, AccordionModule,
-    FiltersModule, LoadersModule, TextInputModule, ToastrModule,
+    FiltersModule, LoadersModule, TextInputModule,
     NgxMaskModule, DialogModule, LineClampModule,
-    InspectorModule, TimepickerModule
+    InspectorModule, TimepickerModule, HxaToastrModule
   ]
 })
 export class HxUiModule {

@@ -11,6 +11,9 @@ $icons-path: '~@hxui/css/static/static/fonts/';
 @import "../projects/ng-select/themes/hxui.theme.scss";
 @import "../projects/ng-select/themes/legacy.theme.scss";
 
+/* Ngx-toastr */
+@import '~ngx-toastr/toastr';
+
 .helixLogo{
   width:2rem;
 }

@@ -18,12 +18,12 @@ import {FiltersComponent} from './core/filters/filters.component';
 import {LoadersComponent} from './core/loaders/loaders.component';
 import {TextInputComponent} from './core/text-input/text-input.component';
 import {OnlineStatusComponent} from './core/online-status/online-status.component';
-import {ToastrComponent} from './core/toastr/toastr.component';
 import { DateRangePickerComponent } from './core/date-range-picker/date-range-picker.component';
 import {DialogsComponent} from './core/dialogs/dialogs.component';
 import {NgSelectComponent} from './core/ng-select/ng-select.component';
 import {InspectorComponent} from './core/inspector/inspector.component';
 import {LineClampComponent} from './core/line-clamp/line-clamp.component';
+import {NgxToastrComponent} from "./core/ngx-toastr/ngx-toastr.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/install-guide', pathMatch: 'full' },
@@ -47,9 +47,9 @@ const routes: Routes = [
   { path: 'loaders',  component: LoadersComponent },
   { path: 'text-input',  component: TextInputComponent },
   { path: 'online-status',  component: OnlineStatusComponent },
-  { path: 'toastr',  component: ToastrComponent },
   { path: 'ng-select',  component: NgSelectComponent },
   { path: 'line-clamp',  component: LineClampComponent },
+  { path: 'toastr',  component: NgxToastrComponent },
   { path: '**',  component: PageNotFoundComponent },
 ];
 @NgModule({

@@ -21,23 +21,14 @@ export * from './lib/dialog/dialog.module';
 export * from './lib/dialog/dialog.service';
 export * from './lib/dialog/dialog-overlay.ref';
 
-export * from './lib/toastr/toastr.directive';
-export * from './lib/toastr/toastr.component';
-export * from './lib/toastr/toastr.service';
-export * from './lib/toastr/toastr-config';
-export * from './lib/toastr/toastr.module';
-export * from './lib/toastr/toastr-injector';
-
-export * from './lib/toastr/portal/portal';
-export * from './lib/toastr/overlay/overlay';
-export * from './lib/toastr/overlay/overlay-container';
-export * from './lib/toastr/overlay/overlay-ref';
-
 export * from './lib/text-input/text-input.directive';
 export * from './lib/text-input/text-input.module';
 
 export * from './lib/loaders/loaders.component';
 export * from './lib/loaders/loaders.module';
+
+export * from './lib/toastr/hxa-toastr.component';
+export * from './lib/toastr/hxa-toastr.module';
 
 export * from './lib/filters/filters-type.enum';
 export * from './lib/filters/filters-config.interface';

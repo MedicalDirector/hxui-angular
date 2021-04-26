@@ -1,3 +1,9 @@
+[11.0.12](https://www.npmjs.com/package/@hxui/angular/v/11.0.12) (2021-04-26)
+
+### New component
+
+* **Toastr:** added 3rd party toastr component with hxui theme
+
 [11.0.11](https://www.npmjs.com/package/@hxui/angular/v/11.0.11) (2021-03-18)
 
 ### Enhancement

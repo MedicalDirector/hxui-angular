@@ -84,6 +84,10 @@ export class AppComponent {
           link: '/typeaheads'
         },
         {
+          name: 'Toastr',
+          link: '/toastr'
+        },
+        {
           name: 'Selectize',
           link: '/selectize',
           deprecated: true

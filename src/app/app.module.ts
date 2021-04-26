@@ -10,6 +10,8 @@ import {HxUiModule} from '../../projects/hx-ui/src/lib/hx-ui.module';
 import scss from 'highlight.js/lib/languages/scss';
 import typescript from 'highlight.js/lib/languages/typescript';
 import html from 'highlight.js/lib/languages/xml';
+import {ToastrModule} from "ngx-toastr";
+import {HxaToastrComponent} from "../../projects/hx-ui/src/lib/toastr/hxa-toastr.component";
 
 registerLocaleData(localeEn, 'en-AU');
 

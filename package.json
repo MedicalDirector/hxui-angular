@@ -43,6 +43,7 @@
     "ngx-highlightjs": "^3.0.3",
     "ngx-mask": "^11.1.4",
     "ngx-page-scroll-core": "7.0.1",
+    "ngx-toastr": "^13.2.1",
     "rxjs": "^6.6.3",
     "selectize": "^0.12.4",
     "tslib": "^2.0.0",

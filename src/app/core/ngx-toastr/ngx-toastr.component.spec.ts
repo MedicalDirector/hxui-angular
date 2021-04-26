@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToastrComponent } from './toastr.component';
+import { NgxToastrComponent } from './ngx-toastr.component';
 
-describe('ToastrComponent', () => {
-  let component: ToastrComponent;
-  let fixture: ComponentFixture<ToastrComponent>;
+describe('NgSelectComponent', () => {
+  let component: NgxToastrComponent;
+  let fixture: ComponentFixture<NgxToastrComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToastrComponent ]
+      declarations: [ NgxToastrComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ToastrComponent);
+    fixture = TestBed.createComponent(NgxToastrComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

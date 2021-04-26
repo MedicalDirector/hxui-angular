@@ -7,10 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {HighlightModule} from 'ngx-highlightjs';
 import {HxUiModule} from '../../../projects/hx-ui/src/lib/hx-ui.module';
-import {ToastrModule} from '../../../projects/hx-ui/src/lib/toastr/toastr.module';
 import { NgSelectModule } from '@ng-select/ng-select'
 import {NgOptionHighlightModule} from "@ng-select/ng-option-highlight";
 import {NgxPageScrollCoreModule} from "ngx-page-scroll-core";
+import {ToastrModule} from "ngx-toastr";
 
 
 @NgModule({
@@ -25,7 +25,6 @@ import {NgxPageScrollCoreModule} from "ngx-page-scroll-core";
     HxUiModule,
     NgxPageScrollCoreModule,
     HighlightModule,
-    ToastrModule,
     NgSelectModule,
     NgOptionHighlightModule
   ],
@@ -41,7 +40,6 @@ import {NgxPageScrollCoreModule} from "ngx-page-scroll-core";
     HxUiModule,
     NgxPageScrollCoreModule,
     HighlightModule,
-    ToastrModule,
     NgSelectModule,
     NgOptionHighlightModule
   ]
