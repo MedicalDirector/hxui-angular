@@ -13,7 +13,7 @@
       (focus)="onFocused($event)"
       (keydown.Tab)="onTab($event)"
        mask="d0/M0/0000"
-       [clearIfNotMatch]="true">
+       [clearIfNotMatch]="true" id="datePicker" >
     <label class="hx-label" *ngIf="placeholder">{{placeholder}} <sup *ngIf="required">*</sup></label>
     <div class="hx-help">{{helpText}}</div>
   </div>

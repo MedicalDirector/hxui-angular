@@ -54,11 +54,11 @@
               <li>
                 <a [id]="filter?.id + '-trigger'" title="{{filter.selected?.label}}">
                   <div class="hx-list-content dateRangePicker">
-                    <hxa-date-range-picker
+                    <hxa-date-range-picker 
                       [dateFormat]="filter.dateRangePickerDisplayDateFormat"
                       [displayMode]="filter.dateRangePickerDisplayMode"
                       [intervalOptions]="getIntervalOptions(filter.options)" [defaultDateRange]="filter.sourceValue"
-                      [id]="i"
+                      [id]="filter?.id"
                       [showCaretDown]=false
                       (onDateRangeSelected)="onDateRangeFilterChange(filter,$event)"
                       #dateRangePicker>
