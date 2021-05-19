@@ -58,7 +58,7 @@
                       [dateFormat]="filter.dateRangePickerDisplayDateFormat"
                       [displayMode]="filter.dateRangePickerDisplayMode"
                       [intervalOptions]="getIntervalOptions(filter.options)" [defaultDateRange]="filter.sourceValue"
-                      [id]="filter?.id"
+                      [id]="filter?.id + '-dateRangePicker'"
                       [showCaretDown]=false
                       (onDateRangeSelected)="onDateRangeFilterChange(filter,$event)"
                       #dateRangePicker>

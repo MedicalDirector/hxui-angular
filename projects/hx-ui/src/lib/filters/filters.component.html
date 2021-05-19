@@ -53,7 +53,7 @@
         [intervalOptions]="getIntervalOptions(filter.options)"
         (onDateRangeSelected)="onDateRangeFilterChange(filter,$event)"
         [defaultDateRange]="filter.sourceValue"
-        [id]="filter?.id"
+        [id]="filter?.id + '-dateRangePicker'"
         #dateRangePicker>
       </hxa-date-range-picker>
     </div>
