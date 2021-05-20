@@ -1,6 +1,6 @@
 {
   "name": "@hxui/angular",
-  "version": "8.2.21",
+  "version": "8.2.23",
   "license": "MIT",
   "peerDependencies": {
     "@angular/animations": "^8.2.13",

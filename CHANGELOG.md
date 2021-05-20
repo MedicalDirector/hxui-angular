@@ -1,3 +1,9 @@
+## [8.2.23](https://www.npmjs.com/package/@hxui/angular/v/8.2.23) (2021-05-20)
+
+### Enhancement
+
+* **Filter group:** Added dynamic ids to date ranger picker filter
+
 ## [8.2.21](https://www.npmjs.com/package/@hxui/angular/v/8.2.21) (2021-03-22)
 
 ### Enhancement
