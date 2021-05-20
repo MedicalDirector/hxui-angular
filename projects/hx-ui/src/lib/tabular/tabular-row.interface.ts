@@ -48,6 +48,8 @@ export interface ITabularRow {
    * Used to disable/enable checkbox
    */
   checkboxDisabled?: boolean;
+
+  rowDisabled?: boolean;
 }
 
 
