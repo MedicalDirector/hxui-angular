@@ -1,4 +1,4 @@
-[11.0.12](https://www.npmjs.com/package/@hxui/angular/v/11.0.12) (2021-04-26)
+[11.0.12 - 11.0.13 - 11.0.14](https://www.npmjs.com/package/@hxui/angular/v/11.0.12) (2021-04-26)
 
 ### New component
 
