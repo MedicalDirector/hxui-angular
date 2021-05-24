@@ -1,3 +1,9 @@
+[11.0.15](https://www.npmjs.com/package/@hxui/angular/v/11.0.15) (2021-05-24)
+
+### Bugfix
+
+* **Datepicker:** fixed issue with touched state
+
 [11.0.12 - 11.0.13 - 11.0.14](https://www.npmjs.com/package/@hxui/angular/v/11.0.12) (2021-04-26)
 
 ### New component

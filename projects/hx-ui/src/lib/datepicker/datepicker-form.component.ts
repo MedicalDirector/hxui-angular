@@ -2,7 +2,14 @@ import {
   Component, Input, Output, OnInit, ElementRef, HostListener, EventEmitter, forwardRef,
   OnDestroy, NgZone, ComponentFactoryResolver, ViewContainerRef, Optional, ViewChild, ContentChild, OnChanges, SimpleChanges, DoCheck
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, Validator, AbstractControl } from '@angular/forms';
+import {
+  NG_VALUE_ACCESSOR,
+  NG_VALIDATORS,
+  ControlValueAccessor,
+  Validator,
+  AbstractControl,
+  FormGroupDirective
+} from '@angular/forms';
 import {
   FlexibleConnectedPositionStrategy,
   HorizontalConnectionPos,
@@ -36,6 +43,7 @@ import {TextInputDirective} from '../text-input/text-input.directive';
 export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Validator, OnDestroy, DoCheck {
 
   @ViewChild(TextInputDirective, { static: true }) datePickerFormInput: TextInputDirective;
+  @ViewChild('datePickerForm', {static: true}) datePickerForm: FormGroupDirective;
 
   _overlayRef: OverlayRef | null;
   _calendarInstance: DatepickerComponent | null;
@@ -195,6 +203,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     this.propogateChange(date);
     this.onDateChange.emit(date);
     this._updateLabelStyle();
+    this.datePickerForm.control.markAsTouched();
   }
 
   public onDateSelectEvent = (inputDate: Date): void => {
