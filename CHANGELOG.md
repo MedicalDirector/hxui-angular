@@ -1,8 +1,9 @@
-[11.0.16](https://www.npmjs.com/package/@hxui/angular/v/11.0.16) (2021-09-26)
+[11.0.16, 11.0.17](https://www.npmjs.com/package/@hxui/angular/v/11.0.16) (2021-09-26)
 
 ### Bugfix
 
 * **Datepicker:** fixed issue with 30th of Feb rolling over (normalising) to the 1st of march
+* **Datepicker:** Added * to label when required attribute = true
 
 [11.0.15](https://www.npmjs.com/package/@hxui/angular/v/11.0.15) (2021-05-24)
 
