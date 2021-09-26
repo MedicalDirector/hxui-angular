@@ -15,7 +15,7 @@
       (keydown.Tab)="onTab($event)"
        [mask]="maskPattern"
        [clearIfNotMatch]="true">
-    <label class="hx-label" *ngIf="placeholder">{{placeholder}} <sup *ngIf="required">*</sup></label>
+    <label class="hx-label" *ngIf="placeholder">{{placeholder}} <ng-container *ngIf="required">*</ng-container></label>
     <div class="hx-help">{{helpText}}</div>
   </div>
   <i class="{{icon}} has-pointer" *ngIf="iconPlacement === 'right'" (click)="onFocused($event)"></i>
