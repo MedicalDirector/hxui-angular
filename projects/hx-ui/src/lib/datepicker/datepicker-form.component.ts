@@ -111,6 +111,9 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   @Input()
   dueDateInterval = '0 day(s)'; // '1 week(s)' | '2 month(s)' | '3 year(s)'
 
+  @Input()
+  maskPattern = 'd0/M0/0000'
+
   @Output()
   onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
@@ -246,7 +249,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
         dateArray.splice(1, 0, day);
 
         const parseInput: number = Date.parse(dateArray.join('/'));
-        if (!isNaN(parseInput)) {
+        if (!isNaN(parseInput) && parseInput.toString() === new Date(parseInput).toISOString()) {
           return new Date(parseInput);
         }
       }
