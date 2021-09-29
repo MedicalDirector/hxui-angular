@@ -24,6 +24,8 @@ import {Directionality} from '@angular/cdk/bidi';
 import {DatepickerConfig} from './datepicker.config';
 import { DatepickerIntervalComponent } from './datepicker-interval.component';
 import {TextInputDirective} from '../text-input/text-input.directive';
+import * as moment_ from 'moment';
+const moment = moment_;
 
 @Component({
   selector: 'hxa-datepicker-input, hxa-datepicker-form',
@@ -76,7 +78,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   placeholder = 'Date';
 
   @Input()
-  helpText = 'Please select a date';
+  helpText = 'Please select a valid date';
 
   @Input()
   helpTextVisible = false;
@@ -241,16 +243,12 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   }
 
   public parseDate(inputDate: string | Date): Date {
-    // Since Date.Parse() only acceps m/d/y dates, we have to swap the day and month
     if((typeof inputDate) === 'string'){
       const dateArray = (inputDate as string).split(/[.,\/ -]/);
       if (dateArray.length === 3 && dateArray[2].length !== 0) {
-        const day: string = dateArray.shift();
-        dateArray.splice(1, 0, day);
-
-        const parseInput: number = Date.parse(dateArray.join('/'));
-        if (!isNaN(parseInput) && parseInput.toString() === new Date(parseInput).toISOString()) {
-          return new Date(parseInput);
+        const momentDate = moment(inputDate, 'DD/MM/YYYY', true);
+        if (momentDate.isValid()) {
+          return momentDate.toDate();
         }
       }
       return null;

@@ -34,7 +34,7 @@
               [defaultToPresentDate]="false"
               formControlName="dayte_basic"
               (onDateChange)="onDateChangedBasic($event)"
-              [required]="false"
+              [required]="true"
             ></hxa-datepicker-input>
             <div>
               <span>Emitted Date object: <b>{{basicForm.get('dayte_basic').value}}</b></span><br>
@@ -73,6 +73,7 @@
             align="bottom"
             [interval]="true"
             formControlName="dayte"
+            [required]="true"
             [allowPreviousDates]="true"
           ></hxa-datepicker-input>
           <div>
