@@ -87,6 +87,9 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   isWarning = false;
 
   @Input()
+  isDanger = false;
+
+  @Input()
   icon = 'hx-icon icon-calendar-outline';
 
   @Input()
