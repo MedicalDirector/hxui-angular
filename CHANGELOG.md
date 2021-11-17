@@ -1,3 +1,9 @@
+[11.0.20](https://www.npmjs.com/package/@hxui/angular/v/11.0.20) (2021-11-17)
+
+### Enhancement
+
+* **Inspector:** add config to disable backdrop click
+
 [11.0.16, 11.0.17, 11.0.18, 11.0.19](https://www.npmjs.com/package/@hxui/angular/v/11.0.16) (2021-09-26)
 
 ### Bugfix

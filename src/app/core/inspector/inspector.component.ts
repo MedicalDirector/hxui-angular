@@ -28,7 +28,7 @@ export class InspectorComponent extends CoreBaseComponent implements OnInit {
   }
 
   openInspector = () => {
-    const inspector: InspectorOverlayRef = this.inspectorService.open(BasicCustomInspectorComponent, { }, {
+    const inspector: InspectorOverlayRef = this.inspectorService.open(BasicCustomInspectorComponent, { closeOnBackdropClick: false }, {
       visitId: 10,
       onClose: (data) => {
         console.log(data);

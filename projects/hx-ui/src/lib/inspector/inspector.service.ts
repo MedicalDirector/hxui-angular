@@ -11,6 +11,7 @@ interface InspectorConfig {
   panelClass?: string | string[];
   hasBackdrop?: boolean;
   backdropClass?: string;
+  closeOnBackdropClick?: boolean;
   size?: InspectorSize;
   location?: InspectorLocation;
   hasClose?: boolean;
@@ -19,6 +20,7 @@ interface InspectorConfig {
 const DEFAULT_CONFIG: InspectorConfig = {
   hasBackdrop: true,
   backdropClass: 'hx-modal-background',
+  closeOnBackdropClick: true,
   panelClass: [],
   hasClose: true
 };
@@ -70,7 +72,7 @@ export class InspectorService {
     inspectorRef.inspectorInstance = inspectorInstance;
 
     // Subscribe to a stream that emits when the backdrop was clicked
-    overlayRef.backdropClick().subscribe(_ => inspectorRef.close());
+    overlayRef.backdropClick().subscribe(_ => config.closeOnBackdropClick && inspectorRef.close());
 
     // subscribe to events when close animation completes
     inspectorInstance.onSlideOutComplete$.subscribe(_ => {
