@@ -72,7 +72,12 @@ export class InspectorService {
     inspectorRef.inspectorInstance = inspectorInstance;
 
     // Subscribe to a stream that emits when the backdrop was clicked
-    overlayRef.backdropClick().subscribe(_ => config.closeOnBackdropClick && inspectorRef.close());
+    overlayRef.backdropClick().subscribe(_ => {
+      if(config.closeOnBackdropClick){
+        inspectorRef.close();
+      }
+      inspectorRef.inspectorInstance.onBackdropClick();
+    });
 
     // subscribe to events when close animation completes
     inspectorInstance.onSlideOutComplete$.subscribe(_ => {

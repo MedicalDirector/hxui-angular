@@ -1,3 +1,9 @@
+[11.0.21](https://www.npmjs.com/package/@hxui/angular/v/11.0.20) (2021-11-24)
+
+### Enhancement
+
+* **Inspector:** add event on backdrop click (onBackDropClick$)
+
 [11.0.20](https://www.npmjs.com/package/@hxui/angular/v/11.0.20) (2021-11-17)
 
 ### Enhancement

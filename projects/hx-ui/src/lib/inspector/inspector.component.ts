@@ -109,6 +109,7 @@ export class InspectorComponent implements OnInit {
   onSlideOutComplete$ = new Subject<boolean>();
   onSlideOutStart$ = new Subject<boolean>();
   onResizeComplete$ = new Subject<InspectorSize>();
+  onBackDropClick$ = new Subject<boolean>();
   componentPortal: ComponentPortal<any>;
   parameters: Object = {};
   state = 'slideOut';
@@ -175,6 +176,7 @@ export class InspectorComponent implements OnInit {
     // slide out done
     if ($event.fromState === 'slideIn' && $event.toState === 'slideOut') {
       this.onSlideOutComplete$.next(true);
+      this.detachComponent();
     }
   }
 
@@ -215,6 +217,14 @@ export class InspectorComponent implements OnInit {
 
     // pass the @Input parameters to the instance
     Object.assign(componentRef.instance, this.parameters);
+  }
+
+  detachComponent(){
+    this.portalHost.detach();
+  }
+
+  onBackdropClick(){
+    this.onBackDropClick$.next(true);
   }
 
 }
