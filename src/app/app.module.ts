@@ -23,9 +23,7 @@ registerLocaleData(localeEn, 'en-AU');
   providers: [{
     provide: HIGHLIGHT_OPTIONS,
     useValue: <HighlightOptions>{
-      lineNumbers: true,
-      // The following is just a workaround to activate the line numbers script since dynamic import does not work in Stackblitz
-      lineNumbersLoader: () => null
+      lineNumbers: true
     }
   }],
   bootstrap: [AppComponent]
