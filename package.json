@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "packagr": "ng build HxUi",
-    "install-peers": "npm install array-sort-by @angular/animations @angular/cdk @angular/cli @angular/common @angular/compiler @angular/core @angular/forms @angular/http @angular/platform-browser @angular/platform-browser-dynamic @angular/platform-server @angular/router @hxui/css angular-in-memory-web-api core-js jquery lodash.clonedeep ngx-highlightjs ngx-page-scroll rxjs selectize zone.js",
+    "install-peers": "npm install array-sort-by @angular/animations @angular/cdk @angular/cli @angular/common @angular/compiler @angular/core @angular/forms @angular/http @angular/platform-browser @angular/platform-browser-dynamic @angular/platform-server @angular/router @hxui/css angular-in-memory-web-api core-js jquery lodash.clonedeep ngx-page-scroll rxjs selectize zone.js",
     "deploy": "npm run install-peers && npm run build",
     "HxUi-UnitTests": "ng test HxUi --code-coverage=true --watch=false --browsers=ChromeHeadless",
     "HxUi-Build": "ng build HxUi",
