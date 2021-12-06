@@ -1,73 +1,72 @@
-[11.0.21](https://www.npmjs.com/package/@hxui/angular/v/11.0.20) (2021-11-24)
+## [11.0.21](https://www.npmjs.com/package/@hxui/angular/v/11.0.20) (2021-11-24)
 
 ### Enhancement
 
 * **Inspector:** add event on backdrop click (onBackDropClick$)
 
-[11.0.20](https://www.npmjs.com/package/@hxui/angular/v/11.0.20) (2021-11-17)
+## [11.0.20](https://www.npmjs.com/package/@hxui/angular/v/11.0.20) (2021-11-17)
 
 ### Enhancement
 
 * **Inspector:** add config to disable backdrop click
 
-[11.0.16, 11.0.17, 11.0.18, 11.0.19](https://www.npmjs.com/package/@hxui/angular/v/11.0.16) (2021-09-26)
+## [11.0.16, 11.0.17, 11.0.18, 11.0.19](https://www.npmjs.com/package/@hxui/angular/v/11.0.16) (2021-09-26)
 
 ### Bugfix
 
 * **Datepicker:** fixed issue with 30th of Feb rolling over (normalising) to the 1st of march
 * **Datepicker:** Added * to label when required attribute = true
 
-[11.0.15](https://www.npmjs.com/package/@hxui/angular/v/11.0.15) (2021-05-24)
+## [11.0.15](https://www.npmjs.com/package/@hxui/angular/v/11.0.15) (2021-05-24)
 
 ### Bugfix
 
 * **Datepicker:** fixed issue with touched state
 
-[11.0.12 - 11.0.13 - 11.0.14](https://www.npmjs.com/package/@hxui/angular/v/11.0.12) (2021-04-26)
+## [11.0.12 - 11.0.13 - 11.0.14](https://www.npmjs.com/package/@hxui/angular/v/11.0.12) (2021-04-26)
 
 ### New component
 
 * **Toastr:** added 3rd party toastr component with hxui theme
 
-[11.0.11](https://www.npmjs.com/package/@hxui/angular/v/11.0.11) (2021-03-18)
+## [11.0.11](https://www.npmjs.com/package/@hxui/angular/v/11.0.11) (2021-03-18)
 
 ### Enhancement
 
 * **Date picker:** added help text visible and is warning inputs
 
 
-[11.0.10](https://www.npmjs.com/package/@hxui/angular/v/11.0.10) (2021-03-11)
+## [11.0.10](https://www.npmjs.com/package/@hxui/angular/v/11.0.10) (2021-03-11)
 
 ### Bugfix
 
 * **Filters:** Fix issue with 'ALL' label when single filter only has 2 or less options
 
-[11.0.9](https://www.npmjs.com/package/@hxui/angular/v/11.0.9) (2021-02-15)
+## [11.0.9](https://www.npmjs.com/package/@hxui/angular/v/11.0.9) (2021-02-15)
 
 ### Bugfix
 
 * **Inspector:** Fix for dynamic width and orientation change
 
-[11.0.8](https://www.npmjs.com/package/@hxui/angular/v/11.0.8) (2020-12-22)
+## [11.0.8](https://www.npmjs.com/package/@hxui/angular/v/11.0.8) (2020-12-22)
 
 ### New component 
 
 * **Timepicker:** Add time picker component
 
-[11.0.7](https://www.npmjs.com/package/@hxui/angular/v/11.0.7) (2020-12-22)
+## [11.0.7](https://www.npmjs.com/package/@hxui/angular/v/11.0.7) (2020-12-22)
 
 ### Enhancement 
 
 * **Inspector:** Add config option to remove close button
 
-[11.0.6](https://www.npmjs.com/package/@hxui/angular/v/11.0.6) (2020-12-18)
+## [11.0.6](https://www.npmjs.com/package/@hxui/angular/v/11.0.6) (2020-12-18)
 
 ### Enhancement 
 
 * **Dialog:** Added config option to disable backdrop click
 
-## 
-[11.0.5](https://www.npmjs.com/package/@hxui/angular/v/11.0.5) (2020-12-18)
+## [11.0.5](https://www.npmjs.com/package/@hxui/angular/v/11.0.5) (2020-12-18)
 
 ### Enhancement 
 
