@@ -7,8 +7,19 @@ import { registerLocaleData } from '@angular/common';
 import localeEn from '@angular/common/locales/en-AU';
 import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highlightjs';
 import {HxUiModule} from '../../projects/hx-ui/src/lib/hx-ui.module';
+import scss from 'highlight.js/lib/languages/scss';
+import typescript from 'highlight.js/lib/languages/typescript';
+import html from 'highlight.js/lib/languages/xml';
 
 registerLocaleData(localeEn, 'en-AU');
+
+export function hljsLanguages() {
+  return [
+    {name: 'typescript', func: typescript},
+    {name: 'scss', func: scss},
+    {name: 'html', func: html}
+  ];
+}
 
 @NgModule({
   declarations: [
