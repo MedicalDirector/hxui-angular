@@ -1,3 +1,4 @@
+import { SafeHtml } from "@angular/platform-browser";
 import {TooltipConfig} from '../tooltip/tooltip.config';
 
 export enum TabularColumnTypes {
@@ -11,6 +12,11 @@ export enum TabularColumnTypes {
   Badge,
   Number,
   Html
+}
+
+export interface ITabularColumnOptions {
+  [key: string]: unknown;
+  header?: SafeHtml;
 }
 
 export abstract class ITabularColumn {
@@ -30,9 +36,25 @@ export abstract class ITabularColumn {
   dataType: TabularColumnTypes;
 
   /**
+   * Is column sortable?
+   */
+  sortable: boolean;
+
+  /**
    * Css class name to append to columns
    */
   cssClass: string;
+
+  /**
+   * Is column hidden?
+   */
+  hidden: boolean;
+
+  /**
+   * Optional parameters
+   * - header: replace column label with html string
+   */
+  options?: ITabularColumnOptions;
 }
 
 
@@ -47,7 +69,7 @@ export interface ITabularColumnIconType {
   icon: string;
   cssClass?: string;
   tooltip: {
-    config: TooltipConfig,
+    config: TooltipConfig;
     content: string;
   };
 }

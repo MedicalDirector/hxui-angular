@@ -1,4 +1,10 @@
-## [11.0.21](https://www.npmjs.com/package/@hxui/angular/v/11.0.20) (2021-11-24)
+## [11.1.0](https://www.npmjs.com/package/@hxui/angular/v/11.1.0) (2022-03-08)
+
+### Enhancement
+
+* **Tabular:** Add support to replace column labels with html
+
+## [11.0.21](https://www.npmjs.com/package/@hxui/angular/v/11.0.21) (2021-11-24)
 
 ### Enhancement
 
