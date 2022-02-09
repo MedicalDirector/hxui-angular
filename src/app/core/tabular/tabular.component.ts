@@ -32,12 +32,16 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
   code = new TabularCode();
   searchTerm: string;
   rowData: ITabularRow[] = [];
+
+  labelHTML =
+    '<span class="hx-icon-control" title="Role"><i class="hx-icon icon-person"></i></span>';
+
   columnData: TabularColumn[] = [
     new TabularColumn('checkboxes', 'Checkboxes', TabularColumnTypes.Checkbox, false),
     new TabularColumn('id', 'Id', TabularColumnTypes.Number, true),
     new TabularColumn('usercode', 'User Code', TabularColumnTypes.String, true),
     new TabularColumn('name', 'Name', TabularColumnTypes.Html, true),
-    new TabularColumn('rolename', 'Role', TabularColumnTypes.String, true),
+    new TabularColumn('rolename', 'Role', TabularColumnTypes.String, true, '', false, { header: this.labelHTML}),
     new TabularColumn('flag', 'Flag', TabularColumnTypes.Badge, false),
     new TabularColumn('created', 'Created', TabularColumnTypes.Date, true),
     new TabularColumn('modified', 'Modified', TabularColumnTypes.DateTime, true),

@@ -16,13 +16,21 @@
 
         <!-- sortable column -->
         <a class="tabular__sorter" href="#" *ngIf="col.sortable && col.dataType != TabularColumnTypes.Checkbox"
-          (click)="onSortClickHandler(col.id, col.dataType)">{{col.label}} <i class="hx-icon icon-arrow-up is-small"
+          (click)="onSortClickHandler(col.id, col.dataType)">
+          <span *ngIf="col.options && col.options.header" [innerHTML]="col.options && col.options.header"></span>
+          <span *ngIf="!col.options || !(col.options && col.options.header)">{{ col.label }}</span>
+          <i class="hx-icon icon-arrow-up is-small"
             [class.icon-arrow-up]="isColumnSorted(col.id, SortByDirection.Ascending)"
             [class.icon-arrow-down]="isColumnSorted(col.id, SortByDirection.Descending)"
-            *ngIf="isColumnSorted(col.id, SortByDirection.Descending) || isColumnSorted(col.id, SortByDirection.Ascending)"></i></a>
+            *ngIf="isColumnSorted(col.id, SortByDirection.Descending) || isColumnSorted(col.id, SortByDirection.Ascending)"
+          ></i>
+        </a>
 
         <!-- non sortable column -->
-        <span *ngIf="!col.sortable && col.dataType !== TabularColumnTypes.Checkbox">{{col.label}}</span>
+        <span *ngIf="!col.sortable && col.dataType !== TabularColumnTypes.Checkbox">
+          <span *ngIf="col.options && col.options.header" [innerHTML]="col.options && col.options.header"></span>
+          <span *ngIf="!col.options || !(col.options && col.options.header)">{{ col.label }}</span>
+        </span>
 
         <!-- checkbox column -->
         <div *ngIf="col.dataType === TabularColumnTypes.Checkbox" class="hx-checkbox-control">
