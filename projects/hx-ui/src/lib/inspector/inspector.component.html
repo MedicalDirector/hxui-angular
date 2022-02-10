@@ -1,17 +1,24 @@
-<div class="hxa-inspector" *ngIf="location === InspectorLocation.Right"
-     [@slideFromRight]="state"
-     (@slideFromRight.done)="slideDone($event)"
-     (@slideFromRight.start)="slideStart($event)"
-     [@sizeFromRight]="size"
-     (@sizeFromRight.done)="sizeDone($event)">
+<div
+  class="hxa-inspector"
+  *ngIf="location === InspectorLocation.Right"
+  [@slideFromRight]="state"
+  (@slideFromRight.done)="slideDone($event)"
+  (@slideFromRight.start)="slideStart($event)"
+  [@sizeFromRight]="size"
+  (@sizeFromRight.done)="sizeDone($event)"
+>
   <div class="portalHost"></div>
-  <a class="close" [class.hide]="hideClose" (click)="close()"></a>
+  <a class="close right" [ngClass]="{ 'hide': hideClose }" *ngIf="hasClose" (click)="close()"></a>
 </div>
-<div class="hxa-inspector" *ngIf="location === InspectorLocation.Left"
-     [@slideFromLeft]="state"
-     (@slideFromLeft.done)="slideDone($event)"
-     (@slideFromLeft.start)="slideStart($event)"
-     [@sizeFromLeft]="size"
-     (@sizeFromLeft.done)="sizeDone($event)">
+<div
+  class="hxa-inspector"
+  *ngIf="location === InspectorLocation.Left"
+  [@slideFromLeft]="state"
+  (@slideFromLeft.done)="slideDone($event)"
+  (@slideFromLeft.start)="slideStart($event)"
+  [@sizeFromLeft]="size"
+  (@sizeFromLeft.done)="sizeDone($event)"
+>
   <div class="portalHost"></div>
+  <a class="close left" [ngClass]="{ 'hide': hideClose }" *ngIf="hasClose" (click)="close()"></a>
 </div>

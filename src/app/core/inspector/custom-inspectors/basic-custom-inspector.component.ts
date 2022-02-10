@@ -67,7 +67,7 @@ export class BasicCustomInspectorComponent implements OnInit, AfterViewInit, OnD
   }
 
   openInspector = (size: InspectorSize) => {
-    const inspector: InspectorOverlayRef = this.inspectorService.open(BasicCustomInspectorComponent, { size: size }, {
+    this.inspectorService.open(BasicCustomInspectorComponent, { size: size, hasClose: false, closeOnBackdropClick: true }, {
       visitId: 11,
       onClose: (data) => {
         console.log(data);

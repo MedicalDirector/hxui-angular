@@ -1,3 +1,10 @@
+## [8.2.24](https://www.npmjs.com/package/@hxui/angular/v/8.2.23) (2021-05-20)
+
+### Enhancement
+
+* **Tabular:** Added support for icons in column headers
+* **Inspector:** Added support for controlling close icon and close on backdrop click
+
 ## [8.2.23](https://www.npmjs.com/package/@hxui/angular/v/8.2.23) (2021-05-20)
 
 ### Enhancement
