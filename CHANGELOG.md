@@ -1,4 +1,4 @@
-## [8.2.24](https://www.npmjs.com/package/@hxui/angular/v/8.2.23) (2021-05-20)
+## [8.2.24](https://www.npmjs.com/package/@hxui/angular/v/8.2.24) (2022-02-10)
 
 ### Enhancement
 
