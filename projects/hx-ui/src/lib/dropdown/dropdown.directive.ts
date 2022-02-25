@@ -39,6 +39,30 @@ import { Directionality } from '@angular/cdk/bidi';
 import { DropdownToggleDirective } from './dropdown-toggle.directive';
 import { DropdownItemDirective } from './dropdown-item.directive';
 
+type DropDownPosition = 
+  | 'top' // equivalent to 'top-start'
+  | 'bottom' // equivalent to 'bottom-start'
+  | 'left' // equivalent to 'left-center'
+  | 'right' // equivalent to 'right-center'
+  | 'top-start'
+  | 'top-center'
+  | 'top-end'
+  | 'bottom-start'
+  | 'bottom-center'
+  | 'bottom-end'
+  | 'left-start'
+  | 'left-center'
+  | 'left-end'
+  | 'right-start'
+  | 'right-center'
+  | 'right-end'
+
+interface PlacementCombination {
+  value: DropDownPosition,
+  originPlacement: OriginConnectionPosition,
+  overlayPlacement: OverlayConnectionPosition,
+}
+
 @Directive({
   selector: '[hxaDropdown],[hxDropdown]',
   exportAs: 'hx-dropdown, hxa-dropdown'
@@ -52,7 +76,7 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   public isOpen = false;
 
   @Input()
-  placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
+  placement: DropDownPosition = 'bottom'; // equivalent to 'bottom-start'
 
   private _autoClose = this._config.autoClose;
   @Input()
@@ -93,6 +117,90 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
 
   @Input()
   createClipPathMask = false;
+
+  // TODO: add to v11.x
+  private _placementCombinations: PlacementCombination[] = [
+    {
+      value: 'top',
+      originPlacement: { originX: 'start', originY: 'top' },
+      overlayPlacement: { overlayX: 'start', overlayY: 'bottom' },
+    },
+    {
+      value: 'top-start',
+      originPlacement: { originX: 'start', originY: 'top' },
+      overlayPlacement: { overlayX: 'start', overlayY: 'bottom' },
+    },
+    {
+      value: 'top-center',
+      originPlacement: { originX: 'center', originY: 'top' },
+      overlayPlacement: { overlayX: 'center', overlayY: 'bottom' },
+    },
+    {
+      value: 'top-end',
+      originPlacement: { originX: 'end', originY: 'top' },
+      overlayPlacement: { overlayX: 'end', overlayY: 'bottom' },
+    },
+    {
+      value: 'bottom',
+      originPlacement: { originX: 'start', originY: 'bottom' },
+      overlayPlacement: { overlayX: 'start', overlayY: 'top' },
+    },
+    {
+      value: 'bottom-start',
+      originPlacement: { originX: 'start', originY: 'bottom' },
+      overlayPlacement: { overlayX: 'start', overlayY: 'top' },
+    },
+    {
+      value: 'bottom-center',
+      originPlacement: { originX: 'center', originY: 'bottom' },
+      overlayPlacement: { overlayX: 'center', overlayY: 'top' },
+    },
+    {
+      value: 'bottom-end',
+      originPlacement: { originX: 'end', originY: 'bottom' },
+      overlayPlacement: { overlayX: 'end', overlayY: 'top' },
+    },
+    {
+      value: 'left',
+      originPlacement: { originX: 'start', originY: 'center' },
+      overlayPlacement: { overlayX: 'end', overlayY: 'center' },
+    },
+    {
+      value: 'left-center',
+      originPlacement: { originX: 'start', originY: 'center' },
+      overlayPlacement: { overlayX: 'end', overlayY: 'center' },
+    },
+    {
+      value: 'left-start',
+      originPlacement: { originX: 'start', originY: 'top' },
+      overlayPlacement: { overlayX: 'end', overlayY: 'top' },
+    },
+    {
+      value: 'left-end',
+      originPlacement: { originX: 'start', originY: 'bottom' },
+      overlayPlacement: { overlayX: 'end', overlayY: 'bottom' },
+    },
+    {
+      value: 'right',
+      originPlacement: { originX: 'end', originY: 'center' },
+      overlayPlacement: { overlayX: 'start', overlayY: 'center' },
+    },
+    {
+      value: 'right-center',
+      originPlacement: { originX: 'end', originY: 'center' },
+      overlayPlacement: { overlayX: 'start', overlayY: 'center' },
+    },
+    {
+      value: 'right-start',
+      originPlacement: { originX: 'end', originY: 'top' },
+      overlayPlacement: { overlayX: 'start', overlayY: 'top' },
+    },
+    {
+      value: 'right-end',
+      originPlacement: { originX: 'end', originY: 'bottom' },
+      overlayPlacement: { overlayX: 'start', overlayY: 'bottom' },
+    },
+  ]
 
   constructor(
     private _elementRef: ElementRef,
@@ -195,17 +303,19 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
 
     this._overlayRef.backdropClick().subscribe(() => this.hide());
 
-    const position = this._overlayRef.getConfig()
+    const position = this._overlayRef
+      .getConfig()
       .positionStrategy as FlexibleConnectedPositionStrategy;
+
     position.positionChanges.pipe(takeUntil(this._destroyed)).subscribe(pos => {
       if (pos.connectionPair.originX === 'start') {
-        this.placement = 'left';
+        this.placement = 'left-center';
       } else if (pos.connectionPair.originX === 'end') {
-        this.placement = 'right';
+        this.placement = 'right-center';
       } else if (pos.connectionPair.originY === 'top') {
-        this.placement = 'top';
+        this.placement = 'top-start';
       } else if (pos.connectionPair.originY === 'bottom') {
-        this.placement = 'bottom';
+        this.placement = 'bottom-start';
       }
     });
 
@@ -257,15 +367,10 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     const placement = this.placement;
     let originPlacement: OriginConnectionPosition;
 
-    if (placement === 'top' || placement === 'bottom') {
-      originPlacement = {
-        originX: 'start',
-        originY: placement === 'top' ? 'top' : 'bottom'
-      };
-    } else if (placement === 'left') {
-      originPlacement = { originX: 'start', originY: 'center' };
-    } else if (placement === 'right') {
-      originPlacement = { originX: 'end', originY: 'center' };
+    const combination = this._placementCombinations.find(combo => combo.value === placement);
+
+    if (combination) {
+      originPlacement = combination.originPlacement; 
     } else {
       console.error('Position error', placement);
     }
@@ -289,14 +394,10 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     const placement = this.placement;
     let overlayPlacement: OverlayConnectionPosition;
 
-    if (placement === 'top') {
-      overlayPlacement = { overlayX: 'start', overlayY: 'bottom' };
-    } else if (placement === 'bottom') {
-      overlayPlacement = { overlayX: 'start', overlayY: 'top' };
-    } else if (placement === 'left') {
-      overlayPlacement = { overlayX: 'end', overlayY: 'center' };
-    } else if (placement === 'right') {
-      overlayPlacement = { overlayX: 'start', overlayY: 'center' };
+    const combination = this._placementCombinations.find(combo => combo.value === placement);
+
+    if (combination) {
+      overlayPlacement = combination.overlayPlacement; 
     } else {
       console.error('Could not find a position', placement);
     }
@@ -312,11 +413,12 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     };
   }
 
+  /** Inverts dropdown menu position in the vertical direction only */
   private _invertPosition(
     x: HorizontalConnectionPos,
     y: VerticalConnectionPos
   ) {
-    if (this.placement === 'top' || this.placement === 'bottom') {
+    if (this.placement.startsWith('top') || this.placement.startsWith('bottom')) {
       if (y === 'top') {
         y = 'bottom';
       } else if (y === 'bottom') {
@@ -333,8 +435,10 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     return { x, y };
   }
 
-  // Create a clip path mask in the backdrop. The mask is a rectangle, the size of the viewcontainer
-  // This enables the user to interact with the contents of the viewcontainer without closing the dropdown
+  /**
+   * Create a clip path mask in the backdrop. The mask is a rectangle, the size of the viewcontainer
+   * This enables the user to interact with the contents of the viewcontainer without closing the dropdown
+   */
   private _addClipPathMaskStyles() {
     const HTMLEl = this._overlayRef.backdropElement;
     const viewRefNativeEl = this._viewContainerRef.element.nativeElement;
