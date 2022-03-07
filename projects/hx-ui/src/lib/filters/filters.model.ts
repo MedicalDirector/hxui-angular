@@ -1,22 +1,23 @@
-import {IFilterOption, IFiltersConfig} from './filters-config.interface';
-import {FilterType} from './filters-type.enum';
-import {DisplayModeEnum} from "../date-range-picker/display-mode.enum";
+import { IFilterOption, IFiltersConfig } from "./filters-config.interface";
+import { FilterType } from "./filters-type.enum";
+import { DisplayModeEnum } from "../date-range-picker/display-mode.enum";
 
 export class FiltersModel implements IFiltersConfig {
-
   id: string;
   type: FilterType;
   label: string;
   options?: IFilterOption[];
   value?: string;
-  //value comes from source component without type parse
+  /**
+   * value from source component without type parse
+   */
   sourceValue?: any;
   callback: any;
   selected: IFilterOption;
   defaultIndex = 0;
   charLimit = 2;
   dateRangePickerDisplayMode?: DisplayModeEnum = DisplayModeEnum.showCustomOnly;
-  dateRangePickerDisplayDateFormat?: string = 'dd/MM/yyyy';
+  dateRangePickerDisplayDateFormat?: string = "dd/MM/yyyy";
   width: number;
   disabled = false;
   hidden = false;
@@ -30,17 +31,17 @@ export class FiltersModel implements IFiltersConfig {
     this.isIconised();
   }
 
-   setSelectedOption(option?: IFilterOption) {
+  setSelectedOption(option?: IFilterOption) {
     if (option) {
       if (this.selected) {
         this.selected.selected = false;
       }
       this.selected = option;
-      option.selected =  true;
+      option.selected = true;
     } else {
       // set preselected option
       if (this.options.length && !this.selected) {
-        this.selected = this.options.find((opt) => {
+        this.selected = this.options.find(opt => {
           return opt.selected;
         });
       }
@@ -57,21 +58,20 @@ export class FiltersModel implements IFiltersConfig {
 
   isDefaultOptionActive() {
     if (this.type === FilterType.SingleSelect) {
-      return (this.selected === this.options[this.defaultIndex]);
+      return this.selected === this.options[this.defaultIndex];
     } else if (this.type === FilterType.Search) {
-      return (this.value === '' || this.value === undefined);
-    }
-    else if (this.type === FilterType.DateRange){
-      return (this.value === '' || this.value === undefined);
+      return this.value === "" || this.value === undefined;
+    } else if (this.type === FilterType.DateRange) {
+      return this.value === "" || this.value === undefined;
     }
   }
 
   isIconised() {
     if (this.options) {
-      const hasIcons = this.options.find((option) => {
-        return (typeof option.icon !== 'undefined' && option.icon !== '');
+      const hasIcons = this.options.find(option => {
+        return typeof option.icon !== "undefined" && option.icon !== "";
       });
-      return (typeof hasIcons !== 'undefined');
+      return typeof hasIcons !== "undefined";
     }
     return false;
   }

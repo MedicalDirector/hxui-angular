@@ -1,27 +1,23 @@
 export class FiltersCode {
+  usage = `
+  import { FiltersModule } from "@hxui/angular";
 
-  usage =
-    `
-    import { FiltersModule } from "@hxui/angular";
+  @NgModule({
+    imports: [FiltersModule.forRoot(), ...]
+  })
+  export class AppModule() {}
+  `;
 
-    @NgModule({
-      imports: [FiltersModule.forRoot(), ...]
-    })
-    export class AppModule() {}
-    `;
-
-  exampleTemplate =
-    `
+  exampleTemplate = `
   <div class="hx-flex hx-flex-align-center">
-     <button type="button" class="hx-button is-primary mr-1" (click)="toggleCollapsed()">Toggle collapsed state</button>
-     <button type="button" class="hx-button is-primary" (click)="clearFilters()">Clear filters</button>
-     <div class="hx-spacer"></div>
-     <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters"></hxa-filters>
+    <button type="button" class="hx-button is-primary mr-1" (click)="toggleCollapsed()">Toggle collapsed state</button>
+    <button type="button" class="hx-button is-primary" (click)="clearFilters()">Clear filters</button>
+    <div class="hx-spacer"></div>
+    <hxa-filters #filterComp [collapsed]="collapsed" [filters]="filters"></hxa-filters>
   </div>
-    `;
+  `;
 
-  exampleTypescript =
-    `
+  exampleTypescript = `
   import {Component, Inject, OnInit, ViewChild} from '@angular/core';
   import {Subscription} from 'rxjs/index';
   import {IFiltersConfig, FilterType, FiltersComponent as HxFiltersComponent, FiltersModel } from '@hxui/angular';
@@ -32,234 +28,234 @@ export class FiltersCode {
   })
   export class FiltersComponent implements OnInit, OnDestroy  {
 
-     @ViewChild('filterComp', { static: true }) filtersComponent: HxFiltersComponent;
+    @ViewChild('filterComp', { static: true }) filtersComponent: HxFiltersComponent;
 
-  code = new FiltersCode();
-  collapsed = false;
-  filters: IFiltersConfig[] = [
-    {
-      id: 'workareaFilter',
-      type: FilterType.SingleSelect,
-      label: 'Work area',
-      options: [
-        {
-          label: 'Dental',
-          value: 0,
-          selected: false
-        },
-        {
-          label: 'GP',
-          value: 1,
-          selected: true
-        },
-        {
-          label: 'Physio',
-          value: 2,
-          selected: false
-        },
-        {
-          label: 'Radiology',
-          value: 3,
-          selected: false
-        },
-        {
-          label: 'Skin Cancer Clinic',
-          value: 4,
-          selected: false
-        },
-        {
-          label: 'Specialist',
-          value: 5,
-          selected: false
-        }
-      ],
-      defaultIndex: 1
-    },
-    {
-      id: 'statusFilter',
-      type: FilterType.SingleSelect,
-      label: 'Status',
-      options: [
-        {
-          icon: '',
-          label: 'All',
-          value: 0,
-          selected: true
-        },
-        {
-          icon: 'hx-icon icon-clock',
-          label: 'Waiting',
-          value: 1,
-          selected: false
-        },
-        {
-          icon: 'hx-icon icon-doctor',
-          label: 'In consult',
-          value: 2,
-          selected: false
-        },
-        {
-          icon: 'hx-icon icon-check',
-          label: 'Finished consult',
-          value: 3,
-          selected: false
-        },
-        {
-          icon: 'hx-icon icon-did-not-wait',
-          label: 'Did not wait',
-          value: 4,
-          selected: false
-        }
-      ]
-    },
-    {
-      id: 'hcpFilter',
-      type: FilterType.SingleSelect,
-      label: 'HCP',
-      options: [
-        {
-          label: 'All',
-          value: 0,
-          selected: true
-        },
-        {
-          label: 'First Available',
-          value: 1,
-          selected: false
-        },
-        {
-          label: 'Mr GP, John',
-          value: 2,
-          selected: false
-        },
-        {
-          label: 'Mr GP, Camila',
-          value: 3,
-          selected: false
-        },
-        {
-          label: 'Mr GP, Peter',
-          value: 4,
-          selected: false
-        },
-        {
-          label: 'Mr GP, Brian',
-          value: 4,
-          selected: false
-        },
-        {
-          label: 'Mr GP, Simon',
-          value: 4,
-          selected: false
-        },
-        {
-          label: 'Mr GP, Peter',
-          value: 4,
-          selected: false
-        },
-        {
-          label: 'Mr GP, Matthew',
-          value: 4,
-          selected: false
-        },
-        {
-          label: 'Mr GP, Jane',
-          value: 4,
-          selected: false
-        },
-        {
-          label: 'Mr GP, Susan',
-          value: 4,
-          selected: false
-        },
-        {
-          label: 'Mr GP, Brendan',
-          value: 4,
-          selected: false
-        },
-        {
-          label: 'Mr GP, Laura',
-          value: 4,
-          selected: false
-        },
-        {
-          label: 'Dr Sigmundsson-Higgenbotham Smythe King AB Junior III, Max Samuel Smithers Terrance Howard Allisonn Henry',
-          value: 4,
-          selected: false
-        }
-      ]
-    },
+    code = new FiltersCode();
+    collapsed = false;
+    filters: IFiltersConfig[] = [
       {
-        id: 'dateRangeFilter',
-        type: FilterType.DateRange,
-        label: 'Date Range',
-        dateRangePickerDisplayMode: 1,
-        dateRangePickerDisplayDateFormat: 'yyyy-MM-dd',
+        id: 'workareaFilter',
+        type: FilterType.SingleSelect,
+        label: 'Work area',
         options: [
           {
-            label: 'Yesterday',
+            label: 'Dental',
             value: 0,
             selected: false
           },
           {
-            label: 'Tomorrow',
+            label: 'GP',
             value: 1,
-            selected: false
+            selected: true
           },
           {
-            label: 'Last Year',
+            label: 'Physio',
             value: 2,
             selected: false
           },
           {
-            label: 'Next Year',
+            label: 'Radiology',
             value: 3,
             selected: false
           },
           {
-            label: 'Last Month',
+            label: 'Skin Cancer Clinic',
             value: 4,
             selected: false
           },
           {
-            label: 'Next Month',
+            label: 'Specialist',
             value: 5,
             selected: false
+          }
+        ],
+        defaultIndex: 1
+      },
+      {
+        id: 'statusFilter',
+        type: FilterType.SingleSelect,
+        label: 'Status',
+        options: [
+          {
+            icon: '',
+            label: 'All',
+            value: 0,
+            selected: true
           },
           {
-            label: 'Last Week',
-            value: 6,
+            icon: 'hx-icon icon-clock',
+            label: 'Waiting',
+            value: 1,
             selected: false
           },
           {
-            label: 'Next Week',
-            value: 7,
+            icon: 'hx-icon icon-doctor',
+            label: 'In consult',
+            value: 2,
             selected: false
           },
           {
-            label: 'Last Fortnight',
-            value: 8,
+            icon: 'hx-icon icon-check',
+            label: 'Finished consult',
+            value: 3,
             selected: false
           },
           {
-            label: 'Next Fortnight',
-            value: 9,
+            icon: 'hx-icon icon-did-not-wait',
+            label: 'Did not wait',
+            value: 4,
             selected: false
           }
         ]
+      },
+      {
+        id: 'hcpFilter',
+        type: FilterType.SingleSelect,
+        label: 'HCP',
+        options: [
+          {
+            label: 'All',
+            value: 0,
+            selected: true
+          },
+          {
+            label: 'First Available',
+            value: 1,
+            selected: false
+          },
+          {
+            label: 'Mr GP, John',
+            value: 2,
+            selected: false
+          },
+          {
+            label: 'Mr GP, Camila',
+            value: 3,
+            selected: false
+          },
+          {
+            label: 'Mr GP, Peter',
+            value: 4,
+            selected: false
+          },
+          {
+            label: 'Mr GP, Brian',
+            value: 4,
+            selected: false
+          },
+          {
+            label: 'Mr GP, Simon',
+            value: 4,
+            selected: false
+          },
+          {
+            label: 'Mr GP, Peter',
+            value: 4,
+            selected: false
+          },
+          {
+            label: 'Mr GP, Matthew',
+            value: 4,
+            selected: false
+          },
+          {
+            label: 'Mr GP, Jane',
+            value: 4,
+            selected: false
+          },
+          {
+            label: 'Mr GP, Susan',
+            value: 4,
+            selected: false
+          },
+          {
+            label: 'Mr GP, Brendan',
+            value: 4,
+            selected: false
+          },
+          {
+            label: 'Mr GP, Laura',
+            value: 4,
+            selected: false
+          },
+          {
+            label: 'Dr Sigmundsson-Higgenbotham Smythe King AB Junior III, Max Samuel Smithers Terrance Howard Allisonn Henry',
+            value: 4,
+            selected: false
+          }
+        ]
+      },
+        {
+          id: 'dateRangeFilter',
+          type: FilterType.DateRange,
+          label: 'Date Range',
+          dateRangePickerDisplayMode: 1,
+          dateRangePickerDisplayDateFormat: 'yyyy-MM-dd',
+          options: [
+            {
+              label: 'Yesterday',
+              value: 0,
+              selected: false
+            },
+            {
+              label: 'Tomorrow',
+              value: 1,
+              selected: false
+            },
+            {
+              label: 'Last Year',
+              value: 2,
+              selected: false
+            },
+            {
+              label: 'Next Year',
+              value: 3,
+              selected: false
+            },
+            {
+              label: 'Last Month',
+              value: 4,
+              selected: false
+            },
+            {
+              label: 'Next Month',
+              value: 5,
+              selected: false
+            },
+            {
+              label: 'Last Week',
+              value: 6,
+              selected: false
+            },
+            {
+              label: 'Next Week',
+              value: 7,
+              selected: false
+            },
+            {
+              label: 'Last Fortnight',
+              value: 8,
+              selected: false
+            },
+            {
+              label: 'Next Fortnight',
+              value: 9,
+              selected: false
+            }
+          ]
+        }
+      {
+        id: 'searchFilter',
+        type: FilterType.Search,
+        label: 'Filter by name',
+        width: this.getSearchWidth('Filter by name')
       }
-    {
-      id: 'searchFilter',
-      type: FilterType.Search,
-      label: 'Filter by name',
-      width: this.getSearchWidth('Filter by name')
-    }
-  ];
-  onFilterChangeEvent$ = new Subscription();
+    ];
+    onFilterChangeEvent$ = new Subscription();
 
     constructor() {}
 
-   ngOnInit() {
+    ngOnInit() {
       this.onFilterChangeEvent$ = this.filtersComponent.onFilterOptionChanged$
         .subscribe((filter: FiltersModel) => {
           console.log(filter);
@@ -298,7 +294,5 @@ export class FiltersCode {
       return min > calc ? min : max;
     }
   }
-
-
-    `;
+  `;
 }

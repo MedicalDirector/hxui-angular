@@ -1,24 +1,32 @@
-import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewChildren, QueryList, AfterViewInit, ContentChildren, AfterContentInit, AfterContentChecked} from '@angular/core';
-import {FilterType} from './filters-type.enum';
-import {IFilterOption, IFiltersConfig} from './filters-config.interface';
-import {FiltersModel} from './filters.model';
-import * as _ from 'lodash';
-import {BehaviorSubject, from, Observable, pipe, Subject, Subscription} from 'rxjs/index';
-import {FiltersConfig} from './filters.config';
-import {debounceTime} from 'rxjs/internal/operators';
-import { DatePipe } from '@angular/common';
-import {DateRangeInterface} from "../date-range-picker/date-range.interface";
-
+import {
+  Component,
+  DoCheck,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewChildren,
+  QueryList
+} from "@angular/core";
+import { FilterType } from "./filters-type.enum";
+import { IFilterOption, IFiltersConfig } from "./filters-config.interface";
+import { FiltersModel } from "./filters.model";
+import * as _ from "lodash";
+import { Subject, Subscription } from "rxjs/index";
+import { FiltersConfig } from "./filters.config";
+import { debounceTime } from "rxjs/internal/operators";
+import { DatePipe } from "@angular/common";
+import { DateRangeInterface } from "../date-range-picker/date-range.interface";
 
 @Component({
-  selector: 'hxa-filters',
-  templateUrl: './filters.component.html',
-  styleUrls: ['./filters.component.scss']
+  selector: "hxa-filters",
+  templateUrl: "./filters.component.html",
+  styleUrls: ["./filters.component.scss"]
 })
 export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
-
-  @ViewChild('carousel', { static: true }) private carousel: ElementRef;
-  @ViewChildren("dateRangePicker") dateRangePickers: QueryList<any>
+  @ViewChild("carousel", { static: true }) private carousel: ElementRef;
+  @ViewChildren("dateRangePicker") dateRangePickers: QueryList<any>;
 
   FilterType = FilterType;
   data: FiltersModel[] = [];
@@ -31,7 +39,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   private _collapsed = false;
 
   @Input()
-  customMask
+  customMask;
 
   @Input()
   get collapsed(): boolean {
@@ -52,10 +60,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     this.setData();
   }
 
-  constructor(
-    private conf: FiltersConfig,
-    private datePipe: DatePipe
-  ) {
+  constructor(private conf: FiltersConfig, private datePipe: DatePipe) {
     Object.assign(this, conf);
   }
 
@@ -63,7 +68,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     this.subscriptions.add(
       this.searchFilter$
         .pipe(debounceTime(this.conf.debounce))
-        .subscribe((x) =>  this.onFilterOptionChanged$.next(x))
+        .subscribe(x => this.onFilterOptionChanged$.next(x))
     );
   }
 
@@ -78,15 +83,15 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     }
   }
 
-   getIntervalOptions(options: IFilterOption[]) {
+  getIntervalOptions(options: IFilterOption[]) {
     let intervalOption: string[] = [];
-    if(options){
-    for(let i=0; i<options.length; i++){
-      intervalOption.push(options[i].label);
+    if (options) {
+      for (let i = 0; i < options.length; i++) {
+        intervalOption.push(options[i].label);
+      }
     }
+    return intervalOption;
   }
-  return intervalOption;
-}
 
   resetFilters(silent: boolean = false) {
     for (const filter of this.data) {
@@ -97,29 +102,27 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
         }
       } else if (filter.type === FilterType.Search) {
         this.clearSearch(filter, silent);
-      }
-      else if (filter.type === FilterType.DateRange) {
+      } else if (filter.type === FilterType.DateRange) {
         this.setDefaultDate(filter);
       }
     }
   }
 
   clearSearch(filter: FiltersModel, silent: boolean = false) {
-      filter.value = '';
-      if (!silent) {
-        this.onFilterOptionChanged$.next(filter);
-      }
+    filter.value = "";
+    if (!silent) {
+      this.onFilterOptionChanged$.next(filter);
+    }
   }
 
-  setDefaultDate(filter: FiltersModel){
-    filter.value = '';
+  setDefaultDate(filter: FiltersModel) {
+    filter.value = "";
     filter.sourceValue = undefined;
-    if(!this._collapsed)
-     {
-        for(let i = 0 ; i < this.dateRangePickers.toArray().length; i++){
-          this.dateRangePickers.toArray()[i].resetDateRange();
-        }
-     }
+    if (!this._collapsed) {
+      for (let i = 0; i < this.dateRangePickers.toArray().length; i++) {
+        this.dateRangePickers.toArray()[i].resetDateRange();
+      }
+    }
     this.onFilterOptionChanged$.next(filter);
   }
 
@@ -143,23 +146,32 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   /**
    * Called when selection is made in the date range filter type
    */
-  onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRangeInterface){
-    let dateRangeValue = this.datePipe.transform(dateRange.fromDate,filter.dateRangePickerDisplayDateFormat) + ' - '+ this.datePipe.transform(dateRange.toDate,filter.dateRangePickerDisplayDateFormat);
+  onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRangeInterface) {
+    let dateRangeValue =
+      this.datePipe.transform(
+        dateRange.fromDate,
+        filter.dateRangePickerDisplayDateFormat
+      ) +
+      " - " +
+      this.datePipe.transform(
+        dateRange.toDate,
+        filter.dateRangePickerDisplayDateFormat
+      );
     filter.value = dateRangeValue;
     filter.sourceValue = dateRange;
     this.searchFilter$.next(filter);
   }
 
   onCollapsedFilter($event) {
-   this.onFilterOptionSelected($event.filter,  $event.option);
+    this.onFilterOptionSelected($event.filter, $event.option);
   }
 
   onCollapsedSearch($event) {
     this.onSearchFilterChange($event.filter);
   }
 
-  onCollapsedDateRangePicker($event){
-    this.onDateRangeFilterChange($event.filter, $event.dateRange)
+  onCollapsedDateRangePicker($event) {
+    this.onDateRangeFilterChange($event.filter, $event.dateRange);
   }
 
   /**

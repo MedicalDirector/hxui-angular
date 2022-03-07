@@ -1,5 +1,5 @@
-import {FilterType} from './filters-type.enum';
-import {DisplayModeEnum} from "../date-range-picker/display-mode.enum";
+import { FilterType } from "./filters-type.enum";
+import { DisplayModeEnum } from "../date-range-picker/display-mode.enum";
 
 export interface IFilterOption {
   label: string;
@@ -10,7 +10,6 @@ export interface IFilterOption {
 }
 
 export interface IFiltersConfig {
-
   /**
    * Unique identifier for filter
    */
@@ -35,7 +34,7 @@ export interface IFiltersConfig {
    * Filter value for Search filter type
    */
   value?: string;
- /**
+  /**
    * The original value from corresponding source component
    */
   sourceValue?: any;
@@ -62,7 +61,7 @@ export interface IFiltersConfig {
    */
   dateRangePicker_displayDateFormat?: string;
 
-    /**
+  /**
    * Width in REM for Search filter type.
    * Defaults if not set
    */
@@ -71,5 +70,4 @@ export interface IFiltersConfig {
   disabled?: boolean;
   hidden?: boolean;
   isLoading?: boolean;
-
 }
