@@ -4,6 +4,10 @@
 
 * **Tabular:** Add support to replace column labels with html
 
+### Bugfix
+
+* **Inspector:** Fix issue with hasClose param and left-anchored styling
+
 ## [11.0.21](https://www.npmjs.com/package/@hxui/angular/v/11.0.21) (2021-11-24)
 
 ### Enhancement

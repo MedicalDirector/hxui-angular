@@ -1,11 +1,22 @@
 <section class="hx-section scrollable-y" #container>
   <div class="hx-section is-comfortable">
-
     <h1 class="hx-title">Modals</h1>
-    <h2 class="hx-subtitle">A modal creates a mode that disables the main window, but keeps it visible with the modal window as a child window in front of it.
-    Mainly used for adding form content or showing a notification of some sort.</h2>
+    <h2 class="hx-subtitle">
+      A modal creates a mode that disables the main window, but keeps it visible
+      with the modal window as a child window in front of it. Mainly used for
+      adding form content or showing a notification of some sort.
+    </h2>
 
-    <hr>
+    <hr />
+    
+    <div class="hx-alert is-danger is-inverse is-bordered">
+      <span class="hx-icon-control mr-2">
+        <i class="hx-icon is-danger icon-exclamation"></i>
+      </span>
+      <span class="hx-flex-1">
+        This component is deprecated and will not receive further support.
+      </span>
+    </div>
 
     <h4 id="usage">Usage</h4>
     <p>Add the ModalModule to AppModule or SharedModule.</p>
@@ -16,24 +27,23 @@
     <code [highlight]="code.placeholder"></code>
   </pre>
 
-
-    <hr>
+    <hr />
 
     <h4 id="example">Example</h4>
 
     <div class="hx-columns">
       <div class="hx-column">
-
-
-        <button class="hx-button is-primary is-outlined" type="button" (click)="openModal()">
-        Open Modal
-      </button>
-
-
+        <button
+          class="hx-button is-primary is-outlined"
+          type="button"
+          (click)="openModal()"
+        >
+          Open Modal
+        </button>
       </div>
     </div>
 
-    <br>
+    <br />
 
     <h5 id="code">Code</h5>
 
@@ -50,7 +60,6 @@
             <pre>
             <code [highlight]="code.exampleTypescript"></code>
           </pre>
-
           </hx-tab>
           <hx-tab heading="Custom Modal Component">
             <pre>
@@ -58,7 +67,10 @@
           </pre>
           </hx-tab>
           <hx-tab heading="Module">
-            <p>You need to declare the custom modal component as an entry component for dynamic loading</p>
+            <p>
+              You need to declare the custom modal component as an entry
+              component for dynamic loading
+            </p>
             <pre>
             <code [highlight]="code.exampleModule"></code>
           </pre>
@@ -67,7 +79,7 @@
       </div>
     </div>
 
-    <hr>
+    <hr />
 
     <h4 id="api">API Reference</h4>
 
@@ -133,36 +145,49 @@
           </thead>
           <tbody>
             <tr>
-              <td>create&#x3C;T&#x3E;(module: any, component: any, parameters?: Object)</td>
-              <td><kbd>Observable&#x3C;ComponentRef&#x3C;T&#x3E;&#x3E;</kbd></td>
-              <td>create and loads a dynamic component that is of type @modal</td>
+              <td>
+                create&#x3C;T&#x3E;(module: any, component: any, parameters?:
+                Object)
+              </td>
+              <td>
+                <kbd>Observable&#x3C;ComponentRef&#x3C;T&#x3E;&#x3E;</kbd>
+              </td>
+              <td>
+                create and loads a dynamic component that is of type @modal
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-
   </div>
 </section>
 
-<aside *ngIf="contentsNav" class="hx-sidebar is-active is-right is-medium-width is-scrollable hx-bg-white">
+<aside
+  *ngIf="contentsNav"
+  class="hx-sidebar is-active is-right is-medium-width is-scrollable hx-bg-white"
+>
   <ul class="hx-nav hx-nav-vertical">
     <li class="hx-nav-heading">
-      <h6>Contents</h6></li>
+      <h6>Contents</h6>
+    </li>
 
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Examples</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#example')"
+        ><span>Examples</span></a
+      >
     </li>
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#code')"><span>Code</span></a>
     </li>
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#api')"
+        ><span>API Reference</span></a
+      >
     </li>
-
   </ul>
 </aside>
