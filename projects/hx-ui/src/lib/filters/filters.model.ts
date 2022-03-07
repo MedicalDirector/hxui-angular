@@ -1,9 +1,8 @@
-import {IFilterOption, IFiltersConfig} from './filters-config.interface';
-import {FilterType} from './filters-type.enum';
-import * as _ from 'lodash';
+import { IFilterOption, IFiltersConfig } from "./filters-config.interface";
+import { FilterType } from "./filters-type.enum";
+import * as _ from "lodash";
 
 export class FiltersModel implements IFiltersConfig {
-
   id: string;
   type: FilterType;
   label: string;
@@ -22,7 +21,7 @@ export class FiltersModel implements IFiltersConfig {
     indeterminate: false,
     none: true
   };
-  selectAllValue = 'Select all';
+  selectAllValue = "Select all";
 
   constructor(data?: IFiltersConfig) {
     Object.assign(this, data);
@@ -40,7 +39,7 @@ export class FiltersModel implements IFiltersConfig {
    */
   addSelectAll() {
     this.options.unshift({
-      label: 'Select all',
+      label: "Select all",
       value: this.selectAllValue,
       selected: false
     });
@@ -49,17 +48,21 @@ export class FiltersModel implements IFiltersConfig {
   /**
    * Set single select option
    */
-   setSingleSelectOption(option?: IFilterOption) {
+  setSingleSelectOption(option?: IFilterOption) {
     if (option) {
       if (this.selected.length) {
         this.selected[0].selected = false;
       }
       this.selected = [option];
-      option.selected =  true;
+      option.selected = true;
     } else {
       // set preselected option
       if (this.options.length && this.selected.length === 0) {
-        this.selected = [this.options.find((opt) => {return opt.selected; })];
+        this.selected = [
+          this.options.find(opt => {
+            return opt.selected;
+          })
+        ];
       }
     }
   }
@@ -81,7 +84,7 @@ export class FiltersModel implements IFiltersConfig {
       } else {
         this.options.forEach((opt, i) => {
           if (opt.value !== this.selectAllValue) {
-            opt.selected = (option.selected);
+            opt.selected = option.selected;
             if (option.selected) {
               this.selected.push(opt);
             }
@@ -102,14 +105,18 @@ export class FiltersModel implements IFiltersConfig {
     this.setSelectAllState();
   }
 
-
   setSelectAllState() {
-    const reducer = (accumulator, option) => (option.selected && option.value !== this.selectAllValue) ? accumulator + 1 : accumulator
+    const reducer = (accumulator, option) =>
+      option.selected && option.value !== this.selectAllValue
+        ? accumulator + 1
+        : accumulator;
     const count = this.options.reduce(reducer, 0);
-    this.selectAllState.all = (count === (this.options.length - 1));
-    this.selectAllState.indeterminate = (count > 0 && count < (this.options.length - 1));
-    this.selectAllState.none = (count === 0);
-    this.options[0].selected = (this.selectAllState.all && !this.selectAllState.indeterminate);
+    this.selectAllState.all = count === this.options.length - 1;
+    this.selectAllState.indeterminate =
+      count > 0 && count < this.options.length - 1;
+    this.selectAllState.none = count === 0;
+    this.options[0].selected =
+      this.selectAllState.all && !this.selectAllState.indeterminate;
   }
 
   setDefaultOption() {
@@ -124,8 +131,8 @@ export class FiltersModel implements IFiltersConfig {
           opt.selected = false;
         });
         this.defaultIndex.forEach((di, i) => {
-           this.options[di].selected = true;
-           this.selected.push(this.options[di]);
+          this.options[di].selected = true;
+          this.selected.push(this.options[di]);
         });
         this.setSelectAllState();
       }
@@ -135,16 +142,16 @@ export class FiltersModel implements IFiltersConfig {
   setSelectAll() {
     this.selected = [];
     this.options.forEach((opt, i) => {
-        opt.selected = true;
-        if (opt.value !== this.selectAllValue) {
-          this.selected.push(opt);
-        }
+      opt.selected = true;
+      if (opt.value !== this.selectAllValue) {
+        this.selected.push(opt);
+      }
     });
   }
 
   isDefaultOptionActive() {
     if (this.type === FilterType.SingleSelect) {
-      return (this.selected[0] === this.options[this.defaultIndex[0]]);
+      return this.selected[0] === this.options[this.defaultIndex[0]];
     } else if (this.type === FilterType.MultiSelect) {
       const selectedIndexes = [];
       this.options.forEach((opt, i) => {
@@ -152,18 +159,18 @@ export class FiltersModel implements IFiltersConfig {
           selectedIndexes.push(i);
         }
       });
-      return (_.isEqual(selectedIndexes, this.defaultIndex));
+      return _.isEqual(selectedIndexes, this.defaultIndex);
     } else if (this.type === FilterType.Search) {
-      return (this.value === '' || this.value === undefined);
+      return this.value === "" || this.value === undefined;
     }
   }
 
   isIconised() {
     if (this.options) {
-      const hasIcons = this.options.find((option) => {
-        return (typeof option.icon !== 'undefined' && option.icon !== '');
+      const hasIcons = this.options.find(option => {
+        return typeof option.icon !== "undefined" && option.icon !== "";
       });
-      return (typeof hasIcons !== 'undefined');
+      return typeof hasIcons !== "undefined";
     }
     return false;
   }
@@ -172,9 +179,9 @@ export class FiltersModel implements IFiltersConfig {
     if (this.selected.length === 1) {
       return this.selected[0].label;
     } else if (this.selected.length) {
-     return this.selected.length + ' selected';
+      return this.selected.length + " selected";
     } else {
-      return 'All';
+      return "All";
     }
   }
 }

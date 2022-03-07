@@ -1,4 +1,4 @@
-import {FilterType} from './filters-type.enum';
+import { FilterType } from "./filters-type.enum";
 
 export interface IFilterOption {
   label: string;
@@ -9,7 +9,6 @@ export interface IFilterOption {
 }
 
 export interface IFiltersConfig {
-
   /**
    * Unique identifier for filter
    */
@@ -48,14 +47,12 @@ export interface IFiltersConfig {
    */
   defaultIndex?: number[];
 
-    /**
-   * Width in REM for Search filter type.
-   * Defaults if not set
+  /**
+   * Width in REM units for FilterType.Search.
    */
   width?: number;
 
   disabled?: boolean;
   hidden?: boolean;
   isLoading?: boolean;
-
 }
