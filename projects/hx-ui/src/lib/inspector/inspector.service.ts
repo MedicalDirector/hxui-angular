@@ -1,7 +1,7 @@
-import {ComponentRef, Inject, Injectable, Injector, Optional} from '@angular/core';
+import {ComponentRef, Injectable, Injector} from '@angular/core';
 import {Overlay, OverlayConfig, OverlayRef} from '@angular/cdk/overlay';
 import {InspectorOverlayRef} from './inspector-overlay.ref';
-import {CdkPortalOutlet, ComponentPortal, PortalInjector} from '@angular/cdk/portal';
+import {ComponentPortal, PortalInjector} from '@angular/cdk/portal';
 import {FocusTrapFactory} from '@angular/cdk/a11y';
 import {InspectorComponent} from './inspector.component';
 import {InspectorSize} from './inspector-size.enum';
@@ -70,6 +70,9 @@ export class InspectorService {
 
     // add reference to inspector component
     inspectorRef.inspectorInstance = inspectorInstance;
+
+    // set close icon
+    inspectorInstance.hasClose = inspectorConfig.hasClose
 
     // Subscribe to a stream that emits when the backdrop was clicked
     overlayRef.backdropClick().subscribe(_ => {
