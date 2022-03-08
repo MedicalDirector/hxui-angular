@@ -1,86 +1,166 @@
 <div class="hx-flex hx-flex-align-center">
-
-  <i  class="hx-icon icon-filter-outline mx-1"></i>
+  <i class="hx-icon icon-filter-outline mx-1"></i>
 
   <!-- collapsed filters -->
-  <hxa-filters-collapsed (onFilter)="onCollapsedFilter($event)" (onBack)="onCollapsedFilterBack($event)" (onSearchFilter)="onCollapsedSearch($event)" [data]="data" *ngIf="collapsed"></hxa-filters-collapsed>
+  <hxa-filters-collapsed
+    (onFilter)="onCollapsedFilter($event)"
+    (onBack)="onCollapsedFilterBack($event)"
+    (onSearchFilter)="onCollapsedSearch($event)"
+    [data]="data"
+    *ngIf="collapsed"
+  ></hxa-filters-collapsed>
 
   <!-- expanded filters -->
   <ng-container *ngIf="!collapsed">
-    <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last;">
-
+    <ng-container
+      *ngFor="let filter of data; trackBy: trackByFn; let lastItem = last"
+    >
       <!-- single select filter -->
-      <div [id]="filter?.id" class="hx-dropdown mx-1 expandedFilter" hxaDropdown [minWidthRelativeTo]="filter?.id + '-trigger'"  *ngIf="filter?.type === FilterType.SingleSelect && !filter?.hidden">
-        <a [id]="filter?.id + '-trigger'" class="hx-button hx-button-dropdown expandedFilter__button" [class.is-loading]="filter?.isLoading" [class.is-disabled]="filter?.disabled" hxaDropdownToggle>
-          <span class="is-text-weight-light">{{filter?.label}}:&nbsp;</span>
-          <span class="hx-icon-control" *ngIf="filter?.selected[0]?.icon"><i class="{{filter?.selected[0]?.icon}} mr-1"></i></span>
-          <span class="is-text-weight-bolder is-text-ellipsed" title="{{filter?.getSelectedLabel()}}">{{filter?.getSelectedLabel()}}</span>
-          <span class="hx-icon-control"><i class="hx-icon icon-caret-down"></i></span>
+      <div
+        [id]="filter?.id"
+        class="hx-dropdown mx-1 expandedFilter"
+        hxaDropdown
+        [minWidthRelativeTo]="filter?.id + '-trigger'"
+        *ngIf="filter?.type === FilterType.SingleSelect && !filter?.hidden"
+      >
+        <a
+          [id]="filter?.id + '-trigger'"
+          class="hx-button hx-button-dropdown expandedFilter__button"
+          [class.is-loading]="filter?.isLoading"
+          [class.is-disabled]="filter?.disabled"
+          hxaDropdownToggle
+        >
+          <span class="is-text-weight-light">{{ filter?.label }}:&nbsp;</span>
+          <span class="hx-icon-control" *ngIf="(filter?.selected)[0]?.icon"
+            ><i class="{{ (filter?.selected)[0]?.icon }} mr-1"></i
+          ></span>
+          <span
+            class="is-text-weight-bolder is-text-ellipsed"
+            title="{{ filter?.getSelectedLabel() }}"
+          >{{ filter?.getSelectedLabel() }}</span>
+          <span class="hx-icon-control">
+            <i class="hx-icon icon-caret-down"></i>
+          </span>
         </a>
-        <div [id]="filter?.id + '-options'" class="hx-dropdown-menu  has-limited-width has-limited-height expandedFilter__menu" [class.hx-dropdown-icon]="filter.isIconised()" *hxaDropdownMenu>
-          <a hxaDropdownItem *ngFor="let option of filter?.options;trackBy: trackByFn" (click)="onFilterOptionSelected(filter,option)" class="hx-dropdown-item is-text-ellipsed" title="{{option?.label}}">
-            <span class="hx-icon-control" *ngIf="option?.icon"><i class="{{option?.icon}}"></i></span> {{option?.label}}
+        <div
+          [id]="filter?.id + '-options'"
+          class="hx-dropdown-menu  has-limited-width has-limited-height expandedFilter__menu"
+          [class.hx-dropdown-icon]="filter.isIconised()"
+          *hxaDropdownMenu
+        >
+          <a
+            hxaDropdownItem
+            *ngFor="let option of filter?.options; trackBy: trackByFn"
+            (click)="onFilterOptionSelected(filter, option)"
+            class="hx-dropdown-item is-text-ellipsed"
+            title="{{ option?.label }}"
+          >
+            <span class="hx-icon-control" *ngIf="option?.icon">
+              <i class="{{ option?.icon }}"></i>
+            </span>
+            {{ option?.label }}
           </a>
         </div>
       </div>
 
-
       <!-- multi select filter -->
-      <div [id]="filter?.id"
-           class="hx-dropdown mx-1 expandedFilter"
-           hxaDropdown
-           [minWidthRelativeTo]="filter?.id + '-trigger'"
-           *ngIf="filter?.type === FilterType.MultiSelect && !filter?.hidden"
-           (onHidden)="onMultiSelectHidden(filter)">
-        <a [id]="filter?.id + '-trigger'" class="hx-button hx-button-dropdown expandedFilter__button" [class.is-loading]="filter?.isLoading" [class.is-disabled]="filter?.disabled" hxaDropdownToggle>
-          <span class="is-text-weight-light">{{filter?.label}}:&nbsp;</span>
-          <span class="is-text-weight-bolder is-text-ellipsed" title="{{filter?.getSelectedLabel()}}">{{filter?.getSelectedLabel()}}</span>
-          <span class="hx-icon-control"><i class="hx-icon icon-caret-down"></i></span>
+      <div
+        [id]="filter?.id"
+        class="hx-dropdown mx-1 expandedFilter"
+        hxaDropdown
+        [minWidthRelativeTo]="filter?.id + '-trigger'"
+        *ngIf="filter?.type === FilterType.MultiSelect && !filter?.hidden"
+        (onHidden)="onMultiSelectHidden(filter)"
+      >
+        <a
+          [id]="filter?.id + '-trigger'"
+          class="hx-button hx-button-dropdown expandedFilter__button"
+          [class.is-loading]="filter?.isLoading"
+          [class.is-disabled]="filter?.disabled"
+          hxaDropdownToggle
+        >
+          <span class="is-text-weight-light">{{ filter?.label }}:&nbsp;</span>
+          <span
+            class="is-text-weight-bolder is-text-ellipsed"
+            title="{{ filter?.getSelectedLabel() }}"
+          >
+            {{ filter?.getSelectedLabel() }}
+          </span>
+          <span class="hx-icon-control">
+            <i class="hx-icon icon-caret-down"></i>
+          </span>
         </a>
-        <div [id]="filter?.id + '-options'" class="hx-dropdown-menu  has-limited-width has-limited-height expandedFilter__menu" *hxaDropdownMenu>
-          <div *ngFor="let option of filter?.options;trackBy: trackByFn; let i = index"
-               class="hx-flex is-text-ellipsed px-3 py-2"
-               title="{{option?.label}}"
-                [class.is-perforated]="i === 0"
-                [class.mb-2]="i === 0"
-                [class.pb-3]="i === 0">
+        <div
+          [id]="filter?.id + '-options'"
+          class="hx-dropdown-menu  has-limited-width has-limited-height expandedFilter__menu"
+          *hxaDropdownMenu
+        >
+          <div
+            *ngFor="
+              let option of filter?.options;
+              trackBy: trackByFn;
+              let i = index
+            "
+            class="hx-flex is-text-ellipsed px-3 py-2"
+            title="{{ option?.label }}"
+            [class.is-perforated]="i === 0"
+            [class.mb-2]="i === 0"
+            [class.pb-3]="i === 0"
+          >
             <div class="hx-checkbox-control ma-0 pa-0 hx-flex">
-              <input [name]="filter?.id + '-checkbox-'+i" type="checkbox" class="hx-checkbox"
-                     [id]="filter?.id + '-checkbox-'+i"
-                     (change)="onFilterOptionSelected(filter, option)"
-                     [(ngModel)]="option.selected"
-                    [class.is-indeterminate]="option?.value === filter?.selectAllValue && filter?.selectAllState.indeterminate"/>
-              <label [for]="filter?.id + '-checkbox-'+i" class="hx-label">
+              <input
+                [name]="filter?.id + '-checkbox-' + i"
+                type="checkbox"
+                class="hx-checkbox"
+                [id]="filter?.id + '-checkbox-' + i"
+                (change)="onFilterOptionSelected(filter, option)"
+                [(ngModel)]="option.selected"
+                [class.is-indeterminate]="
+                  option?.value === filter?.selectAllValue &&
+                  filter?.selectAllState.indeterminate
+                "
+              />
+              <label [for]="filter?.id + '-checkbox-' + i" class="hx-label">
                 <div class="hx-flex hx-flex-align-center">
-                  <i *ngIf="option?.icon" class="{{option?.icon}} mr-2"></i>
-                  {{option?.label}}
+                  <i *ngIf="option?.icon" class="{{ option?.icon }} mr-2"></i>
+                  {{ option?.label }}
                 </div>
               </label>
             </div>
-
           </div>
         </div>
       </div>
 
       <!-- search filter -->
-      <div [id]="filter.id" *ngIf="filter.type === FilterType.Search && !filter?.hidden"  class="hx-input-group ml-4" [class.mx-1]="!lastItem">
+      <div
+        [id]="filter.id"
+        *ngIf="filter.type === FilterType.Search && !filter?.hidden"
+        class="hx-input-group ml-4"
+        [class.mx-1]="!lastItem"
+      >
         <i class="hx-icon icon-search mt-1"></i>
         <div class="hx-input-control my-0">
-          <input class="hx-input"
-                  type="search"
-                  placeholder="{{filter.label}}"
-                  (input)="onSearchFilterChange(filter)"
-                  [(ngModel)]="filter.value"
-                  [style.width.rem]="filter.width"
-                  [disabled]="filter?.disabled"
-                  mask="{{customMask}}">
+          <input
+            class="hx-input"
+            type="search"
+            placeholder="{{ filter.label }}"
+            (input)="onSearchFilterChange(filter)"
+            [(ngModel)]="filter.value"
+            [style.width.rem]="filter.width"
+            [disabled]="filter?.disabled"
+            mask="{{ customMask }}"
+          />
           <label class="hx-label"></label>
           <div class="hx-help"></div>
         </div>
         <div class="hx-input-actions" *ngIf="filter.value">
           <!--<div id="searchLoadingIndicator" class="hx-loader is-small" *ngIf="patientSearchService.showPatientSearchLoader"><div></div><div></div><div></div><div></div></div>-->
           <div class="hx-button-group">
-            <button class="hx-button is-flat" (click)="clearSearch(filter)"><span class="hx-icon-control"><i class="icon icon-close-empty"></i></span></button>
+            <button class="hx-button is-flat" (click)="clearSearch(filter)">
+              <span class="hx-icon-control">
+                <i class="icon icon-close-empty"></i>
+              </span>
+            </button>
           </div>
         </div>
       </div>

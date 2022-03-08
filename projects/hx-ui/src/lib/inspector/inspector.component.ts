@@ -1,6 +1,11 @@
 import {
-  ApplicationRef, Component, ComponentFactoryResolver, ElementRef, EventEmitter, Injector, NgZone,
-  OnInit, Output,
+  ApplicationRef, 
+  Component, 
+  ComponentFactoryResolver, 
+  ElementRef, 
+  Injector, 
+  NgZone,
+  OnInit,
 } from '@angular/core';
 import {
   trigger,
@@ -13,7 +18,6 @@ import { ComponentPortal, DomPortalOutlet} from '@angular/cdk/portal';
 import {Subject} from 'rxjs/index';
 import {InspectorSize} from './inspector-size.enum';
 import {InspectorLocation} from "./inspector-location.enum";
-
 
 @Component({
   selector: 'hxa-inspector',
@@ -116,10 +120,17 @@ export class InspectorComponent implements OnInit {
   size = 'small';
   sizes = ['small', 'large', 'offsetWidth', 'fullWidth'];
   previousSize = 'small';
-  hideClose = false;
-  hasClose = true;
-  location = InspectorLocation.Right;
-  InspectorLocation = InspectorLocation;
+
+  /** Used to temporarily hide external icon when displaying multiple inspectors */
+  public hideClose = false;
+
+  /** Does inspector have external close icon? */
+  public hasClose = true;
+
+  /** Side of display inspector is located */
+  public location = InspectorLocation.Right;
+
+  public InspectorLocation = InspectorLocation;
 
   private portalHost: DomPortalOutlet;
   private animationCount = 0;
@@ -226,5 +237,4 @@ export class InspectorComponent implements OnInit {
   onBackdropClick(){
     this.onBackDropClick$.next(true);
   }
-
 }

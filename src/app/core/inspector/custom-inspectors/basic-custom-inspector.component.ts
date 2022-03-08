@@ -1,11 +1,16 @@
-import {AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {InspectorOverlayRef} from '../../../../../projects/hx-ui/src/lib/inspector/inspector-overlay.ref';
-import {InspectorSize} from '../../../../../projects/hx-ui/src/lib/inspector/inspector-size.enum';
-import {Subscription} from 'rxjs/index';
-import {InspectorService} from '../../../../../projects/hx-ui/src/lib/inspector/inspector.service';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit
+} from "@angular/core";
+import { InspectorOverlayRef } from "../../../../../projects/hx-ui/src/lib/inspector/inspector-overlay.ref";
+import { InspectorSize } from "../../../../../projects/hx-ui/src/lib/inspector/inspector-size.enum";
+import { Subscription } from "rxjs/index";
+import { InspectorService } from "../../../../../projects/hx-ui/src/lib/inspector/inspector.service";
 
 @Component({
-  selector: 'app-basic-custom-inspector',
+  selector: "app-basic-custom-inspector",
   template: `
     <div class="hx-toolbar">
       <span>Heading</span>
@@ -16,15 +21,18 @@ import {InspectorService} from '../../../../../projects/hx-ui/src/lib/inspector/
       <div class="hx-spacer"></div>
       <button class="hx-button is-flat" (click)="small()">Small</button>
       <button class="hx-button is-flat" (click)="large()">Large</button>
-      <button class="hx-button is-flat" (click)="openInspector(sizeEnum.Small)">Open Another (SM)</button>
-      <button class="hx-button is-flat" (click)="openInspector(sizeEnum.Large)">Open Another (LG)</button>
+      <button class="hx-button is-flat" (click)="openInspector(sizeEnum.Small)">
+        Open Another (SM)
+      </button>
+      <button class="hx-button is-flat" (click)="openInspector(sizeEnum.Large)">
+        Open Another (LG)
+      </button>
     </div>
   `,
-  styles:[':host{ width:100% }']
+  styles: [":host{ width:100% }"]
 })
-
-export class BasicCustomInspectorComponent implements OnInit, AfterViewInit, OnDestroy {
-
+export class BasicCustomInspectorComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   protected onClose: Function;
   protected onResize: Function;
   protected visitId = 0;
@@ -32,61 +40,79 @@ export class BasicCustomInspectorComponent implements OnInit, AfterViewInit, OnD
 
   private subscriptions: Subscription = new Subscription();
 
-  constructor(public inspectorRef: InspectorOverlayRef,
-              private inspectorService: InspectorService) { }
+  constructor(
+    public inspectorRef: InspectorOverlayRef,
+    private inspectorService: InspectorService
+  ) {}
 
   ngOnInit() {
     console.log(this.visitId);
-    this.subscriptions.add(this.inspectorRef.inspectorInstance.onSlideInComplete$.subscribe((_) => this.onSlideInComplete(_)));
-    this.subscriptions.add(this.inspectorRef.inspectorInstance.onSlideOutComplete$.subscribe((_) => this.onSlideOutComplete(_)));
-    this.subscriptions.add(this.inspectorRef.inspectorInstance.onResizeComplete$.subscribe((_) => this.onResizeComplete(_)));
+    this.subscriptions.add(
+      this.inspectorRef.inspectorInstance.onSlideInComplete$.subscribe(_ =>
+        this.onSlideInComplete(_)
+      )
+    );
+    this.subscriptions.add(
+      this.inspectorRef.inspectorInstance.onSlideOutComplete$.subscribe(_ =>
+        this.onSlideOutComplete(_)
+      )
+    );
+    this.subscriptions.add(
+      this.inspectorRef.inspectorInstance.onResizeComplete$.subscribe(_ =>
+        this.onResizeComplete(_)
+      )
+    );
   }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
 
-  ngAfterViewInit() {
-
-  }
+  ngAfterViewInit() {}
 
   close() {
-    this.onClose('Closing');
+    this.onClose("Closing");
     this.inspectorRef.close();
   }
 
   small() {
-    this.onResize('Resizing!');
+    this.onResize("Resizing!");
     this.inspectorRef.resize(InspectorSize.Small);
   }
 
-
   large() {
-    this.onResize('Resizing!');
+    this.onResize("Resizing!");
     this.inspectorRef.resize(InspectorSize.Large);
   }
 
   openInspector = (size: InspectorSize) => {
-    const inspector: InspectorOverlayRef = this.inspectorService.open(BasicCustomInspectorComponent, { size: size }, {
-      visitId: 11,
-      onClose: (data) => {
-        console.log(data);
+    this.inspectorService.open(
+      BasicCustomInspectorComponent,
+      {
+        size: size,
+        hasClose: false,
+        closeOnBackdropClick: true
       },
-      onResize: (data) => {
-        console.log(data);
+      {
+        visitId: 11,
+        onClose: data => {
+          console.log(data);
+        },
+        onResize: data => {
+          console.log(data);
+        }
       }
-    });
-  }
+    );
+  };
 
   onSlideInComplete(inspector) {
-    console.log(inspector, 'Slide IN animation finished');
+    console.log(inspector, "Slide IN animation finished");
   }
 
   onSlideOutComplete(inspector) {
-    console.log(inspector, 'Slide OUT animation finished');
+    console.log(inspector, "Slide OUT animation finished");
   }
   onResizeComplete(size: InspectorSize) {
-    console.log(size, 'Resize animation finished');
+    console.log(size, "Resize animation finished");
   }
-
 }
