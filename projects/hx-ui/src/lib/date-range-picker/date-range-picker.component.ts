@@ -6,24 +6,14 @@ import {
   EventEmitter,
   Output
 } from '@angular/core';
-import {
-  DatePipe
-} from '@angular/common';
-import {
-  DropdownDirective
-} from '../dropdown/dropdown.directive';
-import {
-  IntervalItem
-} from './interval-option-model';
-import {
-  DateRangePickerConfig
-} from './date-range-picker.config';
-import {
-  fullIntervalList
-} from './interval-option-model';
-import {DisplayModeEnum} from "./display-mode.enum";
-import {DateRangeInterface} from "./date-range.interface";
-import {DateSelectionTypeEnum} from "./date-selection-type.enum";
+import { DatePipe } from '@angular/common';
+import { DropdownDirective } from '../dropdown/dropdown.directive';
+import { IntervalItem } from './interval-option-model';
+import { DateRangePickerConfig } from './date-range-picker.config';
+import { fullIntervalList } from './interval-option-model';
+import { DisplayModeEnum } from './display-mode.enum';
+import { DateRangeInterface } from './date-range.interface';
+import { DateSelectionTypeEnum } from './date-selection-type.enum';
 
 @Component({
   selector: 'hxa-date-range-picker',
@@ -31,7 +21,6 @@ import {DateSelectionTypeEnum} from "./date-selection-type.enum";
   styleUrls: ['./date-range-picker.component.scss']
 })
 export class DateRangePickerComponent implements OnInit {
-
   @ViewChild('dropdown', { static: true }) dropdown: DropdownDirective;
 
   @Input() intervalOptions: string[];
@@ -41,17 +30,23 @@ export class DateRangePickerComponent implements OnInit {
   @Input() placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
   @Input() displayMode: DisplayModeEnum = DisplayModeEnum.showTab;
   @Input() dateFormat: string = 'dd/MM/yyyy';
-  @Input() defaultDateRange: DateRangeInterface = {fromDate:new Date(), toDate:new Date()};
+  @Input() defaultDateRange: DateRangeInterface = {
+    fromDate: new Date(),
+    toDate: new Date()
+  };
   @Input() id: number;
   @Input() showCaretDown: boolean = true;
 
-  @Output() onDateRangeSelected = new EventEmitter < DateRangeInterface > ();
+  @Output() onDateRangeSelected = new EventEmitter<DateRangeInterface>();
 
-  constructor(private datePipe: DatePipe, private dateRangePickerConfig: DateRangePickerConfig) {}
+  constructor(
+    private datePipe: DatePipe,
+    private dateRangePickerConfig: DateRangePickerConfig
+  ) {}
 
   // import to DateSElectionType into the instance of this class
   DateSelectionType = DateSelectionTypeEnum;
-  currentTab: DateSelectionTypeEnum = DateSelectionTypeEnum.interval
+  currentTab: DateSelectionTypeEnum = DateSelectionTypeEnum.interval;
   fromDate: Date = new Date();
   toDate: Date = new Date();
   _displayRange: string;
@@ -67,16 +62,20 @@ export class DateRangePickerComponent implements OnInit {
   ngOnInit() {
     this.setInitialDateRange();
     this.showTab = this.displayMode === DisplayModeEnum.showTab;
-    this.showIntervalOnly = this.displayMode === DisplayModeEnum.showIntervalOnly;
+    this.showIntervalOnly =
+      this.displayMode === DisplayModeEnum.showIntervalOnly;
     this.showCustomOnly = this.displayMode === DisplayModeEnum.showCustomOnly;
     this.generateIntervalOptionItems(this.intervalOptions || []);
   }
 
-  setInitialDateRange(){
-    this.defaultDateRange = this.defaultDateRange || {fromDate:new Date(), toDate:new Date()};
+  setInitialDateRange() {
+    this.defaultDateRange = this.defaultDateRange || {
+      fromDate: new Date(),
+      toDate: new Date()
+    };
     this.dateFormat = this.dateFormat || 'dd/MM/yyyy';
     this.fromDate = this.defaultDateRange.fromDate;
-    this.toDate =  this.defaultDateRange.toDate;
+    this.toDate = this.defaultDateRange.toDate;
     this._displayRange = this.createDateRange();
   }
 
@@ -87,7 +86,9 @@ export class DateRangePickerComponent implements OnInit {
   }
 
   generateIntervalOptionItems(itemList: string[]) {
-    this.intervalList = fullIntervalList.filter(item => itemList.includes(item.displayName));
+    this.intervalList = fullIntervalList.filter(item =>
+      itemList.includes(item.displayName)
+    );
   }
 
   hide(closeDropdown: boolean) {
@@ -96,7 +97,7 @@ export class DateRangePickerComponent implements OnInit {
     }
   }
 
-  toggle(){
+  toggle() {
     this.dropdown.toggle();
   }
 
@@ -105,7 +106,7 @@ export class DateRangePickerComponent implements OnInit {
       this.fromDate = newCustomDate[0];
       this.toDate = newCustomDate[1];
       this._displayRange = this.createDateRange();
-      this.onDateRangeSelected.emit( < DateRangeInterface > {
+      this.onDateRangeSelected.emit(<DateRangeInterface>{
         fromDate: this.fromDate,
         toDate: this.toDate
       });
@@ -120,11 +121,23 @@ export class DateRangePickerComponent implements OnInit {
       const today: Date = new Date();
       let calculatedDate: Date;
       if (selectedItem.unit === 'day') {
-        calculatedDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + selectedItem.count);
+        calculatedDate = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate() + selectedItem.count
+        );
       } else if (selectedItem.unit === 'month') {
-        calculatedDate = new Date(today.getFullYear(), today.getMonth() + selectedItem.count, today.getDate());
+        calculatedDate = new Date(
+          today.getFullYear(),
+          today.getMonth() + selectedItem.count,
+          today.getDate()
+        );
       } else if (selectedItem.unit === 'year') {
-        calculatedDate = new Date(today.getFullYear() + selectedItem.count, today.getMonth(), today.getDate());
+        calculatedDate = new Date(
+          today.getFullYear() + selectedItem.count,
+          today.getMonth(),
+          today.getDate()
+        );
       }
 
       if (calculatedDate >= today) {
@@ -136,7 +149,7 @@ export class DateRangePickerComponent implements OnInit {
       }
       this._displayRange = this.createDateRange();
 
-      this.onDateRangeSelected.emit( < DateRangeInterface > {
+      this.onDateRangeSelected.emit(<DateRangeInterface>{
         fromDate: this.fromDate,
         toDate: this.toDate
       });

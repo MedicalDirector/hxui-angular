@@ -1,72 +1,48 @@
-import {
-  async,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
-import {
-  DateRangePickerCustomComponent
-} from './date-range-picker-custom.component';
-import {
-  FormsModule
-} from '@angular/forms';
-import {
-  TabsModule
-} from '../../tabs/tabs.module';
-import {
-  DatepickerModule
-} from '../../datepicker/datepicker.module';
-import {
-  DateRangePickerComponent
-} from '../date-range-picker.component';
-import {
-  DateRangePickerIntervalComponent
-} from '../date-range-picker-interval/date-range-picker-interval.component';
-import {
-  DatePipe
-} from '@angular/common';
-import {
-  DateRangePickerConfig
-} from '../date-range-picker.config';
-import {
-  ChangeDetectorRef
-} from '@angular/core';
-import {
-  Overlay
-} from '@angular/cdk/overlay';
-import {
-  DropdownModule
-} from '../../dropdown/dropdown.module';
-import {
-  DropdownConfig
-} from '../../dropdown/dropdown.config';
-import {
-  DropdownStubDirective
-} from '../dropdown-stub.component.spec';
-import {
-  DatepickerConfig
-} from '../../../public_api';
-import {
-  By
-} from '@angular/platform-browser';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-fdescribe('DateRangePickerCustomComponent', () => {
+import { DateRangePickerCustomComponent } from './date-range-picker-custom.component';
+import { FormsModule } from '@angular/forms';
+import { TabsModule } from '../../tabs/tabs.module';
+import { DatepickerModule } from '../../datepicker/datepicker.module';
+import { DateRangePickerComponent } from '../date-range-picker.component';
+import { DateRangePickerIntervalComponent } from '../date-range-picker-interval/date-range-picker-interval.component';
+import { DatePipe } from '@angular/common';
+import { DateRangePickerConfig } from '../date-range-picker.config';
+import { Overlay } from '@angular/cdk/overlay';
+import { DropdownModule } from '../../dropdown/dropdown.module';
+import { DropdownConfig } from '../../dropdown/dropdown.config';
+import { DropdownStubDirective } from '../dropdown-stub.component.spec';
+import { DatepickerConfig } from '../../../public_api';
+import { By } from '@angular/platform-browser';
+import { NgxMaskModule } from 'ngx-mask';
+
+describe('DateRangePickerCustomComponent', () => {
   let component: DateRangePickerCustomComponent;
-  let fixture: ComponentFixture < DateRangePickerCustomComponent > ;
+  let fixture: ComponentFixture<DateRangePickerCustomComponent>;
 
-
-  beforeEach(async (() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-        imports: [FormsModule, TabsModule, DatepickerModule, DropdownModule],
-        declarations: [DateRangePickerComponent, DateRangePickerIntervalComponent, DateRangePickerCustomComponent, DropdownStubDirective],
-        providers: [
-          Overlay,
-          DropdownConfig,
-          DatePipe,
-          DatepickerConfig,
-          DateRangePickerConfig
-        ]
-      })
-      .compileComponents();
+      imports: [
+        FormsModule,
+        TabsModule,
+        DatepickerModule,
+        DropdownModule,
+        NgxMaskModule.forRoot()
+      ],
+      declarations: [
+        DateRangePickerComponent,
+        DateRangePickerIntervalComponent,
+        DateRangePickerCustomComponent,
+        DropdownStubDirective
+      ],
+      providers: [
+        Overlay,
+        DropdownConfig,
+        DatePipe,
+        DatepickerConfig,
+        DateRangePickerConfig
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -96,7 +72,7 @@ fdescribe('DateRangePickerCustomComponent', () => {
       fixture.detectChanges();
       expect(component.newFromDate).toEqual(component.newToDate);
     });
-  })
+  });
 
   describe('Click Cancel', () => {
     beforeEach(() => {});
@@ -108,7 +84,7 @@ fdescribe('DateRangePickerCustomComponent', () => {
       fixture.detectChanges();
       expect(component.closeDropdown.emit).toHaveBeenCalled();
     });
-  })
+  });
 
   describe('Click Selected', () => {
     beforeEach(() => {});
@@ -120,8 +96,10 @@ fdescribe('DateRangePickerCustomComponent', () => {
       button.nativeElement.click();
       fixture.detectChanges();
       expect(component.closeDropdown.emit).toHaveBeenCalled();
-      expect(component.newSelectedCustomDate.emit).toHaveBeenCalledWith([component.newFromDate, component.newToDate]);
+      expect(component.newSelectedCustomDate.emit).toHaveBeenCalledWith([
+        component.newFromDate,
+        component.newToDate
+      ]);
     });
-  })
-
+  });
 });

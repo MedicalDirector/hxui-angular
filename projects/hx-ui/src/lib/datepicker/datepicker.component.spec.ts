@@ -10,11 +10,12 @@ import { DatepickerConfig } from './datepicker.config';
 import { TabsetConfig } from '../tabs/tabset.config';
 import { ElementRef, Injectable, ViewContainerRef } from '@angular/core';
 import { Overlay } from '@angular/cdk/overlay';
+import { NgxMaskModule } from 'ngx-mask';
 
 @Injectable()
 export class MockElementRef extends ElementRef {
   nativeElement = {
-    getElementsByTagName : () => {
+    getElementsByTagName: () => {
       return [];
     }
   };
@@ -29,8 +30,12 @@ describe('DatepickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, TabsModule ],
-      declarations: [ DatepickerFormComponent, DatepickerComponent, DatepickerIntervalComponent ],
+      imports: [FormsModule, TabsModule, NgxMaskModule],
+      declarations: [
+        DatepickerFormComponent,
+        DatepickerComponent,
+        DatepickerIntervalComponent
+      ],
       providers: [
         PositioningService,
         DatepickerConfig,
@@ -40,14 +45,13 @@ describe('DatepickerComponent', () => {
         ViewContainerRef,
         Overlay
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DatepickerComponent);
     component = fixture.componentInstance;
-    component.validators = [() =>  true];
+    component.validators = [() => true];
     fixture.detectChanges();
   });
 
@@ -76,13 +80,25 @@ describe('DatepickerComponent', () => {
       let Sunday: Date = new Date('April 2018');
 
       // Confirm that the first element in the days[] array is Monday, possibly from the previous month
-      confirmRenderCalendarStartDate(Monday, new Date('Monday 01 October 2018'))
-      confirmRenderCalendarStartDate(Tuesday, new Date('Monday 30 April 2018'))
-      confirmRenderCalendarStartDate(Wednesday, new Date('Monday 30 July 2018'))
-      confirmRenderCalendarStartDate(Thursday, new Date('Monday 29 January 2018'))
-      confirmRenderCalendarStartDate(Friday, new Date('Monday 28 May 2018'))
-      confirmRenderCalendarStartDate(Saturday, new Date('Monday 27 August 2018'))
-      confirmRenderCalendarStartDate(Sunday, new Date('Monday 26 March 2018'))
+      confirmRenderCalendarStartDate(
+        Monday,
+        new Date('Monday 01 October 2018')
+      );
+      confirmRenderCalendarStartDate(Tuesday, new Date('Monday 30 April 2018'));
+      confirmRenderCalendarStartDate(
+        Wednesday,
+        new Date('Monday 30 July 2018')
+      );
+      confirmRenderCalendarStartDate(
+        Thursday,
+        new Date('Monday 29 January 2018')
+      );
+      confirmRenderCalendarStartDate(Friday, new Date('Monday 28 May 2018'));
+      confirmRenderCalendarStartDate(
+        Saturday,
+        new Date('Monday 27 August 2018')
+      );
+      confirmRenderCalendarStartDate(Sunday, new Date('Monday 26 March 2018'));
     });
 
     function confirmRenderCalendarStartDate(month: Date, startDate: Date) {
@@ -94,14 +110,14 @@ describe('DatepickerComponent', () => {
     }
   });
 
-  describe('previousMonth', () =>{
+  describe('previousMonth', () => {
     it('should set component.viewDate to the previous month', () => {
       let previousMonth = new Date('June 2018');
       component.viewDate = new Date('July 2018');
 
       component.previousMonth();
 
-      expect(component.viewDate.getMonth()).toBe(previousMonth.getMonth())
+      expect(component.viewDate.getMonth()).toBe(previousMonth.getMonth());
     });
   });
 
@@ -112,7 +128,7 @@ describe('DatepickerComponent', () => {
 
       component.nextMonth();
 
-      expect(component.viewDate.getMonth()).toBe(nextMonth.getMonth())
+      expect(component.viewDate.getMonth()).toBe(nextMonth.getMonth());
     });
   });
 });
