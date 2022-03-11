@@ -1,9 +1,10 @@
 <section class="hx-section scrollable-y" #container>
   <div class="hx-section is-comfortable">
-
     <h1 class="hx-title">Date Pickers</h1>
-    <h2 class="hx-subtitle">The date picker is a form element that is used to select a date</h2>
-    <hr>
+    <h2 class="hx-subtitle">
+      The date picker is a form element that is used to select a date
+    </h2>
+    <hr />
 
     <h4 id="usage">Usage</h4>
     <p>Add the DatepickerModule to AppModule or SharedModule.</p>
@@ -16,50 +17,70 @@
       <span class="hx-icon-control mr-2">
         <i class="hx-icon is-medium icon-information"></i>
       </span>
-          <span class="hx-flex-1">
-            The date picker makes use of an excellent 3rd party angular directive called <a href="https://www.npmjs.com/package/ngx-mask" target="_blank">ngx-mask</a>.<br>
-            You will need to npm install ngx-mask into your application, in order to use the date picker component.
+      <span class="hx-flex-1">
+        The date picker makes use of an excellent 3rd party angular directive
+        called
+        <a 
+          href="https://www.npmjs.com/package/ngx-mask" 
+          target="_blank"
+        >
+          ngx-mask
+        </a>.<br />
+        You will need to npm install ngx-mask into your application, in order to
+        use the date picker component.
       </span>
     </div>
 
-    <hr>
+    <hr />
 
     <h4 id="example">Basic Example</h4>
     <div class="hx-columns">
       <div class="hx-column">
         <form [formGroup]="basicForm">
-            <hxa-datepicker-input
-              name="datepicker_basic"
-              align="bottom"
-              [defaultToPresentDate]="false"
-              formControlName="dayte_basic"
-              (onDateChange)="onDateChangedBasic($event)"
-              [required]="false"
-            ></hxa-datepicker-input>
-            <div>
-              <span>Emitted Date object: <b>{{basicForm.get('dayte_basic').value}}</b></span><br>
-              <span>NgForm Status: <b>{{basicForm.status}}</b></span> <br>
-              <span>NgForm Valid: <b>{{basicForm.valid}}</b></span> <br>
-              <span>NgForm Touched: <b>{{basicForm.touched}}</b></span><br>
-            </div>
+          <hxa-datepicker-input
+            name="datepicker_basic"
+            placement="bottom"
+            [defaultToPresentDate]="false"
+            formControlName="dayte_basic"
+            (onDateChange)="onDateChangedBasic($event)"
+            [required]="true"
+          ></hxa-datepicker-input>
+          <div>
+            <span>
+              Emitted Date object:
+              <b>{{ basicForm.get("dayte_basic").value }}</b>
+            </span>
+            <br />
+            <span>
+              NgForm Status: <b>{{ basicForm.status }}</b>
+            </span>
+            <br />
+            <span>
+              NgForm Valid: <b>{{ basicForm.valid }}</b>
+            </span>
+            <br />
+            <span>
+              NgForm Touched: <b>{{ basicForm.touched }}</b>
+            </span>
+          </div>
         </form>
       </div>
     </div>
 
-    <br>
+    <br />
 
     <h5 id="basic_code">Code</h5>
 
     <hx-tabset>
       <hx-tab heading="Template">
-            <pre>
-              <code [highlight]="code.exampleTemplate"></code>
-            </pre>
+        <pre>
+          <code [highlight]="code.exampleTemplate"></code>
+        </pre>
       </hx-tab>
       <hx-tab heading="Typescript">
-            <pre>
-              <code [highlight]="code.exampleTypescript"></code>
-            </pre>
+        <pre>
+          <code [highlight]="code.exampleTypescript"></code>
+        </pre>
       </hx-tab>
     </hx-tabset>
 
@@ -70,43 +91,55 @@
         <form [formGroup]="intervalForm">
           <hxa-datepicker-input
             name="datepicker"
-            align="bottom"
+            placement="bottom"
             [interval]="true"
             formControlName="dayte"
             [allowPreviousDates]="true"
           ></hxa-datepicker-input>
           <div>
-            <span>Emitted Date object: <b>{{intervalForm.get('dayte').value}}</b></span><br>
-            <span>NgForm Status: <b>{{intervalForm.status}}</b></span> <br>
-            <span>NgForm Valid: <b>{{intervalForm.valid}}</b></span> <br>
-            <span>NgForm Touched: <b>{{intervalForm.touched}}</b></span><br>
+            <span>
+              Emitted Date object:
+              <b>{{ intervalForm.get("dayte").value }}</b>
+            </span>
+            <br />
+            <span>
+              NgForm Status: <b>{{ intervalForm.status }}</b>
+            </span>
+            <br />
+            <span>
+              NgForm Valid: <b>{{ intervalForm.valid }}</b>
+            </span>
+            <br />
+            <span>
+              NgForm Touched: <b>{{ intervalForm.touched }}</b>
+            </span>
           </div>
         </form>
       </div>
     </div>
 
-    <br>
+    <br />
 
     <h5 id="interval_code">Code</h5>
 
     <hx-tabset>
       <hx-tab heading="Template">
-            <pre>
-              <code [highlight]="code.intervalExampleTemplate"></code>
-            </pre>
+        <pre>
+          <code [highlight]="code.intervalExampleTemplate"></code>
+        </pre>
       </hx-tab>
       <hx-tab heading="Typescript">
-            <pre>
-              <code [highlight]="code.intervalExampleTypescript"></code>
-            </pre>
+        <pre>
+          <code [highlight]="code.intervalExampleTypescript"></code>
+        </pre>
       </hx-tab>
     </hx-tabset>
 
-    <hr>
+    <hr />
 
     <h4 id="api">API Reference</h4>
 
-    <h5 class="is-primary">Datepicker-Form Component</h5>
+    <h5 class="is-primary">DatepickerFormComponent</h5>
     <div class="hx-columns">
       <div class="hx-column">
         <table class="hx-table is-striped">
@@ -115,117 +148,223 @@
               <th>Inputs</th>
               <th>Type</th>
               <th>Description</th>
+              <th>Defaults</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>dateFormat</td>
+              <td>id</td>
               <td><kbd>string</kbd></td>
-              <td>A JavaScript Date object formatting string, formats the display of components current value. Defaults to "dd/MM/y".</td>
-            </tr>
-            <tr>
-              <td>defaultToPresentDate</td>
-              <td><kbd>boolean</kbd></td>
-              <td>Initializes the component with a value of the present date. Defaults to true.</td>
-            </tr>
-            <tr>
-              <td>placeholder</td>
-              <td><kbd>string</kbd></td>
-              <td>This attribute specifies the placeholder value of the components input element. Defaults to "Date".</td>
-            </tr>
-            <tr>
-              <td>helpText</td>
-              <td><kbd>string</kbd></td>
-              <td>This attribute specifies the text value of input helper. Defaults to "Please select a date".</td>
-            </tr>
-            <tr>
-              <td>icon</td>
-              <td><kbd>string</kbd></td>
-              <td>This attribute specifies the font icon name. Defaults to "hx-icon icon-calendar".</td>
-            </tr>
-            <tr>
-              <td>iconPosition</td>
-              <td><kbd>string</kbd></td>
-              <td>This attribute specifies the icon position. Defaults to "right".</td>
+              <td></td>
+              <td><kbd>''</kbd></td>
             </tr>
             <tr>
               <td>disabled</td>
               <td><kbd>boolean</kbd></td>
-              <td>Adds the disabled html attribute to the components input element. Defaults to false.</td>
+              <td>
+                Adds the disabled html attribute to the components input element.
+              </td>
+              <td><kbd>false</kbd></td>
             </tr>
             <tr>
               <td>readonly</td>
               <td><kbd>boolean</kbd></td>
-              <td>Adds the readonly html attribute to the components input element. Defaults to false.</td>
+              <td>
+                Adds the readonly html attribute to the components input
+                element.
+              </td>
+              <td><kbd>false</kbd></td>
             </tr>
             <tr>
               <td>required</td>
               <td><kbd>boolean</kbd></td>
-              <td>Adds the required html attribute to the components input element and a required asterisk on the input label. Defaults to true.</td>
+              <td>
+                Adds the required html attribute to the components input element
+                and a required asterisk on the input label.
+              </td>
+              <td><kbd>true</kbd></td>
+            </tr>
+            <tr>
+              <td>defaultToPresentDate</td>
+              <td><kbd>boolean</kbd></td>
+              <td>
+                Initializes the component with a value of the present date.
+              </td>
+              <td><kbd>true</kbd></td>
             </tr>
             <tr>
               <td>allowPreviousDates</td>
               <td><kbd>boolean</kbd></td>
-              <td>Setting to false will disallow the user from selecting dates before the present date. Defaults to true.</td>
+              <td>
+                Setting to false will disallow the user from selecting dates
+                before the present date.
+              </td>
+              <td><kbd>true</kbd></td>
             </tr>
             <tr>
               <td>allowFutureDates</td>
               <td><kbd>boolean</kbd></td>
-              <td>Setting to false will disallow the user from selecting dates after the present date. Defaults to true.</td>
+              <td>
+                Setting to false will disallow the user from selecting dates
+                after the present date.
+              </td>
+              <td><kbd>true</kbd></td>
             </tr>
             <tr>
-              <td>align</td>
-              <td><kbd>"top" | "bottom"</kbd></td>
-              <td>Specifies to open the datepicker at the top of the input element or at the bottom</td>
+              <td>dateFormat</td>
+              <td><kbd>string</kbd></td>
+              <td>
+                A JavaScript Date object formatting string, formats the display
+                of components current value.
+              </td>
+              <td><kbd>'DD/MM/Y'</kbd></td>
+            </tr>
+            <tr>
+              <td>placeholder</td>
+              <td><kbd>string</kbd></td>
+              <td>
+                This attribute specifies the placeholder value of the components
+                input element.
+              </td>
+              <td><kbd>'Date'</kbd></td>
+            </tr>
+            <tr>
+              <td>helpText</td>
+              <td><kbd>string</kbd></td>
+              <td>
+                This attribute specifies the text value of input helper.
+              </td>
+              <td><kbd>'Please select a valid date'</kbd></td>
+            </tr>
+            <tr>
+              <td>helpTextVisible</td>
+              <td><kbd>string</kbd></td>
+              <td>
+                Specifies visibility of input help text
+              </td>
+              <td><kbd>false</kbd></td>
+            </tr>
+            <tr>
+              <td>isWarning</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Warning state of input</td>
+              <td><kbd>false</kbd></td>
+            </tr>
+            <tr>
+              <td>isDanger</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Danger state of input</td>
+              <td><kbd>false</kbd></td>
+            </tr>
+            <tr>
+              <td>icon</td>
+              <td><kbd>string</kbd></td>
+              <td>
+                This attribute specifies the font icon name.
+              </td>
+              <td><kbd>'hx-icon icon-calendar'</kbd></td>
+            </tr>
+            <tr>
+              <td>iconPlacement</td>
+              <td><kbd>string</kbd></td>
+              <td>
+                This attribute specifies the icon placement.
+              </td>
+              <td><kbd>'right'</kbd></td>
+            </tr>
+            <tr>
+              <td>placement</td>
+              <td><kbd>'top' | 'bottom' | 'left' | 'right'</kbd></td>
+              <td>
+                Specifies the position the datepicker opens against the input element
+              </td>
+              <td><kbd>'bottom'</kbd></td>
+            </tr>
+            <tr>
+              <td>showDelay</td>
+              <td><kbd>number</kbd></td>
+              <td>
+                delay in ms before showing the calendar after show is called
+              </td>
+              <td><kbd>0</kbd></td>
+            </tr>
+            <tr>
+              <td>hideDelay</td>
+              <td><kbd>number</kbd></td>
+              <td>
+                delay in ms before hiding the calendar after hide is called
+              </td>
+              <td><kbd>0</kbd></td>
             </tr>
             <tr>
               <td>from</td>
               <td><kbd>"dd/mm/yyyy"</kbd></td>
-              <td>Specifies the inclusive beginning date for allowed date values</td>
+              <td>
+                Specifies the inclusive beginning date for allowed date values
+              </td>
+              <td></td>
             </tr>
             <tr>
               <td>to</td>
               <td><kbd>"dd/mm/yyyy"</kbd></td>
               <td>Specifies the inclusive end date for allowed date values</td>
+              <td></td>
             </tr>
             <tr>
               <td>interval</td>
               <td><kbd>boolean</kbd></td>
-              <td>Enables interval selection. Defaults to "false"</td>
+              <td>Enables interval selection.</td>
+              <td><kbd>false</kbd></td>
             </tr>
-            </tbody>
-        </table>
-      </div>
-    </div>
-
-
-    <div class="hx-columns">
-      <div class="hx-column">
-        <table class="hx-table is-striped">
-          <thead>
-          <tr>
-            <th>Outputs</th>
-            <th>Description</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>onDateChange</td>
-            <td>Emits a Date is selected from the Datepicker or a valid date string is entered into input field</td>
-          </tr>
-          <tr>
-            <td>onFocus</td>
-            <td>Emits a boolean if date picker input field is in focus</td>
-          </tr>
+            <tr>
+              <td>dueDateInterval</td>
+              <td><kbd>string</kbd></td>
+              <td></td>
+              <td><kbd>'0 day(s)'</kbd></td>
+            </tr>
+            <tr>
+              <td>maskPattern</td>
+              <td><kbd>string</kbd></td>
+              <td>Mask pattern for date picker text input</td>
+              <td><kbd>'d0/M0/0000'</kbd></td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
 
+    <div class="hx-columns">
+      <div class="hx-column">
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Outputs</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>onDateChange</td>
+              <td>
+                Emits a Date is selected from the Datepicker or a valid date
+                string is entered into input field
+              </td>
+            </tr>
+            <tr>
+              <td>onFocus</td>
+              <td>Emits a boolean if date picker input field is in focus</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </section>
 
-<aside *ngIf="contentsNav" class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
+<aside
+  *ngIf="contentsNav"
+  class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white"
+>
   <ul class="hx-nav hx-nav-vertical">
     <li class="hx-nav-heading"><h6>Contents</h6></li>
 
@@ -234,15 +373,20 @@
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Basic Example</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#example')"
+        ><span>Basic Example</span></a
+      >
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#interval_example')"><span>Interval Example</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#interval_example')"
+        ><span>Interval Example</span></a
+      >
     </li>
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#api')"
+        ><span>API Reference</span></a
+      >
     </li>
-
   </ul>
 </aside>

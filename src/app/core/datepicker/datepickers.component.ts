@@ -1,10 +1,10 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { PageScrollService } from 'ngx-page-scroll-core';
 import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/common';
 import { DatepickersCode } from './datepickers.code';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class DatepickersComponent extends CoreBaseComponent { 
   public code = new DatepickersCode();
 
   basicForm = this.fb.group({
-    dayte_basic: [null]
+    dayte_basic: [null, Validators.required]
   });
 
   intervalForm = this.fb.group({

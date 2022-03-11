@@ -1,48 +1,53 @@
 <section class="hx-section scrollable-y" #container>
   <div class="hx-section is-comfortable">
-
     <h1 class="hx-title">Date Range Pickers</h1>
-    <h2 class="hx-subtitle">The date range picker is an element that is used to select a date range</h2>
-    <hr>
+    <h2 class="hx-subtitle">
+      The date range picker is an element that is used to select a date range
+    </h2>
+    <hr />
 
     <h4 id="usage">Usage</h4>
     <p>Add the DateRangePickerModule to AppModule or SharedModule.</p>
 
     <pre>
-            <code [highlight]="code.usage"></code>
-          </pre>
+      <code [highlight]="code.usage"></code>
+    </pre>
 
-    <hr>
+    <hr />
 
     <h4 id="customexample">Basic Example - Custom tab only</h4>
 
     <div class="hx-columns">
       <div class="hx-column">
-        <hxa-date-range-picker  [displayMode]="DisplayModeEnum.showCustomOnly"  (onDateRangeSelected)="getSelectedDateRange($event)">
+        <hxa-date-range-picker
+          [displayMode]="DisplayModeEnum.showCustomOnly"
+          (onDateRangeSelected)="getSelectedDateRange($event)"
+        >
         </hxa-date-range-picker>
         <div>
-          <br><span>Emitted Date Range object:</span>
+          <br />
+          <span>Emitted Date Range object:</span>
           <ul>
-            <li>fromDate: {{selectedDateRange.fromDate}}</li>
-            <li>toDate: {{selectedDateRange.toDate}}</li>
+            <li>fromDate: {{ selectedDateRange.fromDate }}</li>
+            <li>toDate: {{ selectedDateRange.toDate }}</li>
           </ul>
         </div>
       </div>
     </div>
-    <br>
+    <br />
 
     <h5 id="basic_code">Code</h5>
 
     <hx-tabset>
       <hx-tab heading="Template">
         <pre>
-                    <code [highlight]="code.exampleTemplateforcustomtab"></code>
-                  </pre>
+          <code [highlight]="code.exampleTemplateforcustomtab"></code>
+        </pre>
       </hx-tab>
       <hx-tab heading="Typescript">
         <pre>
-                    <code [highlight]="code.exampleTypescriptforcustomtab"></code>
-                  </pre>
+          <code [highlight]="code.exampleTypescriptforcustomtab"></code>
+        </pre>
       </hx-tab>
     </hx-tabset>
 
@@ -50,35 +55,37 @@
 
     <div class="hx-columns">
       <div class="hx-column">
-        <hxa-date-range-picker [displayMode]="DisplayModeEnum.showIntervalOnly"
-        [intervalOptions]="intervalOptions"
-        (onDateRangeSelected)="getSelectedDateRange($event)"
-        [defaultDateRange]="defaultDateRange">
-        </hxa-date-range-picker>
+        <hxa-date-range-picker
+          [displayMode]="DisplayModeEnum.showIntervalOnly"
+          [intervalOptions]="intervalOptions"
+          (onDateRangeSelected)="getSelectedDateRange($event)"
+          [defaultDateRange]="defaultDateRange"
+        ></hxa-date-range-picker>
         <div>
-          <br><span>Emitted Date Range object:</span>
+          <br />
+          <span>Emitted Date Range object:</span>
           <ul>
-            <li>fromDate: {{selectedDateRange.fromDate}}</li>
-            <li>toDate: {{selectedDateRange.toDate}}</li>
+            <li>fromDate: {{ selectedDateRange.fromDate }}</li>
+            <li>toDate: {{ selectedDateRange.toDate }}</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <br>
+    <br />
 
     <h5 id="basic_code">Code</h5>
 
     <hx-tabset>
       <hx-tab heading="Template">
         <pre>
-                    <code [highlight]="code.exampleTemplateforintervaltab"></code>
-                  </pre>
+          <code [highlight]="code.exampleTemplateforintervaltab"></code>
+        </pre>
       </hx-tab>
       <hx-tab heading="Typescript">
         <pre>
-                    <code [highlight]="code.exampleTypescriptforintervaltab"></code>
-                  </pre>
+          <code [highlight]="code.exampleTypescriptforintervaltab"></code>
+        </pre>
       </hx-tab>
     </hx-tabset>
 
@@ -86,39 +93,41 @@
 
     <div class="hx-columns">
       <div class="hx-column">
-        <hxa-date-range-picker [intervalOptions]="intervalOptions"
-                               [displayMode]="DisplayModeEnum.showTab"
-                               [dateFormat]="dateFormat"
-        (onDateRangeSelected)="getSelectedDateRange($event)">
-        </hxa-date-range-picker>
+        <hxa-date-range-picker
+          [intervalOptions]="intervalOptions"
+          [displayMode]="DisplayModeEnum.showTab"
+          [dateFormat]="dateFormat"
+          (onDateRangeSelected)="getSelectedDateRange($event)"
+        ></hxa-date-range-picker>
         <div>
-            <br><span>Emitted Date Range object:</span>
-            <ul>
-              <li>From Date: {{selectedDateRange.fromDate}}</li>
-              <li>To Date: {{selectedDateRange.toDate}}</li>
-            </ul>
-          </div>
+          <br />
+          <span>Emitted Date Range object:</span>
+          <ul>
+            <li>From Date: {{ selectedDateRange.fromDate }}</li>
+            <li>To Date: {{ selectedDateRange.toDate }}</li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <br>
+    <br />
 
     <h5 id="interval_code">Code</h5>
 
     <hx-tabset>
       <hx-tab heading="Template">
         <pre>
-                    <code [highlight]="code.exampleTemplatefortabs"></code>
-                  </pre>
+          <code [highlight]="code.exampleTemplatefortabs"></code>
+        </pre>
       </hx-tab>
       <hx-tab heading="Typescript">
         <pre>
-                    <code [highlight]="code.exampleTypescriptfortabs"></code>
-                  </pre>
+          <code [highlight]="code.exampleTypescriptfortabs"></code>
+        </pre>
       </hx-tab>
     </hx-tabset>
 
-    <hr>
+    <hr />
 
     <h4 id="api">API Reference</h4>
 
@@ -131,134 +140,88 @@
               <th>Inputs</th>
               <th>Type</th>
               <th>Description</th>
+              <th>Defaults</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>dateFormat</td>
-              <td><kbd>string</kbd></td>
-              <td>A JavaScript Date object formatting string, formats the display of components current value. Defaults
-                to "dd/MM/y".</td>
+              <td>intervalOptions</td>
+              <td><kbd>string[]</kbd></td>
+              <td>
+                Specifies interval options displayed under interval selection tab.
+                Please see available options as below.
+              </td>
+              <td></td>
             </tr>
             <tr>
               <td>placeholder</td>
               <td><kbd>string</kbd></td>
-              <td>This attribute specifies the placeholder value of the components input element. Defaults to "Date".
+              <td>
+                Specifies the placeholder value of the components
+                input element.
               </td>
+              <td><kbd>'Date'</kbd></td>
             </tr>
             <tr>
               <td>disabled</td>
               <td><kbd>boolean</kbd></td>
-              <td>Adds the disabled html attribute to the components dropdown element. Defaults to false.</td>
-            </tr>
-            <tr>
-              <td>displayMode</td>
-              <td><kbd>number</kbd></td>
-              <td>This attribute specified how tab(s) will be displayed. Options are: 1 - Show both tabs(default); 2 - Show Custom Selection only; 3 - Show Interval Selection only.
-                Defaults to 1.
+              <td>
+                Adds the disabled html attribute to the components dropdown element.
               </td>
+              <td><kbd>false</kbd></td>
             </tr>
             <tr>
               <td>autoClose</td>
               <td><kbd>boolean</kbd></td>
-              <td>Indicates that dropdown will be closed on item or document click, and after pressing ESC. Defaults to true.</td>
+              <td>
+                Indicates that dropdown will be closed on item or document
+                click, and after pressing ESC.
+              </td>
+              <td><kbd>true</kbd></td>
             </tr>
             <tr>
-              <td>Placement</td>
+              <td>placement</td>
+              <td><kbd>'top' | 'bottom' | 'left' | 'right'</kbd></td>
+              <td>
+                Specifies the position the datepicker opens against the input element
+              </td>
+              <td><kbd>'bottom'</kbd></td>
+            </tr>
+            <tr>
+              <td>displayMode</td>
+              <td><kbd>DisplayModeEnum</kbd></td>
+              <td>
+                Specifies how tab(s) will be displayed.
+              </td>
+              <td><kbd>DisplayModeEnum.showTab</kbd></td>
+            </tr>
+            <tr>
+              <td>dateFormat</td>
               <td><kbd>string</kbd></td>
-              <td>Placement of a popover. Accepts: "top", "bottom", "left", "right".</td>
-            </tr>
-            <tr>
-              <td>intervalOptions</td>
-              <td><kbd>string[]</kbd></td>
-              <td>This attribute specifies interval options displayed under interval selection tab. Please see available options as below.</td>
+              <td>
+                A JavaScript Date object formatting string, formats the display
+                of components current value.
+              </td>
+              <td><kbd>dd/MM/yyyy</kbd></td>
             </tr>
             <tr>
               <td>defaultDateRange</td>
-              <td><kbd>DateRange</kbd></td>
-              <td>Default date range initially displayed in date range picker. Default to today's date.</td>
+              <td><kbd>DateRangeInterface</kbd></td>
+              <td>
+                Default date range initially displayed in date range picker.
+              </td>
+              <td>(today)</td>
+            </tr>
+            <tr>
+              <td>showCaretDown</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Specifies whether caret down icon is displayed to right of input</td>
+              <td>true</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-
-
-    <div class="hx-columns">
-      <div class="hx-column">
-        <table class="hx-table is-striped">
-          <thead>
-            <tr>
-              <th>AVAILABLE INTERVAL OPTIONS</th>
-              <th>DESCRIPTION</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Today</td>
-              <td>Today</td>
-            </tr>
-            <tr>
-              <td>Yesterdy</td>
-              <td>Yesterdy</td>
-            </tr>
-            <tr>
-              <td>Tomorrow</td>
-              <td>Tomorrow</td>
-            </tr>
-            <tr>
-              <td>Last Year</td>
-              <td>Last Year</td>
-            </tr>
-            <tr>
-              <td>Next Year</td>
-              <td>Next Year</td>
-            </tr>
-            <tr>
-              <td>Last 6 Months</td>
-              <td>Last 6 Months</td>
-            </tr>
-            <tr>
-              <td>Next 6 Months</td>
-              <td>Next 6 Months</td>
-            </tr>
-            <tr>
-              <td>Last 3 Months</td>
-              <td>Last 3 Months</td>
-            </tr>
-            <tr>
-              <td>Next 3 Months</td>
-              <td>Next 3 Months</td>
-            </tr>
-            <tr>
-              <td>Last Month</td>
-              <td>Last Month</td>
-            </tr>
-            <tr>
-              <td>Next Month</td>
-              <td>Next Month</td>
-            </tr>
-            <tr>
-              <td>Last Week</td>
-              <td>Last Week</td>
-            </tr>
-            <tr>
-              <td>Next Week</td>
-              <td>Next Week</td>
-            </tr>
-            <tr>
-              <td>Last Fortnight</td>
-              <td>Last Fortnight</td>
-            </tr>
-            <tr>
-              <td>Next Fortnight</td>
-              <td>Next Fortnight</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
 
     <div class="hx-columns">
       <div class="hx-column">
@@ -272,41 +235,136 @@
           <tbody>
             <tr>
               <td>onDateRangeChange</td>
-              <td>Emits a Date Range Object containing fromDate and toDate selected from the DateRangePicker. Need to import data type: DateRange.</td>
+              <td>
+                Emits a Date Range Object containing fromDate and toDate
+                selected from the DateRangePicker. Need to import data type:
+                DateRangeInterface.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <h5 class="is-primary">DisplayModeEnum</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Enum</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>showTab</td>
+              <td>Show both tabs</td>
+            </tr>
+            <tr>
+              <td>showCustomOnly</td>
+              <td>Show Custom Selection only</td>
+            </tr>
+            <tr>
+              <td>showIntervalOnly</td>
+              <td>Show Interval Selection only</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <h5 class="is-primary">DateRangeInterface</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Interface</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>fromDate</td>
+              <td>Date</td>
+            </tr>
+            <tr>
+              <td>toDate</td>
+              <td>Date</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
+    <div class="hx-columns">
+      <div class="hx-column">
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>AVAILABLE INTERVAL OPTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Today</td></tr>
+            <tr><td>Yesterdy</td></tr>
+            <tr><td>Tomorrow</td></tr>
+            <tr><td>Last Year</td></tr>
+            <tr><td>Next Year</td></tr>
+            <tr><td>Last 6 Months</td></tr>
+            <tr><td>Next 6 Months</td></tr>
+            <tr><td>Last 3 Months</td></tr>
+            <tr><td>Next 3 Months</td></tr>
+            <tr><td>Last Month</td></tr>
+            <tr><td>Next Month</td></tr>
+            <tr><td>Last Week</td></tr>
+            <tr><td>Next Week</td></tr>
+            <tr><td>Last Fortnight</td></tr>
+            <tr><td>Next Fortnight</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </section>
 
-
-<aside *ngIf="contentsNav" class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
+<aside
+  *ngIf="contentsNav"
+  class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white"
+>
   <ul class="hx-nav hx-nav-vertical">
     <li class="hx-nav-heading">
       <h6>Contents</h6>
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#usage')">
+        <span>Usage</span>
+      </a>
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#customexample')"><span>Basic Example - Custom tab</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#customexample')">
+        <span>Basic Example - Custom tab</span>
+      </a>
     </li>
 
     <li class="hx-nav-item">
-        <a class="hx-nav-link" (click)="scrollTo('#intervalexample')"><span>Basic Example - Interval tab</span></a>
-      </li>
-
-    <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#tabsexample')"><span>Example with 2 tabs</span></a>
-    </li>
-    <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#intervalexample')">
+        <span>Basic Example - Interval tab</span>
+      </a>
     </li>
 
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#tabsexample')">
+        <span>Example with 2 tabs</span>
+      </a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#api')">
+        <span>API Reference</span>
+      </a>
+    </li>
   </ul>
 </aside>
