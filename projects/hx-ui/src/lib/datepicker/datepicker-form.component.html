@@ -1,21 +1,41 @@
 <div class="hx-input-group hxa-datepicker-form">
-  <i class="{{icon}}" *ngIf="iconPlacement === 'left'" (click)="onFocused($event)"></i>
-  <div class="hx-input-control hxa-datepicker-control" [ngClass]="{'is-danger': !isValid && datePickerForm.touched}">
+  <i
+    class="{{ icon }}"
+    *ngIf="iconPlacement === 'left'"
+    (click)="onFocused($event)"
+  ></i>
+  <div
+    class="hx-input-control hxa-datepicker-control"
+    [ngClass]="{
+      'is-danger': (!isValid && datePickerForm.touched) || isDanger,
+      'is-help-visible': helpTextVisible,
+      'is-warning': isWarning && isValid && datePickerForm.touched
+    }"
+  >
     <input
-      class="hx-input" type="text"
-           #datePickerForm="ngModel"
-           hxaTextInput
+      class="hx-input"
+      type="text"
+      #datePickerForm="ngModel"
+      hxaTextInput
       [required]="required ? true : null"
       [disabled]="disabled"
       [readonly]="readonly ? true : null"
-      [ngModel]="date | date:dateFormat"
+      [ngModel]="date | date: dateFormat"
       (change)="onChange($event)"
       (focus)="onFocused($event)"
       (keydown.Tab)="onTab($event)"
-       mask="d0/M0/0000"
-       [clearIfNotMatch]="true" [id]="id + 'datePicker'" >
-    <label class="hx-label" *ngIf="placeholder">{{placeholder}} <sup *ngIf="required">*</sup></label>
-    <div class="hx-help">{{helpText}}</div>
+      [mask]="maskPattern"
+      [clearIfNotMatch]="true"
+      [id]="id + 'datePicker'"
+    />
+    <label class="hx-label" *ngIf="placeholder">
+      {{ placeholder }}&nbsp;<ng-container *ngIf="required">*</ng-container>
+    </label>
+    <div class="hx-help">{{ helpText }}</div>
   </div>
-  <i class="{{icon}} has-pointer" *ngIf="iconPlacement === 'right'" (click)="onFocused($event)"></i>
+  <i
+    class="{{ icon }} has-pointer"
+    *ngIf="iconPlacement === 'right'"
+    (click)="onFocused($event)"
+  ></i>
 </div>

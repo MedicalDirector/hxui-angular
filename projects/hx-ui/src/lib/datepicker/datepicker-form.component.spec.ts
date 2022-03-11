@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DatepickerFormComponent } from './datepicker-form.component';
-import {DatepickerModule} from './datepicker.module';
-import {OverlayModule} from '@angular/cdk/overlay';
-
+import { DatepickerModule } from './datepicker.module';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { NgxMaskModule } from 'ngx-mask';
 
 describe('DatepickerFormComponent', () => {
   let component: DatepickerFormComponent;
@@ -11,9 +11,12 @@ describe('DatepickerFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [DatepickerModule.forRoot(), OverlayModule]
-    })
-    .compileComponents();
+      imports: [
+        DatepickerModule.forRoot(),
+        OverlayModule,
+        NgxMaskModule.forRoot()
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -30,25 +33,25 @@ describe('DatepickerFormComponent', () => {
     let date: Date;
 
     beforeEach(() => {
-     date = new Date('11 Jan 1993');
+      date = new Date('1 Jan 1993');
     });
 
     it('should parse a valid dd/mm/yyyy date then return a new Date object with a value of that date', () => {
-      const parsedDate: Date = component.parseDate('11/01/1993');
+      const parsedDate: Date = component.parseDate('01/01/1993');
 
       expect(parsedDate.getTime()).toEqual(date.getTime());
     });
 
     it('should parse a valid dd/mm/yy date then return a new Date object with a value of that date', () => {
-      const parsedDate: Date = component.parseDate('11/01/93');
+      const parsedDate: Date = component.parseDate('01/01/93');
 
       expect(parsedDate.getTime()).toEqual(date.getTime());
     });
 
     it('should parse a valid d/m/y date then return a new Date object with a value of that date', () => {
-      const parsedDate: Date = component.parseDate('1/1/2018');
+      const parsedDate: Date = component.parseDate('1/1/93');
 
-      expect(parsedDate.getTime()).toBeTruthy();
+      expect(parsedDate.getTime()).toEqual(date.getTime());
     });
 
     it('should not parse an invalid date with letters then return null', () => {
@@ -57,41 +60,41 @@ describe('DatepickerFormComponent', () => {
       expect(parsedDate).toBeNull();
     });
 
-    it('should not parse a date in a mm/dd/y format', () => {
+    it('should not parse a date in a mm/dd/yy format', () => {
       const parsedDate: Date = component.parseDate('10/25/2018');
 
       expect(parsedDate).toBeNull();
     });
   });
 
-  describe("onChange", () => {
+  describe('onChange', () => {
     beforeEach(() => {
-      spyOn(component, "setDate");
+      spyOn(component, 'setDate');
     });
 
     it('should try to call setDate() if passed a valid date', () => {
-      component.onChange("11/01/1993");
+      component.onChange({ target: { value: '11/01/1993' } });
 
       expect(component.setDate).toHaveBeenCalled();
     });
 
-    it('should not try to call setDate() if passed an invalid date', () => {
-      component.onChange("abc");
+    it('should try to call setDate(null) if passed an invalid date', () => {
+      component.onChange({ target: { value: 'abc' } });
 
-      expect(component.setDate).not.toHaveBeenCalled();
+      expect(component.setDate).toHaveBeenCalledWith(null);
     });
   });
 
-  describe("validateIsNotBeforeDate", () => {
+  describe('validateIsNotBeforeDate', () => {
     let date: Date;
 
     beforeEach(() => {
       /*
-      * ECMAScript Spec states that the below is the minimum possible date
-      * http://ecma-international.org/ecma-262/5.1/#sec-15.9.1.1
-      */
-     date = new Date(-8640000000000000);
-    })
+       * ECMAScript Spec states that the below is the minimum possible date
+       * http://ecma-international.org/ecma-262/5.1/#sec-15.9.1.1
+       */
+      date = new Date(-8640000000000000);
+    });
 
     xit('should return true if passed the current date', () => {
       const result: boolean = component.validateIsNotBeforeDate(date);
@@ -112,12 +115,12 @@ describe('DatepickerFormComponent', () => {
     });
   });
 
-  describe("validateIsNotAfterDate", () => {
+  describe('validateIsNotAfterDate', () => {
     let date: Date;
 
     beforeEach(() => {
       date = new Date(8640000000000000);
-    })
+    });
 
     it('should return true if passed the current date', () => {
       const result: boolean = component.validateIsNotAfterDate(date);
@@ -139,12 +142,12 @@ describe('DatepickerFormComponent', () => {
   });
 
   describe('setDate', () => {
-    let date: Date
+    let date: Date;
 
     beforeEach(() => {
       date = new Date('11 Jan 1993');
-      spyOn(component.onDateChange, "emit");
-      spyOn(component, "propogateChange");
+      spyOn(component.onDateChange, 'emit');
+      spyOn(component, 'propogateChange');
     });
 
     it('should set component.date to the Date object passed to it and invoke onDateChange.emit() and propogateChange()', () => {

@@ -59,7 +59,7 @@ export interface IFiltersConfig {
   /**
    * Display date format for type date range picker
    */
-  dateRangePicker_displayDateFormat?: string;
+  dateRangePickerDisplayDateFormat?: string;
 
   /**
    * Width in REM for Search filter type.

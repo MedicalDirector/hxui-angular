@@ -1,35 +1,68 @@
-<div class="hx-dropdown" hxDropdown #dropdown="hx-dropdown" [autoClose]="autoClose" [isDisabled]="disabled"
-  [placement]="placement">
+<div
+  class="hx-dropdown"
+  hxDropdown
+  #dropdown="hx-dropdown"
+  [autoClose]="autoClose"
+  [isDisabled]="disabled"
+  [placement]="placement"
+>
   <button class="hx-button" hxDropdownToggle type="button">
-    <span><span class="is-text-weight-light">{{placeholder}}: </span>
-    <span class="is-text-weight-bolder">{{_displayRange}}</span></span>
-    <span class="hx-icon-control" *ngIf="showCaretDown"><i class="icon icon-caret-down"></i></span>
+    <span>
+      <span class="is-text-weight-light">{{ placeholder }}: </span>
+      <span class="is-text-weight-bolder">{{ _displayRange }}</span>
+    </span>
+    <span class="hx-icon-control" *ngIf="showCaretDown">
+      <i class="icon icon-caret-down"></i>
+    </span>
   </button>
   <div class="hx-dropdown-menu dropdown-menu-wider py-0 px-0" *hxDropdownMenu>
     <div class="hxa-tabs" *ngIf="showTab">
       <hx-tabset [justified]="true" contentCustomClass="pa-0">
-        <hx-tab heading="INTERVAL" [active]="currentTab===DateSelectionType.interval">
-          <hxa-date-range-picker-interval [intervalOptionList]="intervalList"
-            [currentSelectedInterval]="selectedInterval" (newSelectedInterval)="onIntervalSelection($event)"
-            (closeDropdown)="hide($event)">
-          </hxa-date-range-picker-interval>
+        <hx-tab
+          heading="INTERVAL"
+          [active]="currentTab === DateSelectionType.interval"
+        >
+          <hxa-date-range-picker-interval
+            [intervalOptionList]="intervalList"
+            [currentSelectedInterval]="selectedInterval"
+            (newSelectedInterval)="onIntervalSelection($event)"
+            (closeDropdown)="hide($event)"
+          ></hxa-date-range-picker-interval>
         </hx-tab>
-        <hx-tab heading="CUSTOM" [active]="currentTab===DateSelectionType.custom">
-          <hxa-date-range-picker-custom [currentFromDate]="fromDate" [currentToDate]="toDate" [dateFormat]="dateFormat"
-            (newSelectedCustomDate)="onCustomDateSelection($event)" (closeDropdown)="hide($event)">
+        <hx-tab
+          heading="CUSTOM"
+          [active]="currentTab === DateSelectionType.custom"
+        >
+          <hxa-date-range-picker-custom
+            [currentFromDate]="fromDate"
+            [currentToDate]="toDate"
+            [dateFormat]="dateFormat"
+            (newSelectedCustomDate)="onCustomDateSelection($event)"
+            (closeDropdown)="hide($event)"
+          >
           </hxa-date-range-picker-custom>
         </hx-tab>
       </hx-tabset>
     </div>
     <div *ngIf="!showTab && showIntervalOnly" class="internal-custom-tab pa-0">
-      <hxa-date-range-picker-interval [intervalOptionList]="intervalList" [currentSelectedInterval]="selectedInterval"
-        (newSelectedInterval)="onIntervalSelection($event)" (closeDropdown)="hide($event)">
-      </hxa-date-range-picker-interval>
+      <hxa-date-range-picker-interval
+        [intervalOptionList]="intervalList"
+        [currentSelectedInterval]="selectedInterval"
+        (newSelectedInterval)="onIntervalSelection($event)"
+        (closeDropdown)="hide($event)"
+      ></hxa-date-range-picker-interval>
     </div>
-    <div *ngIf="!showTab && showCustomOnly" class="internal-custom-tab px-0 pb-0">
-      <hxa-date-range-picker-custom [currentFromDate]="fromDate" [currentToDate]="toDate" [dateFormat]="dateFormat"
-        (newSelectedCustomDate)="onCustomDateSelection($event)" (closeDropdown)="hide($event)">
-      </hxa-date-range-picker-custom>
+    <div
+      *ngIf="!showTab && showCustomOnly"
+      class="internal-custom-tab px-0 pb-0"
+    >
+      <hxa-date-range-picker-custom
+        [currentFromDate]="fromDate"
+        [currentToDate]="toDate"
+        [dateFormat]="dateFormat"
+        (newSelectedCustomDate)="onCustomDateSelection($event)"
+        (closeDropdown)="hide($event)"
+      ></hxa-date-range-picker-custom>
     </div>
   </div>
 </div>

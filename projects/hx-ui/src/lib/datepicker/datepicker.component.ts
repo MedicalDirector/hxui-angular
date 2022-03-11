@@ -1,13 +1,15 @@
 import { DatepickerIntervalComponent } from './datepicker-interval.component';
 import {
-  Component, OnInit, Output, Input, SimpleChanges, OnChanges,
+  Component,
+  OnInit,
+  Input,
+  SimpleChanges,
+  OnChanges,
   ChangeDetectorRef
 } from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs/index';
-import {Visibility} from '../enums';
-import {DatepickerConfig} from './datepicker.config';
-import * as moment_ from 'moment';
-const moment = moment_;
+import { BehaviorSubject, Observable, Subject } from 'rxjs/index';
+import { Visibility } from '../enums';
+import { DatepickerConfig } from './datepicker.config';
 
 @Component({
   selector: 'hxa-datepicker',
@@ -15,8 +17,9 @@ const moment = moment_;
   styleUrls: ['./datepicker.component.scss']
 })
 export class DatepickerComponent implements OnInit, OnChanges {
-
-  isShowingYear$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isShowingYear$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
   public OpenDiv: Boolean = true;
   public showCalendar: Boolean = true;
   public tabname1: String;
@@ -43,9 +46,30 @@ export class DatepickerComponent implements OnInit, OnChanges {
   visibility: Visibility = Visibility.Hidden;
   viewDate: Date;
   days: Array<Date> = new Array<Date>();
-  week: Array<string> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  month: Array<string> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  years: Array<number> = new Array<number>() ;
+  week: Array<string> = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+  month: Array<string> = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ];
+  years: Array<number> = new Array<number>();
   private presentDate: Date;
   private cellCount = 41;
   private yearCellCount = 20;
@@ -59,45 +83,57 @@ export class DatepickerComponent implements OnInit, OnChanges {
   /** The timeout ID of any current timer set to hide the calendar */
   private _hideTimeoutId: number;
 
-  constructor(private _changeDetectionRef: ChangeDetectorRef, private datePickerConfig: DatepickerConfig) {
-    }
+  constructor(
+    private _changeDetectionRef: ChangeDetectorRef,
+    private datePickerConfig: DatepickerConfig
+  ) {}
 
   // Populates the days array with the current month, and completes the view with partial dates from sibling months
   public renderCalendar(): void {
     for (let i = 0; i <= this.cellCount; i++) {
       // date will be set to the first day of the month set in this.viewDate
-      const date: Date = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth());
+      const date: Date = new Date(
+        this.viewDate.getFullYear(),
+        this.viewDate.getMonth()
+      );
       // Shifts the week to start from Monday, rather than Sunday, this causes the index to start at 1
       const dayOffset = date.getDay() === 0 ? 7 : date.getDay();
       this.days[i] = new Date(date.setDate(2 - dayOffset + i));
-      this.datePickerConfig.selectedDueDateConfiguration.selectedDueDate = this.days[i];
+      this.datePickerConfig.selectedDueDateConfiguration.selectedDueDate = this.days[
+        i
+      ];
     }
   }
 
-  public next(){
-    if(!this.isShowingYear$.value){
+  public next() {
+    if (!this.isShowingYear$.value) {
       this.nextMonth();
     } else {
       this.nextYear();
     }
   }
 
-  public previous(){
-    if(!this.isShowingYear$.value){
+  public previous() {
+    if (!this.isShowingYear$.value) {
       this.previousMonth();
     } else {
       this.previousYear();
     }
   }
 
-
   public previousMonth(): void {
-    this.viewDate = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() - 1);
+    this.viewDate = new Date(
+      this.viewDate.getFullYear(),
+      this.viewDate.getMonth() - 1
+    );
     this.renderCalendar();
   }
 
   public nextMonth(): void {
-    this.viewDate = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1);
+    this.viewDate = new Date(
+      this.viewDate.getFullYear(),
+      this.viewDate.getMonth() + 1
+    );
     this.renderCalendar();
   }
 
@@ -118,32 +154,37 @@ export class DatepickerComponent implements OnInit, OnChanges {
   }
 
   public isInvalidDay(inputDate: Date): boolean {
-    return this.validators.map((fn) => fn(inputDate)).reduce((prev, next) => prev || next, false);
+    return this.validators
+      .map(fn => fn(inputDate))
+      .reduce((prev, next) => prev || next, false);
   }
 
-
   public isCurrentYear(year: number): boolean {
-    return year === this.presentDate.getFullYear()
+    return year === this.presentDate.getFullYear();
   }
 
   public isSelectedYear(year: number): boolean {
-      return year === this.viewDate.getFullYear();
+    return year === this.viewDate.getFullYear();
   }
 
   public isInvalidYear(year: number): boolean {
-    const newDate = new Date(new Date(this.viewDate.getTime()).setFullYear(year));
-    return this.validators.map((fn) => fn(newDate)).reduce((prev, next) => prev || next, false);
+    const newDate = new Date(
+      new Date(this.viewDate.getTime()).setFullYear(year)
+    );
+    return this.validators
+      .map(fn => fn(newDate))
+      .reduce((prev, next) => prev || next, false);
   }
 
   public previousYear(): void {
-   this.getYearCollection(this.years[0] - this.yearCellCount);
+    this.getYearCollection(this.years[0] - this.yearCellCount);
   }
 
   public nextYear(): void {
     this.getYearCollection(this.years[0] + this.yearCellCount);
   }
 
-  public setYear(year){
+  public setYear(year) {
     if (!this.isInvalidYear(year)) {
       this.viewDate.setFullYear(year);
       this.renderCalendar();
@@ -159,41 +200,51 @@ export class DatepickerComponent implements OnInit, OnChanges {
     }
   }
 
-  toggleYear(){
+  toggleYear() {
     this.isShowingYear$.next(!this.isShowingYear$.value);
     if (this.isShowingYear$.value) {
       this.getYearCollection();
     }
   }
 
-  private getYearCollection(startFrom = null){
+  private getYearCollection(startFrom = null) {
     const yearsBeforeActive = 7;
-    const activeYear = (startFrom) ? startFrom : this.viewDate.getFullYear() - yearsBeforeActive;
+    const activeYear = startFrom
+      ? startFrom
+      : this.viewDate.getFullYear() - yearsBeforeActive;
     this.years = [];
-    for(let i = 0; i < this.yearCellCount; i++) {
-      this.years.push((activeYear + i));
+    for (let i = 0; i < this.yearCellCount; i++) {
+      this.years.push(activeYear + i);
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!!changes.selectedDate.currentValue) {
-      this.viewDate = new Date(this.selectedDate.getFullYear(), this.selectedDate.getMonth());
+      this.viewDate = new Date(
+        this.selectedDate.getFullYear(),
+        this.selectedDate.getMonth()
+      );
     }
   }
 
   ngOnInit(): void {
     const date: Date = this.selectedDate ? this.selectedDate : new Date();
-    this.presentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    this.viewDate = this.viewDate || new Date(date.getFullYear(), date.getMonth());
+    this.presentDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
+    this.viewDate =
+      this.viewDate || new Date(date.getFullYear(), date.getMonth());
     this.renderCalendar();
-    if ( this.datePickerConfig.tabSelected === 'tab1') {
-     this.activeVariable1 = false;
+    if (this.datePickerConfig.tabSelected === 'tab1') {
+      this.activeVariable1 = false;
       this.activeVariable = true;
     }
-    if ( this.datePickerConfig.tabSelected === 'tab2') {
+    if (this.datePickerConfig.tabSelected === 'tab2') {
       this.activeVariable1 = true;
       this.activeVariable = false;
-     }
+    }
   }
 
   /**
@@ -213,12 +264,11 @@ export class DatepickerComponent implements OnInit, OnChanges {
     }, delay);
 
     if (this.allowInterval) {
-       this.OpenDiv = true;
-       this.showCalendar = false;
-
+      this.OpenDiv = true;
+      this.showCalendar = false;
     } else {
-     this.OpenDiv = false;
-     this.showCalendar = true;
+      this.OpenDiv = false;
+      this.showCalendar = true;
     }
   }
 
@@ -247,10 +297,10 @@ export class DatepickerComponent implements OnInit, OnChanges {
     return this.visibility === Visibility.Visible;
   }
   onTabSelect(tabname: String) {
-     if (tabname === 'tab1') {
+    if (tabname === 'tab1') {
       this.datePickerConfig.tabSelected = tabname;
-     } else {
+    } else {
       this.datePickerConfig.tabSelected = tabname;
-     }
-   }
+    }
+  }
 }

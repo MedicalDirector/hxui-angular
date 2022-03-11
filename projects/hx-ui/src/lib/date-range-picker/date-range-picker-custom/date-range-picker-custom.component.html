@@ -1,18 +1,42 @@
 <div class="px-4 pt-3">
-  <hxa-datepicker-input align="bottom" [(ngModel)]="newFromDate" placeholder="From" [defaultToPresentDate]="false"
-    [dateFormat]="dateFormat" [to]="boundaryForFromDate" id="fromDatePicker"></hxa-datepicker-input>
+  <hxa-datepicker-input
+    placement="bottom"
+    [(ngModel)]="newFromDate"
+    placeholder="From"
+    [defaultToPresentDate]="false"
+    [dateFormat]="dateFormat"
+    [to]="boundaryForFromDate"
+    id="fromDatePicker"
+  ></hxa-datepicker-input>
 </div>
+
 <div class="px-4 py-3">
-  <hxa-datepicker-input align="bottom" [(ngModel)]="newToDate" placeholder="To" [defaultToPresentDate]="false"
-    [dateFormat]="dateFormat" [from]="boundaryForToDate" id="toDatePicker"></hxa-datepicker-input>
+  <hxa-datepicker-input
+    placement="bottom"
+    [(ngModel)]="newToDate"
+    placeholder="To"
+    [defaultToPresentDate]="false"
+    [dateFormat]="dateFormat"
+    [from]="boundaryForToDate"
+    id="toDatePicker"
+  ></hxa-datepicker-input>
 </div>
+
 <div class="hx-date-range-picker-interval-footer pa-3">
-    <div class="hx-columns">
-        <div class="hx-column">
-            <button id="custom_cancel" class="hx-button" (click)="onCancel()">Cancel</button>
-        </div>
-        <div class="hx-column is-text-right">
-            <button id="custom_select" class="hx-button is-primary" (click)="onSelected()">Select</button>
-        </div>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <button id="custom_cancel" class="hx-button" (click)="onCancel()">
+        Cancel
+      </button>
     </div>
+    <div class="hx-column is-text-right">
+      <button
+        id="custom_select"
+        class="hx-button is-primary"
+        (click)="onSelected()"
+      >
+        Select
+      </button>
+    </div>
+  </div>
 </div>
