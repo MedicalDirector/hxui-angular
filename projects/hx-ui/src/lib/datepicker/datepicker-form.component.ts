@@ -1,6 +1,6 @@
 import {
-  Component, Input, Output, OnInit, ElementRef, HostListener, EventEmitter, forwardRef,
-  OnDestroy, NgZone, ComponentFactoryResolver, ViewContainerRef, Optional, ViewChild, ContentChild, OnChanges, SimpleChanges, DoCheck
+  Component, Input, Output, OnInit, ElementRef, EventEmitter, forwardRef,
+  OnDestroy, NgZone, ComponentFactoryResolver, ViewContainerRef, Optional, ViewChild, DoCheck
 } from '@angular/core';
 import {
   NG_VALUE_ACCESSOR,
@@ -53,75 +53,113 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   private _portal: ComponentPortal<DatepickerComponent>;
   private readonly _destroyed = new Subject();
 
+  /** Adds the disabled html attribute to the components input element */
   @Input()
   disabled = false;
 
+  /** Adds the readonly html attribute to the components input element. */
   @Input()
   readonly = false;
 
+  /**
+   * Adds the required html attribute to the components input element
+   * and a required asterisk on the input label.
+   */
   @Input()
   required = false;
 
+  /** Initializes the component with a value of the present date. */
   @Input()
   defaultToPresentDate = true;
 
+  /**
+   * Setting to false will disallow the user from selecting dates
+   * before the present date
+   */
   @Input()
   allowPreviousDates = true;
 
+  /**
+   * Setting to false will disallow the user from selecting dates
+   * after the present date.
+   */
   @Input()
   allowFutureDates = true;
 
+  /**
+   * A JavaScript Date object formatting string, formats the display
+   * of components current value.
+   */
   @Input()
   dateFormat = 'dd/MM/y';
 
+  /**
+   * This attribute specifies the placeholder value of the components
+   * input element.
+   */
   @Input()
   placeholder = 'Date';
 
+  /** This attribute specifies the text value of input helper. */
   @Input()
   helpText = 'Please select a valid date';
 
+  /** Specifies visibility of input help text */
   @Input()
   helpTextVisible = false;
 
+  /** Warning state of input */
   @Input()
   isWarning = false;
 
+  /** Danger state of input */
   @Input()
   isDanger = false;
 
+  /** This attribute specifies the font icon name. */
   @Input()
   icon = 'hx-icon icon-calendar-outline';
 
+  /** This attribute specifies the icon placement. */
   @Input()
   iconPlacement = 'right';
 
+  /** Specifies the position the datepicker opens against the input element */
   @Input()
   placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
 
+  /** delay in ms before showing the calendar after show is called */
   @Input()
   showDelay = this._config.showDelay;
 
+  /** delay in ms before hiding the calendar after hide is called */
   @Input()
   hideDelay = this._config.hideDelay;
 
+  /** Specifies the inclusive beginning date for allowed date values */
   @Input()
   from = '';
 
+  /** Specifies the inclusive end date for allowed date values */
   @Input()
   to = '';
 
+  /** Enables interval selection */
   @Input()
   interval = false;
 
   @Input()
   dueDateInterval = '0 day(s)'; // '1 week(s)' | '2 month(s)' | '3 year(s)'
 
+  /** Mask pattern for date picker text input */
   @Input()
-  maskPattern = 'd0/M0/0000'
+  maskPattern = 'd0/M0/0000';
 
+  /** Emits a Date is selected from the Datepicker or a valid date string is entered into input field */
   @Output()
   onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
+  /** Emits a boolean if date picker input field is in focus */
   @Output()
   onFocus: EventEmitter<void> = new EventEmitter<void>();
 
@@ -249,7 +287,13 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     if((typeof inputDate) === 'string'){
       const dateArray = (inputDate as string).split(/[.,\/ -]/);
       if (dateArray.length === 3 && dateArray[2].length !== 0) {
-        const momentDate = moment(inputDate, 'DD/MM/YYYY', true);
+        const allowedFormats = [
+          'DD/MM/YYYY', 'D/M/YY', 'DD/MM/YY',
+          'DD-MM-YYYY', 'D-M-YY', 'DD-MM-YY',
+          'DD.MM.YYYY', 'D.M.YY', 'DD.MM.YY',
+        ];
+        const momentDate = moment(inputDate, allowedFormats, true);
+        
         if (momentDate.isValid()) {
           return momentDate.toDate();
         }

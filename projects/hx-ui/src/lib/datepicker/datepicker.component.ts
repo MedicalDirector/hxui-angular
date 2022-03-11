@@ -3,10 +3,7 @@ import {ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges} f
 import {BehaviorSubject, Observable, Subject} from 'rxjs/index';
 import {Visibility} from '../enums';
 import {DatepickerConfig} from './datepicker.config';
-import * as moment_ from 'moment';
 import {DatepickerViewModeEnum} from "./datepicker-view-mode-enum";
-
-const moment = moment_;
 
 @Component({
   selector: 'hxa-datepicker',

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DatepickerFormComponent } from './datepicker-form.component';
 import {DatepickerModule} from './datepicker.module';
@@ -10,7 +10,7 @@ describe('DatepickerFormComponent', () => {
   let component: DatepickerFormComponent;
   let fixture: ComponentFixture<DatepickerFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DatepickerModule.forRoot(), OverlayModule, NgxMaskModule.forRoot()]
     })
@@ -31,25 +31,25 @@ describe('DatepickerFormComponent', () => {
     let date: Date;
 
     beforeEach(() => {
-     date = new Date('11 Jan 1993');
+      date = new Date('1 Jan 1993');
     });
 
     it('should parse a valid dd/mm/yyyy date then return a new Date object with a value of that date', () => {
-      const parsedDate: Date = component.parseDate('11/01/1993');
+      const parsedDate: Date = component.parseDate('01/01/1993');
 
       expect(parsedDate.getTime()).toEqual(date.getTime());
     });
 
-    xit('should parse a valid dd/mm/yy date then return a new Date object with a value of that date', () => {
-      const parsedDate: Date = component.parseDate('11/01/93');
+    it('should parse a valid dd/mm/yy date then return a new Date object with a value of that date', () => {
+      const parsedDate: Date = component.parseDate('01/01/93');
 
       expect(parsedDate.getTime()).toEqual(date.getTime());
     });
 
-    xit('should parse a valid d/m/y date then return a new Date object with a value of that date', () => {
-      const parsedDate: Date = component.parseDate('1/1/2018');
+    it('should parse a valid d/m/y date then return a new Date object with a value of that date', () => {
+      const parsedDate: Date = component.parseDate('1/1/93');
 
-      expect(parsedDate.getTime()).toBeTruthy();
+      expect(parsedDate.getTime()).toEqual(date.getTime());
     });
 
     it('should not parse an invalid date with letters then return null', () => {
@@ -58,7 +58,7 @@ describe('DatepickerFormComponent', () => {
       expect(parsedDate).toBeNull();
     });
 
-    it('should not parse a date in a mm/dd/y format', () => {
+    it('should not parse a date in a mm/dd/yy format', () => {
       const parsedDate: Date = component.parseDate('10/25/2018');
 
       expect(parsedDate).toBeNull();
