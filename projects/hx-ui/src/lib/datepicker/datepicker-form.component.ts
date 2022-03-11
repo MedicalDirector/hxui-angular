@@ -1,41 +1,73 @@
 import {
-  Component, Input, Output, OnInit, ElementRef, HostListener, EventEmitter, forwardRef,
-  OnDestroy, NgZone, ComponentFactoryResolver, ViewContainerRef, Optional, ViewChild, ContentChild, OnChanges, SimpleChanges, DoCheck
+  Component,
+  Input,
+  Output,
+  OnInit,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  OnDestroy,
+  NgZone,
+  ComponentFactoryResolver,
+  ViewContainerRef,
+  Optional,
+  ViewChild,
+  DoCheck
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, Validator, AbstractControl } from '@angular/forms';
+import {
+  NG_VALUE_ACCESSOR,
+  NG_VALIDATORS,
+  ControlValueAccessor,
+  Validator,
+  AbstractControl,
+  FormGroupDirective
+} from '@angular/forms';
 import {
   FlexibleConnectedPositionStrategy,
   HorizontalConnectionPos,
-  OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef,
-  ScrollDispatcher, VerticalConnectionPos
+  OriginConnectionPosition,
+  Overlay,
+  OverlayConnectionPosition,
+  OverlayRef,
+  ScrollDispatcher,
+  VerticalConnectionPos
 } from '@angular/cdk/overlay';
-import {ComponentPortal} from '@angular/cdk/portal';
-import {Subject} from 'rxjs/index';
-import {DatepickerComponent} from './datepicker.component';
-import {take, takeUntil} from 'rxjs/operators';
-import {Directionality} from '@angular/cdk/bidi';
-import {DatepickerConfig} from './datepicker.config';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { Subject } from 'rxjs/index';
+import { DatepickerComponent } from './datepicker.component';
+import { take, takeUntil } from 'rxjs/operators';
+import { Directionality } from '@angular/cdk/bidi';
+import { DatepickerConfig } from './datepicker.config';
 import { DatepickerIntervalComponent } from './datepicker-interval.component';
-import {TextInputDirective} from '../text-input/text-input.directive';
+import { TextInputDirective } from '../text-input/text-input.directive';
+import * as moment_ from 'moment';
+const moment = moment_;
 
 @Component({
   selector: 'hxa-datepicker-input, hxa-datepicker-form',
   templateUrl: './datepicker-form.component.html',
   styleUrls: ['./datepicker-form.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => DatepickerFormComponent),
-    multi: true
-  },
-  {
-    provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => DatepickerFormComponent),
-    multi: true,
- }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DatepickerFormComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => DatepickerFormComponent),
+      multi: true
+    }
+  ]
 })
-export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Validator, OnDestroy, DoCheck {
+export class DatepickerFormComponent
+  implements OnInit, ControlValueAccessor, Validator, OnDestroy, DoCheck {
+  
+  @ViewChild(TextInputDirective, { static: true })
+  datePickerFormInput: TextInputDirective;
 
-  @ViewChild(TextInputDirective, { static: true }) datePickerFormInput: TextInputDirective;
+  @ViewChild('datePickerForm', {static: true})
+  datePickerForm: FormGroupDirective;
 
   _overlayRef: OverlayRef | null;
   _calendarInstance: DatepickerComponent | null;
@@ -46,63 +78,113 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   @Input()
   id = '';
 
+  /** Adds the disabled html attribute to the components input element */
   @Input()
   disabled = false;
 
+  /** Adds the readonly html attribute to the components input element. */
   @Input()
   readonly = false;
 
+  /**
+   * Adds the required html attribute to the components input element
+   * and a required asterisk on the input label.
+   */
   @Input()
   required = false;
 
+  /** Initializes the component with a value of the present date. */
   @Input()
   defaultToPresentDate = true;
 
+  /**
+   * Setting to false will disallow the user from selecting dates
+   * before the present date
+   */
   @Input()
   allowPreviousDates = true;
 
+  /**
+   * Setting to false will disallow the user from selecting dates
+   * after the present date.
+   */
   @Input()
   allowFutureDates = true;
 
+  /**
+   * A JavaScript Date object formatting string, formats the display
+   * of components current value.
+   */
   @Input()
   dateFormat = 'dd/MM/y';
 
+  /**
+   * This attribute specifies the placeholder value of the components
+   * input element.
+   */
   @Input()
   placeholder = 'Date';
 
+  /** This attribute specifies the text value of input helper. */
   @Input()
-  helpText = 'Please select a date';
+  helpText = 'Please select a valid date';
 
+  /** Specifies visibility of input help text */
+  @Input()
+  helpTextVisible = false;
+
+  /** Warning state of input */
+  @Input()
+  isWarning = false;
+
+  /** Danger state of input */
+  @Input()
+  isDanger = false;
+
+  /** This attribute specifies the font icon name. */
   @Input()
   icon = 'hx-icon icon-calendar-outline';
 
+  /** This attribute specifies the icon placement. */
   @Input()
   iconPlacement = 'right';
 
+  /** Specifies the position the datepicker opens against the input element */
   @Input()
   placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
 
+  /** delay in ms before showing the calendar after show is called */
   @Input()
   showDelay = this._config.showDelay;
-
+  
+  /** delay in ms before hiding the calendar after hide is called */
   @Input()
   hideDelay = this._config.hideDelay;
 
+  /** Specifies the inclusive beginning date for allowed date values */
   @Input()
   from = '';
 
+  /** Specifies the inclusive end date for allowed date values */
   @Input()
   to = '';
 
+  /** Enables interval selection */
   @Input()
   interval = false;
 
   @Input()
   dueDateInterval = '0 day(s)'; // '1 week(s)' | '2 month(s)' | '3 year(s)'
 
+  /** Mask pattern for date picker text input */
+  @Input()
+  maskPattern = 'd0/M0/0000'
+
+  /** Emits a Date is selected from the Datepicker or a valid date string is entered into input field */
   @Output()
   onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
+  /** Emits a boolean if date picker input field is in focus */
   @Output()
   onFocus: EventEmitter<void> = new EventEmitter<void>();
 
@@ -118,19 +200,21 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   private _elementHtmlRef: Element;
   private _elementHtmlCollection: HTMLCollection;
 
-  constructor(private _elementRef: ElementRef,
-              private _viewContainerRef: ViewContainerRef,
-              public overlay: Overlay,
-              private _ngZone: NgZone,
-              private _scrollDispatcher: ScrollDispatcher,
-              private _componentFactoryResolver: ComponentFactoryResolver,
-              private _config: DatepickerConfig,
-              @Optional() private _dir: Directionality) {
-
+  constructor(
+    private _elementRef: ElementRef,
+    private _viewContainerRef: ViewContainerRef,
+    public overlay: Overlay,
+    private _ngZone: NgZone,
+    private _scrollDispatcher: ScrollDispatcher,
+    private _componentFactoryResolver: ComponentFactoryResolver,
+    private _config: DatepickerConfig,
+    @Optional() private _dir: Directionality
+  ) {
     // get input reference
-    this._elementHtmlCollection = this._elementRef.nativeElement.getElementsByTagName('input');
+    this._elementHtmlCollection = this._elementRef.nativeElement.getElementsByTagName(
+      'input'
+    );
   }
-
 
   ngDoCheck(): void {
     const from = this.parseDate(this.from) || new Date(-8630000000000000);
@@ -156,12 +240,15 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   }
 
   ngOnInit(): void {
-
     // set element ref which will be used for dropdown positioning
     this._elementHtmlRef = this._elementHtmlCollection.item(0);
 
     const date: Date = new Date();
-    this.presentDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    this.presentDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
 
     if (this.defaultToPresentDate) {
       setTimeout(() => {
@@ -192,15 +279,15 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     this.propogateChange(date);
     this.onDateChange.emit(date);
     this._updateLabelStyle();
+    this.datePickerForm.control.markAsTouched();
   }
 
   public onDateSelectEvent = (inputDate: Date): void => {
     this._hide();
     this.setDate(inputDate);
-  }
+  };
 
   public onChange($event): void {
-
     const inputDate = $event.target.value;
     const date: Date = this.parseDate(inputDate);
 
@@ -211,7 +298,6 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     } else {
       this.propogateChange(inputDate);
     }
-
   }
 
   public onFocused($event): void {
@@ -227,16 +313,20 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   }
 
   public parseDate(inputDate: string | Date): Date {
-    // Since Date.Parse() only acceps m/d/y dates, we have to swap the day and month
     if((typeof inputDate) === 'string'){
       const dateArray = (inputDate as string).split(/[.,\/ -]/);
-      if (dateArray.length === 3 && dateArray[2].length !== 0) {
-        const day: string = dateArray.shift();
-        dateArray.splice(1, 0, day);
 
-        const parseInput: number = Date.parse(dateArray.join('/'));
-        if (!isNaN(parseInput)) {
-          return new Date(parseInput);
+      if (dateArray.length === 3 && dateArray[2].length !== 0) {
+
+        const allowedFormats = [
+          'DD/MM/YYYY', 'D/M/YY', 'DD/MM/YY',
+          'DD-MM-YYYY', 'D-M-YY', 'DD-MM-YY',
+          'DD.MM.YYYY', 'D.M.YY', 'DD.MM.YY',
+        ];
+        const momentDate = moment(inputDate, allowedFormats, true);
+        
+        if (momentDate.isValid()) {
+          return momentDate.toDate();
         }
       }
       return null;
@@ -244,25 +334,51 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
       return <Date>inputDate;
     }
   }
+
   public validateIsNotBeforeDate(date: Date): boolean {
-    const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const normalisedDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
     return normalisedDate.getTime() < this.presentDate.getTime();
   }
 
   public validateIsNotAfterDate(date: Date): boolean {
-    const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const normalisedDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
     return normalisedDate.getTime() > this.presentDate.getTime();
   }
 
-  public createDateRangeValidator(from: Date, to: Date): (date: Date) => boolean {
-    const normalisedFromDate = new Date(from.getFullYear(), from.getMonth(), from.getDate());
-    const normalisedToDate = new Date(to.getFullYear(), to.getMonth(), to.getDate());
+  public createDateRangeValidator(
+    from: Date,
+    to: Date
+  ): (date: Date) => boolean {
+    const normalisedFromDate = new Date(
+      from.getFullYear(),
+      from.getMonth(),
+      from.getDate()
+    );
+    const normalisedToDate = new Date(
+      to.getFullYear(),
+      to.getMonth(),
+      to.getDate()
+    );
 
     return (date: Date) => {
       if (date instanceof Date) {
-        const normalisedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        return !(normalisedFromDate.getTime() <= normalisedDate.getTime() &&
-          normalisedDate.getTime() <= normalisedToDate.getTime());
+        const normalisedDate = new Date(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate()
+        );
+        return !(
+          normalisedFromDate.getTime() <= normalisedDate.getTime() &&
+          normalisedDate.getTime() <= normalisedToDate.getTime()
+        );
       } else {
         return false;
       }
@@ -290,14 +406,17 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
     this.onTouched.forEach(fn => fn());
   }
 
-  public propogateChange = (value) => {
+  public propogateChange = value => {
     this.onChanged.forEach(fn => fn(value));
-  }
+  };
 
-  validate(control: AbstractControl): { [key: string]: any; } {
+  validate(control: AbstractControl): { [key: string]: any } {
     const date = Date.parse(control.value);
 
-    if (!this.required && (control.value === null || control.value === undefined)) {
+    if (
+      !this.required &&
+      (control.value === null || control.value === undefined)
+    ) {
       this.isValid = true;
       return null;
     }
@@ -352,15 +471,19 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
   }
 
   private _show(delay: number = this.showDelay) {
-
-    if (this.disabled) { return; }
+    if (this.disabled) {
+      return;
+    }
 
     const overlayRef = this._createOverlay();
 
     this._detach();
-    this._portal = this._portal || new ComponentPortal(DatepickerComponent, this._viewContainerRef);
+    this._portal =
+      this._portal ||
+      new ComponentPortal(DatepickerComponent, this._viewContainerRef);
     this._calendarInstance = overlayRef.attach(this._portal).instance;
-    this._calendarInstance.afterHidden()
+    this._calendarInstance
+      .afterHidden()
       .pipe(takeUntil(this._destroyed))
       .subscribe(() => this._detach());
 
@@ -379,7 +502,8 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
       return this._overlayRef;
     }
 
-    const positionStrategy = this.overlay.position()
+    const positionStrategy = this.overlay
+      .position()
       .flexibleConnectedTo(<HTMLElement>this._elementHtmlRef)
       .withTransformOriginOn('.hxa-datepicker-control')
       .withFlexibleDimensions(false);
@@ -394,38 +518,36 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
 
     this._updatePosition();
 
-    this._overlayRef.detachments()
+    this._overlayRef
+      .detachments()
       .pipe(takeUntil(this._destroyed))
       .subscribe(() => this._detach());
 
-    this._overlayRef.backdropClick().
-    subscribe(() => this._hide());
+    this._overlayRef.backdropClick().subscribe(() => this._hide());
 
-    const position = this._overlayRef.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
-    position.positionChanges
-      .pipe(takeUntil(this._destroyed))
-      .subscribe((pos) => {
-        if (pos.connectionPair.originX === 'start') {
-          this.placement = 'left';
-        } else if (pos.connectionPair.originX === 'end') {
-          this.placement = 'right';
-        }
-       this._updateTooltipContent();
-      });
+    const position = this._overlayRef.getConfig()
+      .positionStrategy as FlexibleConnectedPositionStrategy;
+    position.positionChanges.pipe(takeUntil(this._destroyed)).subscribe(pos => {
+      if (pos.connectionPair.originX === 'start') {
+        this.placement = 'left';
+      } else if (pos.connectionPair.originX === 'end') {
+        this.placement = 'right';
+      }
+      this._updateTooltipContent();
+    });
 
     return this._overlayRef;
   }
 
-
   private _updatePosition() {
-    const position =
-      this._overlayRef!.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
+    const position = this._overlayRef!.getConfig()
+      .positionStrategy as FlexibleConnectedPositionStrategy;
     const origin = this._getOrigin();
     const overlay = this._getOverlayPosition();
 
     position.withPositions([
-      {...origin.main, ...overlay.main},
-      {...origin.fallback, ...overlay.fallback}
+      { ...origin.main, ...overlay.main },
+      { ...origin.fallback, ...overlay.fallback }
     ]);
   }
 
@@ -433,55 +555,72 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
    * Returns the origin position and a fallback position based on the user's position preference.
    * The fallback position is the inverse of the origin (e.g. `'bottom' -> 'top'`).
    */
-  private _getOrigin(): {main: OriginConnectionPosition, fallback: OriginConnectionPosition} {
+  private _getOrigin(): {
+    main: OriginConnectionPosition;
+    fallback: OriginConnectionPosition;
+  } {
     const placement = this.placement;
     let originPlacement: OriginConnectionPosition;
 
     if (placement === 'top' || placement === 'bottom') {
-      originPlacement = {originX: 'start', originY: placement === 'top' ? 'top' : 'bottom'};
+      originPlacement = {
+        originX: 'start',
+        originY: placement === 'top' ? 'top' : 'bottom'
+      };
     } else if (placement === 'left') {
-      originPlacement = {originX: 'start', originY: 'center'};
+      originPlacement = { originX: 'start', originY: 'center' };
     } else if (placement === 'right') {
-      originPlacement = {originX: 'end', originY: 'center'};
+      originPlacement = { originX: 'end', originY: 'center' };
     } else {
       console.error('Position error', placement);
     }
 
-    const {x, y} = this._invertPosition(originPlacement.originX, originPlacement.originY);
+    const { x, y } = this._invertPosition(
+      originPlacement.originX,
+      originPlacement.originY
+    );
 
     return {
       main: originPlacement,
-      fallback: {originX: x, originY: y}
+      fallback: { originX: x, originY: y }
     };
   }
 
   /** Returns the overlay position and a fallback position based on the user's preference */
-  private _getOverlayPosition(): {main: OverlayConnectionPosition, fallback: OverlayConnectionPosition} {
+  private _getOverlayPosition(): {
+    main: OverlayConnectionPosition;
+    fallback: OverlayConnectionPosition;
+  } {
     const placement = this.placement;
     let overlayPlacement: OverlayConnectionPosition;
 
     if (placement === 'top') {
-      overlayPlacement = {overlayX: 'start', overlayY: 'bottom'};
+      overlayPlacement = { overlayX: 'start', overlayY: 'bottom' };
     } else if (placement === 'bottom') {
-      overlayPlacement = {overlayX: 'start', overlayY: 'top'};
+      overlayPlacement = { overlayX: 'start', overlayY: 'top' };
     } else if (placement === 'left') {
-      overlayPlacement = {overlayX: 'end', overlayY: 'center'};
+      overlayPlacement = { overlayX: 'end', overlayY: 'center' };
     } else if (placement === 'right') {
-      overlayPlacement = {overlayX: 'start', overlayY: 'center'};
+      overlayPlacement = { overlayX: 'start', overlayY: 'center' };
     } else {
       console.error('Could not find a position', placement);
     }
 
-    const {x, y} = this._invertPosition(overlayPlacement.overlayX, overlayPlacement.overlayY);
+    const { x, y } = this._invertPosition(
+      overlayPlacement.overlayX,
+      overlayPlacement.overlayY
+    );
 
     return {
       main: overlayPlacement,
-      fallback: {overlayX: x, overlayY: y}
+      fallback: { overlayX: x, overlayY: y }
     };
   }
 
-
-  private _invertPosition(x: HorizontalConnectionPos, y: VerticalConnectionPos) {
+  private _invertPosition(
+    x: HorizontalConnectionPos,
+    y: VerticalConnectionPos
+  ) {
     if (this.placement === 'top' || this.placement === 'bottom') {
       if (y === 'top') {
         y = 'bottom';
@@ -496,7 +635,7 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
       }
     }
 
-    return {x, y};
+    return { x, y };
   }
 
   public _detach() {
@@ -518,14 +657,14 @@ export class DatepickerFormComponent implements OnInit, ControlValueAccessor, Va
       this._calendarInstance.onDateSelected = this.onDateSelectEvent;
       this._calendarInstance.allowInterval = this.interval;
       this._calendarInstance.selectedDueDateInterval = this.dueDateInterval;
-      this._ngZone.onMicrotaskEmpty.asObservable().pipe(
-        take(1),
-        takeUntil(this._destroyed)
-      ).subscribe(() => {
-        if (this._calendarInstance) {
-          this._overlayRef!.updatePosition();
-        }
-      });
+      this._ngZone.onMicrotaskEmpty
+        .asObservable()
+        .pipe(take(1), takeUntil(this._destroyed))
+        .subscribe(() => {
+          if (this._calendarInstance) {
+            this._overlayRef!.updatePosition();
+          }
+        });
     }
   }
 
