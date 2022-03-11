@@ -1,3 +1,10 @@
+## [8.2.25](https://www.npmjs.com/package/@hxui/angular/v/8.2.25) (2022-03-11)
+
+### Bugfix
+
+* **date-range-picker:** prevent selection of date range where date is null or from later than to
+* **datepicker:** update date validation and states in line with v11 equivalent
+
 ## [8.2.24](https://www.npmjs.com/package/@hxui/angular/v/8.2.24) (2022-02-10)
 
 ### Enhancement
