@@ -23,7 +23,13 @@ describe('DateRangePickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, TabsModule, DatepickerModule, DropdownModule, NgxMaskModule],
+      imports: [
+        FormsModule,
+        TabsModule,
+        DatepickerModule,
+        DropdownModule,
+        NgxMaskModule
+      ],
       declarations: [
         DateRangePickerComponent,
         DateRangePickerIntervalComponent,
@@ -93,9 +99,41 @@ describe('DateRangePickerComponent', () => {
         toDate: component.toDate
       });
     });
+
+    it('should not emit onDateRangeSelected if contains null element', () => {
+
+      const dateNullEl: Date[] = [
+        null,
+        new Date('2019-05-29T00:00:00')
+      ]
+      spyOn(component.onDateRangeSelected, 'emit');
+      component.onCustomDateSelection(dateNullEl);
+      expect(component.onDateRangeSelected.emit).not.toHaveBeenCalledWith(<
+        DateRangeInterface
+      >{
+        fromDate: component.fromDate,
+        toDate: component.toDate
+      });
+    });
+
+    it('should not emit onDateRangeSelected if from > to', () => {
+
+      const dateFromAfterTo: Date[] = [
+        new Date('2019-05-31T00:00:00'),
+        new Date('2019-05-29T00:00:00')
+      ]
+      spyOn(component.onDateRangeSelected, 'emit');
+      component.onCustomDateSelection(dateFromAfterTo);
+      expect(component.onDateRangeSelected.emit).not.toHaveBeenCalledWith(<
+        DateRangeInterface
+      >{
+        fromDate: component.fromDate,
+        toDate: component.toDate
+      });
+    });
   });
 
-  describe('onCustomDateSelection', () => {
+  describe('onIntervalSelection', () => {
     let mockIntervalSelection;
     beforeEach(() => {
       mockIntervalSelection = new IntervalItem(
