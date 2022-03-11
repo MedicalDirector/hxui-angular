@@ -1,5 +1,5 @@
 import {
-  async,
+  waitForAsync,
   ComponentFixture,
   TestBed
 } from '@angular/core/testing';
@@ -28,9 +28,6 @@ import {
   DateRangePickerConfig
 } from '../date-range-picker.config';
 import {
-  ChangeDetectorRef
-} from '@angular/core';
-import {
   Overlay
 } from '@angular/cdk/overlay';
 import {
@@ -55,7 +52,7 @@ describe('DateRangePickerCustomComponent', () => {
   let fixture: ComponentFixture < DateRangePickerCustomComponent > ;
 
 
-  beforeEach(async (() => {
+  beforeEach(waitForAsync (() => {
     TestBed.configureTestingModule({
         imports: [FormsModule, TabsModule, DatepickerModule, DropdownModule, NgxMaskModule.forRoot()],
         declarations: [DateRangePickerComponent, DateRangePickerIntervalComponent, DateRangePickerCustomComponent, DropdownStubDirective],
@@ -121,8 +118,48 @@ describe('DateRangePickerCustomComponent', () => {
       button.nativeElement.click();
       fixture.detectChanges();
       expect(component.closeDropdown.emit).toHaveBeenCalled();
-      expect(component.newSelectedCustomDate.emit).toHaveBeenCalledWith([component.newFromDate, component.newToDate]);
+      expect(component.newSelectedCustomDate.emit).toHaveBeenCalledWith([
+        component.newFromDate,
+        component.newToDate
+      ]);
     });
-  })
 
+    it('should not emit anything if contains null', () => {
+      component.ngOnInit();
+
+      component.newFromDate = null;
+      component.newToDate = new Date('2019-05-31T00:00:00');
+
+      const button = fixture.debugElement.query(By.css('#custom_select'));
+      spyOn(component.closeDropdown, 'emit');
+      spyOn(component.newSelectedCustomDate, 'emit');
+      button.nativeElement.click();
+
+      fixture.detectChanges();
+      expect(component.closeDropdown.emit).not.toHaveBeenCalled();
+      expect(component.newSelectedCustomDate.emit).not.toHaveBeenCalledWith([
+        component.newFromDate,
+        component.newToDate
+      ]);
+    });
+
+    it('should not emit anything if from > to', () => {
+      component.ngOnInit();
+
+      component.newFromDate = new Date('2019-05-31T00:00:00');
+      component.newToDate = new Date('2019-05-29T00:00:00');
+
+      const button = fixture.debugElement.query(By.css('#custom_select'));
+      spyOn(component.closeDropdown, 'emit');
+      spyOn(component.newSelectedCustomDate, 'emit');
+      button.nativeElement.click();
+
+      fixture.detectChanges();
+      expect(component.closeDropdown.emit).not.toHaveBeenCalled();
+      expect(component.newSelectedCustomDate.emit).not.toHaveBeenCalledWith([
+        component.newFromDate,
+        component.newToDate
+      ]);
+    });
+  });
 });

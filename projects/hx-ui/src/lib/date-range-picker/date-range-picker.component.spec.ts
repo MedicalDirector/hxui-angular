@@ -1,5 +1,5 @@
 import {
-  async,
+  waitForAsync,
   ComponentFixture,
   TestBed
 } from '@angular/core/testing';
@@ -53,7 +53,7 @@ describe('DateRangePickerComponent', () => {
   let component: DateRangePickerComponent;
   let fixture: ComponentFixture < DateRangePickerComponent > ;
 
-  beforeEach(async (() => {
+  beforeEach(waitForAsync (() => {
     TestBed.configureTestingModule({
         imports: [FormsModule, TabsModule, DatepickerModule, DropdownModule, NgxMaskModule],
         declarations: [DateRangePickerComponent, DateRangePickerIntervalComponent, DateRangePickerCustomComponent, DropdownStubDirective],
@@ -114,14 +114,39 @@ describe('DateRangePickerComponent', () => {
     it('should emit onDateRangeSelected ', () => {
       spyOn(component.onDateRangeSelected, 'emit');
       component.onCustomDateSelection(mockNewCustomDate);
-      expect(component.onDateRangeSelected.emit).toHaveBeenCalledWith( < DateRange > {
+      expect(component.onDateRangeSelected.emit).toHaveBeenCalledWith(<
+        DateRange
+      >{
         fromDate: component.fromDate,
         toDate: component.toDate
       });
     });
-  })
 
-  describe('onCustomDateSelection', () => {
+    it('should not emit onDateRangeSelected if contains null element', () => {
+      const dateNullEl: Date[] = [null, new Date('2019-05-29T00:00:00')];
+      spyOn(component.onDateRangeSelected, 'emit');
+      component.onCustomDateSelection(dateNullEl);
+      expect(component.onDateRangeSelected.emit).not.toHaveBeenCalledWith(<DateRange>{
+        fromDate: component.fromDate,
+        toDate: component.toDate
+      });
+    });
+
+    it('should not emit onDateRangeSelected if from > to', () => {
+      const dateFromAfterTo: Date[] = [
+        new Date('2019-05-31T00:00:00'),
+        new Date('2019-05-29T00:00:00')
+      ];
+      spyOn(component.onDateRangeSelected, 'emit');
+      component.onCustomDateSelection(dateFromAfterTo);
+      expect(component.onDateRangeSelected.emit).not.toHaveBeenCalledWith(<DateRange>{
+        fromDate: component.fromDate,
+        toDate: component.toDate
+      });
+    });
+  });
+
+  describe('onIntervalSelection', () => {
     let mockIntervalSelection
     beforeEach(() => {
       mockIntervalSelection = new IntervalItem('Yesterdy', 'day', -1, 'yesterday');

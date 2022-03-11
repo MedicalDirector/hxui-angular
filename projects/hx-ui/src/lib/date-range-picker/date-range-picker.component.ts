@@ -48,15 +48,39 @@ export class DateRangePickerComponent implements OnInit {
 
   @ViewChild('dropdown', { static: true }) dropdown: DropdownDirective;
 
+  /** Specifies interval options displayed under interval selection tab. */
   @Input() intervalOptions: string[];
+
+  /** This attribute specifies the placeholder value of the components input element. */
   @Input() placeholder: string = 'Date';
+
+  /** Adds the disabled html attribute to the components dropdown element. */
   @Input() disabled: boolean = false;
+
+  /**
+   * Indicates that dropdown will be closed on item or document
+   * click, and after pressing ESC.
+   */
   @Input() autoClose: boolean = true;
+
+  /** Specifies the position the datepicker opens against the input element */
   @Input() placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
+
+  /** Specifies how tab(s) will be displayed. */
   @Input() displayMode: DisplayMode = DisplayMode.showTab;
+
+  /**
+   * A JavaScript Date object formatting string, formats the display
+   * of components current value.
+   */
   @Input() dateFormat: string = 'dd/MM/yyyy';
 
-  @Output() onDateRangeSelected = new EventEmitter < DateRange > ();
+  /**
+   * Emits a Date Range Object containing fromDate and toDate
+   * selected from the DateRangePicker.
+   */
+  @Output() onDateRangeSelected = new EventEmitter<DateRange>();
+
 
   constructor(private datePipe: DatePipe, private dateRangePickerConfig: DateRangePickerConfig) {}
 
@@ -94,17 +118,25 @@ export class DateRangePickerComponent implements OnInit {
   }
 
   onCustomDateSelection(newCustomDate: Date[]) {
-    if (newCustomDate) {
-      this.fromDate = newCustomDate[0];
-      this.toDate = newCustomDate[1];
-      this._displayRange = this.createDateRange();
-      this.onDateRangeSelected.emit( < DateRange > {
-        fromDate: this.fromDate,
-        toDate: this.toDate
-      });
-      this.currentTab = DateSelectionType.custom;
-      this.selectedInterval = null;
+    // do not update range if undefined, null[], from > to
+    if (
+      !newCustomDate || 
+      newCustomDate[0] == null || 
+      newCustomDate[1] == null ||
+      newCustomDate[0] > newCustomDate[1]
+    ) {
+      return null
     }
+
+    this.fromDate = newCustomDate[0];
+    this.toDate = newCustomDate[1];
+    this._displayRange = this.createDateRange();
+    this.onDateRangeSelected.emit( < DateRange > {
+      fromDate: this.fromDate,
+      toDate: this.toDate
+    });
+    this.currentTab = DateSelectionType.custom;
+    this.selectedInterval = null;
   }
 
   onIntervalSelection(selectedItem: IntervalItem) {
