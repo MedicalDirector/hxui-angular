@@ -38,7 +38,7 @@
               <a class="hx-nav-link" *ngIf="item.url" [href]="item.url" target="_blank"><span>{{ item.name }}</span></a>
               <a class="hx-nav-link hx-flex hx-flex-justify-between" *ngIf="item.link" [routerLink]="item.link" routerLinkActive="is-active">
                 <span>{{ item.name }}</span>
-                <span class="hx-badge is-danger is-small" *ngIf="item?.deprecated">
+                <span class="hx-badge is-danger is-small ma-0" *ngIf="item?.deprecated">
                   <span class="hx-badge-content">Deprecated</span>
                 </span>
               </a>

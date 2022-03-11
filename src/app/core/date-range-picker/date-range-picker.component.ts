@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { PageScrollService } from 'ngx-page-scroll-core';
 import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/common';
@@ -12,6 +12,13 @@ import { DateRange } from '../../../../projects/hx-ui/src/lib/date-range-picker/
   styles: [':host { display: flex; flex: 1; min-width: 0; }']
 })
 export class DateRangePickerComponent extends CoreBaseComponent {
+
+  /**
+   * toggle for version 8 documentation
+   *
+   * **NOTE:** this is an interim solution dated 11/03/2022
+   */
+  public isVersion8 = false;
 
   public code = new DateRangePickersCode();
   public selectedDateRange: DateRange = {fromDate:new Date(),toDate:new Date()};
@@ -42,5 +49,9 @@ export class DateRangePickerComponent extends CoreBaseComponent {
 
   getSelectedDateRange(dateRange: DateRange){
       this.selectedDateRange = dateRange;
+  }
+  
+  toggleVersions() {
+    this.isVersion8 = !this.isVersion8;
   }
 }
