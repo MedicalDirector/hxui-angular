@@ -5,6 +5,33 @@
     <h2 class="hx-subtitle">The date range picker is an element that is used to select a date range</h2>
     <hr>
 
+    <div class="hx-alert is-warning is-inverse is-bordered">
+      <span class="hx-icon-control mr-2">
+        <i class="hx-icon is-medium icon-exclamation"></i>
+      </span>
+      <span *ngIf="!isVersion8">
+        The below documentation is specific to version 11.
+      </span>
+      <span *ngIf="isVersion8">
+        The below documentation is specific to version 8.
+      </span>
+      <div class="hx-spacer"></div>
+      <button
+        *ngIf="!isVersion8"
+        class="hx-button is-flat is-warning"
+        (click)="toggleVersions()"
+      >
+        Switch to version 8
+      </button>
+      <button
+        *ngIf="isVersion8"
+        class="hx-button is-flat is-warning"
+        (click)="toggleVersions()"
+      >
+        Switch to version 11
+      </button>
+    </div>
+
     <h4 id="usage">Usage</h4>
     <p>Add the DateRangePickerModule to AppModule or SharedModule.</p>
 
@@ -127,130 +154,91 @@
               <th>Inputs</th>
               <th>Type</th>
               <th>Description</th>
+              <th>Defaults</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>dateFormat</td>
-              <td><kbd>string</kbd></td>
-              <td>A JavaScript Date object formatting string, formats the display of components current value. Defaults
-                to "dd/MM/y".</td>
+              <td>intervalOptions</td>
+              <td><kbd>string[]</kbd></td>
+              <td>
+                Specifies interval options displayed under interval selection tab.
+                Please see available options as below.
+              </td>
+              <td></td>
             </tr>
             <tr>
               <td>placeholder</td>
               <td><kbd>string</kbd></td>
-              <td>This attribute specifies the placeholder value of the components input element. Defaults to "Date".
+              <td>
+                Specifies the placeholder value of the components
+                input element.
               </td>
+              <td><kbd>'Date'</kbd></td>
             </tr>
             <tr>
               <td>disabled</td>
               <td><kbd>boolean</kbd></td>
-              <td>Adds the disabled html attribute to the components dropdown element. Defaults to false.</td>
-            </tr>
-            <tr>
-              <td>displayMode</td>
-              <td><kbd>number</kbd></td>
-              <td>This attribute specified how tab(s) will be displayed. Options are: 1 - Show both tabs(default); 2 - Show Custom Selection only; 3 - Show Interval Selection only.
-                Defaults to 1.
+              <td>
+                Adds the disabled html attribute to the components dropdown element.
               </td>
+              <td><kbd>false</kbd></td>
             </tr>
             <tr>
               <td>autoClose</td>
               <td><kbd>boolean</kbd></td>
-              <td>Indicates that dropdown will be closed on item or document click, and after pressing ESC. Defaults to true.</td>
+              <td>
+                Indicates that dropdown will be closed on item or document
+                click, and after pressing ESC.
+              </td>
+              <td><kbd>true</kbd></td>
             </tr>
             <tr>
-              <td>Placement</td>
+              <td>placement</td>
+              <td><kbd>'top' | 'bottom' | 'left' | 'right'</kbd></td>
+              <td>
+                Specifies the position the datepicker opens against the input element
+              </td>
+              <td><kbd>'bottom'</kbd></td>
+            </tr>
+            <tr>
+              <td>displayMode</td>
+              <td *ngIf="!isVersion8"><kbd>DisplayMode</kbd></td>
+              <td *ngIf="isVersion8"><kbd>DisplayModeEnum</kbd></td>
+              <td>
+                Specifies how tab(s) will be displayed.
+              </td>
+              <td *ngIf="!isVersion8"><kbd>DisplayMode.showTab</kbd></td>
+              <td *ngIf="isVersion8"><kbd>DisplayModeEnum.showTab</kbd></td>
+            </tr>
+            <tr>
+              <td>dateFormat</td>
               <td><kbd>string</kbd></td>
-              <td>Placement of a popover. Accepts: "top", "bottom", "left", "right".</td>
+              <td>
+                A JavaScript Date object formatting string, formats the display
+                of components current value.
+              </td>
+              <td><kbd>dd/MM/yyyy</kbd></td>
             </tr>
-            <tr>
-              <td>intervalOptions</td>
-              <td><kbd>string[]</kbd></td>
-              <td>This attribute specifies interval options displayed under interval selection tab. Please see available options as below.</td>
+            <tr *ngIf="isVersion8">
+              <td>defaultDateRange</td>
+              <td><kbd>DateRangeInterface</kbd></td>
+              <td>
+                Default date range initially displayed in date range picker.
+              </td>
+              <td>(today)</td>
             </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-
-    <div class="hx-columns">
-      <div class="hx-column">
-        <table class="hx-table is-striped">
-          <thead>
-            <tr>
-              <th>AVAILABLE INTERVAL OPTIONS</th>
-              <th>DESCRIPTION</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Today</td>
-              <td>Today</td>
-            </tr>
-            <tr>
-              <td>Yesterdy</td>
-              <td>Yesterdy</td>
-            </tr>
-            <tr>
-              <td>Tomorrow</td>
-              <td>Tomorrow</td>
-            </tr>
-            <tr>
-              <td>Last Year</td>
-              <td>Last Year</td>
-            </tr>
-            <tr>
-              <td>Next Year</td>
-              <td>Next Year</td>
-            </tr>
-            <tr>
-              <td>Last 6 Months</td>
-              <td>Last 6 Months</td>
-            </tr>
-            <tr>
-              <td>Next 6 Months</td>
-              <td>Next 6 Months</td>
-            </tr>
-            <tr>
-              <td>Last 3 Months</td>
-              <td>Last 3 Months</td>
-            </tr>
-            <tr>
-              <td>Next 3 Months</td>
-              <td>Next 3 Months</td>
-            </tr>
-            <tr>
-              <td>Last Month</td>
-              <td>Last Month</td>
-            </tr>
-            <tr>
-              <td>Next Month</td>
-              <td>Next Month</td>
-            </tr>
-            <tr>
-              <td>Last Week</td>
-              <td>Last Week</td>
-            </tr>
-            <tr>
-              <td>Next Week</td>
-              <td>Next Week</td>
-            </tr>
-            <tr>
-              <td>Last Fortnight</td>
-              <td>Last Fortnight</td>
-            </tr>
-            <tr>
-              <td>Next Fortnight</td>
-              <td>Next Fortnight</td>
+            <tr *ngIf="isVersion8">
+              <td>showCaretDown</td>
+              <td><kbd>boolean</kbd></td>
+              <td>Specifies whether caret down icon is displayed to right of input</td>
+              <td>true</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-
-
+    
     <div class="hx-columns">
       <div class="hx-column">
         <table class="hx-table is-striped">
@@ -263,8 +251,100 @@
           <tbody>
             <tr>
               <td>onDateRangeChange</td>
-              <td>Emits a Date Range Object containing fromDate and toDate selected from the DateRangePicker. Need to import data type: DateRange.</td>
+              <td *ngIf="!isVersion8">
+                Emits a Date Range Object containing fromDate and toDate
+                selected from the DateRangePicker. Need to import data type:
+                DateRange.
+              </td>
+              <td *ngIf="isVersion8">
+                Emits a Date Range Object containing fromDate and toDate
+                selected from the DateRangePicker. Need to import data type:
+                DateRangeInterface.
+              </td>
             </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+        
+    <h5 class="is-primary" *ngIf="!isVersion8">DisplayMode</h5>
+    <h5 class="is-primary" *ngIf="isVersion8">DisplayModeEnum</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Enum</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>showTab</td>
+              <td>Show both tabs</td>
+            </tr>
+            <tr>
+              <td>showCustomOnly</td>
+              <td>Show Custom Selection only</td>
+            </tr>
+            <tr>
+              <td>showIntervalOnly</td>
+              <td>Show Interval Selection only</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <h5 class="is-primary" *ngIf="!isVersion8">DateRange</h5>
+    <h5 class="is-primary" *ngIf="isVersion8">DateRangeInterface</h5>
+    <div class="hx-columns">
+      <div class="hx-column">
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>Interface</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>fromDate</td>
+              <td>Date</td>
+            </tr>
+            <tr>
+              <td>toDate</td>
+              <td>Date</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="hx-columns">
+      <div class="hx-column">
+        <table class="hx-table is-striped">
+          <thead>
+            <tr>
+              <th>AVAILABLE INTERVAL OPTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Today</td></tr>
+            <tr><td>Yesterdy</td></tr>
+            <tr><td>Tomorrow</td></tr>
+            <tr><td>Last Year</td></tr>
+            <tr><td>Next Year</td></tr>
+            <tr><td>Last 6 Months</td></tr>
+            <tr><td>Next 6 Months</td></tr>
+            <tr><td>Last 3 Months</td></tr>
+            <tr><td>Next 3 Months</td></tr>
+            <tr><td>Last Month</td></tr>
+            <tr><td>Next Month</td></tr>
+            <tr><td>Last Week</td></tr>
+            <tr><td>Next Week</td></tr>
+            <tr><td>Last Fortnight</td></tr>
+            <tr><td>Next Fortnight</td></tr>
           </tbody>
         </table>
       </div>

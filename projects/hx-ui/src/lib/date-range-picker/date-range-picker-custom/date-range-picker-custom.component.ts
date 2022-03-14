@@ -1,16 +1,12 @@
 import {
   Component,
   OnInit,
-  ViewChild,
   Input,
   Output,
   EventEmitter,
   ChangeDetectorRef,
   DoCheck
 } from '@angular/core';
-import {
-  DropdownDirective
-} from '../../dropdown/dropdown.directive';
 import {
   DatePipe
 } from '@angular/common';
@@ -66,6 +62,12 @@ export class DateRangePickerCustomComponent implements OnInit, DoCheck {
   }
 
   onSelected() {
+    // do nothing against failed basic validation
+    if (
+      this.newFromDate == null || this.newToDate == null ||
+      this.newFromDate > this.newToDate || this.newToDate < this.newFromDate
+    ) return null;
+
     this.newSelectedCustomDate.emit([this.newFromDate, this.newToDate]);
     this.closeDropdown.emit(true);
   }
