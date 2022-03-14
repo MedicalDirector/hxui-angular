@@ -1,71 +1,47 @@
-import {
-  waitForAsync,
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   DateRangePickerComponent,
   DateSelectionType,
   DateRange
 } from './date-range-picker.component';
-import {
-  FormsModule
-} from '@angular/forms';
-import {
-  TabsModule
-} from '../tabs/tabs.module';
-import {
-  DatepickerModule
-} from '../datepicker/datepicker.module';
-import {
-  DropdownModule
-} from '../dropdown/dropdown.module';
-import {
-  DateRangePickerIntervalComponent
-} from './date-range-picker-interval/date-range-picker-interval.component';
-import {
-  DateRangePickerCustomComponent
-} from './date-range-picker-custom/date-range-picker-custom.component';
-import {
-  DatePipe
-} from '@angular/common';
-import {
-  DateRangePickerConfig
-} from './date-range-picker.config';
-import {
-  Overlay
-} from '@angular/cdk/overlay';
-import {
-  DropdownStubDirective
-} from './dropdown-stub.component.spec';
-import {
-  DropdownConfig
-} from '../dropdown/dropdown.config';
-import {
-  IntervalItem
-} from './interval-option-model';
-import {
-  inject
-} from '@angular/core';
-import {NgxMaskModule} from 'ngx-mask';
+import { FormsModule } from '@angular/forms';
+import { TabsModule } from '../tabs/tabs.module';
+import { DatepickerModule } from '../datepicker/datepicker.module';
+import { DropdownModule } from '../dropdown/dropdown.module';
+import { DateRangePickerIntervalComponent } from './date-range-picker-interval/date-range-picker-interval.component';
+import { DateRangePickerCustomComponent } from './date-range-picker-custom/date-range-picker-custom.component';
+import { DatePipe } from '@angular/common';
+import { DateRangePickerConfig } from './date-range-picker.config';
+import { Overlay } from '@angular/cdk/overlay';
+import { DropdownStubDirective } from './dropdown-stub.component.spec';
+import { DropdownConfig } from '../dropdown/dropdown.config';
+import { IntervalItem } from './interval-option-model';
+import { NgxMaskModule } from 'ngx-mask';
 
 describe('DateRangePickerComponent', () => {
   let component: DateRangePickerComponent;
-  let fixture: ComponentFixture < DateRangePickerComponent > ;
+  let fixture: ComponentFixture<DateRangePickerComponent>;
 
-  beforeEach(waitForAsync (() => {
-    TestBed.configureTestingModule({
-        imports: [FormsModule, TabsModule, DatepickerModule, DropdownModule, NgxMaskModule],
-        declarations: [DateRangePickerComponent, DateRangePickerIntervalComponent, DateRangePickerCustomComponent, DropdownStubDirective],
-        providers: [
-          Overlay,
-          DropdownConfig,
-          DatePipe,
-          DateRangePickerConfig
-        ]
-      })
-      .compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          FormsModule,
+          TabsModule,
+          DatepickerModule,
+          DropdownModule,
+          NgxMaskModule
+        ],
+        declarations: [
+          DateRangePickerComponent,
+          DateRangePickerIntervalComponent,
+          DateRangePickerCustomComponent,
+          DropdownStubDirective
+        ],
+        providers: [Overlay, DropdownConfig, DatePipe, DateRangePickerConfig]
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DateRangePickerComponent);
@@ -90,14 +66,19 @@ describe('DateRangePickerComponent', () => {
       component.intervalOptions = mockIntervalOptions;
       component.ngOnInit();
       fixture.detectChanges();
-      expect(component.generateIntervalOptionItems).toHaveBeenCalledWith(mockIntervalOptions);
+      expect(component.generateIntervalOptionItems).toHaveBeenCalledWith(
+        mockIntervalOptions
+      );
     });
-  })
+  });
 
   describe('onCustomDateSelection', () => {
     let mockNewCustomDate: Date[];
     beforeEach(() => {
-      mockNewCustomDate = [new Date('2019-05-29T00:00:00'), new Date('2019-05-31T00:00:00')];
+      mockNewCustomDate = [
+        new Date('2019-05-29T00:00:00'),
+        new Date('2019-05-31T00:00:00')
+      ];
     });
 
     it('should update fromDate and toDate', () => {
@@ -126,7 +107,9 @@ describe('DateRangePickerComponent', () => {
       const dateNullEl: Date[] = [null, new Date('2019-05-29T00:00:00')];
       spyOn(component.onDateRangeSelected, 'emit');
       component.onCustomDateSelection(dateNullEl);
-      expect(component.onDateRangeSelected.emit).not.toHaveBeenCalledWith(<DateRange>{
+      expect(component.onDateRangeSelected.emit).not.toHaveBeenCalledWith(<
+        DateRange
+      >{
         fromDate: component.fromDate,
         toDate: component.toDate
       });
@@ -139,7 +122,9 @@ describe('DateRangePickerComponent', () => {
       ];
       spyOn(component.onDateRangeSelected, 'emit');
       component.onCustomDateSelection(dateFromAfterTo);
-      expect(component.onDateRangeSelected.emit).not.toHaveBeenCalledWith(<DateRange>{
+      expect(component.onDateRangeSelected.emit).not.toHaveBeenCalledWith(<
+        DateRange
+      >{
         fromDate: component.fromDate,
         toDate: component.toDate
       });
@@ -147,15 +132,22 @@ describe('DateRangePickerComponent', () => {
   });
 
   describe('onIntervalSelection', () => {
-    let mockIntervalSelection
+    let mockIntervalSelection;
     beforeEach(() => {
-      mockIntervalSelection = new IntervalItem('Yesterdy', 'day', -1, 'yesterday');
+      mockIntervalSelection = new IntervalItem(
+        'Yesterdy',
+        'day',
+        -1,
+        'yesterday'
+      );
     });
 
     it('should update fromDate and toDate onIntervalSelection ', () => {
       const today: Date = new Date();
       component.onIntervalSelection(mockIntervalSelection);
-      expect(component.fromDate).toEqual(new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1));
+      expect(component.fromDate).toEqual(
+        new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1)
+      );
       expect(component.toDate).toEqual(today);
     });
 
@@ -167,12 +159,14 @@ describe('DateRangePickerComponent', () => {
     it('should emit onDateRangeSelected ', () => {
       spyOn(component.onDateRangeSelected, 'emit');
       component.onIntervalSelection(mockIntervalSelection);
-      expect(component.onDateRangeSelected.emit).toHaveBeenCalledWith( < DateRange > {
+      expect(component.onDateRangeSelected.emit).toHaveBeenCalledWith(<
+        DateRange
+      >{
         fromDate: component.fromDate,
         toDate: component.toDate
       });
     });
-  })
+  });
 
   describe('createDateRange', () => {
     const today: Date = new Date();
@@ -181,14 +175,28 @@ describe('DateRangePickerComponent', () => {
       component.fromDate = today;
     });
     it('should return a date only when fromDate is equal to toDate', () => {
-      expect(component.createDateRange()).toEqual(datepipe.transform(component.fromDate, component.dateFormat));
+      expect(component.createDateRange()).toEqual(
+        datepipe.transform(component.fromDate, component.dateFormat)
+      );
     });
 
     it('should return date range only when fromDate is different from toDate', () => {
-      component.toDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
-      let fromDateString = datepipe.transform(component.fromDate, component.dateFormat);
-      let toDateString = datepipe.transform(component.toDate, component.dateFormat);
-      expect(component.createDateRange()).toEqual(`${fromDateString} - ${toDateString}`);
+      component.toDate = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate() + 1
+      );
+      let fromDateString = datepipe.transform(
+        component.fromDate,
+        component.dateFormat
+      );
+      let toDateString = datepipe.transform(
+        component.toDate,
+        component.dateFormat
+      );
+      expect(component.createDateRange()).toEqual(
+        `${fromDateString} - ${toDateString}`
+      );
     });
-  })
+  });
 });

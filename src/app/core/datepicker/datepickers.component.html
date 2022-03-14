@@ -1,9 +1,10 @@
 <section class="hx-section scrollable-y" #container>
   <div class="hx-section is-comfortable">
-
     <h1 class="hx-title">Date Pickers</h1>
-    <h2 class="hx-subtitle">The date picker is a form element that is used to select a date</h2>
-    <hr>
+    <h2 class="hx-subtitle">
+      The date picker is a form element that is used to select a date
+    </h2>
+    <hr />
 
     <h4 id="usage">Usage</h4>
     <p>Add the DatepickerModule to AppModule or SharedModule.</p>
@@ -16,50 +17,68 @@
       <span class="hx-icon-control mr-2">
         <i class="hx-icon is-medium icon-information"></i>
       </span>
-          <span class="hx-flex-1">
-            The date picker makes use of an excellent 3rd party angular directive called <a href="https://www.npmjs.com/package/ngx-mask" target="_blank">ngx-mask</a>.<br>
-            You will need to npm install ngx-mask into your application, in order to use the date picker component.
+      <span class="hx-flex-1">
+        The date picker makes use of an excellent 3rd party angular directive
+        called
+        <a href="https://www.npmjs.com/package/ngx-mask" target="_blank">
+          ngx-mask
+        </a>.<br />
+        You will need to npm install ngx-mask into your application, in order to
+        use the date picker component.
       </span>
     </div>
 
-    <hr>
+    <hr />
 
     <h4 id="example">Basic Example</h4>
     <div class="hx-columns">
       <div class="hx-column">
         <form [formGroup]="basicForm">
-            <hxa-datepicker-input
-              name="datepicker_basic"
-              placement="bottom"
-              [defaultToPresentDate]="false"
-              formControlName="dayte_basic"
-              (onDateChange)="onDateChangedBasic($event)"
-              [required]="true"
-            ></hxa-datepicker-input>
-            <div>
-              <span>Emitted Date object: <b>{{basicForm.get('dayte_basic').value}}</b></span><br>
-              <span>NgForm Status: <b>{{basicForm.status}}</b></span> <br>
-              <span>NgForm Valid: <b>{{basicForm.valid}}</b></span> <br>
-              <span>NgForm Touched: <b>{{basicForm.touched}}</b></span><br>
-            </div>
+          <hxa-datepicker-input
+            name="datepicker_basic"
+            placement="bottom"
+            [defaultToPresentDate]="false"
+            formControlName="dayte_basic"
+            (onDateChange)="onDateChangedBasic($event)"
+            [required]="true"
+          ></hxa-datepicker-input>
+          <div>
+            <span>
+              Emitted Date object:
+              <b>{{ basicForm.get("dayte_basic").value }}</b>
+            </span>
+            <br />
+            <span>
+              NgForm Status: <b>{{ basicForm.status }}</b>
+            </span>
+            <br />
+            <span>
+              NgForm Valid: <b>{{ basicForm.valid }}</b>
+            </span>
+            <br />
+            <span>
+              NgForm Touched: <b>{{ basicForm.touched }}</b>
+            </span>
+            <br />
+          </div>
         </form>
       </div>
     </div>
 
-    <br>
+    <br />
 
     <h5 id="basic_code">Code</h5>
 
     <hx-tabset>
       <hx-tab heading="Template">
-            <pre>
-              <code [highlight]="code.exampleTemplate"></code>
-            </pre>
+        <pre>
+          <code [highlight]="code.exampleTemplate"></code>
+        </pre>
       </hx-tab>
       <hx-tab heading="Typescript">
-            <pre>
-              <code [highlight]="code.exampleTypescript"></code>
-            </pre>
+        <pre>
+          <code [highlight]="code.exampleTypescript"></code>
+        </pre>
       </hx-tab>
     </hx-tabset>
 
@@ -77,33 +96,46 @@
             [allowPreviousDates]="true"
           ></hxa-datepicker-input>
           <div>
-            <span>Emitted Date object: <b>{{intervalForm.get('dayte').value}}</b></span><br>
-            <span>NgForm Status: <b>{{intervalForm.status}}</b></span> <br>
-            <span>NgForm Valid: <b>{{intervalForm.valid}}</b></span> <br>
-            <span>NgForm Touched: <b>{{intervalForm.touched}}</b></span><br>
+            <span>
+              Emitted Date object:
+              <b>{{ intervalForm.get("dayte").value }}</b>
+            </span>
+            <br />
+            <span>
+              NgForm Status: <b>{{ intervalForm.status }}</b>
+            </span>
+            <br />
+            <span>
+              NgForm Valid: <b>{{ intervalForm.valid }}</b>
+            </span>
+            <br />
+            <span>
+              NgForm Touched: <b>{{ intervalForm.touched }}</b>
+            </span>
+            <br />
           </div>
         </form>
       </div>
     </div>
 
-    <br>
+    <br />
 
     <h5 id="interval_code">Code</h5>
 
     <hx-tabset>
       <hx-tab heading="Template">
-            <pre>
-              <code [highlight]="code.intervalExampleTemplate"></code>
-            </pre>
+        <pre>
+          <code [highlight]="code.intervalExampleTemplate"></code>
+        </pre>
       </hx-tab>
       <hx-tab heading="Typescript">
-            <pre>
-              <code [highlight]="code.intervalExampleTypescript"></code>
-            </pre>
+        <pre>
+          <code [highlight]="code.intervalExampleTypescript"></code>
+        </pre>
       </hx-tab>
     </hx-tabset>
 
-    <hr>
+    <hr />
 
     <h4 id="api">API Reference</h4>
 
@@ -130,7 +162,8 @@
               <td>disabled</td>
               <td><kbd>boolean</kbd></td>
               <td>
-                Adds the disabled html attribute to the components input element.
+                Adds the disabled html attribute to the components input
+                element.
               </td>
               <td><kbd>false</kbd></td>
             </tr>
@@ -244,7 +277,8 @@
               <td>placement</td>
               <td><kbd>'top' | 'bottom' | 'left' | 'right'</kbd></td>
               <td>
-                Specifies the position the datepicker opens against the input element
+                Specifies the position the datepicker opens against the input
+                element
               </td>
               <td><kbd>'bottom'</kbd></td>
             </tr>
@@ -326,28 +360,37 @@
         </table>
       </div>
     </div>
-
   </div>
 </section>
 
-<aside *ngIf="contentsNav" class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
+<aside
+  *ngIf="contentsNav"
+  class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white"
+>
   <ul class="hx-nav hx-nav-vertical">
     <li class="hx-nav-heading"><h6>Contents</h6></li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#usage')">
+        <span>Usage</span>
+      </a>
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Basic Example</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#example')">
+        <span>Basic Example</span>
+      </a>
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#interval_example')"><span>Interval Example</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#interval_example')">
+        <span>Interval Example</span>
+      </a>
     </li>
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#api')">
+        <span>API Reference</span>
+      </a>
     </li>
-
   </ul>
 </aside>

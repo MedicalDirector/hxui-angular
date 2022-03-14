@@ -1,14 +1,14 @@
-import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { CoreBaseComponent } from "../core-base.component";
-import { DOCUMENT } from "@angular/common";
-import { PageScrollService } from "ngx-page-scroll-core";
-import { FiltersCode } from "./filters.code";
-import { BreakpointObserver } from "@angular/cdk/layout";
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { CoreBaseComponent } from '../core-base.component';
+import { DOCUMENT } from '@angular/common';
+import { PageScrollService } from 'ngx-page-scroll-core';
+import { FiltersCode } from './filters.code';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
-  selector: "app-filters",
-  templateUrl: "./filters.component.html",
-  styles: [":host { display: flex; flex: 1; min-width: 0; }"]
+  selector: 'app-filters',
+  templateUrl: './filters.component.html',
+  styles: [':host { display: flex; flex: 1; min-width: 0; }']
 })
 export class FiltersComponent extends CoreBaseComponent
   implements OnInit, OnDestroy {

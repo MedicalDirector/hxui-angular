@@ -6,12 +6,13 @@ describe('DateRangePickerComponent', () => {
   let component: DateRangePickerComponent;
   let fixture: ComponentFixture<DateRangePickerComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DateRangePickerComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [DateRangePickerComponent]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DateRangePickerComponent);

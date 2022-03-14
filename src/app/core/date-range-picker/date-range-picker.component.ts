@@ -3,7 +3,7 @@ import { PageScrollService } from 'ngx-page-scroll-core';
 import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/common';
 import { DateRangePickersCode } from './date-range-picker.code';
-import {BreakpointObserver} from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { DateRange } from '../../../../projects/hx-ui/src/lib/date-range-picker/date-range-picker.component';
 
 @Component({
@@ -12,7 +12,6 @@ import { DateRange } from '../../../../projects/hx-ui/src/lib/date-range-picker/
   styles: [':host { display: flex; flex: 1; min-width: 0; }']
 })
 export class DateRangePickerComponent extends CoreBaseComponent {
-
   /**
    * toggle for version 8 documentation
    *
@@ -21,7 +20,10 @@ export class DateRangePickerComponent extends CoreBaseComponent {
   public isVersion8 = false;
 
   public code = new DateRangePickersCode();
-  public selectedDateRange: DateRange = {fromDate:new Date(),toDate:new Date()};
+  public selectedDateRange: DateRange = {
+    fromDate: new Date(),
+    toDate: new Date()
+  };
 
   intervalOptions: string[] = [
     'Today',
@@ -37,7 +39,7 @@ export class DateRangePickerComponent extends CoreBaseComponent {
     'Next Fortnight'
   ];
 
-  dateFormat = "dd/MM/yyyy";
+  dateFormat = 'dd/MM/yyyy';
 
   constructor(
     protected pageScrollService: PageScrollService,
@@ -47,10 +49,10 @@ export class DateRangePickerComponent extends CoreBaseComponent {
     super(pageScrollService, breakpointObserver, document);
   }
 
-  getSelectedDateRange(dateRange: DateRange){
-      this.selectedDateRange = dateRange;
+  getSelectedDateRange(dateRange: DateRange) {
+    this.selectedDateRange = dateRange;
   }
-  
+
   toggleVersions() {
     this.isVersion8 = !this.isVersion8;
   }

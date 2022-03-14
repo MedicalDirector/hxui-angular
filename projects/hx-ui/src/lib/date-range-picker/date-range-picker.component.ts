@@ -6,26 +6,16 @@ import {
   EventEmitter,
   Output
 } from '@angular/core';
-import {
-  DatePipe
-} from '@angular/common';
-import {
-  DropdownDirective
-} from '../dropdown/dropdown.directive';
-import {
-  IntervalItem
-} from './interval-option-model';
-import {
-  DateRangePickerConfig
-} from './date-range-picker.config';
-import {
-  fullIntervalList
-} from './interval-option-model';
+import { DatePipe } from '@angular/common';
+import { DropdownDirective } from '../dropdown/dropdown.directive';
+import { IntervalItem } from './interval-option-model';
+import { DateRangePickerConfig } from './date-range-picker.config';
+import { fullIntervalList } from './interval-option-model';
 
 export enum DisplayMode {
   showTab = 1,
-    showCustomOnly,
-    showIntervalOnly
+  showCustomOnly,
+  showIntervalOnly
 }
 
 export interface DateRange {
@@ -45,7 +35,6 @@ export enum DateSelectionType {
   styleUrls: ['./date-range-picker.component.scss']
 })
 export class DateRangePickerComponent implements OnInit {
-
   @ViewChild('dropdown', { static: true }) dropdown: DropdownDirective;
 
   /** Specifies interval options displayed under interval selection tab. */
@@ -81,8 +70,10 @@ export class DateRangePickerComponent implements OnInit {
    */
   @Output() onDateRangeSelected = new EventEmitter<DateRange>();
 
-
-  constructor(private datePipe: DatePipe, private dateRangePickerConfig: DateRangePickerConfig) {}
+  constructor(
+    private datePipe: DatePipe,
+    private dateRangePickerConfig: DateRangePickerConfig
+  ) {}
 
   // import to DateSElectionType into the instance of this class
   DateSelectionType = DateSelectionType;
@@ -108,7 +99,9 @@ export class DateRangePickerComponent implements OnInit {
   }
 
   generateIntervalOptionItems(itemList: string[]) {
-    this.intervalList = fullIntervalList.filter(item => itemList.includes(item.displayName));
+    this.intervalList = fullIntervalList.filter(item =>
+      itemList.includes(item.displayName)
+    );
   }
 
   hide(closeDropdown: boolean) {
@@ -120,18 +113,18 @@ export class DateRangePickerComponent implements OnInit {
   onCustomDateSelection(newCustomDate: Date[]) {
     // do not update range if undefined, null[], from > to
     if (
-      !newCustomDate || 
-      newCustomDate[0] == null || 
+      !newCustomDate ||
+      newCustomDate[0] == null ||
       newCustomDate[1] == null ||
       newCustomDate[0] > newCustomDate[1]
     ) {
-      return null
+      return null;
     }
 
     this.fromDate = newCustomDate[0];
     this.toDate = newCustomDate[1];
     this._displayRange = this.createDateRange();
-    this.onDateRangeSelected.emit( < DateRange > {
+    this.onDateRangeSelected.emit(<DateRange>{
       fromDate: this.fromDate,
       toDate: this.toDate
     });
@@ -145,11 +138,23 @@ export class DateRangePickerComponent implements OnInit {
       const today: Date = new Date();
       let calculatedDate: Date;
       if (selectedItem.unit === 'day') {
-        calculatedDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + selectedItem.count);
+        calculatedDate = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate() + selectedItem.count
+        );
       } else if (selectedItem.unit === 'month') {
-        calculatedDate = new Date(today.getFullYear(), today.getMonth() + selectedItem.count, today.getDate());
+        calculatedDate = new Date(
+          today.getFullYear(),
+          today.getMonth() + selectedItem.count,
+          today.getDate()
+        );
       } else if (selectedItem.unit === 'year') {
-        calculatedDate = new Date(today.getFullYear() + selectedItem.count, today.getMonth(), today.getDate());
+        calculatedDate = new Date(
+          today.getFullYear() + selectedItem.count,
+          today.getMonth(),
+          today.getDate()
+        );
       }
 
       if (calculatedDate >= today) {
@@ -161,7 +166,7 @@ export class DateRangePickerComponent implements OnInit {
       }
       this._displayRange = this.createDateRange();
 
-      this.onDateRangeSelected.emit( < DateRange > {
+      this.onDateRangeSelected.emit(<DateRange>{
         fromDate: this.fromDate,
         toDate: this.toDate
       });

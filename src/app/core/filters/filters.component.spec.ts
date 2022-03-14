@@ -1,18 +1,19 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FiltersComponent } from './filters.component';
-import {AppModule} from '../../app.module';
+import { AppModule } from '../../app.module';
 
 describe('FiltersComponent', () => {
   let component: FiltersComponent;
   let fixture: ComponentFixture<FiltersComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [ AppModule ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [AppModule]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FiltersComponent);

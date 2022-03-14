@@ -8,16 +8,15 @@ import { trigger, transition, animate, style } from '@angular/animations';
   animations: [
     trigger('slideInOut', [
       transition(':enter', [
-        style({transform: 'translateX(-100%)'}),
-        animate('500ms ease-in-out', style({transform: 'translateX(0%)'}))
+        style({ transform: 'translateX(-100%)' }),
+        animate('500ms ease-in-out', style({ transform: 'translateX(0%)' }))
       ]),
       transition(':leave', [
-        animate('500ms ease-in-out', style({transform: 'translateX(-100%)'}))
+        animate('500ms ease-in-out', style({ transform: 'translateX(-100%)' }))
       ])
     ])
   ]
 })
-
 export class AppComponent {
   nav = true;
   navs = [
@@ -145,11 +144,13 @@ export class AppComponent {
       items: [
         {
           name: 'Change Log (v11)',
-          url: 'https://bitbucket.org/md-design/angular-hxui/src/master/CHANGELOG.md'
+          url:
+            'https://bitbucket.org/md-design/angular-hxui/src/master/CHANGELOG.md'
         },
         {
           name: 'Change Log (v8)',
-          url: 'https://bitbucket.org/md-design/angular-hxui/src/8.x/CHANGELOG.md'
+          url:
+            'https://bitbucket.org/md-design/angular-hxui/src/8.x/CHANGELOG.md'
         },
         {
           name: 'License',

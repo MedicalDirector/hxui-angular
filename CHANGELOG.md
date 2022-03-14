@@ -1,3 +1,9 @@
+## [11.1.1](https://www.npmjs.com/package/@hxui/angular/v/11.1.1) (2022-03-15)
+
+### Bugfix
+
+* **date-range-picker:** Prevent selection of date range where date is null or from later than to
+
 ## [11.1.0](https://www.npmjs.com/package/@hxui/angular/v/11.1.0) (2022-03-08)
 
 ### Enhancement

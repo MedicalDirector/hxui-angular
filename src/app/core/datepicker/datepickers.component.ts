@@ -3,18 +3,16 @@ import { PageScrollService } from 'ngx-page-scroll-core';
 import { CoreBaseComponent } from '../core-base.component';
 import { DOCUMENT } from '@angular/common';
 import { DatepickersCode } from './datepickers.code';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {FormBuilder, Validators} from '@angular/forms';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-datepickers',
   templateUrl: './datepickers.component.html',
   styles: [':host { display: flex; flex: 1; min-width: 0; }']
 })
-export class DatepickersComponent extends CoreBaseComponent { 
-
+export class DatepickersComponent extends CoreBaseComponent {
   public code = new DatepickersCode();
-
 
   basicForm = this.fb.group({
     dayte_basic: [null, Validators.required]
@@ -24,8 +22,8 @@ export class DatepickersComponent extends CoreBaseComponent { 
     dayte: [null]
   });
 
-  dateFormat = "yyyy-MM-dd";
-  intervalOptions: string[]  = [
+  dateFormat = 'yyyy-MM-dd';
+  intervalOptions: string[] = [
     'Today',
     'Yesterday',
     'Tomorrow',
@@ -43,7 +41,7 @@ export class DatepickersComponent extends CoreBaseComponent { 
     protected pageScrollService: PageScrollService,
     protected breakpointObserver: BreakpointObserver,
     private fb: FormBuilder,
-    @Inject(DOCUMENT) protected document: any,
+    @Inject(DOCUMENT) protected document: any
   ) {
     super(pageScrollService, breakpointObserver, document);
   }
@@ -56,7 +54,7 @@ export class DatepickersComponent extends CoreBaseComponent { 
     console.log(this.intervalForm.get('dayte').value, $event);
   }
 
-  reset(){
+  reset() {
     this.basicForm.reset();
     this.intervalForm.reset();
   }

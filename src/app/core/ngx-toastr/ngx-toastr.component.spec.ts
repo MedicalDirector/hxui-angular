@@ -6,12 +6,13 @@ describe('NgSelectComponent', () => {
   let component: NgxToastrComponent;
   let fixture: ComponentFixture<NgxToastrComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ NgxToastrComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [NgxToastrComponent]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NgxToastrComponent);
