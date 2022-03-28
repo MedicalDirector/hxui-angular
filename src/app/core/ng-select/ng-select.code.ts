@@ -89,30 +89,41 @@ export class NgSelectCode {
   }
   `;
 
-  multiExampleTemplate =
-    `
+  multiExampleTemplate = `
   <div class="hx-card not-scrollable">
-          <div class="hx-card-content">
-           <ng-select
-              [items]="people$ | async"
-              [multiple]="true"
-              [closeOnSelect]="false"
-              [searchable]="false"
-              bindLabel="name"
-              placeholder="Select people"
-             formControlName="selectedPeople">
-            </ng-select>
+    <div class="hx-card-content">
+      <ng-select
+        [items]="people$ | async"
+        [multiple]="true"
+        [closeOnSelect]="false"
+        [searchable]="false"
+        bindLabel="name"
+        placeholder="Select people"
+        formControlName="selectedPeople"
+        class="is-badge is-outlined"
+      >
+        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+          <span class="hx-badge-content">
+            {{ item.name }}
+            <button
+              class="hx-delete is-small"
+              (click)="clear(item)"
+              aria-hidden="true"
+            ></button>
+          </span>
+        </ng-template>
+      </ng-select>
 
-            <div class="mt-3">
-             Selected value: <br/>
-              <ul>
-                <li *ngFor="let item of form.get('selectedPeople').value">{{item.name}}</li>
-              </ul>
-              <button (click)="clearModel()" class="hx-button mr-2">Clear model</button>
-              <button (click)="changeModel()" class="hx-button is-primary">Change model</button>
-            </div>
-          </div>
-        </div>
+      <div class="mt-3">
+        Selected value: <br/>
+        <ul>
+          <li *ngFor="let item of form.get('selectedPeople').value">{{item.name}}</li>
+        </ul>
+        <button (click)="clearModel()" class="hx-button mr-2">Clear model</button>
+        <button (click)="changeModel()" class="hx-button is-primary">Change model</button>
+      </div>
+    </div>
+  </div>
   `;
 
   multiExampleTypescript =

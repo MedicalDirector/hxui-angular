@@ -212,10 +212,22 @@ $ng-select-danger: #b81e4f;
           .ng-value-icon {
             color: $ng-select-secondary-text;
             padding-right: 5px;
+
             @include rtl {
               padding-left: 5px;
               padding-right: 0;
             }
+
+            &.right {
+              padding-left: 5px;
+              padding-right: 0;
+
+              @include rtl {
+                padding-left: 0;
+                padding-right: 5px;
+              }
+            }
+
             &:hover {
               color: $ng-select-secondary-light-text;
             }
@@ -235,6 +247,34 @@ $ng-select-danger: #b81e4f;
         .ng-arrow-wrapper {
           border-top: .84375em solid transparent;
         }
+      }
+    }
+    &.is-rounded {
+      .ng-value-container {
+        .ng-value {
+          border-radius: 999px;
+        }
+      }
+    }
+    // correlates to hx-badge
+    &.is-badge {
+      .ng-value-container > .ng-value {
+        border-radius: 999px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        font-size: 0.75rem;
+        font-weight: 400;
+        .hx-delete {
+          margin-left: 0.5em;
+          margin-right: -0.5em;
+        }
+      }
+    }
+    &.is-outlined {
+      .ng-value-container > .ng-value {
+        background-color: $ng-select-bg;
+        border: 1px solid hsla(0, 0%, 4%, 0.15);
       }
     }
     .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
