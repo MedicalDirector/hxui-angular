@@ -2,24 +2,25 @@
   <div class="hx-section is-comfortable">
 
     <h1 class="hx-title">Ng-Select</h1>
-    <h2 class="hx-subtitle">Is a 3rd-party all in one UI Select or Multiselect component called <a href="https://github.com/ng-select/ng-select" target="_blank">ng-select</a></h2>
+    <h2 class="hx-subtitle">
+      HXUI styling for 3rd-party library
+      <a href="https://github.com/ng-select/ng-select" target="_blank">ng-select</a>.
+      An all-in-one select, multiselect, input component.
+    </h2>
 
-    <hr>
+    <hr />
 
-    <h4 id="install">Install</h4>
-    <p>To install ng-select via npm run the following.</p>
+    <h4 id="install">Getting started</h4>
+    <p>Install ng-select and hxui theme.</p>
 
     <pre>
-     <code [highlight]="code.install"></code>
+      <code [highlight]="code.install"></code>
     </pre>
 
-    <hr>
-
-    <h4 id="import">Import</h4>
-    <p>Import the scss file to your project.</p>
+    <p>Import the theme to your project styles file.</p>
 
     <pre>
-     <code [highlight]="code.import"></code>
+      <code [highlight]="code.import"></code>
     </pre>
 
     <hr>
@@ -28,14 +29,17 @@
     <p>Add the NgSelectModule and angular FormsModule to AppModule or SharedModule.</p>
 
     <pre>
-     <code [highlight]="code.usage"></code>
+      <code [highlight]="code.usage"></code>
     </pre>
 
     <hr>
 
     <h4 id="multiselectexample">Multi Select Example</h4>
 
-    <p>Add and remove items in any order with or without your mouse. Use your left/right arrow keys to move the cursor between items. </p>
+    <p>
+      Add and remove items in any order with or without your mouse. Use your
+      left/right arrow keys to move the cursor between items.
+    </p>
 
     <div class="hx-columns">
       <div class="hx-column">
@@ -48,26 +52,41 @@
               [searchable]="false"
               bindLabel="name"
               placeholder="Select people"
-             formControlName="selectedPeople">
+              formControlName="selectedPeople"
+              class="is-badge is-outlined"
+            >
+              <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                <span class="hx-badge-content">
+                  {{ item.name }}
+                  <button
+                    class="hx-delete is-small"
+                    (click)="clear(item)"
+                    aria-hidden="true"
+                  ></button>
+                </span>
+              </ng-template>
             </ng-select>
 
             <div class="mt-3">
-              Selected value: <br/>
+              Selected value: <br />
               <ul>
-                <li *ngFor="let item of form.get('selectedPeople').value">{{item.name}}</li>
+                <li *ngFor="let item of form.get('selectedPeople').value">
+                  {{ item.name }}
+                </li>
               </ul>
-              <button (click)="clearModel()" class="hx-button mr-2">Clear model</button>
-              <button (click)="changeModel()" class="hx-button is-primary">Change model</button>
+              <button (click)="clearModel()" class="hx-button mr-2">
+                Clear model
+              </button>
+              <button (click)="changeModel()" class="hx-button is-primary">
+                Change model
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="hx-column">
-
-      </div>
     </div>
 
-    <br>
+    <br />
 
     <h5 id="multiselectexamplecode">Code</h5>
 
@@ -111,7 +130,6 @@
 
             <ng-select [items]="people$ | async"
                        bindLabel="name"
-                       autofocus
                        bindValue="id"
                        placeholder="Select people"
                        formControlName="selectedPersonId">
@@ -169,7 +187,6 @@
 
             <ng-select [items]="people$ | async"
                        bindLabel="name"
-                       autofocus
                        bindValue="id"
                        placeholder="Select people"
                        (keyup)="onKeyup"
@@ -242,6 +259,14 @@
       </div>
     </div>
 
+    <h4 id="changelog">Changelog</h4>
+
+    <p style="padding-bottom: 2em;">See
+      <a 
+        href="https://bitbucket.org/md-design/angular-hxui/src/master/projects/ng-select/CHANGELOG.md" 
+        target="_blank"
+      >changelog</a> for updates.
+    </p>
   </div>
 </section>
 
@@ -249,6 +274,9 @@
   <ul class="hx-nav hx-nav-vertical">
     <li class="hx-nav-heading">
       <h6>Contents</h6></li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#install')"><span>Getting started</span></a>
+    </li>
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
     </li>
@@ -260,6 +288,9 @@
     </li>
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
+    </li>
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#changelog')"><span>Changelog</span></a>
     </li>
   </ul>
 </aside>

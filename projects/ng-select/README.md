@@ -1,18 +1,21 @@
+Add HxUI theme for [ng-select](https://ng-select.github.io/ng-select#/data-sources) to your project.
 
+## Getting started
+### Step 1. Install package:
 
-# Install Guide
+```shell
+npm install @hxui/ng-select --save
+```
 
-## Adding HxUI Ng-select theme to your project
+### Step 2. Import theme to project styles file `styles.scss`:
+```scss
+@import "@hxui/ng-select/themes/hxui.theme.scss";
+```
 
-* * *
+## Demo
 
-1\.Use **NPM**:
+See [examples](https://angular.hxui.io/#/ng-select)
 
-    npm install @hxui/ng-select --save
-    
-2\.Import **SCSS**:
+## Changelog
 
-    @import "@hxui/ng-select/themes/hxui.theme.scss";
-
-
-
+See [changelog](https://bitbucket.org/md-design/angular-hxui/src/master/projects/ng-select/CHANGELOG.md)
