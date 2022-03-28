@@ -1,12 +1,17 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {CoreBaseComponent} from '../core-base.component';
-import {PageScrollService} from 'ngx-page-scroll-core';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {DOCUMENT} from '@angular/common';
-import {NgSelectCode} from './ng-select.code';
-import {Observable, Subject} from 'rxjs/index';
-import {DataService} from './data.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import { Component, Inject, OnInit } from '@angular/core';
+import { CoreBaseComponent } from '../core-base.component';
+import { PageScrollService } from 'ngx-page-scroll-core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { DOCUMENT } from '@angular/common';
+import { NgSelectCode } from './ng-select.code';
+import { Observable, Subject } from 'rxjs/index';
+import { DataService } from './data.service';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 @Component({
   selector: 'app-ng-select',
@@ -14,12 +19,11 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./ng-select.component.scss']
 })
 export class NgSelectComponent extends CoreBaseComponent implements OnInit {
-
   public code = new NgSelectCode();
   people$: Observable<any[]>;
   peopleInput$ = new Subject<string>();
 
-  form: FormGroup
+  form: FormGroup;
 
   constructor(
     protected pageScrollService: PageScrollService,
@@ -33,8 +37,14 @@ export class NgSelectComponent extends CoreBaseComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      selectedPeople:  new FormControl([{ name: 'Karyn Wright' }], Validators.required),
-      selectedPersonId:  new FormControl('5a15b13c36e7a7f00cf0d7cb', Validators.required)
+      selectedPeople: new FormControl(
+        [{ name: 'Karyn Wright' }],
+        Validators.required
+      ),
+      selectedPersonId: new FormControl(
+        '5a15b13c36e7a7f00cf0d7cb',
+        Validators.required
+      )
     });
 
     this.people$ = this.dataService.getPeople();
@@ -51,5 +61,4 @@ export class NgSelectComponent extends CoreBaseComponent implements OnInit {
   onKeyup(val) {
     console.log(val);
   }
-
 }
