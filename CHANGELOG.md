@@ -1,3 +1,9 @@
+## [8.2.26](https://www.npmjs.com/package/@hxui/angular/v/8.2.26) (2022-04-27)
+
+### Bugfix
+
+* **datepicker:** remove setting touched state programmatically upon set date
+
 ## [8.2.25](https://www.npmjs.com/package/@hxui/angular/v/8.2.25) (2022-03-11)
 
 ### Bugfix

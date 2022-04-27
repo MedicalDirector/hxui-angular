@@ -137,10 +137,6 @@ export class DatepickerFormComponent
   @Input()
   isWarning = false;
 
-  /** Danger state of input */
-  @Input()
-  isDanger = false;
-
   /** This attribute specifies the font icon name. */
   @Input()
   icon = 'hx-icon icon-calendar-outline';
@@ -279,7 +275,6 @@ export class DatepickerFormComponent
     this.propogateChange(date);
     this.onDateChange.emit(date);
     this._updateLabelStyle();
-    this.datePickerForm.control.markAsTouched();
   }
 
   public onDateSelectEvent = (inputDate: Date): void => {

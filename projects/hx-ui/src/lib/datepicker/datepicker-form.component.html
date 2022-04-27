@@ -7,7 +7,7 @@
   <div
     class="hx-input-control hxa-datepicker-control"
     [ngClass]="{
-      'is-danger': (!isValid && datePickerForm.touched) || isDanger,
+      'is-danger': !isValid && datePickerForm.touched,
       'is-help-visible': helpTextVisible,
       'is-warning': isWarning && isValid && datePickerForm.touched
     }"
