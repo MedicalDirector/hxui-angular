@@ -108,73 +108,74 @@ export class FiltersCode {
         label: 'HCP',
         options: [
           {
-            label: 'All',
+            label: "All",
             value: 0,
             selected: true
           },
           {
-            label: 'First Available',
+            label: "First Available",
             value: 1,
             selected: false
           },
           {
-            label: 'Mr GP, John',
+            label: "Mr GP, John",
             value: 2,
             selected: false
           },
           {
-            label: 'Mr GP, Camila',
+            label: "Mr GP, Camila",
             value: 3,
             selected: false
           },
           {
-            label: 'Mr GP, Peter',
+            label: "Mr GP, Peter",
             value: 4,
             selected: false
           },
           {
-            label: 'Mr GP, Brian',
-            value: 4,
+            label: "Mr GP, Brian",
+            value: 5,
             selected: false
           },
           {
-            label: 'Mr GP, Simon',
-            value: 4,
+            label: "Mr GP, Simon",
+            value: 6,
             selected: false
           },
           {
-            label: 'Mr GP, Peter',
-            value: 4,
+            label: "Mr GP, Peter",
+            value: 7,
             selected: false
           },
           {
-            label: 'Mr GP, Matthew',
-            value: 4,
+            label: "Mr GP, Matthew",
+            value: 8,
             selected: false
           },
           {
-            label: 'Mr GP, Jane',
-            value: 4,
+            label: "Mr GP, Jane",
+            value: 9,
             selected: false
           },
           {
-            label: 'Mr GP, Susan',
-            value: 4,
+            label: "Mr GP, Susan",
+            value: 10,
             selected: false
           },
           {
-            label: 'Mr GP, Brendan',
-            value: 4,
+            label: "Mr GP, Brendan",
+            value: 11,
             selected: false
           },
           {
-            label: 'Mr GP, Laura',
-            value: 4,
+            label: "Mr GP, Laura",
+            value: 12,
             selected: false
           },
           {
-            label: 'Dr Sigmundsson-Higgenbotham Smythe King AB Junior III, Max Samuel Smithers Terrance Howard Allisonn Henry',
-            value: 4,
+            label:
+              "Dr Sigmundsson-Higgenbotham Smythe King AB Junior III, Max Samuel Smithers Terrance Howard Allisonn Henry",
+            value: 13,
             selected: false
           }
         ]
@@ -216,6 +217,13 @@ export class FiltersCode {
           }
         ],
         defaultIndex: [1, 2, 3, 4]
+      },
+      {
+        id: "dateRangeFilter",
+        type: FilterType.DateRange,
+        label: "Date Range",
+        dateRangePickerDisplayMode: 2,
+        options: []
       },
       {
         id: 'searchFilter',
@@ -382,76 +390,84 @@ export class FiltersCode {
         label: 'HCP',
         options: [
           {
-            label: 'All',
+            label: "All",
             value: 0,
             selected: true
           },
           {
-            label: 'First Available',
+            label: "First Available",
             value: 1,
             selected: false
           },
           {
-            label: 'Mr GP, John',
+            label: "Mr GP, John",
             value: 2,
             selected: false
           },
           {
-            label: 'Mr GP, Camila',
+            label: "Mr GP, Camila",
             value: 3,
             selected: false
           },
           {
-            label: 'Mr GP, Peter',
+            label: "Mr GP, Peter",
             value: 4,
             selected: false
           },
           {
-            label: 'Mr GP, Brian',
-            value: 4,
+            label: "Mr GP, Brian",
+            value: 5,
             selected: false
           },
           {
-            label: 'Mr GP, Simon',
-            value: 4,
+            label: "Mr GP, Simon",
+            value: 6,
             selected: false
           },
           {
-            label: 'Mr GP, Peter',
-            value: 4,
+            label: "Mr GP, Peter",
+            value: 7,
             selected: false
           },
           {
-            label: 'Mr GP, Matthew',
-            value: 4,
+            label: "Mr GP, Matthew",
+            value: 8,
             selected: false
           },
           {
-            label: 'Mr GP, Jane',
-            value: 4,
+            label: "Mr GP, Jane",
+            value: 9,
             selected: false
           },
           {
-            label: 'Mr GP, Susan',
-            value: 4,
+            label: "Mr GP, Susan",
+            value: 10,
             selected: false
           },
           {
-            label: 'Mr GP, Brendan',
-            value: 4,
+            label: "Mr GP, Brendan",
+            value: 11,
             selected: false
           },
           {
-            label: 'Mr GP, Laura',
-            value: 4,
+            label: "Mr GP, Laura",
+            value: 12,
             selected: false
           },
           {
-            label: 'Dr Sigmundsson-Higgenbotham Smythe King AB Junior III, Max Samuel Smithers Terrance Howard Allisonn Henry',
-            value: 4,
+            label:
+              "Dr Sigmundsson-Higgenbotham Smythe King AB Junior III, Max Samuel Smithers Terrance Howard Allisonn Henry",
+            value: 13,
             selected: false
           }
         ]
+      },
+      {
+        id: "dateRangeFilter",
+        type: FilterType.DateRange,
+        label: "Date Range",
+        dateRangePickerDisplayMode: 2,
+        options: []
       },
       {
         id: 'searchFilter',

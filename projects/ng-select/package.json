@@ -2,16 +2,23 @@
   "name": "@hxui/ng-select",
   "version": "1.1.0",
   "description": "A HxUi theme for ng-select",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Design @ MD <design@medicaldirector.com>",
   "private": false,
   "license": "MIT",
   "keywords": [
     "theme",
     "angular",
-    "ng-select"
+    "ng-select",
+    "css",
+    "sass"
   ],
-  "homepage": "https://angular.hxui.io/#/ng-select"
+  "homepage": "https://angular.hxui.io/#/ng-select",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MedicalDirector/hxui-angular.git"
+  },
+  "bugs": "https://github.com/MedicalDirector/hxui-angular/issues",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }

@@ -1,5 +1,6 @@
 import { IFilterOption, IFiltersConfig } from "./filters-config.interface";
 import { FilterType } from "./filters-type.enum";
+import { DisplayMode } from "../date-range-picker/date-range-picker.component";
 import * as _ from "lodash";
 
 export class FiltersModel implements IFiltersConfig {
@@ -8,10 +9,16 @@ export class FiltersModel implements IFiltersConfig {
   label: string;
   options?: IFilterOption[];
   value?: string;
+  /**
+   * value from source component without type parse
+   */
+  sourceValue?: any;
   callback: any;
   selected: IFilterOption[] = [];
   defaultIndex = [0];
   charLimit = 2;
+  dateRangePickerDisplayMode?: DisplayMode = DisplayMode.showCustomOnly;
+  dateRangePickerDisplayDateFormat?: string = "dd/MM/yyyy";
   width: number;
   disabled = false;
   hidden = false;
@@ -25,11 +32,11 @@ export class FiltersModel implements IFiltersConfig {
 
   constructor(data?: IFiltersConfig) {
     Object.assign(this, data);
-    if (this.type === FilterType.SingleSelect) {
-      this.setSingleSelectOption();
-    } else if (this.type === FilterType.MultiSelect) {
+    if (this.type === FilterType.MultiSelect) {
       this.addSelectAll();
       this.setMultiSelectOptions();
+    } else if (this.type !== FilterType.Search) {
+      this.setSingleSelectOption()
     }
     this.isIconised();
   }
@@ -135,6 +142,10 @@ export class FiltersModel implements IFiltersConfig {
           this.selected.push(this.options[di]);
         });
         this.setSelectAllState();
+      } else {
+        this.selected[0].selected = false;
+        this.selected[0] = this.options[this.defaultIndex[0]];
+        this.selected[0].selected = true;
       }
     }
   }
@@ -161,6 +172,8 @@ export class FiltersModel implements IFiltersConfig {
       });
       return _.isEqual(selectedIndexes, this.defaultIndex);
     } else if (this.type === FilterType.Search) {
+      return this.value === "" || this.value === undefined;
+    } else if (this.type === FilterType.DateRange) {
       return this.value === "" || this.value === undefined;
     }
   }

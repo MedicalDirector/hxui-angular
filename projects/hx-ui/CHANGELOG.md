@@ -1,29 +1,33 @@
+## [11.2.0](https://www.npmjs.com/package/@hxui/angular/v/11.2.0) (2022-04-29)
+
+### Enhancement
+* **Filters:** Add support for date range
+* **Date Range Picker:** Add support for conditional rendering of caret and placeholder; and default dates
+
+### Bugfix
+* **Date Picker:** Fix touched state issue
+
 ## [11.1.1](https://www.npmjs.com/package/@hxui/angular/v/11.1.1) (2022-03-15)
 
 ### Bugfix
-
 * **date-range-picker:** Prevent selection of date range where date is null or from later than to
 
 ## [11.1.0](https://www.npmjs.com/package/@hxui/angular/v/11.1.0) (2022-03-08)
 
 ### Enhancement
-
 * **Tabular:** Add support to replace column labels with html
 
 ### Bugfix
-
 * **Inspector:** Fix issue with hasClose param and left-anchored styling
 
 ## [11.0.21](https://www.npmjs.com/package/@hxui/angular/v/11.0.21) (2021-11-24)
 
 ### Enhancement
-
 * **Inspector:** add event on backdrop click (onBackDropClick$)
 
 ## [11.0.20](https://www.npmjs.com/package/@hxui/angular/v/11.0.20) (2021-11-17)
 
 ### Enhancement
-
 * **Inspector:** add config to disable backdrop click
 
 ## [11.0.16, 11.0.17, 11.0.18, 11.0.19](https://www.npmjs.com/package/@hxui/angular/v/11.0.16) (2021-09-26)

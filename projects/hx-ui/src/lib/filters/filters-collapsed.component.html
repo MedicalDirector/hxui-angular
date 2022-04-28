@@ -6,7 +6,7 @@
   <div class="hx-dropdown-menu has-limited-width collapsedFilter__menu panes" *hxaDropdownMenu>
     <ul class="panes__inner" [@slide]="activePane" (@slide.done)="onSlideDone($event)">
       <li id="filterSelections" class="panes__item">
-        <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last;">
+        <ng-container *ngFor="let filter of data;trackBy: trackByFn;let lastItem = last; index as idx">
 
           <div class="hx-dropdown-header itemHeader">{{filter.label}}</div>
 
@@ -61,6 +61,31 @@
               </div>
             </div>
           </div>
+
+          <!-- date range picker filter -->
+          <ng-container *ngIf="filter.type === FilterType.DateRange">
+            <ul class="hx-list-group">
+              <li>
+                <a [id]="filter?.id + '-trigger'" title="{{filter.selected?.label}}">
+                  <div class="hx-list-content dateRangePicker">
+                    <hxa-date-range-picker 
+                      [dateFormat]="filter.dateRangePickerDisplayDateFormat"
+                      [displayMode]="filter.dateRangePickerDisplayMode"
+                      [intervalOptions]="getIntervalOptions(filter.options)" [defaultDateRange]="filter.sourceValue"
+                      [id]="filter?.id + '-dateRangePicker'"
+                      [showCaretDown]=false
+                      [placeholder]="''"
+                      (onDateRangeSelected)="onDateRangeFilterChange(filter,$event)"
+                      #dateRangePicker>
+                    </hxa-date-range-picker>
+                  </div>
+                  <div class="hx-list-action">
+                    <i class="icon icon-angle-right" (click)="toggleDateRangePicker(idx, $event)"></i>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </ng-container>
         </ng-container>
       </li>
       <li id="filterOptions" class="panes__item">

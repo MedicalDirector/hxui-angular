@@ -145,12 +145,12 @@ export class AppComponent {
         {
           name: 'Change Log (v11)',
           url:
-            'https://bitbucket.org/md-design/angular-hxui/src/master/CHANGELOG.md'
+            'https://github.com/MedicalDirector/hxui-angular/blob/master/projects/hx-ui/CHANGELOG.md'
         },
         {
           name: 'Change Log (v8)',
           url:
-            'https://bitbucket.org/md-design/angular-hxui/src/8.x/CHANGELOG.md'
+            'https://github.com/MedicalDirector/hxui-angular/blob/8.x/CHANGELOG.md'
         },
         {
           name: 'License',

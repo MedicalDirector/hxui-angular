@@ -173,7 +173,7 @@ export class TabularCode {
 
   exampleService = `
   import { Injectable } from '@angular/core';
-  import {Http} from '@angular/http';
+  import {Http} from '@angular/common/http';
   import {UserModel} from './user.model';
   import {Observable, of} from 'rxjs';
   import {catchError} from 'rxjs/operators';

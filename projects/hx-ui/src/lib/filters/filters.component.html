@@ -6,6 +6,7 @@
     (onFilter)="onCollapsedFilter($event)"
     (onBack)="onCollapsedFilterBack($event)"
     (onSearchFilter)="onCollapsedSearch($event)"
+    (onDateRangePickerFilter)="onCollapsedDateRangePicker($event)"
     [data]="data"
     *ngIf="collapsed"
   ></hxa-filters-collapsed>
@@ -163,6 +164,25 @@
             </button>
           </div>
         </div>
+      </div>
+
+      <!-- date range picker -->
+      <div 
+        [id]="filter?.id" 
+        class="hx-dropdown mx-1 expandedFilter" 
+        hxaDropdown 
+        [minWidthRelativeTo]="filter?.id + '-trigger'"  
+        *ngIf="filter?.type === FilterType.DateRange"
+      >
+        <hxa-date-range-picker
+          [dateFormat]="filter.dateRangePickerDisplayDateFormat"
+          [displayMode]="filter.dateRangePickerDisplayMode"
+          [intervalOptions]="getIntervalOptions(filter.options)"
+          (onDateRangeSelected)="onDateRangeFilterChange(filter, $event)"
+          [defaultDateRange]="filter.sourceValue"
+          [id]="filter?.id + '-dateRangePicker'"
+          #dateRangePicker
+        ></hxa-date-range-picker>
       </div>
     </ng-container>
   </ng-container>

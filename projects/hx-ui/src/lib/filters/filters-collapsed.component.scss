@@ -5,7 +5,7 @@
   }
 
   &.panes{
-    width:15rem;
+    width: 18rem;
     overflow:hidden;
 
     .panes__inner{
@@ -16,8 +16,8 @@
     }
 
     .panes__item{
-      min-width:15rem;
-      max-width:15rem;
+      min-width: 18rem;
+      max-width: 18rem;
 
       > ul {
         max-height: 20rem;
@@ -42,3 +42,53 @@
     }
   }
 }
+
+::ng-deep .hx-list-content.dateRangePicker {
+  display: flex !important;
+
+  hxa-date-range-picker {
+    display:flex !important;
+    flex: 1  !important;
+    > div.hx-dropdown {
+      display: flex !important;
+      flex:1 !important;
+
+      button {
+        display: flex !important;
+        flex:1 !important; 
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        border: none !important;
+        background: transparent !important;
+        padding-left: 4px !important;
+        padding-right: 0 !important;
+        -webkit-border-radius: 0px !important;
+        -moz-border-radius: 0px !important;
+        -ms-border-radius: 0px !important;
+        -o-border-radius: 0px !important;
+        border-radius: 0px !important;
+        outline: none !important;
+        border: none !important;
+        text-align: left !important;
+    
+        .is-text-weight-light {
+          font-weight: 500 !important;
+        }
+      }
+    
+      button:active {
+        border: none !important;
+        box-shadow: none !important;
+        border-style: none !important;
+        outline: none !important;
+      }
+
+      button:focus {
+        border: none !important;
+        box-shadow: none !important;
+        border-style: none !important;
+        outline: none !important;
+      }
+    }
+  }
+} 

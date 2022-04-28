@@ -1,4 +1,5 @@
 import { FilterType } from "./filters-type.enum";
+import { DisplayMode } from "../date-range-picker/date-range-picker.component";
 
 export interface IFilterOption {
   label: string;
@@ -35,6 +36,11 @@ export interface IFiltersConfig {
   value?: string;
 
   /**
+   * The original value from corresponding source component
+   */
+  sourceValue?: any;
+
+  /**
    * Filter character limit for Search filter type
    * Fire filter event if character >= this value
    *  Defaults to 2
@@ -48,7 +54,18 @@ export interface IFiltersConfig {
   defaultIndex?: number[];
 
   /**
-   * Width in REM units for FilterType.Search.
+   * Display mode for type date range picker
+   */
+  dateRangePickerDisplayMode?: DisplayMode;
+
+  /**
+  * Display date format for type date range picker
+  */
+  dateRangePickerDisplayDateFormat?: string;
+
+  /**
+   * Width in REM for Search filter type.
+   * Defaults if not set
    */
   width?: number;
 

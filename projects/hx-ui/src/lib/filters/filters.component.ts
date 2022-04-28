@@ -1,4 +1,4 @@
-import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {FilterType} from './filters-type.enum';
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {FiltersModel} from './filters.model';
@@ -6,6 +6,8 @@ import * as _ from 'lodash';
 import {BehaviorSubject, from, Observable, pipe, Subject, Subscription} from 'rxjs/index';
 import {FiltersConfig} from './filters.config';
 import {debounceTime} from 'rxjs/internal/operators';
+import { DatePipe } from '@angular/common';
+import { DateRange } from '../date-range-picker/date-range-picker.component';
 
 @Component({
   selector: 'hxa-filters',
@@ -15,6 +17,7 @@ import {debounceTime} from 'rxjs/internal/operators';
 export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
 
   @ViewChild('carousel', { static: true }) private carousel: ElementRef;
+  @ViewChildren('dateRangePicker') dateRangePickers: QueryList<any>;
 
   FilterType = FilterType;
   data: FiltersModel[] = [];
@@ -48,7 +51,8 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   constructor(
-    private conf: FiltersConfig
+    private conf: FiltersConfig,
+    private datePipe: DatePipe
   ) {
     Object.assign(this, conf);
   }
@@ -73,6 +77,16 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     }
   }
 
+  getIntervalOptions(options: IFilterOption[]) {
+    let intervalOption: string[] = [];
+    if (options) {
+      for (let i = 0; i < options.length; i++) {
+        intervalOption.push(options[i].label);
+      }
+    }
+    return intervalOption;
+  }
+
   resetFilters(silent: boolean = false) {
     for (const filter of this.data) {
       if (filter.type === FilterType.SingleSelect || filter.type === FilterType.MultiSelect ) {
@@ -82,6 +96,8 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
         }
       } else if (filter.type === FilterType.Search) {
         this.clearSearch(filter, silent);
+      } else if (filter.type === FilterType.DateRange) {
+        this.setDefaultDate(filter);
       }
     }
   }
@@ -93,18 +109,25 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
       }
   }
 
+  setDefaultDate(filter: FiltersModel) {
+    filter.value = "";
+    filter.sourceValue = undefined;
+    if (!this._collapsed) {
+      for (let i = 0; i < this.dateRangePickers.toArray().length; i++) {
+        this.dateRangePickers.toArray()[i].resetDateRange();
+      }
+    }
+    this.onFilterOptionChanged$.next(filter);
+  }
 
   /**
    * Called when filter option is selected
    */
   onFilterOptionSelected(filter: FiltersModel, option: IFilterOption) {
-    switch (filter.type) {
-      case FilterType.SingleSelect:
-        filter.setSingleSelectOption(option);
-        break;
-      case FilterType.MultiSelect:
-        filter.setMultiSelectOptions(option);
-        break;
+    if (filter.type === FilterType.MultiSelect) {
+      filter.setMultiSelectOptions(option);
+    } else if (filter.type !== FilterType.Search) {
+      filter.setSingleSelectOption(option);
     }
     this.onFilterOptionChanged$.next(filter);
   }
@@ -118,12 +141,35 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     }
   }
 
+  /**
+   * Called when selection is made in the date range filter type
+   */
+  onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRange) {
+    let dateRangeValue =
+      this.datePipe.transform(
+        dateRange.fromDate,
+        filter.dateRangePickerDisplayDateFormat
+      ) +
+      " - " +
+      this.datePipe.transform(
+        dateRange.toDate,
+        filter.dateRangePickerDisplayDateFormat
+      );
+    filter.value = dateRangeValue;
+    filter.sourceValue = dateRange;
+    this.searchFilter$.next(filter);
+  }
+
   onCollapsedFilter($event) {
    this.onFilterOptionSelected($event.filter,  $event.option);
   }
 
   onCollapsedSearch($event) {
     this.onSearchFilterChange($event.filter);
+  }
+
+  onCollapsedDateRangePicker($event) {
+    this.onDateRangeFilterChange($event.filter, $event.dateRange);
   }
 
   onCollapsedFilterBack($event) {
