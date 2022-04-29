@@ -33,16 +33,28 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
   imports: [
-    DropdownModule.forRoot(), ModalModule.forRoot(), PaginationModule.forRoot(),
-    TabsModule.forRoot(), TooltipModule.forRoot(),
-    TypeaheadModule.forRoot(), TabularModule.forRoot(),
-    SelectizeModule.forRoot(), DatepickerModule.forRoot(),
+    DropdownModule.forRoot(), 
+    ModalModule.forRoot(),
+    PaginationModule.forRoot(),
+    TabsModule.forRoot(),
+    TooltipModule.forRoot(),
+    TypeaheadModule.forRoot(),
+    TabularModule.forRoot(),
+    SelectizeModule.forRoot(),
+    DatepickerModule.forRoot(),
     DateRangePickerModule.forRoot(),
-    AutoGrowModule.forRoot(), EmptyStateModule.forRoot(),
-    AccordionModule, FiltersModule.forRoot(), LoadersModule,
-    TextInputModule, NgxMaskModule.forRoot(mask_options),
-    DialogModule.forRoot(), InspectorModule.forRoot(),
-    LineClampModule, TimepickerModule,  ToastrModule.forRoot({
+    AutoGrowModule.forRoot(),
+    EmptyStateModule.forRoot(),
+    AccordionModule,
+    FiltersModule.forRoot(),
+    LoadersModule,
+    TextInputModule,
+    NgxMaskModule.forRoot(mask_options),
+    DialogModule.forRoot(),
+    InspectorModule.forRoot(),
+    LineClampModule,
+    TimepickerModule,
+    ToastrModule.forRoot({
       toastComponent: HxaToastrComponent,
       toastClass: 'hxa-toastr',
       iconClasses: {
@@ -54,13 +66,28 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     })
   ],
   exports: [
-    DatepickerModule, DateRangePickerModule, DropdownModule, ModalModule,
-    PaginationModule, TabsModule, TooltipModule,
-    TypeaheadModule, TabularModule, SelectizeModule,
-    AutoGrowModule, EmptyStateModule, AccordionModule,
-    FiltersModule, LoadersModule, TextInputModule,
-    NgxMaskModule, DialogModule, LineClampModule,
-    InspectorModule, TimepickerModule, HxaToastrModule
+    DatepickerModule, 
+    DateRangePickerModule,
+    DropdownModule,
+    ModalModule,
+    PaginationModule, 
+    TabsModule,
+    TooltipModule,
+    TypeaheadModule, 
+    TabularModule,
+    SelectizeModule,
+    AutoGrowModule, 
+    EmptyStateModule,
+    AccordionModule,
+    FiltersModule, 
+    LoadersModule,
+    TextInputModule,
+    NgxMaskModule, 
+    DialogModule,
+    LineClampModule,
+    InspectorModule, 
+    TimepickerModule,
+    HxaToastrModule
   ]
 })
 export class HxUiModule {

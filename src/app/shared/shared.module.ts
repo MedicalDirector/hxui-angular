@@ -5,50 +5,52 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from '../app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
-import {HighlightModule} from 'ngx-highlightjs';
+import {HighlightModule, HighlightOptions, HIGHLIGHT_OPTIONS} from 'ngx-highlightjs';
 import {HxUiModule} from '../../../projects/hx-ui/src/lib/hx-ui.module';
 import { NgSelectModule } from '@ng-select/ng-select'
 import {NgOptionHighlightModule} from "@ng-select/ng-option-highlight";
 import {NgxPageScrollCoreModule} from "ngx-page-scroll-core";
-import {ToastrModule} from "ngx-toastr";
 
+const modules = [
+  BrowserModule,
+  FormsModule,
+  ReactiveFormsModule,
+  HttpClientModule,
+  CommonModule,
+  AppRoutingModule,
+  BrowserAnimationsModule,
+  HxUiModule,
+  // TODO: replace this scroll with https://github.com/MurhafSousli/ngx-scrollbar
+  NgxPageScrollCoreModule,
+  HighlightModule,
+  NgSelectModule,
+  NgOptionHighlightModule,
+  HighlightModule,
+]
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    CommonModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HxUiModule,
-    NgxPageScrollCoreModule,
-    HighlightModule,
-    NgSelectModule,
-    NgOptionHighlightModule
-  ],
+  imports: modules,
   declarations: [],
-  exports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    CommonModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HxUiModule,
-    NgxPageScrollCoreModule,
-    HighlightModule,
-    NgSelectModule,
-    NgOptionHighlightModule
-  ]
+  exports: modules
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {
     return {
       ngModule: SharedModule,
-      providers: []
+      providers: [
+        {
+          provide: HIGHLIGHT_OPTIONS,
+          useValue: <HighlightOptions>{
+            coreLibraryLoader: () => import('highlight.js/lib/core'),
+            lineNumbersLoader: () => import('highlightjs-line-numbers.js'),
+            languages: {
+              typescript: () => import('highlight.js/lib/languages/typescript'),
+              css: () => import('highlight.js/lib/languages/css'),
+              xml: () => import('highlight.js/lib/languages/xml')
+            }
+          }
+        }
+      ]
     };
   }
 }
