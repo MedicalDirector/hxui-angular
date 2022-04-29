@@ -19,7 +19,7 @@ export class FiltersCode {
 
   exampleTypescriptV11 = `
   import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-  import {Subscription} from 'rxjs/index';
+  import {Subscription} from 'rxjs';
   import {IFiltersConfig, FilterType, FiltersComponent as HxFiltersComponent, FiltersModel } from '@hxui/angular';
 
   @Component({
@@ -296,7 +296,7 @@ export class FiltersCode {
 
   exampleTypescriptV8 = `
   import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-  import {Subscription} from 'rxjs/index';
+  import {Subscription} from 'rxjs';
   import {IFiltersConfig, FilterType, FiltersComponent as HxFiltersComponent, FiltersModel } from '@hxui/angular';
 
   @Component({

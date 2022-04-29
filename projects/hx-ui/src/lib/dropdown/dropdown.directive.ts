@@ -22,7 +22,7 @@ import {
 import { takeUntil } from 'rxjs/operators';
 import { DropdownConfig } from './dropdown.config';
 import { DropdownMenuDirective } from './dropdown-menu.directive';
-import { Subject } from 'rxjs/index';
+import { Subject } from 'rxjs';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
   FlexibleConnectedPositionStrategy,

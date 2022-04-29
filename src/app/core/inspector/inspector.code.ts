@@ -56,7 +56,7 @@ export class InspectorCode {
   import {AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
   import {InspectorOverlayRef} from '@hxui/angular';
   import {InspectorSize} from '@hxui/angular';
-  import {Subscription} from 'rxjs/index';
+  import {Subscription} from 'rxjs';
   import {InspectorService} from '@hxui/angular';
 
   @Component({

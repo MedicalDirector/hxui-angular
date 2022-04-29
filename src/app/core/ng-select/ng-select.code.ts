@@ -38,7 +38,7 @@ export class NgSelectCode {
 
   simpleExampleTypescript = `
   import {Component, Inject, OnInit} from '@angular/core';
-  import {Observable} from 'rxjs/index';
+  import {Observable} from 'rxjs';
   import {DataService} from './data.service';
 
   @Component({
@@ -122,7 +122,7 @@ export class NgSelectCode {
 
   multiExampleTypescript = `
   import {Component, Inject, OnInit} from '@angular/core';
-  import {Observable} from 'rxjs/index';
+  import {Observable} from 'rxjs';
   import {DataService} from './data.service';
 
   @Component({
@@ -450,7 +450,7 @@ export class NgSelectCode {
 
   customExampleTypescript = `
   import {Component, Inject, OnInit} from '@angular/core';
-  import {Observable} from 'rxjs/index';
+  import {Observable} from 'rxjs';
   import {DataService} from './data.service';
 
   @Component({

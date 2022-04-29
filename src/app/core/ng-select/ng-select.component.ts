@@ -4,7 +4,7 @@ import { PageScrollService } from 'ngx-page-scroll-core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
 import { NgSelectCode } from './ng-select.code';
-import { Observable, Subject } from 'rxjs/index';
+import { Observable, Subject } from 'rxjs';
 import { DataService } from './data.service';
 import {
   FormBuilder,

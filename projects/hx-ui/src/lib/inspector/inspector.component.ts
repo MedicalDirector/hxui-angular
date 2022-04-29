@@ -15,7 +15,7 @@ import {
   transition
 } from '@angular/animations';
 import { ComponentPortal, DomPortalOutlet} from '@angular/cdk/portal';
-import {Subject} from 'rxjs/index';
+import {Subject} from 'rxjs';
 import {InspectorSize} from './inspector-size.enum';
 import {InspectorLocation} from "./inspector-location.enum";
 

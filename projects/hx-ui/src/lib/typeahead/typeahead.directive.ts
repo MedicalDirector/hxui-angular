@@ -8,14 +8,13 @@ import { TypeaheadContainerComponent } from './typeahead-container.component';
 import { getValueFromObject, latinize, tokenize } from './typeahead-utils';
 
 import {Observable, from, Subject} from 'rxjs';
-import { debounceTime, mergeMap, filter, toArray } from 'rxjs/operators';
+import { debounceTime, mergeMap, filter, toArray, take, takeUntil } from 'rxjs/operators';
 import { TypeaheadMatch } from './typeahead-match.class';
 import {
   FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, OverlayConnectionPosition,
   Overlay, OverlayRef, VerticalConnectionPos
 } from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
-import {take, takeUntil} from 'rxjs/internal/operators';
 
 @Directive({selector: '[hxaTypeahead]', exportAs: 'hx-typeahead'})
 export class TypeaheadDirective implements OnInit, OnDestroy {

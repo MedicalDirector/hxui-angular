@@ -33,7 +33,7 @@ import {
   VerticalConnectionPos
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Subject } from 'rxjs/index';
+import { Subject } from 'rxjs';
 import { DatepickerComponent } from './datepicker.component';
 import { take, takeUntil } from 'rxjs/operators';
 import { Directionality } from '@angular/cdk/bidi';

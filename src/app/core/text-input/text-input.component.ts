@@ -3,7 +3,6 @@ import {TextInputCode} from './text-input.code';
 import { PageScrollService } from 'ngx-page-scroll-core';
 import {DOCUMENT} from '@angular/common';
 import {CoreBaseComponent} from '../core-base.component';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({

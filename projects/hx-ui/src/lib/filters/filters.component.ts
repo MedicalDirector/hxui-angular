@@ -3,9 +3,9 @@ import {FilterType} from './filters-type.enum';
 import {IFilterOption, IFiltersConfig} from './filters-config.interface';
 import {FiltersModel} from './filters.model';
 import * as _ from 'lodash';
-import {BehaviorSubject, from, Observable, pipe, Subject, Subscription} from 'rxjs/index';
+import {BehaviorSubject, from, Observable, pipe, Subject, Subscription} from 'rxjs';
 import {FiltersConfig} from './filters.config';
-import {debounceTime} from 'rxjs/internal/operators';
+import {debounceTime} from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import { DateRange } from '../date-range-picker/date-range-picker.component';
 
