@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedModule } from 'app/shared/shared.module';
 import { ExampleFilterOldComponent } from './example-filter-old.component';
 
 describe('ExampleFilterOldComponent', () => {
@@ -8,7 +9,9 @@ describe('ExampleFilterOldComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExampleFilterOldComponent ]
+      declarations: [ExampleFilterOldComponent],
+      imports: [SharedModule],
+      providers: [DatePipe]
     })
     .compileComponents();
   });

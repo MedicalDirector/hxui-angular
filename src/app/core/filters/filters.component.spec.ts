@@ -1,7 +1,10 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FiltersComponent } from './filters.component';
-import { AppModule } from '../../app.module';
+import { SharedModule } from 'app/shared/shared.module';
+import { ExampleFilterOldComponent } from './examples/example-filter-old.component';
+import { ExampleFilterNewComponent } from './examples/example-filter-new.component';
+import { DatePipe } from '@angular/common';
 
 describe('FiltersComponent', () => {
   let component: FiltersComponent;
@@ -10,7 +13,13 @@ describe('FiltersComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [AppModule]
+        declarations: [
+          FiltersComponent,
+          ExampleFilterNewComponent,
+          ExampleFilterOldComponent
+        ],
+        imports: [SharedModule],
+        providers: [DatePipe]
       }).compileComponents();
     })
   );

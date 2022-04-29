@@ -1,15 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AutoGrowComponent } from './auto-grow.component';
-import {AppModule} from '../../app.module';
+import { SharedModule } from 'app/shared/shared.module';
 
 describe('AutoGrowComponent', () => {
   let component: AutoGrowComponent;
   let fixture: ComponentFixture<AutoGrowComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ AppModule ]
+      declarations: [AutoGrowComponent],
+      imports: [SharedModule]
     })
     .compileComponents();
   }));
