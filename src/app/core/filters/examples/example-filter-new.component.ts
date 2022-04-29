@@ -139,48 +139,48 @@ export class ExampleFilterNewComponent implements OnInit, OnDestroy {
         },
         {
           label: "Mr GP, Brian",
-          value: 4,
+          value: 5,
           selected: false
         },
         {
           label: "Mr GP, Simon",
-          value: 4,
+          value: 6,
           selected: false
         },
         {
           label: "Mr GP, Peter",
-          value: 4,
+          value: 7,
           selected: false
         },
         {
           label: "Mr GP, Matthew",
-          value: 4,
+          value: 8,
           selected: false
         },
         {
           label: "Mr GP, Jane",
-          value: 4,
+          value: 9,
           selected: false
         },
         {
           label: "Mr GP, Susan",
-          value: 4,
+          value: 10,
           selected: false
         },
         {
           label: "Mr GP, Brendan",
-          value: 4,
+          value: 11,
           selected: false
         },
         {
           label: "Mr GP, Laura",
-          value: 4,
+          value: 12,
           selected: false
         },
         {
           label:
             "Dr Sigmundsson-Higgenbotham Smythe King AB Junior III, Max Samuel Smithers Terrance Howard Allisonn Henry",
-          value: 4,
+          value: 13,
           selected: false
         }
       ]
@@ -222,6 +222,17 @@ export class ExampleFilterNewComponent implements OnInit, OnDestroy {
         }
       ],
       defaultIndex: [1, 2, 3, 4]
+    },
+    {
+      id: "dateRangeFilter",
+      type: FilterType.DateRange,
+      label: "Date Range",
+      dateRangePickerDisplayMode: 2,
+      options: [],
+      sourceValue: {
+        fromDate: new Date('2022-01-01'),
+        toDate: new Date('2022-01-30'),
+      }
     },
     {
       id: "searchFilter",

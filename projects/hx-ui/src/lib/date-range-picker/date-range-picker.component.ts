@@ -64,6 +64,14 @@ export class DateRangePickerComponent implements OnInit {
    */
   @Input() dateFormat: string = 'dd/MM/yyyy';
 
+  @Input() defaultDateRange: DateRange = {
+    fromDate:new Date(), 
+    toDate:new Date()
+  };
+
+  /** Specifies whether caret down icon is displayed to right of input */
+  @Input() showCaretDown: boolean = true;
+
   /**
    * Emits a Date Range Object containing fromDate and toDate
    * selected from the DateRangePicker.
@@ -91,11 +99,28 @@ export class DateRangePickerComponent implements OnInit {
   intervalList: IntervalItem[];
 
   ngOnInit() {
-    this._displayRange = this.datePipe.transform(new Date(), this.dateFormat);
+    this.setInitialDateRange();
     this.showTab = this.displayMode === DisplayMode.showTab;
     this.showIntervalOnly = this.displayMode === DisplayMode.showIntervalOnly;
     this.showCustomOnly = this.displayMode === DisplayMode.showCustomOnly;
     this.generateIntervalOptionItems(this.intervalOptions || []);
+  }
+
+  setInitialDateRange() {
+    this.defaultDateRange = this.defaultDateRange || {
+      fromDate: new Date(), 
+      toDate: new Date()
+    };
+    this.dateFormat = this.dateFormat || 'dd/MM/yyyy';
+    this.fromDate = this.defaultDateRange.fromDate;
+    this.toDate = this.defaultDateRange.toDate;
+    this._displayRange = this.createDateRange();
+  }
+
+  resetDateRange() {
+    this.fromDate = new Date();
+    this.toDate = new Date();
+    this._displayRange = this.createDateRange();
   }
 
   generateIntervalOptionItems(itemList: string[]) {
@@ -108,6 +133,10 @@ export class DateRangePickerComponent implements OnInit {
     if (closeDropdown) {
       this.dropdown.hide();
     }
+  }
+
+  toggle() {
+    this.dropdown.toggle();
   }
 
   onCustomDateSelection(newCustomDate: Date[]) {

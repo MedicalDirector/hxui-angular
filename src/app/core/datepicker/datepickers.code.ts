@@ -13,7 +13,7 @@ export class DatepickersCode {
   <form [formGroup]="basicForm">
     <hxa-datepicker-input
       name="datepicker_basic"
-      align="bottom"
+      placement="bottom"
       [defaultToPresentDate]="false"
       formControlName="dayte_basic"
       (onDateChange)="onDateChangedBasic($event)"
@@ -58,7 +58,7 @@ export class DatepickersCode {
   <form [formGroup]="intervalForm">
     <hxa-datepicker-input
       name="datepicker"
-      align="bottom"
+      placement="bottom"
       [interval]="true"
       formControlName="dayte"
       [allowPreviousDates]="true"
