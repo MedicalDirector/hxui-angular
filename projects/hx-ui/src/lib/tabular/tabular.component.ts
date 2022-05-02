@@ -16,7 +16,7 @@ import { IWithTooltip } from './tabular-tooltip.interface';
 import { TabularContentService } from './tabular-content.service';
 import {TabularTheme} from './tabular-theme.enum';
 import {CdkScrollable, ScrollDispatcher} from '@angular/cdk/scrolling';
-import {BehaviorSubject, Subscription} from 'rxjs/index';
+import {BehaviorSubject, Subscription} from 'rxjs';
 
 @Component({
   selector: 'hxa-tabular',

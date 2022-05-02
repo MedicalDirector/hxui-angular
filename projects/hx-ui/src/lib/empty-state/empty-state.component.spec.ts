@@ -1,11 +1,9 @@
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EmptyStateComponent } from './empty-state.component';
 import {EmptyStateConfig} from './empty-state.config';
 import {IEmptyStateAction} from './empty-state-action.interface';
-import {DebugElement} from '@angular/core';
-import {By} from '@angular/platform-browser';
 
 describe('EmptyStateComponent', () => {
   let component: EmptyStateComponent;
@@ -13,7 +11,7 @@ describe('EmptyStateComponent', () => {
   const mockService = {mockCallback : () => {}};
   let callbackSpy;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ EmptyStateComponent ],
       providers: [EmptyStateConfig]

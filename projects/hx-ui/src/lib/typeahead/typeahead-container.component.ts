@@ -4,7 +4,7 @@ import {
 import { TypeaheadDirective } from './typeahead.directive';
 import { TypeaheadMatch } from './typeahead-match.class';
 import { latinize } from './typeahead-utils';
-import {Observable, Subject} from 'rxjs/index';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'hx-typeahead-container',

@@ -6,7 +6,7 @@ import {
 } from "@angular/core";
 import { InspectorOverlayRef } from "../../../../../projects/hx-ui/src/lib/inspector/inspector-overlay.ref";
 import { InspectorSize } from "../../../../../projects/hx-ui/src/lib/inspector/inspector-size.enum";
-import { Subscription } from "rxjs/index";
+import { Subscription } from "rxjs";
 import { InspectorService } from "../../../../../projects/hx-ui/src/lib/inspector/inspector.service";
 
 @Component({

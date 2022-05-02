@@ -3,6 +3,7 @@
   "version": "11.2.0",
   "license": "MIT",
   "private": false,
+  "author": "Design @ MD <design@medicaldirector.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/MedicalDirector/hxui-angular.git"

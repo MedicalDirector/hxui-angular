@@ -1,14 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedModule } from 'app/shared/shared.module';
 import { InspectorComponent } from './inspector.component';
 
 describe('InspectorComponent', () => {
   let component: InspectorComponent;
   let fixture: ComponentFixture<InspectorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ InspectorComponent ]
+      declarations: [InspectorComponent],
+      imports: [SharedModule]
     })
     .compileComponents();
   }));

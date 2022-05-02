@@ -138,7 +138,7 @@
         }
       }
     },
-    "HxUi": {
+    "hxui": {
       "root": "projects/hx-ui",
       "sourceRoot": "projects/hx-ui/src",
       "projectType": "library",

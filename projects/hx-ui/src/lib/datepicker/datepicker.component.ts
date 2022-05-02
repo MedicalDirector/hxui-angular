@@ -7,7 +7,7 @@ import {
   OnInit,
   SimpleChanges
 } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs/index';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Visibility } from '../enums';
 import { DatepickerConfig } from './datepicker.config';
 import { DatepickerViewModeEnum } from './datepicker-view-mode-enum';

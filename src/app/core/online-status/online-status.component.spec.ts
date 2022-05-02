@@ -1,14 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedModule } from 'app/shared/shared.module';
 import { OnlineStatusComponent } from './online-status.component';
 
 describe('OnlineStatusComponent', () => {
   let component: OnlineStatusComponent;
   let fixture: ComponentFixture<OnlineStatusComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OnlineStatusComponent ]
+      declarations: [OnlineStatusComponent],
+      imports: [SharedModule],
     })
     .compileComponents();
   }));

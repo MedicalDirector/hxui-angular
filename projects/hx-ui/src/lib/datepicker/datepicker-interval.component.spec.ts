@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DatepickerIntervalComponent } from './datepicker-interval.component';
 import { DatepickerFormComponent } from './datepicker-form.component';
@@ -13,7 +13,7 @@ import {DatepickerConfig} from './datepicker.config';
 //   let fixture: ComponentFixture<DatepickerIntervalComponent>;
 //   let formComponent: DatepickerFormComponent;
 //
-//   beforeEach(async(() => {
+//   beforeEach(waitForAsync(() => {
 //     TestBed.configureTestingModule({
 //       imports: [ FormsModule, TabsModule ],
 //       declarations: [ DatepickerFormComponent, DatepickerComponent, DatepickerIntervalComponent ],

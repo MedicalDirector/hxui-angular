@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from '../../../../../src/app/app.module';
 import { AccordionComponent } from './accordion.component';
 import { AccordionContainerComponent } from './accordion.container.component';
@@ -9,7 +9,7 @@ describe('AccordionComponent', () => {
   let component: AccordionComponent;
   let fixture: ComponentFixture<AccordionComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [  ],
       declarations: [

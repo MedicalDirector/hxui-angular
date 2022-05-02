@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { Subscription } from "rxjs/index";
+import { Subscription } from "rxjs";
 import { IFiltersConfig } from "../../../../../projects/hx-ui/src/lib/filters/filters-config.interface";
 import { FilterType } from "../../../../../projects/hx-ui/src/lib/filters/filters-type.enum";
 import { FiltersModel } from "../../../../../projects/hx-ui/src/lib/filters/filters.model";

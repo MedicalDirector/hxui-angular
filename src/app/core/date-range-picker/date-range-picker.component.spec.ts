@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedModule } from 'app/shared/shared.module';
 import { DateRangePickerComponent } from './date-range-picker.component';
 
 describe('DateRangePickerComponent', () => {
@@ -9,7 +10,9 @@ describe('DateRangePickerComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [DateRangePickerComponent]
+        declarations: [DateRangePickerComponent],
+        imports: [SharedModule],
+        providers: [DatePipe]
       }).compileComponents();
     })
   );

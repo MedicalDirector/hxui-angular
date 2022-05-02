@@ -1,34 +1,42 @@
-## [11.2.0](https://www.npmjs.com/package/@hxui/angular/v/11.2.0) (2022-04-29)
+# Changelog
+All notable changes to this project will be documented in this file.
 
-### Enhancement
-* **Filters:** Add support for date range
-* **Date Range Picker:** Add support for conditional rendering of caret and placeholder; and default dates
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### Bugfix
-* **Date Picker:** Fix touched state issue
+## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.0...HEAD)
 
-## [11.1.1](https://www.npmjs.com/package/@hxui/angular/v/11.1.1) (2022-03-15)
+## [11.2.0](https://github.com/MedicalDirector/hxui-angular/compare/v11.1.1...v11.2.0) - 2022-04-29
 
-### Bugfix
-* **date-range-picker:** Prevent selection of date range where date is null or from later than to
+### Added
+- [Filters] Add support for date range ([30d17dd](https://github.com/MedicalDirector/hxui-angular/commit/30d17dd76eea1da2c7c9e11b4839c7f44447ee0f))
+- [Date Range Picker] Add support for conditional rendering of caret and placeholder; and default dates ([7dc5507](https://github.com/MedicalDirector/hxui-angular/commit/7dc5507a030b2520046462f40a856ed890b5cf2e))
 
-## [11.1.0](https://www.npmjs.com/package/@hxui/angular/v/11.1.0) (2022-03-08)
+### Fixed
+- [Date picker] Fix touched state issue ([556383a](https://github.com/MedicalDirector/hxui-angular/commit/556383a83938cf7df32f13cd16012b456319c6bf))
 
-### Enhancement
-* **Tabular:** Add support to replace column labels with html
+## [11.1.1](https://github.com/MedicalDirector/hxui-angular/compare/v11.1.0...v11.1.1) - 2022-03-15
 
-### Bugfix
-* **Inspector:** Fix issue with hasClose param and left-anchored styling
+### Fixed
+- [Date range picker] Prevent selection of date range where date is null or from later than to ([b8a9b12](https://github.com/MedicalDirector/hxui-angular/commit/b8a9b12c52ad8f4f4f335b942fc025ccb78a5f7d))
 
-## [11.0.21](https://www.npmjs.com/package/@hxui/angular/v/11.0.21) (2021-11-24)
+## [11.1.0](https://github.com/MedicalDirector/hxui-angular/compare/v11.0.21...v11.1.0) - 2022-03-08
 
-### Enhancement
-* **Inspector:** add event on backdrop click (onBackDropClick$)
+### Added
+- [Tabular] Add support to replace column labels with html
 
-## [11.0.20](https://www.npmjs.com/package/@hxui/angular/v/11.0.20) (2021-11-17)
+### Fixed
+- [Inspector] Fix issue with hasClose param and left-anchored styling
 
-### Enhancement
-* **Inspector:** add config to disable backdrop click
+## [11.0.21](https://github.com/MedicalDirector/hxui-angular/compare/v11.0.20...v11.0.21) - 2021-11-24
+
+### Added
+- [Inspector] Add event on backdrop click (onBackDropClick$)
+
+## [11.0.20](https://github.com/MedicalDirector/hxui-angular/compare/v11.0.19...v11.0.20) - 2021-11-17
+
+### Added
+- [Inspector] Add config to disable backdrop click
 
 ## [11.0.16, 11.0.17, 11.0.18, 11.0.19](https://www.npmjs.com/package/@hxui/angular/v/11.0.16) (2021-09-26)
 

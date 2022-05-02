@@ -1,14 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AccordionComponent } from './accordion.component';
-import {AppModule} from '../../app.module';
+import { SharedModule } from 'app/shared/shared.module';
 
 describe('AccordionComponent', () => {
   let component: AccordionComponent;
   let fixture: ComponentFixture<AccordionComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ AppModule ]
+      declarations: [AccordionComponent],
+      imports: [SharedModule]
     })
     .compileComponents();
   }));

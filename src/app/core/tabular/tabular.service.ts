@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {UserModel} from './user.model';
 import {Observable, of} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/internal/operators';
 
 @Injectable()
 export class TabularService {

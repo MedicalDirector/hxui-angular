@@ -1,4 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedModule } from 'app/shared/shared.module';
 
 import { LineClampComponent } from './line-clamp.component';
 
@@ -6,9 +7,10 @@ describe('LineClampComponent', () => {
   let component: LineClampComponent;
   let fixture: ComponentFixture<LineClampComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ LineClampComponent ]
+      declarations: [LineClampComponent],
+      imports: [SharedModule]
     })
     .compileComponents();
   }));

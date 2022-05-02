@@ -1,6 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DatepickersComponent } from './datepickers.component';
-import { AppModule } from '../../app.module';
+import { SharedModule } from 'app/shared/shared.module';
 
 describe('DatepickersComponent', () => {
   let component: DatepickersComponent;
@@ -9,7 +9,8 @@ describe('DatepickersComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [AppModule]
+        declarations: [DatepickersComponent],
+        imports: [SharedModule]
       }).compileComponents();
     })
   );
