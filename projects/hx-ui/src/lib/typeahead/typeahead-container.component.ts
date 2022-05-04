@@ -1,47 +1,69 @@
 import {
-  Component, ElementRef, TemplateRef, ViewEncapsulation, HostListener, ChangeDetectorRef
+  Component,
+  ElementRef,
+  TemplateRef,
+  ViewEncapsulation,
+  HostListener,
+  ChangeDetectorRef
 } from '@angular/core';
 import { TypeaheadDirective } from './typeahead.directive';
 import { TypeaheadMatch } from './typeahead-match.class';
 import { latinize } from './typeahead-utils';
-import {Observable, Subject} from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'hx-typeahead-container',
-  // tslint:disable-next-line
+  // eslint-disable-next-line
   template: `
-<!-- inject options list template -->
-<ng-template [ngTemplateOutlet]="optionsListTemplate || optionListTemplate"
-  [ngTemplateOutletContext]="{matches:matches, itemTemplate:itemTemplate, query:query}"></ng-template>
+    <!-- inject options list template -->
+    <ng-template
+      [ngTemplateOutlet]="optionsListTemplate || optionListTemplate"
+      [ngTemplateOutletContext]="{
+        matches: matches,
+        itemTemplate: itemTemplate,
+        query: query
+      }"
+    ></ng-template>
 
-<!-- default options item template -->
-<ng-template #hxItemTemplate let-match="match" let-query="query"><span [innerHtml]="hightlight(match, query)"></span></ng-template>
+    <!-- default options item template -->
+    <ng-template #hxItemTemplate let-match="match" let-query="query"
+      ><span [innerHtml]="hightlight(match, query)"></span
+    ></ng-template>
 
-<!-- options list template -->
-<ng-template #optionListTemplate >
-<ng-template ngFor let-match let-i="index" [ngForOf]="matches">
-   <h6 *ngIf="match.isHeader()" class="hx-dropdown-header">{{match}}</h6>
-   
-   <ng-template [ngIf]="!match.isHeader()">
-      <a href="#"
-        class="hx-dropdown-item"
-        (click)="selectMatch(match, $event)"
-        (mouseenter)="selectActive(match)"
-        [class.active]="isActive(match)">
-          <ng-template [ngTemplateOutlet]="itemTemplate || hxItemTemplate" 
-            [ngTemplateOutletContext]="{item:match.item, index:i, match:match, query:query}"></ng-template>
-      </a>
-  </ng-template>
-</ng-template>
-</ng-template>
-`,
-  // tslint:disable
+    <!-- options list template -->
+    <ng-template #optionListTemplate>
+      <ng-template ngFor let-match let-i="index" [ngForOf]="matches">
+        <h6 *ngIf="match.isHeader()" class="hx-dropdown-header">{{ match }}</h6>
+
+        <ng-template [ngIf]="!match.isHeader()">
+          <a
+            href="#"
+            class="hx-dropdown-item"
+            (click)="selectMatch(match, $event)"
+            (mouseenter)="selectActive(match)"
+            [class.active]="isActive(match)"
+          >
+            <ng-template
+              [ngTemplateOutlet]="itemTemplate || hxItemTemplate"
+              [ngTemplateOutletContext]="{
+                item: match.item,
+                index: i,
+                match: match,
+                query: query
+              }"
+            ></ng-template>
+          </a>
+        </ng-template>
+      </ng-template>
+    </ng-template>
+  `,
+  /* eslint-disable */
   host: {
-    "class": "hx-dropdown-menu"
+    class: 'hx-dropdown-menu'
   },
   // tslint: enable
   encapsulation: ViewEncapsulation.None,
-  styles:[
+  styles: [
     'strong.is-matched { background-color: rgba(35, 49, 43, .23) }',
     '.hx-dropdown-item { font-weight: 300 }'
   ]
@@ -54,7 +76,6 @@ export class TypeaheadContainerComponent {
   public left: string;
   public display: string;
   public placement: string;
-
 
   protected _active: TypeaheadMatch;
   protected _matches: TypeaheadMatch[] = [];
@@ -70,8 +91,8 @@ export class TypeaheadContainerComponent {
 
   public constructor(
     private element: ElementRef,
-    private _changeDetectionRef: ChangeDetectorRef) {
-  }
+    private _changeDetectionRef: ChangeDetectorRef
+  ) {}
 
   public get active(): TypeaheadMatch {
     return this._active;
@@ -106,20 +127,17 @@ export class TypeaheadContainerComponent {
 
   public prevActiveMatch(): void {
     let index = this.matches.indexOf(this._active);
-    this._active = this.matches[index - 1 < 0
-      ? this.matches.length - 1
-      : index - 1];
+    this._active =
+      this.matches[index - 1 < 0 ? this.matches.length - 1 : index - 1];
     if (this._active.isHeader()) {
       this.prevActiveMatch();
     }
-
   }
 
   public nextActiveMatch(): void {
     let index = this.matches.indexOf(this._active);
-    this._active = this.matches[index + 1 > this.matches.length - 1
-      ? 0
-      : index + 1];
+    this._active =
+      this.matches[index + 1 > this.matches.length - 1 ? 0 : index + 1];
     if (this._active.isHeader()) {
       this.nextActiveMatch();
     }
@@ -132,9 +150,9 @@ export class TypeaheadContainerComponent {
 
   public hightlight(match: TypeaheadMatch, query: any): string {
     let itemStr: string = match.value;
-    let itemStrHelper: string = (this.parent && this.parent.typeaheadLatinize
-      ? latinize(itemStr)
-      : itemStr).toLowerCase();
+    let itemStrHelper: string = (
+      this.parent && this.parent.typeaheadLatinize ? latinize(itemStr) : itemStr
+    ).toLowerCase();
     let startIdx: number;
     let tokenLen: number;
     // Replaces the capture string with the same string inside of a "strong" tag
@@ -145,8 +163,18 @@ export class TypeaheadContainerComponent {
         startIdx = itemStrHelper.indexOf(query[i]);
         tokenLen = query[i].length;
         if (startIdx >= 0 && tokenLen > 0) {
-          itemStr = itemStr.substring(0, startIdx) + '<strong class="is-matched">' + itemStr.substring(startIdx, startIdx + tokenLen) + '</strong>' + itemStr.substring(startIdx + tokenLen);
-          itemStrHelper = itemStrHelper.substring(0, startIdx) + '        ' + ' '.repeat(tokenLen) + '         ' + itemStrHelper.substring(startIdx + tokenLen);
+          itemStr =
+            itemStr.substring(0, startIdx) +
+            '<strong class="is-matched">' +
+            itemStr.substring(startIdx, startIdx + tokenLen) +
+            '</strong>' +
+            itemStr.substring(startIdx + tokenLen);
+          itemStrHelper =
+            itemStrHelper.substring(0, startIdx) +
+            '        ' +
+            ' '.repeat(tokenLen) +
+            '         ' +
+            itemStrHelper.substring(startIdx + tokenLen);
         }
       }
     } else if (query) {
@@ -154,7 +182,12 @@ export class TypeaheadContainerComponent {
       startIdx = itemStrHelper.indexOf(query);
       tokenLen = query.length;
       if (startIdx >= 0 && tokenLen > 0) {
-        itemStr = itemStr.substring(0, startIdx) + '<strong  class="is-matched">' + itemStr.substring(startIdx, startIdx + tokenLen) + '</strong>' + itemStr.substring(startIdx + tokenLen);
+        itemStr =
+          itemStr.substring(0, startIdx) +
+          '<strong  class="is-matched">' +
+          itemStr.substring(startIdx, startIdx + tokenLen) +
+          '</strong>' +
+          itemStr.substring(startIdx + tokenLen);
       }
     }
     return itemStr;
@@ -176,9 +209,7 @@ export class TypeaheadContainerComponent {
       e.preventDefault();
     }
     this.parent.changeModel(value);
-    setTimeout(() =>
-      this.parent.typeaheadOnSelect.emit(value), 0
-    );
+    setTimeout(() => this.parent.typeaheadOnSelect.emit(value), 0);
     return false;
   }
 
@@ -206,7 +237,7 @@ export class TypeaheadContainerComponent {
     }
 
     this._hideTimeoutId = window.setTimeout(() => {
-     // this.visibility = Visibility.Hidden;
+      // this.visibility = Visibility.Hidden;
       this._onHide.next();
     }, delay);
   }
