@@ -1,10 +1,12 @@
-/*tslint:disable:no-invalid-this */
+/* eslint-disable no-invalid-this */
 export function OnChange(defaultValue?: any): any {
   const sufix = 'Change';
   return function OnChangeHandler(target: any, propertyKey: string): void {
     const _key = ` __${propertyKey}Value`;
     Object.defineProperty(target, propertyKey, {
-      get(): any { return this[_key]; },
+      get(): any {
+        return this[_key];
+      },
       set(value: any): void {
         const prevValue = this[_key];
         this[_key] = value;
@@ -15,4 +17,4 @@ export function OnChange(defaultValue?: any): any {
     });
   };
 }
-/* tslint:enable */
+/* eslint-enable */

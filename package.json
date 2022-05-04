@@ -23,7 +23,8 @@
     "build:hxui": "ng build hxui --prod",
     "test:hxui": "ng test hxui --code-coverage=true --watch=false",
     "test:hxui:headless": "ng test hxui --code-coverage=true --watch=false --browsers=ChromeHeadless",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@angular/animations": "^11.2.14",
@@ -60,6 +61,11 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1102.19",
+    "@angular-eslint/builder": "4.3.1",
+    "@angular-eslint/eslint-plugin": "4.3.1",
+    "@angular-eslint/eslint-plugin-template": "4.3.1",
+    "@angular-eslint/schematics": "4.3.1",
+    "@angular-eslint/template-parser": "4.3.1",
     "@angular/cli": "^11.2.19",
     "@angular/compiler-cli": "^11.2.14",
     "@angular/localize": "^11.2.14",
@@ -69,7 +75,11 @@
     "@types/jquery": "^3.5.14",
     "@types/lodash": "^4.14.182",
     "@types/node": "^12.20.50",
-    "codelyzer": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "4.16.1",
+    "@typescript-eslint/parser": "4.16.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^7.0.0",
     "jasmine-core": "^3.99.1",
     "jasmine-spec-reporter": "^5.0.0",
     "karma": "^6.3.19",
@@ -78,12 +88,25 @@
     "karma-coverage": "^2.2.0",
     "karma-jasmine": "^4.0.2",
     "karma-jasmine-html-reporter": "^1.7.0",
+    "lint-staged": "^12.4.1",
     "mini-css-extract-plugin": "^1.6.2",
     "ng-packagr": "^11.2.4",
+    "prettier": "^2.6.2",
     "protractor": "^7.0.0",
     "ts-node": "~8.4.1",
-    "tslint": "^6.1.3",
     "typescript": "^4.0.8",
     "webpack": "^4.46.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,html}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ],
+    "*.{css,scss}": [
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
   }
 }

@@ -2,14 +2,24 @@
 // todo: merge events onShow, onShown, etc...
 // todo: add global positioning configuration?
 import {
-  NgZone, ViewContainerRef, ComponentFactoryResolver, Injector, Renderer2,
-  ElementRef, ComponentRef, ComponentFactory, Type, TemplateRef, EventEmitter,
-  Provider, ReflectiveInjector
+  ComponentFactory,
+  ComponentFactoryResolver,
+  ComponentRef,
+  ElementRef,
+  EventEmitter,
+  Injector,
+  NgZone,
+  Provider,
+  ReflectiveInjector,
+  Renderer2,
+  TemplateRef,
+  Type,
+  ViewContainerRef
 } from '@angular/core';
-import { ContentRef } from './content-ref.class';
+import { PositioningOptions } from '../positioning/positioning.options';
 import { PositioningService } from '../positioning/positioning.service';
 import { listenToTriggers } from '../utils/triggers';
-import {PositioningOptions} from '../positioning/positioning.options';
+import { ContentRef } from './content-ref.class';
 
 export interface ListenOptions {
   target?: ElementRef;
@@ -40,11 +50,12 @@ export class ComponentLoader<T> {
   private _componentFactoryResolver: ComponentFactoryResolver;
   private _posService: PositioningService;
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   private _unregisterListenersFn: Function;
 
   public get isShown(): boolean {
     return !!this._componentRef;
-  };
+  }
 
   /**
    * Placement of a component. Accepts: "top", "bottom", "left", "right"
@@ -75,11 +86,16 @@ export class ComponentLoader<T> {
    * @param _ngZone
    * @param _posService
    */
-  // tslint:disable-next-line
-  public constructor(_viewContainerRef: ViewContainerRef, _renderer: Renderer2,
-                     _elementRef: ElementRef,
-                     _injector: Injector, _componentFactoryResolver: ComponentFactoryResolver,
-                     _ngZone: NgZone, _posService: PositioningService) {
+  // eslint-disable-next-line
+  public constructor(
+    _viewContainerRef: ViewContainerRef,
+    _renderer: Renderer2,
+    _elementRef: ElementRef,
+    _injector: Injector,
+    _componentFactoryResolver: ComponentFactoryResolver,
+    _ngZone: NgZone,
+    _posService: PositioningService
+  ) {
     this._ngZone = _ngZone;
     this._injector = _injector;
     this._renderer = _renderer;
@@ -90,8 +106,8 @@ export class ComponentLoader<T> {
   }
 
   public attach(compType: Type<T>): ComponentLoader<T> {
-    this._componentFactory = this._componentFactoryResolver
-      .resolveComponentFactory<T>(compType);
+    this._componentFactory =
+      this._componentFactoryResolver.resolveComponentFactory<T>(compType);
     return this;
   }
 
@@ -103,7 +119,7 @@ export class ComponentLoader<T> {
 
   public position(opts?: PositioningOptions): ComponentLoader<T> {
     this.attachment = opts.attachment || this.attachment;
-    this._elementRef = opts.target as ElementRef || this._elementRef;
+    this._elementRef = (opts.target as ElementRef) || this._elementRef;
     return this;
   }
 
@@ -112,21 +128,31 @@ export class ComponentLoader<T> {
     return this;
   }
 
-  public show(opts: {content?: string | TemplateRef<any>, [key: string]: any} = {}): ComponentRef<T> {
+  public show(
+    opts: { content?: string | TemplateRef<any>; [key: string]: any } = {}
+  ): ComponentRef<T> {
     this._subscribePositioning();
 
     if (!this._componentRef) {
       this.onBeforeShow.emit();
       this._contentRef = this._getContentRef(opts.content);
-      const injector = ReflectiveInjector.resolveAndCreate(this._providers, this._injector);
-      this._componentRef = this._viewContainerRef
-        .createComponent(this._componentFactory, 0, injector, this._contentRef.nodes);
+      const injector = ReflectiveInjector.resolveAndCreate(
+        this._providers,
+        this._injector
+      );
+      this._componentRef = this._viewContainerRef.createComponent(
+        this._componentFactory,
+        0,
+        injector,
+        this._contentRef.nodes
+      );
       this.instance = this._componentRef.instance;
 
       Object.assign(this._componentRef.instance, opts);
 
       if (this.container === 'body' && typeof document !== 'undefined') {
-        document.querySelector(this.container as string)
+        document
+          .querySelector(this.container as string)
           .appendChild(this._componentRef.location.nativeElement);
       }
 
@@ -143,11 +169,15 @@ export class ComponentLoader<T> {
   public hide(): ComponentLoader<T> {
     if (this._componentRef) {
       this.onBeforeHide.emit(this._componentRef.instance);
-      this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._componentRef.hostView));
+      this._viewContainerRef.remove(
+        this._viewContainerRef.indexOf(this._componentRef.hostView)
+      );
       this._componentRef = null;
 
       if (this._contentRef.viewRef) {
-        this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._contentRef.viewRef));
+        this._viewContainerRef.remove(
+          this._viewContainerRef.indexOf(this._contentRef.viewRef)
+        );
         this._contentRef = null;
       }
 
@@ -184,9 +214,9 @@ export class ComponentLoader<T> {
     listenOpts.target = listenOpts.target || this._elementRef;
     listenOpts.show = listenOpts.show || (() => this.show());
     listenOpts.hide = listenOpts.hide || (() => this.hide());
-    listenOpts.toggle = listenOpts.toggle || (() => this.isShown
-        ? listenOpts.hide()
-        : listenOpts.show());
+    listenOpts.toggle =
+      listenOpts.toggle ||
+      (() => (this.isShown ? listenOpts.hide() : listenOpts.show()));
 
     this._unregisterListenersFn = listenToTriggers(
       this._renderer,
@@ -194,7 +224,8 @@ export class ComponentLoader<T> {
       this.triggers,
       listenOpts.show,
       listenOpts.hide,
-      listenOpts.toggle);
+      listenOpts.toggle
+    );
 
     return this;
   }
@@ -204,18 +235,17 @@ export class ComponentLoader<T> {
       return;
     }
 
-    this._zoneSubscription = this._ngZone
-      .onStable.subscribe(() => {
-        if (!this._componentRef) {
-          return;
-        }
-        this._posService.position({
-          element: this._componentRef.location,
-          target: this._elementRef,
-          attachment: this.attachment,
-          appendToBody: this.container === 'body'
-        });
+    this._zoneSubscription = this._ngZone.onStable.subscribe(() => {
+      if (!this._componentRef) {
+        return;
+      }
+      this._posService.position({
+        element: this._componentRef.location,
+        target: this._elementRef,
+        attachment: this.attachment,
+        appendToBody: this.container === 'body'
       });
+    });
   }
 
   private _unsubscribePositioning(): void {
@@ -232,11 +262,11 @@ export class ComponentLoader<T> {
     }
 
     if (content instanceof TemplateRef) {
-      const viewRef = this._viewContainerRef
-        .createEmbeddedView<TemplateRef<T>>(content);
+      const viewRef =
+        this._viewContainerRef.createEmbeddedView<TemplateRef<T>>(content);
       return new ContentRef([viewRef.rootNodes], viewRef);
     }
 
-    return new ContentRef([[this._renderer.createText( `${content}`)]]);
+    return new ContentRef([[this._renderer.createText(`${content}`)]]);
   }
 }
