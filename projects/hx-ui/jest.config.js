@@ -11,5 +11,6 @@ module.exports = {
     'ts-jest': {
       tsconfig: '<rootDir>/projects/hx-ui/tsconfig.spec.json'
     }
-  }
+  },
+  coverageDirectory: '<rootDir>/coverage/hxui'
 };

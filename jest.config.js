@@ -8,5 +8,7 @@ module.exports = {
     'ts-jest': {
       tsconfig: '<rootDir>/src/tsconfig.spec.json'
     }
-  }
+  },
+  coverageReporters: ['html'],
+  coverageDirectory: '<rootDir>/coverage/docs'
 };

@@ -7,6 +7,10 @@
     "emitDecoratorMetadata": true,
     "allowJs": true
   },
-  "files": ["polyfills.ts"],
+  "files": [
+    "./polyfills.ts",
+    "../node_modules/jquery/dist/jquery.min.js",
+    "../node_modules/selectize/dist/js/standalone/selectize.js"
+  ],
   "include": ["**/*.spec.ts", "**/*.d.ts"]
 }

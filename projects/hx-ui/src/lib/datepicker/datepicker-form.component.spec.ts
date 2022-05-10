@@ -1,25 +1,22 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { OverlayModule } from '@angular/cdk/overlay';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NgxMaskModule } from 'ngx-mask';
 import { DatepickerFormComponent } from './datepicker-form.component';
 import { DatepickerModule } from './datepicker.module';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { NgxMaskModule } from 'ngx-mask';
 
 describe('DatepickerFormComponent', () => {
   let component: DatepickerFormComponent;
   let fixture: ComponentFixture<DatepickerFormComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          DatepickerModule.forRoot(),
-          OverlayModule,
-          NgxMaskModule.forRoot()
-        ]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        DatepickerModule.forRoot(),
+        OverlayModule,
+        NgxMaskModule.forRoot()
+      ]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DatepickerFormComponent);
@@ -71,7 +68,7 @@ describe('DatepickerFormComponent', () => {
 
   describe('onChange', () => {
     beforeEach(() => {
-      spyOn(component, 'setDate');
+      jest.spyOn(component, 'setDate');
     });
 
     it('should try to call setDate() if passed a valid date', () => {
@@ -148,8 +145,8 @@ describe('DatepickerFormComponent', () => {
 
     beforeEach(() => {
       date = new Date('11 Jan 1993');
-      spyOn(component.onDateChange, 'emit');
-      spyOn(component, 'propogateChange');
+      jest.spyOn(component.onDateChange, 'emit');
+      jest.spyOn(component, 'propogateChange');
     });
 
     it('should set component.date to the Date object passed to it and invoke onDateChange.emit() and propogateChange()', () => {
