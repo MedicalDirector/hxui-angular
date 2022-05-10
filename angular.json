@@ -26,9 +26,7 @@
                 "output": "/fonts"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/selectize/dist/js/standalone/selectize.js"
@@ -82,54 +80,13 @@
           "builder": "@angular-builders/jest:run",
           "options": {
             "tsConfig": "src/tsconfig.spec.json",
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/selectize/dist/js/standalone/selectize.js"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "assets": [
-              "src/assets",
-              "src/favicon.ico",
-              {
-                "glob": "**/*",
-                "input": "node_modules/@hxui/css/static/static/fonts",
-                "output": "/fonts"
-              }
-            ]
+            "configPath": "src/jest.config.js"
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
-    "docs-e2e": {
-      "root": "",
-      "sourceRoot": "",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "docs:serve"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }

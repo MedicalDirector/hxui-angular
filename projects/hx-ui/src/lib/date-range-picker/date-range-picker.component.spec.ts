@@ -140,10 +140,13 @@ describe('DateRangePickerComponent', () => {
 
     it('should update fromDate and toDate onIntervalSelection ', () => {
       const today: Date = new Date();
-      component.onIntervalSelection(mockIntervalSelection);
-      expect(component.fromDate).toEqual(
-        new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1)
+      const other: Date = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate() - 1
       );
+      component.onIntervalSelection(mockIntervalSelection);
+      expect(component.fromDate).toEqual(other);
       expect(component.toDate).toEqual(today);
     });
 

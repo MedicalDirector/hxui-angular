@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { AppModule } from '../../app.module';
+import { SharedModule } from '../../shared/shared.module';
 import { NgSelectComponent } from './ng-select.component';
 
 describe('NgSelectComponent', () => {
@@ -9,7 +9,7 @@ describe('NgSelectComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NgSelectComponent],
-      imports: [AppModule]
+      imports: [SharedModule]
     }).compileComponents();
   }));
 

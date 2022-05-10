@@ -1,14 +1,5 @@
 module.exports = {
-  moduleNameMapper: {
-    '@core/(.*)': '<rootDir>/src/app/core/$1'
-  },
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/src/tsconfig.spec.json'
-    }
-  },
-  coverageReporters: ['html'],
-  coverageDirectory: '<rootDir>/coverage/docs'
+  coverageReporters: ['html']
 };
