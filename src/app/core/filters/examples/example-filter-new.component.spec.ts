@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from 'app/shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { ExampleFilterNewComponent } from './example-filter-new.component';
 
 describe('ExampleFilterNewComponent', () => {
@@ -12,8 +12,7 @@ describe('ExampleFilterNewComponent', () => {
       declarations: [ExampleFilterNewComponent],
       imports: [SharedModule],
       providers: [DatePipe]
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

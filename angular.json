@@ -79,11 +79,8 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "src/test.ts",
-            "karmaConfig": "./karma.conf.js",
-            "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -157,11 +154,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "projects/hx-ui/src/test.ts",
-            "tsConfig": "projects/hx-ui/tsconfig.spec.json",
-            "karmaConfig": "projects/hx-ui/karma.conf.js"
+            "tsConfig": "projects/hx-ui/tsconfig.spec.json"
           }
         },
         "lint": {
