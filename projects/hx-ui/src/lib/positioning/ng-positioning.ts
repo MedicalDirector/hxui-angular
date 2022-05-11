@@ -5,11 +5,11 @@
 
 // previous version:
 // https://github.com/angular-ui/bootstrap/blob/07c31d0731f7cb068a1932b8e01d2312b796b4ec/src/position/position.js
-/* eslint-disable */
+
 export class Positioning {
-  public position(element: HTMLElement, round = true): ClientRect {
-    let elPosition: ClientRect;
-    let parentOffset: ClientRect = {
+  public position(element: HTMLElement, round = true): Record<string, number> {
+    let elPosition: Record<string, number>;
+    let parentOffset: Record<string, number> = {
       width: 0,
       height: 0,
       top: 0,
@@ -19,7 +19,8 @@ export class Positioning {
     };
 
     if (this.getStyle(element, 'position') === 'fixed') {
-      elPosition = element.getBoundingClientRect();
+      const tempPos = element.getBoundingClientRect() as unknown;
+      elPosition = tempPos as Record<string, number>;
     } else {
       const offsetParentEl = this.offsetParent(element);
 
@@ -48,14 +49,14 @@ export class Positioning {
     return elPosition;
   }
 
-  public offset(element: HTMLElement, round = true): ClientRect {
+  public offset(element: HTMLElement, round = true): Record<string, number> {
     const elBcr = element.getBoundingClientRect();
     const viewportOffset = {
       top: window.pageYOffset - document.documentElement.clientTop,
       left: window.pageXOffset - document.documentElement.clientLeft
     };
 
-    let elOffset = {
+    const elOffset = {
       height: elBcr.height || element.offsetHeight,
       width: elBcr.width || element.offsetWidth,
       top: elBcr.top + viewportOffset.top,
@@ -81,7 +82,7 @@ export class Positioning {
     targetElement: HTMLElement,
     placement: string,
     appendToBody?: boolean
-  ): ClientRect {
+  ): Record<string, number> {
     const hostElPosition = appendToBody
       ? this.offset(hostElement, false)
       : this.position(hostElement, false);
@@ -105,7 +106,7 @@ export class Positioning {
     const placementPrimary = placement.split(' ')[0] || 'top';
     const placementSecondary = placement.split(' ')[1] || 'center';
 
-    let targetElPosition: ClientRect = {
+    const targetElPosition: Record<string, number> = {
       height: targetElBCR.height || targetElement.offsetHeight,
       width: targetElBCR.width || targetElement.offsetWidth,
       top: 0,

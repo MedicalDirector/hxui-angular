@@ -40,7 +40,8 @@
             "style": "camelCase"
           }
         ],
-        "@typescript-eslint/consistent-type-definitions": "error"
+        "@typescript-eslint/consistent-type-definitions": "error",
+        "@angular-eslint/no-output-on-prefix": "warn"
       }
     },
     {

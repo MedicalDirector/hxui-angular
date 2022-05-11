@@ -20,7 +20,7 @@
     "docs:test": "ng test docs --coverage",
     "hxui:build": "ng build hxui --prod",
     "hxui:test": "ng test hxui --coverage",
-    "hxui:test:headless": "ng test hxui --watch",
+    "hxui:test:watch": "ng test hxui --watch",
     "postinstall": "ngcc",
     "prepare": "husky install",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
