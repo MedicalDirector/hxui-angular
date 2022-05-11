@@ -54,6 +54,8 @@ coverage
 npm-debug.log
 testem.log
 /typings
+documentation.json
+*.log
 
 # e2e
 /e2e/*.js
