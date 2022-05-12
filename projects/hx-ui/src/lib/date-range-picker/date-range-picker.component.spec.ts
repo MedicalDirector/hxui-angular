@@ -1,47 +1,43 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  DateRangePickerComponent,
-  DateSelectionType,
-  DateRange
-} from './date-range-picker.component';
-import { FormsModule } from '@angular/forms';
-import { TabsModule } from '../tabs/tabs.module';
-import { DatepickerModule } from '../datepicker/datepicker.module';
-import { DropdownModule } from '../dropdown/dropdown.module';
-import { DateRangePickerIntervalComponent } from './date-range-picker-interval/date-range-picker-interval.component';
-import { DateRangePickerCustomComponent } from './date-range-picker-custom/date-range-picker-custom.component';
-import { DatePipe } from '@angular/common';
-import { DateRangePickerConfig } from './date-range-picker.config';
 import { Overlay } from '@angular/cdk/overlay';
-import { DropdownStubDirective } from './dropdown-stub.component.spec';
-import { DropdownConfig } from '../dropdown/dropdown.config';
-import { IntervalItem } from './interval-option-model';
+import { DatePipe } from '@angular/common';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
+import { DatepickerModule } from '../datepicker/datepicker.module';
+import { DropdownConfig } from '../dropdown/dropdown.config';
+import { DropdownModule } from '../dropdown/dropdown.module';
+import { TabsModule } from '../tabs/tabs.module';
+import { DateRangePickerCustomComponent } from './date-range-picker-custom/date-range-picker-custom.component';
+import { DateRangePickerIntervalComponent } from './date-range-picker-interval/date-range-picker-interval.component';
+import {
+  DateRange,
+  DateRangePickerComponent,
+  DateSelectionType
+} from './date-range-picker.component';
+import { DateRangePickerConfig } from './date-range-picker.config';
+import { IntervalItem } from './interval-option-model';
 
 describe('DateRangePickerComponent', () => {
   let component: DateRangePickerComponent;
   let fixture: ComponentFixture<DateRangePickerComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [
-          FormsModule,
-          TabsModule,
-          DatepickerModule,
-          DropdownModule,
-          NgxMaskModule
-        ],
-        declarations: [
-          DateRangePickerComponent,
-          DateRangePickerIntervalComponent,
-          DateRangePickerCustomComponent,
-          DropdownStubDirective
-        ],
-        providers: [Overlay, DropdownConfig, DatePipe, DateRangePickerConfig]
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        FormsModule,
+        TabsModule,
+        DatepickerModule,
+        DropdownModule,
+        NgxMaskModule
+      ],
+      declarations: [
+        DateRangePickerComponent,
+        DateRangePickerIntervalComponent,
+        DateRangePickerCustomComponent
+      ],
+      providers: [Overlay, DropdownConfig, DatePipe, DateRangePickerConfig]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DateRangePickerComponent);
@@ -54,15 +50,15 @@ describe('DateRangePickerComponent', () => {
   });
 
   it('should call hide from dropdown directive', () => {
-    spyOn(component.dropdown, 'hide');
+    jest.spyOn(component.dropdown, 'hide');
     component.hide(true);
     expect(component.dropdown.hide).toHaveBeenCalled();
   });
 
   describe('OnInit', () => {
     it('should generate  IntervalOptionItems when intervalOptions is provided', () => {
-      spyOn(component, 'generateIntervalOptionItems');
-      let mockIntervalOptions = ['today', 'yesterday', 'tomorrow'];
+      jest.spyOn(component, 'generateIntervalOptionItems');
+      const mockIntervalOptions = ['today', 'yesterday', 'tomorrow'];
       component.intervalOptions = mockIntervalOptions;
       component.ngOnInit();
       fixture.detectChanges();
@@ -93,7 +89,7 @@ describe('DateRangePickerComponent', () => {
     });
 
     it('should emit onDateRangeSelected ', () => {
-      spyOn(component.onDateRangeSelected, 'emit');
+      jest.spyOn(component.onDateRangeSelected, 'emit');
       component.onCustomDateSelection(mockNewCustomDate);
       expect(component.onDateRangeSelected.emit).toHaveBeenCalledWith(<
         DateRange
@@ -105,7 +101,7 @@ describe('DateRangePickerComponent', () => {
 
     it('should not emit onDateRangeSelected if contains null element', () => {
       const dateNullEl: Date[] = [null, new Date('2019-05-29T00:00:00')];
-      spyOn(component.onDateRangeSelected, 'emit');
+      jest.spyOn(component.onDateRangeSelected, 'emit');
       component.onCustomDateSelection(dateNullEl);
       expect(component.onDateRangeSelected.emit).not.toHaveBeenCalledWith(<
         DateRange
@@ -120,7 +116,7 @@ describe('DateRangePickerComponent', () => {
         new Date('2019-05-31T00:00:00'),
         new Date('2019-05-29T00:00:00')
       ];
-      spyOn(component.onDateRangeSelected, 'emit');
+      jest.spyOn(component.onDateRangeSelected, 'emit');
       component.onCustomDateSelection(dateFromAfterTo);
       expect(component.onDateRangeSelected.emit).not.toHaveBeenCalledWith(<
         DateRange
@@ -144,10 +140,13 @@ describe('DateRangePickerComponent', () => {
 
     it('should update fromDate and toDate onIntervalSelection ', () => {
       const today: Date = new Date();
-      component.onIntervalSelection(mockIntervalSelection);
-      expect(component.fromDate).toEqual(
-        new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1)
+      const other: Date = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate() - 1
       );
+      component.onIntervalSelection(mockIntervalSelection);
+      expect(component.fromDate).toEqual(other);
       expect(component.toDate).toEqual(today);
     });
 
@@ -157,7 +156,7 @@ describe('DateRangePickerComponent', () => {
     });
 
     it('should emit onDateRangeSelected ', () => {
-      spyOn(component.onDateRangeSelected, 'emit');
+      jest.spyOn(component.onDateRangeSelected, 'emit');
       component.onIntervalSelection(mockIntervalSelection);
       expect(component.onDateRangeSelected.emit).toHaveBeenCalledWith(<
         DateRange
@@ -170,7 +169,7 @@ describe('DateRangePickerComponent', () => {
 
   describe('createDateRange', () => {
     const today: Date = new Date();
-    let datepipe = new DatePipe(`en-US`);
+    const datepipe = new DatePipe(`en-US`);
     beforeEach(() => {
       component.fromDate = today;
     });
@@ -186,11 +185,11 @@ describe('DateRangePickerComponent', () => {
         today.getMonth(),
         today.getDate() + 1
       );
-      let fromDateString = datepipe.transform(
+      const fromDateString = datepipe.transform(
         component.fromDate,
         component.dateFormat
       );
-      let toDateString = datepipe.transform(
+      const toDateString = datepipe.transform(
         component.toDate,
         component.dateFormat
       );

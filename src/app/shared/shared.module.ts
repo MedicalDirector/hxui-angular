@@ -1,15 +1,19 @@
-import {ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AppRoutingModule} from '../app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
-import {HighlightModule, HighlightOptions, HIGHLIGHT_OPTIONS} from 'ngx-highlightjs';
-import {HxUiModule} from '../../../projects/hx-ui/src/lib/hx-ui.module';
-import { NgSelectModule } from '@ng-select/ng-select'
-import {NgOptionHighlightModule} from "@ng-select/ng-option-highlight";
-import {NgxPageScrollCoreModule} from "ngx-page-scroll-core";
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
+import { NgSelectModule } from '@ng-select/ng-select';
+import {
+  HighlightModule,
+  HighlightOptions,
+  HIGHLIGHT_OPTIONS
+} from 'ngx-highlightjs';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { HxUiModule } from '../../../projects/hx-ui/src/lib/hx-ui.module';
+import { AppRoutingModule } from '../app-routing.module';
 
 const modules = [
   BrowserModule,
@@ -24,9 +28,8 @@ const modules = [
   NgxPageScrollCoreModule,
   HighlightModule,
   NgSelectModule,
-  NgOptionHighlightModule,
-  HighlightModule,
-]
+  NgOptionHighlightModule
+];
 
 @NgModule({
   imports: modules,

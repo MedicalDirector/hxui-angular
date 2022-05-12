@@ -1,52 +1,62 @@
+/* eslint-disable */
 import {
-  Input,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-  DoCheck,
-  forwardRef,
   Component,
-  ViewChild,
-  Output,
+  DoCheck,
   EventEmitter,
-  IterableDiffers,
-  IterableDiffer,
+  forwardRef,
+  Input,
   IterableChangeRecord,
   IterableChanges,
-  ViewEncapsulation,
+  IterableDiffer,
+  IterableDiffers,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
   Renderer2,
-  OnDestroy
+  SimpleChanges,
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
 import {
-  NG_VALUE_ACCESSOR,
   ControlValueAccessor,
-  FormControl
+  FormControl,
+  NG_VALUE_ACCESSOR
 } from '@angular/forms';
-
 import * as _ from 'lodash';
-import { SelectizeConfig } from './selectize.config';
-import {ISelectizeItem} from './selectize-item.interface';
 import './plugins/position-auto.plugin';
+import { ISelectizeItem } from './selectize-item.interface';
+import { SelectizeConfig } from './selectize.config';
 
 declare var $: any;
 
 @Component({
   selector: 'hxa-selectize',
-  template: `<div class="hx-input-control" [ngClass]="config?.inputControlClasses" [class.is-focused]="isFocused" [class.is-valid]="isValid">
-                  <select #selectizeInput></select>
-                  <label for="{{id}}" class="hx-label">{{config?.label}} <sup *ngIf="config?.mandatory">*</sup></label>
-                  <div class="hx-help">{{config?.help}}</div>
-              </div>`,
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => SelectizeComponent),
-    multi: true
-  }],
+  template: `<div
+    class="hx-input-control"
+    [ngClass]="config?.inputControlClasses"
+    [class.is-focused]="isFocused"
+    [class.is-valid]="isValid"
+  >
+    <select #selectizeInput></select>
+    <label for="{{ id }}" class="hx-label"
+      >{{ config?.label }} <sup *ngIf="config?.mandatory">*</sup></label
+    >
+    <div class="hx-help">{{ config?.help }}</div>
+  </div>`,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SelectizeComponent),
+      multi: true
+    }
+  ],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['selectize.component.scss']
 })
 export class SelectizeComponent
-  implements OnInit, OnChanges, DoCheck, ControlValueAccessor, OnDestroy {
+  implements OnInit, OnChanges, DoCheck, ControlValueAccessor, OnDestroy
+{
   private _options: any[];
   private _options_differ: IterableDiffer<any>;
   private _optgroups: any[];
@@ -187,7 +197,7 @@ export class SelectizeComponent
     this.onBlur.emit();
     this.evalHasError();
     this.isFocused = false;
-    this.isValid = (this.selectize.getValue().length > 0);
+    this.isValid = this.selectize.getValue().length > 0;
   }
 
   onFocusEvent() {
@@ -246,14 +256,12 @@ export class SelectizeComponent
   }
 
   focus() {
-    setTimeout(()=> {
+    setTimeout(() => {
       this.selectize.focus();
     });
   }
 
-
-  updateLabel() {
-  }
+  updateLabel() {}
 
   /**
    * Update the current placeholder based on the given input parameter.
@@ -276,7 +284,6 @@ export class SelectizeComponent
   onEnabledStatusChange(): void {
     this.enabled ? this.selectize.enable() : this.selectize.disable();
   }
-
 
   hasCaret() {
     if (this.config && this.config.hasCaret) {
@@ -338,7 +345,7 @@ export class SelectizeComponent
       e.stopImmediatePropagation();
       e.stopPropagation();
     }
-  }
+  };
 
   /**
    * Returns the applicable placeholder.
@@ -375,7 +382,11 @@ export class SelectizeComponent
     }
 
     const value = obj.map(v => {
-      if (!Object.keys(this.selectize.options).some(x => x === v[this.config.valueField])) {
+      if (
+        !Object.keys(this.selectize.options).some(
+          x => x === v[this.config.valueField]
+        )
+      ) {
         this.selectize.addOption(v);
       }
       return v[this.config.valueField];
@@ -383,7 +394,7 @@ export class SelectizeComponent
 
     this.selectize.setValue(value);
     this.evalHasError();
-    this.isValid = (this.selectize.getValue().length > 0);
+    this.isValid = this.selectize.getValue().length > 0;
   }
 
   /**
@@ -432,3 +443,5 @@ export class SelectizeComponent
     return this._optgroups;
   }
 }
+
+/* eslint-enable */

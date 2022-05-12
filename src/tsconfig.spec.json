@@ -2,20 +2,15 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/spec",
-    "types": [
-      "jasmine",
-      "node"
-    ],
-    "typeRoots": [
-      "../node_modules/@types"
-    ]
+    "types": ["node", "jest"],
+    "module": "commonjs",
+    "emitDecoratorMetadata": true,
+    "allowJs": true
   },
   "files": [
-    "test.ts",
-    "polyfills.ts"
+    "./polyfills.ts",
+    "../node_modules/jquery/dist/jquery.min.js",
+    "../node_modules/selectize/dist/js/standalone/selectize.js"
   ],
-  "include": [
-    "**/*.spec.ts",
-    "**/*.d.ts"
-  ]
+  "include": ["./**/*.spec.ts", "./**/*.d.ts"]
 }

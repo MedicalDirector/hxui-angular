@@ -1,6 +1,6 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { SharedModule } from '../../shared/shared.module';
 import { AutoGrowComponent } from './auto-grow.component';
-import { SharedModule } from 'app/shared/shared.module';
 
 describe('AutoGrowComponent', () => {
   let component: AutoGrowComponent;
@@ -10,8 +10,7 @@ describe('AutoGrowComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AutoGrowComponent],
       imports: [SharedModule]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {

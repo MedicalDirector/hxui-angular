@@ -1,6 +1,5 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from 'app/shared/shared.module';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { SharedModule } from '../../shared/shared.module';
 import { LineClampComponent } from './line-clamp.component';
 
 describe('LineClampComponent', () => {
@@ -11,8 +10,7 @@ describe('LineClampComponent', () => {
     TestBed.configureTestingModule({
       declarations: [LineClampComponent],
       imports: [SharedModule]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {

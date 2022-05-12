@@ -1,5 +1,5 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from 'app/shared/shared.module';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { SharedModule } from '../../shared/shared.module';
 import { InspectorComponent } from './inspector.component';
 
 describe('InspectorComponent', () => {
@@ -10,8 +10,7 @@ describe('InspectorComponent', () => {
     TestBed.configureTestingModule({
       declarations: [InspectorComponent],
       imports: [SharedModule]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
