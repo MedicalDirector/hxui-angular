@@ -20,6 +20,7 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:storybook/recommended",
         "prettier"
       ],
       "rules": {
@@ -39,7 +40,8 @@
             "style": "camelCase"
           }
         ],
-        "@typescript-eslint/consistent-type-definitions": "error"
+        "@typescript-eslint/consistent-type-definitions": "error",
+        "@angular-eslint/no-output-on-prefix": "warn"
       }
     },
     {

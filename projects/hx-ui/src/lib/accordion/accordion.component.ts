@@ -7,7 +7,8 @@ import { Component, Input } from '@angular/core';
       <ul class="hx-accordion" [ngClass]="cssClass">
         <ng-content></ng-content>
       </ul>
-    </div>`
+    </div>
+  `
 })
 export class AccordionComponent {
   @Input() cssClass?: string = null;
