@@ -48,6 +48,7 @@ coverage
 .eslintcache
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /libpeerconnection.log
