@@ -8,9 +8,10 @@ describe('NgSelectComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [NgSelectComponent],
-      imports: [SharedModule]
-    }).compileComponents();
+    declarations: [NgSelectComponent],
+    imports: [SharedModule],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

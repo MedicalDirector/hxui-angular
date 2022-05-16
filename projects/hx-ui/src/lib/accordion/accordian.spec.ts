@@ -17,8 +17,9 @@ describe('AccordionComponent', () => {
         AccordionComponent,
         AccordionContainerComponent,
         AccordionHeaderComponent,
-        AccordionBodyComponent
-      ]
+        AccordionBodyComponent,
+      ],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   }));
 

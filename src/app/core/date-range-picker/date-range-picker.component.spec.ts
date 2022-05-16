@@ -9,10 +9,11 @@ describe('DateRangePickerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DateRangePickerComponent],
-      imports: [SharedModule],
-      providers: [DatePipe]
-    }).compileComponents();
+    declarations: [DateRangePickerComponent],
+    imports: [SharedModule],
+    providers: [DatePipe],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

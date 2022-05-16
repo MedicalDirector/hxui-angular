@@ -9,7 +9,8 @@ describe('LoadersComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
-      declarations: [LoadersComponent]
+      declarations: [LoadersComponent],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   }));
 

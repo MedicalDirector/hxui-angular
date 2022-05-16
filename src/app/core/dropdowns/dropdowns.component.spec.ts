@@ -9,7 +9,8 @@ describe('DropdownsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
-      declarations: [DropdownsComponent]
+      declarations: [DropdownsComponent],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   }));
 

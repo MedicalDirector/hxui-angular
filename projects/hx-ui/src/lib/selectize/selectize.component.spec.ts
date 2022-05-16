@@ -12,9 +12,10 @@ xdescribe('SelectizeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule],
-      declarations: [SelectizeComponent]
-    }).compileComponents();
+    imports: [FormsModule],
+    declarations: [SelectizeComponent],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

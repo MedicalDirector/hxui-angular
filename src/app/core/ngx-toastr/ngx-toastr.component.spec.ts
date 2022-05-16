@@ -8,9 +8,10 @@ describe('NgSelectComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [NgxToastrComponent],
-      imports: [SharedModule]
-    }).compileComponents();
+    declarations: [NgxToastrComponent],
+    imports: [SharedModule],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {
