@@ -1,17 +1,19 @@
-$icons-path: "~@hxui/css/static/static/fonts/";
-@import "~@hxui/css/static/static/scss/hxui.scss";
+$icons-path: '~@hxui/css/static/static/fonts/';
+@import '~@hxui/css/static/static/scss/hxui.scss';
 
 /* Structural css needed for CDK to work correctly */
-@import "~@angular/cdk/overlay-prebuilt.css";
-@import "~@angular/cdk/a11y-prebuilt.css";
-@import "~@angular/cdk/text-field-prebuilt.css";
+@import '~@angular/cdk/overlay-prebuilt.css';
+@import '~@angular/cdk/a11y-prebuilt.css';
+@import '~@angular/cdk/text-field-prebuilt.css';
 
 /* Ng-Select */
-@import "../projects/ng-select/themes/hxui.theme.scss";
-@import "../projects/ng-select/themes/legacy.theme.scss";
+@import '../projects/ng-select/themes/hxui.theme.scss';
+@import '../projects/ng-select/themes/legacy.theme.scss';
 
 /* Ngx-toastr */
-@import "~ngx-toastr/toastr";
+@import '~ngx-toastr/toastr';
+
+@import '~highlight.js/styles/github-dark.css';
 
 .helixLogo {
   width: 2rem;
@@ -35,4 +37,4 @@ code.hljs {
   height: 100vh;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
