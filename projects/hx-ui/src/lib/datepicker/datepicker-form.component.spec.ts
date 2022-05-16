@@ -10,12 +10,13 @@ describe('DatepickerFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
+    imports: [
         DatepickerModule.forRoot(),
         OverlayModule,
         NgxMaskModule.forRoot()
-      ]
-    }).compileComponents();
+    ],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

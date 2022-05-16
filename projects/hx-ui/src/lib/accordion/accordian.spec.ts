@@ -10,14 +10,15 @@ describe('AccordionComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [],
-      declarations: [
+    imports: [],
+    declarations: [
         AccordionComponent,
         AccordionContainerComponent,
         AccordionHeaderComponent,
         AccordionBodyComponent
-      ]
-    }).compileComponents();
+    ],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

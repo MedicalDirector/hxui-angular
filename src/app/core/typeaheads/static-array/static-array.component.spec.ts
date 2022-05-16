@@ -8,8 +8,9 @@ describe('StaticArrayComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ StaticArrayComponent ]
-    })
+    declarations: [StaticArrayComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

@@ -2,13 +2,6 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../lib",
   "lib": {
-    "entryFile": "src/public_api.ts",
-    "umdModuleIds": {
-      "moment": "moment_",
-      "ngx-toastr": "ngxToastr",
-      "lodash": "_",
-      "ngx-mask": "ngxMask",
-      "array-sort-by": "sortBy"
-    }
+    "entryFile": "src/public_api.ts"
   }
 }

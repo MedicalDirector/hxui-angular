@@ -6,8 +6,9 @@ import {AppModule} from './app.module';
 xdescribe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ AppModule ]
-    }).compileComponents();
+    imports: [AppModule],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   it('should create the app', waitForAsync(() => {

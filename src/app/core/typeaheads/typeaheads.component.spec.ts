@@ -9,8 +9,9 @@ describe('TypeaheadsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ AppModule ]
-    })
+    imports: [AppModule],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

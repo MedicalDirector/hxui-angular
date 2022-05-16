@@ -9,9 +9,10 @@ describe('TextInputComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TextInputComponent ],
-      imports: [ AppModule ]
-    })
+    declarations: [TextInputComponent],
+    imports: [AppModule],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

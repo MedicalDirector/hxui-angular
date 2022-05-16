@@ -8,9 +8,10 @@ describe('DatepickersComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DatepickersComponent],
-      imports: [SharedModule]
-    }).compileComponents();
+    declarations: [DatepickersComponent],
+    imports: [SharedModule],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

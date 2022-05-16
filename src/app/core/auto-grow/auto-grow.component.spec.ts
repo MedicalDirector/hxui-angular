@@ -8,9 +8,10 @@ describe('AutoGrowComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [AutoGrowComponent],
-      imports: [SharedModule]
-    }).compileComponents();
+    declarations: [AutoGrowComponent],
+    imports: [SharedModule],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

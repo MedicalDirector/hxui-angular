@@ -5,7 +5,8 @@ import { DataService } from './data.service';
 describe('DataService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
-  }));
+    teardown: { destroyAfterEach: false }
+}));
 
   it('should be created', () => {
     const service: DataService = TestBed.inject(DataService);

@@ -6,8 +6,9 @@ import {AppModule} from '../../app.module';
 describe('TabularService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ AppModule ]
-    });
+    imports: [AppModule],
+    teardown: { destroyAfterEach: false }
+});
   });
 
   it('should ...', inject([TabularService], (service: TabularService) => {
