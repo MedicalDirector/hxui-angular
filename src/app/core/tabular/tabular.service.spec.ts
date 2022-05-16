@@ -6,7 +6,8 @@ describe('TabularService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [TabularService]
+      providers: [TabularService],
+      teardown: { destroyAfterEach: false },
     });
   });
 

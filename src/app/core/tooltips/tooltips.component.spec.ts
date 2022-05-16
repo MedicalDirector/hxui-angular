@@ -9,7 +9,8 @@ describe('TooltipsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
-      declarations: [TooltipsComponent]
+      declarations: [TooltipsComponent],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   }));
 

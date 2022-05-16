@@ -3,13 +3,6 @@
   "dest": "../../lib",
   "deleteDestPath": false,
   "lib": {
-    "entryFile": "src/public_api.ts",
-    "umdModuleIds": {
-      "moment": "moment_",
-      "ngx-toastr": "ngxToastr",
-      "lodash": "_",
-      "ngx-mask": "ngxMask",
-      "array-sort-by": "sortBy"
-    }
+    "entryFile": "src/public_api.ts"
   }
 }

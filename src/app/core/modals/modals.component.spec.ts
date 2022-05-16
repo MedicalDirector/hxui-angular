@@ -9,7 +9,8 @@ describe('ModalsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
-      declarations: [ModalsComponent]
+      declarations: [ModalsComponent],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   }));
 

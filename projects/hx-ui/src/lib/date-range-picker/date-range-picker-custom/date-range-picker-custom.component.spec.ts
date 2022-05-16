@@ -20,26 +20,27 @@ describe('DateRangePickerCustomComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
+    imports: [
         FormsModule,
         TabsModule,
         DatepickerModule,
         DropdownModule,
         NgxMaskModule.forRoot()
-      ],
-      declarations: [
+    ],
+    declarations: [
         DateRangePickerComponent,
         DateRangePickerIntervalComponent,
         DateRangePickerCustomComponent
-      ],
-      providers: [
+    ],
+    providers: [
         Overlay,
         DropdownConfig,
         DatePipe,
         DatepickerConfig,
         DateRangePickerConfig
-      ]
-    }).compileComponents();
+    ],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

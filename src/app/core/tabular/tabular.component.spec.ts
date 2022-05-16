@@ -15,11 +15,12 @@ describe('TabularComponent', () => {
       imports: [
         SharedModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService, {
-          dataEncapsulation: false
-        })
+          dataEncapsulation: false,
+        }),
       ],
       declarations: [TabularComponent],
-      providers: [TabularService, InMemoryDataService, DatePipe]
+      providers: [TabularService, InMemoryDataService, DatePipe],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   }));
 

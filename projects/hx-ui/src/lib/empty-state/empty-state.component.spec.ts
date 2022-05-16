@@ -12,9 +12,10 @@ describe('EmptyStateComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [EmptyStateComponent],
-      providers: [EmptyStateConfig]
-    }).compileComponents();
+    declarations: [EmptyStateComponent],
+    providers: [EmptyStateConfig],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

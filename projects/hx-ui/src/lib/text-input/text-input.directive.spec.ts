@@ -18,8 +18,9 @@ describe('TextInputDirective', () => {
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
-      declarations: [TextInputDirective, TestTextInputComponent]
-    })
+    declarations: [TextInputDirective, TestTextInputComponent],
+    teardown: { destroyAfterEach: false }
+})
     .createComponent(TestTextInputComponent);
     inputEl = fixture.debugElement.query(By.css('input'));
   });

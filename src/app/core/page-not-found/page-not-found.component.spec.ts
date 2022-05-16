@@ -9,7 +9,8 @@ describe('PageNotFoundComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
-      declarations: [PageNotFoundComponent]
+      declarations: [PageNotFoundComponent],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   }));
 

@@ -10,13 +10,14 @@ describe('FiltersComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
+    imports: [
         FiltersModule.forRoot(),
         NgxMaskModule.forRoot()
-      ],
-      declarations: [],
-      providers: [DatePipe]
-    })
+    ],
+    declarations: [],
+    providers: [DatePipe],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

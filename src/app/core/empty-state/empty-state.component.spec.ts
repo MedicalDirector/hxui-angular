@@ -9,7 +9,8 @@ describe('EmptyStateComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
-      declarations: [EmptyStateComponent]
+      declarations: [EmptyStateComponent],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   }));
 

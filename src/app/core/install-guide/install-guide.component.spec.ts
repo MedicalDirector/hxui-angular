@@ -9,7 +9,8 @@ describe('InstallGuideComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
-      declarations: [InstallGuideComponent]
+      declarations: [InstallGuideComponent],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   }));
 

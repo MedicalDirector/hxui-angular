@@ -9,10 +9,11 @@ describe('ExampleFilterNewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ExampleFilterNewComponent],
-      imports: [SharedModule],
-      providers: [DatePipe]
-    }).compileComponents();
+    declarations: [ExampleFilterNewComponent],
+    imports: [SharedModule],
+    providers: [DatePipe],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   });
 
   beforeEach(() => {
