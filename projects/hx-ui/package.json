@@ -33,7 +33,7 @@
     "lodash.clonedeep": "^4.5.0",
     "moment": "^2.29.0",
     "ngx-mask": "^13.0.0",
-    "rxjs": "^6.6.0",
+    "rxjs": "^7.4.0",
     "selectize": "^0.12.4",
     "ngx-toastr": "^14.0.0"
   }

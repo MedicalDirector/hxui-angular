@@ -1,4 +1,3 @@
-import { DatepickerIntervalComponent } from './datepicker-interval.component';
 import {
   ChangeDetectorRef,
   Component,
@@ -9,8 +8,9 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Visibility } from '../enums';
-import { DatepickerConfig } from './datepicker.config';
+import { DatepickerIntervalComponent } from './datepicker-interval.component';
 import { DatepickerViewModeEnum } from './datepicker-view-mode-enum';
+import { DatepickerConfig } from './datepicker.config';
 
 @Component({
   selector: 'hxa-datepicker',
@@ -22,11 +22,11 @@ export class DatepickerComponent implements OnInit, OnChanges {
     DatepickerViewModeEnum.Days
   );
   DatepickerViewModeEnum = DatepickerViewModeEnum;
-  public OpenDiv: Boolean = true;
-  public showCalendar: Boolean = true;
-  public tabname1: String;
-  public activeVariable: Boolean = true;
-  public activeVariable1: Boolean;
+  public OpenDiv = true;
+  public showCalendar = true;
+  public tabname1: string;
+  public activeVariable = true;
+  public activeVariable1: boolean;
 
   @Input()
   selectedDate: Date;
@@ -101,9 +101,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
       // Shifts the week to start from Monday, rather than Sunday, this causes the index to start at 1
       const dayOffset = date.getDay() === 0 ? 7 : date.getDay();
       this.days[i] = new Date(date.setDate(2 - dayOffset + i));
-      this.datePickerConfig.selectedDueDateConfiguration.selectedDueDate = this.days[
-        i
-      ];
+      this.datePickerConfig.selectedDueDateConfiguration.selectedDueDate =
+        this.days[i];
     }
   }
 
@@ -221,7 +220,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
     if (!this.isInvalidDay(date)) {
       this.selectedDate = date;
       this.onDateSelected(date);
-      this.datePickerConfig.selectedDueDateConfiguration.isSelectedFromInterval = false;
+      this.datePickerConfig.selectedDueDateConfiguration.isSelectedFromInterval =
+        false;
     }
   }
 
@@ -248,7 +248,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!!changes.selectedDate.currentValue) {
+    if (changes.selectedDate.currentValue) {
       this.viewDate = new Date(
         this.selectedDate.getFullYear(),
         this.selectedDate.getMonth()
@@ -313,7 +313,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
 
     this._hideTimeoutId = window.setTimeout(() => {
       this.visibility = Visibility.Hidden;
-      this._onHide.next();
+      this._onHide.next(true);
     }, delay);
   }
 
@@ -325,7 +325,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
   isVisible(): boolean {
     return this.visibility === Visibility.Visible;
   }
-  onTabSelect(tabname: String) {
+  onTabSelect(tabname: string): void {
     if (tabname === 'tab1') {
       this.datePickerConfig.tabSelected = tabname;
     } else {
