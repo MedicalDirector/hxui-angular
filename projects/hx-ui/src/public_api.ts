@@ -17,6 +17,7 @@ export * from './lib/date-range-picker/date-range-picker-custom/date-range-picke
 export * from './lib/date-range-picker/date-range-picker-interval/date-range-picker-interval.component';
 export * from './lib/date-range-picker/date-range-picker.component';
 export * from './lib/date-range-picker/date-range-picker.config';
+export * from './lib/date-range-picker/date-range-picker.model';
 export * from './lib/date-range-picker/date-range-picker.module';
 export * from './lib/date-range-picker/interval-option-model';
 export * from './lib/datepicker/datepicker-form.component';

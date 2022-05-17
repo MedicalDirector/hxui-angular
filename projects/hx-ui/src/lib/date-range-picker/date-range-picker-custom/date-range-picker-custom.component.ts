@@ -1,14 +1,14 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectorRef,
-  DoCheck
-} from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { DateSelectionType } from '../date-range-picker.component';
+import {
+  ChangeDetectorRef,
+  Component,
+  DoCheck,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
+import { DateSelectionType } from '../date-range-picker.model';
 
 @Component({
   selector: 'hxa-date-range-picker-custom',

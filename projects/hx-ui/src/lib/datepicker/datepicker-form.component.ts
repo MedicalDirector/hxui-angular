@@ -310,6 +310,7 @@ export class DatepickerFormComponent
     if (typeof inputDate === 'string') {
       // eslint-disable-next-line no-useless-escape
       const dateArray = (inputDate as string).split(/[.,\/ -]/);
+
       if (dateArray.length === 3 && dateArray[2].length !== 0) {
         const allowedFormats = [
           'DD/MM/YYYY',
