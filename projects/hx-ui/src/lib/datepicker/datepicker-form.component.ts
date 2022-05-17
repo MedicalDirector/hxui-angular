@@ -1,27 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  OnInit,
-  ElementRef,
-  EventEmitter,
-  forwardRef,
-  OnDestroy,
-  NgZone,
-  ComponentFactoryResolver,
-  ViewContainerRef,
-  Optional,
-  ViewChild,
-  DoCheck
-} from '@angular/core';
-import {
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  ControlValueAccessor,
-  Validator,
-  AbstractControl,
-  FormGroupDirective
-} from '@angular/forms';
+import { Directionality } from '@angular/cdk/bidi';
 import {
   FlexibleConnectedPositionStrategy,
   HorizontalConnectionPos,
@@ -33,14 +10,37 @@ import {
   VerticalConnectionPos
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Subject } from 'rxjs';
-import { DatepickerComponent } from './datepicker.component';
-import { take, takeUntil } from 'rxjs/operators';
-import { Directionality } from '@angular/cdk/bidi';
-import { DatepickerConfig } from './datepicker.config';
-import { DatepickerIntervalComponent } from './datepicker-interval.component';
-import { TextInputDirective } from '../text-input/text-input.directive';
+import {
+  Component,
+  ComponentFactoryResolver,
+  DoCheck,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Output,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormGroupDirective,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  Validator
+} from '@angular/forms';
 import * as moment_ from 'moment';
+import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { TextInputDirective } from '../text-input/text-input.directive';
+import { DatepickerIntervalComponent } from './datepicker-interval.component';
+import { DatepickerComponent } from './datepicker.component';
+import { DatepickerConfig } from './datepicker.config';
 const moment = moment_;
 
 @Component({
@@ -61,7 +61,8 @@ const moment = moment_;
   ]
 })
 export class DatepickerFormComponent
-  implements OnInit, ControlValueAccessor, Validator, OnDestroy, DoCheck {
+  implements OnInit, ControlValueAccessor, Validator, OnDestroy, DoCheck
+{
   @ViewChild(TextInputDirective, { static: true })
   datePickerFormInput: TextInputDirective;
   @ViewChild('datePickerForm', { static: true })
@@ -206,9 +207,8 @@ export class DatepickerFormComponent
     @Optional() private _dir: Directionality
   ) {
     // get input reference
-    this._elementHtmlCollection = this._elementRef.nativeElement.getElementsByTagName(
-      'input'
-    );
+    this._elementHtmlCollection =
+      this._elementRef.nativeElement.getElementsByTagName('input');
   }
 
   ngDoCheck(): void {
@@ -230,7 +230,7 @@ export class DatepickerFormComponent
       this._calendarInstance = null;
     }
 
-    this._destroyed.next();
+    this._destroyed.next(true);
     this._destroyed.complete();
   }
 
@@ -287,7 +287,7 @@ export class DatepickerFormComponent
 
     if (inputDate === '' || date === null) {
       this.setDate(null);
-    } else if (!!date) {
+    } else if (date) {
       this.setDate(date);
     } else {
       this.propogateChange(inputDate);
@@ -308,6 +308,7 @@ export class DatepickerFormComponent
 
   public parseDate(inputDate: string | Date): Date {
     if (typeof inputDate === 'string') {
+      // eslint-disable-next-line no-useless-escape
       const dateArray = (inputDate as string).split(/[.,\/ -]/);
       if (dateArray.length === 3 && dateArray[2].length !== 0) {
         const allowedFormats = [
