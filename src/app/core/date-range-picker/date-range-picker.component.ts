@@ -1,10 +1,10 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { DOCUMENT } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { PageScrollService } from 'ngx-page-scroll-core';
+import { DateRange } from '../../../../projects/hx-ui/src/lib/date-range-picker/date-range-picker.model';
 import { CoreBaseComponent } from '../core-base.component';
-import { DOCUMENT } from '@angular/common';
 import { DateRangePickersCode } from './date-range-picker.code';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { DateRange } from '../../../../projects/hx-ui/src/lib/date-range-picker/date-range-picker.component';
 
 @Component({
   selector: 'app-date-range-picker',

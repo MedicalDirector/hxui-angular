@@ -1,7 +1,7 @@
-import { IFilterOption, IFiltersConfig } from "./filters-config.interface";
-import { FilterType } from "./filters-type.enum";
-import { DisplayMode } from "../date-range-picker/date-range-picker.component";
-import * as _ from "lodash";
+import * as _ from 'lodash';
+import { DisplayMode } from '../date-range-picker/date-range-picker.model';
+import { IFilterOption, IFiltersConfig } from './filters-config.interface';
+import { FilterType } from './filters-type.enum';
 
 export class FiltersModel implements IFiltersConfig {
   id: string;
@@ -18,7 +18,7 @@ export class FiltersModel implements IFiltersConfig {
   defaultIndex = [0];
   charLimit = 2;
   dateRangePickerDisplayMode?: DisplayMode = DisplayMode.showCustomOnly;
-  dateRangePickerDisplayDateFormat?: string = "dd/MM/yyyy";
+  dateRangePickerDisplayDateFormat?: string = 'dd/MM/yyyy';
   width: number;
   disabled = false;
   hidden = false;
@@ -28,7 +28,7 @@ export class FiltersModel implements IFiltersConfig {
     indeterminate: false,
     none: true
   };
-  selectAllValue = "Select all";
+  selectAllValue = 'Select all';
 
   constructor(data?: IFiltersConfig) {
     Object.assign(this, data);
@@ -36,7 +36,7 @@ export class FiltersModel implements IFiltersConfig {
       this.addSelectAll();
       this.setMultiSelectOptions();
     } else if (this.type !== FilterType.Search) {
-      this.setSingleSelectOption()
+      this.setSingleSelectOption();
     }
     this.isIconised();
   }
@@ -46,7 +46,7 @@ export class FiltersModel implements IFiltersConfig {
    */
   addSelectAll() {
     this.options.unshift({
-      label: "Select all",
+      label: 'Select all',
       value: this.selectAllValue,
       selected: false
     });
@@ -172,18 +172,18 @@ export class FiltersModel implements IFiltersConfig {
       });
       return _.isEqual(selectedIndexes, this.defaultIndex);
     } else if (this.type === FilterType.Search) {
-      return this.value === "" || this.value === undefined;
+      return this.value === '' || this.value === undefined;
     } else if (this.type === FilterType.DateRange) {
-      return this.value === "" || this.value === undefined;
+      return this.value === '' || this.value === undefined;
     }
   }
 
   isIconised() {
     if (this.options) {
       const hasIcons = this.options.find(option => {
-        return typeof option.icon !== "undefined" && option.icon !== "";
+        return typeof option.icon !== 'undefined' && option.icon !== '';
       });
-      return typeof hasIcons !== "undefined";
+      return typeof hasIcons !== 'undefined';
     }
     return false;
   }
@@ -192,9 +192,9 @@ export class FiltersModel implements IFiltersConfig {
     if (this.selected.length === 1) {
       return this.selected[0].label;
     } else if (this.selected.length) {
-      return this.selected.length + " selected";
+      return this.selected.length + ' selected';
     } else {
-      return "All";
+      return 'All';
     }
   }
 }
