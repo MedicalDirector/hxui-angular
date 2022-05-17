@@ -1,31 +1,42 @@
 import {
+  ChangeDetectorRef,
   Component,
   Input,
-  ViewEncapsulation,
-  ChangeDetectorRef, TemplateRef
+  TemplateRef
 } from '@angular/core';
-import {Context, Visibility} from '../enums';
-import {Observable, Subject} from 'rxjs';
-import {TooltipDynamicContentDirective} from './tooltip-dynamic-content.directive';
+import { Observable, Subject } from 'rxjs';
+import { Context, Visibility } from '../enums';
+import { TooltipDynamicContentDirective } from './tooltip-dynamic-content.directive';
 
 @Component({
   selector: 'hx-tooltip-content, hxa-tooltip-content',
   template: `
-      <div class="hxui-reset">
-        <div class="hx-tooltip is-{{ placement }}"
-            [class.is-active]='visibility === visibilityEnum.Visible'
-            [class.is-success]="context === contextEnum.Success"
-            [class.is-warning]="context === contextEnum.Warning"
-            [class.is-danger]="context === contextEnum.Danger" 
-            [class.is-white]="context === contextEnum.White"
-            role="tooltip">
-            <div *ngIf="!dynamicContent" class="hx-tooltip-content" [innerHtml]="content" [style.max-width.px]="maxWidth"></div>
-            <div *ngIf="dynamicContent" class="hx-tooltip-content" [style.max-width.px]="maxWidth">
-              <ng-container [ngTemplateOutlet]="dynamicContent"></ng-container>
-            </div>
+    <div class="hxui-reset">
+      <div
+        class="hx-tooltip is-{{ placement }}"
+        [class.is-active]="visibility === visibilityEnum.Visible"
+        [class.is-success]="context === contextEnum.Success"
+        [class.is-warning]="context === contextEnum.Warning"
+        [class.is-danger]="context === contextEnum.Danger"
+        [class.is-white]="context === contextEnum.White"
+        role="tooltip"
+      >
+        <div
+          *ngIf="!dynamicContent"
+          class="hx-tooltip-content"
+          [innerHtml]="content"
+          [style.max-width.px]="maxWidth"
+        ></div>
+        <div
+          *ngIf="dynamicContent"
+          class="hx-tooltip-content"
+          [style.max-width.px]="maxWidth"
+        >
+          <ng-container [ngTemplateOutlet]="dynamicContent"></ng-container>
         </div>
       </div>
-`,
+    </div>
+  `,
   styles: [
     '.hxa-tooltip-panel { display:flex; position: absolute; pointer-events: auto; box-sizing: border-box; z-index: 1000; max-width: 100%; max-height: 100%;}',
     '.hx-tooltip.is-left, .hx-tooltip.is-left:before{ margin-right:.5rem; }',
@@ -35,7 +46,6 @@ import {TooltipDynamicContentDirective} from './tooltip-dynamic-content.directiv
   ]
 })
 export class TooltipContentComponent {
-
   @Input()
   content: string;
 
@@ -68,7 +78,6 @@ export class TooltipContentComponent {
 
   constructor(private _changeDetectionRef: ChangeDetectorRef) {}
 
-
   /**
    * Shows the tooltip
    * @param delay Amount of milliseconds to the delay showing the tooltip.
@@ -98,7 +107,7 @@ export class TooltipContentComponent {
 
     this._hideTimeoutId = window.setTimeout(() => {
       this.visibility = Visibility.Hidden;
-      this._onHide.next();
+      this._onHide.next(true);
     }, delay);
   }
 
@@ -110,5 +119,4 @@ export class TooltipContentComponent {
   isVisible(): boolean {
     return this.visibility === Visibility.Visible;
   }
-
 }
