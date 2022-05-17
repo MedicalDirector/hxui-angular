@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.1...HEAD)
+## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/13.0.0-next.0...next)
+
+<!-- ## [13.0.0-next.0](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.0) - 2022-05-17 -->
+
+### Breaking changes
+
+- Add support for Angular 13
+- Update @angular peer deps to >=13.0.0
+- Update @ng-select/ng-select peer dep to >=8.0.0
+- Update ngx-mask peer dep to >=13.0.0
+- Update rxjs peer dep to >=7.4.0
+- Update ngx-toastr peer dep to >=14.0.0
 
 ## [11.2.1](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.0...v11.2.1) - 2022-06-06
 
