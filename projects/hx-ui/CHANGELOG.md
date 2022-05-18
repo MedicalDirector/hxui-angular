@@ -5,10 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.0...HEAD)
+## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.1...HEAD)
+
+## [11.2.1](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.0...v11.2.1) - 2022-05-19
 
 ### Fixed
 
+- [Selectize] Fix delete icon styling for multi-select
 - [Positioning, Typeahead] Update deprecated types and add typings ([07a5072](https://github.com/MedicalDirector/hxui-angular/commit/07a5072ac69b4aecf34e333e2f0a9b69d8384080))
 
 ## [11.2.0](https://github.com/MedicalDirector/hxui-angular/compare/v11.1.1...v11.2.0) - 2022-04-29
