@@ -1,7 +1,6 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { SharedModule } from '../../shared/shared.module';
 import { TextInputComponent } from './text-input.component';
-import {AppModule} from '../../app.module';
 
 describe('TextInputComponent', () => {
   let component: TextInputComponent;
@@ -9,10 +8,9 @@ describe('TextInputComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TextInputComponent ],
-      imports: [ AppModule ]
-    })
-    .compileComponents();
+      imports: [SharedModule],
+      declarations: [TextInputComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

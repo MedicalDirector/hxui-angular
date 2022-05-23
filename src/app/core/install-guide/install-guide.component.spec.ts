@@ -1,7 +1,6 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { SharedModule } from '../../shared/shared.module';
 import { InstallGuideComponent } from './install-guide.component';
-import {AppModule} from '../../app.module';
 
 describe('InstallGuideComponent', () => {
   let component: InstallGuideComponent;
@@ -9,9 +8,9 @@ describe('InstallGuideComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ AppModule ]
-    })
-    .compileComponents();
+      imports: [SharedModule],
+      declarations: [InstallGuideComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

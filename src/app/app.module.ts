@@ -9,8 +9,8 @@ import { SharedModule } from './shared/shared.module';
 registerLocaleData(localeEn, 'en-AU');
 
 @NgModule({
-  declarations: [AppComponent],
   imports: [CoreModule.forRoot(), SharedModule.forRoot(), HxUiModule.forRoot()],
+  declarations: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
