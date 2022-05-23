@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { AccordionBodyComponent } from './accordion.body';
 import { AccordionComponent } from './accordion.component';
@@ -10,13 +11,13 @@ export default {
   component: AccordionComponent,
   decorators: [
     moduleMetadata({
+      imports: [CommonModule, BrowserAnimationsModule],
       declarations: [
         AccordionComponent,
         AccordionContainerComponent,
         AccordionHeaderComponent,
         AccordionBodyComponent
-      ],
-      imports: [CommonModule]
+      ]
     })
   ]
 } as Meta;
