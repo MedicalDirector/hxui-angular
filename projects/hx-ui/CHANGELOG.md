@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.1...HEAD)
 
-## [11.2.1](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.0...v11.2.1) - 2022-05-19
+<!-- ## [11.2.1](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.0...v11.2.1) - 2022-05-25 -->
 
 ### Fixed
 
