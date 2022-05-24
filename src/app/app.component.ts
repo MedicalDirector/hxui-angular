@@ -1,5 +1,5 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
-import { trigger, transition, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -74,6 +74,10 @@ export class AppComponent {
           link: '/tabular'
         },
         {
+          name: 'Timepicker',
+          link: '/time-picker'
+        },
+        {
           name: 'Tooltips',
           link: '/tooltips'
         },
@@ -144,13 +148,11 @@ export class AppComponent {
       items: [
         {
           name: 'Change Log (v11)',
-          url:
-            'https://github.com/MedicalDirector/hxui-angular/blob/master/projects/hx-ui/CHANGELOG.md'
+          url: 'https://github.com/MedicalDirector/hxui-angular/blob/master/projects/hx-ui/CHANGELOG.md'
         },
         {
           name: 'Change Log (v8)',
-          url:
-            'https://github.com/MedicalDirector/hxui-angular/blob/8.x/CHANGELOG.md'
+          url: 'https://github.com/MedicalDirector/hxui-angular/blob/8.x/CHANGELOG.md'
         },
         {
           name: 'License',

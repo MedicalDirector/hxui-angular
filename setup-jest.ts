@@ -1,4 +1,6 @@
+import '@angular/localize/init';
 import 'jest-preset-angular/setup-jest';
+
 /* eslint-disable no-var */
 declare var window: any;
 window.$ = require('jquery');
