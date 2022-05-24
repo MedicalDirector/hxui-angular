@@ -22,6 +22,7 @@ import { SelectizeComponent } from './core/selectize/selectize.component';
 import { TabsComponent } from './core/tabs/tabs.component';
 import { TabularComponent } from './core/tabular/tabular.component';
 import { TextInputComponent } from './core/text-input/text-input.component';
+import { TimepickerComponent } from './core/timepicker/timepicker.component';
 import { TooltipsComponent } from './core/tooltips/tooltips.component';
 import { TypeaheadsComponent } from './core/typeaheads/typeaheads.component';
 
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'install-guide', component: InstallGuideComponent },
   { path: 'accordion', component: AccordionComponent },
   { path: 'date-pickers', component: DatepickersComponent },
+  { path: 'time-picker', component: TimepickerComponent },
   { path: 'date-range-pickers', component: DateRangePickerComponent },
   { path: 'dropdowns', component: DropdownsComponent },
   { path: 'dialogs', component: DialogsComponent },
