@@ -8,6 +8,7 @@ describe('DateRangePickerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      // TODO: add shared module imports
       declarations: [ DateRangePickerComponent ]
     })
     .compileComponents();
