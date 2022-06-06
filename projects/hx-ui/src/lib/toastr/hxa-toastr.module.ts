@@ -1,19 +1,11 @@
-import {NgModule} from "@angular/core";
-import {HxaToastrComponent} from "./hxa-toastr.component";
-import {ToastrModule} from "ngx-toastr";
-import {CommonModule} from "@angular/common";
-import {BrowserModule} from "@angular/platform-browser";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ToastrModule } from 'ngx-toastr';
+import { HxaToastrComponent } from './hxa-toastr.component';
 
 @NgModule({
+  imports: [ToastrModule, CommonModule],
   declarations: [HxaToastrComponent],
-  exports: [HxaToastrComponent],
-  imports: [
-    ToastrModule,
-    CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule
-  ]
+  exports: [HxaToastrComponent]
 })
-export class HxaToastrModule {
-}
+export class HxaToastrModule {}

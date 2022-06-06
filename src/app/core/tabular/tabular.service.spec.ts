@@ -1,12 +1,12 @@
-import { TestBed, inject } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { inject, TestBed } from '@angular/core/testing';
 import { TabularService } from './tabular.service';
-import {AppModule} from '../../app.module';
 
 describe('TabularService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ AppModule ]
+      imports: [HttpClientTestingModule],
+      providers: [TabularService]
     });
   });
 

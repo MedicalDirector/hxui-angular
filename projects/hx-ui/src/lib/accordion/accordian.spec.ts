@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccordionBodyComponent } from './accordion.body';
 import { AccordionComponent } from './accordion.component';
 import { AccordionContainerComponent } from './accordion.container.component';
 import { AccordionHeaderComponent } from './accordion.header.component';
+import { AccordionModule } from './accordion.module';
 
 describe('AccordionComponent', () => {
   let component: AccordionComponent;
@@ -10,7 +12,7 @@ describe('AccordionComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [],
+      imports: [AccordionModule, BrowserAnimationsModule],
       declarations: [
         AccordionComponent,
         AccordionContainerComponent,
