@@ -147,11 +147,12 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px;
 	}
 
 	> * {
-		vertical-align: baseline;
-		display: -moz-inline-stack;
-		display: inline-block;
-		zoom: 1;
-		*display: inline;
+    &:not(.hx-badge) {
+      vertical-align: baseline;
+      display: -moz-inline-stack;
+      display: inline-block;
+      zoom: 1;
+    }
 	}
 	.selectize-control.multi & > div {
 		cursor: pointer;
