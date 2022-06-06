@@ -10,13 +10,13 @@ export class TimepickerCode {
 
   exampleTemplate = `
   <form [formGroup]="form">
-    <hxa-datepicker-input
+    <hxa-timepicker
       formControlName="time"
       [meridian]="true"
       size="medium"
       [spinners]="true"
       [seconds]="false"
-    ></hxa-datepicker-input>
+    ></hxa-timepicker>
   </form>
   <p>Form value object: <b>{{ form.get("time").value | json }}</b></p>
   `;

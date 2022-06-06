@@ -1,5 +1,6 @@
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
+import '@angular/localize/init';
 setCompodocJson(docJson);
 
 export const parameters = {
@@ -7,8 +8,8 @@ export const parameters = {
   controls: {
     matchers: {
       color: /(background|color)$/i,
-      date: /Date$/
-    }
+      date: /Date$/,
+    },
   },
-  docs: { inlineStories: true }
+  docs: { inlineStories: true },
 };
