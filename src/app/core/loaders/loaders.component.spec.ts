@@ -1,7 +1,6 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { SharedModule } from '../../shared/shared.module';
 import { LoadersComponent } from './loaders.component';
-import {AppModule} from '../../app.module';
 
 describe('LoadersComponent', () => {
   let component: LoadersComponent;
@@ -9,9 +8,9 @@ describe('LoadersComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ AppModule ]
-    })
-    .compileComponents();
+      imports: [SharedModule],
+      declarations: [LoadersComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

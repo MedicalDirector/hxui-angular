@@ -1,7 +1,6 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { SharedModule } from '../../shared/shared.module';
 import { EmptyStateComponent } from './empty-state.component';
-import {AppModule} from '../../app.module';
 
 describe('EmptyStateComponent', () => {
   let component: EmptyStateComponent;
@@ -9,9 +8,9 @@ describe('EmptyStateComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ AppModule ]
-    })
-      .compileComponents();
+      imports: [SharedModule],
+      declarations: [EmptyStateComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -23,6 +22,4 @@ describe('EmptyStateComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-
 });
