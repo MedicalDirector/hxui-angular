@@ -12,6 +12,9 @@
 .ng_pkg_build
 
 # IDEs and editors
+*.iml
+*.iws
+*.ipr
 /.idea
 .project
 .classpath
@@ -27,14 +30,21 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+
+# Output of 'npm pack'
+*.tgz
+
 # misc
 /.sass-cache
 /connect.lock
-/coverage
 /libpeerconnection.log
 npm-debug.log
 testem.log
 /typings
+*.log
 
 # e2e
 /e2e/*.js
