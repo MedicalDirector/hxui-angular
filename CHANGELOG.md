@@ -1,22 +1,37 @@
-## [8.2.26](https://www.npmjs.com/package/@hxui/angular/v/8.2.26) (2022-04-27)
+# Changelog
 
-### Bugfix
+All notable changes to this project will be documented in this file.
 
-* **datepicker:** remove setting touched state programmatically upon set date
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [8.2.25](https://www.npmjs.com/package/@hxui/angular/v/8.2.25) (2022-03-11)
+## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v8.2.27...HEAD)
 
-### Bugfix
+## [8.2.27](https://github.com/MedicalDirector/hxui-angular/compare/v8.2.26...v8.2.27) - 2022-06-06
 
-* **date-range-picker:** prevent selection of date range where date is null or from later than to
-* **datepicker:** update date validation and states in line with v11 equivalent
+### Fixed
 
-## [8.2.24](https://www.npmjs.com/package/@hxui/angular/v/8.2.24) (2022-02-10)
+- [Selectize] Fix delete icon styling for multi-select ([636766a](https://github.com/MedicalDirector/hxui-angular/commit/636766a173df2f0fef9b39b106742cd8cc81c162))
 
-### Enhancement
+## [8.2.26](https://github.com/MedicalDirector/hxui-angular/compare/v8.2.25...v8.2.26) - 2022-04-27
 
-* **Tabular:** Added support for icons in column headers
-* **Inspector:** Added support for controlling close icon and close on backdrop click
+### Fixed
+
+- [Date Picker] Remove setting touched state programmatically upon set date
+
+## [8.2.25](https://github.com/MedicalDirector/hxui-angular/compare/v8.2.24...v8.2.25) - 2022-03-11
+
+### Fixed
+
+- [Date Range Picker] Prevent selection of date range where date is null or from later than to
+- [Date Picker] Update date validation and states in line with v11 equivalent
+
+## [8.2.24](https://github.com/MedicalDirector/hxui-angular/compare/v8.2.24...v8.2.24) - 2022-02-10
+
+### Added
+
+- [Table] Added support for icons in column headers
+- [Inspector] Added support for controlling close icon and close on backdrop click
 
 ## [8.2.23](https://www.npmjs.com/package/@hxui/angular/v/8.2.23) (2021-05-20)
 
