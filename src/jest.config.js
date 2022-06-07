@@ -4,7 +4,9 @@ module.exports = {
   ...baseConfig,
   displayName: 'docs',
   moduleNameMapper: {
-    '@core/(.*)': '<rootDir>/src/app/core/$1'
+    '@core/(.*)': '<rootDir>/src/app/core/$1',
+    //     // https://github.com/JsDaddy/ngx-mask/issues/962#issuecomment-1029284593
+    'ngx-mask': '<rootDir>/node_modules/ngx-mask/fesm2015/ngx-mask.mjs'
   },
   globals: {
     'ts-jest': {
