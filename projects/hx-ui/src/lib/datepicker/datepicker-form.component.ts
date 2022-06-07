@@ -1,4 +1,3 @@
-import { Directionality } from '@angular/cdk/bidi';
 import {
   FlexibleConnectedPositionStrategy,
   HorizontalConnectionPos,
@@ -6,23 +5,23 @@ import {
   Overlay,
   OverlayConnectionPosition,
   OverlayRef,
-  ScrollDispatcher,
   VerticalConnectionPos
 } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
+  ChangeDetectorRef,
   Component,
-  ComponentFactoryResolver,
   DoCheck,
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostBinding,
+  HostListener,
   Input,
-  NgZone,
   OnDestroy,
   OnInit,
-  Optional,
   Output,
+  TemplateRef,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -36,15 +35,14 @@ import {
 } from '@angular/forms';
 import * as moment_ from 'moment';
 import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { TextInputDirective } from '../text-input/text-input.directive';
-import { DatepickerIntervalComponent } from './datepicker-interval.component';
-import { DatepickerComponent } from './datepicker.component';
 import { DatepickerConfig } from './datepicker.config';
+import { DatePickerInterval } from './datepicker.model';
 const moment = moment_;
 
 @Component({
-  selector: 'hxa-datepicker-input, hxa-datepicker-form',
+  selector: 'hxa-datepicker-input',
   templateUrl: './datepicker-form.component.html',
   styleUrls: ['./datepicker-form.component.scss'],
   providers: [
@@ -63,16 +61,41 @@ const moment = moment_;
 export class DatepickerFormComponent
   implements OnInit, ControlValueAccessor, Validator, OnDestroy, DoCheck
 {
+  @HostBinding('class')
+  get classes() {
+    return 'hx-input-group hxa-datepicker-input';
+  }
+
+  /** for controlling input label positioning */
   @ViewChild(TextInputDirective, { static: true })
   datePickerFormInput: TextInputDirective;
+
+  /** for managing form input state */
   @ViewChild('datePickerForm', { static: true })
   datePickerForm: FormGroupDirective;
 
-  _overlayRef: OverlayRef | null;
-  _calendarInstance: DatepickerComponent | null;
-  _intervalInstance: DatepickerIntervalComponent | null;
-  private _portal: ComponentPortal<DatepickerComponent>;
+  @ViewChild('menuRef', { read: TemplateRef })
+  private _menuRef: TemplateRef<unknown>;
+
+  @ViewChild('originRef', { read: ElementRef })
+  private _originRef: ElementRef;
+
+  public _overlayRef: OverlayRef | null;
+  private _portal: TemplatePortal;
   private readonly _destroyed = new Subject();
+  public isOpen = false;
+  public isInputFocus = false;
+
+  /** The timeout ID of any current timer set to show the calendar */
+  private _showTimeoutId: number;
+
+  /** The timeout ID of any current timer set to hide the calendar */
+  private _hideTimeoutId: number;
+
+  public activeTabIndex = 0;
+
+  @Input()
+  allowInterval = false;
 
   /** Adds the disabled html attribute to the components input element */
   @Input()
@@ -147,7 +170,7 @@ export class DatepickerFormComponent
 
   /** Specifies the position the datepicker opens against the input element */
   @Input()
-  placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
+  placement: 'top' | 'bottom' | 'left' | 'right' = this._config.placement;
 
   /** delay in ms before showing the calendar after show is called */
   @Input()
@@ -170,22 +193,23 @@ export class DatepickerFormComponent
   interval = false;
 
   @Input()
-  dueDateInterval = '0 day(s)'; // '1 week(s)' | '2 month(s)' | '3 year(s)'
+  dueDateInterval = '0 day(s)';
 
   /** Mask pattern for date picker text input */
   @Input()
-  maskPattern = 'd0/M0/0000';
+  maskPattern = '00/00/0000'; //'d0/M0/0000';
 
   /** Emits a Date is selected from the Datepicker or a valid date string is entered into input field */
   @Output()
-  onDateChange: EventEmitter<Date> = new EventEmitter<Date>();
+  dateChange: EventEmitter<Date> = new EventEmitter<Date>();
 
   /** Emits a boolean if date picker input field is in focus */
   @Output()
-  onFocus: EventEmitter<void> = new EventEmitter<void>();
+  inputFocus: EventEmitter<void> = new EventEmitter<void>();
+
+  public selectedInterval: DatePickerInterval;
 
   public date: Date = null;
-  public visible = false;
   public presentDate: Date;
   public isValid: boolean;
   public dateValidators = new Array<(date: Date) => boolean>();
@@ -193,50 +217,39 @@ export class DatepickerFormComponent
   private onTouched = new Array<() => void>();
 
   private validateDateRange: (date: Date) => boolean;
-  private _elementHtmlRef: Element;
-  private _elementHtmlCollection: HTMLCollection;
 
   constructor(
-    private _elementRef: ElementRef,
     private _viewContainerRef: ViewContainerRef,
     public overlay: Overlay,
-    private _ngZone: NgZone,
-    private _scrollDispatcher: ScrollDispatcher,
-    private _componentFactoryResolver: ComponentFactoryResolver,
     private _config: DatepickerConfig,
-    @Optional() private _dir: Directionality
-  ) {
-    // get input reference
-    this._elementHtmlCollection =
-      this._elementRef.nativeElement.getElementsByTagName('input');
-  }
+    private _cd: ChangeDetectorRef
+  ) {}
 
-  ngDoCheck(): void {
-    const from = this.parseDate(this.from) || new Date(-8630000000000000);
-    const to = this.parseDate(this.to) || new Date(8630000000000000);
-
-    if (!!this.from || !!this.to) {
-      this.validateDateRange = this.createDateRangeValidator(from, to);
-      this.dateValidators = [this.validateDateRange.bind(this)];
+  /** Listen to keyboard events to trigger changes to overlay state */
+  @HostListener('document:keydown', ['$event'])
+  public onKeydown($event: KeyboardEvent) {
+    if ($event.key === 'Escape' && this.isOpen) {
+      this._hide();
     }
-  }
-
-  /**
-   * Dispose the tooltip when destroyed.
-   */
-  ngOnDestroy() {
-    if (this._overlayRef) {
-      this._overlayRef.dispose();
-      this._calendarInstance = null;
+    if ($event.key === ' ' && this.isInputFocus) {
+      this._show();
     }
-
-    this._destroyed.next(true);
-    this._destroyed.complete();
   }
 
   ngOnInit(): void {
-    // set element ref which will be used for dropdown positioning
-    this._elementHtmlRef = this._elementHtmlCollection.item(0);
+    // if interval is not allowed, go to 'specific date' tab
+    if (!this.interval) {
+      this.activeTabIndex = 1;
+      this.selectedInterval = {
+        interval: this.dueDateInterval,
+        isSelectedFromInterval: false
+      };
+    } else {
+      this.selectedInterval = {
+        interval: this.dueDateInterval,
+        isSelectedFromInterval: true
+      };
+    }
 
     const date: Date = new Date();
     this.presentDate = new Date(
@@ -269,20 +282,51 @@ export class DatepickerFormComponent
     }
   }
 
+  ngDoCheck(): void {
+    const from = this.parseDate(this.from) || new Date(-8630000000000000);
+    const to = this.parseDate(this.to) || new Date(8630000000000000);
+
+    if (!!this.from || !!this.to) {
+      this.validateDateRange = this.createDateRangeValidator(from, to);
+      this.dateValidators = [this.validateDateRange.bind(this)];
+    }
+  }
+
+  ngOnDestroy() {
+    // dispose the overlay ref and subscriptions
+    if (this._overlayRef) {
+      this._overlayRef.dispose();
+      this._overlayRef = null;
+    }
+
+    this._destroyed.next(true);
+    this._destroyed.complete();
+  }
+
   public setDate(date: Date): void {
     this.date = date;
     this.propogateChange(date);
-    this.onDateChange.emit(date);
+    this.dateChange.emit(date);
     this._updateLabelStyle();
   }
 
-  public onDateSelectEvent = (inputDate: Date): void => {
+  public onDateSelection($event: Date): void {
     this._hide();
-    this.setDate(inputDate);
-  };
+    this.selectedInterval['isSelectedFromInterval'] = false;
+    this.setDate($event);
+  }
 
-  public onChange($event): void {
-    const inputDate = $event.target.value;
+  public onIntervalSelection(
+    $event: DatePickerInterval & { date: Date }
+  ): void {
+    this._hide();
+    const { date, ...rest } = $event;
+    this.selectedInterval = rest;
+    this.setDate(date);
+  }
+
+  public onChange($event: Event): void {
+    const inputDate = ($event.target as HTMLInputElement).value;
     const date: Date = this.parseDate(inputDate);
 
     if (inputDate === '' || date === null) {
@@ -294,14 +338,30 @@ export class DatepickerFormComponent
     }
   }
 
-  public onFocused($event): void {
-    this._show();
+  public onFocused($event: FocusEvent): void {
+    this.isInputFocus = true;
     this.propogateTouched();
-    this.onFocus.emit();
+    this.inputFocus.emit();
   }
 
-  public onTab(inputDate: string): void {
-    this.onChange(inputDate);
+  public onBlur($event: FocusEvent): void {
+    this.isInputFocus = false;
+  }
+
+  public onButtonClick($event: Event): void {
+    if (this.isOpen) {
+      this._hide();
+    } else {
+      this._show();
+    }
+  }
+
+  public onIntervalCancel($event: Event): void {
+    this._hide();
+  }
+
+  public onTab($event: Event): void {
+    this.onChange($event);
     this._hide();
     this.propogateTouched();
   }
@@ -469,31 +529,44 @@ export class DatepickerFormComponent
     return null;
   }
 
+  /** open overlay */
   private _show(delay: number = this.showDelay) {
-    if (this.disabled) {
+    if (this.disabled || this.isOpen) {
       return;
     }
 
     const overlayRef = this._createOverlay();
 
     this._detach();
-    this._portal =
-      this._portal ||
-      new ComponentPortal(DatepickerComponent, this._viewContainerRef);
-    this._calendarInstance = overlayRef.attach(this._portal).instance;
-    this._calendarInstance
-      .afterHidden()
-      .pipe(takeUntil(this._destroyed))
-      .subscribe(() => this._detach());
+    overlayRef.attach(this._portal);
 
-    this._updateTooltipContent();
-    this._calendarInstance!.show(delay);
+    // Cancel the delayed hide if it is scheduled
+    if (this._hideTimeoutId) {
+      clearTimeout(this._hideTimeoutId);
+    }
+    this._showTimeoutId = window.setTimeout(() => {
+      this.isOpen = true;
+
+      // Schedule for change detection incase the tooltip is used within a
+      // component with OnPush change detection
+      this._cd.markForCheck();
+    }, delay);
   }
 
+  /** close overlay */
   private _hide(delay: number = this.hideDelay) {
-    if (this._calendarInstance) {
-      this._calendarInstance.hide(delay);
+    this._detach();
+
+    // Cancel the delayed show if it is scheduled
+    if (this._showTimeoutId) {
+      clearTimeout(this._showTimeoutId);
     }
+
+    this._hideTimeoutId = window.setTimeout(() => {
+      this.isOpen = false;
+
+      this._destroyed.next(true);
+    }, delay);
   }
 
   private _createOverlay(): OverlayRef {
@@ -501,15 +574,17 @@ export class DatepickerFormComponent
       return this._overlayRef;
     }
 
+    this._portal = new TemplatePortal(this._menuRef, this._viewContainerRef);
+
     const positionStrategy = this.overlay
       .position()
-      .flexibleConnectedTo(<HTMLElement>this._elementHtmlRef)
+      .flexibleConnectedTo(this._originRef)
       .withTransformOriginOn('.hxa-datepicker-control')
       .withFlexibleDimensions(false);
 
     this._overlayRef = this.overlay.create({
       positionStrategy: positionStrategy,
-      panelClass: 'hxa-datepicker-calendar',
+      panelClass: 'hxa-datepicker-container',
       hasBackdrop: true,
       backdropClass: 'cdk-overlay-transparent-backdrop',
       scrollStrategy: this.overlay.scrollStrategies.reposition()
@@ -532,7 +607,6 @@ export class DatepickerFormComponent
       } else if (pos.connectionPair.originX === 'end') {
         this.placement = 'right';
       }
-      this._updateTooltipContent();
     });
 
     return this._overlayRef;
@@ -641,36 +715,24 @@ export class DatepickerFormComponent
     if (this._overlayRef && this._overlayRef.hasAttached()) {
       this._overlayRef.detach();
     }
-    this._calendarInstance = null;
-    this._intervalInstance = null;
-  }
-
-  /** Updates the tooltip content and repositions the overlay according to the new content length */
-  private _updateTooltipContent() {
-    // Must wait for the content to be painted to the tooltip so that the overlay can properly
-    // calculate the correct positioning based on the size of its contents.
-    if (this._calendarInstance) {
-      this._calendarInstance.selectedDate = this.date;
-      this._calendarInstance.placement = this.placement;
-      this._calendarInstance.validators = this.dateValidators;
-      this._calendarInstance.onDateSelected = this.onDateSelectEvent;
-      this._calendarInstance.allowInterval = this.interval;
-      this._calendarInstance.selectedDueDateInterval = this.dueDateInterval;
-      this._ngZone.onMicrotaskEmpty
-        .asObservable()
-        .pipe(take(1), takeUntil(this._destroyed))
-        .subscribe(() => {
-          if (this._calendarInstance) {
-            this._overlayRef!.updatePosition();
-          }
-        });
-    }
   }
 
   // only applicable if hxaInputDirective is present
   private _updateLabelStyle() {
     if (this.datePickerFormInput) {
       this.datePickerFormInput.styleLabel(true);
+    }
+  }
+
+  onTabSelect(index: number): void {
+    if (!index) {
+      return;
+    }
+
+    if (index === 0) {
+      this.activeTabIndex = 0;
+    } else {
+      this.activeTabIndex = 1;
     }
   }
 }
