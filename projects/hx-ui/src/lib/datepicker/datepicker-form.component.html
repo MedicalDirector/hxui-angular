@@ -1,6 +1,6 @@
 <!-- INPUT -->
 <button
-  class="hxa-datepicker-button left"
+  class="hxa-datepicker__button left"
   (click)="onButtonClick($event)"
   *ngIf="iconPlacement === 'left'"
   tabindex="-1"
@@ -8,7 +8,7 @@
   <i class="{{ icon }}"></i>
 </button>
 <div
-  class="hx-input-control hxa-datepicker-control"
+  class="hx-input-control hxa-datepicker__control"
   [class.is-danger]="(!isValid && datePickerForm.touched) || isDanger"
   [class.is-help-visible]="helpTextVisible"
   [class.is-warning]="isWarning && isValid && datePickerForm.touched"
@@ -26,7 +26,8 @@
     (change)="onChange($event)"
     (focus)="onFocused($event)"
     (blur)="onBlur($event)"
-    (keydown.Tab)="onTab($event)"
+    (keydown.Tab)="onKeydownTab($event)"
+    (keydown.Space)="onKeydownSpace($event)"
     [mask]="maskPattern"
     [clearIfNotMatch]="false"
   />
@@ -36,7 +37,7 @@
   <div class="hx-help">{{ helpText }}</div>
 </div>
 <button
-  class="hxa-datepicker-button right"
+  class="hxa-datepicker__button right"
   (click)="onButtonClick($event)"
   *ngIf="iconPlacement === 'right'"
   tabindex="-1"
@@ -54,7 +55,7 @@
       contentCustomClass="pa-0"
     >
       <hx-tab
-        heading="From today"
+        heading="FROM TODAY"
         (select)="onTabSelect(0)"
         [active]="activeTabIndex === 0"
       >
@@ -66,7 +67,7 @@
         ></hxa-datepicker-interval>
       </hx-tab>
       <hx-tab
-        heading="Specific date"
+        heading="SPECIFIC DATE"
         (select)="onTabSelect(1)"
         [active]="activeTabIndex === 1"
       >

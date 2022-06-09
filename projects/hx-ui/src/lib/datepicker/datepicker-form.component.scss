@@ -2,7 +2,7 @@
 @import 'datepicker-variables';
 
 .hxa-datepicker {
-  &-input:host {
+  &:host {
     position: relative;
     display: block;
     max-width: $hx-datepicker-calendar-width;
@@ -14,17 +14,11 @@
     }
   }
 
-  &-control {
+  &__control {
     margin: 0;
   }
 
-  &-help {
-    font-size: 0.75rem;
-    margin-top: 0.25rem;
-    color: #63605f;
-  }
-
-  &-button {
+  &__button {
     position: absolute;
     top: 0.5rem;
     padding: 0;
@@ -44,7 +38,7 @@
 
 // needed to target overlay
 ::ng-deep .hxa-datepicker {
-  &-container {
+  &__overlay {
     box-shadow: 0 2px 12px 0 rgba($hx-color-black, 0.06);
     outline: 1px solid rgba($hx-color-black, 0.08);
     max-width: $hx-datepicker-calendar-width;
@@ -55,8 +49,14 @@
           display: none;
         }
       }
-      ::ng-deep .hx-nav-tabs {
-        margin-bottom: 0;
+      ::ng-deep {
+        .hx-nav-tabs {
+          margin-bottom: 0;
+        }
+        // TOOD: update hxui css tabs justified text alignment, then remove this
+        .hx-nav-link {
+          text-align: center;
+        }
       }
     }
   }
