@@ -63,7 +63,7 @@ export class DatepickerFormComponent
 {
   @HostBinding('class')
   get classes() {
-    return 'hx-input-group hxa-datepicker-input';
+    return 'hx-input-group hxa-datepicker';
   }
 
   /** for controlling input label positioning */
@@ -94,8 +94,15 @@ export class DatepickerFormComponent
 
   public activeTabIndex = 0;
 
-  @Input()
-  allowInterval = false;
+  public selectedInterval: DatePickerInterval;
+  public date: Date = null;
+  public presentDate: Date;
+  public isValid: boolean;
+  public dateValidators = new Array<(date: Date) => boolean>();
+  private onChanged = new Array<(value: Date) => void>();
+  private onTouched = new Array<() => void>();
+
+  private validateDateRange: (date: Date) => boolean;
 
   /** Adds the disabled html attribute to the components input element */
   @Input()
@@ -207,17 +214,6 @@ export class DatepickerFormComponent
   @Output()
   inputFocus: EventEmitter<void> = new EventEmitter<void>();
 
-  public selectedInterval: DatePickerInterval;
-
-  public date: Date = null;
-  public presentDate: Date;
-  public isValid: boolean;
-  public dateValidators = new Array<(date: Date) => boolean>();
-  private onChanged = new Array<(value: Date) => void>();
-  private onTouched = new Array<() => void>();
-
-  private validateDateRange: (date: Date) => boolean;
-
   constructor(
     private _viewContainerRef: ViewContainerRef,
     public overlay: Overlay,
@@ -230,9 +226,6 @@ export class DatepickerFormComponent
   public onKeydown($event: KeyboardEvent) {
     if ($event.key === 'Escape' && this.isOpen) {
       this._hide();
-    }
-    if ($event.key === ' ' && this.isInputFocus) {
-      this._show();
     }
   }
 
@@ -360,10 +353,26 @@ export class DatepickerFormComponent
     this._hide();
   }
 
-  public onTab($event: Event): void {
+  public onKeydownTab($event: Event): void {
     this.onChange($event);
     this._hide();
     this.propogateTouched();
+  }
+
+  public onKeydownSpace($event: Event): void {
+    this._show();
+  }
+
+  public onTabSelect(index: number): void {
+    if (!index) {
+      return;
+    }
+
+    if (index === 0) {
+      this.activeTabIndex = 0;
+    } else {
+      this.activeTabIndex = 1;
+    }
   }
 
   public parseDate(inputDate: string | Date): Date {
@@ -579,12 +588,12 @@ export class DatepickerFormComponent
     const positionStrategy = this.overlay
       .position()
       .flexibleConnectedTo(this._originRef)
-      .withTransformOriginOn('.hxa-datepicker-control')
+      .withTransformOriginOn('.hxa-datepicker__control')
       .withFlexibleDimensions(false);
 
     this._overlayRef = this.overlay.create({
       positionStrategy: positionStrategy,
-      panelClass: 'hxa-datepicker-container',
+      panelClass: 'hxa-datepicker__overlay',
       hasBackdrop: true,
       backdropClass: 'cdk-overlay-transparent-backdrop',
       scrollStrategy: this.overlay.scrollStrategies.reposition()
@@ -721,18 +730,6 @@ export class DatepickerFormComponent
   private _updateLabelStyle() {
     if (this.datePickerFormInput) {
       this.datePickerFormInput.styleLabel(true);
-    }
-  }
-
-  onTabSelect(index: number): void {
-    if (!index) {
-      return;
-    }
-
-    if (index === 0) {
-      this.activeTabIndex = 0;
-    } else {
-      this.activeTabIndex = 1;
     }
   }
 }

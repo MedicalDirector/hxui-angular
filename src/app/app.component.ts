@@ -26,6 +26,10 @@ export class AppComponent {
         {
           name: 'Install guide',
           link: '/install-guide'
+        },
+        {
+          name: 'Migrating to v13',
+          link: '/migrate-13'
         }
       ]
     },

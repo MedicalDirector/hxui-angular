@@ -12,6 +12,7 @@ import { InspectorComponent } from './core/inspector/inspector.component';
 import { InstallGuideComponent } from './core/install-guide/install-guide.component';
 import { LineClampComponent } from './core/line-clamp/line-clamp.component';
 import { LoadersComponent } from './core/loaders/loaders.component';
+import { MigrateV13Component } from './core/migrate-v13/migrate-v13.component';
 import { ModalsComponent } from './core/modals/modals.component';
 import { NgSelectComponent } from './core/ng-select/ng-select.component';
 import { NgxToastrComponent } from './core/ngx-toastr/ngx-toastr.component';
@@ -29,6 +30,7 @@ import { TypeaheadsComponent } from './core/typeaheads/typeaheads.component';
 const routes: Routes = [
   { path: '', redirectTo: '/install-guide', pathMatch: 'full' },
   { path: 'install-guide', component: InstallGuideComponent },
+  { path: 'migrate-13', component: MigrateV13Component },
   { path: 'accordion', component: AccordionComponent },
   { path: 'date-pickers', component: DatepickersComponent },
   { path: 'time-picker', component: TimepickerComponent },

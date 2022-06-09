@@ -17,6 +17,7 @@ import { InspectorComponent } from './inspector/inspector.component';
 import { InstallGuideComponent } from './install-guide/install-guide.component';
 import { LineClampComponent } from './line-clamp/line-clamp.component';
 import { LoadersComponent } from './loaders/loaders.component';
+import { MigrateV13Component } from './migrate-v13/migrate-v13.component';
 import { CustomModalComponent } from './modals/custom-modal/custom-modal.component';
 import { ModalsComponent } from './modals/modals.component';
 import { NgSelectComponent } from './ng-select/ng-select.component';
@@ -30,17 +31,17 @@ import { InMemoryDataService } from './tabular/in-memory-data.service';
 import { TabularComponent } from './tabular/tabular.component';
 import { TabularService } from './tabular/tabular.service';
 import { TextInputComponent } from './text-input/text-input.component';
+import { TimepickerComponent } from './timepicker/timepicker.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
 import { StaticArrayComponent } from './typeaheads/static-array/static-array.component';
 import { TypeaheadsComponent } from './typeaheads/typeaheads.component';
-import { TimepickerComponent } from './timepicker/timepicker.component';
 
 @NgModule({
   imports: [
     SharedModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService, {
-      dataEncapsulation: false
-    })
+      dataEncapsulation: false,
+    }),
   ],
   declarations: [
     PageNotFoundComponent,
@@ -75,16 +76,17 @@ import { TimepickerComponent } from './timepicker/timepicker.component';
     NgxToastrComponent,
     ExampleFilterNewComponent,
     ExampleFilterOldComponent,
-    TimepickerComponent
+    TimepickerComponent,
+    MigrateV13Component,
   ],
   providers: [TabularService, InMemoryDataService],
-  exports: []
+  exports: [],
 })
 export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
-      providers: []
+      providers: [],
     };
   }
 }
