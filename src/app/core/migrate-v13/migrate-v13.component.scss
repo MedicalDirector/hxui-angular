@@ -1,0 +1,22 @@
+.h2,
+.h3 {
+  margin: 1.25em 0 0.5em;
+}
+:host {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+aside {
+  order: 2;
+}
+
+kbd {
+  display: inline-block;
+  background-color: #f5f5f5;
+  padding: 0 2px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  line-height: 16px;
+  white-space: nowrap;
+}

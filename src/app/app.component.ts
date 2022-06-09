@@ -1,5 +1,5 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
-import { trigger, transition, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +26,10 @@ export class AppComponent {
         {
           name: 'Install guide',
           link: '/install-guide'
+        },
+        {
+          name: 'Migrating to v13',
+          link: '/migrate-13'
         }
       ]
     },
@@ -144,13 +148,11 @@ export class AppComponent {
       items: [
         {
           name: 'Change Log (v11)',
-          url:
-            'https://github.com/MedicalDirector/hxui-angular/blob/master/projects/hx-ui/CHANGELOG.md'
+          url: 'https://github.com/MedicalDirector/hxui-angular/blob/master/projects/hx-ui/CHANGELOG.md'
         },
         {
           name: 'Change Log (v8)',
-          url:
-            'https://github.com/MedicalDirector/hxui-angular/blob/8.x/CHANGELOG.md'
+          url: 'https://github.com/MedicalDirector/hxui-angular/blob/8.x/CHANGELOG.md'
         },
         {
           name: 'License',

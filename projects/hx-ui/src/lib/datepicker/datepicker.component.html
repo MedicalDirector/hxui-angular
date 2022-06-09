@@ -1,17 +1,17 @@
 <ng-container *ngIf="{ viewMode$ : viewMode$ | async } as observables">
-  <div class="hx-card-header hxa-datepicker-header">
-    <div class="hxa-datepicker-month">
-      <div
-        class="hxa-datepicker-icon"
+  <div class="hx-card-header hxa-datepicker-calendar__header">
+    <div class="hxa-datepicker-calendar__month">
+      <button
+        class="hxa-datepicker-calendar__icon hx-button is-transparent is-large"
         *ngIf="observables.viewMode$ !== DatepickerViewModeEnum.Months"
         title="Previous Month"
         (click)="previous()"
       >
-        <button class="hx-button is-transparent">
-          <i class="hx-icon icon-angle-left"></i>
-        </button>
-      </div>
-      <div class="hxa-datepicker-month-title">
+        <span class="hx-icon-control">
+          <i class="hx-icon icon-angle-left is-medium"></i>
+        </span>
+      </button>
+      <div class="hxa-datepicker-calendar__month-title">
         <button
           class="hx-button is-flat is-info is-large"
           (click)="toggleYear()"
@@ -21,75 +21,78 @@
           month: "long", year: "numeric"}) }}
         </button>
       </div>
-      <div
-        class="hxa-datepicker-icon"
+      <button
+        class="hxa-datepicker-calendar__icon hx-button is-transparent is-large"
         *ngIf="observables.viewMode$ !== DatepickerViewModeEnum.Months"
         title="Next Month"
         (click)="next()"
       >
-        <button class="hx-button is-transparent">
-          <i class="hx-icon icon-angle-right"></i>
-        </button>
-      </div>
+        <span class="hx-icon-control">
+          <i class="hx-icon icon-angle-right is-medium"></i>
+        </span>
+      </button>
     </div>
     <div
-      class="hxa-datepicker-week"
+      class="hxa-datepicker-calendar__week"
       *ngIf="observables.viewMode$ === DatepickerViewModeEnum.Days"
     >
-      <div class="hxa-datepicker-weekday" *ngFor="let weekday of week">
+      <div
+        class="hxa-datepicker-calendar__weekday"
+        *ngFor="let weekday of week"
+      >
         {{weekday | slice:0:3}}
       </div>
     </div>
   </div>
-  <div class="hxa-datepicker-contents">
+  <div class="hxa-datepicker-calendar__contents">
     <ng-container *ngIf="observables.viewMode$ === DatepickerViewModeEnum.Days">
-      <div
-        class="hxa-datepicker-day"
+      <button
+        class="hxa-datepicker-calendar__day hx-button is-transparent"
         *ngFor="let day of days"
         [ngClass]="{
-          'hxa-datepicker-day-siblingmonth': !isCurrentMonth(day),
-          'hxa-datepicker-day-currentday': isCurrentDay(day),
-          'hxa-datepicker-day-selectedday': isSelectedDay(day),
-          'hxa-datepicker-day-invalidday': isInvalidDay(day)
+          'hxa-datepicker-calendar__day-siblingmonth': !isCurrentMonth(day),
+          'hxa-datepicker-calendar__day-currentday': isCurrentDay(day),
+          'hxa-datepicker-calendar__day-selectedday': isSelectedDay(day),
+          'hxa-datepicker-calendar__day-invalidday': isInvalidDay(day)
         }"
         (click)="setSelectedDate(day)"
       >
-        <a class="hx-button is-transparent">{{day.getDate()}}</a>
-      </div>
+        {{day.getDate()}}
+      </button>
     </ng-container>
 
     <ng-container
       *ngIf="observables.viewMode$ === DatepickerViewModeEnum.Months"
     >
-      <div
-        class="hxa-datepicker-months"
+      <button
+        class="hxa-datepicker-calendar__months hx-button is-transparent"
         *ngFor="let month of months; let indexOfMth=index;"
         [ngClass]="{
-          'hxa-datepicker-day-currentday': isCurrentMonthByIndex(indexOfMth),
-          'hxa-datepicker-day-selectedday': isSelectedMonthByIndex(indexOfMth),
-          'hxa-datepicker-day-invalidday': isInvalidMonthByIndex(indexOfMth)
+          'hxa-datepicker-calendar__day-currentday': isCurrentMonthByIndex(indexOfMth),
+          'hxa-datepicker-calendar__day-selectedday': isSelectedMonthByIndex(indexOfMth),
+          'hxa-datepicker-calendar__day-invalidday': isInvalidMonthByIndex(indexOfMth)
         }"
         (click)="setMonth(indexOfMth)"
       >
-        <a class="hx-button is-transparent">{{ month }}</a>
-      </div>
+        {{ month }}
+      </button>
     </ng-container>
 
     <ng-container
       *ngIf="observables.viewMode$ === DatepickerViewModeEnum.Years"
     >
-      <div
+      <button
         *ngFor="let year of years"
-        class="hxa-datepicker-year"
+        class="hxa-datepicker-calendar__year hx-button is-transparent"
         [ngClass]="{
-          'hxa-datepicker-day-currentday': isCurrentYear(year),
-          'hxa-datepicker-day-selectedday': isSelectedYear(year),
-          'hxa-datepicker-day-invalidday': isInvalidYear(year)
+          'hxa-datepicker-calendar__day-currentday': isCurrentYear(year),
+          'hxa-datepicker-calendar__day-selectedday': isSelectedYear(year),
+          'hxa-datepicker-calendar__day-invalidday': isInvalidYear(year)
         }"
         (click)="setYear(year)"
       >
-        <a class="hx-button is-transparent">{{ year }}</a>
-      </div>
+        {{ year }}
+      </button>
     </ng-container>
   </div>
 </ng-container>
