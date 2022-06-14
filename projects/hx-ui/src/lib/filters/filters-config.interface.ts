@@ -1,5 +1,5 @@
-import { FilterType } from "./filters-type.enum";
-import { DisplayMode } from "../date-range-picker/date-range-picker.component";
+import { DisplayMode } from '../date-range-picker/date-range-picker.model';
+import { FilterType } from './filters-type.enum';
 
 export interface IFilterOption {
   label: string;
@@ -59,8 +59,8 @@ export interface IFiltersConfig {
   dateRangePickerDisplayMode?: DisplayMode;
 
   /**
-  * Display date format for type date range picker
-  */
+   * Display date format for type date range picker
+   */
   dateRangePickerDisplayDateFormat?: string;
 
   /**

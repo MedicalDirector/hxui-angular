@@ -1,43 +1,31 @@
-<div class="hx-datepicker-set-interval is-flex hx-flex-justify-between hx-flex-column">
+<form [formGroup]="form" (ngSubmit)="onChoose($event)">
+  <section class="hxa-datepicker-interval__content">
+    <fieldset class="hxa-datepicker-interval__inputs">
+      <input
+        type="number"
+        id="numberText"
+        class="hx-input"
+        formControlName="number"
+        min="0"
+      />
 
-  <div class="hx-datepicker-set-interval-content is-flex hx-flex-column hx-flex-auto hx-flex-align-center hx-flex-justify-center  pa-3">
+      <select id="durationText" class="hx-input" formControlName="duration">
+        <option *ngFor="let opt of durationOptions" [value]="opt + 's'">
+          {{ opt + '(s)' }}
+        </option>
+      </select>
 
+      <span>from today</span>
+    </fieldset>
 
-      <div class="mb-5">
-        <div class="hx-datepicker-set-interval-number mr-5">
-          <input type="number" id="numberText" class="hx-input" min=0  [(ngModel)]="dropdownNumber" (change)="onSelect()" #numberText>
-        </div>
-
-        <span class="hx-dropdown month mr-5" hxaDropdown>
-          <select id="durationText" class= "hx-input"  (change)="onSelect()" [(ngModel)]="Duration" #durationText>
-            <option>day(s)</option>
-            <option>week(s)</option>
-            <option>month(s)</option>
-            <option>year(s)</option>
-          </select>
-        </span>
-
-        <span><small>from</small> <span class="hx-datepicker-set-interval-today ml-2">today</span></span>
-      </div>
-
-      <div class="mb-3">
-        <span><small>will be</small></span>
-        <span class="hx-datepicker-set-interval-selected-date ml-1">
-        {{ _DueDate }}
-        </span>
-      </div>
-
-  </div>
-
-  <div class="hx-datepicker-set-interval-footer pa-3">
-    <div class="hx-columns">
-      <div class="hx-column">
-        <button class="hx-button" (click)="onCancel()">Cancel</button>
-      </div>
-      <div class="hx-column is-text-right">
-        <button class="hx-button is-primary" (click)="onChoose($event)">Select</button>
-      </div>
+    <div class="hxa-datepicker-interval__output">
+      <span>will be </span>
+      <span class="is-text-weight-bolder">{{ dateLabel }}</span>
     </div>
-  </div>
+  </section>
 
-</div>
+  <section class="hxa-datepicker-interval__footer">
+    <button class="hx-button" (click)="onCancel()">Cancel</button>
+    <button type="submit" class="hx-button is-primary">Select</button>
+  </section>
+</form>

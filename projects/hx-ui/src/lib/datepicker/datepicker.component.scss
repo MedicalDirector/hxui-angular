@@ -1,167 +1,130 @@
-@import "~@hxui/css/static/static/scss/variables";
-@import "datepicker-variables";
+@import '~@hxui/css/static/static/scss/variables';
+@import 'datepicker-variables';
 
-.hxa-datepicker {
-    &-container {
-        max-width: $hx-datepicker-calendar-width;
-        width: $hx-datepicker-calendar-width;
-        height: $hx-datepicker-calendar-height;
-        display: flex;
-        flex-direction: column;
-        font-size: 1rem;
-    }
-
-    &-header {
-        padding: 0.5rem 0.5rem 0;
-        flex-direction: column;
-        align-items: initial;
-        justify-content: space-around;
-        font-weight: 100;
-    }
-
-    &-icon {
-        cursor: pointer;
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        & .hx-button {
-            position: initial !important;
-            top: initial !important;
-
-            &.is-transparent:hover {
-                color: black;
-            }
-        }
-
-        & .hx-icon {
-            font-size: 2em;
-            position: initial !important;
-            top: initial !important;
-            color: $hx-color-blue;
-        }
-    }
-
-    &-month {
-        display: flex;
-        text-align: center;
-        margin-bottom: 0.5rem;
-
-        &-title {
-            font-size: 1.25em;
-            font-weight: 400;
-            flex: 3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: $hx-color-blue;
-        }
-    }
-
-    &-week {
-        display: flex;
-        width: 100%;
-        text-align: center;
-
-        &day {
-            flex: 1;
-            color: $hx-color-blue;
-            font-size: 0.85em;
-        }
-    }
-
-    &-contents {
-        padding: 0.5rem;
-        background-color: rgba(246, 246, 249, 0.5);
-        display: flex;
-        flex-flow: row wrap;
-        flex: 1;
-        justify-content: space-around;
-        align-content: space-around;
-    }
-
-    &-year{
-      margin:.5rem;
-
-      & .hx-button{
-        padding: .5rem;
-      }
-    }
-
-    &-months{
-      margin:.7rem;
-
-      & .hx-button{
-        padding: .5rem;
-        font-weight: 500;
-      }
-    }
-
-    &-day,
-    &-year,
-    &-months {
-        flex: 1 1 14%;
-        height: 16.666%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        & .hx-button {
-            position: initial;
-            top: initial;
-            flex: 1;
-            font-weight: 400;
-            height: 100%;
-            padding: 0;
-            color: $hx-color-success;
-        }
-
-        &-siblingmonth .hx-button {
-            color: $hx-color-gray;
-            font-weight: 100;
-        }
-
-        &-selectedday .hx-button {
-            color: white;
-            background: #41b987;
-        }
-
-        &-invalidday .hx-button {
-            color: $hx-color-light !important;
-            pointer-events: none;
-        }
-
-        &-currentday .hx-button {
-            border: 2px solid #41b987;
-        }
-    }
+// TODO: remove once hx-card has not-hoverable modifier
+:host.hx-card {
+  border: unset;
+  &:hover,
+  &.is-hovered {
+    box-shadow: none;
+  }
 }
 
-  :host {
-    max-width: 24rem;
-    border: 1px lightgray solid;
-    background: white;
-    .hxa-tabs {
-        ::ng-deep hx-tabset {
-          ::ng-deep ul {
-            background-color: white;
-            margin-bottom: 0;
-            ::ng-deep li {
-              width: 50%;
-              a {
-                span {
-                  font-size: medium;
-                  margin: auto;
-                }
-              }
-            }
-          }
-          ::ng-deep .hx-tab-content {
-            padding: 0;
-          }
-      }
+.hxa-datepicker-calendar {
+  &:host {
+    width: $hx-datepicker-calendar-width;
+    height: $hx-datepicker-calendar-height;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    border: unset;
+  }
+
+  &__header {
+    padding: 0.5rem 0.5rem 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  &__icon {
+    &.hx-button.is-transparent:hover {
+      color: black;
+    }
+
+    .hx-icon {
+      color: $hx-color-blue;
     }
   }
 
+  &__month {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    margin-bottom: 0.5rem;
+
+    &-title {
+      font-size: 1.25em;
+      font-weight: 400;
+      flex: 3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $hx-color-blue;
+    }
+  }
+
+  &__week {
+    display: flex;
+    width: 100%;
+    text-align: center;
+
+    &day {
+      flex: 1;
+      color: $hx-color-blue;
+      font-size: 0.85em;
+    }
+  }
+
+  &__contents {
+    padding: 0.5rem;
+    background-color: rgba(246, 246, 249, 0.5);
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1;
+    justify-content: space-around;
+    align-content: space-around;
+  }
+
+  &__year {
+    margin: 0.5rem;
+
+    &.hx-button {
+      padding: 0.5rem;
+    }
+  }
+
+  &__months {
+    margin: 0.7rem;
+
+    &.hx-button {
+      padding: 0.5rem;
+      font-weight: 500;
+    }
+  }
+
+  &__day,
+  &__year,
+  &__months {
+    flex: 1 1 14%;
+    height: 16.666%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.hx-button.is-transparent {
+      font-weight: 400;
+      padding: 0;
+      color: $hx-color-success;
+    }
+
+    &-siblingmonth.hx-button.is-transparent {
+      color: $hx-color-gray;
+      font-weight: 100;
+    }
+
+    &-selectedday.hx-button.is-transparent {
+      color: white;
+      background: #41b987;
+    }
+
+    &-invalidday.hx-button.is-transparent {
+      color: $hx-color-light;
+      pointer-events: none;
+    }
+
+    &-currentday.hx-button.is-transparent {
+      border: 2px solid #41b987;
+    }
+  }
+}

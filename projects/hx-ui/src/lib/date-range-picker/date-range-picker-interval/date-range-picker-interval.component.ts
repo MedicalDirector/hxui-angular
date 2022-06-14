@@ -1,14 +1,11 @@
 import {
+  AfterViewInit,
   Component,
-  OnInit,
-  Input,
-  Output,
   EventEmitter,
-  AfterViewInit
+  Input,
+  Output
 } from '@angular/core';
-import {
-  IntervalItem
-} from '../interval-option-model';
+import { IntervalItem } from '../interval-option-model';
 
 @Component({
   selector: 'hxa-date-range-picker-interval',
@@ -18,15 +15,13 @@ import {
 export class DateRangePickerIntervalComponent implements AfterViewInit {
   @Input() intervalOptionList: IntervalItem[];
   @Input() currentSelectedInterval: IntervalItem;
-  @Output() newSelectedInterval = new EventEmitter < IntervalItem > ();
-  @Output() closeDropdown = new EventEmitter < boolean > ();
-
-  constructor() {}
+  @Output() newSelectedInterval = new EventEmitter<IntervalItem>();
+  @Output() closeDropdown = new EventEmitter<boolean>();
 
   ngAfterViewInit() {
     if (this.currentSelectedInterval) {
       const element = document.getElementById(this.currentSelectedInterval.id);
-      element.classList.add("label-selected");
+      element.classList.add('label-selected');
     }
   }
 
@@ -38,7 +33,7 @@ export class DateRangePickerIntervalComponent implements AfterViewInit {
   mouseHover(e) {
     if (this.currentSelectedInterval) {
       const element = document.getElementById(this.currentSelectedInterval.id);
-      element.classList.remove("label-selected");
+      element.classList.remove('label-selected');
     }
   }
 }

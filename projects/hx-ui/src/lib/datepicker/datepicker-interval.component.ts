@@ -1,119 +1,207 @@
-import { Component, OnInit, Input, ViewChild, ElementRef} from '@angular/core';
-import {DatepickerFormComponent} from './datepicker-form.component';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment_ from 'moment';
+import { Subscription } from 'rxjs';
+import { DatePickerInterval } from './datepicker.model';
 const moment = moment_;
-import {DatepickerConfig} from './datepicker.config';
-import {DatepickerComponent} from './datepicker.component';
 
 @Component({
   selector: 'hxa-datepicker-interval',
   templateUrl: './datepicker-interval.component.html',
   styleUrls: ['./datepicker-interval.component.scss']
 })
-export class DatepickerIntervalComponent implements OnInit {
-
-  @ViewChild('durationText', { static: true }) durationText: ElementRef;
-  @ViewChild('numberText', { static: true }) numberText: ElementRef;
-  protected close: Function;
-  public Duration: any ; // = 'day(s)';
-  public dropdownNumber: any ; // = 0;
-  public text: any ; // =  moment().add(this.dropdownNumber , this.Duration);
-  public _DueDate: string ;
+export class DatepickerIntervalComponent implements OnInit, OnDestroy {
+  public durationOptions = ['day', 'week', 'month', 'year'];
+  public duration = 'days';
+  public increment = 0;
+  public text: moment_.Moment;
+  public dateLabel: string;
   public _dueDatestring: string;
-  public durationText1: any;
-  public numberText1: any;
-  public selectedDuration: string;
-  private presentDate: Date;
-  viewDate: Date;
+
+  private value$: Subscription = new Subscription();
+  public form: FormGroup;
+
+  @HostBinding('class')
+  get classes() {
+    return 'hx-card hxa-datepicker-interval';
+  }
 
   @Input()
-  selectedDateInterval: Date;
+  selectedDate: Date;
 
   @Input()
-  placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
+  selectedInterval: DatePickerInterval;
 
-  constructor(private _datepickerForm: DatepickerFormComponent, private datePickerConfig: DatepickerConfig, private _datepickerComponent: DatepickerComponent) {
-     }
+  @Output()
+  update = new EventEmitter<DatePickerInterval & { date: Date }>();
 
-     ngOnInit() {
-       if (this.datePickerConfig.selectedDueDateConfiguration.isSelectedFromInterval) {
-        if (this._datepickerComponent.selectedDueDateInterval && this._datepickerComponent.selectedDueDateInterval.split(' ')){
-          const selectedDueDateInterval = this._datepickerComponent.selectedDueDateInterval.split(' ');
-          if (selectedDueDateInterval && selectedDueDateInterval.length > 1) {
-            this.dropdownNumber = selectedDueDateInterval[0];
-            this.Duration = this.resetDurationText(selectedDueDateInterval[1]);
-            if (this.datePickerConfig && this.datePickerConfig.tabSelected === 'tab1') {
-              this.durationText1 = this.SelectElement(this.durationText, this.Duration);
-              this.numberText1 = this.SelectElement(this.numberText, this.dropdownNumber);
-              this._DueDate = this.onSelectoptions(this.numberText1, this.durationText1);
-            } else if (this.datePickerConfig && this.datePickerConfig.tabSelected === 'tab2') {
-              this.text = moment().add(this.dropdownNumber, this.Duration.replace('(s)', 's'));
-              this._DueDate = (this.text).format('ddd DD/MM/YYYY');
-              this.durationText1 = this.Duration;
-              this.numberText1 = this.dropdownNumber;
-            }
-          }
-        }
-      } else {
-        if (this.datePickerConfig.selectedDueDateConfiguration.selectedDueDate) {
-          const selectedDueDate = this.datePickerConfig.selectedDueDateConfiguration.selectedDueDate.toString();
-          this.dropdownNumber = this._datepickerComponent.selectedDueDateInterval.split(' ')[0];
-          this.Duration = this.resetDurationText(this._datepickerComponent.selectedDueDateInterval.split(' ')[1]);
-          this.text = moment().add(this.dropdownNumber, this.Duration.replace('(s)', 's'));
-          this._DueDate = (this.text).format('ddd DD/MM/YYYY');
-        }
+  @Output()
+  cancel = new EventEmitter<void>();
+
+  constructor(public fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    // date selected from interval
+    if (
+      this.selectedInterval &&
+      this.selectedInterval.isSelectedFromInterval &&
+      this.selectedInterval.interval
+    ) {
+      const intervalArr = this.selectedInterval.interval.split(' ');
+
+      if (intervalArr && intervalArr.length > 1) {
+        this.increment = parseInt(intervalArr[0], 10);
+        this.duration = this.normaliseDurationString(intervalArr[1]);
+      }
+
+      // date is typed or calendar picker
+    } else if (this.selectedDate) {
+      const selected = moment(this.selectedDate);
+      const today = moment().startOf('day');
+      const duration = 'days';
+
+      const daysBetween: number = selected.diff(today, duration);
+
+      if (daysBetween && daysBetween > 0) {
+        this.increment = daysBetween;
+        this.duration = duration;
       }
     }
-  onCancel = () => {
-    this._datepickerComponent.OpenDiv = false;
-    this._datepickerForm._detach();
+
+    this.onSelectoptions(this.increment, this.duration);
+
+    this.form = this.fb.group({
+      number: [this.increment, Validators.min(0)],
+      duration: [this.duration]
+    });
+
+    this.onValueChanges();
   }
 
-  onSelect = () => {
-    if (this.dropdownNumber && this.Duration && this.dropdownNumber > 0) {
-      this.text = moment().add(this.dropdownNumber , this.Duration.replace('(s)', 's'));
-    } else if (this.dropdownNumber === 0 || this.dropdownNumber < 0) {
-      this.dropdownNumber = 0;
-        this.text = moment(new Date());
+  ngOnDestroy(): void {
+    this.value$.unsubscribe();
+  }
+
+  public onValueChanges(): void {
+    this.value$ = this.form.valueChanges.subscribe(val => {
+      this.onSelectoptions(val.number, val.duration);
+    });
+  }
+
+  /** on cancel of interval form */
+  public onCancel(): void {
+    this.cancel.emit();
+  }
+
+  public onSelectoptions(numberValue: number, durationValue: string): void {
+    this.text = moment().add(
+      numberValue as moment_.DurationInputArg1,
+      durationValue as moment_.DurationInputArg2
+    );
+    this.dateLabel = this.text.format('ddd DD/MM/YYYY');
+    this._dueDatestring = this.text.format('YYYY-MM-DD');
+  }
+
+  /** on submission of interval form */
+  public onChoose($event: SubmitEvent) {
+    $event.preventDefault();
+    // check form is valid
+    if (this.form.valid) {
+      const intervalSubmitted =
+        this.form.value.number.toString() +
+        ' ' +
+        this.normaliseDurationString(this.form.value.duration, 'optional');
+
+      const dateSubmitted = new Date(this._dueDatestring);
+
+      const result = {
+        interval: intervalSubmitted,
+        isSelectedFromInterval: true,
+        date: dateSubmitted
+      };
+
+      // emit result
+      this.update.emit(result);
     }
-      this._DueDate = (this.text).format('ddd DD/MM/YYYY');
-      this._dueDatestring = (this.text).format('DD/MM/YYYY');
-      this.datePickerConfig.selectedDueDateConfiguration.selectedDueDate = new Date( this._DueDate);
-  }
-  
-  onSelectoptions(numbervalue , durationValue) {
-      this.text = moment().add(numbervalue , durationValue.replace('(s)', 's'));
-      this._DueDate = (this.text).format('ddd DD/MM/YYYY');
-      this._dueDatestring = (this.text).format('DD/MM/YYYY');
-      this.datePickerConfig.selectedDueDateConfiguration.isSelectedFromInterval = true;
-
-      return this._DueDate;
-  }
-  public onChoose($event) {
-    this._datepickerForm.date =  new Date(this.text);
-    this._datepickerForm.setDate(new Date(this.text));
-    this._dueDatestring = (this.text).format('DD/MM/YYYY');
-    $event.target.value = this._dueDatestring
-    this._datepickerForm.onChange($event);
-    this.datePickerConfig.selectedDueDateConfiguration.selectedDueDate = new Date(this.text);
-    this._datepickerComponent.OpenDiv = false;
-    this._datepickerComponent.selectedDueDateInterval = this.dropdownNumber + ' ' + this.Duration;
-    this._datepickerForm.dueDateInterval = this.dropdownNumber + ' ' + this.Duration;
-    this._datepickerForm._detach();
-    this.datePickerConfig.selectedDueDateConfiguration.isSelectedFromInterval = true;
   }
 
-  public SelectElement(id , valueToSelect) {
-    (id.nativeElement).value = valueToSelect;
-    return ((id.nativeElement).value);
-  }
-  public resetDurationText(duration: string): string {
-    if (duration === 'day' || duration === 'week' || duration === 'month' || duration === 'year') {
-      return duration + '(s)';
-    } else if (duration === 'days' || duration === 'weeks' || duration === 'months' || duration === 'years') {
-      return duration.replace('s', '(s)');
-    } else {
-      return duration;
+  /** normalise duration string */
+  public normaliseDurationString(
+    duration: string,
+    output: 'singular' | 'plural' | 'optional' = 'plural'
+  ): string {
+    const singular = this.durationOptions;
+    const plural = singular.map(val => val + 's');
+    const optional = singular.map(val => val + '(s)');
+
+    const current = currentFormat(duration);
+
+    let result = [`${output}`][0] || 'days';
+
+    if (output === 'singular') {
+      result = toSingular(duration);
+    } else if (output === 'plural') {
+      result = toPlural(duration);
+    } else if (output === 'optional') {
+      result = toOptional(duration);
+    }
+
+    return result;
+
+    function currentFormat(str: string): string | undefined {
+      if (singular.includes(str)) {
+        return 'singular';
+      } else if (plural.includes(str)) {
+        return 'plural';
+      } else if (optional.includes(str)) {
+        return 'optional';
+      } else {
+        return undefined;
+      }
+    }
+
+    function toSingular(str: string): string {
+      let result = singular[0];
+      if (current === 'singular') {
+        result = str;
+      } else if (current === 'plural') {
+        result = str.replace('s', '');
+      } else if (current === 'optional') {
+        result = str.replace('(s)', '');
+      }
+      return result;
+    }
+
+    function toPlural(str: string): string {
+      let result = plural[0];
+      if (current === 'singular') {
+        result = str + 's';
+      } else if (current === 'plural') {
+        result = str;
+      } else if (current === 'optional') {
+        result = str.replace('(s)', 's');
+      }
+      return result;
+    }
+
+    function toOptional(str: string): string {
+      let result = optional[0];
+      if (current === 'singular') {
+        result = str + '(s)';
+      } else if (current === 'plural') {
+        result = str.replace('s', '(s)');
+      } else if (current === 'optional') {
+        result = str;
+      }
+      return result;
     }
   }
 }

@@ -33,6 +33,7 @@ import { TextInputComponent } from './text-input/text-input.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
 import { StaticArrayComponent } from './typeaheads/static-array/static-array.component';
 import { TypeaheadsComponent } from './typeaheads/typeaheads.component';
+import { MigrateV13Component } from './migrate-v13/migrate-v13.component';
 
 @NgModule({
   imports: [
@@ -73,7 +74,8 @@ import { TypeaheadsComponent } from './typeaheads/typeaheads.component';
     NgSelectComponent,
     NgxToastrComponent,
     ExampleFilterNewComponent,
-    ExampleFilterOldComponent
+    ExampleFilterOldComponent,
+    MigrateV13Component
   ],
   providers: [TabularService, InMemoryDataService],
   exports: []

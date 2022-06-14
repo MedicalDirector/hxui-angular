@@ -1,45 +1,63 @@
-@import "datepicker-variables";
+@import '~@hxui/css/static/static/scss/variables';
+@import 'datepicker-variables';
 
 .hxa-datepicker {
-    &-form {
-        position: relative;
-        max-width: $hx-datepicker-calendar-width;
+  &:host {
+    position: relative;
+    display: block;
+    max-width: $hx-datepicker-calendar-width;
+
+    input[readonly] ~ .hx-label {
+      top: -0.5rem;
+      font-size: 0.75rem;
+      color: #41b987;
+    }
+  }
+
+  &__control {
+    margin: 0;
+  }
+
+  &__button {
+    position: absolute;
+    top: 0.5rem;
+    padding: 0;
+    z-index: 1;
+    background-color: unset;
+    border: none;
+
+    &.left {
+      left: 0;
     }
 
-    &-control {
-        margin: 0;
+    &.right {
+      right: 0;
     }
-
-    &-calendar {
-        position: absolute;
-        z-index: 99;
-        left: 0;
-        max-width: $hx-datepicker-calendar-width;
-        &-top {
-            bottom: 100%;
-        }
-
-        &-bottom {
-            top: 70%;
-        }
-        & hxa-datepicker {
-          max-width: $hx-datepicker-calendar-width;
-        }
-    }
-
-    &-help {
-        font-size: .75rem;
-        margin-top: .25rem;
-        color: #63605f;
-    }
+  }
 }
 
-.hxa-datepicker-form input[readonly] ~ .hx-label {
-    top: -.5rem;
-    font-size: .75rem;
-    color: #41b987;
-}
-hxa-datepicker {
-  border: 1px lightgray solid;
-  max-width: $hx-datepicker-calendar-width;
+// needed to target overlay
+::ng-deep .hxa-datepicker {
+  &__overlay {
+    box-shadow: 0 2px 12px 0 rgba($hx-color-black, 0.06);
+    outline: 1px solid rgba($hx-color-black, 0.08);
+    max-width: $hx-datepicker-calendar-width;
+
+    .hxa-tabset {
+      &.is-tablist-hidden {
+        ::ng-deep .hx-nav-tabs {
+          display: none;
+        }
+      }
+      ::ng-deep {
+        .hx-nav-tabs {
+          margin-bottom: 0;
+        }
+        // TOOD: update hxui css tabs justified text alignment, then remove this
+        .hx-nav-link {
+          text-align: center;
+        }
+      }
+    }
+  }
 }

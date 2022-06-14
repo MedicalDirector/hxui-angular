@@ -17,12 +17,13 @@ export * from './lib/date-range-picker/date-range-picker-custom/date-range-picke
 export * from './lib/date-range-picker/date-range-picker-interval/date-range-picker-interval.component';
 export * from './lib/date-range-picker/date-range-picker.component';
 export * from './lib/date-range-picker/date-range-picker.config';
+export * from './lib/date-range-picker/date-range-picker.model';
 export * from './lib/date-range-picker/date-range-picker.module';
 export * from './lib/date-range-picker/interval-option-model';
 export * from './lib/datepicker/datepicker-form.component';
-export * from './lib/datepicker/datepicker-view-mode-enum';
 export * from './lib/datepicker/datepicker.component';
 export * from './lib/datepicker/datepicker.config';
+export * from './lib/datepicker/datepicker.model';
 export * from './lib/datepicker/datepicker.module';
 export * from './lib/dialog/dialog-overlay.ref';
 export * from './lib/dialog/dialog.module';

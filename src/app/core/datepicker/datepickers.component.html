@@ -21,8 +21,8 @@
         The date picker makes use of an excellent 3rd party angular directive
         called
         <a href="https://www.npmjs.com/package/ngx-mask" target="_blank">
-          ngx-mask
-        </a>.<br />
+          ngx-mask </a
+        >.<br />
         You will need to npm install ngx-mask into your application, in order to
         use the date picker component.
       </span>
@@ -39,7 +39,7 @@
             placement="bottom"
             [defaultToPresentDate]="false"
             formControlName="dayte_basic"
-            (onDateChange)="onDateChangedBasic($event)"
+            (dateChange)="onDateChangedBasic($event)"
             [required]="true"
           ></hxa-datepicker-input>
           <div>
@@ -48,17 +48,11 @@
               <b>{{ basicForm.get("dayte_basic").value }}</b>
             </span>
             <br />
-            <span>
-              NgForm Status: <b>{{ basicForm.status }}</b>
-            </span>
+            <span> NgForm Status: <b>{{ basicForm.status }}</b> </span>
             <br />
-            <span>
-              NgForm Valid: <b>{{ basicForm.valid }}</b>
-            </span>
+            <span> NgForm Valid: <b>{{ basicForm.valid }}</b> </span>
             <br />
-            <span>
-              NgForm Touched: <b>{{ basicForm.touched }}</b>
-            </span>
+            <span> NgForm Touched: <b>{{ basicForm.touched }}</b> </span>
             <br />
           </div>
         </form>
@@ -101,17 +95,11 @@
               <b>{{ intervalForm.get("dayte").value }}</b>
             </span>
             <br />
-            <span>
-              NgForm Status: <b>{{ intervalForm.status }}</b>
-            </span>
+            <span> NgForm Status: <b>{{ intervalForm.status }}</b> </span>
             <br />
-            <span>
-              NgForm Valid: <b>{{ intervalForm.valid }}</b>
-            </span>
+            <span> NgForm Valid: <b>{{ intervalForm.valid }}</b> </span>
             <br />
-            <span>
-              NgForm Touched: <b>{{ intervalForm.touched }}</b>
-            </span>
+            <span> NgForm Touched: <b>{{ intervalForm.touched }}</b> </span>
             <br />
           </div>
         </form>
@@ -232,17 +220,13 @@
             <tr>
               <td>helpText</td>
               <td><kbd>string</kbd></td>
-              <td>
-                This attribute specifies the text value of input helper.
-              </td>
+              <td>This attribute specifies the text value of input helper.</td>
               <td><kbd>'Please select a valid date'</kbd></td>
             </tr>
             <tr>
               <td>helpTextVisible</td>
               <td><kbd>string</kbd></td>
-              <td>
-                Specifies visibility of input help text
-              </td>
+              <td>Specifies visibility of input help text</td>
               <td><kbd>false</kbd></td>
             </tr>
             <tr>
@@ -260,17 +244,13 @@
             <tr>
               <td>icon</td>
               <td><kbd>string</kbd></td>
-              <td>
-                This attribute specifies the font icon name.
-              </td>
+              <td>This attribute specifies the font icon name.</td>
               <td><kbd>'hx-icon icon-calendar'</kbd></td>
             </tr>
             <tr>
               <td>iconPlacement</td>
               <td><kbd>string</kbd></td>
-              <td>
-                This attribute specifies the icon placement.
-              </td>
+              <td>This attribute specifies the icon placement.</td>
               <td><kbd>'right'</kbd></td>
             </tr>
             <tr>
@@ -346,14 +326,14 @@
           </thead>
           <tbody>
             <tr>
-              <td>onDateChange</td>
+              <td>dateChange</td>
               <td>
                 Emits a Date is selected from the Datepicker or a valid date
                 string is entered into input field
               </td>
             </tr>
             <tr>
-              <td>onFocus</td>
+              <td>inputFocus</td>
               <td>Emits a boolean if date picker input field is in focus</td>
             </tr>
           </tbody>
