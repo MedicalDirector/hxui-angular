@@ -1,5 +1,4 @@
 export class DatepickersCode {
-
   usage = `
   import { DatepickerModule } from "@hxui/angular";
 
@@ -16,7 +15,7 @@ export class DatepickersCode {
       placement="bottom"
       [defaultToPresentDate]="false"
       formControlName="dayte_basic"
-      (onDateChange)="onDateChangedBasic($event)"
+      (dateChange)="onDateChangedBasic($event)"
       [required]="false"
     ></hxa-datepicker-input>
     <div>

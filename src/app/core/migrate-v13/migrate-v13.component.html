@@ -1,0 +1,87 @@
+<aside
+  class="hx-sidebar is-active is-right is-medium-width is-scrollable hx-bg-white"
+>
+  <ul class="hx-nav hx-nav-vertical">
+    <li class="hx-nav-heading">
+      <h6>Contents</h6>
+    </li>
+
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>Usage</span></a>
+    </li>
+
+    <li class="hx-nav-item">
+      <a class="hx-nav-link" (click)="scrollTo('#date-picker')">
+        <span>Date picker</span>
+      </a>
+    </li>
+  </ul>
+</aside>
+
+<div class="hx-section scrollable-y" #container>
+  <article class="is-comfortable">
+    <h1 class="hx-title" style="padding-top: 1.5rem">Migrating to v13</h1>
+    <p class="hx-subtitle">Upgrading from v11</p>
+    <hr />
+
+    <h2 class="h2" id="api">Breaking changes</h2>
+    <section id="date-picker">
+      <h3 class="h3">Date picker</h3>
+
+      <p>
+        Selector <kbd>hxa-datepicker-form</kbd> is <b>no longer available</b>.
+        Please update references to <kbd>hxa-datepicker-input</kbd>.
+      </p>
+
+      <p>
+        Output names have changed to align with
+        <a
+          href="https://angular.io/guide/styleguide"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Angular Style Guide</a
+        >.
+      </p>
+      <ul>
+        <li><kbd>onDateChange</kbd> → <kbd>dateChange</kbd></li>
+        <li><kbd>onFocus</kbd> → <kbd>inputFocus</kbd></li>
+      </ul>
+
+      <p>
+        <b>
+          Keyboard navigation has been enhanced to improve component
+          accessibility.
+        </b>
+        Markup and styling selectors have changed as a result. If you are
+        overriding default styles, please review changes. Generally:
+      </p>
+      <ul>
+        <li><kbd>hxa-datepicker-form</kbd> → <kbd>hxa-datepicker</kbd></li>
+        <li>
+          <kbd>hxa-datepicker-calendar</kbd> →
+          <kbd>hxa-datepicker__overlay</kbd>
+        </li>
+        <li><kbd>hxa-datepicker-</kbd> → <kbd>hxa-datepicker-calendar</kbd></li>
+        <li>
+          <kbd>hx-datepicker-set-interval</kbd> →
+          <kbd>hxa-datepicker-interval</kbd>
+        </li>
+      </ul>
+
+      <p>Default input mask pattern has been updated.</p>
+      <ul>
+        <li><kbd>'d0/M0/0000'</kbd> → <kbd>'00/00/0000'</kbd></li>
+      </ul>
+
+      <p>
+        The following properties have been removed from
+        <kbd>DatePickerConfig</kbd>:
+      </p>
+      <ul>
+        <li><kbd>tabSelected</kbd></li>
+        <li><kbd>selectedDueDateConfiguration</kbd></li>
+      </ul>
+    </section>
+  </article>
+</div>

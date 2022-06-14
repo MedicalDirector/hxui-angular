@@ -10,13 +10,13 @@ describe('DatepickerFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    imports: [
+      imports: [
         DatepickerModule.forRoot(),
         OverlayModule,
         NgxMaskModule.forRoot()
-    ],
-    teardown: { destroyAfterEach: false }
-}).compileComponents();
+      ],
+      teardown: { destroyAfterEach: false }
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -73,13 +73,13 @@ describe('DatepickerFormComponent', () => {
     });
 
     it('should try to call setDate() if passed a valid date', () => {
-      component.onChange({ target: { value: '11/01/1993' } });
+      component.onChange({ target: { value: '11/01/1993' } } as any);
 
       expect(component.setDate).toHaveBeenCalled();
     });
 
     it('should try to call setDate(null) if passed an invalid date', () => {
-      component.onChange({ target: { value: 'abc' } });
+      component.onChange({ target: { value: 'abc' } } as any);
 
       expect(component.setDate).toHaveBeenCalledWith(null);
     });
@@ -146,15 +146,15 @@ describe('DatepickerFormComponent', () => {
 
     beforeEach(() => {
       date = new Date('11 Jan 1993');
-      jest.spyOn(component.onDateChange, 'emit');
+      jest.spyOn(component.dateChange, 'emit');
       jest.spyOn(component, 'propogateChange');
     });
 
-    it('should set component.date to the Date object passed to it and invoke onDateChange.emit() and propogateChange()', () => {
+    it('should set component.date to the Date object passed to it and invoke dateChange.emit() and propogateChange()', () => {
       component.setDate(date);
 
       expect(component.date).toBe(date);
-      expect(component.onDateChange.emit).toHaveBeenCalledWith(date);
+      expect(component.dateChange.emit).toHaveBeenCalledWith(date);
       expect(component.propogateChange).toHaveBeenCalledWith(date);
     });
   });
