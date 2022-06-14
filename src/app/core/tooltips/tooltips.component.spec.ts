@@ -1,7 +1,6 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { SharedModule } from '../../shared/shared.module';
 import { TooltipsComponent } from './tooltips.component';
-import {AppModule} from '../../app.module';
 
 describe('TooltipsComponent', () => {
   let component: TooltipsComponent;
@@ -9,10 +8,10 @@ describe('TooltipsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    imports: [AppModule],
-    teardown: { destroyAfterEach: false }
-})
-    .compileComponents();
+      imports: [SharedModule],
+      declarations: [TooltipsComponent],
+      teardown: { destroyAfterEach: false },
+    }).compileComponents();
   }));
 
   beforeEach(() => {

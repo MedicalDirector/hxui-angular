@@ -9,13 +9,13 @@ import { Component } from '@angular/core';
     trigger('slideInOut', [
       transition(':enter', [
         style({ transform: 'translateX(-100%)' }),
-        animate('500ms ease-in-out', style({ transform: 'translateX(0%)' }))
+        animate('500ms ease-in-out', style({ transform: 'translateX(0%)' })),
       ]),
       transition(':leave', [
-        animate('500ms ease-in-out', style({ transform: 'translateX(-100%)' }))
-      ])
-    ])
-  ]
+        animate('500ms ease-in-out', style({ transform: 'translateX(-100%)' })),
+      ]),
+    ]),
+  ],
 })
 export class AppComponent {
   nav = true;
@@ -25,140 +25,144 @@ export class AppComponent {
       items: [
         {
           name: 'Install guide',
-          link: '/install-guide'
+          link: '/install-guide',
         },
         {
           name: 'Migrating to v13',
-          link: '/migrate-13'
-        }
-      ]
+          link: '/migrate-13',
+        },
+      ],
     },
     {
       cat: 'Components',
       items: [
         {
           name: 'Accordions',
-          link: '/accordion'
+          link: '/accordion',
         },
         {
           name: 'Date Pickers',
-          link: '/date-pickers'
+          link: '/date-pickers',
         },
         {
           name: 'Date Range Pickers',
-          link: '/date-range-pickers'
+          link: '/date-range-pickers',
         },
         {
           name: 'Dropdowns',
-          link: '/dropdowns'
+          link: '/dropdowns',
         },
         {
           name: 'Dialogs',
-          link: '/dialogs'
+          link: '/dialogs',
         },
         {
           name: 'Inspector',
-          link: '/inspector'
+          link: '/inspector',
         },
         {
           name: 'Modals',
           link: '/modals',
-          deprecated: true
+          deprecated: true,
         },
         {
           name: 'Pagination',
-          link: '/pagination'
+          link: '/pagination',
         },
         {
           name: 'Tabs',
-          link: '/tabs'
+          link: '/tabs',
         },
         {
           name: 'Tabular',
-          link: '/tabular'
+          link: '/tabular',
+        },
+        {
+          name: 'Timepicker',
+          link: '/time-picker',
         },
         {
           name: 'Tooltips',
-          link: '/tooltips'
+          link: '/tooltips',
         },
         {
           name: 'Typeaheads',
-          link: '/typeaheads'
+          link: '/typeaheads',
         },
         {
           name: 'Toastr',
-          link: '/toastr'
+          link: '/toastr',
         },
         {
           name: 'Selectize',
           link: '/selectize',
-          deprecated: true
+          deprecated: true,
         },
         {
           name: 'Ng-Select',
-          link: '/ng-select'
+          link: '/ng-select',
         },
         {
           name: 'Loaders',
-          link: '/loaders'
+          link: '/loaders',
         },
         {
           name: 'Line Clamp',
-          link: '/line-clamp'
-        }
-      ]
+          link: '/line-clamp',
+        },
+      ],
     },
     {
       cat: 'Patterns',
       items: [
         {
           name: 'Empty States',
-          link: '/empty-state'
+          link: '/empty-state',
         },
         {
           name: 'Filters',
-          link: '/filters'
-        }
-      ]
+          link: '/filters',
+        },
+      ],
     },
     {
       cat: 'Directives',
       items: [
         {
           name: 'Auto Grow',
-          link: '/autogrow'
+          link: '/autogrow',
         },
         {
           name: 'Text Input',
-          link: '/text-input'
-        }
-      ]
+          link: '/text-input',
+        },
+      ],
     },
     {
       cat: 'Services',
       items: [
         {
           name: 'Online Status',
-          link: '/online-status'
-        }
-      ]
+          link: '/online-status',
+        },
+      ],
     },
     {
       cat: 'Other',
       items: [
         {
           name: 'Change Log (v11)',
-          url: 'https://github.com/MedicalDirector/hxui-angular/blob/master/projects/hx-ui/CHANGELOG.md'
+          url: 'https://github.com/MedicalDirector/hxui-angular/blob/master/projects/hx-ui/CHANGELOG.md',
         },
         {
           name: 'Change Log (v8)',
-          url: 'https://github.com/MedicalDirector/hxui-angular/blob/8.x/CHANGELOG.md'
+          url: 'https://github.com/MedicalDirector/hxui-angular/blob/8.x/CHANGELOG.md',
         },
         {
           name: 'License',
-          url: 'https://bitbucket.org/md-design/angular-hxui/src/master/LICENCE'
-        }
-      ]
-    }
+          url: 'https://bitbucket.org/md-design/angular-hxui/src/master/LICENCE',
+        },
+      ],
+    },
   ];
 }

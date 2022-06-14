@@ -20,14 +20,14 @@ import { DatepickerConfig } from './datepicker.config';
     NgxMaskModule,
     TextInputModule,
     OverlayModule,
-    A11yModule
+    A11yModule,
   ],
   declarations: [
     DatepickerComponent,
     DatepickerFormComponent,
-    DatepickerIntervalComponent
+    DatepickerIntervalComponent,
   ],
-  exports: [DatepickerFormComponent]
+  exports: [DatepickerFormComponent],
 })
 export class DatepickerModule {
   public static forRoot(): ModuleWithProviders<DatepickerModule> {

@@ -23,6 +23,7 @@ import { SelectizeComponent } from './core/selectize/selectize.component';
 import { TabsComponent } from './core/tabs/tabs.component';
 import { TabularComponent } from './core/tabular/tabular.component';
 import { TextInputComponent } from './core/text-input/text-input.component';
+import { TimepickerComponent } from './core/timepicker/timepicker.component';
 import { TooltipsComponent } from './core/tooltips/tooltips.component';
 import { TypeaheadsComponent } from './core/typeaheads/typeaheads.component';
 
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'migrate-13', component: MigrateV13Component },
   { path: 'accordion', component: AccordionComponent },
   { path: 'date-pickers', component: DatepickersComponent },
+  { path: 'time-picker', component: TimepickerComponent },
   { path: 'date-range-pickers', component: DateRangePickerComponent },
   { path: 'dropdowns', component: DropdownsComponent },
   { path: 'dialogs', component: DialogsComponent },
@@ -52,10 +54,10 @@ const routes: Routes = [
   { path: 'ng-select', component: NgSelectComponent },
   { path: 'line-clamp', component: LineClampComponent },
   { path: 'toastr', component: NgxToastrComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

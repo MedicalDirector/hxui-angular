@@ -1,18 +1,16 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { Timepicker } from './timepicker';
 
-import {Timepicker} from './timepicker';
-
-export {Timepicker} from './timepicker';
-export {TimepickerConfig} from './timepicker-config';
-export {HxaTimeStruct} from './hxa-time-struct';
-export {HxaTimeAdapter} from './hxa-time-adapter';
-export {TimepickerI18n} from './timepicker-i18n';
+export { HxaTimeAdapter } from './hxa-time-adapter';
+export { HxaTimeStruct } from './hxa-time-struct';
+export { Timepicker } from './timepicker';
+export { TimepickerConfig } from './timepicker-config';
+export { TimepickerI18n } from './timepicker-i18n';
 
 @NgModule({
   declarations: [Timepicker],
   exports: [Timepicker],
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
-export class TimepickerModule {
-}
+export class TimepickerModule {}

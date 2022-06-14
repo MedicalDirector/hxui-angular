@@ -1,7 +1,6 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { SharedModule } from '../../shared/shared.module';
 import { PaginationComponent } from './pagination.component';
-import {AppModule} from '../../app.module';
 
 describe('PaginationComponent', () => {
   let component: PaginationComponent;
@@ -9,10 +8,10 @@ describe('PaginationComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-    imports: [AppModule],
-    teardown: { destroyAfterEach: false }
-})
-    .compileComponents();
+      imports: [SharedModule],
+      declarations: [PaginationComponent],
+      teardown: { destroyAfterEach: false },
+    }).compileComponents();
   }));
 
   beforeEach(() => {
