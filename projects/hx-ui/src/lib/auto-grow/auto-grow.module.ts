@@ -1,20 +1,15 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import {AutoGrowDirective} from './auto-grow.directive';
-
+import { AutoGrowDirective } from './auto-grow.directive';
 
 @NgModule({
-  declarations: [
-    AutoGrowDirective
-  ],
-  exports: [
-   AutoGrowDirective
-  ]
+  declarations: [AutoGrowDirective],
+  exports: [AutoGrowDirective]
 })
 export class AutoGrowModule {
   public static forRoot(): ModuleWithProviders<AutoGrowModule> {
     return {
-      ngModule: AutoGrowModule, providers: []
+      ngModule: AutoGrowModule,
+      providers: []
     };
-  };
-
+  }
 }

@@ -5,11 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.0...HEAD)
+## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.1...HEAD)
+
+## [11.2.1](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.0...v11.2.1) - 2022-06-06
+
+### Added
+
+- Baseline visual tests for all components ([fad826d](https://github.com/MedicalDirector/hxui-angular/commit/fad826d329498e67c57122930520a4d1fe47312a))
 
 ### Fixed
 
-- [Positioning, Typeahead] Update deprecated types and add typings ([07a5072](https://github.com/MedicalDirector/hxui-angular/commit/07a5072ac69b4aecf34e333e2f0a9b69d8384080))
+- [Accordion, Inspector, Table, Timepicker, Toaster] Remove redundantly-added, lazy-load-blocking modules ([638f30e](https://github.com/MedicalDirector/hxui-angular/commit/638f30e5a929296d97494466814bf661cc36ca2b), [#15](https://github.com/MedicalDirector/hxui-angular/issues/15))
+
+- [Selectize] Fix delete icon styling for multi-select ([945960f](https://github.com/MedicalDirector/hxui-angular/commit/945960f9a578b865669809b0739c6b161c4e1284))
+- [Positioning, Typeahead] Update deprecated types and add typings ([e79b114](https://github.com/MedicalDirector/hxui-angular/commit/e79b114dd1eaa2a68d0411d3c1b097be8c9e590e))
 
 ## [11.2.0](https://github.com/MedicalDirector/hxui-angular/compare/v11.1.1...v11.2.0) - 2022-04-29
 
