@@ -11,6 +11,6 @@ registerLocaleData(localeEn, 'en-AU');
 @NgModule({
   imports: [CoreModule.forRoot(), SharedModule.forRoot(), HxUiModule.forRoot()],
   declarations: [AppComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -17,6 +17,7 @@
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
+            "baseHref": "/angular/",
             "assets": [
               "src/assets",
               "src/favicon.ico",
@@ -40,6 +41,7 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "baseHref": "/angular/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -49,7 +51,7 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "serviceWorker": false,
-              "ngswConfigPath": "/src/ngsw-config.json",
+              "ngswConfigPath": "src/ngsw-config.json",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

@@ -52,10 +52,10 @@ const routes: Routes = [
   { path: 'ng-select', component: NgSelectComponent },
   { path: 'line-clamp', component: LineClampComponent },
   { path: 'toastr', component: NgxToastrComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { useHash: false })],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
