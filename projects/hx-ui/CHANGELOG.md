@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [13.0.0-next.1](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.1) - 2022-06-28
+
+_If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
+
+### Fixed
+
+- [Date picker] Fixed styling for input with leading icon and dropdown overlay in incrementally-adopted hxui usage
+
 ## [13.0.0-next.0](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.0) - 2022-06-14
 
 _If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
