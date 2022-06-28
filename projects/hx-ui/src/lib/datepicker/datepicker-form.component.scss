@@ -16,6 +16,16 @@
 
   &__control {
     margin: 0;
+
+    // input styling with lagging icon - adapted from hxui/css for a11y nuance here
+    &:not(:last-child) {
+      .hx-input {
+        padding-right: 1.8rem;
+      }
+      .hx-label {
+        margin-right: 1.8rem;
+      }
+    }
   }
 
   &__button {
@@ -32,6 +42,16 @@
 
     &.right {
       right: 0;
+    }
+
+    // input styling with leading icon - adapted from hxui/css for a11y nuance here
+    + .hx-input-control {
+      .hx-input {
+        padding-left: 1.8rem;
+      }
+      .hx-label {
+        margin-left: 1.8rem;
+      }
     }
   }
 }
