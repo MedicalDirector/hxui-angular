@@ -5,7 +5,7 @@ import {
   Overlay,
   OverlayConnectionPosition,
   OverlayRef,
-  VerticalConnectionPos
+  VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
@@ -23,7 +23,7 @@ import {
   Output,
   TemplateRef,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -31,7 +31,7 @@ import {
   FormGroupDirective,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
-  Validator
+  Validator,
 } from '@angular/forms';
 import * as moment_ from 'moment';
 import { Subject } from 'rxjs';
@@ -49,14 +49,14 @@ const moment = moment_;
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DatepickerFormComponent),
-      multi: true
+      multi: true,
     },
     {
       provide: NG_VALIDATORS,
       useExisting: forwardRef(() => DatepickerFormComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class DatepickerFormComponent
   implements OnInit, ControlValueAccessor, Validator, OnDestroy, DoCheck
@@ -235,12 +235,12 @@ export class DatepickerFormComponent
       this.activeTabIndex = 1;
       this.selectedInterval = {
         interval: this.dueDateInterval,
-        isSelectedFromInterval: false
+        isSelectedFromInterval: false,
       };
     } else {
       this.selectedInterval = {
         interval: this.dueDateInterval,
-        isSelectedFromInterval: true
+        isSelectedFromInterval: true,
       };
     }
 
@@ -390,7 +390,7 @@ export class DatepickerFormComponent
           'DD-MM-YY',
           'DD.MM.YYYY',
           'D.M.YY',
-          'DD.MM.YY'
+          'DD.MM.YY',
         ];
         const momentDate = moment(inputDate, allowedFormats, true);
 
@@ -493,8 +493,8 @@ export class DatepickerFormComponent
       this.isValid = false;
       return {
         dateParseError: {
-          valid: false
-        }
+          valid: false,
+        },
       };
     }
 
@@ -502,8 +502,8 @@ export class DatepickerFormComponent
       this.isValid = false;
       return {
         previousDateError: {
-          valid: false
-        }
+          valid: false,
+        },
       };
     }
 
@@ -511,8 +511,8 @@ export class DatepickerFormComponent
       this.isValid = false;
       return {
         futureDateError: {
-          valid: false
-        }
+          valid: false,
+        },
       };
     }
 
@@ -520,8 +520,8 @@ export class DatepickerFormComponent
       this.isValid = false;
       return {
         dateRangeError: {
-          valid: false
-        }
+          valid: false,
+        },
       };
     }
 
@@ -529,8 +529,8 @@ export class DatepickerFormComponent
       this.isValid = false;
       return {
         dateRequiredError: {
-          valid: false
-        }
+          valid: false,
+        },
       };
     }
 
@@ -593,10 +593,10 @@ export class DatepickerFormComponent
 
     this._overlayRef = this.overlay.create({
       positionStrategy: positionStrategy,
-      panelClass: 'hxa-datepicker__overlay',
+      panelClass: ['hxui-reset', 'hxa-datepicker__overlay'],
       hasBackdrop: true,
       backdropClass: 'cdk-overlay-transparent-backdrop',
-      scrollStrategy: this.overlay.scrollStrategies.reposition()
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
     });
 
     this._updatePosition();
@@ -629,7 +629,7 @@ export class DatepickerFormComponent
 
     position.withPositions([
       { ...origin.main, ...overlay.main },
-      { ...origin.fallback, ...overlay.fallback }
+      { ...origin.fallback, ...overlay.fallback },
     ]);
   }
 
@@ -647,7 +647,7 @@ export class DatepickerFormComponent
     if (placement === 'top' || placement === 'bottom') {
       originPlacement = {
         originX: 'start',
-        originY: placement === 'top' ? 'top' : 'bottom'
+        originY: placement === 'top' ? 'top' : 'bottom',
       };
     } else if (placement === 'left') {
       originPlacement = { originX: 'start', originY: 'center' };
@@ -664,7 +664,7 @@ export class DatepickerFormComponent
 
     return {
       main: originPlacement,
-      fallback: { originX: x, originY: y }
+      fallback: { originX: x, originY: y },
     };
   }
 
@@ -695,7 +695,7 @@ export class DatepickerFormComponent
 
     return {
       main: overlayPlacement,
-      fallback: { overlayX: x, overlayY: y }
+      fallback: { overlayX: x, overlayY: y },
     };
   }
 
