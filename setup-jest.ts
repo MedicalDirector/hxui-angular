@@ -1,13 +1,6 @@
 import '@angular/localize/init';
 import 'jest-preset-angular/setup-jest';
 
-/* eslint-disable no-var */
-declare var window: any;
-window.$ = require('jquery');
-window.jQuery = window.$;
-window.Selectize = require('selectize');
-window.$.fn.selectize = jest.fn(() => window.$());
-
 /* global mocks for jsdom */
 const mock = () => {
   let storage: { [key: string]: string } = {};

@@ -6,6 +6,16 @@ This document describes breaking changes and how to upgrade. For a complete list
 
 _From Angular version 11_
 
+### General
+
+The following peer dependencies have been removed from the library:
+
+- `@angular/platform-browser-dynamic`
+- `selectize`
+- `jquery`
+
+You may remove these from your app if you have no other requirement for them.
+
 ### Date picker
 
 Selector `hxa-datepicker-form` is _no longer available_.
@@ -31,3 +41,9 @@ The following properties have been removed from `DatePickerConfig`:
 
 - `tabSelected`
 - `selectedDueDateConfiguration`
+
+### Selectize
+
+This previously-deprecated component is now removed from the library.
+
+Please migrate to `ng-select` if you have not already done so.

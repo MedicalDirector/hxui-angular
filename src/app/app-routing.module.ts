@@ -19,7 +19,6 @@ import { NgxToastrComponent } from './core/ngx-toastr/ngx-toastr.component';
 import { OnlineStatusComponent } from './core/online-status/online-status.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { PaginationComponent } from './core/pagination/pagination.component';
-import { SelectizeComponent } from './core/selectize/selectize.component';
 import { TabsComponent } from './core/tabs/tabs.component';
 import { TabularComponent } from './core/tabular/tabular.component';
 import { TextInputComponent } from './core/text-input/text-input.component';
@@ -44,7 +43,6 @@ const routes: Routes = [
   { path: 'tooltips', component: TooltipsComponent },
   { path: 'pagination', component: PaginationComponent },
   { path: 'tabular', component: TabularComponent },
-  { path: 'selectize', component: SelectizeComponent },
   { path: 'autogrow', component: AutoGrowComponent },
   { path: 'empty-state', component: EmptyStateComponent },
   { path: 'filters', component: FiltersComponent },
