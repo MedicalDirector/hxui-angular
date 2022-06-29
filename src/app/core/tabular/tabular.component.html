@@ -40,7 +40,7 @@
               <div>Print</div>
             </button>
           </span>
-          <button class="hx-button  mr-1" (click)="setCheckAllState(true)">
+          <button class="hx-button mr-1" (click)="setCheckAllState(true)">
             Check All
           </button>
           <button class="hx-button" (click)="setCheckAllState(false)">
@@ -48,13 +48,12 @@
           </button>
           <div class="hx-divider"></div>
           <div>
-            <span class="is-info is-text-weight-bolder">{{
-              totalSelected
-            }}</span>
+            <span class="is-info is-text-weight-bolder"
+              >{{ totalSelected }}</span
+            >
             of
-            <span class="is-info is-text-weight-bolder">{{
-              rowData.length
-            }}</span
+            <span class="is-info is-text-weight-bolder"
+              >{{ rowData.length }}</span
             ><span class="is-text-weight-light"> items selected</span>
           </div>
           <div class="hx-spacer"></div>
@@ -74,8 +73,7 @@
           (onSort)="onSortHandler($event)"
           (onCheck)="singleCheckHandler($event)"
           (onCheckAll)="groupCheckHandler($event)"
-        >
-        </hxa-tabular>
+        ></hxa-tabular>
       </div>
     </div>
 
@@ -100,12 +98,6 @@
           <hx-tab heading="Service">
             <pre>
               <code [highlight]="code.exampleService"></code>
-            </pre>
-          </hx-tab>
-
-          <hx-tab heading="Mock Data">
-            <pre>
-              <code [highlight]="code.exampleMockData"></code>
             </pre>
           </hx-tab>
           <hx-tab heading="User Model">
@@ -278,9 +270,7 @@
             <tr>
               <td>sortable</td>
               <td><kbd>boolean</kbd></td>
-              <td>
-                Is column sortable?
-              </td>
+              <td>Is column sortable?</td>
             </tr>
             <tr>
               <td>cssClass</td>
@@ -496,9 +486,7 @@
               <td>tooltip</td>
               <td>
                 <kbd>
-                  {{ "{" }}
-                  config: TooltipConfig; content: string;
-                  {{ "}" }}
+                  {{ "{" }} config: TooltipConfig; content: string; {{ "}" }}
                 </kbd>
               </td>
               <td>
