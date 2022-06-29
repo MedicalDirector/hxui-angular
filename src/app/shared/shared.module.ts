@@ -9,7 +9,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import {
   HighlightModule,
   HighlightOptions,
-  HIGHLIGHT_OPTIONS
+  HIGHLIGHT_OPTIONS,
 } from 'ngx-highlightjs';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { HxUiModule } from '../../../projects/hx-ui/src/lib/hx-ui.module';
@@ -28,13 +28,13 @@ const modules = [
   NgxPageScrollCoreModule,
   HighlightModule,
   NgSelectModule,
-  NgOptionHighlightModule
+  NgOptionHighlightModule,
 ];
 
 @NgModule({
   imports: modules,
   declarations: [],
-  exports: modules
+  exports: modules,
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {
@@ -48,12 +48,12 @@ export class SharedModule {
             lineNumbersLoader: () => import('highlightjs-line-numbers.js'),
             languages: {
               typescript: () => import('highlight.js/lib/languages/typescript'),
-              css: () => import('highlight.js/lib/languages/css'),
-              xml: () => import('highlight.js/lib/languages/xml')
-            }
-          }
-        }
-      ]
+              scss: () => import('highlight.js/lib/languages/scss'),
+              xml: () => import('highlight.js/lib/languages/xml'),
+            },
+          },
+        },
+      ],
     };
   }
 }

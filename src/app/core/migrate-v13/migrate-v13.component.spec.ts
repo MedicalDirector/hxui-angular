@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SharedModule } from '../../shared/shared.module';
 import { MigrateV13Component } from './migrate-v13.component';
 
 describe('MigrateV13Component', () => {
@@ -8,7 +8,8 @@ describe('MigrateV13Component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MigrateV13Component]
+      imports: [SharedModule],
+      declarations: [MigrateV13Component],
     }).compileComponents();
   });
 

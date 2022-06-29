@@ -18,9 +18,6 @@ Please make sure to update tests as appropriate.
 # install dependencies
 npm install
 
-# install peer dependencies
-npm run install-peers
-
 # run docs locally
 npm run docs:start
 
