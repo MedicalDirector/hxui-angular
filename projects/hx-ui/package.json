@@ -20,7 +20,6 @@
     "@angular/core": "^13.0.0",
     "@angular/forms": "^13.0.0",
     "@angular/platform-browser": "^13.0.0",
-    "@angular/platform-browser-dynamic": "^13.0.0",
     "@angular/router": "^13.0.0",
     "@angular/localize": "^13.0.0",
     "@hxui/css": "^1.5.0",
@@ -28,13 +27,11 @@
     "@ng-select/ng-option-highlight": "0.0.7",
     "@ng-select/ng-select": "^8.0.0",
     "array-sort-by": "^1.2.1",
-    "jquery": "^3.6.0",
     "lodash": "^4.17.20",
     "lodash.clonedeep": "^4.5.0",
     "moment": "^2.29.0",
     "ngx-mask": "^13.0.0",
     "rxjs": "^7.4.0",
-    "selectize": "^0.12.4",
     "ngx-toastr": "^14.0.0"
   }
 }

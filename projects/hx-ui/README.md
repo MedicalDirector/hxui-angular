@@ -14,17 +14,13 @@ Option 1:
 **Import all web component modules** into app module or shared module.
 
 ```ts
-import { HxUiModule } from '@hxui/angular'
+import { HxUiModule } from '@hxui/angular';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    HxUiModule.forRoot()
-  ],
+  declarations: [AppComponent],
+  imports: [HxUiModule.forRoot()],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
 ```
@@ -53,15 +49,18 @@ The following structural css needs to be included in the project's style file be
 
 ## Versions
 
-| @hxui/angular | Angular        |
-| ------------- | -------------- |
-| 8.x           | 8.x            |
-| 11.x          | 11.x           |
+| @hxui/angular | Angular |
+| ------------- | ------- |
+| 8.x           | 8.x     |
+| 11.x          | 11.x    |
+| 13.x          | 13.x    |
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)

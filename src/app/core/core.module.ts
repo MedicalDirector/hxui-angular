@@ -25,7 +25,6 @@ import { NgxToastrComponent } from './ngx-toastr/ngx-toastr.component';
 import { OnlineStatusComponent } from './online-status/online-status.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PaginationComponent } from './pagination/pagination.component';
-import { SelectizeComponent } from './selectize/selectize.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { InMemoryDataService } from './tabular/in-memory-data.service';
 import { TabularComponent } from './tabular/tabular.component';
@@ -57,7 +56,6 @@ import { TypeaheadsComponent } from './typeaheads/typeaheads.component';
     PaginationComponent,
     TabularComponent,
     InstallGuideComponent,
-    SelectizeComponent,
     AutoGrowComponent,
     EmptyStateComponent,
     AccordionComponent,

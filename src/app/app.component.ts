@@ -94,11 +94,6 @@ export class AppComponent {
           link: '/toastr',
         },
         {
-          name: 'Selectize',
-          link: '/selectize',
-          deprecated: true,
-        },
-        {
           name: 'Ng-Select',
           link: '/ng-select',
         },
