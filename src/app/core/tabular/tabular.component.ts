@@ -1,31 +1,31 @@
-import { Component, Inject, OnInit, ViewChild } from "@angular/core";
-import { TabularColumn } from "../../../../projects/hx-ui/src/lib/tabular/tabular-column.model";
-import { TabularColumnTypes } from "../../../../projects/hx-ui/src/lib/tabular/tabular-column.interface";
-import { ITabularConfig } from "../../../../projects/hx-ui/src/lib/tabular/tabular-config.interface";
-import { TabularSize } from "../../../../projects/hx-ui/src/lib/tabular/tabular-size.enum";
-import { TabularService } from "./tabular.service";
-import { UserModel } from "./user.model";
-import { CoreBaseComponent } from "../core-base.component";
-import { PageScrollService } from "ngx-page-scroll-core";
-import { DOCUMENT } from "@angular/common";
-import { ITabularRow } from "../../../../projects/hx-ui/src/lib/tabular/tabular-row.interface";
-import { TabularCode } from "./tabular.code";
-import { Observable, Subscription } from "rxjs";
-import { BreakpointObserver } from "@angular/cdk/layout";
-import { SortByDirection } from "../../../../projects/hx-ui/src/lib/tabular/tabular-sort-by.service";
-import { IFiltersConfig } from "../../../../projects/hx-ui/src/lib/filters/filters-config.interface";
-import { FilterType } from "../../../../projects/hx-ui/src/lib/filters/filters-type.enum";
-import { FiltersComponent } from "../../../../projects/hx-ui/src/lib/filters/filters.component";
-import { FiltersModel } from "../../../../projects/hx-ui/src/lib/filters/filters.model";
-import { TabularTheme } from "../../../../projects/hx-ui/src/lib/tabular/tabular-theme.enum";
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { PageScrollService } from 'ngx-page-scroll-core';
+import { Observable, Subscription } from 'rxjs';
+import { IFiltersConfig } from '../../../../projects/hx-ui/src/lib/filters/filters-config.interface';
+import { FilterType } from '../../../../projects/hx-ui/src/lib/filters/filters-type.enum';
+import { FiltersComponent } from '../../../../projects/hx-ui/src/lib/filters/filters.component';
+import { FiltersModel } from '../../../../projects/hx-ui/src/lib/filters/filters.model';
+import { TabularColumnTypes } from '../../../../projects/hx-ui/src/lib/tabular/tabular-column.interface';
+import { TabularColumn } from '../../../../projects/hx-ui/src/lib/tabular/tabular-column.model';
+import { ITabularConfig } from '../../../../projects/hx-ui/src/lib/tabular/tabular-config.interface';
+import { ITabularRow } from '../../../../projects/hx-ui/src/lib/tabular/tabular-row.interface';
+import { TabularSize } from '../../../../projects/hx-ui/src/lib/tabular/tabular-size.enum';
+import { SortByDirection } from '../../../../projects/hx-ui/src/lib/tabular/tabular-sort-by.service';
+import { TabularTheme } from '../../../../projects/hx-ui/src/lib/tabular/tabular-theme.enum';
+import { CoreBaseComponent } from '../core-base.component';
+import { TabularCode } from './tabular.code';
+import { TabularService } from './tabular.service';
+import { UserModel } from './user.model';
 
 @Component({
-  selector: "app-tabular",
-  templateUrl: "./tabular.component.html",
-  styles: [":host { display:flex; flex: 1; min-width: 0; }"]
+  selector: 'app-tabular',
+  templateUrl: './tabular.component.html',
+  styles: [':host { display:flex; flex: 1; min-width: 0; }'],
 })
 export class TabularComponent extends CoreBaseComponent implements OnInit {
-  @ViewChild("filterComp", { static: true }) filtersComponent: FiltersComponent;
+  @ViewChild('filterComp', { static: true }) filtersComponent: FiltersComponent;
 
   onFilterChangeEvent$ = new Subscription();
   users$: Observable<UserModel[]>;
@@ -38,116 +38,116 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
 
   columnData: TabularColumn[] = [
     new TabularColumn(
-      "checkboxes",
-      "Checkboxes",
+      'checkboxes',
+      'Checkboxes',
       TabularColumnTypes.Checkbox,
       false
     ),
-    new TabularColumn("id", "Id", TabularColumnTypes.Number, true),
-    new TabularColumn("usercode", "User Code", TabularColumnTypes.String, true),
-    new TabularColumn("name", "Name", TabularColumnTypes.Html, true),
+    new TabularColumn('id', 'Id', TabularColumnTypes.Number, true),
+    new TabularColumn('usercode', 'User Code', TabularColumnTypes.String, true),
+    new TabularColumn('name', 'Name', TabularColumnTypes.Html, true),
     new TabularColumn(
-      "rolename",
-      "Role",
+      'rolename',
+      'Role',
       TabularColumnTypes.String,
       true,
-      "",
+      '',
       false,
       {
-        header: this.labelHTML
+        header: this.labelHTML,
       }
     ),
-    new TabularColumn("flag", "Flag", TabularColumnTypes.Badge, false),
-    new TabularColumn("created", "Created", TabularColumnTypes.Date, true),
+    new TabularColumn('flag', 'Flag', TabularColumnTypes.Badge, false),
+    new TabularColumn('created', 'Created', TabularColumnTypes.Date, true),
     new TabularColumn(
-      "modified",
-      "Modified",
+      'modified',
+      'Modified',
       TabularColumnTypes.DateTime,
       true
     ),
-    new TabularColumn("info", "info", TabularColumnTypes.Icon, false, "", true),
+    new TabularColumn('info', 'info', TabularColumnTypes.Icon, false, '', true),
     new TabularColumn(
-      "active",
-      "Active",
+      'active',
+      'Active',
       TabularColumnTypes.Status,
       false,
-      "is-text-center"
+      'is-text-center'
     ),
-    new TabularColumn("actions", "Actions", TabularColumnTypes.Actions, false)
+    new TabularColumn('actions', 'Actions', TabularColumnTypes.Actions, false),
   ];
 
   tabularConfig: ITabularConfig = {
-    id: "UniqueId",
+    id: 'UniqueId',
     size: TabularSize.Default,
     theme: TabularTheme.Dark,
     clickableRows: true,
     pagination: {
       itemsPerPage: 5,
-      currentPage: 1
+      currentPage: 1,
     },
     sortBy: [
       {
-        property: "modified",
+        property: 'modified',
         type: TabularColumnTypes.DateTime,
-        direction: SortByDirection.Descending
-      }
+        direction: SortByDirection.Descending,
+      },
     ],
     stickyColumns: {
       left: true,
-      right: true
-    }
+      right: true,
+    },
   };
 
   collapsed = false;
   filters: IFiltersConfig[] = [
     {
-      id: "roleFilter",
+      id: 'roleFilter',
       type: FilterType.SingleSelect,
-      label: "Role",
+      label: 'Role',
       options: [
         {
-          label: "All",
-          value: "All",
-          selected: true
+          label: 'All',
+          value: 'All',
+          selected: true,
         },
         {
-          label: "Administrator",
-          value: "Administrator",
-          selected: false
+          label: 'Administrator',
+          value: 'Administrator',
+          selected: false,
         },
         {
-          label: "GP",
-          value: "GP",
-          selected: false
+          label: 'GP',
+          value: 'GP',
+          selected: false,
         },
         {
-          label: "Specialist",
-          value: "Specialist",
-          selected: false
+          label: 'Specialist',
+          value: 'Specialist',
+          selected: false,
         },
         {
-          label: "Practice Manager",
-          value: "Practice Manager",
-          selected: false
+          label: 'Practice Manager',
+          value: 'Practice Manager',
+          selected: false,
         },
         {
-          label: "Nurse",
-          value: "Nurse",
-          selected: false
+          label: 'Nurse',
+          value: 'Nurse',
+          selected: false,
         },
         {
-          label: "Receptionist",
-          value: "Receptionist",
-          selected: false
-        }
+          label: 'Receptionist',
+          value: 'Receptionist',
+          selected: false,
+        },
       ],
-      defaultIndex: [1]
+      defaultIndex: [1],
     },
     {
-      id: "searchFilter",
+      id: 'searchFilter',
       type: FilterType.Search,
-      label: "Filter by name"
-    }
+      label: 'Filter by name',
+    },
   ];
 
   get totalSelected() {
@@ -184,7 +184,7 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
       }
     }
     alert(
-      "Printing " + count + " users... Check console to see who was selected."
+      'Printing ' + count + ' users... Check console to see who was selected.'
     );
   };
 
@@ -197,15 +197,12 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
     return true;
   };
 
-  /**
-   * Static data for example
-   */
+  /** Static data for example */
   private getAllUsers() {
-    const data: ITabularRow[] = [];
     this.service.getUsers().subscribe(users => this.setRowData(users));
   }
 
-  setCheckAllState(state: boolean = false) {
+  setCheckAllState(state = false) {
     this.rowData.forEach(row => {
       row.checked = state;
     });
@@ -221,24 +218,25 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.onFilterChangeEvent$ = this.filtersComponent.onFilterOptionChanged$.subscribe(
-      (filter: FiltersModel) => {
-        console.log(filter);
-        if (filter.type === FilterType.SingleSelect) {
-          if (filter.selected[0].value === "All") {
-            this.getAllUsers();
-          } else {
+    this.onFilterChangeEvent$ =
+      this.filtersComponent.onFilterOptionChanged$.subscribe(
+        (filter: FiltersModel) => {
+          console.log(filter);
+          if (filter.type === FilterType.SingleSelect) {
+            if (filter.selected[0].value === 'All') {
+              this.getAllUsers();
+            } else {
+              this.service
+                .getUserByRole(filter.selected[0].value)
+                .subscribe(users => this.setRowData(users));
+            }
+          } else if (filter.type === FilterType.Search) {
             this.service
-              .getUserByRole(filter.selected[0].value)
+              .filterUserByName(filter.value)
               .subscribe(users => this.setRowData(users));
           }
-        } else if (filter.type === FilterType.Search) {
-          this.service
-            .filterUserByName(filter.value)
-            .subscribe(users => this.setRowData(users));
         }
-      }
-    );
+      );
 
     this.getAllUsers();
   }
@@ -254,14 +252,15 @@ export class TabularComponent extends CoreBaseComponent implements OnInit {
     }
   }
 
-  onActionClickHandler = () => {};
+  onActionClickHandler = () => {
+    console.log('action performed');
+  };
 
   singleCheckHandler($event): void {
-    alert("single check event: " + $event);
-    console.log($event);
+    console.log('single check event: ' + $event);
   }
 
   groupCheckHandler($event): void {
-    alert("group check " + $event);
+    console.log('group check ' + $event);
   }
 }
