@@ -1,5 +1,4 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { SharedModule } from '../shared/shared.module';
 import { AccordionComponent } from './accordion/accordion.component';
 import { AutoGrowComponent } from './auto-grow/auto-grow.component';
@@ -25,9 +24,7 @@ import { NgxToastrComponent } from './ngx-toastr/ngx-toastr.component';
 import { OnlineStatusComponent } from './online-status/online-status.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PaginationComponent } from './pagination/pagination.component';
-import { SelectizeComponent } from './selectize/selectize.component';
 import { TabsComponent } from './tabs/tabs.component';
-import { InMemoryDataService } from './tabular/in-memory-data.service';
 import { TabularComponent } from './tabular/tabular.component';
 import { TabularService } from './tabular/tabular.service';
 import { TextInputComponent } from './text-input/text-input.component';
@@ -37,12 +34,7 @@ import { StaticArrayComponent } from './typeaheads/static-array/static-array.com
 import { TypeaheadsComponent } from './typeaheads/typeaheads.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService, {
-      dataEncapsulation: false,
-    }),
-  ],
+  imports: [SharedModule],
   declarations: [
     PageNotFoundComponent,
     DatepickersComponent,
@@ -57,7 +49,6 @@ import { TypeaheadsComponent } from './typeaheads/typeaheads.component';
     PaginationComponent,
     TabularComponent,
     InstallGuideComponent,
-    SelectizeComponent,
     AutoGrowComponent,
     EmptyStateComponent,
     AccordionComponent,
@@ -79,7 +70,7 @@ import { TypeaheadsComponent } from './typeaheads/typeaheads.component';
     MigrateV13Component,
     TimepickerComponent,
   ],
-  providers: [TabularService, InMemoryDataService],
+  providers: [TabularService],
   exports: [],
 })
 export class CoreModule {
