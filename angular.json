@@ -26,10 +26,7 @@
               }
             ],
             "styles": ["src/styles.scss"],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/selectize/dist/js/standalone/selectize.js"
-            ],
+            "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,

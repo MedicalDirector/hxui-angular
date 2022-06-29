@@ -18,7 +18,6 @@ import { LoadersModule } from './loaders/loaders.module';
 import { ModalModule } from './modal/modal.module';
 import { ModalService } from './modal/modal.service';
 import { PaginationModule } from './pagination/pagination.module';
-import { SelectizeModule } from './selectize/selectize.module';
 import { TabsModule } from './tabs/tabs.module';
 import { TabularModule } from './tabular/tabular.module';
 import { TextInputModule } from './text-input/text-input.module';
@@ -40,7 +39,6 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     TooltipModule.forRoot(),
     TypeaheadModule.forRoot(),
     TabularModule.forRoot(),
-    SelectizeModule.forRoot(),
     DatepickerModule.forRoot(),
     DateRangePickerModule.forRoot(),
     AutoGrowModule.forRoot(),
@@ -75,7 +73,6 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     TooltipModule,
     TypeaheadModule,
     TabularModule,
-    SelectizeModule,
     AutoGrowModule,
     EmptyStateModule,
     AccordionModule,
