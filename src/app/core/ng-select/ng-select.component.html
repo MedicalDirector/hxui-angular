@@ -3,8 +3,9 @@
     <h1 class="hx-title">Ng-Select</h1>
     <h2 class="hx-subtitle">
       HXUI styling for 3rd-party library
-      <a href="https://github.com/ng-select/ng-select" target="_blank">ng-select</a>. 
-      An all-in-one select, multiselect, input component.
+      <a href="https://github.com/ng-select/ng-select" target="_blank"
+        >ng-select</a
+      >. An all-in-one select, multiselect, input component.
     </h2>
 
     <hr />
@@ -51,20 +52,22 @@
               [items]="people$ | async"
               [multiple]="true"
               [closeOnSelect]="false"
-              [searchable]="false"
+              [searchable]="true"
               bindLabel="name"
               placeholder="Select people"
               formControlName="selectedPeople"
               class="is-badge is-outlined"
             >
               <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                <span class="hx-badge-content">
-                  {{ item.name }}
-                  <button
-                    class="hx-delete is-small"
-                    (click)="clear(item)"
-                    aria-hidden="true"
-                  ></button>
+                <span class="hx-badge is-outlined">
+                  <span class="hx-badge-content">
+                    {{ item.name }}
+                    <button
+                      class="hx-delete is-small"
+                      (click)="clear(item)"
+                      aria-hidden="true"
+                    ></button>
+                  </span>
                 </span>
               </ng-template>
             </ng-select>
@@ -261,7 +264,7 @@
 
     <h4 id="changelog">Changelog</h4>
 
-    <p style="padding-bottom: 2em;">
+    <p style="padding-bottom: 2em">
       See
       <a
         href="https://bitbucket.org/md-design/angular-hxui/src/master/projects/ng-select/CHANGELOG.md"
