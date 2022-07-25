@@ -3,5 +3,11 @@
   "dest": "../../lib",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": [
+    "moment",
+    "array-sort-by",
+    "lodash",
+    "lodash.clonedeep"
+  ]
 }
