@@ -5,9 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [13.0.0-next.2](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.2) - 2022-06-29
+## [13.0.0-next.3](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.3) - 2022-07-25
 
 _If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
+
+### Changed
+
+- **BREAKING** remove peer dependency for moment, array-sort-by, lodash and lodash.clonedeep
+
+## [13.0.0-next.2](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.2) - 2022-06-29
 
 ### Changed
 
