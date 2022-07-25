@@ -10,7 +10,10 @@
   },
   "bugs": "https://github.com/MedicalDirector/hxui-angular/issues",
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "lodash": "^4.17.20",
+    "lodash.clonedeep": "^4.5.0",
+    "moment": "^2.29.0"
   },
   "peerDependencies": {
     "@angular/animations": "^13.0.0",
@@ -27,9 +30,6 @@
     "@ng-select/ng-option-highlight": "0.0.7",
     "@ng-select/ng-select": "^8.0.0",
     "array-sort-by": "^1.2.1",
-    "lodash": "^4.17.20",
-    "lodash.clonedeep": "^4.5.0",
-    "moment": "^2.29.0",
     "ngx-mask": "^13.0.0",
     "rxjs": "^7.4.0",
     "ngx-toastr": "^14.0.0"
