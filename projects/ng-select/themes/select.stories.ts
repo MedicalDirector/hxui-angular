@@ -56,13 +56,15 @@ class DataService {
         class="is-badge is-outlined"
       >
         <ng-template ng-label-tmp let-item="item" let-clear="clear">
-          <span class="hx-badge-content">
-            {{ item.name }}
-            <button
-              class="hx-delete is-small"
-              (click)="clear(item)"
-              aria-hidden="true"
-            ></button>
+          <span class="hx-badge is-outlined">
+            <span class="hx-badge-content">
+              {{ item.name }}
+              <button
+                class="hx-delete is-small"
+                (click)="clear(item)"
+                aria-hidden="true"
+              ></button>
+            </span>
           </span>
         </ng-template>
       </ng-select>

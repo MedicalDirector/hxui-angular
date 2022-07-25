@@ -297,19 +297,6 @@ $ng-select-danger: #b81e4f;
         border: 1px solid hsla(0, 0%, 4%, 0.15);
       }
     }
-    .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
-      background: #fff;
-      color: $ng-select-secondary-text;
-      position: relative;
-      :after {
-        position: absolute;
-        font-family: 'hxui';
-        content: '\E90F';
-        color: $ng-select-secondary-text;
-        font-size: 28px;
-        right: 0.5rem;
-      }
-    }
   }
   .ng-clear-wrapper {
     color: $ng-select-secondary-text;
@@ -354,6 +341,21 @@ $ng-select-danger: #b81e4f;
       &.marked {
         background: rgba(0, 0, 0, 0.05);
         color: #2a2c2d;
+      }
+    }
+  }
+  &.ng-select-multiple {
+    .ng-dropdown-panel-items .ng-option.ng-option-selected {
+      background: #fff;
+      color: $ng-select-secondary-text;
+      position: relative;
+      > ::after {
+        position: absolute;
+        font-family: 'hxui';
+        content: '\E90F';
+        color: $ng-select-secondary-text;
+        font-size: 28px;
+        right: 0.5rem;
       }
     }
   }
