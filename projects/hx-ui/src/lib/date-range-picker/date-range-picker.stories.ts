@@ -17,11 +17,9 @@ import { DropdownModule } from '../dropdown/dropdown.module';
 import { TabsModule } from '../tabs/tabs.module';
 import { DateRangePickerCustomComponent } from './date-range-picker-custom/date-range-picker-custom.component';
 import { DateRangePickerIntervalComponent } from './date-range-picker-interval/date-range-picker-interval.component';
-import {
-  DateRange,
-  DateRangePickerComponent,
-} from './date-range-picker.component';
+import { DateRangePickerComponent } from './date-range-picker.component';
 import { DateRangePickerConfig } from './date-range-picker.config';
+import { DateRange } from './date-range-picker.model';
 
 const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
