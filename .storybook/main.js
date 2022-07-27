@@ -9,5 +9,16 @@ module.exports = {
     '@storybook/addon-interactions',
     '@storybook/addon-a11y',
   ],
-  framework: '@storybook/angular',
+  framework: {
+    name: '@storybook/angular',
+    options: {
+      enableIvy: true,
+    },
+  },
+  features: {
+    postcss: false,
+  },
+  core: {
+    builder: 'webpack5',
+  },
 };
