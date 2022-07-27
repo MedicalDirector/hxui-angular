@@ -126,6 +126,21 @@
               "projects/hx-ui/**/*.html"
             ]
           }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "browserTarget": "hxui:build",
+            "port": 6006,
+            "styles": ["src/styles.scss"]
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "browserTarget": "hxui:build",
+            "styles": ["src/styles.scss"]
+          }
         }
       }
     }
