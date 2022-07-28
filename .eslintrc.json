@@ -1,11 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*",
-    "lib/**/*",
-    "dist/**/*",
-    "coverage/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*", "lib/**/*", "dist/**/*", "coverage/**/*"],
   "env": {
     "browser": true,
     "node": true
@@ -15,14 +10,9 @@
   },
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig.json",
-          "e2e/tsconfig.json"
-        ],
+        "project": ["tsconfig-base.json", "e2e/tsconfig.json"],
         "createDefaultProgram": true
       },
       "extends": [
@@ -55,12 +45,8 @@
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
     }
   ]
