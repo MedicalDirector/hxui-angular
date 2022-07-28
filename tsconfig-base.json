@@ -14,26 +14,13 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2018",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2016",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2016", "dom"],
     "paths": {
-      "hxui-angular": [
-        "dist/hxui-angular"
-      ],
-      "hxui-angular/*": [
-        "dist/hxui-angular/*"
-      ],
-      "HxUi": [
-        "dist/hx-ui"
-      ],
-      "HxUi/*": [
-        "dist/hx-ui/*"
-      ]
+      "hxui-angular": ["dist/hxui-angular"],
+      "hxui-angular/*": ["dist/hxui-angular/*"],
+      "HxUi": ["dist/hx-ui"],
+      "HxUi/*": ["dist/hx-ui/*"]
     }
   }
 }

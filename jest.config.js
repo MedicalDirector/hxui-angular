@@ -1,18 +1,13 @@
-const esModules = ['@angular', 'rxjs'];
+// eslint-disable-next-line no-undef
+globalThis.ngJest = {
+  skipNgcc: true,
+  // tsconfig: 'tsconfig.spec.json', // this is relative to each project root
+};
 
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  preset: 'jest-preset-angular',
-  coverageReporters: ['html'],
   globalSetup: 'jest-preset-angular/global-setup',
-  transform: {
-    '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
-  },
-  transformIgnorePatterns: [
-    `<rootDir>/node_modules/(?!.*\\.mjs$|${esModules.join('|')})`,
-  ],
-  snapshotSerializers: [
-    'jest-preset-angular/build/serializers/no-ng-attributes',
-    'jest-preset-angular/build/serializers/ng-snapshot',
-    'jest-preset-angular/build/serializers/html-comment',
-  ],
+  coverageReporters: ['json', 'lcov', 'text', 'html'],
+  coverageDirectory: '<rootDir>/coverage/combined',
+  projects: ['<rootDir>/src', '<rootDir>/projects/hx-ui'],
 };
