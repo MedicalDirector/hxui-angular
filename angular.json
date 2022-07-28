@@ -14,7 +14,7 @@
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "tsConfig": "tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/assets",
@@ -78,13 +78,6 @@
             "browserTarget": "docs:build"
           }
         },
-        "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {
-            "tsConfig": "src/tsconfig.spec.json",
-            "configPath": "src/jest.config.js"
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
@@ -110,12 +103,6 @@
               "project": "projects/hx-ui/ng-package.prod.json",
               "tsConfig": "projects/hx-ui/tsconfig.lib.prod.json"
             }
-          }
-        },
-        "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {
-            "tsConfig": "projects/hx-ui/tsconfig.spec.json"
           }
         },
         "lint": {
