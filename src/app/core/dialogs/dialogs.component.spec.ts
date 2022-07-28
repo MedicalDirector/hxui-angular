@@ -8,9 +8,10 @@ describe('DialogsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DialogsComponent],
-      imports: [SharedModule]
-    }).compileComponents();
+    declarations: [DialogsComponent],
+    imports: [SharedModule],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

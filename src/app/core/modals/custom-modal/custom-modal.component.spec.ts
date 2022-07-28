@@ -8,8 +8,9 @@ describe('CustomModalComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomModalComponent ]
-    })
+    declarations: [CustomModalComponent],
+    teardown: { destroyAfterEach: false }
+})
     .compileComponents();
   }));
 

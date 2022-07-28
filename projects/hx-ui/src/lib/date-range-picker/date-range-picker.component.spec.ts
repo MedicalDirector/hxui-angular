@@ -9,12 +9,9 @@ import { DropdownModule } from '../dropdown/dropdown.module';
 import { TabsModule } from '../tabs/tabs.module';
 import { DateRangePickerCustomComponent } from './date-range-picker-custom/date-range-picker-custom.component';
 import { DateRangePickerIntervalComponent } from './date-range-picker-interval/date-range-picker-interval.component';
-import {
-  DateRange,
-  DateRangePickerComponent,
-  DateSelectionType
-} from './date-range-picker.component';
+import { DateRangePickerComponent } from './date-range-picker.component';
 import { DateRangePickerConfig } from './date-range-picker.config';
+import { DateRange, DateSelectionType } from './date-range-picker.model';
 import { IntervalItem } from './interval-option-model';
 
 describe('DateRangePickerComponent', () => {
@@ -35,7 +32,8 @@ describe('DateRangePickerComponent', () => {
         DateRangePickerIntervalComponent,
         DateRangePickerCustomComponent
       ],
-      providers: [Overlay, DropdownConfig, DatePipe, DateRangePickerConfig]
+      providers: [Overlay, DropdownConfig, DatePipe, DateRangePickerConfig],
+      teardown: { destroyAfterEach: false }
     }).compileComponents();
   }));
 

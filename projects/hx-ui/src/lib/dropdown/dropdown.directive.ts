@@ -1,49 +1,34 @@
 import {
-  AfterContentInit,
-  AfterViewInit,
-  ComponentFactoryResolver,
+  FlexibleConnectedPositionStrategy,
+  HorizontalConnectionPos,
+  OriginConnectionPosition,
+  Overlay,
+  OverlayConnectionPosition,
+  OverlayRef,
+  VerticalConnectionPos
+} from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import {
   ContentChild,
-  ContentChildren,
   Directive,
   ElementRef,
   EventEmitter,
-  HostListener,
   Input,
-  NgZone,
   OnDestroy,
-  OnInit,
-  Optional,
   Output,
-  QueryList, Renderer2,
-  ViewChildren,
+  Renderer2,
   ViewContainerRef
 } from '@angular/core';
-
-import { takeUntil } from 'rxjs/operators';
-import { DropdownConfig } from './dropdown.config';
-import { DropdownMenuDirective } from './dropdown-menu.directive';
 import { Subject } from 'rxjs';
-import { TemplatePortal } from '@angular/cdk/portal';
-import {
-  FlexibleConnectedPositionStrategy,
-  Overlay,
-  OverlayRef,
-  OverlaySizeConfig,
-  ScrollDispatcher,
-  OriginConnectionPosition,
-  OverlayConnectionPosition,
-  HorizontalConnectionPos,
-  VerticalConnectionPos
-} from '@angular/cdk/overlay';
-import { Directionality } from '@angular/cdk/bidi';
-import { DropdownToggleDirective } from './dropdown-toggle.directive';
-import { DropdownItemDirective } from './dropdown-item.directive';
+import { takeUntil } from 'rxjs/operators';
+import { DropdownMenuDirective } from './dropdown-menu.directive';
+import { DropdownConfig } from './dropdown.config';
 
 @Directive({
   selector: '[hxaDropdown],[hxDropdown]',
   exportAs: 'hx-dropdown, hxa-dropdown'
 })
-export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
+export class DropdownDirective implements OnDestroy {
   @ContentChild(DropdownMenuDirective) menu: DropdownMenuDirective;
 
   _overlayRef: OverlayRef | null;
@@ -102,16 +87,12 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     private renderer: Renderer2
   ) {}
 
-  ngOnInit(): void {}
-
-  ngAfterContentInit() {}
-
   ngOnDestroy(): void {
     if (this._overlayRef) {
       this._overlayRef.dispose();
       this._overlayRef = null;
     }
-    this._destroyed.next();
+    this._destroyed.next(true);
     this._destroyed.complete();
   }
 
@@ -163,7 +144,7 @@ export class DropdownDirective implements OnInit, OnDestroy, AfterContentInit {
       this._viewContainerRef
     );
 
-     const positionStrategy = this.overlay
+    const positionStrategy = this.overlay
       .position()
       .flexibleConnectedTo(this._elementRef)
       .withFlexibleDimensions(false)

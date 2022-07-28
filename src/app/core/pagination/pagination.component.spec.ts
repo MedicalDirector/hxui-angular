@@ -9,7 +9,8 @@ describe('PaginationComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
-      declarations: [PaginationComponent]
+      declarations: [PaginationComponent],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   }));
 

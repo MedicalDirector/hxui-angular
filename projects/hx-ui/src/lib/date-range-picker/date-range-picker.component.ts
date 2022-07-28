@@ -1,33 +1,20 @@
+import { DatePipe } from '@angular/common';
 import {
   Component,
-  OnInit,
-  ViewChild,
-  Input,
   EventEmitter,
-  Output
+  Input,
+  OnInit,
+  Output,
+  ViewChild
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { DropdownDirective } from '../dropdown/dropdown.directive';
-import { IntervalItem } from './interval-option-model';
 import { DateRangePickerConfig } from './date-range-picker.config';
-import { fullIntervalList } from './interval-option-model';
-
-export enum DisplayMode {
-  showTab = 1,
-  showCustomOnly,
-  showIntervalOnly
-}
-
-export interface DateRange {
-  fromDate: Date;
-  toDate: Date;
-}
-
-//expanded when more tabs be added
-export enum DateSelectionType {
-  interval,
-  custom
-}
+import {
+  DateRange,
+  DateSelectionType,
+  DisplayMode
+} from './date-range-picker.model';
+import { fullIntervalList, IntervalItem } from './interval-option-model';
 
 @Component({
   selector: 'hxa-date-range-picker',
@@ -41,16 +28,16 @@ export class DateRangePickerComponent implements OnInit {
   @Input() intervalOptions: string[];
 
   /** This attribute specifies the placeholder value of the components input element. */
-  @Input() placeholder: string = 'Date';
+  @Input() placeholder = 'Date';
 
   /** Adds the disabled html attribute to the components dropdown element. */
-  @Input() disabled: boolean = false;
+  @Input() disabled = false;
 
   /**
    * Indicates that dropdown will be closed on item or document
    * click, and after pressing ESC.
    */
-  @Input() autoClose: boolean = true;
+  @Input() autoClose = true;
 
   /** Specifies the position the datepicker opens against the input element */
   @Input() placement: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
@@ -62,15 +49,15 @@ export class DateRangePickerComponent implements OnInit {
    * A JavaScript Date object formatting string, formats the display
    * of components current value.
    */
-  @Input() dateFormat: string = 'dd/MM/yyyy';
+  @Input() dateFormat = 'dd/MM/yyyy';
 
   @Input() defaultDateRange: DateRange = {
-    fromDate:new Date(), 
-    toDate:new Date()
+    fromDate: new Date(),
+    toDate: new Date()
   };
 
   /** Specifies whether caret down icon is displayed to right of input */
-  @Input() showCaretDown: boolean = true;
+  @Input() showCaretDown = true;
 
   /**
    * Emits a Date Range Object containing fromDate and toDate
@@ -108,7 +95,7 @@ export class DateRangePickerComponent implements OnInit {
 
   setInitialDateRange() {
     this.defaultDateRange = this.defaultDateRange || {
-      fromDate: new Date(), 
+      fromDate: new Date(),
       toDate: new Date()
     };
     this.dateFormat = this.dateFormat || 'dd/MM/yyyy';

@@ -5,7 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.1...HEAD)
+## [13.0.0-next.3](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.3) - 2022-07-25
+
+_If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
+
+### Changed
+
+- **BREAKING** remove peer dependency for moment, array-sort-by, lodash and lodash.clonedeep
+
+## [13.0.0-next.2](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.2) - 2022-06-29
+
+### Changed
+
+- **BREAKING** remove Selectize component
+- **BREAKING** remove peer dependency for selectize, jquery and @angular/platform-browser-dynamic
+
+## [13.0.0-next.1](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.1) - 2022-06-28
+
+### Fixed
+
+- [Date picker] Fixed styling for input with leading icon and dropdown overlay in incrementally-adopted hxui usage
+
+## [13.0.0-next.0](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.0) - 2022-06-14
+
+### Changed
+
+- add support for Angular 13
+- **BREAKING:** bump angular peer deps to >=8.x
+- **BREAKING:** bump ng-select/ng-select peer dep to >=8.x
+- **BREAKING:** bump ngx-mask peer dep to >=13.x
+- **BREAKING:** bump rxjs peer dep to >=7.4.x
+- **BREAKING:** bump ngx-toastr peer dep to >=14.x
+- **BREAKING:** refactor date picker component
 
 ## [11.2.1](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.0...v11.2.1) - 2022-06-06
 

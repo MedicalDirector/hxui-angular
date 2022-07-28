@@ -1,8 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { SharedModule } from '../../shared/shared.module';
-import { InMemoryDataService } from './in-memory-data.service';
 import { TabularComponent } from './tabular.component';
 import { TabularService } from './tabular.service';
 
@@ -12,14 +10,10 @@ describe('TabularComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        SharedModule,
-        InMemoryWebApiModule.forRoot(InMemoryDataService, {
-          dataEncapsulation: false
-        })
-      ],
+      imports: [SharedModule],
       declarations: [TabularComponent],
-      providers: [TabularService, InMemoryDataService, DatePipe]
+      providers: [TabularService, DatePipe],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   }));
 

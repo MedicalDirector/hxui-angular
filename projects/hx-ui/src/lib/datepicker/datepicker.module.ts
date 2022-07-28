@@ -1,6 +1,8 @@
+import { A11yModule } from '@angular/cdk/a11y';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { TabsModule } from '../tabs/tabs.module';
 import { TextInputModule } from '../text-input/text-input.module';
@@ -13,16 +15,19 @@ import { DatepickerConfig } from './datepicker.config';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     TabsModule,
     NgxMaskModule,
-    TextInputModule
+    TextInputModule,
+    OverlayModule,
+    A11yModule,
   ],
   declarations: [
     DatepickerComponent,
     DatepickerFormComponent,
-    DatepickerIntervalComponent
+    DatepickerIntervalComponent,
   ],
-  exports: [DatepickerComponent, DatepickerFormComponent]
+  exports: [DatepickerFormComponent],
 })
 export class DatepickerModule {
   public static forRoot(): ModuleWithProviders<DatepickerModule> {

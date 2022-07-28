@@ -1,13 +1,6 @@
 import '@angular/localize/init';
 import 'jest-preset-angular/setup-jest';
 
-/* eslint-disable no-var */
-declare var window: any;
-window.$ = require('jquery');
-window.jQuery = window.$;
-window.Selectize = require('selectize');
-window.$.fn.selectize = jest.fn(() => window.$());
-
 /* global mocks for jsdom */
 const mock = () => {
   let storage: { [key: string]: string } = {};
@@ -15,7 +8,7 @@ const mock = () => {
     getItem: (key: string) => (key in storage ? storage[key] : null),
     setItem: (key: string, value: string) => (storage[key] = value || ''),
     removeItem: (key: string) => delete storage[key],
-    clear: () => (storage = {})
+    clear: () => (storage = {}),
   };
 };
 
@@ -27,9 +20,9 @@ Object.defineProperty(window, 'getComputedStyle', {
   value: () => {
     return {
       display: 'none',
-      appearance: ['-webkit-appearance']
+      appearance: ['-webkit-appearance'],
     };
-  }
+  },
 });
 
 Object.defineProperty(window, 'matchMedia', {
@@ -42,8 +35,8 @@ Object.defineProperty(window, 'matchMedia', {
     removeListener: jest.fn(), // deprecated
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn()
-  }))
+    dispatchEvent: jest.fn(),
+  })),
 });
 
 /**
@@ -54,12 +47,12 @@ Object.defineProperty(document.body.style, 'transform', {
   value: () => {
     return {
       enumerable: true,
-      configurable: true
+      configurable: true,
     };
-  }
+  },
 });
 Object.defineProperty(document, 'doctype', {
-  value: '<!DOCTYPE html>'
+  value: '<!DOCTYPE html>',
 });
 /* output shorter and more meaningful Zone error stack traces */
 // Error.stackTraceLimit = 2;

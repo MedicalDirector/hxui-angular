@@ -8,9 +8,10 @@ describe('LineClampComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [LineClampComponent],
-      imports: [SharedModule]
-    }).compileComponents();
+    declarations: [LineClampComponent],
+    imports: [SharedModule],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,13 +1,23 @@
-import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {FilterType} from './filters-type.enum';
-import {IFilterOption, IFiltersConfig} from './filters-config.interface';
-import {FiltersModel} from './filters.model';
-import * as _ from 'lodash';
-import {BehaviorSubject, from, Observable, pipe, Subject, Subscription} from 'rxjs';
-import {FiltersConfig} from './filters.config';
-import {debounceTime} from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
-import { DateRange } from '../date-range-picker/date-range-picker.component';
+import {
+  Component,
+  DoCheck,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
+import * as _ from 'lodash';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { DateRange } from '../date-range-picker/date-range-picker.model';
+import { IFilterOption, IFiltersConfig } from './filters-config.interface';
+import { FilterType } from './filters-type.enum';
+import { FiltersConfig } from './filters.config';
+import { FiltersModel } from './filters.model';
 
 @Component({
   selector: 'hxa-filters',
@@ -15,7 +25,6 @@ import { DateRange } from '../date-range-picker/date-range-picker.component';
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
-
   @ViewChild('carousel', { static: true }) private carousel: ElementRef;
   @ViewChildren('dateRangePicker') dateRangePickers: QueryList<any>;
 
@@ -50,19 +59,15 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     this.setData();
   }
 
-  constructor(
-    private conf: FiltersConfig,
-    private datePipe: DatePipe
-  ) {
+  constructor(private conf: FiltersConfig, private datePipe: DatePipe) {
     Object.assign(this, conf);
   }
-
 
   ngOnInit() {
     this.subscriptions.add(
       this.searchFilter$
         .pipe(debounceTime(this.conf.debounce))
-        .subscribe((x) =>  this.onFilterOptionChanged$.next(x))
+        .subscribe(x => this.onFilterOptionChanged$.next(x))
     );
   }
 
@@ -78,7 +83,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   getIntervalOptions(options: IFilterOption[]) {
-    let intervalOption: string[] = [];
+    const intervalOption: string[] = [];
     if (options) {
       for (let i = 0; i < options.length; i++) {
         intervalOption.push(options[i].label);
@@ -87,9 +92,12 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     return intervalOption;
   }
 
-  resetFilters(silent: boolean = false) {
+  resetFilters(silent = false) {
     for (const filter of this.data) {
-      if (filter.type === FilterType.SingleSelect || filter.type === FilterType.MultiSelect ) {
+      if (
+        filter.type === FilterType.SingleSelect ||
+        filter.type === FilterType.MultiSelect
+      ) {
         filter.setDefaultOption();
         if (!silent) {
           this.onFilterOptionChanged$.next(filter);
@@ -102,15 +110,15 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
     }
   }
 
-  clearSearch(filter: FiltersModel, silent: boolean = false) {
-      filter.value = '';
-      if (!silent) {
-        this.onFilterOptionChanged$.next(filter);
-      }
+  clearSearch(filter: FiltersModel, silent = false) {
+    filter.value = '';
+    if (!silent) {
+      this.onFilterOptionChanged$.next(filter);
+    }
   }
 
   setDefaultDate(filter: FiltersModel) {
-    filter.value = "";
+    filter.value = '';
     filter.sourceValue = undefined;
     if (!this._collapsed) {
       for (let i = 0; i < this.dateRangePickers.toArray().length; i++) {
@@ -145,12 +153,12 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
    * Called when selection is made in the date range filter type
    */
   onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRange) {
-    let dateRangeValue =
+    const dateRangeValue =
       this.datePipe.transform(
         dateRange.fromDate,
         filter.dateRangePickerDisplayDateFormat
       ) +
-      " - " +
+      ' - ' +
       this.datePipe.transform(
         dateRange.toDate,
         filter.dateRangePickerDisplayDateFormat
@@ -161,7 +169,7 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   onCollapsedFilter($event) {
-   this.onFilterOptionSelected($event.filter,  $event.option);
+    this.onFilterOptionSelected($event.filter, $event.option);
   }
 
   onCollapsedSearch($event) {
@@ -182,7 +190,6 @@ export class FiltersComponent implements OnInit, DoCheck, OnDestroy {
       this.onFilterOptionChanged$.next(filter);
     }
   }
-
 
   /**
    * Used for track by and boost performance

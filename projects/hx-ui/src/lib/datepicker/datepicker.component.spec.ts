@@ -31,22 +31,23 @@ describe('DatepickerComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [FormsModule, TabsModule, NgxMaskModule],
-        declarations: [
-          DatepickerFormComponent,
-          DatepickerComponent,
-          DatepickerIntervalComponent
-        ],
-        providers: [
-          PositioningService,
-          DatepickerConfig,
-          TabsetConfig,
-          DatepickerFormComponent,
-          { provide: ElementRef, useValue: new MockElementRef(null) },
-          ViewContainerRef,
-          Overlay
-        ]
-      }).compileComponents();
+    imports: [FormsModule, TabsModule, NgxMaskModule],
+    declarations: [
+        DatepickerFormComponent,
+        DatepickerComponent,
+        DatepickerIntervalComponent
+    ],
+    providers: [
+        PositioningService,
+        DatepickerConfig,
+        TabsetConfig,
+        DatepickerFormComponent,
+        { provide: ElementRef, useValue: new MockElementRef(null) },
+        ViewContainerRef,
+        Overlay
+    ],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
     })
   );
 

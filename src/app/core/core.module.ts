@@ -1,5 +1,4 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { SharedModule } from '../shared/shared.module';
 import { AccordionComponent } from './accordion/accordion.component';
 import { AutoGrowComponent } from './auto-grow/auto-grow.component';
@@ -17,6 +16,7 @@ import { InspectorComponent } from './inspector/inspector.component';
 import { InstallGuideComponent } from './install-guide/install-guide.component';
 import { LineClampComponent } from './line-clamp/line-clamp.component';
 import { LoadersComponent } from './loaders/loaders.component';
+import { MigrateV13Component } from './migrate-v13/migrate-v13.component';
 import { CustomModalComponent } from './modals/custom-modal/custom-modal.component';
 import { ModalsComponent } from './modals/modals.component';
 import { NgSelectComponent } from './ng-select/ng-select.component';
@@ -24,24 +24,17 @@ import { NgxToastrComponent } from './ngx-toastr/ngx-toastr.component';
 import { OnlineStatusComponent } from './online-status/online-status.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PaginationComponent } from './pagination/pagination.component';
-import { SelectizeComponent } from './selectize/selectize.component';
 import { TabsComponent } from './tabs/tabs.component';
-import { InMemoryDataService } from './tabular/in-memory-data.service';
 import { TabularComponent } from './tabular/tabular.component';
 import { TabularService } from './tabular/tabular.service';
 import { TextInputComponent } from './text-input/text-input.component';
+import { TimepickerComponent } from './timepicker/timepicker.component';
 import { TooltipsComponent } from './tooltips/tooltips.component';
 import { StaticArrayComponent } from './typeaheads/static-array/static-array.component';
 import { TypeaheadsComponent } from './typeaheads/typeaheads.component';
-import { TimepickerComponent } from './timepicker/timepicker.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService, {
-      dataEncapsulation: false
-    })
-  ],
+  imports: [SharedModule],
   declarations: [
     PageNotFoundComponent,
     DatepickersComponent,
@@ -56,7 +49,6 @@ import { TimepickerComponent } from './timepicker/timepicker.component';
     PaginationComponent,
     TabularComponent,
     InstallGuideComponent,
-    SelectizeComponent,
     AutoGrowComponent,
     EmptyStateComponent,
     AccordionComponent,
@@ -75,16 +67,17 @@ import { TimepickerComponent } from './timepicker/timepicker.component';
     NgxToastrComponent,
     ExampleFilterNewComponent,
     ExampleFilterOldComponent,
-    TimepickerComponent
+    TimepickerComponent,
+    MigrateV13Component,
   ],
-  providers: [TabularService, InMemoryDataService],
-  exports: []
+  providers: [TabularService],
+  exports: [],
 })
 export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
-      providers: []
+      providers: [],
     };
   }
 }

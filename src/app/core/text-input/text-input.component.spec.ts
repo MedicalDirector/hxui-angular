@@ -9,7 +9,8 @@ describe('TextInputComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
-      declarations: [TextInputComponent]
+      declarations: [TextInputComponent],
+      teardown: { destroyAfterEach: false },
     }).compileComponents();
   }));
 

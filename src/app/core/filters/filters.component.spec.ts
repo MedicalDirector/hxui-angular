@@ -11,14 +11,15 @@ describe('FiltersComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [
+    declarations: [
         FiltersComponent,
         ExampleFilterNewComponent,
         ExampleFilterOldComponent
-      ],
-      imports: [SharedModule],
-      providers: [DatePipe]
-    }).compileComponents();
+    ],
+    imports: [SharedModule],
+    providers: [DatePipe],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

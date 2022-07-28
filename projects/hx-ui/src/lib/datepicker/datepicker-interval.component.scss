@@ -1,28 +1,63 @@
-@import "datepicker-variables";
+@import 'datepicker-variables';
+@import '~@hxui/css/static/static/scss/variables';
 
-.hx-datepicker-set-interval {
-  max-width: $hx-datepicker-calendar-width;
-  width: $hx-datepicker-calendar-width;
-  height: $hx-datepicker-calendar-height * .66;
-  background-color: white;
+:host.hx-card {
+  border: unset;
+  &:hover,
+  &.is-hovered {
+    box-shadow: none;
+  }
+}
 
-  .hx-datepicker-set-interval-content {
-    .hx-datepicker-set-interval-number {
-      width: 2.5rem;
-      display: inline-block;
-    }
+.hxa-datepicker-interval {
+  &:host {
+    display: flex;
+    flex-direction: column;
+    width: $hx-datepicker-calendar-width;
+    height: $hx-datepicker-calendar-height;
 
-    .hx-datepicker-set-interval-today {
+    > form {
+      display: flex;
+      flex-direction: column;
       font-size: 1rem;
+      flex: 1 1 auto;
     }
-    .hx-datepicker-set-interval-selected-date {
-      font-size: 1.1rem;
-      font-weight: 500;
-    }
-  }
-  .hx-datepicker-set-interval-footer {
-    flex: 0 0 auto;
-    background-color:  rgba(0, 0, 0, 0.04);
   }
 
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 0.75rem;
+  }
+
+  &__inputs {
+    border: none;
+    display: block;
+    padding: 0;
+    margin: 0 auto 1.25rem;
+
+    .hx-input {
+      display: inline-block;
+      width: unset;
+      &:first-child {
+        width: 2.5rem;
+      }
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  &__output {
+    margin: 0 auto;
+  }
+
+  &__footer {
+    background-color: $hx-color-footer-bg;
+    padding: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+  }
 }

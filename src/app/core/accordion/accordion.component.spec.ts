@@ -8,9 +8,10 @@ describe('AccordionComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [AccordionComponent],
-      imports: [SharedModule]
-    }).compileComponents();
+    declarations: [AccordionComponent],
+    imports: [SharedModule],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

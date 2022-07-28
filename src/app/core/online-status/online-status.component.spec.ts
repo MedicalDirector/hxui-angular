@@ -8,9 +8,10 @@ describe('OnlineStatusComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [OnlineStatusComponent],
-      imports: [SharedModule]
-    }).compileComponents();
+    declarations: [OnlineStatusComponent],
+    imports: [SharedModule],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

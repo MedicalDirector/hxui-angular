@@ -1,10 +1,24 @@
-import {Component, Input, Output, OnInit, ViewChild, EventEmitter, ViewChildren, QueryList} from '@angular/core';
-import {FilterType} from './filters-type.enum';
-import {FiltersModel} from './filters.model';
-import {IFilterOption, IFiltersConfig} from './filters-config.interface';
-import {DropdownDirective} from '../dropdown/dropdown.directive';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import { DateRange } from '../date-range-picker/date-range-picker.component';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger
+} from '@angular/animations';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
+import { DateRange } from '../date-range-picker/date-range-picker.model';
+import { DropdownDirective } from '../dropdown/dropdown.directive';
+import { IFilterOption } from './filters-config.interface';
+import { FilterType } from './filters-type.enum';
+import { FiltersModel } from './filters.model';
 
 type PaneType = 'left' | 'right';
 
@@ -20,10 +34,9 @@ type PaneType = 'left' | 'right';
     ])
   ]
 })
-export class FiltersCollapsedComponent implements OnInit {
-
+export class FiltersCollapsedComponent {
   @ViewChild('dropdown', { static: true }) dropdown: DropdownDirective;
-  @ViewChildren("dateRangePicker") dateRangePickers: QueryList<any>
+  @ViewChildren('dateRangePicker') dateRangePickers: QueryList<any>;
 
   FilterType = FilterType;
   activePane: PaneType = 'left';
@@ -33,18 +46,13 @@ export class FiltersCollapsedComponent implements OnInit {
 
   @Output() onFilter = new EventEmitter();
   @Output() onSearchFilter = new EventEmitter();
-  @Output() onDateRangePickerFilter =  new EventEmitter();
+  @Output() onDateRangePickerFilter = new EventEmitter();
   @Output() onBack = new EventEmitter();
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
   getIntervalOptions(options: IFilterOption[]) {
-    let intervalOption: string[] = [];
-    if(options){
-      for(let i=0; i<options.length; i++){
+    const intervalOption: string[] = [];
+    if (options) {
+      for (let i = 0; i < options.length; i++) {
         intervalOption.push(options[i].label);
       }
     }
@@ -53,7 +61,7 @@ export class FiltersCollapsedComponent implements OnInit {
 
   clearSearch(filter: FiltersModel) {
     filter.value = '';
-    this.onSearchFilter.emit({filter: filter, value: filter.value});
+    this.onSearchFilter.emit({ filter: filter, value: filter.value });
   }
 
   changeFilterSelection(filter: FiltersModel) {
@@ -61,20 +69,20 @@ export class FiltersCollapsedComponent implements OnInit {
     this.activePane = 'right';
   }
 
-  selectFilterOption( option: IFilterOption, goBack = true) {
-    this.onFilter.emit({filter: this.selectedFilter, option: option});
+  selectFilterOption(option: IFilterOption, goBack = true) {
+    this.onFilter.emit({ filter: this.selectedFilter, option: option });
     if (goBack) {
       this.back();
     }
   }
 
   searchFilter(filter: FiltersModel) {
-    this.onSearchFilter.emit({filter: filter});
+    this.onSearchFilter.emit({ filter: filter });
   }
 
   back() {
     this.activePane = 'left';
-    this.onBack.emit({filter: this.selectedFilter});
+    this.onBack.emit({ filter: this.selectedFilter });
   }
 
   onSlideDone($event) {
@@ -88,7 +96,9 @@ export class FiltersCollapsedComponent implements OnInit {
     this.data.forEach((filter: FiltersModel, index: number) => {
       if (
         filter.type === FilterType.SingleSelect ||
-        (filter.type === FilterType.MultiSelect && filter.selected.length !== 0 && filter.selected.length < (filter.options.length - 1)) ||
+        (filter.type === FilterType.MultiSelect &&
+          filter.selected.length !== 0 &&
+          filter.selected.length < filter.options.length - 1) ||
         (filter.type === FilterType.Search && filter.value) ||
         (filter.type === FilterType.DateRange && filter.sourceValue)
       ) {
@@ -99,11 +109,13 @@ export class FiltersCollapsedComponent implements OnInit {
   }
 
   getFilterLabel() {
-    const plural = (this.totalActiveFilters() > 1) ? 'filters' : 'filter';
-    return (this.totalActiveFilters() > 0) ? this.totalActiveFilters() + ` ${plural} applied` : `Filters`;
+    const plural = this.totalActiveFilters() > 1 ? 'filters' : 'filter';
+    return this.totalActiveFilters() > 0
+      ? this.totalActiveFilters() + ` ${plural} applied`
+      : `Filters`;
   }
 
-  onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRange){
+  onDateRangeFilterChange(filter: FiltersModel, dateRange: DateRange) {
     this.onDateRangePickerFilter.emit({ filter, dateRange });
   }
 
@@ -113,13 +125,13 @@ export class FiltersCollapsedComponent implements OnInit {
   trackByFn(index, action) {
     return index;
   }
-  
-  toggleDateRangePicker(id:number, e: any) {
-    if(e.target.type === 'button' && e.target.innerText.indexOf('Date') > -1){
+
+  toggleDateRangePicker(id: number, e: any) {
+    if (e.target.type === 'button' && e.target.innerText.indexOf('Date') > -1) {
       return;
     }
-    for(let i = 0 ; i < this.dateRangePickers.toArray().length ; i ++){
-      if(this.dateRangePickers.toArray()[i].id === id){
+    for (let i = 0; i < this.dateRangePickers.toArray().length; i++) {
+      if (this.dateRangePickers.toArray()[i].id === id) {
         this.dateRangePickers.toArray()[i].toggle();
         e.stopPropagation();
       }

@@ -12,13 +12,13 @@ import { InspectorComponent } from './core/inspector/inspector.component';
 import { InstallGuideComponent } from './core/install-guide/install-guide.component';
 import { LineClampComponent } from './core/line-clamp/line-clamp.component';
 import { LoadersComponent } from './core/loaders/loaders.component';
+import { MigrateV13Component } from './core/migrate-v13/migrate-v13.component';
 import { ModalsComponent } from './core/modals/modals.component';
 import { NgSelectComponent } from './core/ng-select/ng-select.component';
 import { NgxToastrComponent } from './core/ngx-toastr/ngx-toastr.component';
 import { OnlineStatusComponent } from './core/online-status/online-status.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { PaginationComponent } from './core/pagination/pagination.component';
-import { SelectizeComponent } from './core/selectize/selectize.component';
 import { TabsComponent } from './core/tabs/tabs.component';
 import { TabularComponent } from './core/tabular/tabular.component';
 import { TextInputComponent } from './core/text-input/text-input.component';
@@ -29,6 +29,7 @@ import { TypeaheadsComponent } from './core/typeaheads/typeaheads.component';
 const routes: Routes = [
   { path: '', redirectTo: '/install-guide', pathMatch: 'full' },
   { path: 'install-guide', component: InstallGuideComponent },
+  { path: 'migrate-13', component: MigrateV13Component },
   { path: 'accordion', component: AccordionComponent },
   { path: 'date-pickers', component: DatepickersComponent },
   { path: 'time-picker', component: TimepickerComponent },
@@ -42,7 +43,6 @@ const routes: Routes = [
   { path: 'tooltips', component: TooltipsComponent },
   { path: 'pagination', component: PaginationComponent },
   { path: 'tabular', component: TabularComponent },
-  { path: 'selectize', component: SelectizeComponent },
   { path: 'autogrow', component: AutoGrowComponent },
   { path: 'empty-state', component: EmptyStateComponent },
   { path: 'filters', component: FiltersComponent },

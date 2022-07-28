@@ -1,22 +1,41 @@
 import {
-  ComponentFactoryResolver,
-  Directive, ElementRef, EventEmitter, HostListener, Input, NgZone, OnDestroy, OnInit, Optional,
-  Output, Renderer2, TemplateRef, ViewContainerRef
+  FlexibleConnectedPositionStrategy,
+  HorizontalConnectionPos,
+  OriginConnectionPosition,
+  Overlay,
+  OverlayConnectionPosition,
+  OverlayRef,
+  VerticalConnectionPos
+} from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewContainerRef
 } from '@angular/core';
 import { FormControl, NgControl } from '@angular/forms';
+import { from, Observable, Subject } from 'rxjs';
+import {
+  debounceTime,
+  filter,
+  mergeMap,
+  take,
+  takeUntil,
+  toArray
+} from 'rxjs/operators';
 import { TypeaheadContainerComponent } from './typeahead-container.component';
+import { TypeaheadMatch } from './typeahead-match.class';
 import { getValueFromObject, latinize, tokenize } from './typeahead-utils';
 
-import {Observable, from, Subject} from 'rxjs';
-import { debounceTime, mergeMap, filter, toArray, take, takeUntil } from 'rxjs/operators';
-import { TypeaheadMatch } from './typeahead-match.class';
-import {
-  FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, OverlayConnectionPosition,
-  Overlay, OverlayRef, VerticalConnectionPos
-} from '@angular/cdk/overlay';
-import {ComponentPortal} from '@angular/cdk/portal';
-
-@Directive({selector: '[hxaTypeahead]', exportAs: 'hx-typeahead'})
+@Directive({ selector: '[hxaTypeahead]', exportAs: 'hx-typeahead' })
 export class TypeaheadDirective implements OnInit, OnDestroy {
   /** options source, can be Array of strings, objects or an Observable for external matching process */
   @Input() public hxaTypeahead: any;
@@ -64,14 +83,16 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
   minWidthRelativeTo: string;
 
   @Input()
-  maxHeight: string = '20rem';
+  maxHeight = '20rem';
 
   /** fired when 'busy' state of this component was changed, fired on async mode only, returns boolean */
   @Output() public typeaheadLoading: EventEmitter<boolean> = new EventEmitter();
   /** fired on every key event and returns true in case of matches are not detected */
-  @Output() public typeaheadNoResults: EventEmitter<boolean> = new EventEmitter();
+  @Output() public typeaheadNoResults: EventEmitter<boolean> =
+    new EventEmitter();
   /** fired when option was selected, return object with data of this option */
-  @Output() public typeaheadOnSelect: EventEmitter<TypeaheadMatch> = new EventEmitter();
+  @Output() public typeaheadOnSelect: EventEmitter<TypeaheadMatch> =
+    new EventEmitter();
   /** fired when blur event occurres. returns the active item */
   @Output() public typeaheadOnBlur: EventEmitter<any> = new EventEmitter();
 
@@ -84,25 +105,23 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
   private _portal: ComponentPortal<TypeaheadContainerComponent>;
   private readonly _destroyed = new Subject();
 
-
   @HostListener('keyup', ['$event'])
   public onChange(e: any): void {
     if (this._typeaheadInstance) {
-
       // up
-      if (e.keyCode === 38) {
+      if (e.key === 'ArrowUp') {
         this._typeaheadInstance.prevActiveMatch();
         return;
       }
 
       // down
-      if (e.keyCode === 40) {
+      if (e.key === 'ArrowDown') {
         this._typeaheadInstance.nextActiveMatch();
         return;
       }
 
       // enter
-      if (e.keyCode === 13) {
+      if (e.key === 'Enter') {
         this._typeaheadInstance.selectActiveMatch();
         return;
       }
@@ -110,9 +129,8 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
 
     // For `<input>`s, use the `value` property. For others that don't have a
     // `value` (such as `<span contenteditable="true">`, use `innerText`.
-    const value = e.target.value !== undefined
-      ? e.target.value
-      : e.target.innerText;
+    const value =
+      e.target.value !== undefined ? e.target.value : e.target.innerText;
     if (value.trim().length >= this.typeaheadMinLength) {
       this.typeaheadLoading.emit(true);
       this.keyUpEventEmitter.emit(e.target.value);
@@ -158,17 +176,20 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
     public overlay: Overlay,
     private _ngZone: NgZone,
     private _elementRef: ElementRef,
-    private _viewContainerRef: ViewContainerRef) {}
+    private _viewContainerRef: ViewContainerRef
+  ) {}
 
   ngOnInit() {
     this.typeaheadOptionsLimit = this.typeaheadOptionsLimit || 20;
-    this.typeaheadMinLength = this.typeaheadMinLength === void 0
-      ? 1
-      : this.typeaheadMinLength;
+    this.typeaheadMinLength =
+      this.typeaheadMinLength === void 0 ? 1 : this.typeaheadMinLength;
     this.typeaheadWaitMs = this.typeaheadWaitMs || 0;
 
     // async should be false in case of array
-    if (this.typeaheadAsync === undefined && !(this.hxaTypeahead instanceof Observable)) {
+    if (
+      this.typeaheadAsync === undefined &&
+      !(this.hxaTypeahead instanceof Observable)
+    ) {
       this.typeaheadAsync = false;
     }
 
@@ -194,15 +215,20 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
     return this._matches;
   }
 
-  public show(delay: number = 0): void {
-    if (this.disabled) { return; }
+  public show(delay = 0): void {
+    if (this.disabled) {
+      return;
+    }
 
     const overlayRef = this._createOverlay();
 
     this._detach();
-    this._portal = this._portal || new ComponentPortal(TypeaheadContainerComponent, this._viewContainerRef);
+    this._portal =
+      this._portal ||
+      new ComponentPortal(TypeaheadContainerComponent, this._viewContainerRef);
     this._typeaheadInstance = overlayRef.attach(this._portal).instance;
-    this._typeaheadInstance.afterHidden()
+    this._typeaheadInstance
+      .afterHidden()
       .pipe(takeUntil(this._destroyed))
       .subscribe(() => this._detach());
 
@@ -216,7 +242,7 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
     this._hide();
   }
 
-  private _hide(delay: number = 0) {
+  private _hide(delay = 0) {
     if (this._typeaheadInstance) {
       this._typeaheadInstance.hide(delay);
     }
@@ -227,37 +253,16 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
       this._overlayRef.dispose();
       this._typeaheadInstance = null;
     }
-    this._destroyed.next();
+    this._destroyed.next(true);
     this._destroyed.complete();
   }
 
   protected asyncActions(): void {
-    this.keyUpEventEmitter.pipe(
-      debounceTime(this.typeaheadWaitMs),
-      mergeMap(() => this.hxaTypeahead)
-    ).subscribe(
-        (matches: any[]) => {
-          this.finalizeAsyncCall(matches);
-        },
-        (err: any) => {
-          console.error(err);
-        }
-      );
-  }
-
-  protected syncActions(): void {
-    this.keyUpEventEmitter.pipe(
-      debounceTime(this.typeaheadWaitMs),
-      mergeMap((value: string) => {
-        const normalizedQuery = this.normalizeQuery(value);
-
-        return from(this.hxaTypeahead).pipe(
-          filter((option: any) => {
-            return option && this.testMatch(this.normalizeOption(option), normalizedQuery);
-          }),
-          toArray()
-        );
-      }))
+    this.keyUpEventEmitter
+      .pipe(
+        debounceTime(this.typeaheadWaitMs),
+        mergeMap(() => this.hxaTypeahead)
+      )
       .subscribe(
         (matches: any[]) => {
           this.finalizeAsyncCall(matches);
@@ -268,8 +273,39 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
       );
   }
 
-  protected normalizeOption(option: any): any {
-    const optionValue: string = getValueFromObject(option, this.typeaheadOptionField);
+  protected syncActions(): void {
+    this.keyUpEventEmitter
+      .pipe(
+        debounceTime(this.typeaheadWaitMs),
+        mergeMap((value: string) => {
+          const normalizedQuery = this.normalizeQuery(value);
+
+          return from(this.hxaTypeahead).pipe(
+            filter((option: any) => {
+              return (
+                option &&
+                this.testMatch(this.normalizeOption(option), normalizedQuery)
+              );
+            }),
+            toArray()
+          );
+        })
+      )
+      .subscribe(
+        (matches: any[]) => {
+          this.finalizeAsyncCall(matches);
+        },
+        (err: any) => {
+          console.error(err);
+        }
+      );
+  }
+
+  protected normalizeOption(option: any): string {
+    const optionValue: string = getValueFromObject(
+      option,
+      this.typeaheadOptionField
+    );
     const normalizedOption = this.typeaheadLatinize
       ? latinize(optionValue)
       : optionValue;
@@ -280,12 +316,17 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
   protected normalizeQuery(value: string): any {
     // If singleWords, break model here to not be doing extra work on each
     // iteration
-    let normalizedQuery: any =
-      (this.typeaheadLatinize ? latinize(value) : value)
-        .toString()
-        .toLowerCase();
+    let normalizedQuery: any = (
+      this.typeaheadLatinize ? latinize(value) : value
+    )
+      .toString()
+      .toLowerCase();
     normalizedQuery = this.typeaheadSingleWords
-      ? tokenize(normalizedQuery, this.typeaheadWordDelimiters, this.typeaheadPhraseDelimiters)
+      ? tokenize(
+          normalizedQuery,
+          this.typeaheadWordDelimiters,
+          this.typeaheadPhraseDelimiters
+        )
       : normalizedQuery;
 
     return normalizedQuery;
@@ -319,7 +360,7 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
     }
 
     if (this._typeaheadInstance) {
-    this._updateContainer();
+      this._updateContainer();
     } else {
       this.show();
     }
@@ -333,7 +374,9 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
 
       // extract all group names
       const groups = limited
-        .map((option: any) => getValueFromObject(option, this.typeaheadGroupField))
+        .map((option: any) =>
+          getValueFromObject(option, this.typeaheadGroupField)
+        )
         .filter((v: string, i: number, a: any[]) => a.indexOf(v) === i);
 
       groups.forEach((group: string) => {
@@ -341,21 +384,37 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
         matches.push(new TypeaheadMatch(group, group, true));
 
         // add each item of group to array of matches
-        matches = matches.concat(limited
-          .filter((option: any) => getValueFromObject(option, this.typeaheadGroupField) === group)
-          .map((option: any) => new TypeaheadMatch(option, getValueFromObject(option, this.typeaheadOptionField))));
+        matches = matches.concat(
+          limited
+            .filter(
+              (option: any) =>
+                getValueFromObject(option, this.typeaheadGroupField) === group
+            )
+            .map(
+              (option: any) =>
+                new TypeaheadMatch(
+                  option,
+                  getValueFromObject(option, this.typeaheadOptionField)
+                )
+            )
+        );
       });
 
       this._matches = matches;
     } else {
-      this._matches = limited.map((option: any) => new TypeaheadMatch(option, getValueFromObject(option, this.typeaheadOptionField)));
+      this._matches = limited.map(
+        (option: any) =>
+          new TypeaheadMatch(
+            option,
+            getValueFromObject(option, this.typeaheadOptionField)
+          )
+      );
     }
   }
 
   protected hasMatches(): boolean {
     return this._matches.length > 0;
   }
-
 
   private _createOverlay(): OverlayRef {
     if (this._overlayRef) {
@@ -421,24 +480,30 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
       });
     } else if (this.maxWidthRelativeTo) {
       const elem: Element = document.getElementById(this.maxWidthRelativeTo);
-      overlayRef.updateSize({ maxWidth: elem.clientWidth, maxHeight: this.maxHeight });
+      overlayRef.updateSize({
+        maxWidth: elem.clientWidth,
+        maxHeight: this.maxHeight
+      });
     } else if (this.minWidthRelativeTo) {
       const elem: Element = document.getElementById(this.minWidthRelativeTo);
-      overlayRef.updateSize({ minWidth: elem.clientWidth, maxHeight: this.maxHeight });
+      overlayRef.updateSize({
+        minWidth: elem.clientWidth,
+        maxHeight: this.maxHeight
+      });
     } else {
       overlayRef.updateSize({ maxHeight: this.maxHeight });
     }
   }
 
   private _updatePosition() {
-    const position =
-      this._overlayRef!.getConfig().positionStrategy as FlexibleConnectedPositionStrategy;
+    const position = this._overlayRef!.getConfig()
+      .positionStrategy as FlexibleConnectedPositionStrategy;
     const origin = this._getOrigin();
     const overlay = this._getOverlayPosition();
 
     position.withPositions([
-      {...origin.main, ...overlay.main},
-      {...origin.fallback, ...overlay.fallback}
+      { ...origin.main, ...overlay.main },
+      { ...origin.fallback, ...overlay.fallback }
     ]);
   }
 
@@ -446,55 +511,72 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
    * Returns the origin position and a fallback position based on the user's position preference.
    * The fallback position is the inverse of the origin (e.g. `'bottom' -> 'top'`).
    */
-  private _getOrigin(): {main: OriginConnectionPosition, fallback: OriginConnectionPosition} {
+  private _getOrigin(): {
+    main: OriginConnectionPosition;
+    fallback: OriginConnectionPosition;
+  } {
     const placement = this.placement;
     let originPlacement: OriginConnectionPosition;
 
     if (placement === 'top' || placement === 'bottom') {
-      originPlacement = {originX: 'center', originY: placement === 'top' ? 'top' : 'bottom'};
+      originPlacement = {
+        originX: 'center',
+        originY: placement === 'top' ? 'top' : 'bottom'
+      };
     } else if (placement === 'left') {
-      originPlacement = {originX: 'start', originY: 'center'};
+      originPlacement = { originX: 'start', originY: 'center' };
     } else if (placement === 'right') {
-      originPlacement = {originX: 'end', originY: 'center'};
+      originPlacement = { originX: 'end', originY: 'center' };
     } else {
       console.error('Position error', placement);
     }
 
-    const {x, y} = this._invertPosition(originPlacement.originX, originPlacement.originY);
+    const { x, y } = this._invertPosition(
+      originPlacement.originX,
+      originPlacement.originY
+    );
 
     return {
       main: originPlacement,
-      fallback: {originX: x, originY: y}
+      fallback: { originX: x, originY: y }
     };
   }
 
   /** Returns the overlay position and a fallback position based on the user's preference */
-  private _getOverlayPosition(): {main: OverlayConnectionPosition, fallback: OverlayConnectionPosition} {
+  private _getOverlayPosition(): {
+    main: OverlayConnectionPosition;
+    fallback: OverlayConnectionPosition;
+  } {
     const placement = this.placement;
     let overlayPlacement: OverlayConnectionPosition;
 
     if (placement === 'top') {
-      overlayPlacement = {overlayX: 'center', overlayY: 'bottom'};
+      overlayPlacement = { overlayX: 'center', overlayY: 'bottom' };
     } else if (placement === 'bottom') {
-      overlayPlacement = {overlayX: 'center', overlayY: 'top'};
+      overlayPlacement = { overlayX: 'center', overlayY: 'top' };
     } else if (placement === 'left') {
-      overlayPlacement = {overlayX: 'end', overlayY: 'center'};
+      overlayPlacement = { overlayX: 'end', overlayY: 'center' };
     } else if (placement === 'right') {
-      overlayPlacement = {overlayX: 'start', overlayY: 'center'};
+      overlayPlacement = { overlayX: 'start', overlayY: 'center' };
     } else {
       console.error('Could not find a position', placement);
     }
 
-    const {x, y} = this._invertPosition(overlayPlacement.overlayX, overlayPlacement.overlayY);
+    const { x, y } = this._invertPosition(
+      overlayPlacement.overlayX,
+      overlayPlacement.overlayY
+    );
 
     return {
       main: overlayPlacement,
-      fallback: {overlayX: x, overlayY: y}
+      fallback: { overlayX: x, overlayY: y }
     };
   }
 
-
-  private _invertPosition(x: HorizontalConnectionPos, y: VerticalConnectionPos) {
+  private _invertPosition(
+    x: HorizontalConnectionPos,
+    y: VerticalConnectionPos
+  ) {
     if (this.placement === 'top' || this.placement === 'bottom') {
       if (y === 'top') {
         y = 'bottom';
@@ -509,7 +591,7 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
       }
     }
 
-    return {x, y};
+    return { x, y };
   }
 
   private _detach() {
@@ -527,25 +609,31 @@ export class TypeaheadDirective implements OnInit, OnDestroy {
       this._typeaheadInstance.parent = this;
       this._typeaheadInstance.placement = this.placement;
 
-      const normalizedQuery = (this.typeaheadLatinize
-        ? latinize(this.ngControl.control.value)
-        : this.ngControl.control.value).toString()
+      const normalizedQuery = (
+        this.typeaheadLatinize
+          ? latinize(this.ngControl.control.value)
+          : this.ngControl.control.value
+      )
+        .toString()
         .toLowerCase();
       this._typeaheadInstance.query = this.typeaheadSingleWords
-        ? tokenize(normalizedQuery, this.typeaheadWordDelimiters, this.typeaheadPhraseDelimiters)
+        ? tokenize(
+            normalizedQuery,
+            this.typeaheadWordDelimiters,
+            this.typeaheadPhraseDelimiters
+          )
         : normalizedQuery;
       this._typeaheadInstance.matches = this._matches;
       //this._typeaheadInstance.maxWidth = this.maxWidth;
 
-
-      this._ngZone.onMicrotaskEmpty.asObservable().pipe(
-        take(1),
-        takeUntil(this._destroyed)
-      ).subscribe(() => {
-        if (this._typeaheadInstance) {
-          this._overlayRef!.updatePosition();
-        }
-      });
+      this._ngZone.onMicrotaskEmpty
+        .asObservable()
+        .pipe(take(1), takeUntil(this._destroyed))
+        .subscribe(() => {
+          if (this._typeaheadInstance) {
+            this._overlayRef!.updatePosition();
+          }
+        });
     }
   }
 }

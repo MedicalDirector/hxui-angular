@@ -1,6 +1,6 @@
 {
   "name": "@hxui/angular",
-  "version": "11.2.1",
+  "version": "13.0.0-next.3",
   "license": "MIT",
   "private": false,
   "author": "Design @ MD <design@medicaldirector.com>",
@@ -10,31 +10,28 @@
   },
   "bugs": "https://github.com/MedicalDirector/hxui-angular/issues",
   "dependencies": {
-    "tslib": "^2.0.0"
-  },
-  "peerDependencies": {
-    "@angular/animations": "^11.0.0",
-    "@angular/cdk": "^11.0.0",
-    "@angular/common": "^11.0.0",
-    "@angular/compiler": "^11.0.0",
-    "@angular/core": "^11.0.0",
-    "@angular/forms": "^11.0.0",
-    "@angular/platform-browser": "^11.0.0",
-    "@angular/platform-browser-dynamic": "^11.0.0",
-    "@angular/router": "^11.0.0",
-    "@angular/localize": "^11.0.0",
-    "@hxui/css": "^1.4.0",
-    "@hxui/ng-select": "^1.0.0",
-    "@ng-select/ng-option-highlight": ">=0.0.5 <0.0.7",
-    "@ng-select/ng-select": "^6.0.0",
-    "array-sort-by": "^1.2.1",
-    "jquery": "^3.5.1",
+    "tslib": "^2.0.0",
     "lodash": "^4.17.20",
     "lodash.clonedeep": "^4.5.0",
-    "moment": "^2.29.1",
-    "ngx-mask": "^11.1.4",
-    "rxjs": "^6.6.0",
-    "selectize": "^0.12.4",
-    "ngx-toastr": "^13.2.1"
+    "moment": "^2.29.0"
+  },
+  "peerDependencies": {
+    "@angular/animations": "^13.0.0",
+    "@angular/cdk": "^13.0.0",
+    "@angular/common": "^13.0.0",
+    "@angular/compiler": "^13.0.0",
+    "@angular/core": "^13.0.0",
+    "@angular/forms": "^13.0.0",
+    "@angular/platform-browser": "^13.0.0",
+    "@angular/router": "^13.0.0",
+    "@angular/localize": "^13.0.0",
+    "@hxui/css": "^1.5.0",
+    "@hxui/ng-select": "^1.1.0",
+    "@ng-select/ng-option-highlight": "0.0.7",
+    "@ng-select/ng-select": "^8.0.0",
+    "array-sort-by": "^1.2.1",
+    "ngx-mask": "^13.0.0",
+    "rxjs": "^7.4.0",
+    "ngx-toastr": "^14.0.0"
   }
 }

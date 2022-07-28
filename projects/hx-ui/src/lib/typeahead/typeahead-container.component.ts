@@ -1,15 +1,15 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
-  TemplateRef,
-  ViewEncapsulation,
   HostListener,
-  ChangeDetectorRef
+  TemplateRef,
+  ViewEncapsulation
 } from '@angular/core';
-import { TypeaheadDirective } from './typeahead.directive';
+import { Observable, Subject } from 'rxjs';
 import { TypeaheadMatch } from './typeahead-match.class';
 import { latinize } from './typeahead-utils';
-import { Observable, Subject } from 'rxjs';
+import { TypeaheadDirective } from './typeahead.directive';
 
 @Component({
   selector: 'hx-typeahead-container',
@@ -238,7 +238,7 @@ export class TypeaheadContainerComponent {
 
     this._hideTimeoutId = window.setTimeout(() => {
       // this.visibility = Visibility.Hidden;
-      this._onHide.next();
+      this._onHide.next(true);
     }, delay);
   }
 

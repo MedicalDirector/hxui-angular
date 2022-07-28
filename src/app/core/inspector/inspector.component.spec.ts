@@ -8,9 +8,10 @@ describe('InspectorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [InspectorComponent],
-      imports: [SharedModule]
-    }).compileComponents();
+    declarations: [InspectorComponent],
+    imports: [SharedModule],
+    teardown: { destroyAfterEach: false }
+}).compileComponents();
   }));
 
   beforeEach(() => {

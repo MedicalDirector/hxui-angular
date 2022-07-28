@@ -5,8 +5,9 @@ import {Overlay} from '@angular/cdk/overlay';
 
 describe('InspectorService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    providers: [ InspectorService, Overlay ]
-  }));
+    providers: [InspectorService, Overlay],
+    teardown: { destroyAfterEach: false }
+}));
 
   it('should be created', () => {
     const service: InspectorService = TestBed.inject(InspectorService);

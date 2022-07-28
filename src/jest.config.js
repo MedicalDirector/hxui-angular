@@ -1,25 +1,16 @@
-const baseConfig = require('../jest.config');
+globalThis.ngJest = {
+  skipNgcc: true,
+  tsconfig: './tsconfig.spec.json',
+};
 
 module.exports = {
-  ...baseConfig,
   displayName: 'docs',
-  moduleNameMapper: {
-    '@core/(.*)': '<rootDir>/src/app/core/$1'
-  },
+  preset: 'jest-preset-angular',
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   globals: {
     'ts-jest': {
-      tsconfig: '<rootDir>/src/tsconfig.spec.json'
-    }
+      tsconfig: './tsconfig.spec.json',
+    },
   },
-  testPathIgnorePatterns: [
-    '<rootDir>/build/',
-    '<rootDir>/node_modules/',
-    '<rootDir>/projects/'
-  ],
-  coveragePathIgnorePatterns: [
-    '<rootDir>/build/',
-    '<rootDir>/node_modules/',
-    '<rootDir>/projects/'
-  ],
-  coverageDirectory: '<rootDir>/coverage/docs'
+  coverageDirectory: './coverage/docs',
 };
