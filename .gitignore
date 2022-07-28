@@ -68,3 +68,6 @@ Thumbs.db
 # css
 *.css
 *.css.map
+
+# Local Netlify folder
+.netlify

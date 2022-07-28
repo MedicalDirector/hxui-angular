@@ -1,6 +1,6 @@
 {
   "name": "@hxui/ng-select",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A HxUi theme for ng-select",
   "author": "Design @ MD <design@medicaldirector.com>",
   "private": false,
@@ -20,5 +20,10 @@
   "bugs": "https://github.com/MedicalDirector/hxui-angular/issues",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  }
+  },
+  "files": [
+    "CHANGELOG.md",
+    "themes/**/*",
+    "!themes/**/*.stories.ts"
+  ]
 }
