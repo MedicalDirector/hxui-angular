@@ -5,28 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [13.0.0-next.3](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.3) - 2022-07-25
+## [13.0.0](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.1...13.0.0) - 2022-07-29
 
-_If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
-
-### Changed
-
-- **BREAKING** remove peer dependency for moment, array-sort-by, lodash and lodash.clonedeep
-
-## [13.0.0-next.2](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.2) - 2022-06-29
-
-### Changed
-
-- **BREAKING** remove Selectize component
-- **BREAKING** remove peer dependency for selectize, jquery and @angular/platform-browser-dynamic
-
-## [13.0.0-next.1](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.1) - 2022-06-28
-
-### Fixed
-
-- [Date picker] Fixed styling for input with leading icon and dropdown overlay in incrementally-adopted hxui usage
-
-## [13.0.0-next.0](https://github.com/MedicalDirector/hxui-angular/compare/master...13.0.0-next.0) - 2022-06-14
+_If you are upgrading: please see [`MIGRATION.md`](MIGRATION.md)._
 
 ### Changed
 
@@ -37,6 +18,13 @@ _If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
 - **BREAKING:** bump rxjs peer dep to >=7.4.x
 - **BREAKING:** bump ngx-toastr peer dep to >=14.x
 - **BREAKING:** refactor date picker component
+- **BREAKING** remove Selectize component
+- **BREAKING** remove peer dependency for selectize, jquery and @angular/platform-browser-dynamic
+- **BREAKING** remove peer dependency for moment, array-sort-by, lodash and lodash.clonedeep and convert to project dependency
+
+### Fixed
+
+- [Date picker] Fixed styling for input with leading icon and dropdown overlay in incrementally-adopted hxui usage
 
 ## [11.2.1](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.0...v11.2.1) - 2022-06-06
 

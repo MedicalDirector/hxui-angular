@@ -7,12 +7,14 @@
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>Usage</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#date-picker')">
+        <span>Date picker</span>
+      </a>
     </li>
 
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#date-picker')">
-        <span>Date picker</span>
+      <a class="hx-nav-link" (click)="scrollTo('#selectize')">
+        <span>Selectize</span>
       </a>
     </li>
   </ul>
@@ -82,6 +84,15 @@
         <li><kbd>tabSelected</kbd></li>
         <li><kbd>selectedDueDateConfiguration</kbd></li>
       </ul>
+    </section>
+
+    <section id="selectize">
+      <h3 class="h3">Selectize</h3>
+
+      <p>
+        This previously-deprecated component is now removed from the library.
+        Please migrate to <kbd>ng-select</kbd> if you have not already done so.
+      </p>
     </section>
   </article>
 </div>
