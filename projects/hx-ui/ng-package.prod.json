@@ -9,5 +9,6 @@
     "array-sort-by",
     "lodash",
     "lodash.clonedeep"
-  ]
+  ],
+  "assets": ["./CHANGELOG.md", "./MIGRATION.md", "./LICENCE"]
 }
