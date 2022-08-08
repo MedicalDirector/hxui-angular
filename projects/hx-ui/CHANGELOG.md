@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v13.0.0...master)
+
+### Changed
+
+- [timepicker] make disabled property accessible as component input
+
 ## [13.0.0](https://github.com/MedicalDirector/hxui-angular/compare/v11.2.1...13.0.0) - 2022-07-29
 
 _If you are upgrading: please see [`MIGRATION.md`](MIGRATION.md)._
