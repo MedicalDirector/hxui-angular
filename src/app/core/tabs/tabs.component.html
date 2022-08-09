@@ -1,9 +1,10 @@
 <section class="hx-section scrollable-y" #container>
   <div class="hx-section is-comfortable">
-
     <h1 class="hx-title">Tabs</h1>
-    <h2 class="hx-subtitle">The tab component is a small complete navigation component. Do I really need to explain what tabs are? :)</h2>
-    <hr>
+    <h2 class="hx-subtitle">
+      The tab component is a small complete navigation component.
+    </h2>
+    <hr />
 
     <h4 id="usage">Usage</h4>
     <p>Add the TabsModule to AppModule or SharedModule.</p>
@@ -12,84 +13,96 @@
       <code [highlight]="code.usage"></code>
     </pre>
 
-    <hr>
+    <hr />
 
     <h4 id="example">Example</h4>
 
     <div class="hx-columns">
       <div class="hx-column">
-
-        <div (click)="$event.preventDefault()">
+        <div>
           <p>Select an option:</p>
           <p>
-            <button type="button" class="hx-button is-primary" (click)="tabs[1].disabled = ! tabs[1].disabled">Enable / Disable forth tab</button>
+            <button
+              type="button"
+              class="hx-button is-primary"
+              (click)="tabs[1].disabled = ! tabs[1].disabled"
+            >
+              Enable / Disable forth tab
+            </button>
           </p>
 
-          <br>
+          <br />
 
-          <hx-tabset [stickyHeader]="true" [stickyHeaderOffset]="-1">
+          <hx-tabset
+            [stickyHeader]="true"
+            [stickyHeaderOffset]="-1"
+            [changeFn]="confirmBeforeSwitch"
+          >
             <hx-tab heading="Static title">Static content</hx-tab>
-            <hx-tab *ngFor="let tabz of tabs" [heading]="tabz.title" [active]="tabz.active" (select)="onSelect(tabz)" (deselect)="onDeselect(tabz)" [disabled]="tabz.disabled" [removable]="tabz.removable" (removed)="removeTabHandler(tabz)" [customClass]="tabz.customClass">
-              {{tabz?.content}}
+            <hx-tab
+              *ngFor="let tab of tabs"
+              [heading]="tab.title"
+              [active]="tab.active"
+              (select)="selectTab(tab)"
+              (deselect)="deselectTab(tab)"
+              [disabled]="tab.disabled"
+              [removable]="tab.removable"
+              [customClass]="tab.customClass"
+            >
+              {{tab?.content}}
             </hx-tab>
             <hx-tab (select)="alertMe()">
               <ng-template hxTabHeading>
-                <i class="icon icon-bell is-small"></i> Alert!
+                <i class="icon icon-bell is-small" style="height: 20px"></i>
+                Alert!
               </ng-template>
-              Html tab heading and callback!
-              Html tab heading and callback!Html tab heading and callback!Html tab heading and callback!
-              Html tab heading and callback!
+              Html tab heading and callback! Html tab heading and callback!Html
+              tab heading and callback!Html tab heading and callback! Html tab
+              heading and callback! Html tab heading and callback!Html tab
+              heading and callback! Html tab heading and callback!Html tab
+              heading and callback!
+              <br />
+              Html tab heading and callback!Html tab heading and callback! Html
+              tab heading and callback! Html tab heading and callback!Html tab
+              heading and callback!Html tab heading and callback! Html tab
+              heading and callback! Html tab heading and callback!Html tab
+              heading and callback! Html tab heading and callback!Html tab
+              heading and callback!
+              <br />
               Html tab heading and callback!Html tab heading and callback!
-              Html tab heading and callback!Html tab heading and callback!<br>
-              Html tab heading and callback!Html tab heading and callback! Html tab heading and callback!
-              Html tab heading and callback!Html tab heading and callback!Html tab heading and callback!
-              Html tab heading and callback!
-              Html tab heading and callback!Html tab heading and callback!
-              Html tab heading and callback!Html tab heading and callback!<br>
-              Html tab heading and callback!Html tab heading and callback!
-
-
-
-
-
             </hx-tab>
           </hx-tabset>
-
-
         </div>
-
       </div>
     </div>
 
-    <br>
+    <br />
 
     <h5 id="code">Code</h5>
 
     <div class="hx-columns">
       <div class="hx-column">
-
         <hx-tabset>
           <hx-tab heading="Template">
             <pre>
-        <code [highlight]="code.exampleTemplate"></code>
-      </pre>
+              <code [highlight]="code.exampleTemplate"></code>
+            </pre>
           </hx-tab>
           <hx-tab heading="Typescript">
             <pre>
-            <code [highlight]="code.exampleTypescript"></code>
-          </pre>
+              <code [highlight]="code.exampleTypescript"></code>
+            </pre>
           </hx-tab>
         </hx-tabset>
       </div>
     </div>
 
-    <hr>
+    <hr />
 
     <h4 id="infotabexample">Info Tab Example</h4>
 
     <div class="hx-columns">
       <div class="hx-column">
-
         <hx-tabset [justified]="true" [hasInfo]="true">
           <hx-tab>
             <ng-template hxTabHeading>
@@ -183,31 +196,28 @@
             Tab 7 content
           </hx-tab>
         </hx-tabset>
-
       </div>
     </div>
 
-    <br>
+    <br />
 
     <h5 id="infotabcode">Code</h5>
 
     <div class="hx-columns">
       <div class="hx-column">
-
         <hx-tabset>
           <hx-tab heading="Template">
             <pre>
-        <code [highlight]="code.exampleInfoTabTemplate"></code>
-      </pre>
+              <code [highlight]="code.exampleInfoTabTemplate"></code>
+            </pre>
           </hx-tab>
         </hx-tabset>
       </div>
     </div>
 
-    <hr>
+    <hr />
 
     <h4 id="api">API Reference</h4>
-
 
     <div class="hx-columns">
       <div class="hx-column">
@@ -218,49 +228,75 @@
               <th>Inputs</th>
               <th>Type</th>
               <th>Description</th>
+              <th>Default</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>justified</td>
               <td><kbd>boolean</kbd></td>
-              <td>if true tabs fill the container and have a consistent width</td>
+              <td>
+                if true tabs fill the container and have a consistent width
+              </td>
+              <td></td>
             </tr>
             <tr>
               <td>type</td>
               <td><kbd>string</kbd></td>
               <td>navigation context class: 'tabs' or 'pills'</td>
+              <td></td>
             </tr>
             <tr>
               <td>vertical</td>
               <td><kbd>boolean</kbd></td>
               <td>if true tabs will be placed vertically</td>
+              <td></td>
             </tr>
             <tr>
               <td>hasInfo</td>
               <td><kbd>boolean</kbd></td>
               <td>if true info tab classes will be added</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>tag</td>
+              <td><kbd>'link'|'button'</kbd></td>
+              <td>apply the html element that makes sense semantically</td>
+              <td>'link'</td>
             </tr>
             <tr>
               <td>contentCustomClass</td>
               <td><kbd>string</kbd></td>
-              <td>if set, will be added to the tab's content class attribute</td>
+              <td>
+                if set, will be added to the tab's content class attribute
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>changeFn</td>
+              <td><kbd>Promise&lt;boolean&gt;</kbd></td>
+              <td>Provides a hook to intercept the changing of</td>
+              <td><kbd>Promise&lt;true&gt;</kbd></td>
             </tr>
             <tr>
               <td>stickyHeader</td>
               <td><kbd>boolean</kbd></td>
               <td>if set, will make the tab nav items sticky</td>
+              <td></td>
             </tr>
             <tr>
               <td>stickyHeaderOffset</td>
               <td><kbd>string</kbd></td>
-              <td>Add an offset (usually negative) to the position of sticky. REM is the unit of value.</td>
+              <td>
+                Add an offset (usually negative) to the position of sticky. REM
+                is the unit of value.
+              </td>
+              <td></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-
 
     <div class="hx-columns">
       <div class="hx-column">
@@ -302,7 +338,9 @@
             <tr>
               <td>removable</td>
               <td><kbd>boolean</kbd></td>
-              <td>if true tab can be removable, additional button will appear</td>
+              <td>
+                if true tab can be removable, additional button will appear
+              </td>
             </tr>
           </tbody>
         </table>
@@ -316,21 +354,29 @@
           <tbody>
             <tr>
               <td>deselect</td>
-              <td>fired when tab became inactive, $event:Tab equals to deselected instance of Tab component</td>
+              <td>
+                fired when tab became inactive, $event:Tab equals to deselected
+                instance of Tab component
+              </td>
             </tr>
             <tr>
               <td>removed</td>
-              <td>fired before tab will be removed, $event:Tab equals to instance of removed tab</td>
+              <td>
+                fired before tab will be removed, $event:Tab equals to instance
+                of removed tab
+              </td>
             </tr>
             <tr>
               <td>select</td>
-              <td>fired when tab became active, $event:Tab equals to selected instance of Tab component</td>
+              <td>
+                fired when tab became active, $event:Tab equals to selected
+                instance of Tab component
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-
 
     <div class="hx-columns">
       <div class="hx-column">
@@ -347,17 +393,21 @@
             <tr>
               <td>type</td>
               <td><kbd>string</kbd></td>
-              <td>provides default navigation context class: 'tabs' or 'pills'</td>
+              <td>
+                provides default navigation context class: 'tabs' or 'pills'
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-
   </div>
 </section>
 
-<aside *ngIf="contentsNav" class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white">
+<aside
+  *ngIf="contentsNav"
+  class="hx-sidebar is-right is-active is-medium-width is-scrollable hx-bg-white"
+>
   <ul class="hx-nav hx-nav-vertical">
     <li class="hx-nav-heading">
       <h6>Contents</h6>
@@ -366,13 +416,17 @@
       <a class="hx-nav-link" (click)="scrollTo('#usage')"><span>Usage</span></a>
     </li>
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#example')"><span>Examples</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#example')"
+        ><span>Examples</span></a
+      >
     </li>
     <li class="hx-nav-item">
       <a class="hx-nav-link" (click)="scrollTo('#code')"><span>Code</span></a>
     </li>
     <li class="hx-nav-item">
-      <a class="hx-nav-link" (click)="scrollTo('#api')"><span>API Reference</span></a>
+      <a class="hx-nav-link" (click)="scrollTo('#api')"
+        ><span>API Reference</span></a
+      >
     </li>
   </ul>
 </aside>
