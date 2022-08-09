@@ -1,56 +1,58 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {CoreBaseComponent} from '../core-base.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject } from '@angular/core';
 import { PageScrollService } from 'ngx-page-scroll-core';
-import {DOCUMENT} from '@angular/common';
-import {TabsCode} from './tabs.code';
-import {BreakpointObserver} from '@angular/cdk/layout';
+import { CoreBaseComponent } from '../core-base.component';
+import { TabsCode } from './tabs.code';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
-  styles: [':host { display:flex; flex: 1; min-width: 0; }']
+  styles: [':host { display:flex; flex: 1; min-width: 0; }'],
 })
-export class TabsComponent extends CoreBaseComponent implements OnInit {
-
+export class TabsPageComponent extends CoreBaseComponent {
   code = new TabsCode();
-  public tabs: any[] = [
-    {title: 'Dynamic Title 1', content: 'Dynamic content 1'},
-    {title: 'Dynamic Title 2', content: 'Dynamic content 2', disabled: true},
-    {title: 'Dynamic Title 3', content: 'Dynamic content 3', removable: true},
-    {title: 'Dynamic Title 4', content: 'Dynamic content 4', customClass: 'customClass'}
+
+  tabs = [
+    { title: 'Dynamic Title 1', content: 'Dynamic content 1' },
+    { title: 'Dynamic Title 2', content: 'Dynamic content 2', disabled: true },
+    { title: 'Dynamic Title 3', content: 'Dynamic content 3', removable: true },
+    {
+      title: 'Dynamic Title 4',
+      content: 'Dynamic content 4',
+      customClass: 'customClass',
+    },
   ];
 
-  public alertMe(): void {
-    setTimeout(function (): void {
-      alert('You\'ve selected the alert tab!');
-    });
-  }
-
-  public setActiveTab(index: number): void {
-    this.tabs[index].active = true;
-  }
-
-  public removeTabHandler(): void {
-    console.log('Remove Tab handler');
-  }
-
-  public onSelect(tabz): void {
-    //tabz.active = true;
-    console.log('Selected:', tabz);
-  }
-
-  public onDeselect(tabz): void {
-    //tabz.active = false;
-    console.log('Deselected:', tabz);
-  }
-
-  constructor(protected pageScrollService: PageScrollService,
-              protected breakpointObserver: BreakpointObserver,
-              @Inject(DOCUMENT) protected document: any) {
+  constructor(
+    protected pageScrollService: PageScrollService,
+    protected breakpointObserver: BreakpointObserver,
+    @Inject(DOCUMENT) protected document: Document
+  ) {
     super(pageScrollService, breakpointObserver, document);
   }
 
-  ngOnInit() {
+  alertMe(): void {
+    alert("You've selected the alert tab!");
   }
 
+  selectTab(tab): void {
+    console.log('Selected:', tab);
+  }
+
+  deselectTab(tab): void {
+    console.log('Deselected:', tab);
+  }
+
+  async confirmBeforeSwitch() {
+    return confirmDialog('proceed?');
+
+    function confirmDialog(msg) {
+      return new Promise(function (resolve) {
+        const confirmed = window.confirm(msg);
+
+        return confirmed ? resolve(true) : resolve(false);
+      });
+    }
+  }
 }
