@@ -21,7 +21,7 @@
     "hxui:build": "ng build hxui --configuration production",
     "hxui:test": "jest -c ./projects/hx-ui/jest.config.js",
     "hxui:test:coverage": "npm run hxui:test -- --coverage",
-    "hxui:test:watch": "ng test hxui --watch",
+    "hxui:test:watch": "npm run hxui:test -- --watch",
     "postinstall": "ngcc",
     "prepare": "husky install",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",

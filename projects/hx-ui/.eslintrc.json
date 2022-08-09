@@ -1,13 +1,9 @@
 {
   "extends": "../../.eslintrc.json",
-  "ignorePatterns": [
-    "!**/*"
-  ],
+  "ignorePatterns": ["!**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
         "project": [
           "projects/hx-ui/tsconfig.lib.json",
@@ -20,10 +16,7 @@
           "error",
           {
             "type": "element",
-            "prefix": [
-              "hxa",
-              "hx"
-            ],
+            "prefix": ["hxa", "hx"],
             "style": "kebab-case"
           }
         ],
@@ -31,19 +24,21 @@
           "error",
           {
             "type": "attribute",
-            "prefix": [
-              "hxa",
-              "hx"
-            ],
+            "prefix": ["hxa", "hx"],
             "style": "camelCase"
+          }
+        ],
+        "@typescript-eslint/no-empty-function": "off",
+        "@angular-eslint/no-host-metadata-property": [
+          "error",
+          {
+            "allowStatic": true
           }
         ]
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
+      "files": ["*.html"],
       "rules": {}
     }
   ]
