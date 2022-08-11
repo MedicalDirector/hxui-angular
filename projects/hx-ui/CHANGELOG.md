@@ -7,10 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v13.0.0...master)
 
-### Added
-
-- [tabset] add changeFn as input property to control changing of tabs
-
 ### Changed
 
 - [timepicker] make disabled property accessible as component input

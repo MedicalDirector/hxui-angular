@@ -1,99 +1,91 @@
 export class TabsCode {
-  usage = `import {TabsModule} from "@hxui/angular";
+
+usage =
+`
+import {TabsModule} from "@hxui/angular";
 
 @NgModule({
   imports: [TabsModule.forRoot(),...]
 })
 export class AppModule(){}
+
 `;
 
-  exampleTemplate = `<hx-tabset
-  [stickyHeader]="true"
-  [stickyHeaderOffset]="-1"
-  [changeFn]="confirmBeforeSwitch"
->
+exampleTemplate =
+`
+<p>
+  <button type="button" class="hx-button" (click)="tabs[0].active = true">Select second tab</button>
+  <button type="button" class="hx-button is-info" (click)="tabs[1].active = true">Select third tab</button>
+  <button type="button" class="hx-button is-primary" (click)="tabs[1].disabled = ! tabs[1].disabled">Enable / Disable third tab</button>
+</p>
+
+<br>
+
+<hx-tabset>
   <hx-tab heading="Static title">Static content</hx-tab>
-  <hx-tab
-    *ngFor="let tab of tabs"
-    [heading]="tab.title"
-    [active]="tab.active"
-    (select)="selectTab(tab)"
-    (deselect)="deselectTab(tab)"
-    [disabled]="tab.disabled"
-    [removable]="tab.removable"
-    [customClass]="tab.customClass"
-  >
-    {{tab?.content}}
+  <hx-tab *ngFor="let tabz of tabs"
+       [heading]="tabz.title"
+       [active]="tabz.active"
+       (select)="tabz.active = true"
+       (deselect)="tabz.active = false"
+       [disabled]="tabz.disabled"
+       [removable]="tabz.removable"
+       (removed)="removeTabHandler(tabz)"
+       [customClass]="tabz.customClass">
+    { { tabz?.content}}
   </hx-tab>
   <hx-tab (select)="alertMe()">
     <ng-template hxTabHeading>
-      <i class="icon icon-bell is-small" style="height: 20px"></i>
-      Alert!
+      <i class="icon icon-bell is-small"></i> Alert!
     </ng-template>
-    Html tab heading and callback! Html tab heading and callback!Html
-    tab heading and callback!Html tab heading and callback! Html tab
-    heading and callback! Html tab heading and callback!Html tab
-    heading and callback! Html tab heading and callback!Html tab
-    heading and callback!
-    <br />
-    Html tab heading and callback!Html tab heading and callback! Html
-    tab heading and callback! Html tab heading and callback!Html tab
-    heading and callback!Html tab heading and callback! Html tab
-    heading and callback! Html tab heading and callback!Html tab
-    heading and callback! Html tab heading and callback!Html tab
-    heading and callback!
-    <br />
-    Html tab heading and callback!Html tab heading and callback!
+    Html tab heading and callback!
   </hx-tab>
 </hx-tabset>
+
 `;
 
-  exampleTypescript = `import { Component, OnInit } from '@angular/core';
+exampleTypescript =
+  `
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'tab-example',
-  templateUrl: './tab-example.component.html'
+  selector: 'app-tabs',
+  templateUrl: './tabs.component.html'
 })
-export class TabExampleComponent {
+export class TabsComponent implements OnInit {
 
-  tabs: any[] = [
-    { title: 'Dynamic Title 1', content: 'Dynamic content 1' },
-    { title: 'Dynamic Title 2', content: 'Dynamic content 2', disabled: true },
-    { title: 'Dynamic Title 3', content: 'Dynamic content 3', removable: true },
-    {
-      title: 'Dynamic Title 4',
-      content: 'Dynamic content 4',
-      customClass: 'customClass',
-    },
+  public tabs: any[] = [
+    {title: 'Dynamic Title 1', content: 'Dynamic content 1'},
+    {title: 'Dynamic Title 2', content: 'Dynamic content 2', disabled: true},
+    {title: 'Dynamic Title 3', content: 'Dynamic content 3', removable: true},
+    {title: 'Dynamic Title 4', content: 'Dynamic content 4', customClass: 'customClass'}
   ];
 
-  alertMe(): void {
-    alert("You've selected the alert tab!");
+  public alertMe(): void {
+    setTimeout(function (): void {
+      alert('You\\'ve selected the alert tab!');
+    });
   }
 
-  selectTab(tab): void {
-    console.log('Selected:', tab);
+  public setActiveTab(index: number): void {
+    this.tabs[index].active = true;
   }
 
-  deselectTab(tab): void {
-    console.log('Deselected:', tab);
+  public removeTabHandler(): void {
+    console.log('Remove Tab handler');
   }
 
-  async confirmBeforeSwitch() {
-    return confirmDialog('proceed?');
+  constructor() {
 
-    function confirmDialog(msg) {
-      return new Promise(function (resolve) {
-        const confirmed = window.confirm(msg);
-
-        return confirmed ? resolve(true) : resolve(false);
-      });
-    }
+  ngOnInit() {
   }
 }
-`;
 
-  exampleInfoTabTemplate = `<hx-tabset [justified]="true" [hasInfo]="true">
+  `;
+
+exampleInfoTabTemplate =
+`
+<hx-tabset [justified]="true" [hasInfo]="true">
   <hx-tab>
     <ng-template hxTabHeading>
       <h6 class="mt-0 mb-1">Overdue</h6>
@@ -186,5 +178,7 @@ export class TabExampleComponent {
     Tab 7 content
   </hx-tab>
 </hx-tabset>
-`;
+
+    `;
+
 }
