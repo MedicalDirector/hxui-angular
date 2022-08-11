@@ -1,75 +1,70 @@
 ﻿import {
-  Directive,
-  ElementRef,
-  EventEmitter,
-  HostBinding,
-  Input,
-  OnDestroy,
-  Output,
-  TemplateRef,
-} from '@angular/core';
+  Directive, EventEmitter, HostBinding, Input, Output, TemplateRef, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { TabsetComponent } from './tabset.component';
 
-// eslint-disable-next-line @angular-eslint/directive-selector
-@Directive({ selector: 'hx-tab, [hx-tab]' })
-export class TabDirective implements OnDestroy {
+@Directive({selector: 'hx-tab, [hx-tab]'})
+export class TabDirective implements OnInit, OnDestroy {
   /** tab header text */
-  @Input() heading: string;
+  @Input() public heading: string;
   /** tab id */
-  @Input() id: string;
+  @Input() public id: string;
   /** if true tab can not be activated */
-  @Input() disabled: boolean;
+  @Input() public disabled: boolean;
   /** if true tab can be removable, additional button will appear */
-  @Input() removable: boolean;
+  @Input() public removable: boolean;
   /** if set, will be added to the tab's class atribute */
-  @Input() customClass: string;
+  @Input() public customClass: string;
 
+  /** tab active state toggle */
+  @HostBinding('class.is-active')
   @Input()
-  get active(): boolean {
+  public get active(): boolean {
     return this._active;
   }
-
-  set active(active: boolean) {
-    if ((this.disabled && active) || !active) {
+  
+  public set active(active: boolean) {
+    if (this.disabled && active || !active) {
       if (!active) {
         this._active = active;
       }
+      //if(typeof active != 'undefined')
+        this.deselect.emit(this);
 
-      this.deselect.emit(this);
       return;
     }
 
     this._active = active;
     this.select.emit(this);
-  }
-
-  /** tab active state toggle */
-  @HostBinding('class.is-active')
-  get _() {
-    return !!this._active;
+    this.tabset.tabs.forEach((tab: TabDirective) => {
+      if (tab !== this) {
+        tab.active = false;
+      }
+    });
   }
 
   /** fired when tab became active, $event:Tab equals to selected instance of Tab component */
-  // TODO: change output name
-  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() public select: EventEmitter<TabDirective> = new EventEmitter();
   /** fired when tab became inactive, $event:Tab equals to deselected instance of Tab component */
   @Output() public deselect: EventEmitter<TabDirective> = new EventEmitter();
   /** fired before tab will be removed, $event:Tab equals to instance of removed tab */
   @Output() public removed: EventEmitter<TabDirective> = new EventEmitter();
 
-  @HostBinding('class.hx-tab-pane') addClasn = true;
+  @HostBinding('class.hx-tab-pane') public addClasn = true;
 
-  headingRef: TemplateRef<any>;
-  tabset: TabsetComponent;
+  public headingRef: TemplateRef<any>;
+  public tabset: TabsetComponent;
   protected _active: boolean;
 
-  constructor(tabset: TabsetComponent, public elementRef: ElementRef) {
+  public constructor(tabset: TabsetComponent, public elementRef: ElementRef) {
     this.tabset = tabset;
     this.tabset.addTab(this);
   }
 
-  ngOnDestroy(): void {
-    this.tabset.removeTab(this, { reselect: false, emit: false });
+  public ngOnInit(): void {
+    this.removable = this.removable;
+  }
+
+  public ngOnDestroy(): void {
+    this.tabset.removeTab(this, {reselect: false, emit: false});
   }
 }
