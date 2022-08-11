@@ -19,7 +19,7 @@ import { NgxToastrComponent } from './core/ngx-toastr/ngx-toastr.component';
 import { OnlineStatusComponent } from './core/online-status/online-status.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { PaginationComponent } from './core/pagination/pagination.component';
-import { TabsComponent } from './core/tabs/tabs.component';
+import { TabsPageComponent } from './core/tabs/tabs.component';
 import { TabularComponent } from './core/tabular/tabular.component';
 import { TextInputComponent } from './core/text-input/text-input.component';
 import { TimepickerComponent } from './core/timepicker/timepicker.component';
@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'dialogs', component: DialogsComponent },
   { path: 'inspector', component: InspectorComponent },
   { path: 'modals', component: ModalsComponent },
-  { path: 'tabs', component: TabsComponent },
+  { path: 'tabs', component: TabsPageComponent },
   { path: 'typeaheads', component: TypeaheadsComponent },
   { path: 'tooltips', component: TooltipsComponent },
   { path: 'pagination', component: PaginationComponent },
@@ -52,10 +52,10 @@ const routes: Routes = [
   { path: 'ng-select', component: NgSelectComponent },
   { path: 'line-clamp', component: LineClampComponent },
   { path: 'toastr', component: NgxToastrComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
