@@ -64,6 +64,7 @@ export class TabDirective implements OnDestroy {
   tabset: TabsetComponent;
   protected _active: boolean;
 
+  // TODO: refactor so that ref to parent 'TabsetComponent' is removed, causing circular refs
   constructor(tabset: TabsetComponent, public elementRef: ElementRef) {
     this.tabset = tabset;
     this.tabset.addTab(this);

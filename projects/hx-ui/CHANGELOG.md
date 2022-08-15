@@ -5,11 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v13.0.0...master)
+## [Unreleased](https://github.com/MedicalDirector/hxui-angular/compare/v13.1.0...master)
+
+## [13.1.0](https://github.com/MedicalDirector/hxui-angular/compare/v13.0.0...v13.1.0)
 
 ### Added
 
-- [tabset] add changeFn as input property to control changing of tabs
+- [tabset] add changeFn as input property to control changing of tabs and tag to alternate between `a` and `button`
 
 ### Changed
 
