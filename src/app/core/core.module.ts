@@ -24,7 +24,7 @@ import { NgxToastrComponent } from './ngx-toastr/ngx-toastr.component';
 import { OnlineStatusComponent } from './online-status/online-status.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PaginationComponent } from './pagination/pagination.component';
-import { TabsComponent } from './tabs/tabs.component';
+import { TabsPageComponent } from './tabs/tabs.component';
 import { TabularComponent } from './tabular/tabular.component';
 import { TabularService } from './tabular/tabular.service';
 import { TextInputComponent } from './text-input/text-input.component';
@@ -42,7 +42,7 @@ import { TypeaheadsComponent } from './typeaheads/typeaheads.component';
     DropdownsComponent,
     ModalsComponent,
     CustomModalComponent,
-    TabsComponent,
+    TabsPageComponent,
     TypeaheadsComponent,
     StaticArrayComponent,
     TooltipsComponent,
