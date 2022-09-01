@@ -1,0 +1,419 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Date Range Pickers</h1>
+  <p class="hx-subtitle">
+    The date range picker is an element that is used to select a date range
+  </p>
+  <hr />
+
+  <div class="hx-alert is-warning is-inverse is-bordered">
+    <span class="hx-icon-control mr-2">
+      <i class="hx-icon is-medium icon-exclamation"></i>
+    </span>
+    <span *ngIf="!isVersion8">
+      The below documentation is specific to version 11+.
+    </span>
+    <span *ngIf="isVersion8">
+      The below documentation is specific to version 8.
+    </span>
+    <div class="hx-spacer"></div>
+    <button
+      *ngIf="!isVersion8"
+      class="hx-button is-flat is-warning"
+      (click)="toggleVersions()"
+    >
+      Switch to version 8
+    </button>
+    <button
+      *ngIf="isVersion8"
+      class="hx-button is-flat is-warning"
+      (click)="toggleVersions()"
+    >
+      Switch to version 11+
+    </button>
+  </div>
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the DateRangePickerModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <p>If lazy-loaded, add the following to the LazyFeatureModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usageLazy.text"
+      [languages]="code.usageLazy.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-calendar">Calendar example</h2>
+  <p>Custom (date-picker) tab only</p>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hxa-date-range-picker
+        [displayMode]="2"
+        (onDateRangeSelected)="getSelectedDateRange($event)"
+      ></hxa-date-range-picker>
+      <div>
+        <br />
+        <span>Emitted Date Range object:</span>
+        <ul>
+          <li>fromDate: {{ selectedDateRange.fromDate }}</li>
+          <li>toDate: {{ selectedDateRange.toDate }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <hx-tabset>
+    <hx-tab heading="Template">
+      <pre>
+        <code 
+          [highlight]="code.egCalendarHTML.text"
+          [languages]="code.egCalendarHTML.lang"
+        ></code>
+      </pre>
+    </hx-tab>
+    <hx-tab heading="Typescript">
+      <pre>
+        <code 
+          [highlight]="code.egCalendarTS.text"
+          [languages]="code.egCalendarTS.lang"
+        ></code>
+      </pre>
+    </hx-tab>
+  </hx-tabset>
+
+  <h2 id="example-interval">Interval example</h2>
+  <p>Interval tab only</p>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hxa-date-range-picker
+        [displayMode]="3"
+        [intervalOptions]="intervalOptions"
+        (onDateRangeSelected)="getSelectedDateRange($event)"
+      ></hxa-date-range-picker>
+      <div>
+        <br />
+        <span>Emitted Date Range object:</span>
+        <ul>
+          <li>fromDate: {{ selectedDateRange.fromDate }}</li>
+          <li>toDate: {{ selectedDateRange.toDate }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <hx-tabset>
+    <hx-tab heading="Template">
+      <pre>
+        <code 
+          [highlight]="code.egIntervalHTML.text"
+          [languages]="code.egIntervalHTML.lang"
+        ></code>
+      </pre>
+    </hx-tab>
+    <hx-tab heading="Typescript">
+      <pre>
+        <code 
+          [highlight]="code.egIntervalTS.text"
+          [languages]="code.egIntervalTS.lang"
+        ></code>
+      </pre>
+    </hx-tab>
+  </hx-tabset>
+
+  <h2 id="example-choice">Choice example</h2>
+  <p>Example with both tabs: date-pickers and interval</p>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hxa-date-range-picker
+        [intervalOptions]="intervalOptions"
+        [displayMode]="1"
+        [dateFormat]="dateFormat"
+        (onDateRangeSelected)="getSelectedDateRange($event)"
+      ></hxa-date-range-picker>
+      <div>
+        <br />
+        <span>Emitted Date Range object:</span>
+        <ul>
+          <li>From Date: {{ selectedDateRange.fromDate }}</li>
+          <li>To Date: {{ selectedDateRange.toDate }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <hx-tabset>
+    <hx-tab heading="Template">
+      <pre>
+        <code 
+          [highlight]="code.egChoiceHTML.text"
+          [languages]="code.egChoiceHTML.lang"
+        ></code>
+      </pre>
+    </hx-tab>
+    <hx-tab heading="Typescript">
+      <pre>
+        <code 
+          [highlight]="code.egChoiceTS.text"
+          [languages]="code.egChoiceTS.lang"
+        ></code>
+      </pre>
+    </hx-tab>
+  </hx-tabset>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <h3 class="is-primary">DateRangePickerComponent</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Inputs</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Defaults</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>intervalOptions</td>
+            <td><kbd>string[]</kbd></td>
+            <td>
+              Specifies interval options displayed under interval selection tab.
+              Please see available options as below.
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>placeholder</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              Specifies the placeholder value of the components input element.
+            </td>
+            <td><kbd>'Date'</kbd></td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td><kbd>boolean</kbd></td>
+            <td>
+              Adds the disabled html attribute to the components dropdown
+              element.
+            </td>
+            <td><kbd>false</kbd></td>
+          </tr>
+          <tr>
+            <td>autoClose</td>
+            <td><kbd>boolean</kbd></td>
+            <td>
+              Indicates that dropdown will be closed on item or document click,
+              and after pressing ESC.
+            </td>
+            <td><kbd>true</kbd></td>
+          </tr>
+          <tr>
+            <td>placement</td>
+            <td><kbd>'top' | 'bottom' | 'left' | 'right'</kbd></td>
+            <td>
+              Specifies the position the datepicker opens against the input
+              element
+            </td>
+            <td><kbd>'bottom'</kbd></td>
+          </tr>
+          <tr>
+            <td>displayMode</td>
+            <td *ngIf="!isVersion8"><kbd>DisplayMode</kbd></td>
+            <td *ngIf="isVersion8"><kbd>DisplayModeEnum</kbd></td>
+            <td>Specifies how tab(s) will be displayed.</td>
+            <td *ngIf="!isVersion8"><kbd>DisplayMode.showTab</kbd></td>
+            <td *ngIf="isVersion8"><kbd>DisplayModeEnum.showTab</kbd></td>
+          </tr>
+          <tr>
+            <td>dateFormat</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              A JavaScript Date object formatting string, formats the display of
+              components current value.
+            </td>
+            <td><kbd>dd/MM/yyyy</kbd></td>
+          </tr>
+          <tr *ngIf="isVersion8">
+            <td>defaultDateRange</td>
+            <td><kbd>DateRangeInterface</kbd></td>
+            <td>
+              Default date range initially displayed in date range picker.
+            </td>
+            <td>(today)</td>
+          </tr>
+          <tr *ngIf="isVersion8">
+            <td>showCaretDown</td>
+            <td><kbd>boolean</kbd></td>
+            <td>
+              Specifies whether caret down icon is displayed to right of input
+            </td>
+            <td>true</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Outputs</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>onDateRangeChange</td>
+            <td *ngIf="!isVersion8">
+              Emits a Date Range Object containing fromDate and toDate selected
+              from the DateRangePicker. Need to import data type: DateRange.
+            </td>
+            <td *ngIf="isVersion8">
+              Emits a Date Range Object containing fromDate and toDate selected
+              from the DateRangePicker. Need to import data type:
+              DateRangeInterface.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary" *ngIf="!isVersion8">DisplayMode</h3>
+  <h3 class="is-primary" *ngIf="isVersion8">DisplayModeEnum</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Enum</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>showTab</td>
+            <td>Show both tabs</td>
+          </tr>
+          <tr>
+            <td>showCustomOnly</td>
+            <td>Show Custom Selection only</td>
+          </tr>
+          <tr>
+            <td>showIntervalOnly</td>
+            <td>Show Interval Selection only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary" *ngIf="!isVersion8">DateRange</h3>
+  <h3 class="is-primary" *ngIf="isVersion8">DateRangeInterface</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Interface</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>fromDate</td>
+            <td>Date</td>
+          </tr>
+          <tr>
+            <td>toDate</td>
+            <td>Date</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>AVAILABLE INTERVAL OPTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Today</td>
+          </tr>
+          <tr>
+            <td>Yesterdy</td>
+          </tr>
+          <tr>
+            <td>Tomorrow</td>
+          </tr>
+          <tr>
+            <td>Last Year</td>
+          </tr>
+          <tr>
+            <td>Next Year</td>
+          </tr>
+          <tr>
+            <td>Last 6 Months</td>
+          </tr>
+          <tr>
+            <td>Next 6 Months</td>
+          </tr>
+          <tr>
+            <td>Last 3 Months</td>
+          </tr>
+          <tr>
+            <td>Next 3 Months</td>
+          </tr>
+          <tr>
+            <td>Last Month</td>
+          </tr>
+          <tr>
+            <td>Next Month</td>
+          </tr>
+          <tr>
+            <td>Last Week</td>
+          </tr>
+          <tr>
+            <td>Next Week</td>
+          </tr>
+          <tr>
+            <td>Last Fortnight</td>
+          </tr>
+          <tr>
+            <td>Next Fortnight</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>

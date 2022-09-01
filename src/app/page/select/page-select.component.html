@@ -1,0 +1,309 @@
+<app-page-base [items]="contents" [formGroup]="form">
+  <h1 class="hx-title">Ng-Select</h1>
+  <p class="hx-subtitle">
+    HXUI styling for 3rd-party library
+    <a
+      href="https://github.com/ng-select/ng-select"
+      target="_blank"
+      rel="noopener noreferrer"
+      >ng-select</a
+    >. An all-in-one select, multiselect, input component.
+  </p>
+
+  <hr />
+
+  <h2 id="install">Getting started</h2>
+  <p>Install ng-select and hxui theme.</p>
+
+  <pre>
+    <code
+      [highlight]="code.install.text"
+      [languages]="code.install.lang"
+    ></code>
+  </pre>
+
+  <p>Import the theme to your project styles file.</p>
+
+  <pre>
+    <code
+      [highlight]="code.import.text"
+      [languages]="code.import.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="usage">Usage</h2>
+  <p>
+    Add the NgSelectModule and angular FormsModule to AppModule or SharedModule.
+  </p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-multi">Multi-select example</h2>
+
+  <p>
+    Add and remove items in any order with or without your mouse. Use your
+    left/right arrow keys to move the cursor between items.
+  </p>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <div class="hx-card not-scrollable">
+        <div class="hx-card-content">
+          <ng-select
+            [items]="people$ | async"
+            [multiple]="true"
+            [closeOnSelect]="false"
+            [searchable]="true"
+            bindLabel="name"
+            placeholder="Select people"
+            formControlName="selectedPeople"
+            class="is-badge is-outlined"
+          >
+            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+              <span class="hx-badge is-outlined">
+                <span class="hx-badge-content">
+                  {{ item.name }}
+                  <button
+                    class="hx-delete is-small"
+                    (click)="clear(item)"
+                    aria-hidden="true"
+                  ></button>
+                </span>
+              </span>
+            </ng-template>
+          </ng-select>
+
+          <div class="mt-3">
+            Selected value: <br />
+            <ul>
+              <li *ngFor="let item of form.get('selectedPeople')?.value ?? []">
+                {{ item.name }}
+              </li>
+            </ul>
+            <button (click)="clearModel()" class="hx-button mr-2">
+              Clear model
+            </button>
+            <button (click)="changeModel()" class="hx-button is-primary">
+              Change model
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egMultiHTML.text"
+              [languages]="code.egMultiHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+          <pre>
+            <code 
+              [highlight]="code.egMultiTS.text"
+              [languages]="code.egMultiTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Data Service">
+          <pre>
+            <code 
+              [highlight]="code.egService.text"
+              [languages]="code.egService.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="example-single">Single-select example</h2>
+
+  <p>
+    Most basic example that behaves like a native select drop down box. <br />
+    Most common case is showing data from backend API and with ng-select this is
+    extremely simple since you can bind directly to observable when using
+    angular <b> | async</b> pipe
+  </p>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <div class="hx-card not-scrollable">
+        <div class="hx-card-content">
+          <ng-select
+            [items]="people$ | async"
+            bindLabel="name"
+            bindValue="id"
+            placeholder="Select people"
+            formControlName="selectedPersonId"
+          >
+          </ng-select>
+
+          <br />Selected: {{ form.get("selectedPersonId")?.value ?? '' }}
+        </div>
+      </div>
+    </div>
+    <div class="hx-column"></div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egSingleHTML.text"
+              [languages]="code.egSingleHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+          <pre>
+            <code 
+              [highlight]="code.egSingleTS.text"
+              [languages]="code.egSingleTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Data Service">
+          <pre>
+            <code 
+              [highlight]="code.egService.text"
+              [languages]="code.egService.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="example-template-custom">Custom template example</h2>
+
+  <p>Custom selected item label and options. You can customise either or.</p>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <div class="hx-card not-scrollable">
+        <div class="hx-card-content">
+          <ng-select
+            [items]="people$ | async"
+            bindLabel="name"
+            bindValue="id"
+            placeholder="Select people"
+            (keyup)="(onKeyup)"
+            formControlName="selectedPersonId"
+          >
+            <ng-template ng-label-tmp let-item="item">
+              <img height="15" width="15" [src]="item.picture" />
+              {{ item.name }}
+            </ng-template>
+
+            <ng-template
+              ng-option-tmp
+              let-item="item"
+              let-index="index"
+              let-search="searchTerm"
+            >
+              <div [ngOptionHighlight]="search">{{ item.name }}</div>
+            </ng-template>
+          </ng-select>
+
+          <br />Selected: {{ form.get("selectedPersonId")?.value ?? [] }}
+        </div>
+      </div>
+    </div>
+    <div class="hx-column"></div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egCustomHTML.text"
+              [languages]="code.egCustomHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+          <pre>
+            <code 
+              [highlight]="code.egCustomTS.text"
+              [languages]="code.egCustomTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Data Service">
+          <pre>
+            <code 
+              [highlight]="code.egService.text"
+              [languages]="code.egService.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <div class="hx-columns mt-2">
+    <div class="hx-column">
+      <div class="hx-alert is-info is-inverse">
+        <span class="hx-icon-control mr-2">
+          <i class="hx-icon is-medium icon-information"></i>
+        </span>
+        <span class="hx-flex-1">
+          For a full list of examples and API references, view the
+          <a
+            href="https://ng-select.github.io/ng-select#/data-sources"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Ng-select documentation</a
+          >.
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <h2 id="changelog">Styles changelog</h2>
+
+  <p style="padding-bottom: 2em">
+    See
+    <a
+      href="https://bitbucket.org/md-design/angular-hxui/src/master/projects/ng-select/CHANGELOG.md"
+      target="_blank"
+      rel="noopener noreferrer"
+      >changelog</a
+    >
+    for updates.
+  </p>
+</app-page-base>

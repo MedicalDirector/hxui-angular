@@ -1,0 +1,336 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Typeaheads</h1>
+  <p class="hx-subtitle">A typeahead is a suggestive search component.</p>
+  <hr />
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the TypeaheadsModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <p>If lazy-loaded, add the following to the LazyFeatureModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usageLazy.text"
+      [languages]="code.usageLazy.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-basic">Example</h2>
+
+  <div class="hx-columns mt-5">
+    <div class="hx-column">
+      <div class="hx-input-control" id="parentEL">
+        <input
+          class="hx-input"
+          type="text"
+          hxaTextInput
+          [(ngModel)]="selected"
+          [hxaTypeahead]="states"
+          minWidthRelativeTo="parentEL"
+        />
+        <label class="hx-label">
+          <i class="icon icon-search is-small"></i>
+          &nbsp; Medications
+        </label>
+        <div class="hx-help">Search for medication names</div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egBasicHTML.text"
+              [languages]="code.egBasicHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+          <pre>
+            <code
+              [highlight]="code.egBasicTS.text"
+              [languages]="code.egBasicTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="example-predefined">Predefined Options Example</h2>
+
+  <div class="hx-columns mt-5">
+    <div class="hx-column is-half">
+      <div class="hx-input-group">
+        <div class="hx-input-control" id="parentEL2">
+          <input
+            class="hx-input"
+            type="text"
+            #phoneTypeahead
+            hxaTextInput
+            mask="0000 000 000"
+            [(ngModel)]="selected_number"
+            [hxaTypeahead]="phone_numbers"
+            minWidthRelativeTo="parentEL2"
+            typeaheadOptionField="number"
+            typeaheadGroupField="category"
+            [typeaheadMinLength]="0"
+            [typeaheadItemTemplate]="customItemTemplate"
+            (typeaheadOnSelect)="onSelect($event)"
+            (typeaheadOnBlur)="onBlur()"
+          />
+          <label class="hx-label">Phone number</label>
+          <div class="hx-help">Select a phone number</div>
+        </div>
+        <div class="hx-input-actions">
+          <i class="hx-icon icon-caret-down"></i>
+        </div>
+      </div>
+
+      <ng-template
+        #customItemTemplate
+        let-model="item"
+        let-index="index"
+        let-query="query"
+      >
+        <hxa-highlight
+          [result]="model.number"
+          [term]="query | mask: '0000 000 000'"
+        ></hxa-highlight>
+      </ng-template>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egPredefinedHTML.text"
+              [languages]="code.egPredefinedHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+          <pre>
+            <code 
+              [highlight]="code.egPredefinedTS.text"
+              [languages]="code.egPredefinedTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <h3 class="is-primary">TypeaheadDirective</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Inputs</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>optionsListTemplate</td>
+            <td><kbd>TemplateRef&lt;any&gt;</kbd></td>
+            <td>
+              used to specify a custom options list template. Template
+              variables: matches, itemTemplate, query
+            </td>
+          </tr>
+          <tr>
+            <td>hxaTypeahead</td>
+            <td><kbd>any</kbd></td>
+            <td>
+              options source, can be Array of strings, objects or an Observable
+              for external matching process
+            </td>
+          </tr>
+          <tr>
+            <td>typeaheadAsync</td>
+            <td><kbd>boolean</kbd></td>
+            <td>
+              should be used only in case of typeahead attribute is array. If
+              true - loading of options will be async, otherwise - sync. true
+              make sense if options array is large.
+            </td>
+          </tr>
+          <tr>
+            <td>typeaheadGroupField</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              when options source is an array of objects, the name of field that
+              contains the group value, matches are grouped by this field when
+              set.
+            </td>
+          </tr>
+          <tr>
+            <td>typeaheadItemTemplate</td>
+            <td><kbd>TemplateRef&lt;any&gt;</kbd></td>
+            <td>
+              used to specify a custom item template. Template variables exposed
+              are called item and index;
+            </td>
+          </tr>
+          <tr>
+            <td>typeaheadLatinize</td>
+            <td><kbd>boolean</kbd></td>
+            <td>
+              match latin symbols. If true the word súper would match super and
+              vice versa.
+            </td>
+          </tr>
+          <tr>
+            <td>typeaheadMinLength</td>
+            <td><kbd>number</kbd></td>
+            <td>
+              minimal no of characters that needs to be entered before typeahead
+              kicks-in. When set to 0, typeahead shows on focus with full list
+              of options (limited as normal by typeaheadOptionsLimit)
+            </td>
+          </tr>
+          <tr>
+            <td>typeaheadOptionField</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              when options source is an array of objects, the name of field that
+              contains the options value, we use array item as option in case of
+              this field is missing. Supports nested properties and methods.
+            </td>
+          </tr>
+          <tr>
+            <td>typeaheadOptionsLimit</td>
+            <td><kbd>number</kbd></td>
+            <td>maximum length of options items list</td>
+          </tr>
+          <tr>
+            <td>typeaheadPhraseDelimiters</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              should be used only in case typeaheadSingleWords attribute is
+              true. Sets the word delimiter to match exact phrase. Defaults to
+              simple and double quotes.
+            </td>
+          </tr>
+          <tr>
+            <td>typeaheadSingleWords</td>
+            <td><kbd>boolean</kbd></td>
+            <td>
+              break words with spaces. If true the text "exact phrase" here
+              match would match with match exact phrase here but not with phrase
+              here exact match (kind of "google style").
+            </td>
+          </tr>
+          <tr>
+            <td>typeaheadWaitMs</td>
+            <td><kbd>number</kbd></td>
+            <td>
+              minimal wait time after last character typed before typeahead
+              kicks-in
+            </td>
+          </tr>
+          <tr>
+            <td>typeaheadWordDelimiters</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              should be used only in case typeaheadSingleWords attribute is
+              true. Sets the word delimiter to break words. Defaults to space.
+            </td>
+          </tr>
+          <tr>
+            <td>placement</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              Placement of a popover. Accepts: "top", "bottom", "left", "right"
+            </td>
+          </tr>
+          <tr>
+            <td>maxWidthRelativeTo</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              The element id of the element the dropdown should get it's max
+              width from
+            </td>
+          </tr>
+          <tr>
+            <td>minWidthRelativeTo</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              The element id of the element the dropdown should get it's min
+              width from
+            </td>
+          </tr>
+          <tr>
+            <td>maxHeight</td>
+            <td><kbd>number|string</kbd></td>
+            <td>The max height of the dropdown. Defaults to 20rem.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Outputs</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>typeaheadLoading</td>
+            <td>
+              fired when 'busy' state of this component was changed, fired on
+              async mode only, returns boolean
+            </td>
+          </tr>
+          <tr>
+            <td>typeaheadNoResults</td>
+            <td>
+              fired on every key event and returns true in case of matches are
+              not detected
+            </td>
+          </tr>
+          <tr>
+            <td>typeaheadOnBlur</td>
+            <td>fired when blur event occurres. returns the active item</td>
+          </tr>
+          <tr>
+            <td>typeaheadOnSelect</td>
+            <td>
+              fired when option was selected, return object with data of this
+              option
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>
