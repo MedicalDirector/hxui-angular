@@ -1,0 +1,541 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Filters</h1>
+  <p class="hx-subtitle">A component that renders 1 or more filters</p>
+  <hr />
+
+  <div class="hx-alert is-warning is-inverse is-bordered">
+    <span class="hx-icon-control mr-2">
+      <i class="hx-icon is-medium icon-exclamation"></i>
+    </span>
+    <span *ngIf="!isVersion8">
+      The below documentation is specific to version 11+.
+    </span>
+    <span *ngIf="isVersion8">
+      The below documentation is specific to version 8.
+    </span>
+    <div class="hx-spacer"></div>
+    <button
+      *ngIf="!isVersion8"
+      class="hx-button is-flat is-warning"
+      (click)="toggleVersions()"
+    >
+      Switch to version 8
+    </button>
+    <button
+      *ngIf="isVersion8"
+      class="hx-button is-flat is-warning"
+      (click)="toggleVersions()"
+    >
+      Switch to version 11+
+    </button>
+  </div>
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the FiltersModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-basic">Basic example</h2>
+
+  <ng-container *ngIf="!isVersion8">
+    <eg-filter-new></eg-filter-new>
+  </ng-container>
+
+  <ng-container *ngIf="isVersion8">
+    <eg-filter-old></eg-filter-old>
+  </ng-container>
+
+  <br />
+
+  <hx-tabset *ngIf="!isVersion8">
+    <hx-tab heading="Template">
+      <pre>
+        <code 
+          [highlight]="code.egBasicV11HTML.text"
+          [languages]="code.egBasicV11HTML.lang"
+        ></code>
+      </pre>
+    </hx-tab>
+    <hx-tab heading="Typescript">
+      <pre>
+        <code 
+          [highlight]="code.egBasicV11TS.text"
+          [languages]="code.egBasicV11TS.lang"
+        ></code>
+      </pre>
+    </hx-tab>
+  </hx-tabset>
+
+  <hx-tabset *ngIf="isVersion8">
+    <hx-tab heading="Template">
+      <pre>
+        <code 
+          [highlight]="code.egBasicV8HTML.text"
+          [languages]="code.egBasicV8HTML.lang"
+        ></code>
+      </pre>
+    </hx-tab>
+    <hx-tab heading="Typescript">
+      <pre>
+        <code 
+          [highlight]="code.egBasicV8TS.text"
+          [languages]="code.egBasicV8TS.lang"
+        ></code>
+      </pre>
+    </hx-tab>
+  </hx-tabset>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <h3 class="is-primary">Component</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Inputs</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Defaults</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>collapsed</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Toggles the collapsed state of the filter component</td>
+            <td><kbd>false</kbd></td>
+          </tr>
+          <tr>
+            <td>filters</td>
+            <td><kbd>IFilterConfig[]</kbd></td>
+            <td>An array of filter configurations</td>
+            <td></td>
+          </tr>
+          <tr *ngIf="!isVersion8">
+            <td>customMask</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              Custom mask for search input (when using
+              <kbd>FilterType.Search</kbd>)
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Outputs</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>onFilterOptionChanged$</td>
+            <td><kbd>Observable&lt;FilterModel&gt;</kbd></td>
+            <td>
+              Observable that returns the <kbd>FilterModel</kbd> of the changed
+              filter
+            </td>
+          </tr>
+          <tr>
+            <td>filters</td>
+            <td><kbd>IFilterConfig[]</kbd></td>
+            <td>An array of filter configurations</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">FiltersModel</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Defaults</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td><kbd>string</kbd></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>type</td>
+            <td><kbd>FilterType</kbd></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>label</td>
+            <td><kbd>string</kbd></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>options</td>
+            <td><kbd>IFilterOption[]</kbd></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>value</td>
+            <td><kbd>string</kbd></td>
+            <td></td>
+          </tr>
+          <tr *ngIf="isVersion8">
+            <td>sourceValue</td>
+            <td><kbd>any</kbd></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>callback</td>
+            <td><kbd>any</kbd></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>selected</td>
+            <td *ngIf="!isVersion8"><kbd>IFilterOption[]</kbd></td>
+            <td *ngIf="isVersion8"><kbd>IFilterOption</kbd></td>
+            <td><kbd>[]</kbd></td>
+          </tr>
+          <tr *ngIf="!isVersion8">
+            <td>defaultIndex</td>
+            <td><kbd>number[]</kbd></td>
+            <td><kbd>[0]</kbd></td>
+          </tr>
+          <tr *ngIf="isVersion8">
+            <td>defaultIndex</td>
+            <td><kbd>number</kbd></td>
+            <td><kbd>0</kbd></td>
+          </tr>
+          <tr>
+            <td>charLimit</td>
+            <td><kbd>number</kbd></td>
+            <td><kbd>2</kbd></td>
+          </tr>
+          <tr *ngIf="isVersion8">
+            <td>dateRangePickerDisplayMode</td>
+            <td><kbd>DisplayModeEnum</kbd></td>
+            <td><kbd>DisplayModeEnum.showCustomOnly</kbd></td>
+          </tr>
+          <tr *ngIf="isVersion8">
+            <td>dateRangePickerDisplayDateFormat</td>
+            <td><kbd>string</kbd></td>
+            <td><kbd>'dd/MM/yyyy'</kbd></td>
+          </tr>
+          <tr>
+            <td>width</td>
+            <td><kbd>number</kbd></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td><kbd>boolean</kbd></td>
+            <td><kbd>false</kbd></td>
+          </tr>
+          <tr>
+            <td>hidden</td>
+            <td><kbd>boolean</kbd></td>
+            <td><kbd>false</kbd></td>
+          </tr>
+          <tr>
+            <td>isLoading</td>
+            <td><kbd>boolean</kbd></td>
+            <td><kbd>false</kbd></td>
+          </tr>
+          <tr *ngIf="!isVersion8">
+            <td>selectAllState</td>
+            <td>
+              <kbd
+                >{{ "{" }} all: boolean, indeterminate: boolean, none: boolean
+                {{ "}" }}</kbd
+              >
+            </td>
+            <td>
+              <kbd
+                >{{ "{" }} all: false, indeterminate: false, none: true {{ "}"
+                }}</kbd
+              >
+            </td>
+          </tr>
+          <tr *ngIf="!isVersion8">
+            <td>selectAllValue</td>
+            <td><kbd>string</kbd></td>
+            <td><kbd>'Select all'</kbd></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">IFilterConfig</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td><kbd>number</kbd></td>
+            <td>Unique identifier</td>
+          </tr>
+
+          <tr>
+            <td>type</td>
+            <td><kbd>FilterType</kbd></td>
+            <td>Denotes the filter type.</td>
+          </tr>
+
+          <tr>
+            <td>label</td>
+            <td><kbd>string</kbd></td>
+            <td>Label used for display purposes.</td>
+          </tr>
+
+          <tr>
+            <td>options</td>
+            <td><kbd>IFilterOption[]</kbd></td>
+            <td *ngIf="!isVersion8">
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Filter options (for types <kbd>FilterType.SingleSelect</kbd> and
+              <kbd>FilterType.MultiSelect</kbd>)
+            </td>
+            <td *ngIf="isVersion8">
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Filter options (for type <kbd>FilterType.SingleSelect</kbd>)
+            </td>
+          </tr>
+
+          <tr>
+            <td>value</td>
+            <td><kbd>string</kbd></td>
+            <td *ngIf="!isVersion8">
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Filter value (for type <kbd>FilterType.Search</kbd>)
+            </td>
+
+            <td *ngIf="isVersion8">
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Filter value (for types <kbd>FilterType.Search</kbd> and
+              <kbd>FilterType.DateRange</kbd>)
+            </td>
+          </tr>
+
+          <tr *ngIf="isVersion8">
+            <td>sourceValue</td>
+            <td><kbd>any</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Original value derived from source component. (e.g string for
+              search type, DateRange for DateRangePicker type)
+            </td>
+          </tr>
+
+          <tr>
+            <td>defaultIndex</td>
+            <td><kbd>number[]</kbd></td>
+            <td>
+              Index of default filter option. The option to set when filters are
+              cleared.
+            </td>
+          </tr>
+
+          <tr *ngIf="isVersion8">
+            <td>dateRangePickerDisplayMode</td>
+            <td><kbd>DisplayModeEnum</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Display mode for type date range picker
+            </td>
+          </tr>
+
+          <tr *ngIf="isVersion8">
+            <td>dateRangePickerDisplayDateFormat</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+            </td>
+          </tr>
+
+          <tr>
+            <td>width</td>
+            <td><kbd>number</kbd></td>
+            <td>Width in REM units for type <kbd>FilterType.Search</kbd></td>
+          </tr>
+
+          <tr>
+            <td>disabled</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Disabled state of filter type</td>
+          </tr>
+
+          <tr>
+            <td>hidden</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Hidden state of filter type</td>
+          </tr>
+
+          <tr>
+            <td>isLoading</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Loading state of filter type. Displays preloader animation.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">IFilterOption</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>label</td>
+            <td><kbd>string</kbd></td>
+            <td>The label used for display purposes</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>value</td>
+            <td><kbd>any</kbd></td>
+            <td>The value used when filter option selected</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>icon</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Icon identifier for option (refer to
+              <a href="http://hxui.io/icons">Icons</a>). Must include
+              <kbd>'hx-icon'</kbd> as part of string.
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>selected</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Used to determine if one or more options selected.</td>
+            <td><kbd>false</kbd></td>
+          </tr>
+          <tr>
+            <td>charLimit</td>
+            <td><kbd>number</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">FilterType</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Enum</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SingleSelect</td>
+            <td>Ability to select one option</td>
+          </tr>
+          <tr>
+            <td>Search</td>
+            <td>Ability to filter via text search</td>
+          </tr>
+          <tr *ngIf="!isVersion8">
+            <td>MultiSelect</td>
+            <td>Ability to select a subset or all options</td>
+          </tr>
+          <tr *ngIf="isVersion8">
+            <td>DateRange</td>
+            <td>Ability to filter between two dates</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Version 8 only -->
+  <h3 *ngIf="isVersion8" class="is-primary">DisplayModeEnum</h3>
+  <div *ngIf="isVersion8" class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Enum</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>showTab</td>
+          </tr>
+          <tr>
+            <td>showCustomOnly</td>
+          </tr>
+          <tr>
+            <td>showIntervalOnly</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>

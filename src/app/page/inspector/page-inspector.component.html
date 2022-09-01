@@ -1,0 +1,255 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Inspector</h1>
+  <p class="hx-subtitle">
+    The inspector mainly used for displaying, forms, details or previews in a
+    full height panel that comes in from the left or right.
+  </p>
+
+  <hr />
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the InspectorModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <p>If lazy-loaded, add the following to the LazyFeatureModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usageLazy.text"
+      [languages]="code.usageLazy.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-basic">Basic example</h2>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <button
+        class="hx-button is-primary is-outlined"
+        type="button"
+        (click)="openInspector()"
+      >
+        Open Inspector
+      </button>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egBasicHTML.text"
+              [languages]="code.egBasicHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+
+        <hx-tab heading="Typescript">
+          <pre>
+            <code 
+              [highlight]="code.egBasicTS.text"
+              [languages]="code.egBasicTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Custom Modal Component">
+          <pre>
+            <code 
+              [highlight]="code.egBasicChild.text"
+              [languages]="code.egBasicChild.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Module">
+          <p>
+            You need to declare the custom modal component as an entry component
+            for dynamic loading
+          </p>
+          <pre>
+            <code 
+              [highlight]="code.egBasicNG.text"
+              [languages]="code.egBasicNG.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <h3 class="is-primary">InspectorService</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              open(component: any, config: InspectorConfig, parameters?: Object)
+            </td>
+            <td><kbd>InspectorOverlayRef</kbd></td>
+            <td>Opens and loads a dynamic component</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">InspectorConfig</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>panelClass</td>
+            <td><kbd>string | string[]</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Opens and loads a dynamic component
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>hasBackdrop</td>
+            <td><kbd>boolean</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Does the inspector have a backdrop effect?
+            </td>
+            <td><kbd>true</kbd></td>
+          </tr>
+          <tr>
+            <td>backdropClass</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Custom styling class for backdrop
+            </td>
+            <td><kbd>'hx-modal-background'</kbd></td>
+          </tr>
+          <tr>
+            <td>closeOnBackdropClick</td>
+            <td><kbd>boolean</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Automatically close inspector on backdrop click
+            </td>
+            <td><kbd>true</kbd></td>
+          </tr>
+          <tr>
+            <td>size</td>
+            <td><kbd>InspectorSize</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Determines width of inspector
+            </td>
+            <td><kbd>InspectorSize.Small</kbd></td>
+          </tr>
+          <tr>
+            <td>location</td>
+            <td><kbd>InspectorLocation</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Determines side of screen inspector is anchored to
+            </td>
+            <td><kbd>InspectorLocation.Right</kbd></td>
+          </tr>
+          <tr>
+            <td>hasClose</td>
+            <td><kbd>boolean</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Does inspector have exterior close icon?
+            </td>
+            <td><kbd>true</kbd></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">InspectorSize</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Enum</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Small</td>
+          </tr>
+          <tr>
+            <td>Large</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">InspectorLocation</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Enum</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Left</td>
+          </tr>
+          <tr>
+            <td>Right</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>

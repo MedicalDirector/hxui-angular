@@ -1,0 +1,210 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Tooltips</h1>
+  <h2 class="hx-subtitle">
+    The tooltip component is a message component which appears when a cursor is
+    positioned over an icon, image, hyperlink, or other element.
+  </h2>
+  <hr />
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the TooltipsModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example">Example</h2>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <p>
+        Here is an example of a link with a tooltip that has a top placement
+        <a
+          href="#"
+          hxTooltip="my tooltip message is here"
+          [disabled]="false"
+          placement="top"
+          >tooltip</a
+        >. You can also have tooltips appear on the
+        <a
+          href="#"
+          hxTooltip="my tooltip showing on the right"
+          [disabled]="false"
+          placement="right"
+          >right</a
+        >
+        or on the
+        <a
+          href="#"
+          hxTooltip="my tooltip showing on the left"
+          [disabled]="false"
+          placement="left"
+          >left</a
+        >.
+      </p>
+
+      <p>
+        You can set the context (colour) of the tooltip to
+        <a
+          href
+          hxTooltip="Success!"
+          placement="bottom"
+          [context]="eContext.Success"
+          >success</a
+        >,
+        <a
+          href
+          hxTooltip="Warning!"
+          placement="bottom"
+          [context]="eContext.Warning"
+          >warning</a
+        >, or
+        <a
+          href
+          hxTooltip="Danger!"
+          placement="bottom"
+          [context]="eContext.Danger"
+          >danger</a
+        >.
+      </p>
+
+      <p>
+        You can use formatted HTML in the tooltip and you can set the width in
+        pixels of the tooltip:
+        <i
+          class="hx-icon icon-information-outline"
+          hxTooltip
+          [autoClose]="false"
+          placement="right"
+          maxWidth="350"
+        >
+          <div *hxaTooltipDynamicContent>
+            <div class="is-text-left pa-3">
+              ENABLED FOR
+              <ul>
+                <li>Card payments</li>
+                <li>Fully paid patient claims with EasyClaim</li>
+                <li>
+                  Dynamic content with
+                  <a (click)="onClickHandler($event)">links</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </i>
+      </p>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egBasicHTML.text"
+              [languages]="code.egBasicHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+          <pre>
+            <code 
+              [highlight]="code.egBasicTS.text"
+              [languages]="code.egBasicTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <h5 class="is-primary">TooltipContentComponent</h5>
+
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>hostElement</td>
+            <td><kbd>HTMLElement</kbd></td>
+            <td>the element that will call this component to show</td>
+          </tr>
+          <tr>
+            <td>content</td>
+            <td><kbd>String</kbd></td>
+            <td>the content that shows inside the tooltip</td>
+          </tr>
+          <tr>
+            <td>placement</td>
+            <td><kbd>String</kbd></td>
+            <td>place the tooltip either top|bottom|left|right</td>
+          </tr>
+          <tr>
+            <td>context</td>
+            <td><kbd>Enum</kbd></td>
+            <td>
+              set the context (colour) to either Success|Warning|Danger|None
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <h5 class="is-primary">TooltipDirective</h5>
+
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>autoClose</td>
+            <td><kbd>Boolean</kbd></td>
+            <td>Indicates that the tooltip will be closed on document click</td>
+          </tr>
+          <tr>
+            <td>content</td>
+            <td><kbd>String</kbd></td>
+            <td>the content that shows inside the tooltip</td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td><kbd>Boolean</kbd></td>
+            <td>disable the tooltip or not</td>
+          </tr>
+          <tr>
+            <td>placement</td>
+            <td><kbd>String</kbd></td>
+            <td>place the tooltip either top|bottom|left|right</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>

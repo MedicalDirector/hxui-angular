@@ -1,0 +1,60 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Install Guide</h1>
+  <p class="hx-subtitle">Adding HxUI-angular into a project</p>
+  <hr />
+
+  <h2 id="install">Installation</h2>
+  <pre>
+    <code 
+      [highlight]="code.install.text" 
+      [languages]="code.install.lang"
+    ></code>
+  </pre>
+
+  <h2 id="setup">Setup</h2>
+  <p>
+    <strong>Option 1:</strong>&nbsp;Import all web component modules into app
+    module or shared module.
+  </p>
+  <pre>
+    <code 
+    [highlight]="code.all.text"
+    [languages]="code.all.lang"
+  ></code>
+  </pre>
+  <p>
+    <strong>Option 2:</strong>&nbsp;Import only the specific module(s) that you
+    need.
+  </p>
+  <pre>
+    <code 
+    [highlight]="code.specific.text"
+    [languages]="code.specific.lang"
+    ></code>
+  </pre>
+  <h2 id="notes">Notes</h2>
+  <div class="hx-alert is-warning is-inverse is-bordered">
+    <span class="hx-icon-control mr-2">
+      <i class="hx-icon is-medium icon-exclamation"></i>
+    </span>
+    <span class="hx-flex-1">
+      The
+      <a
+        href="https://material.angular.io/cdk/categories"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Material CDK</a
+      >
+      has been used to construct some of the web components in HxUi.<br />
+      In order for components to work correctly, you will need to include some
+      of the structural css provided.
+    </span>
+  </div>
+  <pre>
+    <code 
+      [highlight]="code.cdk.text"
+      [languages]="code.cdk.lang"
+    ></code>
+  </pre>
+</app-page-base>

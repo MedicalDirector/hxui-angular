@@ -1,0 +1,118 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Dialogs</h1>
+  <p class="hx-subtitle">
+    A dialog mainly used for adding form content or showing a notification of
+    some sort.
+  </p>
+
+  <hr />
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the DialogModule to AppModule or FeatureModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <p>If lazy-loaded, add the following to the LazyFeatureModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usageLazy.text"
+      [languages]="code.usageLazy.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-basic">Basic example</h2>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <button
+        class="hx-button is-primary is-outlined"
+        type="button"
+        (click)="openDialog()"
+      >
+        Open Dialog
+      </button>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egBasicHTML.text"
+              [languages]="code.egBasicHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+
+        <hx-tab heading="Typescript">
+          <pre>
+            <code 
+              [highlight]="code.egBasicTS.text"
+              [languages]="code.egBasicTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Custom Modal Component">
+          <pre>
+            <code 
+              [highlight]="code.egBasicChild.text"
+              [languages]="code.egBasicChild.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Module">
+          <p>
+            You need to declare the custom modal component as an entry component
+            for dynamic loading
+          </p>
+          <pre>
+            <code 
+              [highlight]="code.egBasicNG.text"
+              [languages]="code.egBasicNG.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <h3 class="is-primary">DialogService</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              open(component: any, config: DialogConfig, parameters?: Object)
+            </td>
+            <td><kbd>DialogOverlayRef</kbd></td>
+            <td>Opens and loads a dynamic component</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>

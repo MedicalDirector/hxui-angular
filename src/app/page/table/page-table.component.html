@@ -1,0 +1,515 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Tabular</h1>
+  <p class="hx-subtitle">
+    The tabular component is a table with sort, filter and pagination features
+    baked in.
+  </p>
+
+  <hr />
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the TabularModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-kitchen">Kitchen-sink example</h2>
+  <p>
+    Inline actions, multi-select with global actions, pagination and sorting.
+  </p>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <div class="hx-toolbar is-small is-perforated">
+        <span hxTooltip="Select 1 or more users" placement="right">
+          <button
+            class="hx-button mr-1"
+            (click)="printSelected()"
+            [disabled]="isPrintDisabled()"
+          >
+            <div class="hx-icon-control">
+              <i class="hx-icon icon-printer-outline"></i>
+            </div>
+            <div>Print</div>
+          </button>
+        </span>
+        <button class="hx-button mr-1" (click)="setCheckAllState(true)">
+          Check All
+        </button>
+        <button class="hx-button" (click)="setCheckAllState(false)">
+          Uncheck All
+        </button>
+        <div class="hx-divider"></div>
+        <div>
+          <span class="is-info is-text-weight-bolder">{{ totalSelected }}</span>
+          of
+          <span class="is-info is-text-weight-bolder">{{ rowData.length }}</span
+          ><span class="is-text-weight-light"> items selected</span>
+        </div>
+        <div class="hx-spacer"></div>
+        <hxa-filters
+          #filterComp
+          [collapsed]="collapsed"
+          [filters]="filters"
+        ></hxa-filters>
+      </div>
+      <hxa-tabular
+        [rows]="rowData"
+        [columns]="columnData"
+        [config]="tabularConfig"
+        [callback]="onActionClickHandler"
+        (refresh)="refreshDataHandler()"
+        (rowClick)="rowClickHandler($event)"
+        (onSort)="onSortHandler($event)"
+        (onCheck)="singleCheckHandler($event)"
+        (onCheckAll)="groupCheckHandler($event)"
+      ></hxa-tabular>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code
+              [highlight]="code.egKitchenHTML.text"
+              [languages]="code.egKitchenHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Component">
+          <pre>
+            <code 
+              [highlight]="code.egKitchenTS.text"
+              [languages]="code.egKitchenTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+
+        <hx-tab heading="Service">
+          <pre>
+            <code 
+              [highlight]="code.egKitchenService.text"
+              [languages]="code.egKitchenService.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="User Model">
+          <pre>
+            <code 
+              [highlight]="code.egKitchenModel.text"
+              [languages]="code.egKitchenModel.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <h3 class="is-primary">TabularComponent</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>columns</td>
+            <td><kbd>TabularColumn[]</kbd></td>
+            <td>Collection of column configurations</td>
+          </tr>
+          <tr>
+            <td>rows</td>
+            <td><kbd>ITabularRow[]</kbd></td>
+            <td>
+              Collection of models that implement the ITabularRow interface
+            </td>
+          </tr>
+          <tr>
+            <td>config</td>
+            <td><kbd>ITabularConfig</kbd></td>
+            <td>Configuration options for a tabular instance</td>
+          </tr>
+          <tr>
+            <td>callback</td>
+            <td><kbd>Function</kbd></td>
+            <td>The function to call when an action route type is callback.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br />
+
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Output</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>refresh</td>
+            <td><kbd>EventEmitter</kbd></td>
+            <td>
+              Event fired when refresh is called. Host should refresh data of
+              input.
+            </td>
+          </tr>
+          <tr>
+            <td>rowClick</td>
+            <td><kbd>EventEmitter</kbd></td>
+            <td>Event fired when a row is clicked.</td>
+          </tr>
+          <tr>
+            <td>onSort</td>
+            <td><kbd>EventEmitter: ISortByProperty[]</kbd></td>
+            <td>Event fired when a column is sorted.</td>
+          </tr>
+          <tr>
+            <td>onCheck</td>
+            <td><kbd>EventEmitter: ITabularRow</kbd></td>
+            <td>Event fired when a row checkbox is checked or unchecked.</td>
+          </tr>
+          <tr>
+            <td>onCheckAll</td>
+            <td><kbd>EventEmitter: boolean</kbd></td>
+            <td>
+              Event fired when the header checkbox is checked or unchecked.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">TabularConfig</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>config</td>
+            <td><kbd>ITabularConfig</kbd></td>
+            <td>
+              <pre>
+                <code 
+                  [highlight]="code.tabularConfig.text"
+                  [languages]="code.tabularConfig.lang"
+                ></code>
+              </pre>
+            </td>
+            <td>
+              Configuration options for a tabular instance, ex: Pagination, size
+              etc..
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <h5 class="is-primary">TabularColumn</h5>
+
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              The property name in an array of objects passed in @input row.
+            </td>
+          </tr>
+          <tr>
+            <td>label</td>
+            <td><kbd>string</kbd></td>
+            <td>The column label, which will appear in the column header.</td>
+          </tr>
+          <tr>
+            <td>dataType</td>
+            <td><kbd>TabularColumnTypes</kbd></td>
+            <td>
+              <p>The supported column data types:</p>
+              <pre>
+                <code 
+                  [highlight]="code.columnTypes.text"
+                  [languages]="code.columnTypes.lang"
+                ></code>
+              </pre>
+              <p>
+                Note: Value for the <kbd>badge column type</kbd> must be in the
+                following format
+              </p>
+              <pre>
+                <code 
+                  [highlight]="code.badgeColumnType.text"
+                  [languages]="code.badgeColumnType.lang"
+                ></code>
+              </pre>
+            </td>
+          </tr>
+          <tr>
+            <td>sortable</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Is column sortable?</td>
+          </tr>
+          <tr>
+            <td>cssClass</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Css class name to append to columns
+            </td>
+          </tr>
+          <tr>
+            <td>hidden</td>
+            <td><kbd>boolean</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Is column hidden?
+            </td>
+          </tr>
+          <tr>
+            <td>options</td>
+            <td><kbd>{{ "{" }} header: string {{ "}" }}</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Header html string replaces column label
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">ITabularRow</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td><kbd>number|string</kbd></td>
+            <td>
+              Set an ID property. It's optional unless you have a checkbox
+              column.
+            </td>
+          </tr>
+          <tr>
+            <td>actions</td>
+            <td><kbd>IActionsConfig[]</kbd></td>
+            <td>Used to configure 1 or more actions</td>
+          </tr>
+          <tr>
+            <td>checked</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Used to control the checkbox checked state</td>
+          </tr>
+          <tr>
+            <td>selected</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Used to control the model selected state</td>
+          </tr>
+          <tr>
+            <td>context</td>
+            <td><kbd>Context</kbd></td>
+            <td>Set context, default, danger, warning, success or info</td>
+          </tr>
+          <tr>
+            <td>stripeContext</td>
+            <td><kbd>Context</kbd></td>
+            <td>
+              Set stripe context, default, danger, warning, success or info
+            </td>
+          </tr>
+          <tr>
+            <td>cssClass</td>
+            <td><kbd>string</kbd></td>
+            <td>Add any css class names to each row.</td>
+          </tr>
+          <tr>
+            <td>checkboxDisabled</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Used to control disabled state of checkbox.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">IActionsConfig</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td><kbd>number</kbd></td>
+            <td>Unique identifier</td>
+          </tr>
+          <tr>
+            <td>label</td>
+            <td><kbd>string</kbd></td>
+            <td>Label used for display purposes. Can be html for icons.</td>
+          </tr>
+          <tr>
+            <td>css</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Css class name to append to button.
+            </td>
+          </tr>
+          <tr>
+            <td>disabledConfig</td>
+            <td><kbd>IDisabledInput</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Disable action option.
+            </td>
+          </tr>
+          <tr>
+            <td>routeType</td>
+            <td><kbd>ActionConfigRouteType</kbd></td>
+            <td>Route type, could be route by link or route by callback.</td>
+          </tr>
+          <tr>
+            <td>route</td>
+            <td><kbd>any[]</kbd></td>
+            <td>
+              Route to go to when clicked. RouteType must be
+              ActionConfigRouteType.Route.
+            </td>
+          </tr>
+          <tr>
+            <td>callback</td>
+            <td><kbd>Function</kbd></td>
+            <td>
+              Function to call when clicked. RouteType must be
+              ActionConfigRouteType.Callback.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">IDisabledInput</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>disabled</td>
+            <td><kbd>boolean</kbd></td>
+            <td>Toggle for disabled state</td>
+          </tr>
+          <tr>
+            <td>tooltip</td>
+            <td><kbd>string</kbd></td>
+            <td>Messaged displayed in a tooltip when an action is disabled</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">IWithTooltip</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>tooltip</td>
+            <td>
+              <kbd>
+                {{ "{" }} config: TooltipConfig; content: string; {{ "}" }}
+              </kbd>
+            </td>
+            <td>
+              Tooltip configuration and message to displayed in the tooltip
+            </td>
+          </tr>
+          <tr>
+            <td>content</td>
+            <td><kbd>any</kbd></td>
+            <td>Content to be displayed in the cell</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>

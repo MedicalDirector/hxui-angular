@@ -1,0 +1,397 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Tabs</h1>
+  <h2 class="hx-subtitle">
+    The tab component is a small complete navigation component.
+  </h2>
+  <hr />
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the TabsModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-basic">Basic example</h2>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <p>Select an option:</p>
+      <button
+        type="button"
+        class="hx-button is-primary mb-4"
+        (click)="tabs[1].disabled = ! tabs[1].disabled"
+      >
+        Enable / Disable forth tab
+      </button>
+
+      <hx-tabset
+        [stickyHeader]="true"
+        [stickyHeaderOffset]="-1"
+        [changeFn]="confirmBeforeSwitch"
+      >
+        <hx-tab heading="Static title">Static content</hx-tab>
+        <hx-tab
+          *ngFor="let tab of tabs"
+          [heading]="tab.title"
+          [active]="tab.active"
+          (select)="selectTab(tab)"
+          (deselect)="deselectTab(tab)"
+          [disabled]="tab.disabled"
+          [removable]="tab.removable"
+          [customClass]="tab.customClass"
+        >
+          {{tab?.content}}
+        </hx-tab>
+        <hx-tab (select)="alertMe()">
+          <ng-template hxTabHeading>
+            <i class="icon icon-bell is-small" style="height: 20px"></i>
+            Alert!
+          </ng-template>
+          Html tab heading and callback! Html tab heading and callback!Html tab
+          heading and callback!Html tab heading and callback! Html tab heading
+          and callback! Html tab heading and callback!Html tab heading and
+          callback! Html tab heading and callback!Html tab heading and callback!
+          <br />
+          Html tab heading and callback!Html tab heading and callback! Html tab
+          heading and callback! Html tab heading and callback!Html tab heading
+          and callback!Html tab heading and callback! Html tab heading and
+          callback! Html tab heading and callback!Html tab heading and callback!
+          Html tab heading and callback!Html tab heading and callback!
+          <br />
+          Html tab heading and callback!Html tab heading and callback!
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egBasicHTML.text"
+              [languages]="code.egBasicHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+          <pre>
+            <code 
+              [highlight]="code.egBasicTS.text"
+              [languages]="code.egBasicTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="example-custom">Custom example</h2>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset [justified]="true" [hasInfo]="true">
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Overdue</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">10 <small>in April</small></h6>
+                <h6 class="mt-0 mb-0">13 <small>in total</small></h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 1 content
+        </hx-tab>
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Upcoming</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">23 <small>in April/May</small></h6>
+                <h6 class="mt-0 mb-0">300 <small>claims</small></h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 2 content
+        </hx-tab>
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Assigned/New</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">40 <small>total</small></h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 3 content
+        </hx-tab>
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Plan Started</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">23 <small>awaiting recall</small></h6>
+                <h6 class="mt-0 mb-0">40 <small>recalled</small></h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 4 content
+        </hx-tab>
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Team Participation</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">23 <small>participating</small></h6>
+                <h6 class="mt-0 mb-0">11 <small>no response</small></h6>
+                <h6 class="mt-0 mb-0">5 <small>declined</small></h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 5 content
+        </hx-tab>
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Awaiting Billing</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">23 <small>in April</small></h6>
+                <h6 class="mt-0 mb-0">40 <small>in total</small></h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 6 content
+        </hx-tab>
+        <hx-tab>
+          <ng-template hxTabHeading>
+            <h6 class="mt-0 mb-1">Completed</h6>
+            <div class="hx-columns mt-0 pt-0">
+              <div class="hx-column hx-flex-grow">
+                <h6 class="mt-0 mb-0">23 <small>in April</small></h6>
+                <h6 class="mt-0 mb-0">40 <small>in total</small></h6>
+                <h6 class="mt-0 mb-0">&nbsp;</h6>
+              </div>
+            </div>
+          </ng-template>
+          Tab 7 content
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egCustomHTML.text"
+              [languages]="code.egCustomHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <h3 class="is-primary">TabsetComponent</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Inputs</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>justified</td>
+            <td><kbd>boolean</kbd></td>
+            <td>if true tabs fill the container and have a consistent width</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>type</td>
+            <td><kbd>string</kbd></td>
+            <td>navigation context class: 'tabs' or 'pills'</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>vertical</td>
+            <td><kbd>boolean</kbd></td>
+            <td>if true tabs will be placed vertically</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>hasInfo</td>
+            <td><kbd>boolean</kbd></td>
+            <td>if true info tab classes will be added</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>tag</td>
+            <td><kbd>'link'|'button'</kbd></td>
+            <td>apply the html element that makes sense semantically</td>
+            <td>'link'</td>
+          </tr>
+          <tr>
+            <td>contentCustomClass</td>
+            <td><kbd>string</kbd></td>
+            <td>if set, will be added to the tab's content class attribute</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>changeFn</td>
+            <td><kbd>Promise&lt;boolean&gt;</kbd></td>
+            <td>Provides a hook to intercept the changing of</td>
+            <td><kbd>Promise&lt;true&gt;</kbd></td>
+          </tr>
+          <tr>
+            <td>stickyHeader</td>
+            <td><kbd>boolean</kbd></td>
+            <td>if set, will make the tab nav items sticky</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>stickyHeaderOffset</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              Add an offset (usually negative) to the position of sticky. REM is
+              the unit of value.
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">TabDirective</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Inputs</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>active</td>
+            <td><kbd>boolean</kbd></td>
+            <td>tab active state toggle</td>
+          </tr>
+          <tr>
+            <td>customClass</td>
+            <td><kbd>string</kbd></td>
+            <td>if set, will be added to the tab's class atribute</td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td><kbd>boolean</kbd></td>
+            <td>if true tab can not be activated</td>
+          </tr>
+          <tr>
+            <td>heading</td>
+            <td><kbd>string</kbd></td>
+            <td>tab header text</td>
+          </tr>
+          <tr>
+            <td>id</td>
+            <td><kbd>string</kbd></td>
+            <td>tab id</td>
+          </tr>
+          <tr>
+            <td>removable</td>
+            <td><kbd>boolean</kbd></td>
+            <td>if true tab can be removable, additional button will appear</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Outputs</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>deselect</td>
+            <td>
+              fired when tab became inactive, $event:Tab equals to deselected
+              instance of Tab component
+            </td>
+          </tr>
+          <tr>
+            <td>removed</td>
+            <td>
+              fired before tab will be removed, $event:Tab equals to instance of
+              removed tab
+            </td>
+          </tr>
+          <tr>
+            <td>select</td>
+            <td>
+              fired when tab became active, $event:Tab equals to selected
+              instance of Tab component
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">TabsetConfig</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Properties</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>type</td>
+            <td><kbd>string</kbd></td>
+            <td>
+              provides default navigation context class: 'tabs' or 'pills'
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>
