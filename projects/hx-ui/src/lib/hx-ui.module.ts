@@ -59,9 +59,9 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
         error: 'is-danger',
         info: 'is-info',
         success: 'is-success',
-        warning: 'is-warning'
-      }
-    })
+        warning: 'is-warning',
+      },
+    }),
   ],
   exports: [
     DatepickerModule,
@@ -84,8 +84,8 @@ export const mask_options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     LineClampModule,
     InspectorModule,
     TimepickerModule,
-    HxaToastrModule
-  ]
+    HxaToastrModule,
+  ],
 })
 export class HxUiModule {
   public static forRoot(): ModuleWithProviders<HxUiModule> {
@@ -96,8 +96,8 @@ export class HxUiModule {
         OnlineStatusService,
         DatePipe,
         DialogService,
-        InspectorService
-      ]
+        InspectorService,
+      ],
     };
   }
 }

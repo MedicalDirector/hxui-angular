@@ -4,7 +4,7 @@ An Angular library based on the [HXUI design system](https://hxui.io).
 
 ## Installation
 
-```bash
+```sh
 npm i @hxui/angular
 ```
 
@@ -17,10 +17,7 @@ Option 1:
 import { HxUiModule } from '@hxui/angular';
 
 @NgModule({
-  declarations: [AppComponent],
   imports: [HxUiModule.forRoot()],
-  providers: [],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}
 ```
@@ -29,12 +26,12 @@ Option 2:
 **Import each web component module** that you need individually.
 
 ```ts
-import {DropdownModule} from '@hxui/angular'
+import { DropdownModule } from '@hxui/angular'
 
 @NgModule({
-imports: [DropdownModule.forRoot(),...]
+imports: [DropdownModule.forRoot(), ...]
 })
-export class AppModule(){}
+export class AppModule {}
 ```
 
 **IMPORTANT**
