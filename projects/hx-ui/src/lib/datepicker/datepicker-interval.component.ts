@@ -1,38 +1,34 @@
 import {
   Component,
   EventEmitter,
-  HostBinding,
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as moment_ from 'moment';
+import moment from 'moment';
 import { Subscription } from 'rxjs';
 import { DatePickerInterval } from './datepicker.model';
-const moment = moment_;
 
 @Component({
   selector: 'hxa-datepicker-interval',
   templateUrl: './datepicker-interval.component.html',
-  styleUrls: ['./datepicker-interval.component.scss']
+  styleUrls: ['./datepicker-interval.component.scss'],
+  host: {
+    class: 'hx-card hxa-datepicker-interval',
+  },
 })
 export class DatepickerIntervalComponent implements OnInit, OnDestroy {
-  public durationOptions = ['day', 'week', 'month', 'year'];
-  public duration = 'days';
-  public increment = 0;
-  public text: moment_.Moment;
-  public dateLabel: string;
+  durationOptions = ['day', 'week', 'month', 'year'];
+  duration = 'days';
+  increment = 0;
+  text: moment.Moment;
+  dateLabel: string;
   public _dueDatestring: string;
 
   private value$: Subscription = new Subscription();
-  public form: FormGroup;
-
-  @HostBinding('class')
-  get classes() {
-    return 'hx-card hxa-datepicker-interval';
-  }
+  form: FormGroup;
 
   @Input()
   selectedDate: Date;
@@ -46,7 +42,7 @@ export class DatepickerIntervalComponent implements OnInit, OnDestroy {
   @Output()
   cancel = new EventEmitter<void>();
 
-  constructor(public fb: FormBuilder) {}
+  constructor(private _fb: FormBuilder) {}
 
   ngOnInit(): void {
     // date selected from interval
@@ -78,9 +74,9 @@ export class DatepickerIntervalComponent implements OnInit, OnDestroy {
 
     this.onSelectoptions(this.increment, this.duration);
 
-    this.form = this.fb.group({
+    this.form = this._fb.group({
       number: [this.increment, Validators.min(0)],
-      duration: [this.duration]
+      duration: [this.duration],
     });
 
     this.onValueChanges();
@@ -90,28 +86,28 @@ export class DatepickerIntervalComponent implements OnInit, OnDestroy {
     this.value$.unsubscribe();
   }
 
-  public onValueChanges(): void {
+  onValueChanges(): void {
     this.value$ = this.form.valueChanges.subscribe(val => {
       this.onSelectoptions(val.number, val.duration);
     });
   }
 
   /** on cancel of interval form */
-  public onCancel(): void {
+  onCancel(): void {
     this.cancel.emit();
   }
 
-  public onSelectoptions(numberValue: number, durationValue: string): void {
+  onSelectoptions(numberValue: number, durationValue: string): void {
     this.text = moment().add(
-      numberValue as moment_.DurationInputArg1,
-      durationValue as moment_.DurationInputArg2
+      numberValue as moment.DurationInputArg1,
+      durationValue as moment.DurationInputArg2
     );
     this.dateLabel = this.text.format('ddd DD/MM/YYYY');
     this._dueDatestring = this.text.format('YYYY-MM-DD');
   }
 
   /** on submission of interval form */
-  public onChoose($event: SubmitEvent) {
+  onChoose($event: SubmitEvent) {
     $event.preventDefault();
     // check form is valid
     if (this.form.valid) {
@@ -125,7 +121,7 @@ export class DatepickerIntervalComponent implements OnInit, OnDestroy {
       const result = {
         interval: intervalSubmitted,
         isSelectedFromInterval: true,
-        date: dateSubmitted
+        date: dateSubmitted,
       };
 
       // emit result
@@ -134,7 +130,7 @@ export class DatepickerIntervalComponent implements OnInit, OnDestroy {
   }
 
   /** normalise duration string */
-  public normaliseDurationString(
+  normaliseDurationString(
     duration: string,
     output: 'singular' | 'plural' | 'optional' = 'plural'
   ): string {

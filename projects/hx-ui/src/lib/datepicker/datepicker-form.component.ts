@@ -15,7 +15,6 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
-  HostBinding,
   HostListener,
   Input,
   OnDestroy,
@@ -33,18 +32,20 @@ import {
   NG_VALUE_ACCESSOR,
   Validator,
 } from '@angular/forms';
-import * as moment_ from 'moment';
+import moment from 'moment';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TextInputDirective } from '../text-input/text-input.directive';
 import { DatepickerConfig } from './datepicker.config';
 import { DatePickerInterval } from './datepicker.model';
-const moment = moment_;
 
 @Component({
   selector: 'hxa-datepicker-input',
   templateUrl: './datepicker-form.component.html',
   styleUrls: ['./datepicker-form.component.scss'],
+  host: {
+    class: 'hx-input-group hxa-datepicker',
+  },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -61,11 +62,6 @@ const moment = moment_;
 export class DatepickerFormComponent
   implements OnInit, ControlValueAccessor, Validator, OnDestroy, DoCheck
 {
-  @HostBinding('class')
-  get classes() {
-    return 'hx-input-group hxa-datepicker';
-  }
-
   /** for controlling input label positioning */
   @ViewChild(TextInputDirective, { static: true })
   datePickerFormInput: TextInputDirective;
@@ -83,8 +79,8 @@ export class DatepickerFormComponent
   public _overlayRef: OverlayRef | null;
   private _portal: TemplatePortal;
   private readonly _destroyed = new Subject();
-  public isOpen = false;
-  public isInputFocus = false;
+  isOpen = false;
+  isInputFocus = false;
 
   /** The timeout ID of any current timer set to show the calendar */
   private _showTimeoutId: number;
@@ -92,13 +88,13 @@ export class DatepickerFormComponent
   /** The timeout ID of any current timer set to hide the calendar */
   private _hideTimeoutId: number;
 
-  public activeTabIndex = 0;
+  activeTabIndex = 0;
 
-  public selectedInterval: DatePickerInterval;
-  public date: Date = null;
-  public presentDate: Date;
-  public isValid: boolean;
-  public dateValidators = new Array<(date: Date) => boolean>();
+  selectedInterval: DatePickerInterval;
+  date: Date = null;
+  presentDate: Date;
+  isValid: boolean;
+  dateValidators = new Array<(date: Date) => boolean>();
   private onChanged = new Array<(value: Date) => void>();
   private onTouched = new Array<() => void>();
 
@@ -204,7 +200,7 @@ export class DatepickerFormComponent
 
   /** Mask pattern for date picker text input */
   @Input()
-  maskPattern = '00/00/0000'; //'d0/M0/0000';
+  maskPattern = '00/00/0000';
 
   /** Emits a Date is selected from the Datepicker or a valid date string is entered into input field */
   @Output()
@@ -220,14 +216,6 @@ export class DatepickerFormComponent
     private _config: DatepickerConfig,
     private _cd: ChangeDetectorRef
   ) {}
-
-  /** Listen to keyboard events to trigger changes to overlay state */
-  @HostListener('document:keydown', ['$event'])
-  public onKeydown($event: KeyboardEvent) {
-    if ($event.key === 'Escape' && this.isOpen) {
-      this._hide();
-    }
-  }
 
   ngOnInit(): void {
     // if interval is not allowed, go to 'specific date' tab
@@ -296,29 +284,35 @@ export class DatepickerFormComponent
     this._destroyed.complete();
   }
 
-  public setDate(date: Date): void {
+  /** Listen to keyboard events to trigger changes to overlay state */
+  @HostListener('document:keydown', ['$event'])
+  onKeydown($event: KeyboardEvent) {
+    if ($event.key === 'Escape' && this.isOpen) {
+      this._hide();
+    }
+  }
+
+  setDate(date: Date): void {
     this.date = date;
     this.propogateChange(date);
     this.dateChange.emit(date);
     this._updateLabelStyle();
   }
 
-  public onDateSelection($event: Date): void {
+  onDateSelection($event: Date): void {
     this._hide();
     this.selectedInterval['isSelectedFromInterval'] = false;
     this.setDate($event);
   }
 
-  public onIntervalSelection(
-    $event: DatePickerInterval & { date: Date }
-  ): void {
+  onIntervalSelection($event: DatePickerInterval & { date: Date }): void {
     this._hide();
     const { date, ...rest } = $event;
     this.selectedInterval = rest;
     this.setDate(date);
   }
 
-  public onChange($event: Event): void {
+  onChange($event: Event): void {
     const inputDate = ($event.target as HTMLInputElement).value;
     const date: Date = this.parseDate(inputDate);
 
@@ -331,17 +325,17 @@ export class DatepickerFormComponent
     }
   }
 
-  public onFocused($event: FocusEvent): void {
+  onFocused($event: FocusEvent): void {
     this.isInputFocus = true;
     this.propogateTouched();
     this.inputFocus.emit();
   }
 
-  public onBlur($event: FocusEvent): void {
+  onBlur($event: FocusEvent): void {
     this.isInputFocus = false;
   }
 
-  public onButtonClick($event: Event): void {
+  onButtonClick($event: Event): void {
     if (this.isOpen) {
       this._hide();
     } else {
@@ -349,21 +343,21 @@ export class DatepickerFormComponent
     }
   }
 
-  public onIntervalCancel($event: Event): void {
+  onIntervalCancel($event: Event): void {
     this._hide();
   }
 
-  public onKeydownTab($event: Event): void {
+  onKeydownTab($event: Event): void {
     this.onChange($event);
     this._hide();
     this.propogateTouched();
   }
 
-  public onKeydownSpace($event: Event): void {
+  onKeydownSpace($event: Event): void {
     this._show();
   }
 
-  public onTabSelect(index: number): void {
+  onTabSelect(index: number): void {
     if (!index) {
       return;
     }
@@ -375,7 +369,7 @@ export class DatepickerFormComponent
     }
   }
 
-  public parseDate(inputDate: string | Date): Date {
+  parseDate(inputDate: string | Date): Date {
     if (typeof inputDate === 'string') {
       // eslint-disable-next-line no-useless-escape
       const dateArray = (inputDate as string).split(/[.,\/ -]/);
@@ -403,7 +397,7 @@ export class DatepickerFormComponent
       return <Date>inputDate;
     }
   }
-  public validateIsNotBeforeDate(date: Date): boolean {
+  validateIsNotBeforeDate(date: Date): boolean {
     const normalisedDate = new Date(
       date.getFullYear(),
       date.getMonth(),
@@ -412,7 +406,7 @@ export class DatepickerFormComponent
     return normalisedDate.getTime() < this.presentDate.getTime();
   }
 
-  public validateIsNotAfterDate(date: Date): boolean {
+  validateIsNotAfterDate(date: Date): boolean {
     const normalisedDate = new Date(
       date.getFullYear(),
       date.getMonth(),
@@ -421,10 +415,7 @@ export class DatepickerFormComponent
     return normalisedDate.getTime() > this.presentDate.getTime();
   }
 
-  public createDateRangeValidator(
-    from: Date,
-    to: Date
-  ): (date: Date) => boolean {
+  createDateRangeValidator(from: Date, to: Date): (date: Date) => boolean {
     const normalisedFromDate = new Date(
       from.getFullYear(),
       from.getMonth(),
@@ -453,7 +444,7 @@ export class DatepickerFormComponent
     };
   }
 
-  public writeValue(value: Date): void {
+  writeValue(value: Date): void {
     if (value !== this.date && value !== undefined) {
       if (value && this.date && value.valueOf() === this.date.valueOf()) {
         return;
@@ -462,19 +453,19 @@ export class DatepickerFormComponent
     }
   }
 
-  public registerOnChange(fn: (value: Date) => void): void {
+  registerOnChange(fn: (value: Date) => void): void {
     this.onChanged.push(fn);
   }
 
-  public registerOnTouched(fn: () => void): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched.push(fn);
   }
 
-  public propogateTouched(): void {
+  propogateTouched(): void {
     this.onTouched.forEach(fn => fn());
   }
 
-  public propogateChange = value => {
+  propogateChange = value => {
     this.onChanged.forEach(fn => fn(value));
   };
 
@@ -720,7 +711,7 @@ export class DatepickerFormComponent
     return { x, y };
   }
 
-  public _detach() {
+  private _detach() {
     if (this._overlayRef && this._overlayRef.hasAttached()) {
       this._overlayRef.detach();
     }

@@ -1,6 +1,6 @@
 {
   "name": "@hxui/angular",
-  "version": "13.1.0",
+  "version": "13.1.1",
   "license": "MIT",
   "private": false,
   "author": "Design @ MD <design@medicaldirector.com>",
@@ -10,6 +10,7 @@
   },
   "bugs": "https://github.com/MedicalDirector/hxui-angular/issues",
   "dependencies": {
+    "array-sort-by": "^1.2.1",
     "lodash": "^4.17.20",
     "lodash.clonedeep": "^4.5.0",
     "moment": "^2.29.4",
@@ -19,17 +20,14 @@
     "@angular/animations": "^13.0.0",
     "@angular/cdk": "^13.0.0",
     "@angular/common": "^13.0.0",
-    "@angular/compiler": "^13.0.0",
     "@angular/core": "^13.0.0",
     "@angular/forms": "^13.0.0",
     "@angular/localize": "^13.0.0",
-    "@angular/platform-browser": "^13.0.0",
     "@angular/router": "^13.0.0",
     "@hxui/css": "^1.5.0",
     "@hxui/ng-select": "^1.1.0",
     "@ng-select/ng-option-highlight": "0.0.7",
     "@ng-select/ng-select": "^8.0.0",
-    "array-sort-by": "^1.2.1",
     "ngx-mask": "^13.0.0",
     "ngx-toastr": "^14.0.0",
     "rxjs": "^7.4.0"
