@@ -1,16 +1,16 @@
 import { registerLocaleData } from '@angular/common';
 import localeEn from '@angular/common/locales/en-AU';
 import { NgModule } from '@angular/core';
-import { HxUiModule } from '../../projects/hx-ui/src/lib/hx-ui.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core.module';
+import { PageOtherModule } from './page/page-other.module';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 registerLocaleData(localeEn, 'en-AU');
 
 @NgModule({
-  imports: [CoreModule.forRoot(), SharedModule.forRoot(), HxUiModule.forRoot()],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent, SidebarComponent],
+  imports: [CoreModule.forRoot(), PageOtherModule],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,0 +1,106 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Line Clamp</h1>
+  <p class="hx-subtitle">
+    The line clamp component will clamp both text & html content with a
+    specified number of rows.
+  </p>
+  <hr />
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the LineClampModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-basic">Basic example</h2>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hxa-line-clamp row="3">
+        <div #content>
+          test<br />
+          test<br />
+          test<br />
+          test
+        </div>
+      </hxa-line-clamp>
+
+      <br />
+
+      <hxa-line-clamp row="2">
+        <div #content>
+          test<br />
+          test
+        </div>
+      </hxa-line-clamp>
+
+      <br />
+
+      <hxa-line-clamp row="2">
+        <div #content style="color: red">{{message}}</div>
+      </hxa-line-clamp>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code
+              [highlight]="code.egBasicHTML.text"
+              [languages]="code.egBasicHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+          <pre>
+            <code 
+              [highlight]="code.egBasicTS.text"
+              [languages]="code.egBasicTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <h3 class="is-primary">LineClampComponent</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>row</td>
+            <td><kbd>number</kbd></td>
+            <td>The number of rows that should be displayed before clamping</td>
+          </tr>
+          <tr>
+            <td>toggleCss</td>
+            <td><kbd>String</kbd></td>
+            <td>Add 1 or more css class names to the toggle link/button</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>

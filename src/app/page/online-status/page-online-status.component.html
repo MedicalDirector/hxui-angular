@@ -1,0 +1,102 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Online Status</h1>
+  <h2 class="hx-subtitle">
+    The online status service detects when an angular app goes offline/online
+  </h2>
+  <hr />
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the HxUiModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-basic">Basic example</h2>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <p>Use the browser console to emulate offline mode.</p>
+
+      <div class="hx-columns">
+        <div class="hx-column">
+          <div class="hx-card">
+            <div class="hx-card-content">
+              <p style="display: inline-block">App is currently:</p>
+              <span
+                class="hx-badge"
+                [class.is-primary]="isOnline"
+                [class.is-danger]="!isOnline"
+              >
+                <span class="hx-badge-content"
+                  >{{ (isOnline)? 'Online' : 'Offline' }}</span
+                >
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egBasicHTML.text"
+              [languages]="code.egBasicHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+          <pre>
+            <code 
+              [highlight]="code.egBasicTS.text"
+              [languages]="code.egBasicTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <h3 class="is-primary">OnlineStatusService</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Properties</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>online</td>
+            <td><kbd>Observable</kbd></td>
+            <td>Fires when online mode detected</td>
+          </tr>
+          <tr>
+            <td>offline</td>
+            <td><kbd>Observable</kbd></td>
+            <td>Fires when offline mode detected</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>

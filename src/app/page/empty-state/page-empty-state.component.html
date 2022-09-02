@@ -1,0 +1,100 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Empty States</h1>
+  <p class="hx-subtitle">
+    The default state of a specific area, module, component is usually filled
+    with a so called empty state. <br />It's a component that requires users to
+    go through one or more steps to populate it with data.
+  </p>
+  <hr />
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the EmptyStateModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-basic">Basic example</h2>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hxa-empty-state icon="icon-medications" [msg]="emptyStateMsg">
+        <button
+          class="hx-button is-small"
+          id="currentNotTakingMedsBtn"
+          (click)="onNotTakingMeds()"
+        >
+          Not taking any medications
+        </button>
+        <button
+          class="hx-button is-small is-primary"
+          id="addCurrentMedicationBtn"
+          (click)="onAddMeds()"
+        >
+          Add current medication
+        </button>
+      </hxa-empty-state>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egBasicHTML.text"
+              [languages]="code.egBasicHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Typescript">
+          <pre>
+            <code 
+              [highlight]="code.egBasicTS.text"
+              [languages]="code.egBasicTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <h3 class="is-primary">EmptyStateComponent</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Inputs</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>icon</td>
+            <td><kbd>string</kbd></td>
+            <td>A string value of the icon name.</td>
+          </tr>
+          <tr>
+            <td>msg</td>
+            <td><kbd>string</kbd></td>
+            <td>The message to describe why the state is empty.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>

@@ -1,0 +1,115 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Loaders</h1>
+  <p class="hx-subtitle">A component that renders different types of loaders</p>
+  <hr />
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the LoadersModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-basic">Basic example</h2>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <div class="hx-card">
+        <div class="hx-card-header">
+          <div class="hx-card-header-title">Sizes</div>
+        </div>
+        <div class="hx-card-content">
+          <div class="hx-columns">
+            <div class="hx-column"><hxa-loader></hxa-loader></div>
+            <div class="hx-column">
+              <hxa-loader [size]="eSize.Small"></hxa-loader>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hx-column">
+      <div class="hx-card">
+        <div class="hx-card-header">
+          <div class="hx-card-header-title">Contextual</div>
+        </div>
+        <div class="hx-card-content">
+          <div class="hx-columns">
+            <div class="hx-column">
+              <hxa-loader [context]="eContext.Info"></hxa-loader>
+            </div>
+            <div class="hx-column">
+              <hxa-loader [context]="eContext.Success"></hxa-loader>
+            </div>
+            <div class="hx-column">
+              <hxa-loader [context]="eContext.Danger"></hxa-loader>
+            </div>
+            <div class="hx-column">
+              <hxa-loader [context]="eContext.Warning"></hxa-loader>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <hx-tabset>
+    <hx-tab heading="Template">
+      <pre>
+        <code 
+          [highlight]="code.egBasicHTML.text"
+          [languages]="code.egBasicHTML.lang"
+        ></code>
+      </pre>
+    </hx-tab>
+    <hx-tab heading="Typescript">
+      <pre>
+        <code 
+          [highlight]="code.egBasicTS.text"
+          [languages]="code.egBasicTS.lang"
+        ></code>
+      </pre>
+    </hx-tab>
+  </hx-tabset>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <h3 class="is-primary">LoaderComponent</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Inputs</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>size</td>
+            <td><kbd>Enum</kbd></td>
+            <td>Set the loader size to either Small|Large|Default</td>
+          </tr>
+          <tr>
+            <td>context</td>
+            <td><kbd>Enum</kbd></td>
+            <td>
+              Set the context (colour) to either
+              Success|Warning|Danger|Info|None
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>

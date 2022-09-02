@@ -1,0 +1,180 @@
+<app-page-base [items]="contents">
+  <h1 class="hx-title">Modals</h1>
+  <p class="hx-subtitle">
+    A modal creates a mode that disables the main window, but keeps it visible
+    with the modal window as a child window in front of it. Mainly used for
+    adding form content or showing a notification of some sort.
+  </p>
+
+  <hr />
+
+  <div class="hx-alert is-danger is-inverse is-bordered">
+    <span class="hx-icon-control mr-2">
+      <i class="hx-icon is-medium is-danger icon-exclamation"></i>
+    </span>
+    <span class="hx-flex-1">
+      This component is currently deprecated and will be removed in the next
+      major update.
+    </span>
+  </div>
+
+  <h2 id="usage">Usage</h2>
+  <p>Add the ModalModule to AppModule or SharedModule.</p>
+
+  <pre>
+    <code 
+      [highlight]="code.usage.text"
+      [languages]="code.usage.lang"
+    ></code>
+  </pre>
+
+  <pre>
+    <code 
+      [highlight]="code.placeholder.text"
+      [languages]="code.placeholder.lang"
+    ></code>
+  </pre>
+
+  <hr />
+
+  <h2 id="example-basic">Basic example</h2>
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <button
+        class="hx-button is-primary is-outlined"
+        type="button"
+        (click)="openModal()"
+      >
+        Open Modal
+      </button>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="hx-columns">
+    <div class="hx-column">
+      <hx-tabset>
+        <hx-tab heading="Template">
+          <pre>
+            <code 
+              [highlight]="code.egBasicHTML.text"
+              [highlight]="code.egBasicHTML.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+
+        <hx-tab heading="Typescript">
+          <pre>
+            <code 
+              [highlight]="code.egBasicTS.text"
+              [highlight]="code.egBasicTS.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Custom Modal Component">
+          <pre>
+            <code 
+              [highlight]="code.egBasicChild.text"
+              [highlight]="code.egBasicChild.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+        <hx-tab heading="Module">
+          <p>
+            You need to declare the custom modal component as an entry component
+            for dynamic loading
+          </p>
+          <pre>
+            <code 
+              [highlight]="code.egBasicNG.text"
+              [highlight]="code.egBasicNG.lang"
+            ></code>
+          </pre>
+        </hx-tab>
+      </hx-tabset>
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 id="api">API reference</h2>
+
+  <h3 class="is-primary">ModalPlaceholderComponent</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>n/a</td>
+            <td><kbd>n/a</kbd></td>
+            <td>n/a</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <h5 class="is-primary">ModalAnnotation</h5>
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>destroy</td>
+            <td><kbd>Function</kbd></td>
+            <td>Destroys the component when the ng2 magic calls destroy</td>
+          </tr>
+          <tr>
+            <td>close</td>
+            <td><kbd>Function</kbd></td>
+            <td>Closes the modal and then calls destroy</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="is-primary">ModalService</h3>
+  <div class="hx-columns">
+    <div class="hx-column">
+      <table class="hx-table is-striped">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              create&#x3C;T&#x3E;(module: any, component: any, parameters?:
+              Object)
+            </td>
+            <td>
+              <kbd>Observable&#x3C;ComponentRef&#x3C;T&#x3E;&#x3E;</kbd>
+            </td>
+            <td>create and loads a dynamic component that is of type @modal</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-page-base>
+
+<hx-modal-placeholder></hx-modal-placeholder>

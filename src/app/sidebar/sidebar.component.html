@@ -1,0 +1,91 @@
+<nav class="hx-nav-drawer">
+  <span *ngIf="isSidebarOpen" [@slideInOut]>
+    <aside
+      class="hx-sidebar is-minified has-blue-gradient hx-flex hx-flex-column is-active"
+    >
+      <ul class="hx-nav hx-nav-vertical hx-flex-auto">
+        <li class="hx-nav-item hx-nav-brand">
+          <svg class="hxui-logo is-white">
+            <use xlink:href="assets/hxui.svg#hxui"></use>
+          </svg>
+        </li>
+        <li class="hx-nav-item">
+          <a class="hx-nav-link" href="http://hxui.io">
+            <i class="icon icon-html-css"></i>
+            <span>HxUi-css</span>
+          </a>
+        </li>
+        <li class="hx-nav-item">
+          <a class="hx-nav-link is-active" href="http://angular.hxui.io">
+            <i class="icon icon-angular"></i>
+            <span>HxUi-angular</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="hx-nav hx-nav-vertical is-bottom">
+        <li class="hx-nav-item">
+          <a class="hx-nav-link is-disabled" href="">
+            <i class="hx-icon icon-chat-bubble"></i>
+            <span class="ml-1">Feedback</span>
+          </a>
+        </li>
+        <li class="hx-nav-item">
+          <a class="hx-nav-link" href="">
+            <i class="hx-icon icon-more"></i>
+            <span class="ml-1">Collapse</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <div class="hx-sidebar is-medium-width is-scrollable is-active hx-bg-white">
+      <ul class="hx-nav hx-nav-vertical" *ngFor="let navItem of navs">
+        <li class="hx-nav-heading">
+          <h6>
+            <span class="oi" data-glyph="home"></span>
+            {{ navItem.cat }}
+          </h6>
+        </li>
+        <li class="hx-nav-item" *ngFor="let item of navItem.items">
+          <a
+            class="hx-nav-link"
+            *ngIf="item.url"
+            [href]="item.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>{{ item.name }}</span>
+          </a>
+          <a
+            class="hx-nav-link hx-flex hx-flex-justify-between"
+            *ngIf="item.link"
+            [routerLink]="item.link"
+            routerLinkActive="is-active"
+          >
+            <span>{{ item.name }}</span>
+            <span
+              class="hx-badge is-danger is-small ma-0"
+              *ngIf="item?.deprecated"
+            >
+              <span class="hx-badge-content">Deprecated</span>
+            </span>
+            <span class="hx-badge is-primary is-small ma-0" *ngIf="item?.new">
+              <span class="hx-badge-content">New</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </span>
+
+  <div *ngIf="isSidebarOpen" class="hx-overlay"></div>
+
+  <button
+    class="hx-nav-navicon"
+    style="border: none; cursor: pointer"
+    [class.is-closed]="!isSidebarOpen"
+    (click)="toggleSidebar()"
+  >
+    <i class="hx-icon icon-navicon"></i>
+  </button>
+</nav>
