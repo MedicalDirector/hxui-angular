@@ -9,10 +9,18 @@ import {
 } from '@hxui/angular';
 import { NgxMaskModule } from 'ngx-mask';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ExampleCalendarDaterangepickerComponent } from './example/calendar-daterangepicker.component';
+import { ExampleChoiceDaterangepickerComponent } from './example/choice-daterangepicker.component';
+import { ExampleIntervalDaterangepickerComponent } from './example/interval-daterangepicker.component';
 import { PageDateRangePickerComponent } from './page-date-range-picker.component';
 
 @NgModule({
-  declarations: [PageDateRangePickerComponent],
+  declarations: [
+    PageDateRangePickerComponent,
+    ExampleCalendarDaterangepickerComponent,
+    ExampleIntervalDaterangepickerComponent,
+    ExampleChoiceDaterangepickerComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([

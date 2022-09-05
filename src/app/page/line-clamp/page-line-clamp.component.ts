@@ -14,6 +14,4 @@ export class PageLineClampComponent {
     { text: 'Basic example', link: 'example-basic' },
     { text: 'API reference', link: 'api' },
   ];
-
-  message = [...Array(100)].map(() => 'Lorem ipsum dolor sit amet').join(', ');
 }

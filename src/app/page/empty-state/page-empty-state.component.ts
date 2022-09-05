@@ -12,16 +12,6 @@ export class PageEmptyStateComponent {
   contents: Contents[] = [
     { text: 'Usage', link: 'usage' },
     { text: 'Basic example', link: 'example-basic' },
-    { text: 'API Reference', link: 'api' },
+    { text: 'API reference', link: 'api' },
   ];
-
-  emptyStateMsg = 'No current medications have been recorded';
-
-  onNotTakingMeds() {
-    alert('Not taking medications');
-  }
-
-  onAddMeds() {
-    alert('Add medication');
-  }
 }

@@ -29,7 +29,7 @@ import { Subscription } from 'rxjs';
   styles: [
     `
       :host {
-        width: 100%;
+        display: contents;
       }
     `,
   ],

@@ -1,5 +1,5 @@
 <app-page-base [items]="contents">
-  <h1 class="hx-title">Date Pickers</h1>
+  <h1 class="hx-title">Date Picker</h1>
   <p class="hx-subtitle">
     The date picker is a form element that is used to select a date
   </p>
@@ -48,29 +48,7 @@
   <h2 id="example-basic">Basic example</h2>
   <div class="hx-columns">
     <div class="hx-column">
-      <form [formGroup]="basicForm">
-        <hxa-datepicker-input
-          name="datepicker_basic"
-          placement="bottom"
-          [defaultToPresentDate]="false"
-          formControlName="dayte_basic"
-          (dateChange)="onDateChangedBasic($event)"
-          [required]="true"
-        ></hxa-datepicker-input>
-        <div>
-          <span>
-            Emitted Date object:
-            <b>{{ basicForm.get("dayte_basic").value }}</b>
-          </span>
-          <br />
-          <span> NgForm Status: <b>{{ basicForm.status }}</b> </span>
-          <br />
-          <span> NgForm Valid: <b>{{ basicForm.valid }}</b> </span>
-          <br />
-          <span> NgForm Touched: <b>{{ basicForm.touched }}</b> </span>
-          <br />
-        </div>
-      </form>
+      <eg-basic-datepicker></eg-basic-datepicker>
     </div>
   </div>
 
@@ -99,29 +77,7 @@
 
   <div class="hx-columns">
     <div class="hx-column">
-      <form [formGroup]="intervalForm">
-        <hxa-datepicker-input
-          name="datepicker"
-          placement="bottom"
-          [interval]="true"
-          formControlName="dayte"
-          [required]="true"
-          [allowPreviousDates]="true"
-        ></hxa-datepicker-input>
-        <div>
-          <span>
-            Emitted Date object:
-            <b>{{ intervalForm.get("dayte").value }}</b>
-          </span>
-          <br />
-          <span> NgForm Status: <b>{{ intervalForm.status }}</b> </span>
-          <br />
-          <span> NgForm Valid: <b>{{ intervalForm.valid }}</b> </span>
-          <br />
-          <span> NgForm Touched: <b>{{ intervalForm.touched }}</b> </span>
-          <br />
-        </div>
-      </form>
+      <eg-interval-datepicker></eg-interval-datepicker>
     </div>
   </div>
 

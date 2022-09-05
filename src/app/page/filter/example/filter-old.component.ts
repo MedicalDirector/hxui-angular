@@ -38,7 +38,13 @@ import { Subscription } from 'rxjs';
       ></hxa-filters>
     </div>
   `,
-  styles: [],
+  styles: [
+    `
+      :host {
+        display: contents;
+      }
+    `,
+  ],
 })
 export class ExampleFilterOldComponent implements OnInit, OnDestroy {
   @ViewChild('filterComp', { static: true })

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DateRange } from '@hxui/angular';
 import { Contents } from 'src/app/shared/page-base/page-base.model';
 import { PageDateRangePickersCode } from './page-date-range-picker.code';
 
@@ -24,31 +23,6 @@ export class PageDateRangePickerComponent {
    * **NOTE:** this is an interim solution dated 11/03/2022
    */
   isVersion8 = false;
-
-  selectedDateRange: DateRange = {
-    fromDate: new Date(),
-    toDate: new Date(),
-  };
-
-  intervalOptions: string[] = [
-    'Today',
-    'Yesterday',
-    'Tomorrow',
-    'Last Year',
-    'Next Year',
-    'Last Month',
-    'Next Month',
-    'Last Week',
-    'Next Week',
-    'Last Fortnight',
-    'Next Fortnight',
-  ];
-
-  dateFormat = 'dd/MM/yyyy';
-
-  getSelectedDateRange(dateRange: DateRange) {
-    this.selectedDateRange = dateRange;
-  }
 
   toggleVersions() {
     this.isVersion8 = !this.isVersion8;

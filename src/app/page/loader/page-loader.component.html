@@ -1,5 +1,5 @@
 <app-page-base [items]="contents">
-  <h1 class="hx-title">Loaders</h1>
+  <h1 class="hx-title">Loader</h1>
   <p class="hx-subtitle">A component that renders different types of loaders</p>
   <hr />
 
@@ -17,46 +17,7 @@
 
   <h2 id="example-basic">Basic example</h2>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <div class="hx-card">
-        <div class="hx-card-header">
-          <div class="hx-card-header-title">Sizes</div>
-        </div>
-        <div class="hx-card-content">
-          <div class="hx-columns">
-            <div class="hx-column"><hxa-loader></hxa-loader></div>
-            <div class="hx-column">
-              <hxa-loader [size]="eSize.Small"></hxa-loader>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="hx-column">
-      <div class="hx-card">
-        <div class="hx-card-header">
-          <div class="hx-card-header-title">Contextual</div>
-        </div>
-        <div class="hx-card-content">
-          <div class="hx-columns">
-            <div class="hx-column">
-              <hxa-loader [context]="eContext.Info"></hxa-loader>
-            </div>
-            <div class="hx-column">
-              <hxa-loader [context]="eContext.Success"></hxa-loader>
-            </div>
-            <div class="hx-column">
-              <hxa-loader [context]="eContext.Danger"></hxa-loader>
-            </div>
-            <div class="hx-column">
-              <hxa-loader [context]="eContext.Warning"></hxa-loader>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <eg-basic-loader></eg-basic-loader>
 
   <br />
 

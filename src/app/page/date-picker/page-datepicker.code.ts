@@ -33,11 +33,10 @@ export class LazyFeatureModule {}
     lang: ['xml'],
     text: `<form [formGroup]="basicForm">
   <hxa-datepicker-input
-    name="datepicker_basic"
     placement="bottom"
     [defaultToPresentDate]="false"
-    formControlName="dayte_basic"
-    (dateChange)="onDateChangedBasic($event)"
+    formControlName="date"
+    (dateChange)="onDateChanged($event)"
     [required]="false"
   ></hxa-datepicker-input>
   <div>
@@ -67,12 +66,12 @@ export class MyFeatureComponent implements OnInit {
 
   ngOnInit() {
     this.basicForm = this._fb.group({
-      dayte_basic: [null]
+      date: [null]
     });
   }
 
-  onDateChangedBasic($event: Event) {
-    console.log(this.basicForm.get('dayte_basic').value, $event);
+  onDateChanged($event: Event) {
+    console.log(this.basicForm.get('date').value, $event);
   }
 }
 `,
@@ -82,14 +81,13 @@ export class MyFeatureComponent implements OnInit {
     lang: ['xml'],
     text: `<form [formGroup]="intervalForm">
   <hxa-datepicker-input
-    name="datepicker"
     placement="bottom"
     [interval]="true"
-    formControlName="dayte"
+    formControlName="date"
     [allowPreviousDates]="true"
   ></hxa-datepicker-input>
   <div>
-    <span>Emitted Date object: <b>{{intervalForm.get('dayte').value}}</b></span><br>
+    <span>Emitted Date object: <b>{{intervalForm.get('date').value}}</b></span><br>
     <span>NgForm Status: <b>{{intervalForm.status}}</b></span> <br>
     <span>NgForm Valid: <b>{{intervalForm.valid}}</b></span> <br>
     <span>NgForm Touched: <b>{{intervalForm.touched}}</b></span><br>
@@ -115,12 +113,12 @@ export class MyFeatureComponent implements OnInit {
 
   ngOnInit() {
     this.intervalForm = this._fb.group({
-      dayte: [null],
+      date: [null],
     });
   }
 
   onDateChanged($event: Event) {
-    console.log(this.intervalForm.get('dayte').value, $event);
+    console.log(this.intervalForm.get('date').value, $event);
   }
 }
 `,

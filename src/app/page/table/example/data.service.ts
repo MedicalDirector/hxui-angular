@@ -5,7 +5,7 @@ import { catchError, delay, map } from 'rxjs/operators';
 import { UserModel } from './user.model';
 
 @Injectable()
-export class PageTableService {
+export class DataService {
   getUsers(): Observable<UserModel[]> {
     const items = getMockPeople() as UserModel[];
     return of(items).pipe(

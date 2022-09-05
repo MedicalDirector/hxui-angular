@@ -16,23 +16,23 @@ export const sidebar = [
     cat: 'Components',
     items: [
       {
-        name: 'Accordions',
+        name: 'Accordion',
         link: '/accordion',
       },
       {
-        name: 'Date Pickers',
+        name: 'Date picker',
         link: '/date-picker',
       },
       {
-        name: 'Date Range Pickers',
+        name: 'Date range picker',
         link: '/date-range-picker',
       },
       {
-        name: 'Dialogs',
+        name: 'Dialog',
         link: '/dialog',
       },
       {
-        name: 'Dropdowns',
+        name: 'Dropdown',
         link: '/dropdown',
       },
       {
@@ -40,20 +40,20 @@ export const sidebar = [
         link: '/inspector',
       },
       {
-        name: 'Loaders',
+        name: 'Loader',
         link: '/loader',
       },
       {
-        name: 'Line Clamp',
+        name: 'Line clamp',
         link: '/line-clamp',
       },
       {
-        name: 'Modals',
+        name: 'Modal',
         link: '/modal',
         deprecated: true,
       },
       {
-        name: 'Ng-Select',
+        name: 'Select',
         link: '/select',
       },
       {
@@ -65,23 +65,23 @@ export const sidebar = [
         link: '/tab',
       },
       {
-        name: 'Tabular',
+        name: 'Table',
         link: '/table',
       },
       {
-        name: 'Timepicker',
+        name: 'Time picker',
         link: '/timepicker',
       },
       {
-        name: 'Toastr',
+        name: 'Toast',
         link: '/toast',
       },
       {
-        name: 'Tooltips',
+        name: 'Tooltip',
         link: '/tooltip',
       },
       {
-        name: 'Typeaheads',
+        name: 'Typeahead',
         link: '/typeahead',
       },
     ],
@@ -90,11 +90,11 @@ export const sidebar = [
     cat: 'Patterns',
     items: [
       {
-        name: 'Empty States',
+        name: 'Empty state',
         link: '/empty-state',
       },
       {
-        name: 'Filters',
+        name: 'Filter',
         link: '/filter',
       },
     ],
@@ -103,11 +103,11 @@ export const sidebar = [
     cat: 'Directives',
     items: [
       {
-        name: 'Auto Grow',
+        name: 'Auto grow',
         link: '/autogrow',
       },
       {
-        name: 'Text Input',
+        name: 'Text input',
         link: '/text-input',
       },
     ],
@@ -116,7 +116,7 @@ export const sidebar = [
     cat: 'Services',
     items: [
       {
-        name: 'Online Status',
+        name: 'Online status',
         link: '/online-status',
       },
     ],
@@ -125,15 +125,15 @@ export const sidebar = [
     cat: 'Other',
     items: [
       {
-        name: 'Change Log (v13)',
+        name: 'Changelog',
         url: 'https://github.com/MedicalDirector/hxui-angular/blob/master/projects/hx-ui/CHANGELOG.md',
       },
       {
-        name: 'Change Log (v11)',
+        name: 'Changelog (v11)',
         url: 'https://github.com/MedicalDirector/hxui-angular/blob/11.x/projects/hx-ui/CHANGELOG.md',
       },
       {
-        name: 'Change Log (v8)',
+        name: 'Changelog (v8)',
         url: 'https://github.com/MedicalDirector/hxui-angular/blob/8.x/CHANGELOG.md',
       },
       {

@@ -13,6 +13,5 @@ export class PageTextInputComponent {
   contents: Contents[] = [
     { text: 'Usage', link: 'usage' },
     { text: 'Examples', link: 'example' },
-    { text: 'API Reference', link: 'api' },
   ];
 }

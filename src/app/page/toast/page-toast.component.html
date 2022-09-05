@@ -1,13 +1,17 @@
 <app-page-base [items]="contents">
-  <h1 class="hx-title">Ngx-toastr</h1>
+  <h1 class="hx-title">
+    Toast
+    <span class="text-sub">(Ngx-toastr)</span>
+  </h1>
   <p class="hx-subtitle">
-    Is a 3rd-party notification component called
+    A
     <a
       href="https://ngx-toastr.vercel.app/"
       target="_blank"
       rel="noopener noreferrer"
-      >ngx-toastr</a
+      >3rd-party</a
     >
+    notification component.
   </p>
 
   <hr />
@@ -20,7 +24,7 @@
     <div class="hx-spacer"></div>
   </div>
 
-  <h2 id="install">Install</h2>
+  <h2 id="install">Installation</h2>
   <p>To install ngx-toastr via npm run the following.</p>
 
   <pre>
@@ -32,7 +36,7 @@
 
   <hr />
 
-  <h2 id="import">Import</h2>
+  <h2 id="usage">Usage</h2>
   <p>Import the scss file to your project.</p>
 
   <pre>
@@ -42,9 +46,6 @@
     ></code>
   </pre>
 
-  <hr />
-
-  <h2 id="usage">Usage</h2>
   <p>Add the ToastrModule to AppModule or SharedModule.</p>
 
   <pre>
@@ -57,55 +58,8 @@
   <hr />
 
   <h2 id="example">Examples</h2>
-  <p>No titles</p>
 
-  <div class="hx-columns">
-    <div class="hx-column">
-      <button class="hx-button is-primary" (click)="showSuccess()">
-        Show success
-      </button>
-    </div>
-    <div class="hx-column">
-      <button class="hx-button is-danger" (click)="showError()">
-        Show error
-      </button>
-    </div>
-    <div class="hx-column">
-      <button class="hx-button is-warning" (click)="showWarning()">
-        Show warning
-      </button>
-    </div>
-    <div class="hx-column">
-      <button class="hx-button is-info" (click)="showInfo()">Show info</button>
-    </div>
-  </div>
-
-  <hr />
-
-  <p>With titles</p>
-
-  <div class="hx-columns">
-    <div class="hx-column">
-      <button class="hx-button is-primary" (click)="showSuccess('Success')">
-        Show success
-      </button>
-    </div>
-    <div class="hx-column">
-      <button class="hx-button is-danger" (click)="showError('Error')">
-        Show error
-      </button>
-    </div>
-    <div class="hx-column">
-      <button class="hx-button is-warning" (click)="showWarning('Warning')">
-        Show warning
-      </button>
-    </div>
-    <div class="hx-column">
-      <button class="hx-button is-info" (click)="showInfo('Informative')">
-        Show info
-      </button>
-    </div>
-  </div>
+  <eg-basic-toast></eg-basic-toast>
 
   <br />
 

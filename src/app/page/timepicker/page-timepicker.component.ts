@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HxaTime } from '@hxui/angular';
+import { Component } from '@angular/core';
 import { Contents } from 'src/app/shared/page-base/page-base.model';
 import { PageTimepickerCode } from './page-timepicker.code';
 
@@ -29,21 +27,11 @@ import { PageTimepickerCode } from './page-timepicker.code';
     `,
   ],
 })
-export class PageTimepickerComponent implements OnInit {
+export class PageTimepickerComponent {
   code = new PageTimepickerCode();
   contents: Contents[] = [
     { text: 'Usage', link: 'usage' },
     { text: 'Examples', link: 'example' },
     { text: 'API reference', link: 'api' },
   ];
-
-  form: FormGroup;
-
-  constructor(private _fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.form = this._fb.group({
-      time: [new HxaTime(16, 0, 0), Validators.required],
-    });
-  }
 }

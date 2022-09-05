@@ -46,6 +46,13 @@ import { DialogOverlayRef } from '@hxui/angular';
       </div>
     </div>
   `,
+  styles: [
+    `
+      :host {
+        display: contents;
+      }
+    `,
+  ],
 })
 export class ExampleCustomDialogComponent {
   selected: string;
