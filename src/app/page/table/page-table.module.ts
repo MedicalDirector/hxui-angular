@@ -10,11 +10,12 @@ import {
 } from '@hxui/angular';
 import { NgxMaskModule } from 'ngx-mask';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DataService } from './example/data.service';
+import { ExampleKitchenSinkTableComponent } from './example/kitchen-sink-table.component';
 import { PageTableComponent } from './page-table.component';
-import { PageTableService } from './page-table.service';
 
 @NgModule({
-  declarations: [PageTableComponent],
+  declarations: [PageTableComponent, ExampleKitchenSinkTableComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
@@ -31,6 +32,6 @@ import { PageTableService } from './page-table.service';
     SharedModule,
     NgxMaskModule.forRoot(),
   ],
-  providers: [PageTableService, DatePipe],
+  providers: [DataService, DatePipe],
 })
 export class PageTableModule {}

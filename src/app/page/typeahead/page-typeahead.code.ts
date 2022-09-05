@@ -35,13 +35,18 @@ export class AppModule {}
 
   egBasicHTML: Code = {
     lang: ['xml'],
-    text: `<div class="hx-input-control" id="parentEL">
-  <input class="hx-input" hxaTextInput type="text" [(ngModel)]="selected"
-    [hxaTypeahead]="medications" minWidthRelativeTo="parentEL">
+    text: `<div class="hx-input-control" id="el">
+  <input
+    class="hx-input"
+    type="text"
+    hxaTextInput
+    [(ngModel)]="selected"
+    [hxaTypeahead]="states"
+    minWidthRelativeTo="el"
+  />
   <label class="hx-label">
     <i class="icon icon-search is-small"></i>
-    &nbsp;
-    Medications
+    &nbsp; Medications
   </label>
   <div class="hx-help">Search for medication names</div>
 </div>

@@ -25,20 +25,7 @@
 
       <div class="hx-columns">
         <div class="hx-column">
-          <div class="hx-card">
-            <div class="hx-card-content">
-              <p style="display: inline-block">App is currently:</p>
-              <span
-                class="hx-badge"
-                [class.is-primary]="isOnline"
-                [class.is-danger]="!isOnline"
-              >
-                <span class="hx-badge-content"
-                  >{{ (isOnline)? 'Online' : 'Offline' }}</span
-                >
-              </span>
-            </div>
-          </div>
+          <eg-basic-online-status></eg-basic-online-status>
         </div>
       </div>
     </div>

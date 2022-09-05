@@ -1,5 +1,5 @@
 <app-page-base [items]="contents">
-  <h1 class="hx-title">Date Range Pickers</h1>
+  <h1 class="hx-title">Date Range Picker</h1>
   <p class="hx-subtitle">
     The date range picker is an element that is used to select a date range
   </p>
@@ -58,18 +58,7 @@
 
   <div class="hx-columns">
     <div class="hx-column">
-      <hxa-date-range-picker
-        [displayMode]="2"
-        (onDateRangeSelected)="getSelectedDateRange($event)"
-      ></hxa-date-range-picker>
-      <div>
-        <br />
-        <span>Emitted Date Range object:</span>
-        <ul>
-          <li>fromDate: {{ selectedDateRange.fromDate }}</li>
-          <li>toDate: {{ selectedDateRange.toDate }}</li>
-        </ul>
-      </div>
+      <eg-calendar-daterangepicker></eg-calendar-daterangepicker>
     </div>
   </div>
   <br />
@@ -98,19 +87,7 @@
 
   <div class="hx-columns">
     <div class="hx-column">
-      <hxa-date-range-picker
-        [displayMode]="3"
-        [intervalOptions]="intervalOptions"
-        (onDateRangeSelected)="getSelectedDateRange($event)"
-      ></hxa-date-range-picker>
-      <div>
-        <br />
-        <span>Emitted Date Range object:</span>
-        <ul>
-          <li>fromDate: {{ selectedDateRange.fromDate }}</li>
-          <li>toDate: {{ selectedDateRange.toDate }}</li>
-        </ul>
-      </div>
+      <eg-interval-daterangepicker></eg-interval-daterangepicker>
     </div>
   </div>
 
@@ -140,20 +117,7 @@
 
   <div class="hx-columns">
     <div class="hx-column">
-      <hxa-date-range-picker
-        [intervalOptions]="intervalOptions"
-        [displayMode]="1"
-        [dateFormat]="dateFormat"
-        (onDateRangeSelected)="getSelectedDateRange($event)"
-      ></hxa-date-range-picker>
-      <div>
-        <br />
-        <span>Emitted Date Range object:</span>
-        <ul>
-          <li>From Date: {{ selectedDateRange.fromDate }}</li>
-          <li>To Date: {{ selectedDateRange.toDate }}</li>
-        </ul>
-      </div>
+      <eg-choice-daterangepicker></eg-choice-daterangepicker>
     </div>
   </div>
 

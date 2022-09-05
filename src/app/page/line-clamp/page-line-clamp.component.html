@@ -1,5 +1,5 @@
 <app-page-base [items]="contents">
-  <h1 class="hx-title">Line Clamp</h1>
+  <h1 class="hx-title">Line clamp</h1>
   <p class="hx-subtitle">
     The line clamp component will clamp both text & html content with a
     specified number of rows.
@@ -22,29 +22,7 @@
 
   <div class="hx-columns">
     <div class="hx-column">
-      <hxa-line-clamp row="3">
-        <div #content>
-          test<br />
-          test<br />
-          test<br />
-          test
-        </div>
-      </hxa-line-clamp>
-
-      <br />
-
-      <hxa-line-clamp row="2">
-        <div #content>
-          test<br />
-          test
-        </div>
-      </hxa-line-clamp>
-
-      <br />
-
-      <hxa-line-clamp row="2">
-        <div #content style="color: red">{{message}}</div>
-      </hxa-line-clamp>
+      <eg-basic-lineclamp></eg-basic-lineclamp>
     </div>
   </div>
 

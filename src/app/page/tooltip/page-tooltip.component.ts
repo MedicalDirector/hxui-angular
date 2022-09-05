@@ -1,5 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Context } from '@hxui/angular';
+import { Component } from '@angular/core';
 import { Contents } from 'src/app/shared/page-base/page-base.model';
 import { PageTooltipCode } from './page-tooltip.code';
 
@@ -8,36 +7,12 @@ import { PageTooltipCode } from './page-tooltip.code';
   templateUrl: './page-tooltip.component.html',
   styles: [':host { display: contents; }'],
 })
-export class PageTooltipComponent implements OnInit {
+export class PageTooltipComponent {
   code = new PageTooltipCode();
   contents: Contents[] = [
     { text: 'Usage', link: 'usage' },
-    { text: 'Examples', link: 'example' },
+    { text: 'Basic examples', link: 'example-basic' },
+    { text: 'Custom example', link: 'example-custom' },
     { text: 'API reference', link: 'api' },
   ];
-
-  @ViewChild('toolTipContent', { static: true }) toolTipContent: ElementRef;
-
-  eContext = Context;
-  tooltipTemplateHtml = '';
-
-  private _dynamicTooltipText = 'sample text';
-  get dynamicTooltipText(): string {
-    return this._dynamicTooltipText;
-  }
-  set dynamicTooltipText(txt: string) {
-    this._dynamicTooltipText = txt;
-  }
-
-  ngOnInit() {
-    this.tooltipTemplateHtml = this.toolTipContent
-      ? this.toolTipContent.nativeElement.innerHTML
-      : '';
-  }
-
-  onClickHandler($event) {
-    alert('clicked');
-    $event.preventDefault();
-    $event.stopPropagation();
-  }
 }

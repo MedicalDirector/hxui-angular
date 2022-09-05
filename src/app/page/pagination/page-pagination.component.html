@@ -18,66 +18,11 @@
 
   <hr />
 
-  <h2 id="examples">Examples</h2>
+  <h2 id="example">Examples</h2>
 
   <div class="hx-columns">
     <div class="hx-column">
-      <hx-pagination
-        [totalItems]="totalItems"
-        [(ngModel)]="currentPage"
-        (pageChanged)="pageChanged($event)"
-      ></hx-pagination>
-      <br />
-      <hx-pagination
-        [boundaryLinks]="true"
-        [totalItems]="totalItems"
-        [(ngModel)]="currentPage"
-        previousText="&lsaquo;"
-        nextText="&rsaquo;"
-        firstText="&laquo;"
-        lastText="&raquo;"
-      ></hx-pagination>
-      <br />
-      <hx-pagination
-        [directionLinks]="false"
-        [boundaryLinks]="true"
-        [totalItems]="totalItems"
-        [(ngModel)]="currentPage"
-      ></hx-pagination>
-      <br />
-      <hx-pagination
-        [directionLinks]="true"
-        [boundaryLinks]="true"
-        [rotate]="false"
-        [totalItems]="totalItems"
-        [maxSize]="7"
-        [(ngModel)]="currentPage"
-      ></hx-pagination>
-      <br />
-      <hx-pagination
-        [directionLinks]="false"
-        [totalItems]="totalItems"
-        [(ngModel)]="currentPage"
-        (numPages)="smallnumPages = $event"
-      ></hx-pagination>
-      <br />
-      <hx-pager
-        [totalItems]="totalItems"
-        [(ngModel)]="currentPage"
-        (pageChanged)="pageChanged($event)"
-        pageBtnClass="hx-button"
-        itemsPerPage="10"
-      ></hx-pager>
-      <br />
-
-      <div class="hx-flex hx-flex-justify-center">
-        <div>
-          <pre>The selected page no: {{currentPage}}/{{smallnumPages}}</pre>
-          <button type="button" class="hx-button is-info" (click)="setPage(3)">
-            Set current page to: 3
-          </button>
-        </div>
-      </div>
+      <eg-basic-pagination></eg-basic-pagination>
     </div>
   </div>
 

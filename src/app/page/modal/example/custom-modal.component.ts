@@ -33,6 +33,13 @@ import { Modal } from '@hxui/angular';
       </div>
     </div>
   `,
+  styles: [
+    `
+      :host {
+        display: contents;
+      }
+    `,
+  ],
 })
 export class ExampleCustomModalComponent {
   protected onSuccess: (args: string) => void;

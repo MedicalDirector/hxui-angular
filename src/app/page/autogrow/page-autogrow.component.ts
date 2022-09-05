@@ -9,7 +9,6 @@ import { PageAutoGrowCode } from './page-autogrow.code';
 })
 export class PageAutoGrowComponent {
   code = new PageAutoGrowCode();
-
   contents: Contents[] = [
     { text: 'Usage', link: 'usage' },
     { text: 'Basic example', link: 'example-basic' },

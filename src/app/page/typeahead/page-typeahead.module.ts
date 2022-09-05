@@ -6,10 +6,16 @@ import { RouterModule } from '@angular/router';
 import { TextInputModule, TypeaheadModule } from '@hxui/angular';
 import { NgxMaskModule } from 'ngx-mask';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ExampleBasicTypeaheadComponent } from './example/basic-typeahead.component';
+import { ExamplePredefinedTypeaheadComponent } from './example/predefined-typeahead.component';
 import { PageTypeaheadComponent } from './page-typeahead.component';
 
 @NgModule({
-  declarations: [PageTypeaheadComponent],
+  declarations: [
+    PageTypeaheadComponent,
+    ExampleBasicTypeaheadComponent,
+    ExamplePredefinedTypeaheadComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([

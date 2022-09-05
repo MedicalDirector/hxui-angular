@@ -17,6 +17,7 @@ const modules = [BrowserModule, BrowserAnimationsModule, HttpClientModule];
     RouterModule.forRoot(APP_ROUTES, {
       anchorScrolling: 'enabled',
       scrollPositionRestoration: 'enabled',
+      useHash: true, // TODO: switch to Angular Scully or Angular Universal to prerender pages and turn off hash routing
     }),
     ToastrModule.forRoot({
       toastComponent: HxaToastrComponent,

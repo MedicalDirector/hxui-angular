@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
 import { Contents } from 'src/app/shared/page-base/page-base.model';
-import { DataService } from './data.service';
 import { PageSelectCode } from './page-select.code';
 
 @Component({
   selector: 'app-page-select',
   templateUrl: './page-select.component.html',
-  styles: [':host { display: contents; }'],
+  styles: [
+    `
+      :host {
+        display: contents;
+      }
+
+      .text-sub {
+        font-size: 1.25rem;
+        line-height: 2rem;
+      }
+    `,
+  ],
 })
-export class PageSelectComponent implements OnInit {
+export class PageSelectComponent {
   code = new PageSelectCode();
   contents: Contents[] = [
     { text: 'Installation', link: 'install' },
@@ -26,36 +29,4 @@ export class PageSelectComponent implements OnInit {
     { text: 'API reference', link: 'api' },
     { text: 'Styles changelog', link: 'changelog' },
   ];
-
-  people$: Observable<any[]>;
-  form: FormGroup;
-
-  constructor(private _dataService: DataService, private _fb: FormBuilder) {}
-
-  ngOnInit() {
-    this.form = this._fb.group({
-      selectedPeople: new FormControl(
-        [{ name: 'Karyn Wright' }],
-        Validators.required
-      ),
-      selectedPersonId: new FormControl(
-        '5a15b13c36e7a7f00cf0d7cb',
-        Validators.required
-      ),
-    });
-
-    this.people$ = this._dataService.getPeople();
-  }
-
-  clearModel() {
-    this.form.get('selectedPeople').patchValue([]);
-  }
-
-  changeModel() {
-    this.form.get('selectedPeople').patchValue([{ name: 'New person' }]);
-  }
-
-  onKeyup(val) {
-    console.log(val);
-  }
 }

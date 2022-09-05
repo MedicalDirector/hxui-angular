@@ -13,7 +13,7 @@ export class AppModule {}
   };
 
   egBasicHTML: Code = {
-    lang: ['ts'],
+    lang: ['xml'],
     text: `<div class="hx-card">
   <div class="hx-card-content">
     <p>App is currently:</p>
