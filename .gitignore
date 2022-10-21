@@ -57,6 +57,7 @@ testem.log
 /typings
 documentation.json
 *.log
+storybook-static
 
 # e2e
 /e2e/*.js

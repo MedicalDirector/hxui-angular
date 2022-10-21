@@ -14,18 +14,11 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "target": "es2018",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2016",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2016", "dom"],
     "paths": {
-      "@hxui/angular": [
-        "lib/hxui-angular/hxui-angular",
-        "lib/hxui-angular"
-      ],
-    }
+      "@hxui/angular": ["lib/hxui-angular/hxui-angular", "lib/hxui-angular"]
+    },
+    "forceConsistentCasingInFileNames": true
   }
 }
