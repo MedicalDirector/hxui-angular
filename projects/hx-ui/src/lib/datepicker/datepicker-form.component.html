@@ -1,5 +1,7 @@
 <!-- INPUT -->
 <button
+  type="button"
+  aria-label="Open datepicker"
   class="hxa-datepicker__button left"
   (click)="onButtonClick($event)"
   *ngIf="iconPlacement === 'left'"
@@ -16,6 +18,8 @@
   <input
     class="hx-input"
     type="text"
+    [attr.aria-label]="placeholder"
+    [title]="helpText"
     #originRef
     #datePickerForm="ngModel"
     hxaTextInput
@@ -37,6 +41,8 @@
   <div class="hx-help">{{ helpText }}</div>
 </div>
 <button
+  type="button"
+  aria-label="Open datepicker"
   class="hxa-datepicker__button right"
   (click)="onButtonClick($event)"
   *ngIf="iconPlacement === 'right'"
