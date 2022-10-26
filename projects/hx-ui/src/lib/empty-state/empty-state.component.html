@@ -1,12 +1,16 @@
 <div class="hxui-reset emptyState">
   <i class="hx-icon is-lightest emptyState__icon" [ngClass]="icon"></i>
-  <div class="emptySate__msg is-lighter">{{msg}}</div>
+  <div class="emptyState__msg" [innerHtml]="msgElement"></div>
   <div class="emptyState__actions hx-flex">
-    <button *ngFor="let action of actions"
-            class="hx-button is-small"
-            [attr.id]="action.id"
-            [ngClass]="action.css"
-            (click)='executeCallback($event,action.callback)'>{{action.label}}</button>
+    <button
+      *ngFor="let action of actions"
+      class="hx-button is-small"
+      [attr.id]="action.id"
+      [ngClass]="action.css"
+      (click)="executeCallback($event,action.callback)"
+    >
+      {{action.label}}
+    </button>
     <ng-content></ng-content>
   </div>
 </div>

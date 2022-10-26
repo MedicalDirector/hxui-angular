@@ -11,7 +11,7 @@
   <p>Add the EmptyStateModule to AppModule or SharedModule.</p>
 
   <pre>
-    <code 
+    <code
       [highlight]="code.usage.text"
       [languages]="code.usage.lang"
     ></code>
@@ -34,7 +34,7 @@
       <hx-tabset>
         <hx-tab heading="Template">
           <pre>
-            <code 
+            <code
               [highlight]="code.egBasicHTML.text"
               [languages]="code.egBasicHTML.lang"
             ></code>
@@ -42,7 +42,7 @@
         </hx-tab>
         <hx-tab heading="Typescript">
           <pre>
-            <code 
+            <code
               [highlight]="code.egBasicTS.text"
               [languages]="code.egBasicTS.lang"
             ></code>
@@ -77,6 +77,17 @@
             <td>msg</td>
             <td><kbd>string</kbd></td>
             <td>The message to describe why the state is empty.</td>
+          </tr>
+          <tr>
+            <td>headingLevel</td>
+            <td><kbd>number</kbd></td>
+            <td>
+              <span class="hx-badge is-info">
+                <span class="hx-badge-content">OPTIONAL</span>
+              </span>
+              Set a heading level to render the message within a &lt;h1&gt; -
+              &lt;h6&gt; element.
+            </td>
           </tr>
         </tbody>
       </table>
