@@ -3,7 +3,11 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'eg-basic-empty-state',
   template: `
-    <hxa-empty-state icon="icon-medications" [msg]="emptyStateMsg">
+    <hxa-empty-state
+      icon="icon-medications"
+      [msg]="emptyStateMsg"
+      headingLevel="1"
+    >
       <button
         class="hx-button is-small"
         id="currentNotTakingMedsBtn"
