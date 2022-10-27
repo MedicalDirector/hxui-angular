@@ -1,5 +1,9 @@
 <div class="hxui-reset emptyState">
-  <i class="hx-icon is-lightest emptyState__icon" [ngClass]="icon"></i>
+  <i
+    class="hx-icon is-lightest emptyState__icon"
+    [ngClass]="icon"
+    aria-hidden="true"
+  ></i>
   <div class="emptyState__msg" [innerHtml]="msgElement"></div>
   <div class="emptyState__actions hx-flex">
     <button
