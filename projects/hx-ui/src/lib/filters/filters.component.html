@@ -1,5 +1,9 @@
 <div class="hx-flex hx-flex-align-center">
-  <i class="hx-icon icon-filter-outline mx-1"></i>
+  <i
+    class="hx-icon icon-filter-outline mx-1"
+    role="img"
+    aria-label="Filter"
+  ></i>
 
   <!-- collapsed filters -->
   <hxa-filters-collapsed
@@ -33,19 +37,23 @@
         >
           <span class="is-text-weight-light">{{ filter?.label }}:&nbsp;</span>
           <span class="hx-icon-control" *ngIf="(filter?.selected)[0]?.icon"
-            ><i class="{{ (filter?.selected)[0]?.icon }} mr-1"></i
+            ><i
+              class="{{ (filter?.selected)[0]?.icon }} mr-1"
+              aria-hidden="true"
+            ></i
           ></span>
           <span
             class="is-text-weight-bolder is-text-ellipsed"
             title="{{ filter?.getSelectedLabel() }}"
-          >{{ filter?.getSelectedLabel() }}</span>
+            >{{ filter?.getSelectedLabel() }}</span
+          >
           <span class="hx-icon-control">
             <i class="hx-icon icon-caret-down"></i>
           </span>
         </a>
         <div
           [id]="filter?.id + '-options'"
-          class="hx-dropdown-menu  has-limited-width has-limited-height expandedFilter__menu"
+          class="hx-dropdown-menu has-limited-width has-limited-height expandedFilter__menu"
           [class.hx-dropdown-icon]="filter.isIconised()"
           *hxaDropdownMenu
         >
@@ -57,7 +65,7 @@
             title="{{ option?.label }}"
           >
             <span class="hx-icon-control" *ngIf="option?.icon">
-              <i class="{{ option?.icon }}"></i>
+              <i class="{{ option?.icon }}" aria-hidden="true"></i>
             </span>
             {{ option?.label }}
           </a>
@@ -93,7 +101,7 @@
         </a>
         <div
           [id]="filter?.id + '-options'"
-          class="hx-dropdown-menu  has-limited-width has-limited-height expandedFilter__menu"
+          class="hx-dropdown-menu has-limited-width has-limited-height expandedFilter__menu"
           *hxaDropdownMenu
         >
           <div
@@ -123,7 +131,11 @@
               />
               <label [for]="filter?.id + '-checkbox-' + i" class="hx-label">
                 <div class="hx-flex hx-flex-align-center">
-                  <i *ngIf="option?.icon" class="{{ option?.icon }} mr-2"></i>
+                  <i
+                    *ngIf="option?.icon"
+                    class="{{ option?.icon }} mr-2"
+                    aria-hidden="true"
+                  ></i>
                   {{ option?.label }}
                 </div>
               </label>
@@ -167,11 +179,11 @@
       </div>
 
       <!-- date range picker -->
-      <div 
-        [id]="filter?.id" 
-        class="hx-dropdown mx-1 expandedFilter" 
-        hxaDropdown 
-        [minWidthRelativeTo]="filter?.id + '-trigger'"  
+      <div
+        [id]="filter?.id"
+        class="hx-dropdown mx-1 expandedFilter"
+        hxaDropdown
+        [minWidthRelativeTo]="filter?.id + '-trigger'"
         *ngIf="filter?.type === FilterType.DateRange"
       >
         <hxa-date-range-picker
