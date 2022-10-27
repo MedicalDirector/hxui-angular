@@ -3,7 +3,27 @@ ngb-timepicker {
 }
 
 fieldset {
-  border:none;
+  border: none;
+}
+
+.hx-input {
+  padding: 0.4rem 0 0.6rem;
+}
+
+.hx-input + .hx-label {
+  position: unset;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.hx-input:valid ~ .hx-label {
+  margin-top: 0;
+}
+
+.hx-input + .hx-label + .hx-help::before,
+.hx-input + .hx-label + .hx-help::after {
+  top: -1.77rem;
 }
 
 .ngb-tp {
@@ -30,7 +50,7 @@ fieldset {
     }
 
     &.bottom:before {
-      top: -.3em;
+      top: -0.3em;
       transform: rotate(135deg);
     }
   }

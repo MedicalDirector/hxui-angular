@@ -70,7 +70,7 @@ const FILTER_REGEX = /[^0-9]/g;
               "
               hxaTextInput
             />
-            <label class="hx-label"></label>
+            <label class="hx-label">Hours</label>
             <div class="hx-help"></div>
           </div>
           <button
@@ -79,7 +79,7 @@ const FILTER_REGEX = /[^0-9]/g;
             type="button"
             aria-label="Decrement hours"
             (click)="changeHour(-hourStep)"
-            class="hx-button is-flat mt-2"
+            class="hx-button is-flat"
             [class.is-small]="isSmallSize"
             [class.is-large]="isLargeSize"
             [class.disabled]="disabled"
@@ -138,7 +138,7 @@ const FILTER_REGEX = /[^0-9]/g;
                 changeMinute(-minuteStep); $event.preventDefault()
               "
             />
-            <label class="hx-label"></label>
+            <label class="hx-label">Minutes</label>
             <div class="hx-help"></div>
           </div>
           <button
@@ -147,7 +147,7 @@ const FILTER_REGEX = /[^0-9]/g;
             type="button"
             aria-label="Decrement minutes"
             (click)="changeMinute(-minuteStep)"
-            class="hx-button is-flat mt-2"
+            class="hx-button is-flat"
             [class.is-small]="isSmallSize"
             [class.is-large]="isLargeSize"
             [class.disabled]="disabled"
@@ -206,7 +206,7 @@ const FILTER_REGEX = /[^0-9]/g;
                 changeSecond(-secondStep); $event.preventDefault()
               "
             />
-            <label class="hx-label"></label>
+            <label class="hx-label">Seconds</label>
             <div class="hx-help"></div>
           </div>
           <button
@@ -215,7 +215,7 @@ const FILTER_REGEX = /[^0-9]/g;
             type="button"
             aria-label="Decrement seconds"
             (click)="changeSecond(-secondStep)"
-            class="hx-button mt-2"
+            class="hx-button is-flat"
             [class.is-small]="isSmallSize"
             [class.is-large]="isLargeSize"
             [class.disabled]="disabled"
