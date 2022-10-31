@@ -1,12 +1,16 @@
 import {
+  AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   HostBinding,
   Input,
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges
+  QueryList,
+  SimpleChanges,
+  ViewChildren,
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Visibility } from '../enums';
@@ -15,9 +19,9 @@ import { DatepickerViewModeEnum } from './datepicker.model';
 @Component({
   selector: 'hxa-datepicker',
   templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.scss']
+  styleUrls: ['./datepicker.component.scss'],
 })
-export class DatepickerComponent implements OnInit, OnChanges {
+export class DatepickerComponent implements OnInit, OnChanges, AfterViewInit {
   @HostBinding('class')
   get classes() {
     return 'hxui-reset hx-card hxa-datepicker-calendar';
@@ -31,6 +35,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
 
   @Output()
   update = new EventEmitter<Date>();
+
+  @ViewChildren('day') dayElements: QueryList<ElementRef>;
 
   viewMode$ = new BehaviorSubject<DatepickerViewModeEnum>(
     DatepickerViewModeEnum.Days
@@ -47,7 +53,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
     'Thursday',
     'Friday',
     'Saturday',
-    'Sunday'
+    'Sunday',
   ];
   months: Array<string> = [
     'Jan',
@@ -61,7 +67,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
     'Sep',
     'Oct',
     'Nov',
-    'Dec'
+    'Dec',
   ];
   years: Array<number> = new Array<number>();
   private presentDate: Date;
@@ -78,6 +84,20 @@ export class DatepickerComponent implements OnInit, OnChanges {
     this.viewDate =
       this.viewDate || new Date(date.getFullYear(), date.getMonth());
     this.renderCalendar();
+  }
+
+  ngAfterViewInit(): void {
+    const dayButton = this.dayElements.find(
+      x =>
+        x.nativeElement.className.includes(
+          'hxa-datepicker-calendar__day-selectedday'
+        ) ||
+        x.nativeElement.className.includes(
+          'hxa-datepicker-calendar__day-currentday'
+        )
+    ).nativeElement;
+
+    setTimeout(() => dayButton.focus(), 0);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -196,6 +216,62 @@ export class DatepickerComponent implements OnInit, OnChanges {
     return this.validators
       .map(fn => fn(newDate))
       .reduce((prev, next) => prev || next, false);
+  }
+
+  public onKeyDown(event: KeyboardEvent, day: Date) {
+    let nextButton: ElementRef;
+    const nextDate = new Date(day);
+
+    switch (event.key) {
+      case 'ArrowUp':
+        event.preventDefault();
+        event.stopPropagation();
+
+        nextDate.setDate(day.getDate() - 7);
+
+        nextButton = this.dayElements.find(
+          x => x.nativeElement.ariaLabel === nextDate.toDateString()
+        );
+
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        event.stopPropagation();
+
+        nextDate.setDate(day.getDate() + 7);
+
+        nextButton = this.dayElements.find(
+          x => x.nativeElement.ariaLabel === nextDate.toDateString()
+        );
+
+        break;
+      case 'ArrowLeft':
+        event.preventDefault();
+        event.stopPropagation();
+
+        nextDate.setDate(day.getDate() - 1);
+
+        nextButton = this.dayElements.find(
+          x => x.nativeElement.ariaLabel === nextDate.toDateString()
+        );
+
+        break;
+      case 'ArrowRight':
+        event.preventDefault();
+        event.stopPropagation();
+
+        nextDate.setDate(day.getDate() + 1);
+
+        nextButton = this.dayElements.find(
+          x => x.nativeElement.ariaLabel === nextDate.toDateString()
+        );
+
+        break;
+    }
+
+    if (nextButton) {
+      setTimeout(() => nextButton.nativeElement.focus(), 0);
+    }
   }
 
   public previousYear(): void {
