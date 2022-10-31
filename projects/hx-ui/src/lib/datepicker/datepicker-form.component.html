@@ -5,7 +5,7 @@
   class="hxa-datepicker__button left"
   (click)="onButtonClick($event)"
   *ngIf="iconPlacement === 'left'"
-  tabindex="-1"
+  tabindex="0"
 >
   <i class="{{ icon }}"></i>
 </button>
@@ -46,7 +46,7 @@
   class="hxa-datepicker__button right"
   (click)="onButtonClick($event)"
   *ngIf="iconPlacement === 'right'"
-  tabindex="-1"
+  tabindex="0"
 >
   <i class="{{ icon }}"></i>
 </button>

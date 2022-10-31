@@ -47,6 +47,7 @@
   <div class="hxa-datepicker-calendar__contents">
     <ng-container *ngIf="observables.viewMode$ === DatepickerViewModeEnum.Days">
       <button
+        #day
         class="hxa-datepicker-calendar__day hx-button is-transparent"
         *ngFor="let day of days"
         [ngClass]="{
@@ -55,7 +56,10 @@
           'hxa-datepicker-calendar__day-selectedday': isSelectedDay(day),
           'hxa-datepicker-calendar__day-invalidday': isInvalidDay(day)
         }"
+        [attr.aria-label]="day?.toDateString()"
+        [attr.aria-pressed]="isSelectedDay(day)"
         (click)="setSelectedDate(day)"
+        (keydown)="onKeyDown($event, day)"
       >
         {{day.getDate()}}
       </button>
