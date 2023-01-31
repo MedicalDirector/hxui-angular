@@ -20,6 +20,7 @@ import { DataService, Person } from './data.service';
           placeholder="Select people"
           (keyup)="(onKeyup)"
           formControlName="selectedPersonId"
+          class="custom-width"
         >
           <ng-template ng-label-tmp let-item="item">
             <img height="15" width="15" [src]="item.picture" />
