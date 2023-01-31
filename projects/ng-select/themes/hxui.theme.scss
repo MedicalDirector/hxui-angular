@@ -317,6 +317,11 @@ $ng-select-danger: #b81e4f;
   .ng-spinner-zone {
     top: 3px;
   }
+
+  &.custom-width .ng-dropdown-panel {
+    width: auto !important;
+    // https://github.com/ng-select/ng-select/issues/1361#issuecomment-537837586
+  }
 }
 
 .ng-dropdown-panel {

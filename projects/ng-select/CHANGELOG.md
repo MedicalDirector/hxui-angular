@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.2.0](https://www.npmjs.com/package/@hxui/ng-select/v/1.2.0) (2022-07-05)
+
+### Added
+
+- Added support for `custom-width` class. Use to then set width of dropdown panel items through custom templates.
+
 ### Changed
 
-- Styling for `ng-select-multiple` dropdown no longer depends on its location in the dom
+- Styling for `ng-select-multiple` dropdown no longer depends on its location in the dom.
 
 ## [1.1.1](https://www.npmjs.com/package/@hxui/ng-select/v/1.1.1) (2022-07-05)
 
